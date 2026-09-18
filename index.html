@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>函数轨道</title>
+<style>
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "PingFang SC", "Helvetica Neue", sans-serif;
+    background: #f4f1ea;
+    color: #2b2b2b;
+    -webkit-tap-highlight-color: transparent;
+  }
+  #app { max-width: 520px; margin: 0 auto; padding: 12px 16px 24px; }
+  header { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 8px; }
+  h1 { font-size: 18px; margin: 0; }
+  #levels { display: flex; gap: 6px; }
+  #levels button {
+    width: 28px; height: 28px; border-radius: 50%; border: none;
+    background: #ddd6c8; color: #6b6457; font-size: 13px; padding: 0;
+  }
+  #levels button.done { background: #8fc79a; color: #fff; }
+  #levels button.current { outline: 2px solid #2b2b2b; outline-offset: 1px; }
+  #levels button:disabled { opacity: .4; }
+  #hint { font-size: 14px; line-height: 1.5; color: #555; margin: 8px 0 10px; }
+  canvas {
+    display: block; width: min(100%, 55vh); aspect-ratio: 1; margin: 0 auto;
+    background: #fffdf8; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,.08);
+  }
+  #equation { text-align: center; margin: 10px 0 4px; }
+  #template { font-size: 13px; color: #8a8374; }
+  #formula { font-size: 26px; font-family: "Times New Roman", serif; font-style: italic; margin-top: 2px; }
+  .param { display: flex; align-items: center; gap: 8px; margin: 6px 0; }
+  .param .name { width: 18px; font: italic bold 20px "Times New Roman", serif; }
+  .param input[type=range] { flex: 1; accent-color: #2f6fd6; }
+  .param button {
+    width: 38px; height: 38px; border-radius: 8px; border: 1px solid #cfc8b8;
+    background: #fff; font-size: 20px; color: #2b2b2b; padding: 0;
+  }
+  .param .val { width: 44px; text-align: right; font-variant-numeric: tabular-nums; font-size: 17px; }
+  .param.locked { color: #8a8374; font-size: 14px; }
+  #message { font-size: 14px; line-height: 1.5; margin: 10px 0; padding: 8px 10px; border-radius: 8px; }
+  #message:empty { display: none; }
+  #message.ok { background: #e3f3e6; color: #256b34; }
+  #message.fail { background: #fbe7e4; color: #9a3326; }
+  #actions { display: flex; gap: 10px; margin-top: 12px; }
+  #actions button {
+    flex: 1; height: 46px; border-radius: 10px; border: 1px solid #cfc8b8;
+    background: #fff; font-size: 16px; color: #2b2b2b;
+  }
+  #actions button.primary { background: #2f6fd6; border-color: #2f6fd6; color: #fff; }
+</style>
+</head>
+<body>
+<main id="app">
+  <header>
+    <h1 id="title"></h1>
+    <nav id="levels"></nav>
+  </header>
+  <p id="hint"></p>
+  <canvas id="board"></canvas>
+  <section id="equation">
+    <div id="template"></div>
+    <div id="formula"></div>
+  </section>
+  <section id="params"></section>
+  <p id="message"></p>
+  <div id="actions">
+    <button id="reset" type="button">重置</button>
+    <button id="launch" type="button" class="primary">发射 ▶</button>
+    <button id="next" type="button" class="primary" hidden>下一关 →</button>
+  </div>
+</main>
+<script src="game.js"></script>
+</body>
+</html>
