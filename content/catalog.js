@@ -22,9 +22,9 @@ Content.catalog = {
                   title: '有理数',
                   sections: [
                     { no: '1.1', title: '有理数的引入', ready: true },
-                    { no: '1.2', title: '有理数的加法与减法' },
-                    { no: '1.3', title: '有理数的乘法与除法' },
-                    { no: '1.4', title: '有理数的乘方' },
+                    { no: '1.2', title: '有理数的加法与减法', ready: true },
+                    { no: '1.3', title: '有理数的乘法与除法', ready: true },
+                    { no: '1.4', title: '有理数的乘方', ready: true },
                     { no: '1.5', title: '有理数的混合运算' },
                   ],
                 },

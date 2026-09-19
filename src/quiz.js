@@ -105,7 +105,7 @@
           let value = null;
           const group = el('div', 'seg');
           blank.options.forEach(o => {
-            const b = el('button', '', renderText(o.length === 1 ? `$${o}$` : o));
+            const b = el('button', '', renderText(/^[<>=≤≥≠]$/.test(o) ? `$${o}$` : o));
             b.type = 'button';
             b.addEventListener('click', () => {
               value = o;

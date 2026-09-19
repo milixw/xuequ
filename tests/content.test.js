@@ -28,7 +28,7 @@ function checkMath(text, where) {
     if (p.startsWith('$')) {
       const tex = p.replace(/^\$\$?|\$\$?$/g, '');
       try {
-        katex.renderToString(tex, { throwOnError: true });
+        katex.renderToString(tex, { throwOnError: true, strict: 'error' });
       } catch (e) {
         throw new Error(`${where}：公式无法渲染 ${p}\n      ${e.message}`);
       }
