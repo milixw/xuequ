@@ -15,11 +15,11 @@
 **手机上用**：
 
 ```bash
-python3 -m http.server 8000     # 在项目目录下启动服务器
-ipconfig getifaddr en0          # 查看电脑的局域网 IP（macOS）
+./scripts/start.sh      # 后台启动服务器，会打印手机要访问的地址
+./scripts/stop.sh       # 用完后关闭
 ```
 
-手机连上和电脑同一个 Wi-Fi，用浏览器打开 `http://<电脑IP>:8000`。
+手机连上和电脑同一个 Wi-Fi，用浏览器打开脚本打印的地址。换了网络后电脑的 IP 可能会变，以脚本打印的为准。
 
 ## 功能
 

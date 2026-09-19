@@ -8,8 +8,8 @@
 
 ```bash
 node tests/run.js                     # 全部校验（改了内容或代码都要跑）
-python3 -m http.server 8000           # 本地服务器，手机同 Wi-Fi 访问 http://<本机IP>:8000
-ipconfig getifaddr en0                # 查本机局域网 IP
+./scripts/start.sh [端口]             # 后台启动本地服务器（默认 8000），打印电脑和手机的访问地址
+./scripts/stop.sh                     # 关闭服务器
 ```
 
 不需要构建。直接用浏览器打开 `index.html` 也要能用，所以**不要用 `fetch` 加载本地文件**（`file://` 下会被拦截），内容文件用 `<script>` 加载。
@@ -44,6 +44,7 @@ tests/
 docs/
   plan-*.md                       开发计划
   textbooks/                      教材目录与各章知识范围（出题前必读）
+scripts/                          start.sh / stop.sh：本地服务器（PID 记在 .server.pid，不入库）
 pic/                              用户拍的教材照片，不入库
 ```
 
