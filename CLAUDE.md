@@ -4,12 +4,10 @@
 
 当前进行中：上海数学六年级上册，计划见 `docs/plan-g6s1.md`。
 
-> **当前状态**：阶段 1（框架重构）还没开始，仓库里仍然是原型的结构（根目录下的 `index.html`、`game.js`、`test.js`，都是函数轨道游戏）。下面的"目录结构"是目标结构，完成阶段 1 后删掉这条说明。
-
 ## 常用命令
 
 ```bash
-node tests/run.js                     # 全部校验（改了内容或代码都要跑；阶段 1 之前是 node test.js）
+node tests/run.js                     # 全部校验（改了内容或代码都要跑）
 python3 -m http.server 8000           # 本地服务器，手机同 Wi-Fi 访问 http://<本机IP>:8000
 ipconfig getifaddr en0                # 查本机局域网 IP
 ```
@@ -19,16 +17,18 @@ ipconfig getifaddr en0                # 查本机局域网 IP
 ## 目录结构
 
 ```
-index.html                        应用入口
+index.html                        应用入口（按顺序加载下面的脚本）
 src/
-  app.js                          路由和页面：首页 → 学科 → 册 → 章 → 节 → 知识点 → 做题
-  quiz.js                         做题引擎：题型渲染、判分、解析、快捷输入栏
-  answer.js                       判分用的纯函数（分数、代数式等价、角度），可以在 node 里测试
-  progress.js                     进度存取（localStorage）
-  games/function-track/           函数轨道小游戏（原型的 game.js）
-vendor/katex/                     KaTeX 本地副本（数学排版）
+  answer.js                       判分纯函数：精确分数 Frac、数值/多值/代数式/角度解析与比较、“已化简”检查
+  progress.js                     做题进度（localStorage：xq.progress.v1）
+  content.js                      内容注册表：目录查询、按需加载小节文件
+  quiz.js                         做题引擎：题目渲染、作答、判分反馈、解析、快捷输入栏、renderText 排版
+  app.js                          hash 路由和页面：首页 → 册 → 小节（知识点 + 题目列表）→ 做题
+  app.css                         全部样式
+  games/function-track/           函数轨道小游戏（独立页面，首页“趣味玩法”进入）
+vendor/katex/                     KaTeX 0.18.7 本地副本（只保留 woff2 字体）
 content/
-  catalog.js                      学科 → 教材 → 册 → 章 → 节 的目录，只有元数据
+  catalog.js                      学科 → 教材 → 册 → 章 → 节 的目录；ready: true 表示小节已上线
   math/
     sh2024/                       教材：上海教育出版社 2024 版（五·四学制）
       g6s1/                       册：六年级上册（g=年级，s1=上册，s2=下册）
@@ -36,11 +36,14 @@ content/
   <其他学科>/                     预留，比如 physics/、english/，结构相同
 tests/
   run.js                          测试入口
-  content.test.js                 内容结构校验 + 答案校验
+  harness.js                      极简测试工具（test / warn / assert）
   answer.test.js                  判分逻辑单元测试
+  content.test.js                 内容校验：目录与文件一致、题量配比、字段、公式渲染、答案自检、verify
+  function-track.test.js          函数轨道关卡校验
+  export-blind.js                 导出不含答案的盲解题单（给复核子代理用）
 docs/
   plan-*.md                       开发计划
-  textbooks/                      教材目录转写
+  textbooks/                      教材目录与各章知识范围（出题前必读）
 pic/                              用户拍的教材照片，不入库
 ```
 
@@ -59,6 +62,7 @@ Content.section({
   id: 'math/sh2024/g6s1/1.1',
   title: '有理数的引入',
   review: { status: 'pending' },          // pending 待审核 / approved 已审核（附审核人、日期）
+  audit: { blind: '2026-09-19', rounds: 2, note: '...' },  // 盲解复核记录，没有它测试会提醒
   intro: [                                // 知识点卡片，3～6 张
     { title: '正数和负数', body: '...', example: '...', pitfall: '...' },  // pitfall 为易错提醒，可选
   ],
@@ -71,7 +75,7 @@ Content.section({
       options: ['...'],                   // choice、multi 用
       answer: 1,                          // 形式取决于题型，见 src/answer.js
       explain: ['第一步...', '第二步...'],  // 分步解析
-      verify: () => ...,                  // 可选：独立计算答案，测试时和 answer 核对
+      verify: () => ...,                  // 可选：独立计算答案，测试时和 answer 核对；可用全局 F(x)（=Frac.of）
       figure: '<svg>...</svg>',           // 可选：配图
     },
   ],
@@ -102,14 +106,31 @@ Content.section({
 
 - 每道题都要有分步解析，挑战题的解析要讲清思路是怎么想到的
 - 选择题的干扰项要对应真实的常见错误（比如符号错、漏掉一种情况），不要随便凑
-- 能计算验证的题目必须写 `verify`。写完一个小节后，对没有 `verify` 的题要盲解复核一遍：不看答案独立做，然后和答案对照
+- 能计算验证的题目必须写 `verify`：用 `F()` 做精确分数运算，或者穷举、模拟，**不要直接返回写死的答案**
+- TeX 命令在 JS 字符串里要写双反斜杠（`'\\frac'`）；文本里不要出现换行符，测试会拦截控制字符
 - 有配图的题用内联 SVG，图里的数据必须和题干一致
+- 解析里只能用**已学过的方法**：比如第 1 章用"数格子、距离、行程问题"推理，不要列方程（方程在第 3 章）；1.1 还没学有理数运算，不要写成加减算式
 
 ### 版权和审核
 
 - 可以参照课本的章节结构和知识范围，但**不能照搬课本原文、例题、习题和插图**，全部内容原创
 - AI 写的内容 `review.status` 一律是 `pending`，界面上标注"待审核"，**上线前必须由数学老师审核**
 - 不要凭记忆写课本内容。各小节的知识范围以用户提供的课本资料为准（`docs/textbooks/`），资料不够时先问用户
+
+### 每个小节的出题流程
+
+1. 读 `docs/textbooks/` 里的知识范围，确认本节学什么、之前学过什么
+2. 写 `content/<学科>/<教材>/<册>/<小节号>.js`，在 `catalog.js` 中标记 `ready: true`
+3. `node tests/run.js` 通过
+4. **盲解复核**（用户已同意使用子代理）：`node tests/export-blind.js <小节ID> <scratchpad 里的文件>` 导出不含答案的题单，交给子代理独立解答，并评价难度和超纲情况。子代理只能读这份题单，不能读项目目录
+5. 对照答案，逐条处理复核意见；改过的题目再做一轮盲解
+6. 在小节文件里写入 `audit` 记录，提交 git
+
+### 经验（1.1 样板）
+
+- 子代理对挑战题的难度要求很严格：常规的"两层分类讨论""折叠数轴""找规律求第 n 项"只被评为期中、期末压轴水平。要达到"难一档"，需要叠加多个思维环节，比如动点加分段讨论加重合的情况，或者端点取舍加反证
+- 小节越靠前，可用的知识越少，挑战题的难度上限越低，这一点要如实告诉用户，不要为了凑难度而超纲
+- 知识点卡片要避免循环定义（比如相反数和绝对值互相解释），同一个词在同一张卡片里要保持同一个含义
 
 ## 代码约定
 
