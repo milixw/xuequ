@@ -1,2 +1,5 @@
 .DS_Store
 node_modules/
+.idea/
+# 教材照片：文件大且是教材原图，只在本地参考，目录已转写到 docs/textbooks/
+pic/
