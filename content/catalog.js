@@ -25,7 +25,7 @@ Content.catalog = {
                     { no: '1.2', title: '有理数的加法与减法', ready: true },
                     { no: '1.3', title: '有理数的乘法与除法', ready: true },
                     { no: '1.4', title: '有理数的乘方', ready: true },
-                    { no: '1.5', title: '有理数的混合运算' },
+                    { no: '1.5', title: '有理数的混合运算', ready: true },
                   ],
                 },
                 {
