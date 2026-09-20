@@ -8,6 +8,7 @@ Content.section({
   id: 'math/sh2024/g6s1/1.5',
   title: '有理数的混合运算',
   review: { status: 'pending' },
+  audit: { blind: '2026-09-20', rounds: 3, note: '难度上移后子代理复核三轮：新题答案全部一致，第 3 轮判定整节通过（按意见换掉 e09、c05 增加第 3 问）' },
 
   intro: [
     {
@@ -276,20 +277,33 @@ Content.section({
       id: '1.5-e09',
       level: 'extended',
       type: 'fill',
-      stem: '已知 $a$、$b$ 互为相反数，$c$、$d$ 互为倒数，$x$ 的绝对值是 3。求 $x^2-(a+b+cd)x+(a+b)^{2025}+(-cd)^{2024}$ 的所有可能值。（用逗号隔开）',
-      blanks: [{ kind: 'nums', answer: ['7', '13'] }],
-      explain: [
-        '$a+b=0$，$cd=1$，$x=\\pm 3$，$x^2=9$。',
-        '原式 $=9-(0+1)\\times x+0^{2025}+(-1)^{2024}=9-x+0+1=10-x$。',
-        '$x=3$ 时为 7，$x=-3$ 时为 13。注意 $(-cd)^{2024}=(-1)^{2024}=1$，偶次幂为正。',
+      stem: '某车间每天的产量以 1000 个为标准，超出的个数记为正，不足的记为负。本周七天的记录是：$+16,\\ -5,\\ -9,\\ +22,\\ -8,\\ 0,\\ +30$。',
+      blanks: [
+        { kind: 'num', label: '(1) 产量最高的一天比最低的一天多几个？', answer: '39', suffix: '个' },
+        { kind: 'num', label: '(2) 本周一共生产了多少个？', answer: '7046', suffix: '个' },
+        { kind: 'num', label: '(3) 按规定，每生产 1 个奖励 2 元；超出标准的部分每个再奖 1 元，不足标准的部分每个扣 1.5 元。本周车间共得多少元？', answer: '14127', suffix: '元' },
       ],
-      verify: () => [3, -3].map(x => F(x).pow(2).sub(F(0).add(1).mul(x)).add(F(0).pow(2025)).add(F(-1).pow(2024))),
+      explain: [
+        '(1) 最高的一天是 $+30$，最低的一天是 $-9$，相差 $30-(-9)=39$ 个。注意比较的是记录的数，不是绝对值。',
+        '(2) 先把偏差加起来：$16-5-9+22-8+0+30=(16+22+30)-(5+9+8)=68-22=46$。总产量 $=1000\\times 7+46=7046$ 个。',
+        '(3) 分三部分算：生产奖励 $7046\\times 2=14092$ 元；超出的部分共 $16+22+30=68$ 个，再奖 68 元；不足的部分共 $5+9+8=22$ 个，扣 $22\\times 1.5=33$ 元。',
+        '合计 $14092+68-33=14127$ 元。用“基准数 + 偏差”来算，比一天天算快得多。',
+      ],
+      verify: () => {
+        const rec = [16, -5, -9, 22, -8, 0, 30];
+        const total = rec.reduce((s, x) => s.add(x), F(1000 * 7));
+        const extra = rec.filter(x => x > 0).reduce((s, x) => s.add(x), F(0));
+        const less = rec.filter(x => x < 0).reduce((s, x) => s.add(-x), F(0));
+        const hi = rec.reduce((a, b) => Math.max(a, b));
+        const lo = rec.reduce((a, b) => Math.min(a, b));
+        return [F(hi).sub(lo), total, total.mul(2).add(extra).sub(less.mul('1.5'))];
+      },
     },
     {
       id: '1.5-e10',
       level: 'extended',
       type: 'fill',
-      stem: '已知 $|x|=4$，$|y|=\\frac{1}{2}$，并且 $xy<0$。求 $x\\div y-(x+y)^2$ 的所有可能值。（用逗号隔开）',
+      stem: '已知 $|x|=4$，$|y|=\\frac{1}{2}$，并且 $xy<0$。求 $x\\div y-(x+y)^2$ 的所有可能值。（有几个就填几个，只有一个就填一个）',
       blanks: [{ kind: 'nums', answer: ['-81/4'] }],
       explain: [
         '$xy<0$，$x$、$y$ 异号，有两种情况：$x=4,\\ y=-\\frac{1}{2}$，或 $x=-4,\\ y=\\frac{1}{2}$。',
@@ -395,7 +409,7 @@ Content.section({
       id: '1.5-c04',
       level: 'challenge',
       type: 'fill',
-      stem: '在 $1\\ \\square \\ 2\\ \\square \\ 3\\ \\square \\ 4\\ \\square \\ 5\\ \\square \\ 6$ 的五个 □ 中，填入“$+$”“$-$”“$\\times$”“$\\div$”，每种符号至少用一次（有一种会用两次），然后按运算顺序计算。',
+      stem: '在 $1\\ \\square \\ 2\\ \\square \\ 3\\ \\square \\ 4\\ \\square \\ 5\\ \\square \\ 6$ 的五个 $\\square$ 中，填入“$+$”“$-$”“$\\times$”“$\\div$”，每种符号至少用一次（有一种会用两次），然后按运算顺序计算。',
       blanks: [
         { kind: 'num', label: '(1) 计算结果的最大值是', answer: '361/3' },
         { kind: 'num', label: '(2) 计算结果的最小值是', answer: '-355/3' },
@@ -441,20 +455,26 @@ Content.section({
       blanks: [
         { kind: 'num', label: '(1) $1\\times 2+2\\times 3+3\\times 4+\\cdots+99\\times 100=$', answer: '333300' },
         { kind: 'num', label: '(2) $1\\times 2\\times 3+2\\times 3\\times 4+\\cdots+20\\times 21\\times 22=$', answer: '53130' },
+        { kind: 'num', label: '(3) $1^2+2^2+3^2+\\cdots+50^2=$', answer: '42925' },
       ],
       explain: [
         '(1) 按规律，每一项都能写成 $\\frac{1}{3}\\times$（“它和后一个数的三连乘” − “前一个数开头的三连乘”）。相加时中间的三连乘全部抵消。',
         '原式 $=\\frac{1}{3}\\times(99\\times 100\\times 101-0\\times 1\\times 2)=\\frac{1}{3}\\times 999900=333300$。',
         '(2) 自己仿照构造：试 $1\\times 2\\times 3\\times 4-0\\times 1\\times 2\\times 3=24=4\\times(1\\times 2\\times 3)$。一般地，四个连续数之积减去“往前挪一位”的四连乘，等于中间三连乘的 4 倍，所以每一项 $=\\frac{1}{4}\\times$（两个四连乘之差）。',
         '原式 $=\\frac{1}{4}\\times(20\\times 21\\times 22\\times 23-0)=\\frac{1}{4}\\times 212520=53130$。',
-        '第 (2) 问没有现成的提示，要自己把第 (1) 问的方法推广，这是这道题的难点。',
+        '(3) 换一个思路：$k^2$ 和 $k\\times(k+1)$ 只差一个 $k$，因为 $k\\times(k+1)=k^2+k$，所以 $k^2=k\\times(k+1)-k$。',
+        '于是 $1^2+2^2+\\cdots+50^2=(1\\times 2+2\\times 3+\\cdots+50\\times 51)-(1+2+\\cdots+50)$。',
+        '用 (1) 的方法算第一部分：$\\frac{1}{3}\\times 50\\times 51\\times 52=44200$；第二部分首尾配对：$1+50=51$，$2+49=51$……共 25 对，$51\\times 25=1275$。所以结果是 $44200-1275=42925$。',
+        '(2) 要把 (1) 的方法推广到三个因数，(3) 要先把平方转化成两个相邻数之积，都是自己构造出来的，这是这道题的难点。',
       ],
       verify: () => {
         let a = F(0);
         for (let k = 1; k <= 99; k++) a = a.add(k * (k + 1));
         let b = F(0);
         for (let k = 1; k <= 20; k++) b = b.add(k * (k + 1) * (k + 2));
-        return [a, b];
+        let c = F(0);
+        for (let k = 1; k <= 50; k++) c = c.add(k * k);
+        return [a, b, c];
       },
     },
   ],
