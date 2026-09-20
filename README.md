@@ -41,7 +41,15 @@ tests/              自动校验
 docs/               开发计划、教材目录与知识范围
 ```
 
-详细说明和内容编写规范见 [CLAUDE.md](CLAUDE.md)。
+详细说明和内容编写规范见 [CLAUDE.md](CLAUDE.md)，制作小节的流程见 [docs/sop-section.md](docs/sop-section.md)。
+
+## 部署到服务器
+
+```bash
+./scripts/build.sh     # 打包（先跑校验），产物在 dist/
+```
+
+上传解压后 `./run.sh start` 即可，详见 [docs/deploy.md](docs/deploy.md)。
 
 ## 校验
 

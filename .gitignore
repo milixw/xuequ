@@ -5,3 +5,5 @@ node_modules/
 pic/
 .server.pid
 .server.log
+dist/
+server.log
