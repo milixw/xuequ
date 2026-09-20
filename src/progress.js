@@ -1,11 +1,11 @@
 'use strict';
 
-// 做题进度，存在 localStorage 的 xq.progress.v1 里：
+// 做题进度，存在 localStorage 的 xq.progress.v2 里：
 // { [小节ID]: { [题目ID]: { tries, solved, revealed } } }
 // solved：答对过；revealed：看过解析
 
 (function (root) {
-  const KEY = 'xq.progress.v1';
+  const KEY = 'xq.progress.v2';
   let data = load();
 
   function load() {

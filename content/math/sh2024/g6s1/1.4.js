@@ -8,7 +8,6 @@ Content.section({
   id: 'math/sh2024/g6s1/1.4',
   title: '有理数的乘方',
   review: { status: 'pending' },
-  audit: { blind: '2026-09-19', rounds: 2, note: '子代理盲解：第 1 轮 20 题答案全部一致；第 2 轮复核新 c03 和修改后的卡片，一致' },
 
   intro: [
     {
@@ -31,7 +30,7 @@ Content.section({
     {
       title: '平方的非负性',
       body: '任何数的平方都是**非负数**：$a^2\\ge 0$。互为相反数的两个数，平方相等，立方互为相反数。反过来，平方相等的两个数，要么相等，要么互为相反数。所以平方等于 9 的数有两个：3 和 $-3$。',
-      example: '如果 $|x|+y^2=0$，因为 $|x|\\ge 0$，$y^2\\ge 0$，两个非负数的和为 0，只能都是 0，所以 $x=0$，$y=0$。',
+      example: '$(-7)^2=7^2=49$；平方等于 0 的数只有 0 本身。',
       pitfall: '平方等于某个正数的数有两个，别漏掉负的那个。',
     },
   ],
@@ -42,77 +41,23 @@ Content.section({
       id: '1.4-b01',
       level: 'basic',
       type: 'fill',
-      stem: '计算：$(-3)^3$',
-      blanks: [{ kind: 'num', answer: '-27' }],
-      explain: ['$(-3)^3=(-3)\\times(-3)\\times(-3)$，3 个负因数，结果为负。', '绝对值 $3\\times 3\\times 3=27$，结果是 $-27$。'],
-      verify: () => F(-3).pow(3),
-    },
-    {
-      id: '1.4-b02',
-      level: 'basic',
-      type: 'fill',
-      stem: '计算：$-2^4$',
-      blanks: [{ kind: 'num', answer: '-16' }],
-      explain: ['$-2^4$ 的底数是 2，不是 $-2$，表示 $2^4$ 的相反数。', '$2^4=16$，所以 $-2^4=-16$。'],
-      verify: () => F(2).pow(4).neg(),
-    },
-    {
-      id: '1.4-b03',
-      level: 'basic',
-      type: 'fill',
-      stem: '计算：$\\left(-\\frac{2}{3}\\right)^2$',
-      blanks: [{ kind: 'num', answer: '4/9' }],
-      explain: ['负数的偶次幂是正数。', '$\\frac{2}{3}\\times\\frac{2}{3}=\\frac{4}{9}$。'],
-      verify: () => F('-2/3').pow(2),
-    },
-    {
-      id: '1.4-b04',
-      level: 'basic',
-      type: 'choice',
-      stem: '在 $(-1)^{2025}$，$-1^2$，$(-1)^2$，$-(-1)^3$ 中，结果等于 1 的有（　　）',
-      options: ['1 个', '2 个', '3 个', '4 个'],
-      answer: 1,
-      explain: [
-        '$(-1)^{2025}=-1$（奇次幂）；$-1^2=-(1^2)=-1$。',
-        '$(-1)^2=1$（偶次幂）；$-(-1)^3=-(-1)=1$。',
-        '等于 1 的有 2 个，选 B。',
-      ],
-      verify: () => [F(-1).pow(2025), F(1).pow(2).neg(), F(-1).pow(2), F(-1).pow(3).neg()].filter(x => x.eq(1)).length - 1,
-    },
-    {
-      id: '1.4-b05',
-      level: 'basic',
-      type: 'fill',
-      stem: '在 $(-5)^4$ 中：',
-      blanks: [
-        { kind: 'num', label: '底数是', answer: '-5' },
-        { kind: 'num', label: '指数是', answer: '4' },
-      ],
-      explain: ['括号里的 $-5$ 是底数，右上角的 4 是指数。', '$(-5)^4$ 表示 4 个 $-5$ 相乘。'],
-    },
-
-    // ---------- 扩展 ----------
-    {
-      id: '1.4-e01',
-      level: 'extended',
-      type: 'fill',
       stem: '计算：$-3^2\\times\\left(-\\frac{1}{3}\\right)^2$',
       blanks: [{ kind: 'num', answer: '-1' }],
       explain: ['先算乘方：$-3^2=-9$，$\\left(-\\frac{1}{3}\\right)^2=\\frac{1}{9}$。', '$-9\\times\\frac{1}{9}=-1$。'],
       verify: () => F(3).pow(2).neg().mul(F('-1/3').pow(2)),
     },
     {
-      id: '1.4-e02',
-      level: 'extended',
+      id: '1.4-b02',
+      level: 'basic',
       type: 'fill',
-      stem: '如果 $x^2=\\frac{25}{36}$，那么 $x$ 等于多少？（全部填出，用逗号隔开）',
-      blanks: [{ kind: 'nums', answer: ['5/6', '-5/6'] }],
-      explain: ['$\\left(\\frac{5}{6}\\right)^2=\\frac{25}{36}$，$\\left(-\\frac{5}{6}\\right)^2=\\frac{25}{36}$。', '所以 $x=\\frac{5}{6}$ 或 $-\\frac{5}{6}$。'],
-      verify: () => ['5/6', '-5/6', '25/36', '-25/36', '5/36'].filter(x => F(x).pow(2).eq('25/36')),
+      stem: '计算：$(-1)^{2024}+(-1)^{2025}-(-1)^2$',
+      blanks: [{ kind: 'num', answer: '-1' }],
+      explain: ['$(-1)^{2024}=1$（偶次幂），$(-1)^{2025}=-1$（奇次幂），$(-1)^2=1$。', '$1+(-1)-1=-1$。'],
+      verify: () => F(-1).pow(2024).add(F(-1).pow(2025)).sub(F(-1).pow(2)),
     },
     {
-      id: '1.4-e03',
-      level: 'extended',
+      id: '1.4-b03',
+      level: 'basic',
       type: 'fill',
       stem: '已知 $(a-2)^2+|b+3|=0$，求 $b^a$ 的值。',
       blanks: [{ kind: 'num', answer: '9' }],
@@ -124,54 +69,8 @@ Content.section({
       verify: () => F(-3).pow(2),
     },
     {
-      id: '1.4-e04',
-      level: 'extended',
-      type: 'choice',
-      stem: '下列各组数中，两个数相等的是（　　）',
-      options: ['$-2^3$ 与 $(-2)^3$', '$-3^2$ 与 $(-3)^2$', '$2^3$ 与 $3^2$', '$\\left(-\\frac{2}{3}\\right)^3$ 与 $-\\frac{2^3}{3}$'],
-      answer: 0,
-      explain: [
-        'A：$-2^3=-8$，$(-2)^3=-8$，相等。',
-        'B：$-9$ 与 $9$；C：$8$ 与 $9$；D：$-\\frac{8}{27}$ 与 $-\\frac{8}{3}$，都不相等。选 A。',
-      ],
-      verify: () =>
-        [
-          [F(2).pow(3).neg(), F(-2).pow(3)],
-          [F(3).pow(2).neg(), F(-3).pow(2)],
-          [F(2).pow(3), F(3).pow(2)],
-          [F('-2/3').pow(3), F(2).pow(3).div(3).neg()],
-        ].findIndex(([x, y]) => x.eq(y)),
-    },
-    {
-      id: '1.4-e05',
-      level: 'extended',
-      type: 'fill',
-      stem: '计算：$(-1)^{2024}+(-1)^{2025}-(-1)^2$',
-      blanks: [{ kind: 'num', answer: '-1' }],
-      explain: ['$(-1)^{2024}=1$（偶次幂），$(-1)^{2025}=-1$（奇次幂），$(-1)^2=1$。', '$1+(-1)-1=-1$。'],
-      verify: () => F(-1).pow(2024).add(F(-1).pow(2025)).sub(F(-1).pow(2)),
-    },
-    {
-      id: '1.4-e06',
-      level: 'extended',
-      type: 'fill',
-      stem: '一张纸的厚度是 0.1 毫米。把它对折 1 次，厚度变成原来的 2 倍。连续对折 6 次后，这叠纸的厚度是多少毫米？',
-      blanks: [{ kind: 'num', answer: '6.4', suffix: '毫米' }],
-      explain: ['每对折一次，层数乘 2。对折 6 次后有 $2^6=64$ 层。', '厚度是 $0.1\\times 64=6.4$（毫米）。'],
-      verify: () => F('0.1').mul(F(2).pow(6)),
-    },
-    {
-      id: '1.4-e07',
-      level: 'extended',
-      type: 'fill',
-      stem: '某种细胞每过 30 分钟由 1 个分裂成 2 个。1 个这样的细胞经过 3 小时后，会分裂成多少个？',
-      blanks: [{ kind: 'num', answer: '64', suffix: '个' }],
-      explain: ['3 小时有 $180\\div 30=6$ 个 30 分钟，共分裂 6 次。', '每次个数乘 2，共 $2^6=64$ 个。'],
-      verify: () => F(2).pow(180 / 30),
-    },
-    {
-      id: '1.4-e08',
-      level: 'extended',
+      id: '1.4-b04',
+      level: 'basic',
       type: 'fill',
       stem: '计算：$(-2)^3\\times\\left(-\\frac{1}{2}\\right)^2\\div(-1)^5$',
       blanks: [{ kind: 'num', answer: '2' }],
@@ -179,27 +78,8 @@ Content.section({
       verify: () => F(-2).pow(3).mul(F('-1/2').pow(2)).div(F(-1).pow(5)),
     },
     {
-      id: '1.4-e09',
-      level: 'extended',
-      type: 'multi',
-      stem: '下列说法中，正确的有（多选）',
-      options: [
-        '任何数的平方都是正数',
-        '平方等于它本身的数是 0 和 1',
-        '如果 $a^3=-a^3$，那么 $a=0$',
-        '如果 $a^2=b^2$，那么 $a=b$',
-      ],
-      answer: [1, 2],
-      explain: [
-        'A 错：$0^2=0$，0 不是正数。',
-        'B 对：只有 $0^2=0$，$1^2=1$；$(-1)^2=1\\ne -1$。',
-        'C 对：一个数等于它的相反数，这个数只能是 0，所以 $a^3=0$，$a=0$。',
-        'D 错：$2^2=(-2)^2$，但 $2\\ne -2$。答案是 B、C。',
-      ],
-    },
-    {
-      id: '1.4-e10',
-      level: 'extended',
+      id: '1.4-b05',
+      level: 'basic',
       type: 'fill',
       stem: '已知 $a$、$b$ 互为相反数，$c$、$d$ 互为倒数，$m$ 的绝对值是 2。求 $(a+b)^{2025}-(cd)^{2024}+m^2$ 的值。',
       blanks: [{ kind: 'num', answer: '3' }],
@@ -207,29 +87,29 @@ Content.section({
       verify: () => F(0).pow(2025).sub(F(1).pow(2024)).add(F(2).pow(2)),
     },
 
-    // ---------- 挑战 ----------
+    // ---------- 扩展 ----------
     {
-      id: '1.4-c01',
-      level: 'challenge',
-      type: 'fill',
-      stem: '观察：$3^1=3$，$3^2=9$，$3^3=27$，$3^4=81$，$3^5=243$，……；$2^1=2$，$2^2=4$，$2^3=8$，$2^4=16$，$2^5=32$，……',
-      blanks: [
-        { kind: 'num', label: '(1) $3^{2025}$ 的个位数字是', answer: '3' },
-        { kind: 'num', label: '(2) $2^{2025}+3^{2025}$ 的个位数字是', answer: '5' },
+      id: '1.4-e01',
+      level: 'extended',
+      type: 'multi',
+      stem: '下列说法中，正确的有（多选）',
+      options: [
+        '如果 $a^2>b^2$，那么 $a>b$',
+        '平方等于它本身的数是 0 和 1',
+        '如果 $a^3=-a^3$，那么 $a=0$',
+        '如果 $a^2=b^2$，那么 $a=b$',
       ],
+      answer: [1, 2],
       explain: [
-        '个位数字只和上一次的个位有关。3 的幂的个位依次是 3，9，7，1，3，9，7，1……每 4 个一循环；2 的幂的个位依次是 2，4，8，6……也是每 4 个一循环。',
-        '(1) $2025\\div 4=506$ 余 1，所以 $3^{2025}$ 的个位和 $3^1$ 相同，是 3。',
-        '(2) 同理 $2^{2025}$ 的个位和 $2^1$ 相同，是 2。两数相加，个位是 $2+3=5$。',
+        'A 错：$(-3)^2>1^2$，但 $-3<1$。平方大的数不一定大，要看绝对值。',
+        'B 对：只有 $0^2=0$，$1^2=1$；$(-1)^2=1\\ne -1$。',
+        'C 对：一个数等于它的相反数，这个数只能是 0，所以 $a^3=0$，$a=0$。',
+        'D 错：$2^2=(-2)^2$，但 $2\\ne -2$。答案是 B、C。',
       ],
-      verify: () => {
-        const last = (b, e) => Number(BigInt(b) ** BigInt(e) % 10n);
-        return [last(3, 2025), (last(2, 2025) + last(3, 2025)) % 10];
-      },
     },
     {
-      id: '1.4-c02',
-      level: 'challenge',
+      id: '1.4-e02',
+      level: 'extended',
       type: 'fill',
       stem: '计算：$\\left(1-\\frac{1}{2^2}\\right)\\times\\left(1-\\frac{1}{3^2}\\right)\\times\\left(1-\\frac{1}{4^2}\\right)\\times\\cdots\\times\\left(1-\\frac{1}{2025^2}\\right)$',
       blanks: [{ kind: 'num', answer: '1013/2025' }],
@@ -246,8 +126,8 @@ Content.section({
       },
     },
     {
-      id: '1.4-c03',
-      level: 'challenge',
+      id: '1.4-e03',
+      level: 'extended',
       type: 'fill',
       stem: '计算：$\\dfrac{(-2)^{2025}+(-2)^{2024}}{(-2)^{2024}-(-2)^{2023}}$',
       blanks: [{ kind: 'num', answer: '-2/3' }],
@@ -261,8 +141,8 @@ Content.section({
       verify: () => F(-2).pow(2025).add(F(-2).pow(2024)).div(F(-2).pow(2024).sub(F(-2).pow(2023))),
     },
     {
-      id: '1.4-c04',
-      level: 'challenge',
+      id: '1.4-e04',
+      level: 'extended',
       type: 'choice',
       stem: '如果 $-1<a<0$，那么 $a$，$a^2$，$a^3$，$\\frac{1}{a}$ 的大小关系是（　　）',
       options: [
@@ -290,8 +170,8 @@ Content.section({
       },
     },
     {
-      id: '1.4-c05',
-      level: 'challenge',
+      id: '1.4-e05',
+      level: 'extended',
       type: 'fill',
       stem: '计算：$2^{2025}-2^{2024}-2^{2023}-\\cdots-2^2-2$',
       blanks: [{ kind: 'num', answer: '2' }],
@@ -305,6 +185,279 @@ Content.section({
         let s = 2n ** 2025n;
         for (let k = 2024; k >= 1; k--) s -= 2n ** BigInt(k);
         return Number(s);
+      },
+    },
+    {
+      id: '1.4-e06',
+      level: 'extended',
+      type: 'fill',
+      stem: '已知 $a^2=4$，$|b|=3$，并且 $|a+b|=a+b$。求 $a^3-b$ 的所有可能值。（用逗号隔开）',
+      blanks: [{ kind: 'nums', answer: ['5', '-11'] }],
+      explain: [
+        '$a^2=4$，$a=\\pm 2$；$|b|=3$，$b=\\pm 3$。',
+        '$|a+b|=a+b$ 说明 $a+b\\ge 0$。逐一检查：$(2,3)$ 和 5，满足；$(-2,3)$ 和 1，满足；$(2,-3)$ 和 $-1$，不满足；$(-2,-3)$ 和 $-5$，不满足。',
+        '$a=2,\\ b=3$：$a^3-b=8-3=5$；$a=-2,\\ b=3$：$a^3-b=-8-3=-11$。',
+      ],
+      verify: () => {
+        const r = [];
+        for (const a of [2, -2]) for (const b of [3, -3]) if (a + b >= 0) r.push(F(a).pow(3).sub(b));
+        return r;
+      },
+    },
+    {
+      id: '1.4-e07',
+      level: 'extended',
+      type: 'fill',
+      stem: '规定一种新运算：$a\\triangle b=a^2-b^3$。例如 $3\\triangle 2=9-8=1$。',
+      blanks: [
+        { kind: 'num', label: '(1) $(-2)\\triangle(-1)=$', answer: '5' },
+        { kind: 'nums', label: '(2) 若 $x\\triangle(-1)=10$，则 $x=$（全部填出，用逗号隔开）', answer: ['3', '-3'] },
+        { kind: 'nums', label: '(3) 若 $2\\triangle y=-23$，则 $y=$（全部填出，用逗号隔开）', answer: ['3'] },
+      ],
+      explain: [
+        '(1) $(-2)^2=4$，$(-1)^3=-1$，结果 $4-(-1)=5$。',
+        '(2) $x\\triangle(-1)=x^2-(-1)^3=x^2+1$。等于 10，所以 $x^2=9$，$x=3$ 或 $-3$（平方等于 9 的数有两个，别漏）。',
+        '(3) $2\\triangle y=4-y^3$。等于 $-23$，所以 $y^3=27$，$y=3$。立方等于 27 的数只有一个，因为立方保号：正数的立方是正数，负数的立方是负数。',
+        '对比 (2) 和 (3)：平方有两个解，立方只有一个解。',
+      ],
+      verify: () => {
+        const op = (a, b) => F(a).pow(2).sub(F(b).pow(3));
+        const xs = [];
+        const ys = [];
+        for (let i = -40; i <= 40; i++) {
+          const v = F(i).div(4);
+          if (op(v, -1).eq(10)) xs.push(v);
+          if (op(2, v).eq(-23)) ys.push(v);
+        }
+        return [op(-2, -1), xs, ys];
+      },
+    },
+    {
+      id: '1.4-e08',
+      level: 'extended',
+      type: 'fill',
+      stem: '按要求找出所有满足条件的有理数（全部填出，用逗号隔开）：',
+      blanks: [
+        { kind: 'nums', label: '(1) $a^3=a$，$a$ 的值是', answer: ['0', '1', '-1'] },
+        { kind: 'nums', label: '(2) $a^2=a^3$，$a$ 的值是', answer: ['0', '1'] },
+        { kind: 'nums', label: '(3) $a^3=-a$，$a$ 的值是', answer: ['0'] },
+      ],
+      explain: [
+        '(1) 先想 $a=0$：成立。$a\\ne 0$ 时，$a^3=a\\times a\\times a$ 等于 $a$，就是 $a\\times a=1$，$a$ 是倒数等于本身的数，$a=\\pm 1$。答案 $0,\\ 1,\\ -1$。',
+        '(2) $a=0$ 成立。$a\\ne 0$ 时，$a^3$ 是 $a^2$ 再乘 $a$，要等于 $a^2$（不为 0），只能 $a=1$。$a=-1$ 时 $a^2=1$，$a^3=-1$，不相等。答案 $0,\\ 1$。',
+        '(3) $a$ 与 $a^3$ 同号（奇次幂），而 $-a$ 与 $a$ 异号。一个数和它的“异号数”相等，只能都是 0。答案只有 0。',
+      ],
+      verify: () => {
+        const xs = [];
+        for (let i = -40; i <= 40; i++) xs.push(F(i).div(4));
+        return [xs.filter(a => a.pow(3).eq(a)), xs.filter(a => a.pow(2).eq(a.pow(3))), xs.filter(a => a.pow(3).eq(a.neg()))];
+      },
+    },
+    {
+      id: '1.4-e09',
+      level: 'extended',
+      type: 'fill',
+      stem: '在小于 1000 的正整数中：',
+      blanks: [
+        { kind: 'num', label: '(1) 是某个整数的平方的数有几个？', answer: '31', suffix: '个' },
+        { kind: 'num', label: '(2) 既是某个整数的平方、又是某个整数的立方的数有几个？', answer: '3', suffix: '个' },
+      ],
+      explain: [
+        '(1) $31^2=961<1000$，$32^2=1024>1000$，所以 $1^2,\\ 2^2,\\ \\dots,\\ 31^2$ 共 31 个。',
+        '(2) 小于 1000 的立方数有 $1,\\ 8,\\ 27,\\ 64,\\ 125,\\ 216,\\ 343,\\ 512,\\ 729$（$10^3=1000$ 不算）。逐个检查哪些也是平方数：$1=1^2$，$64=8^2$，$729=27^2$。',
+        '共 3 个。它们恰好是 $1^6,\\ 2^6,\\ 3^6$：6 个相同因数相乘，既可以看成 2 个一组（平方），也可以看成 3 个一组（立方）。',
+      ],
+      verify: () => {
+        const sq = new Set();
+        for (let k = 1; k * k < 1000; k++) sq.add(k * k);
+        let both = 0;
+        for (let k = 1; k * k * k < 1000; k++) if (sq.has(k * k * k)) both++;
+        return [sq.size, both];
+      },
+    },
+    {
+      id: '1.4-e10',
+      level: 'extended',
+      type: 'fill',
+      stem: '计算：$(-1)^1\\times 1+(-1)^2\\times 2+(-1)^3\\times 3+\\cdots+(-1)^{100}\\times 100$',
+      blanks: [{ kind: 'num', answer: '50' }],
+      explain: [
+        '先定每一项的符号：$(-1)^k$ 在 $k$ 为奇数时是 $-1$，偶数时是 1。所以原式 $=-1+2-3+4-\\cdots-99+100$。',
+        '两两一组：$(-1+2)+(-3+4)+\\cdots+(-99+100)$，每组为 1，共 50 组，和为 50。',
+      ],
+      verify: () => {
+        let s = F(0);
+        for (let k = 1; k <= 100; k++) s = s.add(F(-1).pow(k).mul(k));
+        return s;
+      },
+    },
+
+    // ---------- 挑战 ----------
+    {
+      id: '1.4-c01',
+      level: 'challenge',
+      type: 'fill',
+      stem: '求 $1^1+2^2+3^3+4^4+\\cdots+2025^{2025}$ 的个位数字。',
+      blanks: [{ kind: 'num', answer: '7' }],
+      explain: [
+        '$k^k$ 的个位由两件事决定：底数 $k$ 的个位，以及指数 $k$ 在该底数个位循环中的位置。个位循环的长度都是 1、2 或 4，所以只看 $k$ 除以 4 的余数就够了。',
+        '$k$ 的个位每 10 个一循环，$k$ 除以 4 的余数每 4 个一循环，两者同时重复要每 20 个一循环：$k$ 和 $k+20$ 的 $k^k$ 个位相同。',
+        '算出 $k=1$ 到 20 的 $k^k$ 个位：1，4，7，6，5，6，3，6，9，0，1，6，3，6，5，6，7，4，9，0，它们的和是 94，个位是 4。',
+        '$2025=20\\times 101+5$。101 个完整循环，个位之和的个位是 $101\\times 4=404$ 的个位 4；剩下的 $2021^{2021}$ 到 $2025^{2025}$ 和 $1^1$ 到 $5^5$ 的个位相同：$1+4+7+6+5=23$，个位 3。',
+        '总的个位是 $4+3=7$。',
+      ],
+      verify: () => {
+        let u = 0n;
+        for (let k = 1n; k <= 2025n; k++) u = (u + ((k % 10n) ** (((k - 1n) % 4n) + 1n)) % 10n) % 10n;
+        let check = 0n;
+        for (let k = 1n; k <= 200n; k++) check = (check + k ** k) % 10n;
+        let brute = 0n;
+        for (let k = 1n; k <= 200n; k++) brute = (brute + ((k % 10n) ** (((k - 1n) % 4n) + 1n)) % 10n) % 10n;
+        return check === brute ? Number(u) : null;
+      },
+    },
+    {
+      id: '1.4-c02',
+      level: 'challenge',
+      type: 'multi',
+      stem: '已知有理数 $a$、$b$、$c$ 满足：$a^{2025}\\times b^{2024}\\times c^{2023}<0$，$a^2\\times b\\times c^3>0$，并且 $|a|>|c|$。下列结论中**一定成立**的有（多选）',
+      options: [
+        '$a+c$ 与 $a$ 同号',
+        '$(a+c)^{2025}\\times b<0$',
+        '$abc>0$',
+        '$\\frac{a}{|a|}+\\frac{b}{|b|}+\\frac{c}{|c|}+\\frac{abc}{|abc|}=0$',
+      ],
+      answer: [0, 1, 3],
+      explain: [
+        '三个数都不为 0。由第一个条件，$b^{2024}>0$，所以 $a$ 与 $c$ 异号（奇次幂与底数同号）；由第二个条件，$a^2>0$，所以 $b$ 与 $c$ 同号。于是 $a$ 与 $b$、$c$ 都异号。',
+        'A：$a$、$c$ 异号且 $|a|>|c|$，和的符号跟绝对值大的 $a$，成立。',
+        'B：$(a+c)^{2025}$ 与 $a+c$ 同号，也就是与 $a$ 同号；$b$ 与 $a$ 异号，所以乘积为负，成立。',
+        'C：$abc$ 的符号：$bc>0$，所以 $abc$ 与 $a$ 同号，$a$ 可正可负，不一定成立。',
+        'D：分两种情况。$a>0$、$b,\\ c<0$：$1-1-1+1=0$；$a<0$、$b,\\ c>0$：$-1+1+1-1=0$。总是 0，成立。答案是 A、B、D。',
+      ],
+      verify: () => {
+        const xs = [3, -3, 2, -2, 1, -1];
+        const sg = x => F(x).div(F(x).abs());
+        const claims = [
+          (a, b, c) => (a + c) * a > 0,
+          (a, b, c) => F(a + c).pow(2025).mul(b).cmp(0) < 0,
+          (a, b, c) => a * b * c > 0,
+          (a, b, c) => sg(a).add(sg(b)).add(sg(c)).add(sg(a * b * c)).isZero(),
+        ];
+        const always = claims.map(() => true);
+        for (const a of xs) for (const b of xs) for (const c of xs) {
+          const p1 = F(a).pow(2025).mul(F(b).pow(2024)).mul(F(c).pow(2023));
+          const p2 = F(a).pow(2).mul(b).mul(F(c).pow(3));
+          if (!(p1.cmp(0) < 0 && p2.cmp(0) > 0 && Math.abs(a) > Math.abs(c))) continue;
+          claims.forEach((f, i) => { if (!f(a, b, c)) always[i] = false; });
+        }
+        return always.map((ok, i) => (ok ? i : -1)).filter(i => i >= 0);
+      },
+    },
+    {
+      id: '1.4-c03',
+      level: 'challenge',
+      type: 'fill',
+      stem: '一个小球从 16 米高处自由落下，每次落地后弹起的高度都是它下落高度的 $\\frac{1}{2}$。',
+      blanks: [
+        { kind: 'num', label: '(1) 小球第 10 次落地时，一共经过了多少米？', answer: '767/16', suffix: '米' },
+        { kind: 'num', label: '(2) 小球第几次落地时，经过的总路程比 48 米少 $\\frac{1}{64}$ 米？', answer: '12' },
+        { kind: 'num', label: '(3) 小球第几次落地时，经过的总路程首次超过 47.99 米？', answer: '13' },
+      ],
+      explain: [
+        '第 $n$ 次落地时的总路程 = 第一次下落的 16 米 + 前 $n-1$ 次弹起高度的 2 倍（每次弹起后还要落下）。',
+        '弹起高度依次是 8，4，2，1，$\\frac{1}{2}$……从 8 开始每次减半的若干个数之和，比 16 少最后一个数（例如 $8+4+2=14=16-2$）。',
+        '所以总路程 $=16+2\\times\\left(16-\\text{第 }n-1\\text{ 次弹起高度}\\right)=48-2\\times$（第 $n-1$ 次弹起高度）。而第 $n-1$ 次弹起的高度是 $16\\div 2^{n-1}$，所以总路程比 48 米少 $16\\div 2^{n-2}$ 米。总路程永远到不了 48 米，但越来越接近。',
+        '(1) $n=10$：少 $16\\div 2^8=\\frac{1}{16}$，总路程 $48-\\frac{1}{16}=\\frac{767}{16}$ 米。',
+        '(2) 少 $\\frac{1}{64}$：$16\\div 2^{n-2}=\\frac{1}{64}$，即 $2^{n-2}=1024$。$2^{10}=1024$，所以 $n-2=10$，$n=12$。',
+        '(3) 首次超过 47.99，就是少的部分首次小于 0.01：$16\\div 2^{n-2}<0.01$，即 $2^{n-2}>1600$。$2^{10}=1024$ 不够，$2^{11}=2048$ 够，所以 $n-2=11$，$n=13$。',
+      ],
+      verify: () => {
+        let h = F(16);
+        let dist = F(16);
+        const landing = { 1: F(16) };
+        for (let n = 1; n <= 30; n++) {
+          h = h.div(2);
+          dist = dist.add(h.mul(2));
+          landing[n + 1] = dist;
+        }
+        let first = null;
+        let exact = null;
+        for (let n = 1; n <= 31; n++) {
+          if (!first && landing[n].cmp('47.99') > 0) first = n;
+          if (F(48).sub(landing[n]).eq('1/64')) exact = n;
+        }
+        return [landing[10], exact, first];
+      },
+    },
+    {
+      id: '1.4-c04',
+      level: 'challenge',
+      type: 'fill',
+      stem: '培养皿中的一种细菌，每过 1 分钟，每个细菌都分裂成 2 个，同时在这一分钟末恰好有 1 个细菌死亡。现在培养皿中有 3 个这种细菌。',
+      blanks: [
+        { kind: 'num', label: '(1) 10 分钟后，培养皿中有多少个细菌？', answer: '2049', suffix: '个' },
+        { kind: 'num', label: '(2) 几分钟后，细菌个数首次超过 10000 个？', answer: '13', suffix: '分钟' },
+        { kind: 'num', label: '(3) 若一开始有 $a$ 个细菌，10 分钟后恰好有 1025 个，则 $a=$', answer: '2' },
+      ],
+      explain: [
+        '先算前几分钟：3 个 → $3\\times 2-1=5$ → $5\\times 2-1=9$ → 17 → 33……直接找不出规律，试着和 2 的幂比一比：5 比 4 多 1，9 比 8 多 1，17 比 16 多 1。',
+        '规律：**个数减 1 之后每分钟正好翻倍**。因为“先翻倍再少 1 个”等于“比原来多出的部分翻倍”：个数是 $x$ 时，$2x-1$ 减 1 得 $2x-2$，正好是 $x-1$ 的 2 倍。',
+        '开始时 $3-1=2$，所以 $n$ 分钟后的个数 $=2\\times 2^n+1$（这里 $2\\times 2^n$ 表示 $n+1$ 个 2 相乘）。',
+        '(1) 10 分钟后：$2^{11}+1=2048+1=2049$ 个。',
+        '(2) 要 $2^{n+1}+1>10000$，即 $2^{n+1}>9999$。$2^{13}=8192$ 不够，$2^{14}=16384$ 够，所以 $n+1=14$，$n=13$ 分钟。',
+        '(3) 一开始 $a$ 个，减 1 得 $a-1$，10 分钟后变成 $(a-1)$ 的 $2^{10}=1024$ 倍，再加 1。所以 $(a-1)\\times 1024+1=1025$，$(a-1)\\times 1024=1024$，$a-1=1$，$a=2$。',
+      ],
+      verify: () => {
+        const step = x => 2 * x - 1;
+        let x = 3;
+        const after = [3];
+        for (let n = 1; n <= 20; n++) { x = step(x); after.push(x); }
+        let first = null;
+        for (let n = 1; n <= 20; n++) if (!first && after[n] > 10000) first = n;
+        const starts = [];
+        for (let a = 1; a <= 20; a++) {
+          let y = a;
+          for (let n = 0; n < 10; n++) y = step(y);
+          if (y === 1025) starts.push(a);
+        }
+        return [after[10], first, starts.length === 1 ? starts[0] : null];
+      },
+    },
+    {
+      id: '1.4-c05',
+      level: 'challenge',
+      type: 'fill',
+      stem: '按规律排列的一列数：$1,\\ -2,\\ 4,\\ -8,\\ 16,\\ -32,\\ \\dots$（后一个数是前一个数的 $-2$ 倍）。',
+      blanks: [
+        { kind: 'num', label: '(1) 若其中某三个相邻的数之和的绝对值是 1536，则这三个数中最大的数是', answer: '1024' },
+        { kind: 'num', label: '(2) 若其中某 $k$ 个相邻的数之和是 $-1364$，则 $k=$', answer: '10' },
+        { kind: 'num', label: '(3) 在 (2) 中，这 $k$ 个数里的第一个数是', answer: '4' },
+      ],
+      explain: [
+        '这列数第 $n$ 个是 $(-2)^{n-1}$：奇数位是正数（$1,\\ 4,\\ 16,\\ \\dots$），偶数位是负数（$-2,\\ -8,\\ -32,\\ \\dots$）。注意 $2,\\ 8,\\ 32$ 这些数只以负号出现，$-1,\\ -4,\\ -16$ 则不会出现。',
+        '(1) 相邻三个数依次是第一个数的 1 倍、$-2$ 倍、4 倍，和是第一个数的 3 倍。绝对值是 1536，所以第一个数是 $512$ 或 $-512$。$512=2^9$ 在数列中只能以 $-512$ 出现，所以第一个数是 $-512$，三个数是 $-512,\\ 1024,\\ -2048$，最大的是 1024。',
+        '(2)(3) 从某个数 $x$ 开始的 $k$ 个相邻数之和 $=x\\times$（$1-2+4-8+\\cdots$ 的前 $k$ 项之和）。列出前 $k$ 项之和：1，$-1$，3，$-5$，11，$-21$，43，$-85$，171，$-341$，683……**都是奇数**。',
+        '$-1364=x\\times$（一个奇数），而 $1364=4\\times 341$，所以 $x$ 只能是 $\\pm 1,\\ \\pm 2,\\ \\pm 4$ 中的数，再逐个试：$x=1$ 时要前 $k$ 项和为 $-1364$，不在表中；$x=-2$ 时要 682，也不在表中；$x=4$ 时要 $-341$，正好是前 10 项之和。',
+        '数列中 4 确实存在（第 3 个数），而 $-2$ 存在但对应的 682 不在表中，$-4$、$-1$ 不在数列中。所以 $k=10$，第一个数是 4。',
+      ],
+      verify: () => {
+        const seq = [];
+        for (let n = 0; n < 40; n++) seq.push(F(-2).pow(n));
+        let big = null;
+        for (let i = 0; i + 2 < seq.length; i++) {
+          const s = seq[i].add(seq[i + 1]).add(seq[i + 2]);
+          if (s.abs().eq(1536)) big = [seq[i], seq[i + 1], seq[i + 2]].sort((x, y) => y.cmp(x))[0];
+        }
+        const found = [];
+        for (let i = 0; i < 30; i++) {
+          let s = F(0);
+          for (let k = 1; i + k <= 40; k++) {
+            s = s.add(seq[i + k - 1]);
+            if (s.eq(-1364)) found.push([k, seq[i]]);
+          }
+        }
+        return found.length === 1 ? [big, found[0][0], found[0][1]] : null;
       },
     },
   ],

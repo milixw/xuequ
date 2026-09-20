@@ -8,7 +8,7 @@ Content.section({
   id: 'math/sh2024/g6s1/1.3',
   title: '有理数的乘法与除法',
   review: { status: 'pending' },
-  audit: { blind: '2026-09-19', rounds: 2, note: '子代理盲解：第 1 轮 20 题答案全部一致；第 2 轮复核新 e05 和修改后的卡片，一致' },
+  audit: { blind: '2026-09-19', rounds: 3, note: '难度上移后子代理复核三轮：新题答案全部一致，第 3 轮判定整节通过（按意见调整 e08 解析措辞和运算符号）' },
 
   intro: [
     {
@@ -47,67 +47,6 @@ Content.section({
       id: '1.3-b01',
       level: 'basic',
       type: 'fill',
-      stem: '计算：$(-2.5)\\times 4$',
-      blanks: [{ kind: 'num', answer: '-10' }],
-      explain: ['异号两数相乘得负。', '绝对值相乘：$2.5\\times 4=10$，结果是 $-10$。'],
-      verify: () => F('-2.5').mul(4),
-    },
-    {
-      id: '1.3-b02',
-      level: 'basic',
-      type: 'fill',
-      stem: '计算：$\\left(-\\frac{3}{4}\\right)\\times\\left(-\\frac{8}{9}\\right)$',
-      blanks: [{ kind: 'num', answer: '2/3' }],
-      explain: ['同号两数相乘得正。', '$\\frac{3}{4}\\times\\frac{8}{9}=\\frac{24}{36}=\\frac{2}{3}$。'],
-      verify: () => F('-3/4').mul('-8/9'),
-    },
-    {
-      id: '1.3-b03',
-      level: 'basic',
-      type: 'fill',
-      stem: '$-2\\frac{1}{3}$ 的倒数是多少？',
-      blanks: [{ kind: 'num', answer: '-3/7' }],
-      explain: ['先化成假分数：$-2\\frac{1}{3}=-\\frac{7}{3}$。', '倒数不改变符号，把分子分母颠倒：$-\\frac{3}{7}$。'],
-      verify: () => F(1).div('-7/3'),
-    },
-    {
-      id: '1.3-b04',
-      level: 'basic',
-      type: 'fill',
-      stem: '计算：$\\left(-\\frac{5}{6}\\right)\\div\\left(-\\frac{10}{3}\\right)$',
-      blanks: [{ kind: 'num', answer: '1/4' }],
-      explain: ['除以一个数等于乘它的倒数：$\\left(-\\frac{5}{6}\\right)\\times\\left(-\\frac{3}{10}\\right)$。', '同号得正：$\\frac{5}{6}\\times\\frac{3}{10}=\\frac{1}{4}$。'],
-      verify: () => F('-5/6').div('-10/3'),
-    },
-    {
-      id: '1.3-b05',
-      level: 'basic',
-      type: 'choice',
-      stem: '下列算式中，结果是负数的是（　　）',
-      options: ['$(-2)\\times(-3)$', '$(-2)\\times 3\\times(-1)$', '$0\\times(-5)$', '$(-1)\\times(-2)\\times(-3)$'],
-      answer: 3,
-      explain: ['看负因数的个数：A 有 2 个，积为正；B 有 2 个，积为正。', 'C 有因数 0，积为 0，0 不是负数。', 'D 有 3 个负因数，积为负（$-6$）。选 D。'],
-      verify: () => [F(-2).mul(-3), F(-2).mul(3).mul(-1), F(0).mul(-5), F(-1).mul(-2).mul(-3)].findIndex(x => x.cmp(0) < 0),
-    },
-
-    // ---------- 扩展 ----------
-    {
-      id: '1.3-e01',
-      level: 'extended',
-      type: 'fill',
-      stem: '用简便方法计算：$\\left(-\\frac{1}{2}+\\frac{2}{3}-\\frac{3}{4}\\right)\\times(-12)$',
-      blanks: [{ kind: 'num', answer: '7' }],
-      explain: [
-        '用分配律，括号里每一项都乘 $-12$：',
-        '$\\left(-\\frac{1}{2}\\right)\\times(-12)=6$，$\\frac{2}{3}\\times(-12)=-8$，$\\left(-\\frac{3}{4}\\right)\\times(-12)=9$。',
-        '$6-8+9=7$。',
-      ],
-      verify: () => F('-1/2').add('2/3').sub('3/4').mul(-12),
-    },
-    {
-      id: '1.3-e02',
-      level: 'extended',
-      type: 'fill',
       stem: '计算：$-4\\frac{1}{2}\\div 3\\times\\left(-\\frac{2}{3}\\right)$',
       blanks: [{ kind: 'num', answer: '1' }],
       explain: [
@@ -117,57 +56,8 @@ Content.section({
       verify: () => F('-9/2').div(3).mul('-2/3'),
     },
     {
-      id: '1.3-e03',
-      level: 'extended',
-      type: 'fill',
-      stem: '用简便方法计算：$99\\frac{17}{18}\\times(-9)$',
-      blanks: [{ kind: 'num', answer: '-1799/2' }],
-      explain: [
-        '把 $99\\frac{17}{18}$ 拆成 $100-\\frac{1}{18}$，再用分配律：',
-        '$\\left(100-\\frac{1}{18}\\right)\\times(-9)=-900+\\frac{1}{2}=-899\\frac{1}{2}$。',
-      ],
-      verify: () => F('99又17/18').mul(-9),
-    },
-    {
-      id: '1.3-e04',
-      level: 'extended',
-      type: 'choice',
-      stem: '如果 $ab<0$，并且 $a+b>0$，那么（　　）',
-      options: ['$a$、$b$ 都是正数', '$a$、$b$ 异号，并且正数的绝对值较大', '$a$、$b$ 异号，并且负数的绝对值较大', '无法确定 $a$、$b$ 的符号'],
-      answer: 1,
-      explain: [
-        '$ab<0$，说明 $a$、$b$ 异号，A、D 都不对。',
-        '异号两数相加，和的符号跟绝对值较大的数相同。和是正数，所以正数的绝对值较大。选 B。',
-      ],
-      // 在一批取值中检查：满足条件时 A、B、C 哪一个始终成立
-      verify: () => {
-        const xs = [];
-        for (let i = -8; i <= 8; i++) if (i) xs.push(F(i).div(2));
-        const claims = [
-          (a, b) => a.cmp(0) > 0 && b.cmp(0) > 0,
-          (a, b) => a.mul(b).cmp(0) < 0 && (a.cmp(0) > 0 ? a : b).abs().cmp((a.cmp(0) > 0 ? b : a).abs()) > 0,
-          (a, b) => a.mul(b).cmp(0) < 0 && (a.cmp(0) < 0 ? a : b).abs().cmp((a.cmp(0) < 0 ? b : a).abs()) > 0,
-        ];
-        return claims.findIndex(f => xs.every(a => xs.every(b => !(a.mul(b).cmp(0) < 0 && a.add(b).cmp(0) > 0) || f(a, b))));
-      },
-    },
-    {
-      id: '1.3-e05',
-      level: 'extended',
-      type: 'fill',
-      stem: '计算：$\\left(-\\frac{1}{30}\\right)\\div\\left(\\frac{2}{3}-\\frac{1}{10}+\\frac{1}{6}-\\frac{2}{5}\\right)$',
-      blanks: [{ kind: 'num', answer: '-1/10' }],
-      explain: [
-        '除法没有分配律，不能拆开。可以先算出括号里的值，也可以用“倒数法”：先求原式的倒数。',
-        '原式的倒数 $=\\left(\\frac{2}{3}-\\frac{1}{10}+\\frac{1}{6}-\\frac{2}{5}\\right)\\div\\left(-\\frac{1}{30}\\right)=\\left(\\frac{2}{3}-\\frac{1}{10}+\\frac{1}{6}-\\frac{2}{5}\\right)\\times(-30)$，这里可以用分配律。',
-        '$=-20+3-5+12=-10$。',
-        '原式的倒数是 $-10$，所以原式 $=-\\frac{1}{10}$。',
-      ],
-      verify: () => F('-1/30').div(F('2/3').sub('1/10').add('1/6').sub('2/5')),
-    },
-    {
-      id: '1.3-e06',
-      level: 'extended',
+      id: '1.3-b02',
+      level: 'basic',
       type: 'fill',
       stem: '已知 $|a|=2$，$|b|=3$，并且 $ab<0$。求 $a+b$ 的所有可能值。（用逗号隔开）',
       blanks: [{ kind: 'nums', answer: ['1', '-1'] }],
@@ -179,29 +69,8 @@ Content.section({
       },
     },
     {
-      id: '1.3-e07',
-      level: 'extended',
-      type: 'fill',
-      stem: '倒数等于它本身的数是哪些？（全部填出，用逗号隔开）',
-      blanks: [{ kind: 'nums', answer: ['1', '-1'] }],
-      explain: ['一个数和它的倒数相乘等于 1，倒数等于本身，就是这个数乘它自己等于 1。', '满足的数是 1 和 $-1$。0 没有倒数，别写进去。'],
-      verify: () => [-2, -1, '-1/2', '1/2', 1, 2].filter(x => F(1).div(x).eq(x)),
-    },
-    {
-      id: '1.3-e08',
-      level: 'extended',
-      type: 'fill',
-      stem: '用简便方法计算：$(-0.25)\\times\\left(-\\frac{4}{7}\\right)\\times(-4)\\times(-7)$',
-      blanks: [{ kind: 'num', answer: '4' }],
-      explain: [
-        '先定符号：4 个负因数，积为正。',
-        '用交换律和结合律凑整：$(0.25\\times 4)\\times\\left(\\frac{4}{7}\\times 7\\right)=1\\times 4=4$。',
-      ],
-      verify: () => F('-0.25').mul('-4/7').mul(-4).mul(-7),
-    },
-    {
-      id: '1.3-e09',
-      level: 'extended',
+      id: '1.3-b03',
+      level: 'basic',
       type: 'fill',
       stem: '一个数与 $-\\frac{3}{5}$ 的积是 $\\frac{9}{10}$，这个数除以 $-\\frac{1}{2}$ 的商是多少？',
       blanks: [{ kind: 'num', answer: '3' }],
@@ -209,29 +78,36 @@ Content.section({
       verify: () => F('9/10').div('-3/5').div('-1/2'),
     },
     {
-      id: '1.3-e10',
-      level: 'extended',
-      type: 'multi',
-      stem: '下列说法中，正确的有（多选）',
-      options: [
-        '如果 $a\\div b<0$，那么 $ab<0$',
-        '两个数相除，如果商是 0，那么被除数一定是 0',
-        '一个数的倒数一定比这个数小',
-        '如果 $a+b=0$，并且 $a\\ne 0$，那么 $a\\div b=-1$',
-      ],
-      answer: [0, 1, 3],
+      id: '1.3-b04',
+      level: 'basic',
+      type: 'fill',
+      stem: '用简便方法计算：$99\\frac{17}{18}\\times(-9)$',
+      blanks: [{ kind: 'num', answer: '-1799/2' }],
       explain: [
-        'A 对：$a\\div b<0$ 说明 $a$、$b$ 异号，所以 $ab<0$。',
-        'B 对：除数不能为 0，被除数不为 0 时商也不为 0，所以商是 0 时被除数一定是 0。',
-        'C 错：$\\frac{1}{2}$ 的倒数是 2，比它大；$-2$ 的倒数是 $-\\frac{1}{2}$，也比它大。',
-        'D 对：$a$、$b$ 互为相反数且不为 0，绝对值相等、符号相反，商是 $-1$。答案是 A、B、D。',
+        '把 $99\\frac{17}{18}$ 拆成 $100-\\frac{1}{18}$，再用分配律：',
+        '$\\left(100-\\frac{1}{18}\\right)\\times(-9)=-900+\\frac{1}{2}=-899\\frac{1}{2}$。',
       ],
+      verify: () => F('99又17/18').mul(-9),
+    },
+    {
+      id: '1.3-b05',
+      level: 'basic',
+      type: 'fill',
+      stem: '计算：$\\left(-\\frac{1}{30}\\right)\\div\\left(\\frac{2}{3}-\\frac{1}{10}+\\frac{1}{6}-\\frac{2}{5}\\right)$',
+      blanks: [{ kind: 'num', answer: '-1/10' }],
+      explain: [
+        '除法没有分配律，不能拆开。可以先算出括号里的值，也可以用“倒数法”：先求原式的倒数。',
+        '原式的倒数 $=\\left(\\frac{2}{3}-\\frac{1}{10}+\\frac{1}{6}-\\frac{2}{5}\\right)\\div\\left(-\\frac{1}{30}\\right)=\\left(\\frac{2}{3}-\\frac{1}{10}+\\frac{1}{6}-\\frac{2}{5}\\right)\\times(-30)$，这里可以用分配律。',
+        '$=-20+3-5+12=-10$。',
+        '原式的倒数是 $-10$，所以原式 $=-\\frac{1}{10}$。',
+      ],
+      verify: () => F('-1/30').div(F('2/3').sub('1/10').add('1/6').sub('2/5')),
     },
 
-    // ---------- 挑战 ----------
+    // ---------- 扩展 ----------
     {
-      id: '1.3-c01',
-      level: 'challenge',
+      id: '1.3-e01',
+      level: 'extended',
       type: 'fill',
       stem: '已知 $a$、$b$、$c$ 都是不为 0 的有理数，并且 $a+b+c=0$。求 $\\frac{a}{|a|}+\\frac{b}{|b|}+\\frac{c}{|c|}+\\frac{abc}{|abc|}$ 的所有可能值。（用逗号隔开）',
       blanks: [{ kind: 'nums', answer: ['0'] }],
@@ -255,8 +131,8 @@ Content.section({
       },
     },
     {
-      id: '1.3-c02',
-      level: 'challenge',
+      id: '1.3-e02',
+      level: 'extended',
       type: 'fill',
       stem: '计算：$-\\frac{1}{1\\times 3}-\\frac{1}{3\\times 5}-\\frac{1}{5\\times 7}-\\cdots-\\frac{1}{2023\\times 2025}$',
       blanks: [{ kind: 'num', answer: '-1012/2025' }],
@@ -273,8 +149,8 @@ Content.section({
       },
     },
     {
-      id: '1.3-c03',
-      level: 'challenge',
+      id: '1.3-e03',
+      level: 'extended',
       type: 'fill',
       stem: '计算：$\\left(-\\frac{1}{2}\\right)\\times\\left(-\\frac{2}{3}\\right)\\times\\left(-\\frac{3}{4}\\right)\\times\\cdots\\times\\left(-\\frac{2024}{2025}\\right)\\div\\left(-\\frac{1}{2025}\\right)$',
       blanks: [{ kind: 'num', answer: '-1' }],
@@ -290,8 +166,8 @@ Content.section({
       },
     },
     {
-      id: '1.3-c04',
-      level: 'challenge',
+      id: '1.3-e04',
+      level: 'extended',
       type: 'fill',
       stem: '从 $-5,\\ -3,\\ -1,\\ 2,\\ 4,\\ 6$ 中取出三个不同的数，分别作为 $a$、$b$、$c$，计算 $\\frac{ab}{c}$ 的值。',
       blanks: [
@@ -318,8 +194,8 @@ Content.section({
       },
     },
     {
-      id: '1.3-c05',
-      level: 'challenge',
+      id: '1.3-e05',
+      level: 'extended',
       type: 'fill',
       stem: '已知 $a$、$b$、$c$、$d$ 是四个互不相等的整数，并且 $abcd=9$。求 $a+b+c+d$ 的值。',
       blanks: [{ kind: 'num', answer: '0' }],
@@ -336,6 +212,268 @@ Content.section({
           for (let k = j + 1; k < ds.length; k++) for (let l = k + 1; l < ds.length; l++)
             if (ds[i] * ds[j] * ds[k] * ds[l] === 9) sums.add(ds[i] + ds[j] + ds[k] + ds[l]);
         return sums.size === 1 ? [...sums][0] : null;
+      },
+    },
+    {
+      id: '1.3-e06',
+      level: 'extended',
+      type: 'fill',
+      stem: '已知 $|a|=3$，$|b|=4$，$|c|=6$，并且 $|ab|=-ab$，$|bc|=bc$，$a+b+c>0$。求 $a\\div b\\div c$ 的值。',
+      blanks: [{ kind: 'num', answer: '-1/8' }],
+      explain: [
+        '$|ab|=-ab$ 说明 $ab\\le 0$，而 $a$、$b$ 都不为 0，所以 $ab<0$，$a$、$b$ 异号。',
+        '$|bc|=bc$ 说明 $bc\\ge 0$，同理 $bc>0$，$b$、$c$ 同号。所以 $a$ 与 $b$、$c$ 都异号。',
+        '分两种情况用 $a+b+c>0$ 检验：$b$、$c$ 为正、$a$ 为负时，$-3+4+6=7>0$，成立；$b$、$c$ 为负、$a$ 为正时，$3-4-6=-7<0$，不成立。',
+        '所以 $a=-3,\\ b=4,\\ c=6$，$a\\div b\\div c=-3\\div 4\\div 6=-\\frac{1}{8}$。',
+      ],
+      verify: () => {
+        const r = [];
+        for (const a of [3, -3]) for (const b of [4, -4]) for (const c of [6, -6]) {
+          if (Math.abs(a * b) === -a * b && Math.abs(b * c) === b * c && a + b + c > 0) r.push(F(a).div(b).div(c));
+        }
+        return r.length === 1 ? r[0] : null;
+      },
+    },
+    {
+      id: '1.3-e07',
+      level: 'extended',
+      type: 'fill',
+      stem: '已知 $a$、$b$ 互为倒数，$c$、$d$ 互为相反数，$m$ 的绝对值是 2。求 $3ab-(c+d)\\div m+m$ 的所有可能值。（用逗号隔开）',
+      blanks: [{ kind: 'nums', answer: ['5', '1'] }],
+      explain: [
+        '互为倒数的两个数积为 1：$ab=1$；互为相反数的两个数和为 0：$c+d=0$；$m=2$ 或 $-2$（都不为 0，可以作除数）。',
+        '$(c+d)\\div m=0\\div m=0$。',
+        '原式 $=3\\times 1-0+m=3+m$。$m=2$ 时为 5，$m=-2$ 时为 1。',
+      ],
+      verify: () => [2, -2].map(m => F(3).mul(1).sub(F(0).div(m)).add(m)),
+    },
+    {
+      id: '1.3-e08',
+      level: 'extended',
+      type: 'fill',
+      stem: '规定一种新运算：$a\\odot b=|a|\\times b-a\\div|b|$（$b\\ne 0$）。若 $x\\odot 2=5$，求 $x$ 的所有可能值。（用逗号隔开）',
+      blanks: [{ kind: 'nums', answer: ['10/3', '-2'] }],
+      explain: [
+        '$x\\odot 2=|x|\\times 2-x\\div 2$。$|x|$ 要按 $x$ 的正负分开处理。',
+        '$x\\ge 0$ 时：$|x|=x$，结果是“$x$ 的 2 倍减去 $x$ 的一半”，也就是 $x$ 的 1.5 倍。等于 5，所以 $x=5\\div 1.5=\\frac{10}{3}$，确实大于 0。',
+        '$x<0$ 时：$|x|=-x$，结果是“$x$ 的 $-2$ 倍减去 $x$ 的一半”，也就是 $x$ 的 $-2.5$ 倍。等于 5，所以 $x=5\\div(-2.5)=-2$，确实小于 0。',
+        '两个都符合，$x=\\frac{10}{3}$ 或 $-2$。每种情况求出后都要检验是否符合前提。',
+      ],
+      verify: () => {
+        const op = (a, b) => F(a).abs().mul(b).sub(F(a).div(F(b).abs()));
+        const r = [];
+        for (let i = -240; i <= 240; i++) if (op(F(i).div(12), 2).eq(5)) r.push(F(i).div(12));
+        return r;
+      },
+    },
+    {
+      id: '1.3-e09',
+      level: 'extended',
+      type: 'multi',
+      stem: '已知有理数 $a$、$b$、$c$ 满足 $ab>0$，$bc<0$，并且 $|a|>|b|>|c|$。下列结论中**一定成立**的有（多选）',
+      options: ['$(a+b)\\times(b+c)>0$', '$(a+b)\\div c<0$', '$abc>0$', '$(b+c)\\div(a+b)>0$'],
+      answer: [0, 1, 3],
+      explain: [
+        '$ab>0$：$a$、$b$ 同号；$bc<0$：$b$、$c$ 异号。所以 $a$、$b$ 同号，$c$ 和它们异号。',
+        '$a+b$：同号相加，与 $b$ 同号。$b+c$：异号相加，$|b|>|c|$，符号跟 $b$，也与 $b$ 同号。',
+        'A：两个因数都与 $b$ 同号，积为正，成立。B：$a+b$ 与 $b$ 同号，$c$ 与 $b$ 异号，商为负，成立。D：两个数都与 $b$ 同号，商为正，成立。',
+        'C：$abc=(ab)\\times c$，$ab>0$，所以与 $c$ 同号，$c$ 可正可负（例如 $a=3,\\ b=2,\\ c=-1$ 与 $a=-3,\\ b=-2,\\ c=1$），不一定成立。答案是 A、B、D。',
+      ],
+      verify: () => {
+        const xs = [3, -3, 2, -2, 1, -1, 4, -4];
+        const claims = [
+          (a, b, c) => (a + b) * (b + c) > 0,
+          (a, b, c) => F(a + b).div(c).cmp(0) < 0,
+          (a, b, c) => a * b * c > 0,
+          (a, b, c) => F(b + c).div(a + b).cmp(0) > 0,
+        ];
+        const always = claims.map(() => true);
+        for (const a of xs) for (const b of xs) for (const c of xs) {
+          if (!(a * b > 0 && b * c < 0 && Math.abs(a) > Math.abs(b) && Math.abs(b) > Math.abs(c))) continue;
+          claims.forEach((f, i) => { if (!f(a, b, c)) always[i] = false; });
+        }
+        return always.map((ok, i) => (ok ? i : -1)).filter(i => i >= 0);
+      },
+    },
+    {
+      id: '1.3-e10',
+      level: 'extended',
+      type: 'fill',
+      stem: '已知 $a$、$b$ 都是整数，并且 $a\\times b=-6$。',
+      blanks: [
+        { kind: 'num', label: '(1) $a\\div b$ 的最大值是', answer: '-1/6' },
+        { kind: 'num', label: '(2) $a\\div b$ 的最小值是', answer: '-6' },
+      ],
+      explain: [
+        '$ab=-6$，$a$、$b$ 异号，所以 $a\\div b$ 一定是负数。按 $a$ 的值列举：$a$ 可以是 $\\pm 1,\\ \\pm 2,\\ \\pm 3,\\ \\pm 6$，对应 $b=-6\\div a$。',
+        '$|a\\div b|=|a|\\div|b|$：$|a|=1$ 时是 $\\frac{1}{6}$；$|a|=2$ 时是 $\\frac{2}{3}$；$|a|=3$ 时是 $\\frac{3}{2}$；$|a|=6$ 时是 6。',
+        '都是负数，绝对值越小越大：最大值是 $-\\frac{1}{6}$（如 $a=1,\\ b=-6$），最小值是 $-6$（如 $a=6,\\ b=-1$）。',
+      ],
+      verify: () => {
+        const vals = [];
+        for (let a = -6; a <= 6; a++) if (a && (-6) % a === 0) vals.push(F(a).div(-6 / a));
+        vals.sort((x, y) => x.cmp(y));
+        return [vals[vals.length - 1], vals[0]];
+      },
+    },
+
+    // ---------- 挑战 ----------
+    {
+      id: '1.3-c01',
+      level: 'challenge',
+      type: 'fill',
+      stem: '已知 $|a|=2$，$|b|=1$，并且 $ab>0$。求 $\\frac{1}{ab}+\\frac{1}{(a+1)(b+1)}+\\frac{1}{(a+2)(b+2)}+\\cdots+\\frac{1}{(a+2024)(b+2024)}$ 的值。',
+      blanks: [{ kind: 'num', answer: '2025/2026' }],
+      explain: [
+        '$ab>0$，$a$、$b$ 同号，有两种情况：$a=2,\\ b=1$，或 $a=-2,\\ b=-1$。',
+        '先检查第二种：$a=-2,\\ b=-1$ 时，第二项的分母是 $(a+1)(b+1)=(-1)\\times 0=0$，**分母为 0，式子没有意义**，所以这种情况要舍去。',
+        '所以 $a=2,\\ b=1$，原式 $=\\frac{1}{2\\times 1}+\\frac{1}{3\\times 2}+\\cdots+\\frac{1}{2026\\times 2025}$。',
+        '每一项都是两个相邻整数之积的倒数，拆成两个倒数之差：$\\frac{1}{1\\times 2}=1-\\frac{1}{2}$，$\\frac{1}{2\\times 3}=\\frac{1}{2}-\\frac{1}{3}$……相加时中间全部抵消，得 $1-\\frac{1}{2026}=\\frac{2025}{2026}$。',
+        '这道题的关键是第二种情况：不是算出另一个答案，而是发现它根本不成立。',
+      ],
+      verify: () => {
+        const results = [];
+        for (const [a, b] of [[2, 1], [-2, -1]]) {
+          let s = F(0);
+          let ok = true;
+          for (let k = 0; k <= 2024; k++) {
+            const d = (a + k) * (b + k);
+            if (d === 0) { ok = false; break; }
+            s = s.add(F(1).div(d));
+          }
+          if (ok) results.push(s);
+        }
+        return results.length === 1 ? results[0] : null;
+      },
+    },
+    {
+      id: '1.3-c02',
+      level: 'challenge',
+      type: 'fill',
+      stem: '从 $-6,\\ -5,\\ -4,\\ -3,\\ -2,\\ -1,\\ 0,\\ 1,\\ 2,\\ 3$ 这 10 个整数中，任取三个不同的数相乘（只看取哪三个数，不计顺序）。',
+      blanks: [
+        { kind: 'num', label: '(1) 积为正数的取法有几种？', answer: '46', suffix: '种' },
+        { kind: 'num', label: '(2) 积为负数，并且大于 $-20$ 的取法有几种？', answer: '22', suffix: '种' },
+        { kind: 'num', label: '(3) 积的最大值是', answer: '90' },
+      ],
+      explain: [
+        '负数有 6 个（$-6$～$-1$），正数有 3 个（1～3），还有 0。',
+        '(1) 积为正：三个正数，只有 $\\{1,2,3\\}$ 1 种；一正两负：正数 3 种，两个负数从 6 个里取 2 个有 15 种，共 45 种。合计 46 种。',
+        '(2) 积为负：三个负数，或两正一负。要大于 $-20$，就是绝对值小于 20。',
+        '三个负数：从 1～6 中取三个数，积小于 20 的有 $\\{1,2,3\\},\\{1,2,4\\},\\{1,2,5\\},\\{1,2,6\\},\\{1,3,4\\},\\{1,3,5\\},\\{1,3,6\\}$，共 7 种。注意 $\\{-1,-4,-5\\}$ 的积恰好是 $-20$，“大于 $-20$”不包括 $-20$，不算。',
+        '两正一负：两个正数的积是 2（1 和 2）时，负数的绝对值 1～6 都行，6 种；积是 3 时，$3\\times 6=18<20$，也是 6 种；积是 6 时，负数的绝对值只能是 1～3，3 种。共 15 种。合计 $7+15=22$ 种。',
+        '(3) 三个正数最大是 6；一正两负取 $3\\times(-6)\\times(-5)=90$。最大值是 90。（最小值是 $(-6)\\times(-5)\\times(-4)=-120$，两者不对称。）',
+      ],
+      verify: () => {
+        const xs = [-6, -5, -4, -3, -2, -1, 0, 1, 2, 3];
+        let pos = 0;
+        let neg = 0;
+        let max = -Infinity;
+        for (let i = 0; i < xs.length; i++) for (let j = i + 1; j < xs.length; j++) for (let k = j + 1; k < xs.length; k++) {
+          const p = xs[i] * xs[j] * xs[k];
+          if (p > 0) pos++;
+          if (p < 0 && p > -20) neg++;
+          max = Math.max(max, p);
+        }
+        return [pos, neg, max];
+      },
+    },
+    {
+      id: '1.3-c03',
+      level: 'challenge',
+      type: 'fill',
+      stem: '对于有理数 $a$、$b$（$a$、$b$、$a+b$ 都不为 0），规定一种新运算：$a\\oplus b=\\frac{a\\times b}{a+b}$。例如 $2\\oplus 3=\\frac{6}{5}$。可以验证：$a\\oplus b$ 的倒数等于 $a$ 的倒数与 $b$ 的倒数之和（如 $\\frac{5}{6}=\\frac{1}{2}+\\frac{1}{3}$）。',
+      blanks: [
+        { kind: 'num', label: '(1) $(2\\oplus 3)\\oplus 6=$', answer: '1' },
+        { kind: 'num', label: '(2) 若 $x\\oplus 3=2$，则 $x=$', answer: '6' },
+        { kind: 'nums', label: '(3) 若 $a$、$b$ 都是正整数，$a\\oplus b=2$，并且 $a\\le b$，则 $a$ 的值是（全部填出，用逗号隔开）', answer: ['3', '4'] },
+      ],
+      explain: [
+        '(1) $2\\oplus 3=\\frac{6}{5}$，$\\frac{6}{5}\\oplus 6=\\frac{\\frac{36}{5}}{\\frac{36}{5}}=1$。',
+        '用题目给的规律更快：连续做 $\\oplus$ 运算，结果的倒数就是各数倒数之和。(1) $\\frac{1}{2}+\\frac{1}{3}+\\frac{1}{6}=1$，倒数是 1。（再试一个：$4\\oplus 12=\\frac{48}{16}=3$，倒数 $\\frac{1}{3}=\\frac{1}{4}+\\frac{1}{12}$，规律成立。）',
+        '(2) 结果是 2，倒数是 $\\frac{1}{2}$，所以 $x$ 的倒数 $=\\frac{1}{2}-\\frac{1}{3}=\\frac{1}{6}$，$x=6$。检验：$\\frac{6\\times 3}{6+3}=2$。',
+        '(3) 要 $a$ 的倒数加 $b$ 的倒数等于 $\\frac{1}{2}$，且 $a\\le b$，所以 $a$ 的倒数是两者中较大的，至少是 $\\frac{1}{4}$，又要小于 $\\frac{1}{2}$。',
+        '所以 $a$ 只能是 3 或 4：$a=3$ 时 $b$ 的倒数是 $\\frac{1}{6}$，$b=6$；$a=4$ 时 $b=4$。答案是 3 或 4。',
+      ],
+      verify: () => {
+        const op = (a, b) => F(a).mul(b).div(F(a).add(b));
+        const one = op(op(2, 3), 6);
+        const xs = [];
+        for (let i = 1; i <= 200; i++) if (op(F(i).div(4), 3).eq(2)) xs.push(F(i).div(4));
+        const as = [];
+        for (let a = 1; a <= 50; a++) for (let b = a; b <= 200; b++) if (op(a, b).eq(2)) as.push(a);
+        return [one, xs.length === 1 ? xs[0] : null, as];
+      },
+    },
+    {
+      id: '1.3-c04',
+      level: 'challenge',
+      type: 'fill',
+      stem: '一列数 $a_1,\\ a_2,\\ a_3,\\ \\dots$ 满足：$a_1=2$，从第二个数起，每个数都等于“1 减去前一个数”的倒数，即 $a_2=\\frac{1}{1-a_1}$，$a_3=\\frac{1}{1-a_2}$……',
+      blanks: [
+        { kind: 'num', label: '(1) $a_{2025}=$', answer: '1/2' },
+        { kind: 'num', label: '(2) $a_1\\times a_2\\times a_3\\times\\cdots\\times a_{2025}=$', answer: '-1' },
+        { kind: 'num', label: '(3) $a_1+a_2+a_3+\\cdots+a_{2025}=$', answer: '2025/2' },
+        { kind: 'num', label: '(4) 若前 $n$ 个数的和等于 1000，则 $n=$', answer: '2000' },
+      ],
+      explain: [
+        '逐个算：$a_2=\\frac{1}{1-2}=-1$，$a_3=\\frac{1}{1-(-1)}=\\frac{1}{2}$，$a_4=\\frac{1}{1-\\frac{1}{2}}=2$。又回到了 2，所以每 3 个数一循环：$2,\\ -1,\\ \\frac{1}{2}$。',
+        '(1) $2025=3\\times 675$，$a_{2025}$ 是第 675 个循环的最后一个，等于 $\\frac{1}{2}$。',
+        '(2) 一个循环的积：$2\\times(-1)\\times\\frac{1}{2}=-1$。675 个 $-1$ 相乘，负因数有奇数个，积为 $-1$。',
+        '(3) 一个循环的和：$2-1+\\frac{1}{2}=\\frac{3}{2}$。总和 $=675\\times\\frac{3}{2}=\\frac{2025}{2}$。',
+        '(4) 按 $n$ 除以 3 的余数分三类。$n$ 是 3 的倍数（$3k$ 个数）：和为 $\\frac{3}{2}k$；多 1 个：再加 2；多 2 个：再加 $2-1=1$。',
+        '$\\frac{3}{2}k=1000$：$k=\\frac{2000}{3}$，不是整数；$\\frac{3}{2}k+2=1000$：$k=\\frac{1996}{3}$，不是整数；$\\frac{3}{2}k+1=1000$：$k=666$，是整数。所以 $n=3\\times 666+2=2000$。',
+      ],
+      verify: () => {
+        let a = F(2);
+        let prod = F(1);
+        let sum = F(0);
+        for (let n = 1; n <= 2025; n++) {
+          if (n > 1) a = F(1).div(F(1).sub(a));
+          prod = prod.mul(a);
+          sum = sum.add(a);
+        }
+        let b = F(2);
+        let t = F(0);
+        const ns = [];
+        for (let n = 1; n <= 3000; n++) {
+          if (n > 1) b = F(1).div(F(1).sub(b));
+          t = t.add(b);
+          if (t.eq(1000)) ns.push(n);
+        }
+        return [a, prod, sum, ns.length === 1 ? ns[0] : null];
+      },
+    },
+    {
+      id: '1.3-c05',
+      level: 'challenge',
+      type: 'fill',
+      stem: '分子是 1、分母是正整数的分数叫作单位分数，例如 $\\frac{1}{2}$，$\\frac{1}{7}$。把 1 写成几个分母互不相同的单位分数之和。',
+      blanks: [
+        { kind: 'num', label: '(1) 若写成 3 个单位分数之和，最大的分母是', answer: '6' },
+        { kind: 'num', label: '(2) 若写成 4 个单位分数之和，最大的分母最小是', answer: '12' },
+      ],
+      explain: [
+        '单位分数就是正整数的倒数。把分母从小到大排：分母越小，倒数越大，最小的分母决定最大的那个单位分数。',
+        '(1) 最小分母若 $\\ge 3$，三个数之和最多 $\\frac{1}{3}+\\frac{1}{4}+\\frac{1}{5}<1$，不够，所以最小分母是 2，剩下两个数之和是 $\\frac{1}{2}$。第二个分母若 $\\ge 4$，最多 $\\frac{1}{4}+\\frac{1}{5}<\\frac{1}{2}$，所以是 3，第三个是 $\\frac{1}{2}-\\frac{1}{3}=\\frac{1}{6}$。只有 $1=\\frac{1}{2}+\\frac{1}{3}+\\frac{1}{6}$ 一种，最大分母是 6。',
+        '(2) 同理最小分母必须是 2（$\\frac{1}{3}+\\frac{1}{4}+\\frac{1}{5}+\\frac{1}{6}<1$），剩下三个数之和是 $\\frac{1}{2}$。第二个分母只能是 3、4 或 5（$\\ge 6$ 时 $\\frac{1}{6}+\\frac{1}{7}+\\frac{1}{8}<\\frac{1}{2}$）。',
+        '第二个是 3：剩 $\\frac{1}{6}$ 拆成两个，$\\frac{1}{7}+\\frac{1}{42}$、$\\frac{1}{8}+\\frac{1}{24}$、$\\frac{1}{9}+\\frac{1}{18}$、$\\frac{1}{10}+\\frac{1}{15}$，最大分母最小是 15。',
+        '第二个是 4：剩 $\\frac{1}{4}$ 拆成两个，$\\frac{1}{5}+\\frac{1}{20}$、$\\frac{1}{6}+\\frac{1}{12}$，最大分母最小是 12。第二个是 5：剩 $\\frac{3}{10}$，无法拆成两个更小的不同单位分数。',
+        '所以最小是 12：$1=\\frac{1}{2}+\\frac{1}{4}+\\frac{1}{6}+\\frac{1}{12}$。既要找到例子，又要说明更小的不可能。',
+      ],
+      verify: () => {
+        const unit = (r, after) => r.cmp(0) > 0 && r.n === 1n && Number(r.d) > after;
+        let three = null;
+        for (let a = 2; a <= 20; a++) for (let b = a + 1; b <= 60; b++) {
+          const r = F(1).sub(F(1).div(a)).sub(F(1).div(b));
+          if (unit(r, b)) three = three === null ? Number(r.d) : Math.max(three, Number(r.d));
+        }
+        let best = null;
+        for (let a = 2; a <= 20; a++) for (let b = a + 1; b <= 60; b++) for (let c = b + 1; c <= 200; c++) {
+          const r = F(1).sub(F(1).div(a)).sub(F(1).div(b)).sub(F(1).div(c));
+          if (unit(r, c)) best = best === null ? Number(r.d) : Math.min(best, Number(r.d));
+        }
+        return [three, best];
       },
     },
   ],
