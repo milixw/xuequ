@@ -190,20 +190,24 @@ function initUI() {
   let params = {};
   let result = null;  // 上一次发射的结果（动画结束后）
   let anim = null;    // 正在播放的动画
-  let cleared = loadProgress();
+  let solved = loadProgress();   // 已通关的关卡下标（可以任意选关，不按顺序）
   let S = 0;          // 画布边长（CSS 像素）
   let dpr = 1;
 
   function loadProgress() {
     try {
-      return Math.min(Number(localStorage.getItem('fg-cleared')) || 0, LEVELS.length);
+      const raw = localStorage.getItem('fg-solved.v2');
+      if (raw) return new Set(JSON.parse(raw).filter(i => i >= 0 && i < LEVELS.length));
+      // 旧版本按顺序解锁，存的是“已通关的关数”，转换成集合
+      const count = Math.min(Number(localStorage.getItem('fg-cleared')) || 0, LEVELS.length);
+      return new Set(Array.from({ length: count }, (_, i) => i));
     } catch {
-      return 0;
+      return new Set();
     }
   }
 
   function saveProgress() {
-    try { localStorage.setItem('fg-cleared', String(cleared)); } catch {}
+    try { localStorage.setItem('fg-solved.v2', JSON.stringify([...solved])); } catch {}
   }
 
   function loadLevel(i) {
@@ -213,7 +217,7 @@ function initUI() {
     $('title').textContent = `第 ${i + 1} 关 · ${lv.title}`;
     $('hint').textContent = lv.hint;
     $('template').textContent = TYPES[lv.type].template;
-    $('next').hidden = !(i < cleared && i < LEVELS.length - 1);
+    $('next').hidden = i === LEVELS.length - 1;
     buildParams(lv);
     renderLevels();
     clearResult();
@@ -272,8 +276,7 @@ function initUI() {
       const b = document.createElement('button');
       b.type = 'button';
       b.textContent = i + 1;
-      b.disabled = i > cleared;
-      if (i < cleared) b.classList.add('done');
+      if (solved.has(i)) b.classList.add('done');
       if (i === levelIdx) b.classList.add('current');
       b.addEventListener('click', () => loadLevel(i));
       nav.appendChild(b);
@@ -321,11 +324,12 @@ function initUI() {
     result = res;
     if (res.ok) {
       const last = levelIdx === LEVELS.length - 1;
-      if (levelIdx + 1 > cleared) {
-        cleared = levelIdx + 1;
+      if (!solved.has(levelIdx)) {
+        solved.add(levelIdx);
         saveProgress();
       }
-      setMessage('ok', `${last ? '🎉 全部通关！' : '✓ 过关！'}${LEVELS[levelIdx].learn}`);
+      const allDone = solved.size === LEVELS.length;
+      setMessage('ok', `${allDone ? '🎉 全部通关！' : '✓ 过关！'}${LEVELS[levelIdx].learn}`);
       $('next').hidden = last;
       renderLevels();
     } else {
@@ -522,7 +526,8 @@ function initUI() {
   $('next').addEventListener('click', () => loadLevel(levelIdx + 1));
   window.addEventListener('resize', resize);
 
-  loadLevel(Math.min(cleared, LEVELS.length - 1));
+  const firstUnsolved = LEVELS.findIndex((_, i) => !solved.has(i));
+  loadLevel(firstUnsolved < 0 ? 0 : firstUnsolved);
   resize();
 }
 
