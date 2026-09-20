@@ -43,8 +43,11 @@ tests/
   function-track.test.js          函数轨道关卡校验
   export-blind.js                 导出不含答案的盲解题单（给复核子代理用）
 docs/
+  sop-section.md                  制作一个小节的完整流程（出题前必读）
+  question-types.md               题型台账：已用套路、待用套路池、教辅资料使用规则
   plan-*.md                       开发计划
   textbooks/                      教材目录与各章知识范围（出题前必读）
+  references/                     外部参考资料的笔记（原件放 refs/，不入库）
 scripts/                          start.sh / stop.sh：本地开发服务器；build.sh：打包；serve.js / run.sh：部署到服务器上运行
 dist/                             打包产物，不入库
 pic/                              用户拍的教材照片，不入库
@@ -128,12 +131,12 @@ Content.section({
 
 **完整步骤、自查清单和复核提示词模板见 `docs/sop-section.md`，做新小节时照着执行。** 简要流程：
 
-1. 查 `docs/textbooks/` 确认本节教什么、之前学过什么、还没学什么
+1. 查 `docs/textbooks/` 确认知识范围，查 `docs/question-types.md` 避开已用套路、挑新套路
 2. 先列三档提纲（挑战题先写下"叠加哪两个环节"），再写题
 3. `node tests/run.js` 通过 → 对照 SOP 的自查清单
 4. `node tests/export-blind.js` 导出无答案题单，交子代理盲解复核
 5. 处理意见后再送一轮，直到复核明确写"整节通过"（第 1 章每节用了 3 轮）
-6. 写入 `audit`、标记 `ready`、截图抽查、提交
+6. 更新题型台账、写入 `audit`、标记 `ready`、截图抽查、提交
 
 ### 经验（1.1～1.5）
 

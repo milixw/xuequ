@@ -7,3 +7,5 @@ pic/
 .server.log
 dist/
 server.log
+# 教辅等外部参考资料原件（有版权，只在本地参考；提炼的笔记放 docs/references/）
+refs/
