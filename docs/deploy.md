@@ -16,7 +16,7 @@
 
 ## 二、上传并启动（在服务器）
 
-> 服务器上已经有 nginx（比如前面挂着别的服务），跳到「五、与 ai-chat 共用一台服务器」——静态站直接交给 nginx，不用起这里的 node 进程。
+> 服务器上已经有 nginx（比如前面挂着别的服务），跳到「五、服务器上已有 nginx」——静态站直接交给 nginx，不用起这里的 node 进程。
 
 ```bash
 scp dist/xuequ-20260920-0859-068d3a9.tar.gz user@服务器:~/
@@ -94,9 +94,9 @@ sudo systemctl restart xuequ
 
 注意：用 systemd 时不要再用 `./run.sh start`，两者会抢端口。
 
-## 五、与 ai-chat 共用一台服务器（已有 nginx 时）
+## 五、服务器上已有 nginx（挂在子路径下）
 
-服务器上已经跑着 nginx（比如前面挂着 ai-chat），**就走这一节，不要再用 `run.sh` 起 node 进程**：本项目是纯静态站，交给 nginx 直接提供就行，不用开端口、不用改安全组，也不受域名备案进度影响——ai-chat 现在从哪个地址访问，它就从同一个地址的子路径访问。
+服务器上已经跑着 nginx（比如前面挂着别的站点），**就走这一节，不要再用 `run.sh` 起 node 进程**：本项目是纯静态站，交给 nginx 直接提供就行，不用开端口、不用改安全组，也不受域名备案进度影响——现有站点从哪个地址访问，它就从同一个地址的子路径（比如 `/xue/`）访问。
 
 先看清现有配置挂在哪个 server 块：
 
@@ -116,7 +116,7 @@ sudo ln -sfn /srv/xuequ-20260920-0859-068d3a9 /srv/web/xue
 
 ### nginx 配置
 
-加进 **ai-chat 现有的那个 server 块**，不要新建 server 块，也不要动它的 `location /`：
+加进 **现有站点的那个 server 块**，不要新建 server 块，也不要动它的 `location /`：
 
 ```nginx
 location = /xue  { return 301 /xue/; }          # 少打尾斜杠不会白屏
@@ -142,10 +142,10 @@ location ~ ^/xue/.*\.html$ {                     # 页面不缓存，改了刷�
 后三段是把 `scripts/serve.js` 里的缓存策略搬到 nginx 上。`^~` 和正则的先后顺序是有意的：`^~` 命中后 nginx 不再查正则，所以 vendor 走一年缓存、html 走 no-cache、其余走 5 分钟。
 
 ```bash
-sudo nginx -t && sudo systemctl reload nginx     # reload 不会断 ai-chat 的连接
+sudo nginx -t && sudo systemctl reload nginx     # reload 不会断开现有连接
 ```
 
-然后访问 `http://<ai-chat 现在的地址>/xue/`。
+然后访问 `http://<现有站点的地址>/xue/`。
 
 ### 为什么子路径不用配前缀
 
@@ -173,12 +173,12 @@ sudo tar -xzf ~/新包.tar.gz -C /srv/
 sudo ln -sfn /srv/xuequ-新版本 /srv/web/xue
 ```
 
-软链一改立刻生效，nginx 都不用 reload，ai-chat 全程无感。回退就是把软链指回旧目录，确认新版没问题后再删旧目录。
+软链一改立刻生效，nginx 都不用 reload，现有站点不受影响。回退就是把软链指回旧目录，确认新版没问题后再删旧目录。
 
-### 两个坑
+### 注意
 
 - **nginx 的 worker 用户要能读到解压目录**：`sudo -u www-data test -r /srv/web/xue/index.html && echo ok`（CentOS 系那个用户叫 `nginx`）
-- **别误删 ai-chat 那条 `proxy_buffering off`**：掉了它，ai-chat 走中继时回答不再逐字出现，而是攒成一坨最后一次吐出来
+- **不要改动现有站点原来的 `location` 配置**，只在同一个 server 块里追加上面几段
 
 ## 六、配域名和 HTTPS（可选）
 
@@ -211,7 +211,7 @@ sudo certbot --nginx -d 你的域名     # 自动申请证书并改成 HTTPS
 按第五节挂在 `/xue/` 下的，等域名备案下来可以换成独立子域名：把那几段 `location` 挪进新的 server 块，去掉 `/xue/` 前缀、`root` 从 `/srv/web` 改成 `/srv/web/xue`，再签证书：
 
 ```bash
-sudo certbot --nginx -d xue.你的域名 -d ai.你的域名    # 和 ai-chat 的域名可以一条命令一起签
+sudo certbot --nginx -d xue.你的域名 -d 其他.你的域名    # 同一台机器上的多个域名可以一条命令一起签
 ```
 
 备案之前子路径那套照样能用，不是白配的过渡。
@@ -221,5 +221,5 @@ sudo certbot --nginx -d xue.你的域名 -d ai.你的域名    # 和 ai-chat 的
 - **内容都标着"待审核"**：还没有数学老师审核过，对外开放前要处理
 - **做题进度存在浏览器本地**：换设备、换浏览器、清理数据都会丢；要跨设备保存得另做账号和后端
 - **没有访问统计**：需要的话可以在服务器上看 `server.log`，或者接入统计服务
-- **和 ai-chat 共用一台机器**：两者端口不冲突（8080 / 8787），也不共享任何文件；按第五节走 nginx 静态方案时本项目连常驻进程都没有。就算两个 node 都起着，Linux 上各约几十 MB，1 核 1G 的机器也宽裕
+- **和别的服务共用一台机器**：按第五节走 nginx 静态方案时本项目没有常驻进程；用 `serve.js` 时约占几十 MB 内存，1 核 1G 的机器也够用
 - **更新内容后**：页面和内容文件的缓存是 5 分钟（`no-cache` / `max-age=300`），学生刷新即可拿到新内容；KaTeX 相关文件按一年缓存，因为文件名不变但内容也不会变

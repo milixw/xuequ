@@ -59,6 +59,7 @@
     head.innerHTML =
       `<span class="lv lv-${q.level}">${LEVEL_NAMES[q.level]}</span>` +
       `<span class="q-no">第 ${opts.index + 1} / ${opts.total} 题</span>` +
+      `<span class="q-id" title="题号，纠错时请写上">${q.id}</span>` +
       `<span class="q-state"></span>`;
     container.appendChild(head);
     const stateEl = head.querySelector('.q-state');
