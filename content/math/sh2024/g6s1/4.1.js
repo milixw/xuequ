@@ -530,6 +530,7 @@ Content.section({
       level: 'challenge',
       type: 'fill',
       stem: '把一根绳子对折，再对折，使它变成原长的四分之一（共四层），然后在某处垂直剪一刀，把四层同时剪断。',
+      demo: { type: 'foldCut', folds: 2 },
       blanks: [
         { kind: 'num', label: '(1) 绳子被剪成', answer: '5', suffix: '段' },
         { kind: 'num', label: '(2) 若对折三次后（共八层）同样剪一刀，绳子被剪成', answer: '9', suffix: '段' },

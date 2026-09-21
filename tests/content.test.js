@@ -16,6 +16,7 @@ require('../content/catalog.js');
 const ROOT = path.join(__dirname, '..');
 const LEVELS = { b: 'basic', e: 'extended', c: 'challenge' };
 const KINDS = ['num', 'nums', 'expr', 'angle', 'text'];
+const DEMOS = ['foldCut'];  // src/demos.js 里的演示类型
 
 // 取出文本里所有 $...$ / $$...$$ 公式，逐个用 KaTeX 编译
 function checkMath(text, where) {
@@ -63,6 +64,7 @@ function checkQuestion(q, sectionNo, where) {
   assert(Array.isArray(q.explain) && q.explain.length, `${where}：缺少分步解析 explain`);
   q.explain.forEach((s, i) => checkMath(s, `${where} 解析第 ${i + 1} 步`));
   if (q.figure) assert(/^<svg[\s\S]*<\/svg>$/.test(q.figure.trim()), `${where}：figure 应为内联 SVG`);
+  if (q.demo) assert(DEMOS.includes(q.demo.type), `${where}：未知演示类型 ${q.demo.type}`);
 
   if (q.type === 'choice' || q.type === 'multi') {
     assert(Array.isArray(q.options) && q.options.length >= 2, `${where}：选项至少 2 个`);

@@ -190,5 +190,15 @@ a { color: inherit; text-decoration: none; }
 .explain ol { margin: 8px 0 0; padding-left: 20px; }
 .explain li { margin-bottom: 6px; }
 
+.demo { margin: 10px 0 4px; padding: 8px; border: 1px solid var(--line); border-radius: 10px; background: var(--bg); }
+.demo svg { display: block; width: 100%; height: auto; }
+.demo-caption { min-height: 1.5em; margin: 2px 0 6px; font-size: 14px; text-align: center; color: var(--muted); }
+.demo-controls { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px 14px; font-size: 14px; }
+.demo-row { display: flex; align-items: center; gap: 6px; }
+.demo .seg { gap: 4px; }
+.demo .seg button { min-width: 36px; height: 36px; font-size: 16px; }
+.demo input[type=range] { width: 110px; height: 36px; }
+.demo-play { height: 36px; padding: 0 14px; font-size: 15px; border: none; border-radius: 10px; background: var(--primary); color: #fff; }
+
 .q-nav { display: flex; justify-content: space-between; margin-top: 20px; }
 .q-nav a { color: var(--primary); padding: 8px 0; }

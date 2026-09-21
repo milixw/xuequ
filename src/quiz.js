@@ -235,6 +235,12 @@
         explain.innerHTML =
           `<div class="answer-line"><b>答案：</b>${answerSummary()}</div>` +
           `<ol>${q.explain.map(s => `<li>${renderText(s)}</li>`).join('')}</ol>`;
+        // 演示动画放在解析里：它会直接演示出答案
+        if (q.demo) {
+          const slot = el('div');
+          explain.querySelector('.answer-line').after(slot);
+          Demos.mount(slot, q.demo);
+        }
         explain.hidden = false;
         if (Progress.status(sectionId, q.id) !== 'solved') Progress.reveal(sectionId, q.id);
         revealBtn.textContent = '收起解析';
