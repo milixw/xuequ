@@ -41,9 +41,9 @@ Content.catalog = {
                   no: 3,
                   title: '一元一次方程',
                   sections: [
-                    { no: '3.1', title: '方程与列方程' },
-                    { no: '3.2', title: '一元一次方程及其解法' },
-                    { no: '3.3', title: '一元一次方程的应用' },
+                    { no: '3.1', title: '方程与列方程', ready: true },
+                    { no: '3.2', title: '一元一次方程及其解法', ready: true },
+                    { no: '3.3', title: '一元一次方程的应用', ready: true },
                   ],
                 },
                 {
