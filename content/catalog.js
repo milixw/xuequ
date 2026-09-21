@@ -50,8 +50,8 @@ Content.catalog = {
                   no: 4,
                   title: '线段与角',
                   sections: [
-                    { no: '4.1', title: '线段' },
-                    { no: '4.2', title: '角' },
+                    { no: '4.1', title: '线段', ready: true },
+                    { no: '4.2', title: '角', ready: true },
                   ],
                 },
               ],
