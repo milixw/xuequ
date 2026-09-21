@@ -403,6 +403,14 @@ Content.section({
       level: 'extended',
       type: 'fill',
       stem: '一根绳子长 $a$ 米。第一次剪去全长的一半，第二次剪去剩下的一半，第三次再剪去这时剩下的一半。',
+      demo: {
+        type: 'ropeCut',
+        rows: [
+          { label: '第一种：每次剪去剩下的一半', cuts: [[1 / 2, 'a/2'], [1 / 4, 'a/4'], [1 / 8, 'a/8']] },
+          { label: '第二种：每次剪去 a/4', cuts: [[1 / 4, '3a/4'], [1 / 4, 'a/2'], [1 / 4, 'a/4']] },
+        ],
+        summary: '三次之后：第一种剩 a/8，第二种剩 a/4（第一种每次剪得越来越短）',
+      },
       blanks: [
         { kind: 'expr', label: '(1) 三次之后还剩（米）', answer: 'a/8' },
         { kind: 'expr', label: '(2) 若改成每次都剪去 $\\frac{a}{4}$ 米，共剪三次，三次之后还剩（米）', answer: 'a/4' },

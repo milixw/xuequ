@@ -283,6 +283,7 @@ Content.section({
       level: 'extended',
       type: 'fill',
       stem: '点 $O$ 在直线 $AB$ 上，射线 $OC$、$OD$ 在直线 $AB$ 的同一侧，$OC$ 靠近 $OA$、$OD$ 靠近 $OB$。把 $\\angle AOC$ 沿 $OC$ 折叠，$OA$ 落在 $OA\'$ 处；把 $\\angle BOD$ 沿 $OD$ 折叠，$OB$ 落在 $OB\'$ 处。（折叠后重合的角相等）',
+      demo: { type: 'angleFold', cases: [{ name: '恰好重合', a: 50, b: 40 }, { name: '空出 20°', a: 45, b: 35 }, { name: '重叠 20°', a: 55, b: 45 }] },
       blanks: [
         { kind: 'num', label: '(1) 若 $OA\'$ 与 $OB\'$ 恰好重合，则 $\\angle COD=$', answer: '90', suffix: '°' },
         { kind: 'nums', label: '(2) 若 $\\angle A\'OB\'=20^\\circ$，则 $\\angle COD$ 的度数是（全部填出，用逗号隔开）', answer: ['100', '80'], suffix: '°' },

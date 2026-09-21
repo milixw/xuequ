@@ -191,6 +191,7 @@ Content.section({
       level: 'extended',
       type: 'fill',
       stem: '将数轴沿某一点 $P$ 折叠，表示 $-4$ 的点 $A$ 落在点 $A\'$ 处。已知点 $A\'$ 与表示 $6$ 的点 $B$ 之间的距离是 2 个单位长度。',
+      demo: { type: 'numberLineFold', a: -4, b: 6, d: 2, probe: 5, min: -2, max: 4, p0: -1 },
       blanks: [
         { kind: 'nums', label: '(1) 点 $P$ 表示的数是（全部填出，用逗号隔开）', answer: ['0', '2'] },
         { kind: 'nums', label: '(2) 折叠后，表示 $5$ 的点会落在表示哪个数的点处？（(1) 中每种情况各得一个结果，都填上，用逗号隔开）', answer: ['-5', '-1'] },

@@ -419,6 +419,7 @@ Content.section({
       level: 'extended',
       type: 'fill',
       stem: '一张厚 0.1 毫米的纸，对折 1 次后是 2 层，对折 2 次后是 4 层，对折 3 次后是 8 层，……（假设可以一直对折下去）',
+      demo: { type: 'foldCut', cut: false, folds: 4, thickness: 0.1 },
       blanks: [
         { kind: 'num', label: '(1) 对折 5 次后是（层）', answer: '32' },
         { kind: 'text', label: '(2) 对折 $n$ 次后的层数是', options: ['$2^n$', '$2n$', '$n^2$', '$n+2$'], answer: '$2^n$' },
