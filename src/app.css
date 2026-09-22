@@ -103,6 +103,23 @@ a { color: inherit; text-decoration: none; }
 .lv-basic { background: var(--basic); }
 .lv-extended { background: var(--extended); }
 .lv-challenge { background: var(--challenge); }
+.lv-score-1 { background: #4f9d69; }
+.lv-score-2 { background: #438f9f; }
+.lv-score-3 { background: #2f6fd6; }
+.lv-score-4 { background: #b46a24; }
+.lv-score-5 { background: #b23a2b; }
+
+.exam-source { font-size: 13px; color: var(--muted); }
+.exam-tiles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.exam-tile {
+  min-height: 58px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  border-radius: 10px; background: var(--card); border: 1px solid var(--line); font-size: 14px;
+}
+.exam-tile small { color: var(--muted); font-size: 11px; }
+.exam-tile.solved { background: var(--ok); border-color: var(--ok); color: #fff; }
+.exam-tile.solved small { color: #fff; }
+.exam-tile.tried { background: var(--fail-bg); border-color: #efb9b1; color: var(--fail); }
+.exam-tile.revealed { background: #e6e2da; color: var(--muted); }
 
 /* 题目方块 */
 .level-group h4 { margin: 14px 0 8px; font-size: 14px; font-weight: normal; color: var(--muted); }
