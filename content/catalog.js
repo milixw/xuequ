@@ -57,6 +57,101 @@ Content.catalog = {
               ],
             },
             {
+              id: 'g7s1',
+              name: '七年级上册',
+              chapters: [
+                {
+                  no: 10,
+                  title: '整式的加减',
+                  sections: [
+                    { no: '10.1', title: '整式', ready: false },
+                    { no: '10.2', title: '合并同类项', ready: false },
+                    { no: '10.3', title: '整式的加法和减法', ready: false },
+                  ],
+                },
+                {
+                  no: 11,
+                  title: '整式的乘除',
+                  sections: [
+                    { no: '11.1', title: '整式的乘法', ready: false },
+                    { no: '11.2', title: '乘法公式', ready: false },
+                    { no: '11.3', title: '整式的除法', ready: false },
+                  ],
+                },
+                {
+                  no: 12,
+                  title: '因式分解',
+                  sections: [
+                    { no: '12.1', title: '因式分解的意义', ready: false },
+                    { no: '12.2', title: '因式分解的方法', ready: false },
+                  ],
+                },
+                {
+                  no: 13,
+                  title: '分式',
+                  sections: [
+                    { no: '13.1', title: '分式及其性质', ready: false },
+                    { no: '13.2', title: '分式的运算', ready: false },
+                    { no: '13.3', title: '分式方程', ready: false },
+                  ],
+                },
+                {
+                  no: 14,
+                  title: '图形的运动',
+                  sections: [
+                    { no: '14.1', title: '平移', ready: false },
+                    { no: '14.2', title: '旋转', ready: false },
+                    { no: '14.3', title: '轴对称', ready: false },
+                    { no: '14.4', title: '中心对称', ready: false },
+                  ],
+                },
+              ],
+            },
+            {
+              id: 'g7s2',
+              name: '七年级下册',
+              chapters: [
+                {
+                  no: 15,
+                  title: '一元一次不等式',
+                  sections: [
+                    { no: '15.1', title: '不等式及其性质', ready: false },
+                    { no: '15.2', title: '一元一次不等式', ready: false },
+                    { no: '15.3', title: '一元一次不等式组', ready: false },
+                  ],
+                },
+                {
+                  no: 16,
+                  title: '相交线与平行线',
+                  sections: [
+                    { no: '16.1', title: '相交线', ready: false },
+                    { no: '16.2', title: '平行线', ready: false },
+                    { no: '16.3', title: '命题与证明', ready: false },
+                  ],
+                },
+                {
+                  no: 17,
+                  title: '三角形',
+                  sections: [
+                    { no: '17.1', title: '三角形的有关概念', ready: false },
+                    { no: '17.2', title: '三角形的内角和', ready: false },
+                    { no: '17.3', title: '全等三角形及其性质', ready: false },
+                    { no: '17.4', title: '三角形全等的判定', ready: false },
+                  ],
+                },
+                {
+                  no: 18,
+                  title: '等腰三角形',
+                  sections: [
+                    { no: '18.1', title: '等腰三角形的性质', ready: false },
+                    { no: '18.2', title: '等腰三角形的判定', ready: false },
+                    { no: '18.3', title: '等边三角形', ready: false },
+                    { no: '18.4', title: '线段的垂直平分线', ready: false },
+                  ],
+                },
+              ],
+            },
+            {
               id: 'g8s1',
               name: '八年级上册',
               exams: [
