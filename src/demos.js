@@ -22,7 +22,7 @@
   }
   const totalOf = phases => phases.reduce((s, p) => s + p.dur, 0);
 
-  // 公共外壳：画布 + 说明文字 + 自定义控件 + 播放/暂停、重播按钮
+  // 公共外壳：画布 + 说明文字 + 自定义控件 + 播放/暂停、重播、慢放按钮
   // frame(ms) 画出某一时刻；duration() 返回总时长
   function shell(container, { w, h, aria, controls = '' }) {
     const box = document.createElement('div');
@@ -32,10 +32,12 @@
       '<div class="demo-caption"></div>' +
       `<div class="demo-controls">${controls}` +
       '<span class="demo-row"><button type="button" class="demo-play"></button>' +
-      '<button type="button" class="demo-replay" hidden>↻ 重播</button></span></div>';
+      '<button type="button" class="demo-replay" hidden>↻ 重播</button>' +
+      '<button type="button" class="demo-speed" aria-pressed="false">0.5× 慢放</button></span></div>';
     container.appendChild(box);
     const play = box.querySelector('.demo-play');
     const replay = box.querySelector('.demo-replay');
+    const speedBtn = box.querySelector('.demo-speed');
     const s = {
       box,
       svg: box.querySelector('svg'),
@@ -43,7 +45,7 @@
       frame: () => {},
       duration: () => 0,
     };
-    let raf = 0, at = 0, last = 0, mode = 'idle';   // idle 未开始 / playing / paused / done
+    let raf = 0, at = 0, last = 0, speed = 1, mode = 'idle';   // idle 未开始 / playing / paused / done
     const label = { idle: '▶ 播放', playing: '⏸ 暂停', paused: '▶ 继续', done: '▶ 播放' };
     const setMode = m => {
       mode = m;
@@ -51,7 +53,7 @@
       replay.hidden = m === 'idle' || m === 'done';
     };
     const tick = now => {
-      at += now - last;
+      at += (now - last) * speed;
       last = now;
       const end = s.duration();
       s.frame(Math.min(at, end));
@@ -76,6 +78,12 @@
       else restart();
     });
     replay.addEventListener('click', restart);
+    // 慢放：可以在播放中途切换，从当前画面接着按新速度走
+    speedBtn.addEventListener('click', () => {
+      speed = speed === 1 ? 0.5 : 1;
+      speedBtn.classList.toggle('on', speed !== 1);
+      speedBtn.setAttribute('aria-pressed', String(speed !== 1));
+    });
     // 参数改变后回到开头
     s.reset = () => {
       cancelAnimationFrame(raf);
@@ -135,6 +143,28 @@
       r.push(k % 2 ? base + p - u : base + u);
     }
     return r.sort((a, b) => a - b);
+  }
+
+  // 折痕处相邻两点几乎上下对齐：补一段向外鼓的半圆，半径是两层间距的一半。
+  // 这样折了几次以后，外层折痕包住内层折痕，能看出哪一层连着哪一层
+  function bends(pts) {
+    const out = [pts[0]];
+    for (let i = 1; i < pts.length; i++) {
+      const [x1, y1] = pts[i - 1], [x2, y2] = pts[i];
+      const dy = y2 - y1;
+      if (Math.abs(dy) > 1 && Math.abs(dy) > 2 * Math.abs(x2 - x1)) {
+        // 往绳子原来前进的方向鼓出去
+        const ref = i >= 2 ? x1 - pts[i - 2][0] : x2 - pts[Math.min(i + 1, pts.length - 1)][0];
+        const dir = ref >= 0 ? 1 : -1;
+        const r = Math.abs(dy) / 2;
+        for (let t = 1; t < 12; t++) {
+          const a = Math.PI * t / 12;
+          out.push([lerp(x1, x2, t / 12) + dir * r * Math.sin(a), (y1 + y2) / 2 - (dy / 2) * Math.cos(a)]);
+        }
+      }
+      out.push(pts[i]);
+    }
+    return out.map(([x, y]) => `${x.toFixed(1)},${y.toFixed(1)}`).join(' ');
   }
 
   function foldCut(container, opts) {
@@ -246,13 +276,13 @@
         const pts = [];
         const add = x => {
           const [X, Y] = place(x, st.k, st.th, gap);
-          pts.push(`${(sx(X) + shift).toFixed(1)},${(FC_BASE + Y).toFixed(1)}`);
+          pts.push([sx(X) + shift, FC_BASE + Y]);
         };
         add(p.a);
         for (let j = Math.floor(p.a * 512) + 1; j / 512 < p.b; j++) add(j / 512);
         add(p.b);
         const color = st.spread ? mix(stroke, p.color, st.spread) : stroke;
-        html += `<polyline points="${pts.join(' ')}" fill="none" stroke="${color}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>`;
+        html += `<polyline points="${bends(pts)}" fill="none" stroke="${color}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>`;
       });
       // 两个端头
       if (!st.spread) {
