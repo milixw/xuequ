@@ -64,9 +64,9 @@ Content.catalog = {
                   no: 10,
                   title: '整式的加减',
                   sections: [
-                    { no: '10.1', title: '整式', ready: false },
-                    { no: '10.2', title: '合并同类项', ready: false },
-                    { no: '10.3', title: '整式的加法和减法', ready: false },
+                    { no: '10.1', title: '整式', ready: true },
+                    { no: '10.2', title: '合并同类项', ready: true },
+                    { no: '10.3', title: '整式的加法和减法', ready: true },
                   ],
                 },
                 {

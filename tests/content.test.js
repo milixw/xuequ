@@ -7,10 +7,11 @@ const { test, warn, assert } = require('./harness');
 const A = require('../src/answer.js');
 const katex = require('../vendor/katex/katex.min.js');
 
-// 内容文件是浏览器脚本，依赖全局 Content；verify 函数里可以用 Frac 和 F
+// 内容文件是浏览器脚本，依赖全局 Content；verify 函数里可以用 Frac、F 和 Poly
 globalThis.Content = require('../src/content.js');
 globalThis.Frac = A.Frac;
 globalThis.F = A.Frac.of;
+globalThis.Poly = require('./poly.js');  // 第 10 章起的整式运算，见 tests/poly.js
 require('../content/catalog.js');
 
 const ROOT = path.join(__dirname, '..');

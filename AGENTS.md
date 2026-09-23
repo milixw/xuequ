@@ -48,6 +48,7 @@ content/
     sh2024/                       教材：上海教育出版社 2024 版（五·四学制）
       g6s1/                       册：六年级上册（g=年级，s1=上册，s2=下册）
         1.1.js ... 4.2.js         每个小节一个文件：知识点 + 题目
+      g7s1/                       册：七年级上册（目前 10.1～10.3）
       g8s1/                       册：八年级上册（目前 19.1、19.2）
   exams/
     math/sh2024/g8s1/*.js         真题卷，一份试卷一个文件，路径 = 真题卷 ID
@@ -62,6 +63,7 @@ tests/
   exam.test.js                    限时测试的计时、判分、会话存取
   function-track.test.js          函数轨道关卡校验
   export-blind.js                 导出不含答案的盲解题单（给复核子代理用）
+  poly.js                         给 verify 用的整式运算（展开、加减、代入、次数），测试时挂成全局 Poly
 docs/
   sop-section.md                  制作一个小节的完整流程（出题前必读）
   question-types.md               题型台账：已用套路、待用套路池、教辅资料使用规则
@@ -131,7 +133,7 @@ Content.section({
       options: ['...'],                   // choice、multi 用
       answer: 1,                          // 形式取决于题型，见 src/answer.js
       explain: ['第一步...', '第二步...'],  // 分步解析
-      verify: () => ...,                  // 可选：独立计算答案，测试时和 answer 核对；可用全局 F(x)（=Frac.of）
+      verify: () => ...,                  // 可选：独立计算答案，测试时和 answer 核对；可用全局 F(x)（=Frac.of）和 Poly（整式运算，见 tests/poly.js）
       figure: '<svg>...</svg>',           // 可选：配图
       demo: { type: 'foldCut', folds: 2 }, // 可选：解析里的演示动画，type 见 src/demos.js 的 TYPES
     },
