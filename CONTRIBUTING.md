@@ -20,7 +20,7 @@ review: { status: 'approved', by: '审核人', date: '2026-10-01' },
 
 ## 出题（新增或修改小节）
 
-1. 先读 [CLAUDE.md](CLAUDE.md) 的“内容写作规范”和 [docs/sop-section.md](docs/sop-section.md) 的完整流程
+1. 先读 [AGENTS.md](AGENTS.md) 的“内容写作规范”和 [docs/sop-section.md](docs/sop-section.md) 的完整流程
 2. 知识范围以 [docs/textbooks/](docs/textbooks/) 为准，不能超纲；查 [docs/question-types.md](docs/question-types.md) 避开已经用过的套路
 3. **全部原创**：不能照搬教材、教辅、真题卷的原文、例题、习题和插图
 4. 能计算的题目必须写 `verify`，用独立计算核对答案，不能直接返回写死的答案

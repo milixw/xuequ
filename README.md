@@ -56,7 +56,7 @@ AI 出的题最容易错在答案本身，所以每一节都要过这几关：
 3. **盲解复核**：导出不含答案的题单，交给另一个 AI 独立解题并评估难度，不通过就改，第 1 章每节都复核了 3 轮
 4. **老师审核**：上线前由数学老师审核（进行中）
 
-完整流程见 [docs/sop-section.md](docs/sop-section.md)，已用的出题套路见 [docs/question-types.md](docs/question-types.md)，项目约定见 [CLAUDE.md](CLAUDE.md)。
+完整流程见 [docs/sop-section.md](docs/sop-section.md)，已用的出题套路见 [docs/question-types.md](docs/question-types.md)，项目约定见 [AGENTS.md](AGENTS.md)。
 
 ## 路线图
 
