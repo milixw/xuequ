@@ -83,6 +83,21 @@
       return Content.volumes().find(v => v.id === id) || null;
     },
 
+    // 目录里实际有的学期，按册 ID 去重（不同学科可能共用同一册）
+    semesters() {
+      const list = [];
+      for (const v of Content.volumes()) {
+        if (!list.some(s => s.id === v.volume.id)) list.push({ id: v.volume.id, name: v.volume.name });
+      }
+      return list;
+    },
+
+    // 按 ID 取学期；存的学期已经不在目录里（比如删了某一册）就退回第一个，避免页面空白
+    semester(id) {
+      const list = Content.semesters();
+      return list.find(s => s.id === id) || list[0] || null;
+    },
+
     // 所有小节的目录信息
     sectionMetas() {
       const list = [];

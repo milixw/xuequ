@@ -166,11 +166,10 @@
 
   // ---------- 列表 ----------
   Exam.listPage = function (main) {
-    // 册列表：按当前账号的年级偏好筛选
-    const username = Accounts.current();
-    const currentGrade = Accounts.grade.get(username);
+    // 册列表：按当前账号选的学期筛选，和首页保持一致
+    const semester = Content.semester(Accounts.grade.get(Accounts.current()));
     renderHeader(main, '试卷', '#/', '按小节限时测试');
-    for (const v of Content.volumes().filter(v => v.volume.id === currentGrade)) {
+    for (const v of (semester ? Content.volumes().filter(v => v.volume.id === semester.id) : [])) {
       const metas = Content.sectionMetas().filter(m => m.volumeId === v.id && m.section.ready);
       const card = document.createElement(metas.length ? 'a' : 'div');
       card.className = 'card volume' + (metas.length ? '' : ' disabled');

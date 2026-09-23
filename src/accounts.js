@@ -7,6 +7,7 @@
   const KEY = 'xq.account.v1';
   const HISTORY_KEY_PREFIX = 'xq.history.v1.';
   const GRADE_KEY_PREFIX = 'xq.grade.v1.';
+  const GRADE_KEY_ANON = 'xq.grade.v1';
   const NAME_PATTERN = /^[A-Za-z_][A-Za-z0-9_]*$/;
   const NAME_MIN = 1;
   const NAME_MAX = 20;
@@ -37,6 +38,22 @@
 
   function historyKey(username) {
     return HISTORY_KEY_PREFIX + username;
+  }
+
+  // 没登录时返回 null，调用方改用匿名键
+  function gradeName(username) {
+    return typeof username === 'string' && username ? GRADE_KEY_PREFIX + username : null;
+  }
+
+  function readGrade(key) {
+    try {
+      const raw = localStorage.getItem(key);
+      if (!raw) return null;
+      const obj = JSON.parse(raw);
+      return obj && typeof obj.grade === 'string' ? obj.grade : null;
+    } catch {
+      return null;
+    }
   }
 
   function readHistory(username) {
@@ -153,25 +170,17 @@
       },
     },
 
-    // 年级偏好：按账号保存到 localStorage['xq.grade.v1.<账号>']
+    // 学期偏好：登录后存 localStorage['xq.grade.v1.<账号>']，未登录存 'xq.grade.v1'
+    // 未登录也要能切换，所以没账号时用匿名键；登录后自己还没选过，就沿用匿名时选的那个
     grade: {
       DEFAULT: 'g6s1',
       get(username) {
-        const fallback = 'g6s1';
-        if (typeof username !== 'string' || !username) return fallback;
-        try {
-          const raw = localStorage.getItem(GRADE_KEY_PREFIX + username);
-          if (!raw) return fallback;
-          const obj = JSON.parse(raw);
-          return obj && typeof obj.grade === 'string' ? obj.grade : fallback;
-        } catch {
-          return fallback;
-        }
+        const own = gradeName(username) ? readGrade(gradeName(username)) : null;
+        return own || readGrade(GRADE_KEY_ANON) || Accounts.grade.DEFAULT;
       },
       set(username, grade) {
-        if (typeof username !== 'string' || !username) return;
         if (typeof grade !== 'string' || !grade) return;
-        try { localStorage.setItem(GRADE_KEY_PREFIX + username, JSON.stringify({ grade })); } catch {}
+        try { localStorage.setItem(gradeName(username) || GRADE_KEY_ANON, JSON.stringify({ grade })); } catch {}
       },
     },
   };

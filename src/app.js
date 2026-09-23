@@ -36,29 +36,22 @@
   // 学期切换器（首页用），下拉菜单显示在 button 之下，点外侧收起
   // 切换的是学期（如「八年级下」），学期下的多个课程都列出
   function mountSemesterSwitcher(headerEl, currentSemester, username) {
-    const semesters = [
-      { id: 'g6s1', label: '六年级上' },
-      { id: 'g6s2', label: '六年级下' },
-      { id: 'g7s1', label: '七年级上' },
-      { id: 'g7s2', label: '七年级下' },
-      { id: 'g8s1', label: '八年级上' },
-      { id: 'g8s2', label: '八年级下' },
-      { id: 'g9s1', label: '九年级上' },
-      { id: 'g9s2', label: '九年级下' },
-    ];
+    // 只列目录里真有的学期，列了没有的册点进去会是一片空白
+    const semesters = Content.semesters();
+    if (semesters.length < 2) return;
     const current = semesters.find(g => g.id === currentSemester) || semesters[0];
     const wrap = document.createElement('div');
     wrap.className = 'semester-switcher';
     const btn = document.createElement('button');
     btn.className = 'semester-btn';
-    btn.innerHTML = `${escapeHtml(current.label)} <span class="caret">▾</span>`;
+    btn.innerHTML = `${escapeHtml(current.name)} <span class="caret">▾</span>`;
     const menu = document.createElement('div');
     menu.className = 'semester-menu';
     menu.hidden = true;
     semesters.forEach(g => {
       const opt = document.createElement('button');
       opt.type = 'button';
-      opt.textContent = g.label + (g.id === currentSemester ? ' ✓' : '');
+      opt.textContent = g.name + (g.id === current.id ? ' ✓' : '');
       opt.addEventListener('click', () => {
         Accounts.grade.set(username, g.id);
         menu.hidden = true;
@@ -115,10 +108,10 @@
     const main = page('学趣闯关', null, '跟着课本学，一节一关');
     const header = app.querySelector('header.bar');
     const username = Accounts.current();
-    const currentGrade = Accounts.grade.get(username);
-    mountSemesterSwitcher(header, currentGrade, username);
+    const semester = Content.semester(Accounts.grade.get(username));
+    mountSemesterSwitcher(header, semester && semester.id, username);
     AccountUI.mount(header);
-    const volumes = Content.volumes().filter(v => v.volume.id === currentGrade);
+    const volumes = semester ? Content.volumes().filter(v => v.volume.id === semester.id) : [];
     for (const v of volumes) {
       const metas = Content.sectionMetas().filter(s => s.volumeId === v.id);
       const ready = metas.filter(s => s.section.ready).length;
