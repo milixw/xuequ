@@ -39,7 +39,8 @@
         vars.forEach(v => keys.add(v));
         ['+', '−', '/', '(', ')', '^'].forEach(k => keys.add(k));
       }
-      if (b.kind === 'real') ['√', '∛', 'π', '−', '/', '(', ')', '^'].forEach(k => keys.add(k));
+      if (b.kind === 'real' || b.kind === 'reals') ['√', '∛', 'π', '−', '/', '(', ')', '^'].forEach(k => keys.add(k));
+      if (b.kind === 'reals') keys.add(',');
       if (b.kind === 'angle') ['°', '′', '″'].forEach(k => keys.add(k));
     }
     return [...keys];

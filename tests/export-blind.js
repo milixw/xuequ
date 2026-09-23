@@ -29,7 +29,16 @@ for (const c of s.intro) {
   md += '\n';
 }
 md += '## 题目\n\n';
-for (const q of s.questions.filter(q => !only.length || only.includes(q.id))) {
+// 题目 ID 既可以写全（19.1-c01），也可以只写后缀（c01）
+const picked = s.questions.filter(q => !only.length || only.some(x => q.id === x || q.id.endsWith('-' + x)));
+if (only.length) {
+  const missed = only.filter(x => !s.questions.some(q => q.id === x || q.id.endsWith('-' + x)));
+  if (missed.length) {
+    console.error(`这些题目 ID 在 ${id} 里找不到：${missed.join('、')}`);
+    process.exit(1);
+  }
+}
+for (const q of picked) {
   md += `### ${q.id}（标注难度：${q.level}，题型：${q.type}）\n${q.stem}\n`;
   if (q.figure) md += `[配图 SVG] ${q.figure}\n`;
   if (q.options) q.options.forEach((o, i) => (md += `${LETTERS[i]}. ${o}\n`));

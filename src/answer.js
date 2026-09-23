@@ -489,6 +489,15 @@
         try { v = realValue(s); } catch (e) { return { ok: false, error: e.message + '。可以填 2√3、−√5、3+√2 这样的式子' }; }
         return { ok: realEqual(v, realValue(blank.answer)) };
       }
+      case 'reals': {
+        const parts = s.split(',').map(t => t.trim()).filter(Boolean);
+        if (!parts.length) return { ok: false, error: '请填数，多个答案之间用逗号隔开' };
+        let vs;
+        try { vs = parts.map(realValue); } catch (e) { return { ok: false, error: e.message + '。可以填 2√3、−√5 这样的式子' }; }
+        const want = blank.answer.map(realValue);
+        const got = vs.filter((v, i) => vs.findIndex(w => realEqual(w, v)) === i);
+        return { ok: got.length === want.length && want.every(w => got.some(g => realEqual(g, w))) };
+      }
       case 'angle': {
         const v = parseAngle(s);
         if (!v) return { ok: false, error: '请按 36°15′ 这样的格式填写，分、秒要小于 60' };
@@ -525,6 +534,7 @@
       case 'nums': return blank.answer.map(x => `$${Frac.of(x).toTeX()}$`).join('，');
       case 'expr': return `$${normalize(blank.answer).replace(/\*/g, '\\cdot ')}$`;
       case 'real': return `$${blank.tex || texReal(parseReal(blank.answer))}$`;
+      case 'reals': return blank.answer.map(a => `$${texReal(parseReal(a))}$`).join('，');
       case 'angle': return normalize(blank.answer).replace(/'/g, '′').replace(/"/g, '″');
       case 'text': return Array.isArray(blank.answer) ? blank.answer[0] : blank.answer;
     }

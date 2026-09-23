@@ -15,7 +15,7 @@ require('../content/catalog.js');
 
 const ROOT = path.join(__dirname, '..');
 const LEVELS = { b: 'basic', e: 'extended', c: 'challenge' };
-const KINDS = ['num', 'nums', 'expr', 'real', 'angle', 'text'];
+const KINDS = ['num', 'nums', 'expr', 'real', 'reals', 'angle', 'text'];
 const DEMOS = ['foldCut', 'numberLineFold', 'angleFold', 'ropeCut'];  // src/demos.js 里的演示类型
 
 // 取出文本里所有 $...$ / $$...$$ 公式，逐个用 KaTeX 编译
@@ -28,6 +28,9 @@ function checkMath(text, where) {
   for (const p of parts) {
     if (p.startsWith('$')) {
       const tex = p.replace(/^\$\$?|\$\$?$/g, '');
+      // 单反斜杠被 JS 吃掉后 '\sqrt' 会变成 'sqrt'，KaTeX 当成一串字母照样渲染，不报错也看不出来
+      const bare = tex.match(/(?<!\\)\b(sqrt|frac|dfrac|times|cdots|ldots|lvert|rvert|approx|neq|angle|overline|cdot|div|left|right|mathrm)\b/);
+      assert(!bare, `${where}：公式 ${p} 里的 ${bare && bare[1]} 前面没有反斜杠，多半是 TeX 命令少写了一个反斜杠`);
       try {
         katex.renderToString(tex, { throwOnError: true, strict: 'error' });
       } catch (e) {
@@ -50,6 +53,7 @@ function verifyBlank(blank, v) {
     case 'nums': return sameSet(v.map(A.Frac.of), blank.answer.map(A.Frac.of), (x, y) => x.eq(y));
     case 'expr': return A.equivalent(A.parseExpr(String(v)), A.parseExpr(blank.answer));
     case 'real': return A.realEqual(typeof v === 'number' ? v : A.realValue(String(v)), A.realValue(blank.answer));
+    case 'reals': return sameSet(v.map(x => (typeof x === 'number' ? x : A.realValue(String(x)))), blank.answer.map(A.realValue), (x, y) => A.realEqual(x, y));
     case 'angle': return A.parseAngle(String(v)).eq(A.parseAngle(blank.answer));
     case 'text': return (Array.isArray(blank.answer) ? blank.answer : [blank.answer]).includes(v);
   }
@@ -83,13 +87,13 @@ function checkQuestion(q, sectionNo, where) {
       const w = `${where} 第 ${i + 1} 空`;
       assert(KINDS.includes(b.kind), `${w}：未知类型 ${b.kind}`);
       if (b.label) checkMath(b.label, `${w} 标签`);
-      if (b.kind === 'nums') assert(Array.isArray(b.answer) && b.answer.length, `${w}：nums 的答案应为数组`);
+      if (b.kind === 'nums' || b.kind === 'reals') assert(Array.isArray(b.answer) && b.answer.length, `${w}：${b.kind} 的答案应为数组`);
       if (b.kind === 'text' && b.options) {
         const answers = Array.isArray(b.answer) ? b.answer : [b.answer];
         assert(answers.every(a => b.options.includes(a)), `${w}：答案不在按钮选项中`);
       }
       // 标准答案本身必须能被判分器判对（顺带检查了“已化简”等要求）
-      const input = b.kind === 'nums' ? b.answer.join(',') : Array.isArray(b.answer) ? b.answer[0] : String(b.answer);
+      const input = b.kind === 'nums' || b.kind === 'reals' ? b.answer.join(',') : Array.isArray(b.answer) ? b.answer[0] : String(b.answer);
       const r = A.checkBlank(b, input);
       assert(r.ok, `${w}：标准答案 ${input} 不能被判分器判对${r.error ? '（' + r.error + '）' : ''}`);
     });
