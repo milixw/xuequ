@@ -1,5 +1,7 @@
 # 账号系统重设计实施计划
 
+> **状态：已全部完成，仅作开发过程记录，不要再按它执行。** 现行说明见 [docs/exam.md](../../exam.md)，细节以代码为准。
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** 把账号系统从"白名单 + 2 个固定账号"改成"自由注册（无密码）"，加右上角账号区 + 登录模态框，并引入按账号保存的考试历史。

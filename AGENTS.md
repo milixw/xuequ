@@ -1,13 +1,17 @@
 # AGENTS.md
 
-面向初中生的学习闯关手机网页应用：按课本章节提供**通俗的知识点介绍 + 分级题目**，以后可能扩展到其他学科。另有一个"函数轨道"解谜小游戏，留给函数章节使用。
+面向初中生的学习闯关手机网页应用：按课本章节提供**通俗的知识点介绍 + 分级题目**，另有按册收录的**真题卷**、按小节的**限时测试**（需要登录本地账号），以后可能扩展到其他学科。另有一个"函数轨道"解谜小游戏，留给函数章节使用。
 
 本文件是项目约定的唯一正文，各家 AI 工具通用；`CLAUDE.md` 只是把它导入，改约定请改这里。
 
 ## 协作约定
 
-- 团队规模小，**直接提交到 main**，不开分支、不走 PR
-- 提交前必须 `node tests/run.js` 全绿
+- 多人协作，**不限制协作方式**：直接推 main、开分支、fork 后提 PR 都可以，按改动大小自己选
+- 直接推 main 之前先 `git pull --rebase`，避免在别人的提交上多出一次 merge
+- 不管用哪种方式，提交前都必须 `node tests/run.js` 全绿
+- 提交信息用中文一句话说清改了什么
+- 改了目录结构、内容格式、本地存储的键名或页面路由，要在**同一个提交里**更新本文件对应的部分，别让下一个人（或 AI）照着过时的说明干活
+- 较大的功能先写设计文档，放在 `docs/superpowers/specs/`
 - AI 写的内容 `review.status` 一律是 `pending`，等数学老师审核后才能改成 `approved`
 
 ## 常用命令
@@ -27,37 +31,77 @@ node tests/run.js                     # 全部校验（改了内容或代码都�
 index.html                        应用入口（按顺序加载下面的脚本）
 src/
   answer.js                       判分纯函数：精确分数 Frac、数值/多值/代数式/实数（根号、π）/角度的解析与比较、“已化简”检查
-  progress.js                     做题进度（localStorage：xq.progress.v2）
-  content.js                      内容注册表：目录查询、按需加载小节文件
+  accounts.js                     本地账号（无密码）、按账号保存的考试历史、学期偏好
+  progress.js                     做题进度（小节和真题卷共用）
+  content.js                      内容注册表：目录查询、学期列表、按需加载小节文件和真题卷文件
+  demos.js                        解析里的演示动画（题目的 demo 字段），依赖 DOM
   quiz.js                         做题引擎：题目渲染、作答、判分反馈、解析、快捷输入栏、renderText 排版
-  app.js                          hash 路由和页面：首页 → 册 → 小节（知识点 + 题目列表）→ 做题
+  exam.js                         限时测试：会话状态机、计时、交卷判分、结果页
+  account-ui.js                   右上角账号区和登录弹窗
+  app.js                          hash 路由和页面：首页（学期切换）→ 册 → 小节 / 真题卷 → 做题
   app.css                         全部样式
   games/function-track/           函数轨道小游戏（独立页面，首页“趣味玩法”进入）
 vendor/katex/                     KaTeX 0.18.7 本地副本（只保留 woff2 字体）
 content/
-  catalog.js                      学科 → 教材 → 册 → 章 → 节 的目录；ready: true 表示小节已上线
+  catalog.js                      学科 → 教材 → 册 → 章 → 节 的目录，册下可挂 exams（真题卷）；ready: true 表示已上线
   math/
     sh2024/                       教材：上海教育出版社 2024 版（五·四学制）
       g6s1/                       册：六年级上册（g=年级，s1=上册，s2=下册）
         1.1.js ... 4.2.js         每个小节一个文件：知识点 + 题目
+      g8s1/                       册：八年级上册（目前 19.1、19.2）
+  exams/
+    math/sh2024/g8s1/*.js         真题卷，一份试卷一个文件，路径 = 真题卷 ID
   <其他学科>/                     预留，比如 physics/、english/，结构相同
 tests/
   run.js                          测试入口
   harness.js                      极简测试工具（test / warn / assert）
   answer.test.js                  判分逻辑单元测试
   content.test.js                 内容校验：目录与文件一致、题量配比、字段、公式渲染、答案自检、verify
+  accounts.test.js                账号、考试历史、学期偏好
+  account-ui.test.js              账号区和登录弹窗
+  exam.test.js                    限时测试的计时、判分、会话存取
   function-track.test.js          函数轨道关卡校验
   export-blind.js                 导出不含答案的盲解题单（给复核子代理用）
 docs/
   sop-section.md                  制作一个小节的完整流程（出题前必读）
   question-types.md               题型台账：已用套路、待用套路池、教辅资料使用规则
-  plan-*.md                       开发计划
+  exam.md                         限时测试和账号的使用说明、开发说明
+  deploy.md                       打包和服务器部署
+  plan-*.md                       早期开发计划（已完成，仅供参考）
+  superpowers/specs/              功能设计文档
+  superpowers/plans/              功能实施计划（开发过程记录，已完成的以代码为准）
   textbooks/                      教材目录与各章知识范围（出题前必读）
   references/                     外部参考资料的笔记（原件放 refs/，不入库）
+.github/ISSUE_TEMPLATE/           Issue 模板：题目纠错、功能建议
 scripts/                          start.sh / stop.sh：本地开发服务器；build.sh：打包；serve.js / run.sh：部署到服务器上运行；pdf-page.sh：把教材 PDF 的某页渲染成图片，用来核对课本原文
 dist/                             打包产物，不入库
 pic/                              用户拍的教材照片，不入库
+refs/                             教材 PDF、教辅等参考资料原件，不入库
 ```
+
+### 页面路由
+
+| hash | 页面 |
+|---|---|
+| `#/` | 首页：按当前学期列出各学科的册，右上角学期切换和账号区 |
+| `#/v/<册ID>` | 册：章节列表 + 本册的真题卷 |
+| `#/s/<小节ID>` | 小节：知识点 + 题目列表 |
+| `#/q/<小节ID>/<题目ID>` | 做题 |
+| `#/e/<真题卷ID>`、`#/eq/<真题卷ID>/<题目ID>` | 真题卷（按教材小节归类）、做真题 |
+| `#/exam`、`#/exam/...` | 限时测试：列表、答题、结果（未登录会先要求登录） |
+
+### 本地存储
+
+所有键名都以 `xq.` 开头，读写都包在 try/catch 里。改结构时升版本号（`v1` → `v2`）并写迁移，不要直接改旧键的格式。
+
+| 键 | 位置 | 内容 |
+|---|---|---|
+| `xq.progress.v2` | localStorage | 做题进度；真题卷的进度用 `exam:<真题卷ID>` 作小节 ID，不按账号区分 |
+| `xq.account.v1` | localStorage | 当前登录的账号 `{ name }` |
+| `xq.history.v1.<账号>` | localStorage | 该账号的考试历史，退出登录也保留 |
+| `xq.grade.v1.<账号>` / `xq.grade.v1` | localStorage | 首页选的学期（登录 / 未登录），默认 `g6s1` |
+| `xq.exam.v1` | sessionStorage | 进行中的限时测试（含截止时间） |
+| `fg-solved.v2` | localStorage | 函数轨道通关记录（早于 `xq.` 约定，保持不动） |
 
 ### 编号规则
 
@@ -89,6 +133,34 @@ Content.section({
       explain: ['第一步...', '第二步...'],  // 分步解析
       verify: () => ...,                  // 可选：独立计算答案，测试时和 answer 核对；可用全局 F(x)（=Frac.of）
       figure: '<svg>...</svg>',           // 可选：配图
+      demo: { type: 'foldCut', folds: 2 }, // 可选：解析里的演示动画，type 见 src/demos.js 的 TYPES
+    },
+  ],
+});
+```
+
+## 真题卷格式
+
+真题卷是网上收集的公开试卷，**保留原卷的题干、数据、选项和题号**，按教材小节归类后供学生练习。和原创小节的区别：
+
+- 放在 `content/exams/<册ID>/<试卷名>.js`，在 `catalog.js` 对应册的 `exams` 里登记（`id`、`title`、`ready`、`questionCount`）
+- 不受"20 道题、三档配比"的限制；难度用 1～5 标注（1 易 … 5 压轴），和原创题的三档不是一套标准
+- 必须写 `source` 注明来源；分析笔记放 `docs/references/`，比如 `2025-chongming-midterm-analysis.md`
+- 题目 ID 用 `<试卷缩写>-q<原题号>`，比如 `cm2025-q05`，发布后同样不要改动
+
+```js
+Content.exam({
+  id: 'math/sh2024/g8s1/2025-chongming-midterm',
+  volumeId: 'math/sh2024/g8s1',
+  title: '...',
+  source: { kind: 'exam-original', name: '...', note: '...' },
+  questions: [
+    {
+      id: 'cm2025-q05', originalNo: 5,
+      section: '19.2', sectionTitle: '实数',   // 归到哪个教材小节
+      topic: '数轴上的无理数',
+      difficulty: 2, difficultyReason: '...',
+      type: 'choice', stem: '...', options: [...], answer: 0, explain: [...],  // 同小节题目
     },
   ],
 });
@@ -129,7 +201,9 @@ Content.section({
 
 ### 版权和审核
 
-- 可以参照课本的章节结构和知识范围，但**不能照搬课本原文、例题、习题和插图**，全部内容原创
+- 可以参照课本的章节结构和知识范围，但**不能照搬课本原文、例题、习题和插图**，小节里的知识点和题目全部原创
+- 真题卷是例外：收录网上公开的试卷原题，要注明来源（见"真题卷格式"），不计入原创内容。原作者要求撤下时照办
+- 教辅资料仍然只能提炼成笔记（`docs/references/`），不能整题搬进小节
 - AI 写的内容 `review.status` 一律是 `pending`，界面上标注"待审核"，**上线前必须由数学老师审核**
 - 不要凭记忆写课本内容。各小节的知识范围以 `docs/textbooks/` 里的课本资料为准，资料不够时先问项目维护者，不要自己补
 

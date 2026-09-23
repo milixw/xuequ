@@ -7,6 +7,7 @@
 //   #/q/<小节ID>/<题目ID> 做题
 //   #/e/<真题卷ID>      真题卷：按教材小节归类
 //   #/eq/<真题卷ID>/<题目ID> 做真题
+//   #/exam...           限时测试（src/exam.js 负责渲染）
 
 (function () {
   const app = document.getElementById('app');

@@ -2,8 +2,6 @@
 
 // 试卷模块：状态机 + UI。
 // 设计文档：docs/superpowers/specs/2026-09-21-exam-module-design.md
-//
-// 纯逻辑（session 存取、时间计算、判分）— UI 在 Task 5 补
 
 (function (root) {
   const KEY = 'xq.exam.v1';

@@ -1,4 +1,6 @@
-# 试卷模块
+# 试卷模块（限时测试 + 账号）
+
+> 这里的“试卷”指按小节的**限时测试**，题目来自原创小节。“真题卷”（`content/exams/`、页面 `#/e/...`）是另一个功能，只做练习、不计时，格式见 AGENTS.md 的“真题卷格式”。
 
 ## 给学生的使用说明
 
@@ -26,7 +28,13 @@
 
 `src/accounts.js` 的 `looseCheck` 控制宽松校验。如需切换为严格模式（仅允许 `^[A-Za-z_][A-Za-z0-9_]*$`，与账号ID一致），调用 `Accounts.signIn(name, { strict: true })`。
 
+设计文档 `2026-09-22-account-redesign-design.md` 里写的“字母、数字、下划线，不能是纯数字”是最初方案，实现时放宽了，**以本文件和 `src/accounts.js` 为准**。
+
 考试历史按账号 ID 保存到 `localStorage['xq.history.v1.<账号>']`，每个账号一份。退出登录只清当前账号标记，历史保留。
+
+### 学期偏好
+
+首页右上角可以切换学期（`app.js` 的 `mountSemesterSwitcher`）。学期列表来自目录里实际有的册（`Content.semesters()`），选中的学期存在 `localStorage['xq.grade.v1.<账号>']`，未登录时存 `xq.grade.v1`，都没有时默认 `g6s1`。存的学期已经不在目录里时退回第一个。
 
 ### 加新考试类型
 

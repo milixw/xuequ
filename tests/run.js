@@ -5,7 +5,6 @@ require('./content.test.js');
 require('./exam.test.js');
 require('./function-track.test.js');
 require('./accounts.test.js');
-require('./exam.test.js');
 require('./account-ui.test.js');
 
 process.exit(require('./harness').run() ? 1 : 0);

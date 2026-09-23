@@ -1,5 +1,7 @@
 # 试卷模块实施计划
 
+> **状态：已全部完成，仅作开发过程记录，不要再按它执行。** 现行说明见 [docs/exam.md](../../exam.md)，细节以代码为准。
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** 在学趣闯关新增试卷模块：白名单账号（jiajia / keyi）登录后对某一节做限时测试，交卷后才显示分数和解析。
