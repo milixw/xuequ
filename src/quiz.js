@@ -4,6 +4,7 @@
 
 (function (root) {
   const LEVEL_NAMES = { basic: '基础', extended: '扩展', challenge: '挑战' };
+  const DIFFICULTY_NAMES = { 1: '易', 2: '较易', 3: '中等', 4: '较难', 5: '压轴' };
   const LETTERS = 'ABCDEFGH';
 
   function escapeHtml(s) {
@@ -56,9 +57,12 @@
     container.innerHTML = '';
 
     const head = el('div', 'q-head');
+    const badge = q.difficulty
+      ? `<span class="lv lv-score-${q.difficulty}" title="${escapeHtml(q.difficultyReason || '')}">难度 ${q.difficulty}/5 · ${DIFFICULTY_NAMES[q.difficulty]}</span>`
+      : `<span class="lv lv-${q.level}">${LEVEL_NAMES[q.level]}</span>`;
     head.innerHTML =
-      `<span class="lv lv-${q.level}">${LEVEL_NAMES[q.level]}</span>` +
-      `<span class="q-no">第 ${opts.index + 1} / ${opts.total} 题</span>` +
+      badge +
+      `<span class="q-no">${escapeHtml(opts.numberLabel || `第 ${opts.index + 1} / ${opts.total} 题`)}</span>` +
       `<span class="q-id" title="题号，纠错时请写上">${q.id}</span>` +
       `<span class="q-state"></span>`;
     container.appendChild(head);
@@ -262,5 +266,5 @@
     container.appendChild(nav);
   }
 
-  root.Quiz = { mount, renderText, escapeHtml, LEVEL_NAMES };
+  root.Quiz = { mount, renderText, escapeHtml, LEVEL_NAMES, DIFFICULTY_NAMES };
 })(this);
