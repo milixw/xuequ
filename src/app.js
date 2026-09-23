@@ -33,11 +33,79 @@
     main.innerHTML = `<p class="error">${escapeHtml(msg)}</p>`;
   }
 
+  // 学期切换器（首页用），下拉菜单显示在 button 之下，点外侧收起
+  // 切换的是学期（如「八年级下」），学期下的多个课程都列出
+  function mountSemesterSwitcher(headerEl, currentSemester, username) {
+    const semesters = [
+      { id: 'g6s1', label: '六年级上' },
+      { id: 'g6s2', label: '六年级下' },
+      { id: 'g7s1', label: '七年级上' },
+      { id: 'g7s2', label: '七年级下' },
+      { id: 'g8s1', label: '八年级上' },
+      { id: 'g8s2', label: '八年级下' },
+      { id: 'g9s1', label: '九年级上' },
+      { id: 'g9s2', label: '九年级下' },
+    ];
+    const current = semesters.find(g => g.id === currentSemester) || semesters[0];
+    const wrap = document.createElement('div');
+    wrap.className = 'semester-switcher';
+    const btn = document.createElement('button');
+    btn.className = 'semester-btn';
+    btn.innerHTML = `${escapeHtml(current.label)} <span class="caret">▾</span>`;
+    const menu = document.createElement('div');
+    menu.className = 'semester-menu';
+    menu.hidden = true;
+    semesters.forEach(g => {
+      const opt = document.createElement('button');
+      opt.type = 'button';
+      opt.textContent = g.label + (g.id === currentSemester ? ' ✓' : '');
+      opt.addEventListener('click', () => {
+        Accounts.grade.set(username, g.id);
+        menu.hidden = true;
+        // 重渲染首页
+        location.reload();
+      });
+      menu.appendChild(opt);
+    });
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      // 切换菜单显示，并按需注册/卸载「点外侧收起」监听器
+      if (menu.hidden) {
+        menu.hidden = false;
+        if (outsideHandler) document.removeEventListener('click', outsideHandler);
+        outsideHandler = (ev) => {
+          if (!wrap.contains(ev.target)) {
+            menu.hidden = true;
+            document.removeEventListener('click', outsideHandler);
+            outsideHandler = null;
+          }
+        };
+        document.addEventListener('click', outsideHandler);
+      } else {
+        menu.hidden = true;
+        if (outsideHandler) {
+          document.removeEventListener('click', outsideHandler);
+          outsideHandler = null;
+        }
+      }
+    });
+    wrap.appendChild(btn);
+    wrap.appendChild(menu);
+    headerEl.appendChild(wrap);
+  }
+
+  let outsideHandler = null;
+
   // ---------- 首页 ----------
   function home() {
     const main = page('学趣闯关', null, '跟着课本学，一节一关');
-    AccountUI.mount(app.querySelector('header.bar'));
-    for (const v of Content.volumes()) {
+    const header = app.querySelector('header.bar');
+    const username = Accounts.current();
+    const currentGrade = Accounts.grade.get(username);
+    mountSemesterSwitcher(header, currentGrade, username);
+    AccountUI.mount(header);
+    const volumes = Content.volumes().filter(v => v.volume.id === currentGrade);
+    for (const v of volumes) {
       const metas = Content.sectionMetas().filter(s => s.volumeId === v.id);
       const ready = metas.filter(s => s.section.ready).length;
       const solved = metas.reduce((n, s) => n + Progress.solvedCount(s.id), 0);

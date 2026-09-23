@@ -6,6 +6,7 @@
 (function (root) {
   const KEY = 'xq.account.v1';
   const HISTORY_KEY_PREFIX = 'xq.history.v1.';
+  const GRADE_KEY_PREFIX = 'xq.grade.v1.';
   const NAME_PATTERN = /^[A-Za-z_][A-Za-z0-9_]*$/;
   const NAME_MIN = 1;
   const NAME_MAX = 20;
@@ -149,6 +150,28 @@
       get(username, recordId) {
         if (typeof username !== 'string' || !recordId) return null;
         return readHistory(username).find(r => r.id === recordId) || null;
+      },
+    },
+
+    // 年级偏好：按账号保存到 localStorage['xq.grade.v1.<账号>']
+    grade: {
+      DEFAULT: 'g6s1',
+      get(username) {
+        const fallback = 'g6s1';
+        if (typeof username !== 'string' || !username) return fallback;
+        try {
+          const raw = localStorage.getItem(GRADE_KEY_PREFIX + username);
+          if (!raw) return fallback;
+          const obj = JSON.parse(raw);
+          return obj && typeof obj.grade === 'string' ? obj.grade : fallback;
+        } catch {
+          return fallback;
+        }
+      },
+      set(username, grade) {
+        if (typeof username !== 'string' || !username) return;
+        if (typeof grade !== 'string' || !grade) return;
+        try { localStorage.setItem(GRADE_KEY_PREFIX + username, JSON.stringify({ grade })); } catch {}
       },
     },
   };
