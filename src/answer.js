@@ -313,6 +313,140 @@
     return true;
   }
 
+  // ---------- 实数（带根号、圆周率） ----------
+  // 第 19 章起，答案常常是 2√3、3+√2、∛(-8) 这样的无理数，用不了精确分数。
+  // 这里把输入解析成语法树，再分别用于数值比较（判分）和 TeX 显示（对答案）。
+  // 根号只管住紧跟着的一个数、括号、π 或另一个根号：√2×3 里的 3 不在根号下。
+  function parseReal(s) {
+    const src = normalize(s)
+      .replace(/\s+/g, '')
+      .replace(/cbrt/gi, '∛')
+      .replace(/sqrt/gi, '√')
+      .replace(/pi/gi, 'π')
+      .replace(/根号/g, '√');
+    let i = 0;
+    const peek = () => src[i];
+    const eat = c => (src[i] === c ? (i++, true) : false);
+
+    function number() {
+      const m = /^\d+(?:\.\d+)?/.exec(src.slice(i));
+      if (!m) return null;
+      i += m[0].length;
+      return Number(m[0]);
+    }
+    function expr() {
+      let node = term();
+      while (peek() === '+' || peek() === '-') {
+        const op = src[i++];
+        node = { t: op === '+' ? 'add' : 'sub', a: node, b: term() };
+      }
+      return node;
+    }
+    function term() {
+      let node = unary();
+      for (;;) {
+        if (eat('*')) node = { t: 'mul', a: node, b: unary() };
+        else if (eat('/')) node = { t: 'div', a: node, b: unary() };
+        else if (peek() && '√∛π('.includes(peek())) node = { t: 'mul', a: node, b: unary() };  // 省略乘号：2√3
+        else return node;
+      }
+    }
+    function unary() {
+      if (eat('+')) return unary();
+      if (eat('-')) return { t: 'neg', a: unary() };
+      return power();
+    }
+    function power() {
+      const base = atom();
+      if (eat('^')) {
+        const neg = eat('-');
+        const k = number();
+        if (k == null || !Number.isInteger(k)) throw new Error('指数要填整数');
+        return { t: 'pow', a: base, k: neg ? -k : k };
+      }
+      return base;
+    }
+    function atom() {
+      if (eat('√')) return { t: 'sqrt', a: radicand() };
+      if (eat('∛')) return { t: 'cbrt', a: radicand() };
+      if (eat('π')) return { t: 'pi' };
+      if (eat('(')) {
+        const node = expr();
+        if (!eat(')')) throw new Error('括号没有配对');
+        return { t: 'paren', a: node };
+      }
+      const v = number();
+      if (v == null) throw new Error(i < src.length ? `看不懂“${src.slice(i)}”` : '式子不完整');
+      return { t: 'num', v };
+    }
+    function radicand() {
+      if (eat('-')) return { t: 'neg', a: radicand() };
+      return atom();
+    }
+
+    if (!src) throw new Error('式子是空的');
+    const node = expr();
+    if (i < src.length) throw new Error(`多余的“${src.slice(i)}”`);
+    return node;
+  }
+
+  function evalReal(node) {
+    switch (node.t) {
+      case 'num': return node.v;
+      case 'pi': return Math.PI;
+      case 'paren': return evalReal(node.a);
+      case 'neg': return -evalReal(node.a);
+      case 'add': return evalReal(node.a) + evalReal(node.b);
+      case 'sub': return evalReal(node.a) - evalReal(node.b);
+      case 'mul': return evalReal(node.a) * evalReal(node.b);
+      case 'div': {
+        const d = evalReal(node.b);
+        if (d === 0) throw new Error('除数不能为 0');
+        return evalReal(node.a) / d;
+      }
+      case 'pow': return Math.pow(evalReal(node.a), node.k);
+      case 'sqrt': {
+        const v = evalReal(node.a);
+        if (v < 0) throw new Error('负数没有平方根');
+        return Math.sqrt(v);
+      }
+      case 'cbrt': return Math.cbrt(evalReal(node.a));
+    }
+    throw new Error('未知节点 ' + node.t);
+  }
+
+  function realValue(s) {
+    return evalReal(parseReal(s));
+  }
+
+  // 双精度算出来的根式会有 1e-16 量级的误差，容差取相对 1e-12：
+  // √8 与 2√2 判相等，而填 1.414 这样的近似值仍然判错
+  function realEqual(x, y) {
+    return Math.abs(x - y) <= 1e-12 * Math.max(1, Math.abs(x), Math.abs(y));
+  }
+
+  function texReal(node) {
+    const wrap = n => (['add', 'sub', 'neg'].includes(n.t) ? `(${texReal(n)})` : texReal(n));
+    const bare = n => texReal(n.t === 'paren' ? n.a : n);  // 根号里、分数线上下不用再套括号
+    switch (node.t) {
+      case 'num': return String(node.v);
+      case 'pi': return '\\pi';
+      case 'paren': return `(${texReal(node.a)})`;
+      case 'neg': return `-${wrap(node.a)}`;
+      case 'add': return `${texReal(node.a)}+${texReal(node.b)}`;
+      case 'sub': return `${texReal(node.a)}-${wrap(node.b)}`;
+      case 'mul': {
+        const b = texReal(node.b);
+        return texReal(node.a) + (/^[\\(]/.test(b) ? '' : '\\times ') + b;  // 2√3 不写乘号，2×3 写
+      }
+      case 'div': return `\\frac{${bare(node.a)}}{${bare(node.b)}}`;
+      case 'pow': return `${['num', 'pi', 'paren'].includes(node.a.t) ? texReal(node.a) : `(${texReal(node.a)})`}^{${node.k}}`;
+      case 'sqrt': return `\\sqrt{${bare(node.a)}}`;
+      case 'cbrt': return `\\sqrt[3]{${bare(node.a)}}`;
+    }
+    return '';
+  }
+
   // ---------- 角度 ----------
   // 36°15′30″、36°15′、36°、36.25°、36.25；返回以“秒”为单位的分数
   function parseAngle(s) {
@@ -350,6 +484,11 @@
         if (blank.simplified && !isSimplified(node)) return { ok: false, error: '结果正确，但还可以再化简' };
         return { ok: true };
       }
+      case 'real': {
+        let v;
+        try { v = realValue(s); } catch (e) { return { ok: false, error: e.message + '。可以填 2√3、−√5、3+√2 这样的式子' }; }
+        return { ok: realEqual(v, realValue(blank.answer)) };
+      }
       case 'angle': {
         const v = parseAngle(s);
         if (!v) return { ok: false, error: '请按 36°15′ 这样的格式填写，分、秒要小于 60' };
@@ -385,6 +524,7 @@
       case 'num': return `$${Frac.of(blank.answer).toTeX()}$`;
       case 'nums': return blank.answer.map(x => `$${Frac.of(x).toTeX()}$`).join('，');
       case 'expr': return `$${normalize(blank.answer).replace(/\*/g, '\\cdot ')}$`;
+      case 'real': return `$${blank.tex || texReal(parseReal(blank.answer))}$`;
       case 'angle': return normalize(blank.answer).replace(/'/g, '′').replace(/"/g, '″');
       case 'text': return Array.isArray(blank.answer) ? blank.answer[0] : blank.answer;
     }
@@ -393,7 +533,8 @@
 
   const Answer = {
     Frac, normalize, parseNumber, parseNumberList, parseExpr, evaluate, equivalent,
-    isSimplified, parseAngle, checkBlank, checkQuestion, answerText,
+    isSimplified, parseAngle, parseReal, evalReal, realValue, realEqual, texReal,
+    checkBlank, checkQuestion, answerText,
   };
   if (typeof module !== 'undefined') module.exports = Answer;
   else root.Answer = Answer;

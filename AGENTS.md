@@ -18,7 +18,7 @@ node tests/run.js                     # 全部校验（改了内容或代码都�
 ```
 index.html                        应用入口（按顺序加载下面的脚本）
 src/
-  answer.js                       判分纯函数：精确分数 Frac、数值/多值/代数式/角度解析与比较、“已化简”检查
+  answer.js                       判分纯函数：精确分数 Frac、数值/多值/代数式/实数（根号、π）/角度的解析与比较、“已化简”检查
   progress.js                     做题进度（localStorage：xq.progress.v2）
   content.js                      内容注册表：目录查询、按需加载小节文件
   quiz.js                         做题引擎：题目渲染、作答、判分反馈、解析、快捷输入栏、renderText 排版

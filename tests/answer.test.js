@@ -70,6 +70,26 @@ test('符号填空', () => {
   assert(!ok(b, '<'), '<');
 });
 
+test('实数填空：根号、立方根、圆周率', () => {
+  const b = blank('real', '2√3');
+  for (const s of ['2√3', '2*√3', '√3*2', '√12', '2 √3', '2×√3', '2sqrt3']) assert(ok(b, s), `应判对：${s}`);
+  for (const s of ['3√2', '-2√3', '3.46', '2√3.1']) assert(!ok(b, s), `应判错：${s}`);
+  assert(!ok(b, '3.4641016'), '近似值不算对');
+  assert(ok(blank('real', '√2'), '1.4142135623730951'), '写到双精度极限的小数仍算对');
+
+  assert(ok(blank('real', '3+2√3'), '2√3+3'), '加法交换');
+  assert(ok(blank('real', '∛(-8)'), '-2'), '立方根是整数');
+  assert(ok(blank('real', '∛-8'), '−2'), '立方根括号可省、负号可用全角');
+  assert(ok(blank('real', '(1+√5)/2'), '(1+√5)/2'), '分式');
+  assert(ok(blank('real', 'π-3'), 'π−3'), '圆周率');
+  assert(ok(blank('real', '(√7)^2'), '7'), '根号平方');
+
+  assert(A.checkBlank(blank('real', '√2'), '√-4').error, '负数开平方要提示');
+  assert(A.checkBlank(blank('real', '√2'), '2√').error, '写不完整要提示');
+  assert(A.checkBlank(blank('real', '√2'), '(1+√2').error, '括号不配对要提示');
+  assert(A.checkBlank(blank('real', '√2'), 'x+1').error, '看不懂的输入要提示');
+});
+
 test('整题判分', () => {
   assert(A.checkQuestion({ type: 'choice', answer: 2 }, 2).ok, '单选');
   assert(!A.checkQuestion({ type: 'choice', answer: 2 }, 1).ok, '单选错');
@@ -82,5 +102,8 @@ test('整题判分', () => {
 
 test('标准答案展示', () => {
   assert(A.answerText(blank('num', '-3/4')) === '$-\\frac{3}{4}$', 'num');
+  assert(A.answerText(blank('real', '2√3')) === '$2\\sqrt{3}$', 'real');
+  assert(A.answerText(blank('real', '(1+√5)/2')) === '$\\frac{1+\\sqrt{5}}{2}$', 'real 分式');
+  assert(A.answerText(blank('real', '∛(-8)')) === '$\\sqrt[3]{-8}$', 'real 立方根');
   assert(A.answerText(blank('angle', "36°15'")) === '36°15′', 'angle');
 });
