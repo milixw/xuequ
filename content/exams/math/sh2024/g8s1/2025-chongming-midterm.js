@@ -1,8 +1,14 @@
 'use strict';
 
 // 2025～2026 学年上海崇明区初二上学期期中数学试卷（九校联考）原题。
-// 题干、数据和选项保持原卷；section、topic、difficulty 为项目分析元数据。
+// 题干、数据和选项保持原卷；章、节、知识点和难度为项目分析元数据。
 (function () {
+  const chapterTitles = {
+    19: '实数',
+    20: '二次根式',
+    21: '一元二次方程',
+  };
+
   const sectionTitles = {
     '19.1': '平方根与立方根',
     '19.2': '实数',
@@ -16,9 +22,12 @@
   };
 
   function q(originalNo, section, topic, difficulty, difficultyReason, def) {
+    const chapter = Number(section.split('.')[0]);
     return {
       id: `cm2025-q${String(originalNo).padStart(2, '0')}`,
       originalNo,
+      chapter,
+      chapterTitle: chapterTitles[chapter],
       section,
       sectionTitle: sectionTitles[section],
       topic,
