@@ -2,8 +2,6 @@
 
 面向初中生的学习闯关手机网页应用：按课本章节提供**通俗的知识点介绍 + 分级题目**，以后可能扩展到其他学科。另有一个"函数轨道"解谜小游戏，留给函数章节使用。
 
-当前进行中：上海数学六年级上册，计划见 `docs/plan-g6s1.md`。
-
 ## 常用命令
 
 ```bash
@@ -48,7 +46,7 @@ docs/
   plan-*.md                       开发计划
   textbooks/                      教材目录与各章知识范围（出题前必读）
   references/                     外部参考资料的笔记（原件放 refs/，不入库）
-scripts/                          start.sh / stop.sh：本地开发服务器；build.sh：打包；serve.js / run.sh：部署到服务器上运行
+scripts/                          start.sh / stop.sh：本地开发服务器；build.sh：打包；serve.js / run.sh：部署到服务器上运行；pdf-page.sh：把教材 PDF 的某页渲染成图片，用来核对课本原文
 dist/                             打包产物，不入库
 pic/                              用户拍的教材照片，不入库
 ```
