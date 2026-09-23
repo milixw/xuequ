@@ -167,7 +167,7 @@ Content.catalog = {
                   no: 19,
                   title: '实数',
                   sections: [
-                    { no: '19.1', title: '平方根与立方根', ready: false },
+                    { no: '19.1', title: '平方根与立方根', ready: true },
                     { no: '19.2', title: '实数', ready: false },
                   ],
                 },
