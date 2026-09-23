@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>立体图形实验室</title>
+<style>
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "PingFang SC", "Helvetica Neue", "Microsoft YaHei", sans-serif;
+    background: #f4f1ea;
+    color: #2b2b2b;
+    -webkit-tap-highlight-color: transparent;
+  }
+  #app { max-width: 560px; margin: 0 auto; padding: 12px 16px 32px; }
+  .back { display: inline-block; color: #2f6fd6; text-decoration: none; font-size: 14px; padding: 4px 0 8px; }
+  h1 { font-size: 18px; margin: 0 0 8px; }
+  button { font: inherit; color: #2b2b2b; cursor: pointer; }
+  #chapters, #levels { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+  #chapters button {
+    min-height: 36px; padding: 0 12px; border-radius: 18px; border: 1px solid #cfc8b8;
+    background: #fff; font-size: 14px;
+  }
+  #chapters button.current { background: #2b2b2b; border-color: #2b2b2b; color: #fff; }
+  #levels button {
+    min-height: 36px; padding: 0 10px; border-radius: 8px; border: none;
+    background: #e9e3d6; font-size: 13px; color: #5b5346;
+  }
+  #levels button.done { background: #d9eedd; color: #256b34; }
+  #levels button.current { outline: 2px solid #2b2b2b; outline-offset: 1px; }
+  #hint { font-size: 14px; line-height: 1.6; color: #555; margin: 4px 0 10px; }
+  .stage { position: relative; }
+  #board {
+    display: block; width: 100%; height: min(88vw, 52vh, 460px);
+    background: #fffdf8; border-radius: 12px; box-shadow: 0 1px 4px rgba(0,0,0,.08);
+    touch-action: none; cursor: grab;
+  }
+  #resetView {
+    position: absolute; top: 8px; right: 8px; min-height: 36px; padding: 0 10px;
+    border-radius: 8px; border: 1px solid #cfc8b8; background: rgba(255,255,255,.9); font-size: 13px;
+  }
+  .drag-tip { position: absolute; left: 10px; top: 12px; font-size: 12px; color: #a39b8b; pointer-events: none; }
+  #controls { margin-top: 10px; }
+  .row { display: flex; gap: 10px; margin: 8px 0; align-items: center; }
+  .row > button { flex: 1; min-height: 44px; border-radius: 10px; border: 1px solid #cfc8b8; background: #fff; font-size: 16px; }
+  .row > button.primary, .choices button.primary { background: #2f6fd6; border-color: #2f6fd6; color: #fff; }
+  .row > button.nav { flex: 0 0 44px; font-size: 22px; }
+  .navtext { flex: 1; text-align: center; font-size: 15px; }
+  .param { display: flex; align-items: center; gap: 8px; margin: 6px 0; }
+  .param .name { min-width: 30px; font-size: 15px; font-weight: 600; }
+  .param input[type=range] { flex: 1; min-width: 0; accent-color: #2f6fd6; }
+  .param button {
+    width: 38px; height: 38px; flex: none; border-radius: 8px; border: 1px solid #cfc8b8;
+    background: #fff; font-size: 20px; padding: 0;
+  }
+  .param .val { width: 50px; text-align: right; font-variant-numeric: tabular-nums; font-size: 15px; }
+  .fold { display: flex; align-items: center; gap: 8px; margin: 10px 0; }
+  .fold .play {
+    width: 44px; height: 44px; flex: none; border-radius: 50%; border: none;
+    background: #2f6fd6; color: #fff; font-size: 18px; padding: 0;
+  }
+  .fold input { flex: 1; min-width: 0; accent-color: #2f6fd6; }
+  .fold .end { font-size: 13px; color: #7a7366; }
+  .choices { display: flex; flex-wrap: wrap; gap: 8px; margin: 8px 0; }
+  .choices button {
+    flex: 1 1 60px; min-height: 44px; border-radius: 10px; border: 2px solid #cfc8b8;
+    background: #fff; font-size: 16px; font-weight: 600;
+  }
+  .choices button.on { background: #fff4e0; }
+  .thumbs { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0; }
+  .thumb {
+    min-width: 36px; min-height: 36px; padding: 4px; border-radius: 8px; border: 1px solid #e4ddcf;
+    background: #fff; display: inline-flex; align-items: center; justify-content: center;
+  }
+  .thumb.current { border: 2px solid #2b2b2b; }
+  .thumb svg { display: block; }
+  .grid { display: grid; gap: 3px; justify-content: center; margin: 8px 0; }
+  .grid button {
+    width: 40px; height: 40px; border-radius: 4px; border: 1px dashed #cfc8b8; background: #fff; padding: 0;
+  }
+  .grid button.on { background: #f7d794; border: 1px solid #5b5346; }
+  .chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 8px 0; }
+  .chip { font-size: 14px; padding: 4px 10px; border-radius: 14px; background: #e9e3d6; color: #5b5346; }
+  .chip.got { background: #d9eedd; color: #256b34; }
+  #message { font-size: 15px; line-height: 1.6; margin: 10px 0; padding: 8px 10px; border-radius: 8px; background: #f0ece2; }
+  #message:empty { display: none; }
+  #message.ok { background: #e3f3e6; color: #256b34; }
+  #message.fail { background: #fbe7e4; color: #9a3326; }
+  #info { font-size: 14px; line-height: 1.7; background: #fffdf8; border-radius: 10px; padding: 4px 12px; }
+  #info:empty { display: none; }
+  #info p { margin: 6px 0; }
+  #info ul { margin: 4px 0 8px; padding-left: 20px; }
+  .muted { color: #7a7366; }
+  .red { color: #d9534f; font-weight: 600; }
+  .shapebox { display: flex; gap: 10px; align-items: center; justify-content: space-between; }
+  canvas.shape { width: 110px; height: 110px; flex: none; }
+  table.routes { width: 100%; border-collapse: collapse; margin: 6px 0; font-size: 13px; }
+  table.routes th, table.routes td { text-align: left; padding: 4px 2px; border-bottom: 1px solid #eee6d6; }
+  table.routes tr.best td { font-weight: 700; }
+  table.routes i { display: inline-block; width: 10px; height: 10px; border-radius: 50%; margin-right: 4px; }
+</style>
+</head>
+<body>
+<main id="app">
+  <a class="back" href="../../../index.html">‹ 返回首页</a>
+  <h1 id="title"></h1>
+  <nav id="chapters"></nav>
+  <nav id="levels"></nav>
+  <p id="hint"></p>
+  <div class="stage">
+    <canvas id="board"></canvas>
+    <span class="drag-tip">拖动可旋转</span>
+    <button id="resetView" type="button">重置视角</button>
+  </div>
+  <section id="controls"></section>
+  <p id="message"></p>
+  <section id="info"></section>
+</main>
+<script src="geo3d.js"></script>
+<script src="game.js"></script>
+</body>
+</html>

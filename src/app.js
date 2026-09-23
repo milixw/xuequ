@@ -155,7 +155,9 @@
     games.innerHTML =
       `<h3 class="group">趣味玩法</h3>` +
       `<a class="card" href="src/games/function-track/index.html">` +
-      `<h2>函数轨道</h2><p>调整函数参数，让小球沿着图像到达终点。适合学完一次函数、二次函数后玩。</p></a>`;
+      `<h2>函数轨道</h2><p>调整函数参数，让小球沿着图像到达终点。适合学完一次函数、二次函数后玩。</p></a>` +
+      `<a class="card" href="src/games/solids/index.html">` +
+      `<h2>立体图形实验室</h2><p>正方体展开图、圆柱圆锥的展开、蚂蚁爬最短路、切正方体。拖动旋转，动手折一折、切一切。</p></a>`;
     main.appendChild(games);
   }
 

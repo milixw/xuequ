@@ -4,6 +4,7 @@ require('./answer.test.js');
 require('./content.test.js');
 require('./exam.test.js');
 require('./function-track.test.js');
+require('./solids.test.js');
 require('./accounts.test.js');
 require('./account-ui.test.js');
 
