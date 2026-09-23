@@ -36,6 +36,7 @@
   // ---------- 首页 ----------
   function home() {
     const main = page('学趣闯关', null, '跟着课本学，一节一关');
+    AccountUI.mount(app.querySelector('header.bar'));
     for (const v of Content.volumes()) {
       const metas = Content.sectionMetas().filter(s => s.volumeId === v.id);
       const ready = metas.filter(s => s.section.ready).length;
@@ -50,6 +51,30 @@
         `<p class="meta">已上线 ${ready} / ${metas.length} 节 · 已答对 ${solved} 题</p>`;
       main.appendChild(card);
     }
+    const exam = document.createElement('a');
+    exam.className = 'card volume exam-entry';
+    exam.innerHTML =
+      `<span class="tag">试卷</span>` +
+      `<h2>试卷</h2>` +
+      `<p>先交卷，再看分数和错题解析</p>`;
+    // 短按才跳转；长按（>500ms）不触发
+    let pressStart = 0;
+    let longPressed = false;
+    exam.addEventListener('pointerdown', () => {
+      pressStart = Date.now();
+      longPressed = false;
+    });
+    exam.addEventListener('pointerup', () => {
+      if (Date.now() - pressStart > 500) { longPressed = true; return; }
+      if (longPressed) return;
+      if (!Accounts.current()) {
+        AccountUI.ensureLoggedIn(() => { location.hash = '#/exam'; });
+      } else {
+        location.hash = '#/exam';
+      }
+    });
+    exam.addEventListener('contextmenu', e => e.preventDefault());
+    main.appendChild(exam);
     const games = document.createElement('section');
     games.innerHTML =
       `<h3 class="group">趣味玩法</h3>` +
@@ -254,8 +279,44 @@
     if (parts[0] === 'q') return questionPage(parts.slice(1, -1).join('/'), parts[parts.length - 1]);
     if (parts[0] === 'e') return examPage(parts.slice(1).join('/'));
     if (parts[0] === 'eq') return examQuestionPage(parts.slice(1, -1).join('/'), parts[parts.length - 1]);
+    if (parts[0] === 'exam') {
+      const app = document.getElementById('app');
+      app.innerHTML = '';
+      const main = document.createElement('main');
+      app.appendChild(main);
+      if (parts.length === 1) return Exam.listPage(main);
+      const last = parts[parts.length - 1];
+      if (last === 'play' || last === 'result') {
+        const sectionId = parts.slice(1, -1).join('/');
+        return last === 'play' ? Exam.playPage(sectionId, main) : Exam.resultPage(sectionId, main);
+      }
+      if (parts.length >= 4 && parts[parts.length - 2] === 'result-history') {
+        const recordId = parts[parts.length - 1];
+        const sectionId = parts.slice(1, -2).join('/');
+        if (typeof Exam.historyResultPage === 'function') {
+          return Exam.historyResultPage(sectionId, recordId, main);
+        }
+        location.hash = '#/exam';
+        return;
+      }
+      if (parts[1] === 'v') {
+        return Exam.volumePage(parts.slice(2).join('/'), main);
+      }
+      if (typeof Exam.entryPage === 'function') {
+        return Exam.entryPage(parts.slice(1).join('/'), main);
+      }
+      // 兜底：未登录 → 跳登录
+      if (!Accounts.current()) {
+        AccountUI.ensureLoggedIn(() => { location.hash = '#/exam'; });
+      } else {
+        location.hash = '#/exam';
+      }
+    }
     return home();
   }
+
+  Exam.bindUI({ showError, escapeHtml });
+  AccountUI.bindUI({ escapeHtml });
 
   window.addEventListener('hashchange', route);
   route();

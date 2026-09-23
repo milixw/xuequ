@@ -51,9 +51,11 @@
     return e;
   }
 
-  // opts: { sectionId, q, index, total, prevHref, nextHref }
-  function mount(container, opts) {
-    const { sectionId, q } = opts;
+  // 共享渲染：渲染题号、题干、配图、答案输入、快捷输入栏
+  // opts: { index, total, onChange?(response), onSubmit?() }
+  // 返回 { setDisabled(bool), setResponse(response), getResponse(), mark(result) }
+  function renderQuestion(container, q, opts) {
+    opts = opts || {};
     container.innerHTML = '';
 
     const head = el('div', 'q-head');
@@ -66,23 +68,31 @@
       `<span class="q-id" title="题号，纠错时请写上">${q.id}</span>` +
       `<span class="q-state"></span>`;
     container.appendChild(head);
-    const stateEl = head.querySelector('.q-state');
-    const showState = () => {
-      const st = Progress.status(sectionId, q.id);
-      stateEl.textContent = st === 'solved' ? '✓ 已答对' : st === 'revealed' ? '看过解析' : '';
-      stateEl.className = 'q-state ' + st;
-    };
-    showState();
 
     container.appendChild(el('div', 'q-stem', renderText(q.stem)));
     if (q.figure) container.appendChild(el('div', 'q-figure', q.figure));
 
-    // ---------- 作答区 ----------
     const answerBox = el('div', 'q-answer');
     container.appendChild(answerBox);
     let selected = q.type === 'multi' ? new Set() : null;
-    const inputs = [];      // 每个空一个：{ get(), mark(ok) }
+    const inputs = [];
     let lastInput = null;
+    let notify = opts.onChange || (() => {});
+    let locked = false;
+
+    function lock(state) {
+      locked = state;
+      answerBox.querySelectorAll('input, button.option, .seg button').forEach(x => {
+        x.disabled = state;
+      });
+    }
+
+    function fire() {
+      if (locked) return;
+      if (q.type === 'choice') notify(selected);
+      else if (q.type === 'multi') notify([...selected]);
+      else notify(inputs.map(x => x.get()));
+    }
 
     if (q.type === 'choice' || q.type === 'multi') {
       if (q.type === 'multi') answerBox.appendChild(el('p', 'hint', '多选题：选出所有正确的选项'));
@@ -90,6 +100,7 @@
         const b = el('button', 'option', `<span class="letter">${LETTERS[i]}</span><span class="text">${renderText(opt)}</span>`);
         b.type = 'button';
         b.addEventListener('click', () => {
+          if (locked) return;
           if (q.type === 'choice') {
             selected = i;
             answerBox.querySelectorAll('.option').forEach((o, j) => o.classList.toggle('selected', j === i));
@@ -97,7 +108,7 @@
             selected.has(i) ? selected.delete(i) : selected.add(i);
             b.classList.toggle('selected', selected.has(i));
           }
-          clearFeedback();
+          fire();
         });
         answerBox.appendChild(b);
       });
@@ -106,21 +117,24 @@
         const row = el('div', 'blank');
         if (blank.label) row.appendChild(el('span', 'label', renderText(blank.label)));
         if (blank.options) {
-          // 固定选项（比如 > < =）用按钮
           let value = null;
           const group = el('div', 'seg');
+          const optionBtns = [];
           blank.options.forEach(o => {
             const b = el('button', '', renderText(/^[<>=≤≥≠]$/.test(o) ? `$${o}$` : o));
             b.type = 'button';
             b.addEventListener('click', () => {
+              if (locked) return;
               value = o;
               group.querySelectorAll('button').forEach(x => x.classList.toggle('selected', x === b));
-              clearFeedback();
+              group.classList.remove('wrong');
+              fire();
             });
             group.appendChild(b);
+            optionBtns.push({ btn: b, value: o });
           });
           row.appendChild(group);
-          inputs.push({ get: () => value, mark: ok => group.classList.toggle('wrong', !ok) });
+          inputs.push({ get: () => value, group, optionBtns });
         } else {
           const input = el('input');
           input.type = 'text';
@@ -131,14 +145,15 @@
           input.placeholder = blank.kind === 'nums' ? '多个答案用逗号隔开' : '';
           input.addEventListener('focus', () => (lastInput = input));
           input.addEventListener('input', () => {
+            if (locked) return;
             input.classList.remove('wrong');
-            clearFeedback();
+            fire();
           });
           input.addEventListener('keydown', e => {
-            if (e.key === 'Enter') submit();
+            if (e.key === 'Enter' && opts.onSubmit) opts.onSubmit();
           });
           row.appendChild(input);
-          inputs.push({ get: () => input.value, mark: ok => input.classList.toggle('wrong', !ok), input });
+          inputs.push({ get: () => input.value, input });
         }
         if (blank.suffix) row.appendChild(el('span', 'suffix', renderText(blank.suffix)));
         answerBox.appendChild(row);
@@ -150,7 +165,6 @@
         keys.forEach(k => {
           const b = el('button', '', escapeHtml(k));
           b.type = 'button';
-          // pointerdown + preventDefault：点按键时输入框不失去焦点，手机键盘不收起
           b.addEventListener('pointerdown', e => {
             e.preventDefault();
             const target = lastInput || (inputs.find(x => x.input) || {}).input;
@@ -168,7 +182,71 @@
       }
     }
 
-    // ---------- 反馈、按钮、解析 ----------
+    return {
+      setDisabled: lock,
+      setResponse(response) {
+        if (q.type === 'choice') {
+          selected = response;
+          answerBox.querySelectorAll('.option').forEach((o, j) => o.classList.toggle('selected', j === response));
+        } else if (q.type === 'multi') {
+          selected = new Set(response || []);
+          answerBox.querySelectorAll('.option').forEach((o, j) => o.classList.toggle('selected', selected.has(j)));
+        } else {
+          (response || []).forEach((v, i) => {
+            const it = inputs[i];
+            if (!it) return;
+            if (it.input) {
+              it.input.value = v == null ? '' : String(v);
+            } else if (it.optionBtns) {
+              it.group.classList.remove('wrong');
+              it.optionBtns.forEach(({ btn, value }) => {
+                btn.classList.toggle('selected', value === v);
+              });
+            }
+          });
+        }
+      },
+      getResponse() {
+        if (q.type === 'choice') return selected;
+        if (q.type === 'multi') return [...selected];
+        return inputs.map(x => x.get());
+      },
+      mark(result) {
+        if (q.type === 'fill' && result.blanks) {
+          result.blanks.forEach((b, i) => {
+            const it = inputs[i];
+            if (!it) return;
+            if (it.input) it.input.classList.toggle('wrong', !b.ok);
+            else if (it.group) it.group.classList.toggle('wrong', !b.ok);
+          });
+        } else {
+          answerBox.querySelectorAll('.option').forEach(o => o.classList.remove('wrong'));
+          if (!result.ok) answerBox.querySelectorAll('.option.selected').forEach(o => o.classList.add('wrong'));
+        }
+      },
+    };
+  }
+
+  // opts: { sectionId, q, index, total, prevHref, nextHref }
+  function mount(container, opts) {
+    const { sectionId, q } = opts;
+    container.innerHTML = '';
+
+    const handle = renderQuestion(container, q, {
+      index: opts.index,
+      total: opts.total,
+      onChange: clearFeedback,
+      onSubmit: submit,
+    });
+
+    const stateEl = container.querySelector('.q-state');
+    const showState = () => {
+      const st = Progress.status(sectionId, q.id);
+      stateEl.textContent = st === 'solved' ? '✓ 已答对' : st === 'revealed' ? '看过解析' : '';
+      stateEl.className = 'q-state ' + st;
+    };
+    showState();
+
     const feedback = el('div', 'feedback');
     container.appendChild(feedback);
     const actions = el('div', 'q-actions');
@@ -185,38 +263,27 @@
       feedback.className = 'feedback';
       feedback.textContent = '';
     }
-
     function setFeedback(kind, text) {
       feedback.className = 'feedback ' + kind;
       feedback.textContent = text;
     }
 
     function submit() {
-      let response;
-      if (q.type === 'choice') {
-        if (selected === null) return setFeedback('info', '先选一个答案');
-        response = selected;
-      } else if (q.type === 'multi') {
-        if (!selected.size) return setFeedback('info', '先选出答案');
-        response = [...selected];
-      } else {
-        response = inputs.map(x => x.get());
-      }
-
+      const response = handle.getResponse();
+      if (q.type === 'choice' && response === null) return setFeedback('info', '先选一个答案');
+      if (q.type === 'multi' && !response.length) return setFeedback('info', '先选出答案');
       const result = Answer.checkQuestion(q, response);
-      // 输入看不懂或需要再化简时只提示，不算一次作答
       const hint = result.blanks && result.blanks.find(b => !b.ok && b.error);
       if (hint) {
-        result.blanks.forEach((b, i) => inputs[i].mark(b.ok || !b.error));
+        // 输入格式有问题：标出哪些空解析成功了，哪些没
+        result.blanks.forEach((b, i) => {
+          const input = container.querySelectorAll('.blank input')[i];
+          if (input) input.classList.toggle('wrong', !b.ok && !b.error);
+        });
         return setFeedback('info', hint.error);
       }
-
       Progress.record(sectionId, q.id, result.ok);
-      if (result.blanks) result.blanks.forEach((b, i) => inputs[i].mark(b.ok));
-      if (q.type !== 'fill') {
-        answerBox.querySelectorAll('.option').forEach(o => o.classList.remove('wrong'));
-        if (!result.ok) answerBox.querySelectorAll('.option.selected').forEach(o => o.classList.add('wrong'));
-      }
+      handle.mark(result);
       if (result.ok) {
         setFeedback('ok', '✓ 回答正确！');
         revealBtn.textContent = '看看解析';
@@ -266,5 +333,6 @@
     container.appendChild(nav);
   }
 
-  root.Quiz = { mount, renderText, escapeHtml, LEVEL_NAMES, DIFFICULTY_NAMES };
+if (typeof module !== 'undefined') module.exports = { mount, renderQuestion, renderText, escapeHtml, LEVEL_NAMES, LETTERS, DIFFICULTY_NAMES };
+  else root.Quiz = { mount, renderQuestion, renderText, escapeHtml, LEVEL_NAMES, LETTERS, DIFFICULTY_NAMES };
 })(this);

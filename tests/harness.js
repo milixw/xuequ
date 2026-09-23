@@ -17,6 +17,12 @@ function assert(cond, msg) {
   if (!cond) throw new Error(msg || '断言失败');
 }
 
+assert.throws = function (fn, msg) {
+  let threw = false;
+  try { fn(); } catch { threw = true; }
+  if (!threw) throw new Error(msg || '断言失败：期望抛错但没抛');
+};
+
 function run() {
   let failed = 0;
   for (const { name, fn } of cases) {
