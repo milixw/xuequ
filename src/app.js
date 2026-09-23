@@ -71,6 +71,10 @@
       e.stopPropagation();
       // 切换菜单显示，并按需注册/卸载「点外侧收起」监听器
       if (menu.hidden) {
+        // 收起另一个弹窗（账号下拉）
+        if (typeof AccountUI !== 'undefined' && AccountUI.closeMenu) {
+          AccountUI.closeMenu();
+        }
         menu.hidden = false;
         if (outsideHandler) document.removeEventListener('click', outsideHandler);
         outsideHandler = (ev) => {
@@ -81,6 +85,16 @@
           }
         };
         document.addEventListener('click', outsideHandler);
+        // 暴露给账号下拉收起自己用
+        if (typeof window !== 'undefined') window.__closeSemesterMenu = () => {
+          if (!menu.hidden) {
+            menu.hidden = true;
+            if (outsideHandler) {
+              document.removeEventListener('click', outsideHandler);
+              outsideHandler = null;
+            }
+          }
+        };
       } else {
         menu.hidden = true;
         if (outsideHandler) {

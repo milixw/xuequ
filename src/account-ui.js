@@ -8,6 +8,7 @@
   let modalEl = null;
   let onLoginSuccess = null;
   let outsideClickHandler = null;
+  let currentWrap = null;
 
   function esc(s) { return UI ? UI.escapeHtml(s) : String(s); }
 
@@ -104,6 +105,7 @@
       document.removeEventListener('click', outsideClickHandler);
       outsideClickHandler = null;
     }
+    currentWrap = null;
     const wrap = document.createElement('div');
     wrap.className = 'account';
     const current = Accounts.current();
@@ -145,6 +147,11 @@
     if (!menu) return;
     menu.hidden = !menu.hidden;
     if (!menu.hidden) {
+      currentWrap = wrap;
+      // 收起另一个弹窗（学期切换器）
+      if (typeof window !== 'undefined' && window.__closeSemesterMenu) {
+        window.__closeSemesterMenu();
+      }
       // 清理旧 handler
       if (outsideClickHandler) document.removeEventListener('click', outsideClickHandler);
       outsideClickHandler = (e) => {
@@ -172,6 +179,18 @@
 
     mount(headerEl) {
       return buildAccountArea(headerEl);
+    },
+
+    closeMenu() {
+      // 暴露给外部（学期切换器等）用来收起账号下拉
+      if (currentWrap) {
+        const menu = currentWrap.querySelector('.account-menu');
+        if (menu) menu.hidden = true;
+      }
+      if (outsideClickHandler) {
+        document.removeEventListener('click', outsideClickHandler);
+        outsideClickHandler = null;
+      }
     },
 
     ensureLoggedIn(onLoggedIn) {
