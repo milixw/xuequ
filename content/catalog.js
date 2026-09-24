@@ -2,6 +2,7 @@
 
 // 教材目录：学科 → 教材 → 册 → 章 → 节。只放元数据，小节内容在各自的文件里。
 // ready: true 表示小节内容已经做好（content/<学科>/<教材>/<册>/<小节号>.js 存在）
+// games：挂在这一节的动手玩游戏 ID（src/games/<ID>/，在应用内打开 #/g/<ID>）
 
 Content.catalog = {
   subjects: [
@@ -42,7 +43,7 @@ Content.catalog = {
                   title: '一元一次方程',
                   sections: [
                     { no: '3.1', title: '方程与列方程', ready: true },
-                    { no: '3.2', title: '一元一次方程及其解法', ready: true },
+                    { no: '3.2', title: '一元一次方程及其解法', ready: true, games: ['balance'] },
                     { no: '3.3', title: '一元一次方程的应用', ready: true },
                   ],
                 },

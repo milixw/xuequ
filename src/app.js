@@ -8,6 +8,7 @@
 //   #/e/<真题卷ID>      真题卷：按教材小节归类
 //   #/eq/<真题卷ID>/<题目ID> 做真题
 //   #/exam...           限时测试（src/exam.js 负责渲染）
+//   #/g/<游戏ID>[/<关卡ID>] 挂在小节上的动手玩游戏（window.Games 里注册）
 
 (function () {
   const app = document.getElementById('app');
@@ -194,6 +195,12 @@
             ? `<span class="count">${solved}/${total}</span><span class="bar-bg"><span style="width:${total ? (solved / total) * 100 : 0}%"></span></span>`
             : `<span class="count soon">制作中</span>`);
         box.appendChild(row);
+        for (const g of sectionGames(s.section)) {
+          const p = g.progress();
+          box.insertAdjacentHTML('beforeend',
+            `<a class="row game-row" href="#/g/${g.id}"><span class="no">玩</span>` +
+            `<span class="name">${escapeHtml(g.title)}</span><span class="count">${p.done}/${p.total} 关</span></a>`);
+        }
       }
       main.appendChild(box);
     }
@@ -219,6 +226,20 @@
       }
       main.appendChild(box);
     }
+  }
+
+  // ---------- 动手玩 ----------
+  // 目录里小节的 games 字段列出挂在这一节的游戏，游戏脚本在 index.html 里加载并注册到 window.Games
+  function sectionGames(section) {
+    return (section.games || []).map(id => window.Games && window.Games[id]).filter(Boolean);
+  }
+
+  function gamePage(id, levelId) {
+    const g = window.Games && window.Games[id];
+    if (!g) return showError(page('找不到这个游戏', '#/'), '链接可能有误，请返回首页。');
+    const meta = Content.sectionMeta(g.section);
+    const main = page(g.title, `#/s/${g.section}`, meta ? `${meta.section.no} ${meta.section.title} · 动手玩` : '动手玩');
+    g.mount(main, levelId);
   }
 
   // ---------- 小节 ----------
@@ -253,6 +274,19 @@
           (card.pitfall ? `<div class="pitfall"><b>易错</b>${renderText(card.pitfall)}</div>` : '') +
           `</article>`
       );
+    }
+
+    const games = sectionGames(meta.section);
+    if (games.length) {
+      main.insertAdjacentHTML('beforeend', '<h3 class="group">动手玩</h3>');
+      for (const g of games) {
+        const p = g.progress();
+        main.insertAdjacentHTML(
+          'beforeend',
+          `<a class="card game-card" href="#/g/${g.id}"><h2>${escapeHtml(g.title)}</h2>` +
+            `<p>${escapeHtml(g.desc)}</p><p class="meta">已过 ${p.done} / ${p.total} 关</p></a>`
+        );
+      }
     }
 
     const qs = orderedQuestions(section);
@@ -360,6 +394,7 @@
     if (parts[0] === 'v') return volumePage(parts.slice(1).join('/'));
     if (parts[0] === 's') return sectionPage(parts.slice(1).join('/'));
     if (parts[0] === 'q') return questionPage(parts.slice(1, -1).join('/'), parts[parts.length - 1]);
+    if (parts[0] === 'g') return gamePage(parts[1], parts[2]);
     if (parts[0] === 'e') return examPage(parts.slice(1).join('/'));
     if (parts[0] === 'eq') return examQuestionPage(parts.slice(1, -1).join('/'), parts[parts.length - 1]);
     if (parts[0] === 'exam') {

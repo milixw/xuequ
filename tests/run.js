@@ -7,6 +7,7 @@ require('./function-track.test.js');
 require('./solids.test.js');
 require('./24.test.js');
 require('./nim.test.js');
+require('./balance.test.js');
 require('./accounts.test.js');
 require('./account-ui.test.js');
 
