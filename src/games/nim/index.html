@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>取石子</title>
+<style>
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body {
+    margin: 0;
+    font-family: -apple-system, "PingFang SC", "Helvetica Neue", "Microsoft YaHei", sans-serif;
+    background: #f4f1ea;
+    color: #2b2b2b;
+    -webkit-tap-highlight-color: transparent;
+  }
+  #app { max-width: 560px; margin: 0 auto; padding: 12px 16px 32px; }
+  .back { display: inline-block; color: #2f6fd6; text-decoration: none; font-size: 14px; padding: 4px 0 8px; }
+  h1 { font-size: 18px; margin: 0 0 8px; }
+  button { font: inherit; color: #2b2b2b; cursor: pointer; }
+  button:disabled { opacity: .4; cursor: default; }
+  #chapters, #levels { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; }
+  #chapters button {
+    min-height: 36px; padding: 0 12px; border-radius: 18px; border: 1px solid #cfc8b8;
+    background: #fff; font-size: 14px;
+  }
+  #chapters button.current { background: #2b2b2b; border-color: #2b2b2b; color: #fff; }
+  #levels button {
+    min-height: 36px; min-width: 44px; padding: 0 10px; border-radius: 8px; border: none;
+    background: #e9e3d6; font-size: 13px; color: #5b5346;
+  }
+  #levels button.done { background: #d9eedd; color: #256b34; }
+  #levels button.locked { opacity: .55; }
+  #levels button.current { outline: 2px solid #2b2b2b; outline-offset: 1px; }
+  #hint { font-size: 14px; line-height: 1.6; color: #555; margin: 4px 0 10px; }
+  details.rules { font-size: 14px; line-height: 1.7; color: #555; margin: 0 0 10px; }
+  details.rules summary { cursor: pointer; color: #2f6fd6; min-height: 32px; line-height: 32px; }
+  details.rules ul { margin: 0; padding-left: 20px; }
+
+  .choices { display: flex; gap: 8px; margin: 8px 0; }
+  .choices button {
+    flex: 1; min-height: 40px; border-radius: 10px; border: 2px solid #cfc8b8;
+    background: #fff; font-size: 14px; font-weight: 600; line-height: 1.2; padding: 4px;
+  }
+  .choices button.on { border-color: #2b2b2b; background: #fff4e0; }
+  .opts { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 6px 0; }
+  .editor { margin: 6px 0; padding: 4px 10px; border-radius: 10px; background: #fffdf8; }
+  #toggles { display: flex; flex-wrap: wrap; gap: 4px 16px; font-size: 14px; }
+  #toggles label { display: inline-flex; align-items: center; gap: 6px; min-height: 36px; cursor: pointer; }
+  #toggles input { width: 18px; height: 18px; accent-color: #2f6fd6; }
+  .row { display: flex; gap: 8px; margin: 8px 0; width: 100%; }
+  .row > button { flex: 1; min-height: 44px; border-radius: 10px; border: 1px solid #cfc8b8; background: #fff; font-size: 16px; line-height: 1.2; }
+  .row > button small { display: block; font-size: 12px; color: #7a7366; }
+  .row > button.primary, #controls > .primary { background: #2f6fd6; border-color: #2f6fd6; color: #fff; }
+  .row > button.lose { background: #3b3b3b; border-color: #3b3b3b; color: #fff; }
+
+  /* 轮到谁：甲 / 你在左边亮蓝条，乙 / 电脑在右边亮红条 */
+  .turn {
+    margin: 8px 0 0; padding: 8px 12px; border-radius: 8px; background: #fffdf8;
+    text-align: center; font-weight: 600; font-size: 15px;
+  }
+  .turn.p0 { box-shadow: inset 6px 0 0 #2f6fd6; }
+  .turn.p1 { box-shadow: inset -6px 0 0 #c9302c; }
+  #status { font-size: 13px; color: #7a5a16; text-align: center; min-height: 0; margin: 4px 0 0; }
+  #status:empty { display: none; }
+
+  .board { background: #e8dcc2; border-radius: 14px; padding: 12px 8px; margin: 8px 0; }
+  .board:empty { display: none; }
+
+  /* 石子：每堆一列，从下往上堆 */
+  .piles { display: flex; justify-content: center; align-items: flex-end; gap: 6px; }
+  .pile {
+    flex: 1 1 0; min-width: 36px; max-width: 64px; padding: 6px 0 2px; border-radius: 10px;
+    display: flex; flex-direction: column; align-items: center; cursor: pointer;
+  }
+  .pile.sel { background: rgba(47, 111, 214, .14); }
+  .stack { display: flex; flex-direction: column-reverse; align-items: center; gap: 5px; }
+  .grp { display: flex; flex-direction: column-reverse; align-items: center; gap: 2px; padding: 2px; border-radius: 10px; }
+  .stone {
+    width: 20px; height: 15px; border-radius: 50%; background: #8a8174;
+    box-shadow: inset -2px -3px 0 rgba(0, 0, 0, .18);
+  }
+  .grp.b8 .stone { background: #3b6fd1; }
+  .grp.b4 .stone { background: #2f9a5a; }
+  .grp.b2 .stone { background: #e0902a; }
+  .grp.b1 .stone { background: #a54fb0; }
+  .grp.odd { box-shadow: 0 0 0 2px #f5c518, 0 0 10px 2px #f5c518; animation: glow 1.2s ease-in-out infinite alternate; }
+  @keyframes glow { from { box-shadow: 0 0 0 2px #f5c518; } to { box-shadow: 0 0 0 2px #f5c518, 0 0 12px 4px #f5c518; } }
+  .stone.sel { opacity: .35; outline: 2px dashed #2f6fd6; outline-offset: 1px; }
+  .stone.ai { opacity: .35; outline: 2px solid #c9302c; outline-offset: 1px; }
+  /* 只有一堆时横着排、自动换行，取的是最后几颗 */
+  .piles.single .pile { max-width: none; }
+  .piles.single .stack, .piles.single .grp { flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 6px; max-width: 290px; }
+  .piles.single .stone { width: 22px; height: 22px; }
+  .count { font-size: 14px; font-weight: 600; margin-top: 4px; color: #5b5346; }
+
+  /* 阶梯：从左到右第 1～5 级，越往右越高，左边是地面 */
+  .stair { display: flex; justify-content: center; align-items: flex-end; gap: 4px; }
+  .stepcol {
+    flex: 1 1 0; min-width: 36px; max-width: 60px; border-radius: 8px;
+    display: flex; flex-direction: column; align-items: center; cursor: pointer;
+  }
+  .stepcol.sel { background: rgba(47, 111, 214, .14); }
+  .stepcol.ground { cursor: default; }
+  .stepcol.ground .step { background: #c9b99a; font-size: 11px; }
+  .coins { display: flex; flex-direction: column-reverse; align-items: center; gap: 2px; padding: 4px 0 2px; }
+  .coin { width: 26px; height: 9px; border-radius: 50%; background: #d9a520; box-shadow: inset 0 -2px 0 #a97a0d; }
+  .coin.sel { opacity: .35; outline: 2px dashed #2f6fd6; }
+  .coin.ai { opacity: .35; outline: 2px solid #c9302c; }
+  .step {
+    width: 100%; min-height: 16px; background: #a88b62; border-radius: 4px 4px 0 0;
+    color: #fff; font-size: 12px; text-align: center; line-height: 16px;
+  }
+
+  /* 棋子对推 */
+  .push { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+  .prow { display: flex; }
+  .cell {
+    width: 36px; height: 36px; padding: 0; border: 1px solid #cdbfa4; background: #f6eedc;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .cell.gap { background: #fffaf0; }
+  .cell.target { background: #cfe0fb; }
+  .cell.aitarget { background: #f6d3cf; }
+  .piece { width: 24px; height: 24px; border-radius: 50%; }
+  .white .piece { background: #fff; border: 2px solid #555; }
+  .black .piece { background: #333; }
+
+  /* 倒推表 */
+  .tbl1 { display: flex; flex-wrap: wrap; justify-content: center; gap: 6px; }
+  .tcell {
+    width: 40px; height: 48px; padding: 0; border-radius: 8px; border: 2px solid #cfc8b8; background: #fff;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .tcell span { font-size: 16px; font-weight: 700; }
+  .tcell b { font-size: 12px; min-height: 14px; }
+  .tcell.open { border-style: dashed; }
+  .tcell.w { background: #e3f0fb; border-color: #9cc0ea; color: #22508f; }
+  .tcell.l { background: #3b3b3b; border-color: #3b3b3b; color: #fff; }
+  .tcell.cur { border: 3px solid #f0a830; }
+  .tbl2 { display: grid; gap: 4px; max-width: 320px; margin: 0 auto; }
+  .tbl2 .tcell { width: auto; height: 40px; }
+  .axis { display: flex; align-items: center; justify-content: center; font-size: 13px; color: #7a7366; }
+  .note { font-size: 13px; color: #7a7366; text-align: center; margin: 8px 0 0; }
+  .lesson { font-size: 15px; line-height: 1.7; margin: 12px 4px 0; }
+
+  #controls { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 8px; margin: 8px 0; min-height: 44px; }
+  #controls > .primary { min-height: 44px; padding: 0 20px; border-radius: 10px; border: 1px solid; font-size: 16px; }
+  .ctext { font-size: 15px; }
+  .stepper { width: 40px; height: 40px; border-radius: 50%; border: 1px solid #cfc8b8; background: #fff; font-size: 20px; padding: 0; }
+  .num { min-width: 28px; text-align: center; font-size: 20px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  #actions { display: flex; flex-wrap: wrap; gap: 8px; }
+  #actions button {
+    flex: 1 1 60px; min-height: 44px; border-radius: 10px; border: 1px solid #cfc8b8; background: #fff; font-size: 15px;
+  }
+  #actions button.primary { background: #2f6fd6; border-color: #2f6fd6; color: #fff; }
+
+  #message { font-size: 15px; line-height: 1.6; margin: 10px 0; padding: 8px 10px; border-radius: 8px; background: #f0ece2; }
+  #message:empty { display: none; }
+  #message.ok { background: #e3f3e6; color: #256b34; }
+  #message.fail { background: #fbe7e4; color: #9a3326; }
+  #info:empty { display: none; }
+  .learn { font-size: 15px; line-height: 1.7; background: #fffdf8; border-radius: 10px; padding: 10px 12px; margin: 0; }
+</style>
+</head>
+<body>
+<main id="app">
+  <a class="back" href="../../../index.html">‹ 返回首页</a>
+  <h1>取石子</h1>
+  <nav id="chapters"></nav>
+  <nav id="levels"></nav>
+  <p id="hint"></p>
+  <details class="rules">
+    <summary>玩法说明</summary>
+    <ul>
+      <li>两人轮流取，每次只能从一堆里取，至少取 1 颗；没说限制时一次取几颗都行</li>
+      <li>一般是取到最后一颗的人赢；“最后一颗算输”时反过来</li>
+      <li>操作：先点一堆石子，用 − + 选颗数（也可以直接点石子，从上面取到这一颗），再点「取走」</li>
+      <li><b>必胜局面</b>：轮到你时，只要走对就一定能赢；<b>必败局面</b>：轮到你时，对方不犯错你就赢不了</li>
+      <li>每章第 1 关完成后，这一章后面的关卡才会开放。同一关输得多了会给提示</li>
+    </ul>
+  </details>
+  <section id="setup"></section>
+  <div id="turn" class="turn" hidden></div>
+  <p id="status"></p>
+  <div id="board" class="board"></div>
+  <div id="controls"></div>
+  <div id="toggles"></div>
+  <div id="actions"></div>
+  <p id="message"></p>
+  <section id="info"></section>
+</main>
+<script src="solver.js"></script>
+<script src="game.js"></script>
+</body>
+</html>
