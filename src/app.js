@@ -191,7 +191,7 @@
           `<span class="no">${s.section.no}</span>` +
           `<span class="name">${escapeHtml(s.section.title)}</span>` +
           (content
-            ? `<span class="count">${solved}/${total}</span><span class="bar-bg"><span style="width:${(solved / total) * 100}%"></span></span>`
+            ? `<span class="count">${solved}/${total}</span><span class="bar-bg"><span style="width:${total ? (solved / total) * 100 : 0}%"></span></span>`
             : `<span class="count soon">制作中</span>`);
         box.appendChild(row);
       }
@@ -234,7 +234,8 @@
 
   async function sectionPage(id) {
     const { meta, section } = await loadSection(id);
-    if (!section) return showError(page('内容还没准备好', '#/'), '这一节正在制作中。');
+    if (!meta) return showError(page('找不到这一节', '#/'), '链接可能有误，请返回首页。');
+    if (!section) return showError(page('内容还没准备好', `#/v/${meta.volumeId}`), '这一节正在制作中。');
     const main = page(`${meta.section.no}　${section.title}`, `#/v/${meta.volumeId}`, `第 ${meta.chapter.no} 章 ${meta.chapter.title}`);
 
     if (section.review.status !== 'approved') {
@@ -257,7 +258,7 @@
     const qs = orderedQuestions(section);
     main.insertAdjacentHTML(
       'beforeend',
-      `<h3 class="group">练习 <small>已答对 ${Progress.solvedCount(id)} / ${qs.length}</small></h3>` +
+      `<h3 class="group">原创练习 <small>已答对 ${Progress.solvedCount(id)} / ${qs.length}</small></h3>` +
         `<p class="legend"><i class="solved"></i>答对 <i class="tried"></i>答错过 <i class="revealed"></i>看过解析 <i class="new"></i>未做</p>`
     );
     for (const lv of LEVEL_ORDER) {

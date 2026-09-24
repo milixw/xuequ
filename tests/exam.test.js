@@ -38,8 +38,13 @@ for (const meta of Content.examMetas()) {
 
     for (const q of exam.questions) {
       const where = `原题 ${q.originalNo}`;
-      assert(/^cm2025-q\d{2}$/.test(q.id), `${where}：题目 ID 格式错误`);
-      assert(Content.sectionMeta(`${meta.volumeId}/${q.section}`), `${where}：未知教材小节 ${q.section}`);
+      assert(/^[a-z]+2025-q\d{2}$/.test(q.id), `${where}：题目 ID 格式错误`);
+      const sectionMeta = Content.sectionMeta(`${meta.volumeId}/${q.section}`);
+      assert(sectionMeta, `${where}：未知教材小节 ${q.section}`);
+      assert(Number.isInteger(q.chapter), `${where}：缺少所属章编号`);
+      assert(q.chapter === sectionMeta.chapter.no, `${where}：所属章与小节 ${q.section} 不一致`);
+      assert(q.chapterTitle === sectionMeta.chapter.title, `${where}：所属章名称与目录不一致`);
+      assert(q.sectionTitle === sectionMeta.section.title, `${where}：所属节名称与目录不一致`);
       assert(Number.isInteger(q.difficulty) && q.difficulty >= 1 && q.difficulty <= 5, `${where}：难度应为 1～5`);
       assert(typeof q.difficultyReason === 'string' && q.difficultyReason.trim(), `${where}：缺少难度理由`);
       assert(typeof q.topic === 'string' && q.topic.trim(), `${where}：缺少知识点`);

@@ -161,6 +161,72 @@ Content.catalog = {
                   ready: true,
                   questionCount: 28,
                 },
+                {
+                  id: '2025-hongkou-midterm',
+                  title: '2025～2026 学年上海虹口区初二上学期期中数学试卷',
+                  ready: true,
+                  questionCount: 27,
+                },
+                {
+                  id: '2025-xuhui-midterm',
+                  title: '2025～2026 学年上海徐汇区初二上学期期中数学试卷',
+                  ready: true,
+                  questionCount: 32,
+                },
+                {
+                  id: '2025-nanyang-midterm',
+                  title: '2025～2026 学年上海徐汇区上海市南洋模范初级中学初二上学期期中数学试卷',
+                  ready: true,
+                  questionCount: 25,
+                },
+                {
+                  id: '2025-yangpu-midterm',
+                  title: '2025～2026 学年上海杨浦区初二上学期期中数学试卷',
+                  ready: true,
+                  questionCount: 25,
+                },
+                {
+                  id: '2025-lansheng-midterm',
+                  title: '2025～2026 学年上海杨浦区上海市民办兰生复旦中学初二上学期期中数学试卷',
+                  ready: true,
+                  questionCount: 28,
+                },
+                {
+                  id: '2025-qingpu-no1-midterm',
+                  title: '2025～2026 学年上海青浦区上海市青浦区第一中学初二上学期期中数学试卷',
+                  ready: true,
+                  questionCount: 28,
+                },
+                {
+                  id: '2025-jianping-experimental-midterm',
+                  title: '2025～2026 学年上海浦东新区上海市建平实验中学初二上学期期中数学试卷',
+                  ready: true,
+                  questionCount: 28,
+                },
+                {
+                  id: '2025-jinshan-midterm',
+                  title: '2025～2026 学年上海金山区初二上学期期中数学试卷',
+                  ready: true,
+                  questionCount: 28,
+                },
+                {
+                  id: '2025-tianjiabing-midterm',
+                  title: '2025～2026 学年上海静安区上海市田家炳中学初二上学期期中数学试卷',
+                  ready: true,
+                  questionCount: 30,
+                },
+                {
+                  id: '2025-putuo-midterm',
+                  title: '2025～2026 学年上海普陀区初二上学期期中数学试卷',
+                  ready: true,
+                  questionCount: 25,
+                },
+                {
+                  id: '2025-songjiang-midterm',
+                  title: '2025～2026 学年上海松江区初二上学期期中数学试卷',
+                  ready: true,
+                  questionCount: 29,
+                },
               ],
               chapters: [
                 {
