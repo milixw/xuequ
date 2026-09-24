@@ -105,6 +105,17 @@
 
   let outsideHandler = null;
 
+  // 首页“趣味玩法”的宫格。挂在小节上的游戏（#/g/...）也可以放进来，从首页进去时返回键回首页
+  // when：什么时候适合玩（课本位置），按课本顺序排
+  const FUN_GAMES = [
+    { name: '24 点', tag: '有理数运算', when: '六上第 1 章', icon: '24', color: '#c0513a', href: 'src/games/24/index.html' },
+    { name: '数学魔术', tag: '字母表示数', when: '六上第 2 章', icon: '?!', color: '#8a4fb0', href: '#/g/magic' },
+    { name: '天平解方程', tag: '等式的性质', when: '六上第 3 章', icon: '=', color: '#3f9a5a', href: '#/g/balance' },
+    { name: '函数轨道', tag: '一次、二次函数', when: '八下第 25 章', icon: 'y=', color: '#b46a24', href: 'src/games/function-track/index.html' },
+    { name: '取石子', tag: '策略推理', when: '不限年级', icon: '●●', color: '#2f6f7a', href: 'src/games/nim/index.html' },
+    { name: '立体图形', tag: '展开图 · 截面', when: '不限年级', icon: '◆', color: '#2f6fd6', href: 'src/games/solids/index.html' },
+  ];
+
   // ---------- 首页 ----------
   function home() {
     const main = page('学趣闯关', null, '跟着课本学，一节一关');
@@ -152,17 +163,14 @@
     });
     exam.addEventListener('contextmenu', e => e.preventDefault());
     main.appendChild(exam);
+    // 趣味玩法：宫格，每格只写名字、练什么、课本位置，详细玩法进了游戏再看
     const games = document.createElement('section');
     games.innerHTML =
-      `<h3 class="group">趣味玩法</h3>` +
-      `<a class="card" href="src/games/function-track/index.html">` +
-      `<h2>函数轨道</h2><p>调整函数参数，让小球沿着图像到达终点。适合学完一次函数、二次函数后玩。</p></a>` +
-      `<a class="card" href="src/games/solids/index.html">` +
-      `<h2>立体图形实验室</h2><p>正方体展开图、圆柱圆锥的展开、蚂蚁爬最短路、切正方体。拖动旋转，动手折一折、切一切。</p></a>` +
-      `<a class="card" href="src/games/24/index.html">` +
-      `<h2>24 点</h2><p>用 + − × ÷ 把 4 张牌算成 24。有经典难题，还有红牌算负数的有理数版，适合学完有理数的运算后玩。</p></a>` +
-      `<a class="card" href="src/games/nim/index.html">` +
-      `<h2>取石子</h2><p>几堆石子轮流取，取到最后一颗的人赢。从倒推表出发，自己找出必胜策略；也可以和同桌对战。</p></a>`;
+      `<h3 class="group">趣味玩法</h3><div class="fun-grid">` +
+      FUN_GAMES.map(g =>
+        `<a class="fun-tile" href="${g.href}"><span class="icon" style="background:${g.color}">${g.icon}</span>` +
+        `<b>${escapeHtml(g.name)}</b><small>${escapeHtml(g.tag)}</small><i class="when">${escapeHtml(g.when)}</i></a>`).join('') +
+      `</div>`;
     main.appendChild(games);
   }
 
@@ -234,11 +242,11 @@
     return (section.games || []).map(id => window.Games && window.Games[id]).filter(Boolean);
   }
 
-  function gamePage(id, levelId) {
+  function gamePage(id, levelId, fromHome) {
     const g = window.Games && window.Games[id];
     if (!g) return showError(page('找不到这个游戏', '#/'), '链接可能有误，请返回首页。');
     const meta = Content.sectionMeta(g.section);
-    const main = page(g.title, `#/s/${g.section}`, meta ? `${meta.section.no} ${meta.section.title} · 动手玩` : '动手玩');
+    const main = page(g.title, fromHome ? '#/' : `#/s/${g.section}`, meta ? `${meta.section.no} ${meta.section.title} · 动手玩` : '动手玩');
     g.mount(main, levelId);
   }
 
@@ -388,13 +396,18 @@
     });
   }
 
+  // 上一个页面：从首页进游戏时返回键回首页，其余回游戏所在的小节
+  let prevParts = [];
+
   function route() {
     const parts = (location.hash.slice(1) || '/').split('/').filter(Boolean);
+    const prev = prevParts;
+    prevParts = parts;
     window.scrollTo(0, 0);
     if (parts[0] === 'v') return volumePage(parts.slice(1).join('/'));
     if (parts[0] === 's') return sectionPage(parts.slice(1).join('/'));
     if (parts[0] === 'q') return questionPage(parts.slice(1, -1).join('/'), parts[parts.length - 1]);
-    if (parts[0] === 'g') return gamePage(parts[1], parts[2]);
+    if (parts[0] === 'g') return gamePage(parts[1], parts[2], prev.length === 0);
     if (parts[0] === 'e') return examPage(parts.slice(1).join('/'));
     if (parts[0] === 'eq') return examQuestionPage(parts.slice(1, -1).join('/'), parts[parts.length - 1]);
     if (parts[0] === 'exam') {

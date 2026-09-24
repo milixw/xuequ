@@ -35,7 +35,7 @@ Content.catalog = {
                   sections: [
                     { no: '2.1', title: '用字母表示数', ready: true },
                     { no: '2.2', title: '代数式与代数式的值', ready: true },
-                    { no: '2.3', title: '一次式', ready: true },
+                    { no: '2.3', title: '一次式', ready: true, games: ['magic'] },
                   ],
                 },
                 {

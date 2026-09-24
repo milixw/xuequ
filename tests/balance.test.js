@@ -108,7 +108,7 @@ test('天平：评星', () => {
   assert(stars(3, 3) === 3 && stars(4, 3) === 2 && stars(5, 3) === 2 && stars(6, 3) === 1, '评星不对');
 });
 
-test('天平：目录里挂的游戏都存在，并在 index.html 加载', () => {
+test('动手玩：目录里挂的游戏都存在，并在 index.html 加载', () => {
   // 用模块本身，不用全局 Content（exam.test.js 会把全局换成假的）；单独跑本文件时自己加载目录
   const Content = require('../src/content.js');
   if (!Content.catalog) {
@@ -118,17 +118,17 @@ test('天平：目录里挂的游戏都存在，并在 index.html 加载', () =>
     globalThis.Content = saved;
   }
   const html = fs.readFileSync(path.join(ROOT, 'index.html'), 'utf8');
-  const games = { balance: BalanceGame };
-  let found = 0;
+  const seen = new Set();
   for (const meta of Content.sectionMetas()) {
     for (const id of meta.section.games || []) {
-      found++;
-      assert(games[id], `${meta.id} 挂了不存在的游戏 ${id}`);
-      assert(games[id].section === meta.id, `${id} 的 section 应是 ${meta.id}`);
-      for (const f of ['solver.js', 'game.js']) {
-        assert(html.includes(`src/games/${id}/${f}`), `index.html 没有加载 src/games/${id}/${f}`);
-      }
+      const file = path.join(ROOT, 'src/games', id, 'game.js');
+      assert(fs.existsSync(file), `${meta.id} 挂了不存在的游戏 ${id}`);
+      const game = Object.values(require(file)).find(v => v && v.id === id && typeof v.mount === 'function');
+      assert(game, `src/games/${id}/game.js 没有导出 id 为 ${id} 的游戏`);
+      assert(game.section === meta.id, `${id} 的 section 应是 ${meta.id}`);
+      assert(html.includes(`src/games/${id}/game.js`), `index.html 没有加载 src/games/${id}/game.js`);
+      seen.add(id);
     }
   }
-  assert(found === Object.keys(games).length, '每个动手玩游戏都应挂在某一节上');
+  assert(seen.has(BalanceGame.id), '天平解方程应挂在某一节上');
 });
