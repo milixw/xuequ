@@ -11,6 +11,7 @@ Content.section({
   id: 'math/bridge/g6s1/2.5',
   title: '分数的乘法',
   review: { status: 'pending' },
+  audit: { blind: '2026-09-27', rounds: 4, note: '子代理盲解复核四轮，答案全部一致；第 1 轮按意见重做 b01、e05、e07～e10 和 c02、c03、c05，第 2～3 轮消除 c02 两问同答案、c05 能硬算的问题并加难 c04，第 4 轮判定整节通过' },
 
   intro: [
     {
@@ -33,7 +34,7 @@ Content.section({
     {
       title: '乘法运算律',
       body: '乘法交换律、结合律、分配律对分数同样适用，用来简便计算。',
-      example: '$\\left(\\frac{1}{4}+\\frac{1}{6}\\right)\\times 12=\\frac{1}{4}\\times 12+\\frac{1}{6}\\times 12=3+2=5$。',
+      example: '$\\left(\\frac{1}{3}+\\frac{1}{5}\\right)\\times 15=\\frac{1}{3}\\times 15+\\frac{1}{5}\\times 15=5+3=8$。',
     },
   ],
 
@@ -43,13 +44,14 @@ Content.section({
       id: '2.5-b01',
       level: 'basic',
       type: 'fill',
-      stem: '计算：$\\frac{3}{4}\\times\\frac{8}{9}\\times 3$',
-      blanks: [{ kind: 'num', answer: '2' }],
+      stem: '计算：$2\\frac{1}{4}\\times\\frac{8}{9}\\times 3$',
+      blanks: [{ kind: 'num', answer: '6' }],
       explain: [
-        '先约分：3 和 9 约去 3，4 和 8 约去 4，再把剩下的 3 和 9 约去的 3 抵消：$\\frac{3}{4}\\times\\frac{8}{9}=\\frac{2}{3}$，$\\frac{2}{3}\\times 3=2$。',
-        '易错：分母也乘了 3，得 $\\frac{2}{9}$。',
+        '先把带分数化成假分数：$2\\frac{1}{4}=\\frac{9}{4}$。',
+        '$\\frac{9}{4}\\times\\frac{8}{9}$：9 和 9 约去，8 和 4 约成 2 和 1，得 2；再乘 3 得 6。',
+        '易错：算成 $2\\times\\frac{8}{9}\\times 3+\\frac{1}{4}$，或者 3 乘到了分母上。',
       ],
-      verify: () => F(3).div(4).mul(F(8).div(9)).mul(3),
+      verify: () => F(9).div(4).mul(F(8).div(9)).mul(3),
     },
     {
       id: '2.5-b02',
@@ -182,17 +184,17 @@ Content.section({
       id: '2.5-e05',
       level: 'extended',
       type: 'fill',
-      stem: '甲数是乙数的 $\\frac{3}{4}$，乙数是丙数的 $\\frac{2}{5}$。',
+      stem: '甲数是乙数的 $\\frac{3}{4}$，乙数是丙数的 $\\frac{2}{5}$（三个数都不为 0）。',
       blanks: [
         { kind: 'num', label: '(1) 甲数是丙数的几分之几', answer: '3/10' },
-        { kind: 'num', label: '(2) 甲数比丙数少丙数的几分之几', answer: '7/10' },
+        { kind: 'num', label: '(2) 丙数比甲数多甲数的几分之几', answer: '7/3' },
       ],
       explain: [
-        '把丙看作单位"1"：乙是 $\\frac{2}{5}$，甲是乙的 $\\frac{3}{4}$，即 $\\frac{2}{5}\\times\\frac{3}{4}=\\frac{3}{10}$。',
-        '(1) 甲是丙的 $\\frac{3}{10}$。(2) 甲比丙少 $1-\\frac{3}{10}=\\frac{7}{10}$（单位"1"是丙）。',
-        '易错：(1) 把两个分数相加得 $\\frac{23}{20}$。',
+        '(1) 把丙看作单位"1"：乙是 $\\frac{2}{5}$，甲是 $\\frac{2}{5}\\times\\frac{3}{4}=\\frac{3}{10}$。',
+        '(2) 单位"1"换成甲。甲是丙的 $\\frac{3}{10}$，就是把丙平均分成 10 份，甲占 3 份。丙比甲多 7 份，是甲的 $\\frac{7}{3}$。',
+        '易错：(2) 用 $1-\\frac{3}{10}=\\frac{7}{10}$，这是"甲比丙少丙的几分之几"，单位"1"弄错了。',
       ],
-      verify: () => { const a = F(2).div(5).mul(F(3).div(4)); return [a, F(1).sub(a)]; },
+      verify: () => { const a = F(2).div(5).mul(F(3).div(4)); return [a, F(1).sub(a).div(a)]; },
     },
     {
       id: '2.5-e06',
@@ -222,18 +224,17 @@ Content.section({
       id: '2.5-e07',
       level: 'extended',
       type: 'fill',
-      stem: '一块长方形菜地长 $2\\frac{1}{4}$ 米，宽是长的 $\\frac{2}{3}$。',
+      stem: '一块长方形菜地长 $2\\frac{1}{4}$ 米，宽是长的 $\\frac{2}{3}$。现在把长增加它的 $\\frac{1}{3}$，宽减少它的 $\\frac{1}{5}$。',
       blanks: [
-        { kind: 'num', label: '(1) 面积是多少平方米', answer: '27/8' },
-        { kind: 'num', label: '(2) 周长是多少米', answer: '15/2' },
+        { kind: 'num', label: '(1) 原来的面积是多少平方米', answer: '27/8' },
+        { kind: 'num', label: '(2) 现在的面积是多少平方米', answer: '18/5' },
       ],
       explain: [
-        '宽：$\\frac{9}{4}\\times\\frac{2}{3}=\\frac{3}{2}$ 米。',
-        '(1) 面积：$\\frac{9}{4}\\times\\frac{3}{2}=\\frac{27}{8}=3\\frac{3}{8}$ 平方米。',
-        '(2) 周长：$\\left(\\frac{9}{4}+\\frac{3}{2}\\right)\\times 2=\\frac{15}{4}\\times 2=\\frac{15}{2}=7\\frac{1}{2}$ 米。',
-        '易错：面积算成 长 × 长 × $\\frac{2}{3}$ 时漏乘；周长只加了一次长和宽。',
+        '(1) 宽 $\\frac{9}{4}\\times\\frac{2}{3}=\\frac{3}{2}$ 米，面积 $\\frac{9}{4}\\times\\frac{3}{2}=\\frac{27}{8}$ 平方米。',
+        '(2) 新的长是原来的 $\\frac{4}{3}$，新的宽是原来的 $\\frac{4}{5}$，新面积是原来的 $\\frac{4}{3}\\times\\frac{4}{5}=\\frac{16}{15}$：$\\frac{27}{8}\\times\\frac{16}{15}=\\frac{18}{5}=3\\frac{3}{5}$ 平方米。',
+        '易错：以为长增加 $\\frac{1}{3}$、宽减少 $\\frac{1}{5}$，面积就增加 $\\frac{1}{3}-\\frac{1}{5}$。',
       ],
-      verify: () => { const L = F(9).div(4); const W = L.mul(F(2).div(3)); return [L.mul(W), L.add(W).mul(2)]; },
+      verify: () => { const L = F(9).div(4); const W = L.mul(F(2).div(3)); return [L.mul(W), L.mul(F(4).div(3)).mul(W.mul(F(4).div(5)))]; },
     },
     {
       id: '2.5-e08',
@@ -242,53 +243,56 @@ Content.section({
       stem: '一个正整数的 $\\frac{3}{7}$ 是整数，它的 $\\frac{5}{6}$ 也是整数。',
       blanks: [
         { kind: 'num', label: '(1) 这个数最小是', answer: '42' },
-        { kind: 'num', label: '(2) 1～200 中这样的数有几个', answer: '4' },
+        { kind: 'num', label: '(2) 如果这两个整数的和是 159，这个数是', answer: '126' },
       ],
       explain: [
-        '这个数乘 $\\frac{3}{7}$ 是整数：3 和 7 互素，这个数要能被 7 整除。乘 $\\frac{5}{6}$ 是整数：这个数要能被 6 整除。',
-        '所以它是 6 和 7 的公倍数，也就是 42 的倍数。(1) 最小是 42。(2) 42、84、126、168，共 4 个。',
-        '易错：以为要被 $3\\times 7$、$5\\times 6$ 整除。',
+        '(1) 乘 $\\frac{3}{7}$ 是整数：3 和 7 互素，这个数要能被 7 整除；乘 $\\frac{5}{6}$ 是整数：要能被 6 整除。所以它是 42 的倍数，最小是 42。',
+        '(2) 这个数是 42 的倍数，记作 $42\\times k$。它的 $\\frac{3}{7}$ 是 $18\\times k$，$\\frac{5}{6}$ 是 $35\\times k$，和是 $53\\times k=159$，$k=3$，这个数是 126。',
+        '易错：(2) 用 $159\\div\\left(\\frac{3}{7}+\\frac{5}{6}\\right)$，要用还没学的分数除法；按 42 的倍数来想更简单。',
       ],
       verify: () => {
         const r = [];
-        for (let n = 1; n <= 200; n++) { const a = F(n).mul(F(3).div(7)); const b = F(n).mul(F(5).div(6)); if (a.d === 1n && b.d === 1n) r.push(n); }
-        return [r[0], r.length];
+        let hit = 0;
+        for (let n = 1; n <= 1000; n++) {
+          const a = F(n).mul(F(3).div(7));
+          const b = F(n).mul(F(5).div(6));
+          if (a.d === 1n && b.d === 1n) { r.push(n); if (a.add(b).eq(159)) hit = n; }
+        }
+        return [r[0], hit];
       },
     },
     {
       id: '2.5-e09',
       level: 'extended',
       type: 'fill',
-      stem: '计算：',
+      stem: '图形的边长变化：',
       blanks: [
-        { kind: 'num', label: '(1) $\\left(1-\\frac{1}{2}\\right)\\times\\left(1-\\frac{1}{3}\\right)\\times\\cdots\\times\\left(1-\\frac{1}{100}\\right)=$', answer: '1/100' },
-        { kind: 'num', label: '(2) $\\left(1+\\frac{1}{2}\\right)\\times\\left(1+\\frac{1}{3}\\right)\\times\\cdots\\times\\left(1+\\frac{1}{99}\\right)=$', answer: '50' },
+        { kind: 'num', label: '(1) 正方形的边长增加 $\\frac{1}{4}$，面积增加了原来面积的几分之几', answer: '9/16' },
+        { kind: 'num', label: '(2) 正方体的棱长增加 $\\frac{1}{2}$，体积增加了原来体积的几分之几', answer: '19/8' },
       ],
       explain: [
-        '(1) 每个括号：$\\frac{1}{2}$、$\\frac{2}{3}$、……、$\\frac{99}{100}$，连乘时前一个的分母和后一个的分子约去，只剩 $\\frac{1}{100}$。',
-        '(2) 每个括号：$\\frac{3}{2}$、$\\frac{4}{3}$、……、$\\frac{100}{99}$，同样约去，只剩 $\\frac{100}{2}=50$。',
-        '易错：(2) 以为和 (1) 一样剩首尾，写成 $\\frac{100}{99}$。',
+        '(1) 把原边长看作单位"1"，新边长是 $\\frac{5}{4}$，新面积是原来的 $\\frac{5}{4}\\times\\frac{5}{4}=\\frac{25}{16}$，增加了 $\\frac{9}{16}$。',
+        '(2) 新棱长是原来的 $\\frac{3}{2}$，新体积是原来的 $\\frac{3}{2}\\times\\frac{3}{2}\\times\\frac{3}{2}=\\frac{27}{8}$，增加了 $\\frac{27}{8}-1=\\frac{19}{8}$。',
+        '易错：以为边长增加 $\\frac{1}{4}$，面积也增加 $\\frac{1}{4}$ 或 $\\frac{1}{2}$。',
       ],
-      verify: () => {
-        let a = F(1);
-        let b = F(1);
-        for (let k = 2; k <= 100; k++) a = a.mul(F(1).sub(F(1).div(k)));
-        for (let k = 2; k <= 99; k++) b = b.mul(F(1).add(F(1).div(k)));
-        return [a, b];
-      },
+      verify: () => [F(5).div(4).mul(F(5).div(4)).sub(1), F(3).div(2).mul(F(3).div(2)).mul(F(3).div(2)).sub(1)],
     },
     {
       id: '2.5-e10',
       level: 'extended',
       type: 'fill',
-      stem: '一根电线长 120 米，第一次剪去全长的 $\\frac{3}{8}$ 还多 6 米，第二次剪去余下的 $\\frac{1}{3}$。还剩多少米？',
-      blanks: [{ kind: 'num', answer: '46', suffix: '米' }],
+      stem: '一根电线，第一次剪去全长的 $\\frac{3}{8}$ 还多 6 米，第二次剪去余下的 $\\frac{1}{3}$，还剩 46 米。这根电线原来长多少米？',
+      blanks: [{ kind: 'num', answer: '120', suffix: '米' }],
       explain: [
-        '第一次剪去 $120\\times\\frac{3}{8}+6=45+6=51$ 米，余下 $120-51=69$ 米。',
-        '第二次剪去余下的 $\\frac{1}{3}$：$69\\times\\frac{1}{3}=23$ 米，还剩 $69-23=46$ 米。',
-        '易错：第一次只剪去 45 米，忘了"还多 6 米"；第二次按全长 120 米的 $\\frac{1}{3}$ 算。',
+        '倒推。第二次剪去余下的 $\\frac{1}{3}$，剩下的 46 米是"余下部分"的 $\\frac{2}{3}$：把余下部分平均分成 3 份，46 米占 2 份，1 份是 23 米，余下部分是 69 米。',
+        '第一次剪去全长的 $\\frac{3}{8}$ 还多 6 米后剩 69 米，所以 $69+6=75$ 米是全长的 $1-\\frac{3}{8}=\\frac{5}{8}$。',
+        '全长平均分成 8 份，75 米占 5 份，1 份 15 米，全长 120 米。',
+        '易错：倒推时先减 6 再算；或者把 46 米当成余下部分的 $\\frac{1}{3}$。',
       ],
-      verify: () => { let r = F(120); r = r.sub(r.mul(F(3).div(8))).sub(6); return r.sub(r.mul(F(1).div(3))); },
+      verify: () => {
+        for (let L = 1; L < 1000; L++) { let r = F(L); r = r.sub(r.mul(F(3).div(8))).sub(6); r = r.sub(r.mul(F(1).div(3))); if (r.eq(46)) return L; }
+        return 0;
+      },
     },
 
     // ---------- 挑战 ----------
@@ -324,22 +328,23 @@ Content.section({
       type: 'fill',
       stem: '甲数的 $\\frac{2}{3}$ 等于乙数的 $\\frac{4}{5}$（甲、乙都是正整数）。',
       blanks: [
-        { kind: 'num', label: '(1) 如果甲、乙两数的和是 99，甲数是', answer: '54' },
-        { kind: 'num', label: '(2) 如果甲、乙都是两位数，这样的甲、乙一共有几组', answer: '15' },
+        { kind: 'num', label: '(1) 如果甲、乙两数的差是 7，甲数是', answer: '42' },
+        { kind: 'nums', label: '(2) 如果甲、乙都是两位数，而且把甲的十位数字和个位数字交换后恰好得到乙，甲可能是（全部填出，用逗号隔开）', answer: ['54'] },
       ],
       explain: [
         '思路：用"份数"。甲的 $\\frac{2}{3}$ 和乙的 $\\frac{4}{5}$ 相等，把它看成 4 份（2 和 4 的公倍数），那么甲的 $\\frac{1}{3}$ 是 2 份，甲是 6 份；乙的 $\\frac{1}{5}$ 是 1 份，乙是 5 份。',
         '检验：甲 6 份的 $\\frac{2}{3}$ 是 4 份，乙 5 份的 $\\frac{4}{5}$ 是 4 份，相等。',
-        '(1) 甲 + 乙 = 11 份 = 99，1 份是 9，甲是 54（乙是 45）。',
-        '(2) 甲 = $6\\times k$，乙 = $5\\times k$（$k$ 是 1 份的大小）。都是两位数：$5\\times k\\ge 10$，$k\\ge 2$；$6\\times k\\le 99$，$k\\le 16$。$k$ 取 2～16，共 15 组。',
+        '(1) 甲比乙多 1 份，1 份是 7，甲是 $6\\times 7=42$（乙是 35）。',
+        '(2) 甲 = $6\\times k$，乙 = $5\\times k$（$k$ 是 1 份的大小），都是两位数，$k$ 是 2～16。甲比乙大，交换数字后变小，所以甲的十位数字比个位数字大。',
+        '甲是 6 的倍数，个位是偶数；乙是 5 的倍数，个位是 0 或 5，而乙的个位就是甲的十位，所以甲的十位是 5（十位不能是 0）。甲在 50～59 之间、是 6 的倍数：54。对应 $k=9$，乙 $=45$，正好是 54 交换数字。只有 54。',
         '易错：以为甲多、乙少（看到 $\\frac{4}{5}$ 比 $\\frac{2}{3}$ 大），把份数弄反。',
       ],
       verify: () => {
         let a1 = 0;
-        for (let a = 1; a < 99; a++) if (F(a).mul(F(2).div(3)).eq(F(99 - a).mul(F(4).div(5)))) a1 = a;
-        let c = 0;
-        for (let a = 10; a <= 99; a++) for (let b = 10; b <= 99; b++) if (F(a).mul(F(2).div(3)).eq(F(b).mul(F(4).div(5)))) c++;
-        return [a1, c];
+        for (let a = 8; a < 200; a++) if (F(a).mul(F(2).div(3)).eq(F(a - 7).mul(F(4).div(5)))) a1 = a;
+        const r = [];
+        for (let a = 10; a <= 99; a++) for (let b = 10; b <= 99; b++) if (F(a).mul(F(2).div(3)).eq(F(b).mul(F(4).div(5))) && String(a).split('').reverse().join('') === String(b)) r.push(a);
+        return [a1, r];
       },
     },
     {
@@ -349,26 +354,31 @@ Content.section({
       stem: '求满足条件的最小的分数（分子、分母都是正整数）：',
       blanks: [
         { kind: 'num', label: '(1) 它乘 $\\frac{12}{35}$ 和乘 $\\frac{20}{21}$ 的结果都是整数', answer: '105/4' },
-        { kind: 'num', label: '(2) 它乘 $\\frac{12}{35}$、$\\frac{20}{21}$、$\\frac{18}{49}$ 的结果都是整数', answer: '735/2' },
+        { kind: 'num', label: '(2) 满足 (1) 的条件、而且大小在 100 和 300 之间（含 100 和 300）的最简分数有几个（整数也算）', answer: '8' },
       ],
       explain: [
         '思路：设这个分数约分后是 $\\frac{a}{b}$（$a$、$b$ 互素）。$\\frac{a}{b}\\times\\frac{12}{35}=\\frac{a\\times 12}{b\\times 35}$ 是整数，分母 $b\\times 35$ 要被分子"吃掉"。',
         '$a$ 和 $b$ 互素，12 和 35 也互素，所以 35 只能由 $a$ 约掉——$a$ 是 35 的倍数；$b$ 只能由 12 约掉——$b$ 是 12 的因数。',
         '(1) 同理，由 $\\frac{20}{21}$：$a$ 是 21 的倍数，$b$ 是 20 的因数。分数要最小，分子尽量小、分母尽量大：$a$ 取 35 和 21 的最小公倍数 105，$b$ 取 12 和 20 的最大公因数 4。答案 $\\frac{105}{4}$。',
-        '(2) 再加上 $\\frac{18}{49}$：$a$ 是 35、21、49 的最小公倍数 $3\\times 5\\times 7\\times 7=735$，$b$ 是 12、20、18 的最大公因数 2。答案 $\\frac{735}{2}$。',
+        '(2) 由上面的分析，满足条件的最简分数，分子是 105 的倍数，分母是 4 的因数：1、2 或 4。按分母分类：',
+        '分母 1：105、210（315 超过 300），2 个。分母 2：分子是 105 的奇数倍（否则能约分），$\\frac{315}{2}$、$\\frac{525}{2}$ 在范围内，2 个。分母 4：分子是 105 的奇数倍，在 400 和 1200 之间：525、735、945、1155，4 个。',
+        '共 $2+2+4=8$ 个。',
         '检验 (1)：$\\frac{105}{4}\\times\\frac{12}{35}=9$，$\\frac{105}{4}\\times\\frac{20}{21}=25$。',
-        '易错：分母取最小公倍数、分子取最大公因数，正好弄反。',
+        '易错：分母取最小公倍数、分子取最大公因数，正好弄反；(2) 忘了检查最简，把 $\\frac{210}{2}$ 这类也算进去。',
       ],
       verify: () => {
-        const find = fs => {
-          let best = null;
-          for (let b = 1; b <= 20; b++) for (let a = 1; a <= 1500; a++) {
-            const x = F(a).div(b);
-            if (fs.every(f => x.mul(f).d === 1n) && (!best || x.cmp(best) < 0)) best = x;
-          }
-          return best;
-        };
-        return [find([F(12).div(35), F(20).div(21)]), find([F(12).div(35), F(20).div(21), F(18).div(49)])];
+        const g = (x, y) => (y ? g(y, x % y) : x);
+        const ok = x => x.mul(F(12).div(35)).d === 1n && x.mul(F(20).div(21)).d === 1n;
+        let best = null;
+        let cnt = 0;
+        for (let b = 1; b <= 20; b++) for (let a = 1; a <= 6000; a++) {
+          if (g(a, b) !== 1) continue;
+          const x = F(a).div(b);
+          if (!ok(x)) continue;
+          if (!best || x.cmp(best) < 0) best = x;
+          if (x.cmp(100) >= 0 && x.cmp(300) <= 0) cnt++;
+        }
+        return [best, cnt];
       },
     },
     {
@@ -378,42 +388,55 @@ Content.section({
       stem: '某商品每轮调价都是"先涨价 $\\frac{1}{3}$，再降价 $\\frac{1}{3}$"。',
       blanks: [
         { kind: 'num', label: '(1) 经过几轮后，价格第一次低于原价的一半', answer: '6' },
-        { kind: 'num', label: '(2) 经过几轮后，价格第一次低于原价的 $\\frac{1}{4}$', answer: '12' },
+        { kind: 'num', label: '(2) 如果每轮改成"先涨价 $\\frac{1}{a}$，再降价 $\\frac{1}{a}$"（$a$ 是大于 1 的整数），要使 2 轮后价格不低于原价的 $\\frac{9}{10}$，$a$ 最小是多少', answer: '5' },
       ],
       explain: [
         '一轮后价格是原来的 $\\frac{4}{3}\\times\\frac{2}{3}=\\frac{8}{9}$。$k$ 轮后是原价的 $k$ 个 $\\frac{8}{9}$ 相乘：分子是 $k$ 个 8 相乘，分母是 $k$ 个 9 相乘。',
         '(1) 低于一半：分子的 2 倍比分母小。$k=5$：分子 32768，2 倍是 65536，分母 59049，还不够小；$k=6$：分子 262144，2 倍 524288，分母 531441，小了。所以是第 6 轮。',
-        '(2) 低于 $\\frac{1}{4}$：分子的 4 倍比分母小。可以借用 (1)：两轮 6 轮连起来，每 6 轮都乘上一个比 $\\frac{1}{2}$ 小的数，所以 12 轮后一定低于 $\\frac{1}{4}$。',
-        '11 轮还不行：11 轮时分子是 8589934592，4 倍是 34359738368；分母是 31381059609，分子的 4 倍更大，所以还没有低于 $\\frac{1}{4}$。',
-        '所以是第 12 轮。易错：以为涨 $\\frac{1}{3}$ 再降 $\\frac{1}{3}$ 价格不变。',
+        '(2) 先写出一轮的一般情况：先涨 $\\frac{1}{a}$ 是原来的 $\\frac{a+1}{a}$，再降 $\\frac{1}{a}$ 是它的 $\\frac{a-1}{a}$，一轮后是原来的 $\\frac{(a-1)\\times(a+1)}{a\\times a}$，即 $1-\\frac{1}{a\\times a}$（比如 $a=3$ 时是 $\\frac{8}{9}$）。',
+        '2 轮后是 $\\left(1-\\frac{1}{a\\times a}\\right)$ 乘它自己。逐个试：$a=3$：$\\frac{64}{81}$，$64\\times 10=640<81\\times 9=729$，低于 $\\frac{9}{10}$；$a=4$：$\\frac{15}{16}\\times\\frac{15}{16}=\\frac{225}{256}$，$2250<2304$，还是低于；$a=5$：$\\frac{24}{25}\\times\\frac{24}{25}=\\frac{576}{625}$，$5760\\ge 5625$，不低于。所以 $a$ 最小是 5。',
+        '易错：以为涨 $\\frac{1}{3}$ 再降 $\\frac{1}{3}$ 价格不变，永远不会低于原价。',
       ],
       verify: () => {
         let v = F(1);
-        let a = 0;
-        let b = 0;
-        for (let i = 1; i < 40; i++) { v = v.mul(F(8).div(9)); if (!a && v.cmp(F(1).div(2)) < 0) a = i; if (!b && v.cmp(F(1).div(4)) < 0) b = i; }
-        return [a, b];
+        let n6 = 0;
+        for (let i = 1; i < 40 && !n6; i++) { v = v.mul(F(4).div(3)).mul(F(2).div(3)); if (v.cmp(F(1).div(2)) < 0) n6 = i; }
+        let a = 2;
+        for (;; a++) { const r = F(1).add(F(1).div(a)).mul(F(1).sub(F(1).div(a))); if (r.mul(r).cmp(F(9).div(10)) >= 0) break; }
+        return [n6, a];
       },
     },
     {
       id: '2.5-c05',
       level: 'challenge',
       type: 'fill',
-      stem: '计算：$\\left(1+\\frac{1}{2}+\\cdots+\\frac{1}{2025}\\right)\\times\\left(\\frac{1}{2}+\\frac{1}{3}+\\cdots+\\frac{1}{2026}\\right)-\\left(1+\\frac{1}{2}+\\cdots+\\frac{1}{2026}\\right)\\times\\left(\\frac{1}{2}+\\frac{1}{3}+\\cdots+\\frac{1}{2025}\\right)$',
-      blanks: [{ kind: 'num', answer: '1/2026' }],
+      stem: '一串括号相乘：$\\left(1+\\frac{1}{2}\\right)\\times\\left(1+\\frac{1}{4}\\right)\\times\\left(1+\\frac{1}{16}\\right)\\times\\left(1+\\frac{1}{256}\\right)\\times\\cdots$，从第二个括号起，括号里的分母是前一个括号里分母乘它自己。',
+      blanks: [
+        { kind: 'num', label: '(1) 前 3 个括号相乘的结果是', answer: '255/128' },
+        { kind: 'num', label: '(2) 前 $n$ 个括号相乘，结果与 2 的差第一次小于一百亿分之一（$\\frac{1}{10000000000}$）时，$n=$', answer: '6' },
+      ],
       explain: [
-        '思路：直接算不可能。四个括号里有大段相同的部分，把相同的部分看成一个整体。',
-        '设 $A=\\frac{1}{2}+\\frac{1}{3}+\\cdots+\\frac{1}{2025}$。那么四个括号分别是 $1+A$、$A+\\frac{1}{2026}$、$1+A+\\frac{1}{2026}$、$A$。',
-        '原式 $=(1+A)\\times\\left(A+\\frac{1}{2026}\\right)-\\left(1+A+\\frac{1}{2026}\\right)\\times A$。',
-        '用分配律展开：前一部分 $=(1+A)\\times A+(1+A)\\times\\frac{1}{2026}$；后一部分 $=(1+A)\\times A+\\frac{1}{2026}\\times A$。',
-        '相减：$(1+A)\\times\\frac{1}{2026}-A\\times\\frac{1}{2026}=\\frac{1}{2026}$。',
-        '易错：想把括号里的和先算出来；或者展开时漏项。',
+        '思路：观察 $\\left(1-\\frac{1}{2}\\right)\\times\\left(1+\\frac{1}{2}\\right)=\\frac{1}{2}\\times\\frac{3}{2}=\\frac{3}{4}=1-\\frac{1}{4}$——两个括号一乘，变成"1 减去分母乘它自己分之一"。在式子前面乘上 $\\left(1-\\frac{1}{2}\\right)$，后面的括号就会一个接一个地"合并"。',
+        '乘上 $\\frac{1}{2}$ 后：$\\left(1-\\frac{1}{2}\\right)\\left(1+\\frac{1}{2}\\right)=1-\\frac{1}{4}$，再乘 $\\left(1+\\frac{1}{4}\\right)$ 得 $\\frac{3}{4}\\times\\frac{5}{4}=\\frac{15}{16}=1-\\frac{1}{16}$，再乘 $\\left(1+\\frac{1}{16}\\right)$ 得 $\\frac{15}{16}\\times\\frac{17}{16}=\\frac{255}{256}=1-\\frac{1}{256}$……',
+        '所以前 $n$ 个括号的积，它的 $\\frac{1}{2}$ 等于"1 减去一个单位分数"，这个单位分数的分母依次是 4、16、256、65536、……（每次乘它自己）。积本身是它的 2 倍。',
+        '(1) 前 3 个：积的一半是 $\\frac{255}{256}$，积是 2 个 $\\frac{255}{256}$，即 $\\frac{255}{128}$。',
+        '(2) 积 = 2 × (1 − 单位分数)，与 2 的差是这个单位分数的 2 倍。单位分数的分母依次是 4、16、256、65536，第 5 个是 65536 × 65536，第 6 个是它再乘它自己。',
+        '前 5 个括号：差是 $\\frac{2}{65536\\times 65536}$，而 $65536\\times 65536<100000\\times 100000=10000000000$，所以差比一百亿分之一的 2 倍还大，不够小。',
+        '前 6 个括号：分母是 $(65536\\times 65536)$ 乘它自己，比 $4000000000\\times 4000000000$ 还大，差远小于一百亿分之一。所以 $n=6$。',
+        '易错：以为每多乘一个括号，差就缩小一半，要乘到第 10 个。其实分母是"自己乘自己"地变大，缩得非常快。',
       ],
       verify: () => {
-        let A = F(0);
-        for (let k = 2; k <= 2025; k++) A = A.add(F(1).div(k));
-        const t = F(1).div(2026);
-        return F(1).add(A).mul(A.add(t)).sub(F(1).add(A).add(t).mul(A));
+        let p = F(1);
+        let d = 2n;
+        let n3 = null;
+        let first = 0;
+        for (let n = 1; n <= 6; n++) {
+          p = p.mul(F(1).add(F(1).div(F(d))));
+          d = d * d;
+          if (n === 3) n3 = p;
+          if (!first && F(2).sub(p).cmp(F(1).div(10000000000)) < 0) first = n;
+        }
+        return [n3, first];
       },
     },
   ],
