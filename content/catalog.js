@@ -341,7 +341,7 @@ Content.catalog = {
                   title: '分数',
                   sections: [
                     { no: '2.1', title: '分数与除法', ready: true },
-                    { no: '2.2', title: '分数的基本性质', ready: false },
+                    { no: '2.2', title: '分数的基本性质', ready: true },
                     { no: '2.3', title: '分数的大小比较', ready: false },
                     { no: '2.4', title: '分数的加减法', ready: false },
                     { no: '2.5', title: '分数的乘法', ready: false },
