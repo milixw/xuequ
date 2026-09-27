@@ -11,6 +11,7 @@ Content.section({
   id: 'math/bridge/g6s1/2.1',
   title: '分数与除法',
   review: { status: 'pending' },
+  audit: { blind: '2026-09-27', rounds: 3, note: '子代理盲解复核三轮；第 1 轮按意见重做 e01、e07～e09 和全部挑战题，第 2 轮修正 c01 歧义、加强 e09，e01 改题干消除"带分数"的歧义（复核方更正了自己的答案），第 3 轮判定整节通过' },
 
   intro: [
     {

@@ -10,6 +10,7 @@ Content.section({
   id: 'math/bridge/g6s1/2.2',
   title: '分数的基本性质',
   review: { status: 'pending' },
+  audit: { blind: '2026-09-27', rounds: 2, note: '子代理盲解复核两轮，答案全部一致；第 1 轮按意见重做 e06～e08、c02、c05(2)，第 2 轮判定整节通过' },
 
   intro: [
     {
