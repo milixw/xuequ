@@ -487,16 +487,25 @@ Content.section({
       ],
       verify: () => {
         const g = (x, y) => (y ? g(y, x % y) : x);
+        // 下界：两两"不能同组"的数最多有几个（穷举）；上界：按几种顺序贪心分组。两者相等就是答案
         const best = ok => {
-          let m = 21;
-          const rec = (i, groups) => {
-            if (groups.length >= m) return;
-            if (i > 20) { m = groups.length; return; }
-            for (const G of groups) if (G.every(x => ok(x, i))) { G.push(i); rec(i + 1, groups); G.pop(); }
-            groups.push([i]); rec(i + 1, groups); groups.pop();
+          const N = Array.from({ length: 20 }, (_, i) => i + 1);
+          let lower = 0;
+          const rec = (i, chosen) => {
+            if (chosen.length + (20 - i) <= lower) return;
+            if (i === 20) { lower = Math.max(lower, chosen.length); return; }
+            const x = N[i];
+            if (chosen.every(y => !ok(x, y))) { chosen.push(x); rec(i + 1, chosen); chosen.pop(); }
+            rec(i + 1, chosen);
           };
-          rec(1, []);
-          return m;
+          rec(0, []);
+          let upper = 21;
+          for (const order of [N, [...N].reverse(), [1, ...N.filter(x => x % 2 === 0), ...N.filter(x => x > 1 && x % 2)]]) {
+            const groups = [];
+            for (const x of order) { const G = groups.find(g2 => g2.every(y => ok(x, y))); if (G) G.push(x); else groups.push([x]); }
+            upper = Math.min(upper, groups.length);
+          }
+          return lower === upper ? lower : NaN;
         };
         return [best((x, y) => g(x, y) === 1), best((x, y) => g(x, y) > 1)];
       },

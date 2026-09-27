@@ -399,12 +399,12 @@ Content.section({
         '答案是 7 个。',
       ],
       verify: () => {
-        const two = q => { let c = 0; for (let a = 2; a < 300; a++) for (let b = a + 1; b < 8000; b++) if (F(1).div(a).add(F(1).div(b)).eq(q)) c++; return c; };
-        const one = [];
-        for (let a = 2; a < 300; a++) for (let b = a + 1; b < 8000; b++) if (F(1).div(a).add(F(1).div(b)).eq(F(2).div(19))) one.push(a + b);
+        // 2/n = 1/a + 1/b（a<b）：b = n×a ÷ (2a − n) 要是整数且比 a 大
+        const ways = n => { const r = []; for (let a = Math.floor(n / 2) + 1; a < n; a++) { const k = 2 * a - n; if ((n * a) % k === 0 && (n * a) / k > a) r.push([a, (n * a) / k]); } return r; };
+        const w19 = ways(19);
         let k = 0;
-        for (let n = 5; n <= 25; n += 2) if (two(F(2).div(n)) === 1) k++;
-        return [one.length === 1 ? one[0] : 0, k];
+        for (let n = 5; n <= 25; n += 2) if (ways(n).length === 1) k++;
+        return [w19.length === 1 ? w19[0][0] + w19[0][1] : 0, k];
       },
     },
     {
