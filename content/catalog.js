@@ -332,8 +332,8 @@ Content.catalog = {
                     { no: '1.2', title: '因数和倍数', ready: true },
                     { no: '1.3', title: '能被 2、5 整除的数', ready: true },
                     { no: '1.4', title: '素数、合数与分解素因数', ready: true },
-                    { no: '1.5', title: '公因数与最大公因数', ready: false },
-                    { no: '1.6', title: '公倍数与最小公倍数', ready: false },
+                    { no: '1.5', title: '公因数与最大公因数', ready: true },
+                    { no: '1.6', title: '公倍数与最小公倍数', ready: true },
                   ],
                 },
                 {
