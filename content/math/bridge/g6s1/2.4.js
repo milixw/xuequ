@@ -31,7 +31,7 @@ Content.section({
     {
       title: '拆成单位分数',
       body: '分子是 1 的分数叫单位分数。相邻两个单位分数的差，可以写成一个单位分数：$\\frac{1}{n}-\\frac{1}{n+1}=\\frac{1}{n\\times(n+1)}$。反过来，$\\frac{1}{n\\times(n+1)}$ 可以拆成两个单位分数的差，这叫**裂项**。',
-      example: '$\\frac{1}{20}=\\frac{1}{4\\times 5}=\\frac{1}{4}-\\frac{1}{5}$。',
+      example: '$\\frac{1}{56}=\\frac{1}{7\\times 8}=\\frac{1}{7}-\\frac{1}{8}$。',
     },
   ],
 
@@ -153,44 +153,51 @@ Content.section({
       id: '2.4-e03',
       level: 'extended',
       type: 'fill',
-      stem: '一项工程，第一天完成了全部的 $\\frac{1}{4}$，第二天比第一天多完成全部的 $\\frac{1}{12}$。还剩全部的几分之几没有完成？',
-      blanks: [{ kind: 'num', answer: '5/12' }],
+      stem: '一项工程，第一天完成了全部的 $\\frac{1}{4}$，第二天比第一天多完成全部的 $\\frac{1}{12}$，第三天完成的比前两天完成的总和少全部的 $\\frac{1}{4}$。还剩全部的几分之几没有完成？',
+      blanks: [{ kind: 'num', answer: '1/12' }],
       explain: [
         '把全部工程看作单位"1"。第二天完成 $\\frac{1}{4}+\\frac{1}{12}=\\frac{4}{12}=\\frac{1}{3}$。',
-        '还剩 $1-\\frac{1}{4}-\\frac{1}{3}=\\frac{12-3-4}{12}=\\frac{5}{12}$。',
-        '易错：以为第二天完成 $\\frac{1}{12}$；或者用 $1-\\frac{1}{4}-\\frac{1}{12}$。',
+        '前两天共完成 $\\frac{1}{4}+\\frac{1}{3}=\\frac{7}{12}$；第三天完成 $\\frac{7}{12}-\\frac{1}{4}=\\frac{4}{12}=\\frac{1}{3}$。',
+        '三天共完成 $\\frac{7}{12}+\\frac{4}{12}=\\frac{11}{12}$，还剩 $\\frac{1}{12}$。',
+        '易错：把第三天当成"比第二天少"，或者把"少 $\\frac{1}{4}$"理解成比前两天少了前两天的 $\\frac{1}{4}$。',
       ],
-      verify: () => F(1).sub(F(1).div(4)).sub(F(1).div(4).add(F(1).div(12))),
+      verify: () => {
+        const d1 = F(1).div(4);
+        const d2 = d1.add(F(1).div(12));
+        const d3 = d1.add(d2).sub(F(1).div(4));
+        return F(1).sub(d1).sub(d2).sub(d3);
+      },
     },
     {
       id: '2.4-e04',
       level: 'extended',
       type: 'fill',
-      stem: '把 $\\frac{1}{6}$ 写成两个不同的单位分数之和：$\\frac{1}{6}=\\frac{1}{a}+\\frac{1}{b}$（$a<b$）。一共有几种写法？',
-      blanks: [{ kind: 'num', answer: '4', suffix: '种' }],
+      stem: '两个分数的和是 $1\\frac{1}{12}$，差是 $\\frac{1}{4}$。较大的分数是多少？',
+      blanks: [{ kind: 'num', answer: '2/3' }],
       explain: [
-        '两个加数都比 $\\frac{1}{6}$ 小，所以 $a>6$；又因为 $\\frac{1}{a}$ 是较大的一个，它比 $\\frac{1}{6}$ 的一半 $\\frac{1}{12}$ 大，$a<12$。$a$ 只能是 7～11。',
-        '逐个试 $\\frac{1}{6}-\\frac{1}{a}$ 是不是单位分数：$a=7$：$\\frac{7-6}{42}=\\frac{1}{42}$，是；$a=8$：$\\frac{2}{48}=\\frac{1}{24}$，是；$a=9$：$\\frac{3}{54}=\\frac{1}{18}$，是；$a=10$：$\\frac{4}{60}=\\frac{1}{15}$，是；$a=11$：$\\frac{5}{66}$，不是。',
-        '共 4 种：$\\frac{1}{7}+\\frac{1}{42}$、$\\frac{1}{8}+\\frac{1}{24}$、$\\frac{1}{9}+\\frac{1}{18}$、$\\frac{1}{10}+\\frac{1}{15}$。',
-        '易错：把 $a=12$（$\\frac{1}{12}+\\frac{1}{12}$，两个加数相同）也算进去。',
+        '统一成十二分之几：和是 $\\frac{13}{12}$，差是 $\\frac{3}{12}$。',
+        '较大的数 + 较小的数 = 13 个 $\\frac{1}{12}$；较大的数 − 较小的数 = 3 个 $\\frac{1}{12}$。把较小的数补成和较大的数一样大（补上 3 个 $\\frac{1}{12}$），两个较大的数合起来是 16 个 $\\frac{1}{12}$。',
+        '较大的数是 8 个 $\\frac{1}{12}$，即 $\\frac{8}{12}=\\frac{2}{3}$（较小的数是 $\\frac{5}{12}$）。',
+        '检验：$\\frac{2}{3}+\\frac{5}{12}=\\frac{13}{12}$，$\\frac{2}{3}-\\frac{5}{12}=\\frac{3}{12}$。',
       ],
       verify: () => {
-        let c = 0;
-        for (let a = 2; a < 100; a++) for (let b = a + 1; b < 1000; b++) if (F(1).div(a).add(F(1).div(b)).eq(F(1).div(6))) c++;
-        return c;
+        for (let n = 1; n < 100; n++) { const big = F(n).div(24); const small = F(13).div(12).sub(big); if (big.sub(small).eq(F(1).div(4))) return big; }
+        return F(0);
       },
     },
     {
       id: '2.4-e05',
       level: 'extended',
       type: 'fill',
-      stem: '在 $\\square$ 里填一个数：$7\\frac{1}{3}-\\square=2\\frac{5}{6}$',
-      blanks: [{ kind: 'num', answer: '9/2' }],
+      stem: '一个数先加上 $2\\frac{5}{6}$，再减去 $4\\frac{3}{8}$，结果是 $1\\frac{1}{12}$。这个数是多少？',
+      blanks: [{ kind: 'num', answer: '21/8' }],
       explain: [
-        '减数 = 被减数 − 差：$7\\frac{1}{3}-2\\frac{5}{6}=7\\frac{2}{6}-2\\frac{5}{6}=6\\frac{8}{6}-2\\frac{5}{6}=4\\frac{3}{6}=4\\frac{1}{2}$。',
-        '易错：用 $7\\frac{1}{3}+2\\frac{5}{6}$；或者借 1 时写成 $6\\frac{12}{6}$。',
+        '倒推：最后减去了 $4\\frac{3}{8}$，先加回来；之前加上了 $2\\frac{5}{6}$，再减掉。',
+        '这个数 $=1\\frac{1}{12}+4\\frac{3}{8}-2\\frac{5}{6}$，通分成分母 24：$1\\frac{2}{24}+4\\frac{9}{24}-2\\frac{20}{24}=5\\frac{11}{24}-2\\frac{20}{24}$。',
+        '分数部分不够减，借 1：$4\\frac{35}{24}-2\\frac{20}{24}=2\\frac{15}{24}=2\\frac{5}{8}$。',
+        '易错：倒推时仍然按"先加后减"的顺序算，得到 $1\\frac{1}{12}+2\\frac{5}{6}-4\\frac{3}{8}$，结果不够减。',
       ],
-      verify: () => F(22).div(3).sub(F(17).div(6)),
+      verify: () => F(13).div(12).add(F(35).div(8)).sub(F(17).div(6)),
     },
     {
       id: '2.4-e06',
@@ -220,14 +227,18 @@ Content.section({
       id: '2.4-e07',
       level: 'extended',
       type: 'fill',
-      stem: '小明做作业用了 $1\\frac{1}{4}$ 小时，比看书多用了 $\\frac{1}{3}$ 小时。两项一共用了几小时？',
-      blanks: [{ kind: 'num', answer: '13/6', suffix: '小时' }],
-      explain: [
-        '做作业比看书多 $\\frac{1}{3}$ 小时，看书用了 $1\\frac{1}{4}-\\frac{1}{3}=1\\frac{3}{12}-\\frac{4}{12}=\\frac{11}{12}$ 小时。',
-        '一共 $1\\frac{1}{4}+\\frac{11}{12}=1\\frac{3}{12}+\\frac{11}{12}=2\\frac{2}{12}=2\\frac{1}{6}$ 小时。',
-        '易错：看到"多"就用加法，得看书 $1\\frac{7}{12}$ 小时。',
+      stem: '小明周末做作业用了 $1\\frac{1}{4}$ 小时，看书比做作业少用 $\\frac{1}{3}$ 小时，运动比看书多用 $\\frac{1}{6}$ 小时。',
+      blanks: [
+        { kind: 'num', label: '(1) 运动用了几小时', answer: '13/12' },
+        { kind: 'num', label: '(2) 三项一共用了几小时', answer: '13/4' },
       ],
-      verify: () => { const hw = F(5).div(4); const rd = hw.sub(F(1).div(3)); return hw.add(rd); },
+      explain: [
+        '看书：$1\\frac{1}{4}-\\frac{1}{3}=\\frac{15}{12}-\\frac{4}{12}=\\frac{11}{12}$ 小时。',
+        '(1) 运动：$\\frac{11}{12}+\\frac{1}{6}=\\frac{11}{12}+\\frac{2}{12}=\\frac{13}{12}=1\\frac{1}{12}$ 小时。',
+        '(2) 一共：$\\frac{15}{12}+\\frac{11}{12}+\\frac{13}{12}=\\frac{39}{12}=3\\frac{1}{4}$ 小时。',
+        '易错：运动是"比看书多"，不是比做作业多；一连串比较要一步一步找清楚和谁比。',
+      ],
+      verify: () => { const hw = F(5).div(4); const rd = hw.sub(F(1).div(3)); const sp = rd.add(F(1).div(6)); return [sp, hw.add(rd).add(sp)]; },
     },
     {
       id: '2.4-e08',
@@ -256,18 +267,24 @@ Content.section({
       id: '2.4-e09',
       level: 'extended',
       type: 'fill',
-      stem: '把 $\\frac{7}{12}$ 写成两个不同的单位分数之和，有几种写法？',
-      blanks: [{ kind: 'num', answer: '2', suffix: '种' }],
+      stem: '从 $\\frac{1}{3}$、$\\frac{1}{4}$、$\\frac{1}{5}$、$\\frac{1}{6}$、$\\frac{1}{7}$、$\\frac{1}{8}$ 中选出若干个相加，要求和比 1 小。和最大是多少？',
+      blanks: [{ kind: 'num', answer: '271/280' }],
       explain: [
-        '设 $\\frac{7}{12}=\\frac{1}{a}+\\frac{1}{b}$，$a<b$。较大的 $\\frac{1}{a}$ 要比 $\\frac{7}{12}$ 的一半大、比 $\\frac{7}{12}$ 小：$\\frac{7}{24}<\\frac{1}{a}<\\frac{7}{12}$，所以 $a$ 是 2 或 3。',
-        '$a=2$：$\\frac{7}{12}-\\frac{1}{2}=\\frac{1}{12}$，是单位分数。$a=3$：$\\frac{7}{12}-\\frac{1}{3}=\\frac{3}{12}=\\frac{1}{4}$，是单位分数。',
-        '共 2 种：$\\frac{1}{2}+\\frac{1}{12}$ 和 $\\frac{1}{3}+\\frac{1}{4}$。',
-        '易错：只凑出 $\\frac{1}{3}+\\frac{1}{4}$ 就停了。',
+        '思路：六个数全加起来比 1 大多少？再想"去掉哪些数"最划算。',
+        '通分成分母 840：六个数依次是 280、210、168、140、120、105 个 $\\frac{1}{840}$，全部加起来是 1023 个，比 1（840 个）多 183 个。',
+        '要让和比 1 小，去掉的部分必须超过 183 个；要让和最大，去掉的部分要尽量少。单独去掉一个：210（$\\frac{1}{4}$）或 280 超过 183，最少是 210；去掉两个或更多，至少 $105+120=225$，更多。',
+        '所以去掉 $\\frac{1}{4}$，和是 $1023-210=813$ 个 $\\frac{1}{840}$，即 $\\frac{813}{840}=\\frac{271}{280}$。',
+        '易错：去掉最小的 $\\frac{1}{8}$，剩下的和是 $\\frac{918}{840}$，仍然比 1 大。',
       ],
       verify: () => {
-        let c = 0;
-        for (let a = 2; a < 100; a++) for (let b = a + 1; b < 1000; b++) if (F(1).div(a).add(F(1).div(b)).eq(F(7).div(12))) c++;
-        return c;
+        const v = [3, 4, 5, 6, 7, 8].map(d => F(1).div(d));
+        let best = F(0);
+        for (let m = 1; m < 64; m++) {
+          let s = F(0);
+          v.forEach((x, i) => { if ((m >> i) & 1) s = s.add(x); });
+          if (s.cmp(1) < 0 && s.cmp(best) > 0) best = s;
+        }
+        return best;
       },
     },
     {
@@ -289,50 +306,52 @@ Content.section({
       id: '2.4-c01',
       level: 'challenge',
       type: 'fill',
-      stem: '把 1 写成几个**不同**的单位分数之和：',
+      stem: '把 1 写成四个**不同**的单位分数之和：$1=\\frac{1}{a}+\\frac{1}{b}+\\frac{1}{c}+\\frac{1}{d}$（$a<b<c<d$）。',
       blanks: [
-        { kind: 'num', label: '(1) 写成三个不同单位分数之和 $1=\\frac{1}{a}+\\frac{1}{b}+\\frac{1}{c}$（$a<b<c$），有几种写法', answer: '1' },
-        { kind: 'num', label: '(2) 写成 $1=\\frac{1}{2}+\\frac{1}{4}+\\frac{1}{d}+\\frac{1}{e}$（四个单位分数都不同，$d<e$），有几种写法', answer: '2' },
+        { kind: 'num', label: '(1) 一共有几种写法', answer: '6' },
+        { kind: 'num', label: '(2) 其中 $d$ 最大是多少', answer: '42' },
       ],
       explain: [
-        '(1) 思路：先用"最大的一项"卡住范围。$\\frac{1}{a}$ 最大，三项之和不超过它的 3 倍，所以 $\\frac{1}{a}>\\frac{1}{3}$ 以外的情况要排除：如果 $a\\ge 3$，三项最大是 $\\frac{1}{3}+\\frac{1}{4}+\\frac{1}{5}=\\frac{47}{60}<1$，不够。所以 $a=2$。',
-        '剩下 $\\frac{1}{b}+\\frac{1}{c}=\\frac{1}{2}$，$b>2$。同样，$\\frac{1}{b}$ 比 $\\frac{1}{2}$ 的一半 $\\frac{1}{4}$ 大，$b<4$，只能 $b=3$，$\\frac{1}{c}=\\frac{1}{6}$。',
-        '只有 $\\frac{1}{2}+\\frac{1}{3}+\\frac{1}{6}$ 一种。',
-        '(2) $\\frac{1}{d}+\\frac{1}{e}=1-\\frac{1}{2}-\\frac{1}{4}=\\frac{1}{4}$，而且 $d$、$e$ 都不能是 2、4。$\\frac{1}{d}$ 在 $\\frac{1}{8}$ 和 $\\frac{1}{4}$ 之间，$d$ 是 5、6、7。',
-        '$d=5$：$\\frac{1}{4}-\\frac{1}{5}=\\frac{1}{20}$，可以；$d=6$：$\\frac{1}{12}$，可以；$d=7$：$\\frac{3}{28}$，不是单位分数。（$d=8$ 时 $e=8$，两项相同。）',
-        '共 2 种：$\\frac{1}{5}+\\frac{1}{20}$、$\\frac{1}{6}+\\frac{1}{12}$。',
+        '思路：从最大的一项开始，一层一层卡范围。',
+        '$\\frac{1}{a}$ 最大，四项之和比它的 4 倍小，所以 $\\frac{1}{a}>\\frac{1}{4}$；$a\\ne 1$。如果 $a=3$，四项最大是 $\\frac{1}{3}+\\frac{1}{4}+\\frac{1}{5}+\\frac{1}{6}=\\frac{57}{60}<1$。所以 $a=2$。',
+        '剩下 $\\frac{1}{b}+\\frac{1}{c}+\\frac{1}{d}=\\frac{1}{2}$，$b>2$。同理 $\\frac{1}{b}>\\frac{1}{6}$，$b$ 是 3、4、5；$b=5$ 时最大 $\\frac{1}{5}+\\frac{1}{6}+\\frac{1}{7}<\\frac{1}{2}$，不行。',
+        '$b=3$：$\\frac{1}{c}+\\frac{1}{d}=\\frac{1}{6}$，$c$ 在 7～11 之间逐个试：$c=7$、8、9、10 得 $d=42$、24、18、15（$c=11$ 不行）。4 种。',
+        '$b=4$：$\\frac{1}{c}+\\frac{1}{d}=\\frac{1}{4}$，$c$ 在 5～7 之间：$c=5$ 得 $d=20$，$c=6$ 得 $d=12$，$c=7$ 不行。2 种。',
+        '(1) 共 6 种；(2) $d$ 最大是 42（$\\frac{1}{2}+\\frac{1}{3}+\\frac{1}{7}+\\frac{1}{42}$）。',
       ],
       verify: () => {
-        let a3 = 0;
-        for (let a = 2; a < 10; a++) for (let b = a + 1; b < 50; b++) for (let c = b + 1; c < 200; c++) if (F(1).div(a).add(F(1).div(b)).add(F(1).div(c)).eq(1)) a3++;
-        let a4 = 0;
-        for (let d = 3; d < 100; d++) for (let e = d + 1; e < 1000; e++) if (![2, 4].includes(d) && ![2, 4].includes(e) && F(1).div(d).add(F(1).div(e)).eq(F(1).div(4))) a4++;
-        return [a3, a4];
+        const r = [];
+        for (let a = 2; a < 5; a++) for (let b = a + 1; b < 13; b++) for (let c = b + 1; c < 60; c++) {
+          const rem = F(1).sub(F(1).div(a)).sub(F(1).div(b)).sub(F(1).div(c));
+          if (rem.cmp(0) > 0 && rem.n === 1n && Number(rem.d) > c) r.push(Number(rem.d));
+        }
+        return [r.length, Math.max(...r)];
       },
     },
     {
       id: '2.4-c02',
       level: 'challenge',
       type: 'fill',
-      stem: '一串分数 $\\frac{2}{1\\times 3}$、$\\frac{2}{3\\times 5}$、$\\frac{2}{5\\times 7}$、……，分母是两个相邻奇数的积。',
+      stem: '把 $\\frac{7}{15}$ 写成几个不同的单位分数之和。一种办法是每次都取"不超过剩下部分的最大单位分数"，直到剩下的部分本身是单位分数为止。',
       blanks: [
-        { kind: 'num', label: '(1) 前 49 项的和是', answer: '98/99' },
-        { kind: 'num', label: '(2) 从第一项开始，至少加到第几项，和才超过 $\\frac{9}{10}$', answer: '5' },
+        { kind: 'num', label: '(1) 按这种办法，最后一个单位分数的分母是', answer: '120' },
+        { kind: 'num', label: '(2) 把 $\\frac{7}{15}$ 写成不同单位分数之和，最少要几个', answer: '3' },
       ],
       explain: [
-        '思路：像 $\\frac{1}{n\\times(n+1)}$ 那样裂项，但这里相邻两个奇数相差 2。试一试：$1-\\frac{1}{3}=\\frac{2}{3}=\\frac{2}{1\\times 3}$，$\\frac{1}{3}-\\frac{1}{5}=\\frac{2}{15}=\\frac{2}{3\\times 5}$。',
-        '所以 $\\frac{2}{(2k-1)\\times(2k+1)}=\\frac{1}{2k-1}-\\frac{1}{2k+1}$：分子 2 正好是两个分母的差。',
-        '(1) 前 49 项：$\\left(1-\\frac{1}{3}\\right)+\\left(\\frac{1}{3}-\\frac{1}{5}\\right)+\\cdots+\\left(\\frac{1}{97}-\\frac{1}{99}\\right)=1-\\frac{1}{99}=\\frac{98}{99}$。',
-        '(2) 前 $n$ 项的和是 $1-\\frac{1}{2n+1}$。要超过 $\\frac{9}{10}$，$\\frac{1}{2n+1}$ 要比 $\\frac{1}{10}$ 小，$2n+1>10$，$n\\ge 5$。',
-        '检验：前 4 项和 $\\frac{8}{9}<\\frac{9}{10}$，前 5 项和 $\\frac{10}{11}>\\frac{9}{10}$。所以至少加到第 5 项。',
+        '(1) 不超过 $\\frac{7}{15}$ 的最大单位分数：$\\frac{1}{2}=\\frac{7.5}{15}$ 太大，$\\frac{1}{3}=\\frac{5}{15}$ 可以。剩下 $\\frac{7}{15}-\\frac{1}{3}=\\frac{2}{15}$。',
+        '不超过 $\\frac{2}{15}$ 的最大单位分数：$\\frac{2}{15}=\\frac{1}{7.5}$，所以是 $\\frac{1}{8}$。剩下 $\\frac{2}{15}-\\frac{1}{8}=\\frac{16-15}{120}=\\frac{1}{120}$，是单位分数，停止。',
+        '$\\frac{7}{15}=\\frac{1}{3}+\\frac{1}{8}+\\frac{1}{120}$，最后一个分母是 120。',
+        '(2) 一个不行（$\\frac{7}{15}$ 不是单位分数）。两个：$\\frac{7}{15}=\\frac{1}{a}+\\frac{1}{b}$（$a<b$），较大的 $\\frac{1}{a}$ 比 $\\frac{7}{30}$ 大、比 $\\frac{7}{15}$ 小，$a$ 在 $\\frac{15}{7}$ 和 $\\frac{30}{7}$ 之间，是 3 或 4。',
+        '$a=3$：剩 $\\frac{2}{15}$，不是单位分数；$a=4$：剩 $\\frac{7}{15}-\\frac{1}{4}=\\frac{13}{60}$，不是。所以两个不行，最少 3 个（(1) 已经给出了 3 个的写法）。',
       ],
       verify: () => {
-        let s = F(0);
-        for (let k = 1; k <= 49; k++) s = s.add(F(2).div((2 * k - 1) * (2 * k + 1)));
-        let t = F(0);
-        let n = 0;
-        for (let k = 1; ; k++) { t = t.add(F(2).div((2 * k - 1) * (2 * k + 1))); if (t.cmp(F(9).div(10)) > 0) { n = k; break; } }
-        return [s, n];
+        let rem = F(7).div(15);
+        const terms = [];
+        while (rem.cmp(0) > 0) { let d = 1; while (F(1).div(d).cmp(rem) > 0) d++; terms.push(d); rem = rem.sub(F(1).div(d)); }
+        let two = 0;
+        for (let a = 2; a < 100; a++) for (let b = a + 1; b < 5000; b++) if (F(1).div(a).add(F(1).div(b)).eq(F(7).div(15))) two++;
+        const isUnit = F(7).div(15).n === 1n;
+        return [terms[terms.length - 1], isUnit ? 1 : two ? 2 : terms.length];
       },
     },
     {
@@ -366,23 +385,25 @@ Content.section({
       id: '2.4-c04',
       level: 'challenge',
       type: 'fill',
-      stem: '把分数写成两个不同的单位分数之和：',
+      stem: '把形如 $\\frac{2}{n}$（$n$ 是奇数）的分数写成两个不同的单位分数之和 $\\frac{1}{a}+\\frac{1}{b}$（$a<b$）。',
       blanks: [
-        { kind: 'num', label: '(1) $\\frac{2}{7}=\\frac{1}{a}+\\frac{1}{b}$（$a<b$），$a+b=$', answer: '32' },
-        { kind: 'num', label: '(2) $\\frac{2}{9}=\\frac{1}{a}+\\frac{1}{b}$（$a<b$）有几种写法', answer: '2' },
+        { kind: 'num', label: '(1) $\\frac{2}{19}=\\frac{1}{a}+\\frac{1}{b}$ 时，$a+b=$', answer: '200' },
+        { kind: 'num', label: '(2) $n$ 取 5～25 中的奇数（5、7、9、……、25），$\\frac{2}{n}$ 恰好只有一种写法的 $n$ 有几个', answer: '7' },
       ],
       explain: [
-        '思路：较大的 $\\frac{1}{a}$ 比总和的一半大、比总和小，先定 $a$ 的范围，再逐个检验。',
-        '(1) $\\frac{1}{7}<\\frac{1}{a}<\\frac{2}{7}$：把 $\\frac{2}{7}$ 看成 $\\frac{1}{3.5}$，$a$ 在 3.5 和 7 之间，$a$ 是 4、5、6。',
-        '$a=4$：$\\frac{2}{7}-\\frac{1}{4}=\\frac{8-7}{28}=\\frac{1}{28}$，是；$a=5$：$\\frac{10-7}{35}=\\frac{3}{35}$，不是；$a=6$：$\\frac{12-7}{42}=\\frac{5}{42}$，不是。只有 $\\frac{1}{4}+\\frac{1}{28}$，$a+b=32$。',
-        '(2) $\\frac{1}{9}<\\frac{1}{a}<\\frac{2}{9}$，$a$ 在 4.5 和 9 之间：5、6、7、8。',
-        '$a=5$：$\\frac{10-9}{45}=\\frac{1}{45}$，是；$a=6$：$\\frac{12-9}{54}=\\frac{3}{54}=\\frac{1}{18}$，是；$a=7$：$\\frac{5}{63}$，不是；$a=8$：$\\frac{7}{72}$，不是。共 2 种。',
-        '易错：(2) 算出 $\\frac{3}{54}$ 没有约分，以为不是单位分数。',
+        '思路：较大的 $\\frac{1}{a}$ 比总和的一半大、比总和小，所以 $a$ 在 $\\frac{n}{2}$ 和 $n$ 之间。$\\frac{2}{n}-\\frac{1}{a}=\\frac{2\\times a-n}{n\\times a}$，要是单位分数，分子 $2\\times a-n$ 要能整除分母 $n\\times a$。',
+        '(1) $n=19$，$a$ 是 10～18。$a=10$ 时分子是 1，得 $\\frac{1}{190}$。$a=11$～18 时分子是 3～17 的奇数，它们和 19 互素，要整除 $19\\times a$ 就得整除 $a$；但分子 $2\\times a-19$ 如果整除 $a$，也就整除 $2\\times a$，进而整除 $2\\times a-(2\\times a-19)=19$，只能是 1。所以只有 $a=10$，$a+b=200$。',
+        '(2) 上面的道理对任何**素数** $n$ 都成立：分子 $2\\times a-n$ 只能是 1，$a=\\frac{n+1}{2}$，恰好一种写法。5～25 中的素数：5、7、11、13、17、19、23，共 7 个。',
+        '奇合数 9、15、21、25 除了 $a=\\frac{n+1}{2}$ 这种，还能再找到一种：$\\frac{2}{9}=\\frac{1}{6}+\\frac{1}{18}$，$\\frac{2}{15}=\\frac{1}{10}+\\frac{1}{30}$，$\\frac{2}{21}=\\frac{1}{14}+\\frac{1}{42}$，$\\frac{2}{25}=\\frac{1}{15}+\\frac{1}{75}$（都是取 $a$ 为 $n$ 的一个因数的 2 倍附近，让分子能约掉）。所以它们不止一种。',
+        '答案是 7 个。',
       ],
       verify: () => {
-        const two = (p, q) => { const r = []; for (let a = 2; a < 200; a++) for (let b = a + 1; b < 5000; b++) if (F(1).div(a).add(F(1).div(b)).eq(F(p).div(q))) r.push([a, b]); return r; };
-        const r1 = two(2, 7);
-        return [r1.length === 1 ? r1[0][0] + r1[0][1] : 0, two(2, 9).length];
+        const two = q => { let c = 0; for (let a = 2; a < 300; a++) for (let b = a + 1; b < 8000; b++) if (F(1).div(a).add(F(1).div(b)).eq(q)) c++; return c; };
+        const one = [];
+        for (let a = 2; a < 300; a++) for (let b = a + 1; b < 8000; b++) if (F(1).div(a).add(F(1).div(b)).eq(F(2).div(19))) one.push(a + b);
+        let k = 0;
+        for (let n = 5; n <= 25; n += 2) if (two(F(2).div(n)) === 1) k++;
+        return [one.length === 1 ? one[0] : 0, k];
       },
     },
     {
@@ -392,7 +413,7 @@ Content.section({
       stem: '按下面的规律依次相加：$\\frac{1}{2}+\\left(\\frac{1}{3}+\\frac{2}{3}\\right)+\\left(\\frac{1}{4}+\\frac{2}{4}+\\frac{3}{4}\\right)+\\cdots+\\left(\\frac{1}{50}+\\frac{2}{50}+\\cdots+\\frac{49}{50}\\right)$。',
       blanks: [
         { kind: 'num', label: '(1) 全部加起来的和是', answer: '1225/2' },
-        { kind: 'num', label: '(2) 从第一个数开始逐个往上加，加到哪一个数时，和第一次超过 100（写出这个数）', answer: '15/21' },
+        { kind: 'num', label: '(2) 从第一个数开始逐个往上加，加到哪一个数时，和第一次超过 100（写出这个数，约分或不约分都可以）', answer: '15/21' },
       ],
       explain: [
         '思路：先算每一组的和。分母是 $n$ 的一组有 $n-1$ 个数，首尾配对：$\\frac{1}{n}+\\frac{n-1}{n}=1$，$\\frac{2}{n}+\\frac{n-2}{n}=1$……一组的和是 $\\frac{n-1}{2}$。',
