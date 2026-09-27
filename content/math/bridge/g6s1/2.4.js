@@ -10,6 +10,7 @@ Content.section({
   id: 'math/bridge/g6s1/2.4',
   title: '分数的加减法',
   review: { status: 'pending' },
+  audit: { blind: '2026-09-27', rounds: 3, note: '子代理盲解复核三轮，答案全部一致；第 1 轮按意见重做 e03～e05、e07、e09 和 c01、c02、c04，第 2 轮消除 e08/e09 同构、c04 改成素数分母的推广分类，第 3 轮判定整节通过' },
 
   intro: [
     {
