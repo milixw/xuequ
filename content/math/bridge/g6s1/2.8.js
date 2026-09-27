@@ -10,6 +10,7 @@ Content.section({
   id: 'math/bridge/g6s1/2.8',
   title: '分数、小数的四则混合运算',
   review: { status: 'pending' },
+  audit: { blind: '2026-09-27', rounds: 3, note: '子代理盲解复核三轮，答案全部一致；第 1 轮按意见改卡片（与 b04、b02 撞车）、重做 e01、e02、e04～e06、e08、e09 和 c02～c05，第 2 轮加难 c03 并把 e05、e09 改成倒推，第 3 轮判定整节通过（按意见注明整数也算）' },
 
   intro: [
     {
@@ -155,14 +156,18 @@ Content.section({
       id: '2.8-e05',
       level: 'extended',
       type: 'fill',
-      stem: '规定 $[a,b,c]=(a+b)\\div c$。计算 $\\left[0.5,\\ \\frac{1}{3},\\ [0.25,\\ \\frac{1}{4},\\ 0.2]\\right]$。',
-      blanks: [{ kind: 'num', answer: '1/3' }],
+      stem: '规定 $[a,b,c]=(a+b)\\div c$。如果 $\\left[\\,[x,\\ \\frac{1}{3},\\ 0.25],\\ 0.5,\\ 0.2\\right]=15$，求 $x$。',
+      blanks: [{ kind: 'num', answer: '7/24' }],
       explain: [
-        '先算里面的：$[0.25,\\ \\frac{1}{4},\\ 0.2]=\\left(\\frac{1}{4}+\\frac{1}{4}\\right)\\div\\frac{1}{5}=\\frac{1}{2}\\times 5=\\frac{5}{2}$。',
-        '再算外面的：$\\left(0.5+\\frac{1}{3}\\right)\\div\\frac{5}{2}=\\frac{5}{6}\\times\\frac{2}{5}=\\frac{1}{3}$。',
-        '易错：外层先算，把 0.2 当成 $c$；或者按从左往右把六个数串起来算。',
+        '从外往里倒推。设里面的 $[x,\\ \\frac{1}{3},\\ 0.25]=y$，外层 $(y+0.5)\\div 0.2=15$，$y+0.5=3$，$y=2.5$。',
+        '里层 $\\left(x+\\frac{1}{3}\\right)\\div 0.25=2.5$，$x+\\frac{1}{3}=\\frac{5}{8}$，$x=\\frac{5}{8}-\\frac{1}{3}=\\frac{7}{24}$。',
+        '易错：外层把 0.2 当成了 $b$，或者倒推时把除以 0.2 还原成除以 5。',
       ],
-      verify: () => { const g = (a, b, c) => a.add(b).div(c); return g(F(1).div(2), F(1).div(3), g(F(1).div(4), F(1).div(4), F(1).div(5))); },
+      verify: () => {
+        const g = (a, b, c) => a.add(b).div(c);
+        for (let n = 1; n < 100; n++) for (let d = 1; d < 100; d++) { const x = F(n).div(d); if (g(g(x, F(1).div(3), F(1).div(4)), F(1).div(2), F(1).div(5)).eq(15)) return x; }
+        return F(0);
+      },
     },
     {
       id: '2.8-e06',
@@ -208,15 +213,18 @@ Content.section({
       id: '2.8-e09',
       level: 'extended',
       type: 'fill',
-      stem: '计算：$1\\div\\left[1+1\\div\\left(1+1\\div 1.5\\right)\\right]$',
-      blanks: [{ kind: 'num', answer: '5/8' }],
+      stem: '求 $x$：$1\\div\\left[1+1\\div\\left(1+1\\div x\\right)\\right]=\\frac{5}{8}$',
+      blanks: [{ kind: 'num', answer: '3/2' }],
       explain: [
-        '从最里层往外算。$1\\div 1.5=\\frac{2}{3}$，$1+\\frac{2}{3}=\\frac{5}{3}$。',
-        '$1\\div\\frac{5}{3}=\\frac{3}{5}$，$1+\\frac{3}{5}=\\frac{8}{5}$。',
-        '$1\\div\\frac{8}{5}=\\frac{5}{8}$。',
-        '易错：从左往右算，先算 $1\\div 1$。',
+        '从外往里一层层倒推。$1\\div[\\cdots]=\\frac{5}{8}$，中括号里是 $\\frac{8}{5}$。',
+        '$1+1\\div(1+1\\div x)=\\frac{8}{5}$，所以 $1\\div(1+1\\div x)=\\frac{3}{5}$，小括号里是 $\\frac{5}{3}$。',
+        '$1+1\\div x=\\frac{5}{3}$，$1\\div x=\\frac{2}{3}$，$x=\\frac{3}{2}$（即 1.5）。',
+        '易错：倒推"$1\\div$ 某数 = $\\frac{5}{8}$"时把某数写成 $\\frac{5}{8}$，没取倒数。',
       ],
-      verify: () => F(1).div(F(1).add(F(1).div(F(1).add(F(1).div(F(3).div(2)))))),
+      verify: () => {
+        for (let n = 1; n < 50; n++) for (let d = 1; d < 50; d++) { const x = F(n).div(d); if (F(1).div(F(1).add(F(1).div(F(1).add(F(1).div(x))))).eq(F(5).div(8))) return x; }
+        return F(0);
+      },
     },
     {
       id: '2.8-e10',
@@ -314,24 +322,31 @@ Content.section({
       id: '2.8-c03',
       level: 'challenge',
       type: 'fill',
-      stem: '一组数的平均数是 1.2。去掉其中一个数 3.6 后，剩下的数的平均数是 $1\\frac{1}{15}$。',
+      stem: '一组数的平均数是 1.2。去掉其中一个数后，剩下的数的平均数是 $1\\frac{1}{15}$。',
       blanks: [
-        { kind: 'num', label: '(1) 原来一共有几个数', answer: '19' },
-        { kind: 'num', label: '(2) 再去掉一个数后，剩下的数的平均数恰好是 1，第二次去掉的数是多少', answer: '11/5' },
+        { kind: 'num', label: '(1) 如果去掉的数是 3.6，原来一共有几个数', answer: '19' },
+        { kind: 'num', label: '(2) 如果只知道去掉的数不是循环小数（整数、有限小数都可以），并且原来不超过 20 个数，原来的个数有几种可能', answer: '6' },
       ],
       explain: [
-        '思路：平均数变化的原因是去掉的数比平均数大，多出来的部分被剩下的数"分摊"了。',
-        '(1) 3.6 比原平均数 1.2 多 2.4。去掉它后，剩下的每个数的平均数比 1.2 少了 $1.2-1\\frac{1}{15}=\\frac{6}{5}-\\frac{16}{15}=\\frac{2}{15}$。',
-        '原来这 2.4 是被所有数平分的；也就是说，去掉 3.6 后，剩下的数的总和比"个数 × 1.2"少了 2.4，平均下来每个少 $\\frac{2}{15}$。剩下的个数 $=2.4\\div\\frac{2}{15}=18$，原来 19 个。',
-        '检验：原总和 $19\\times 1.2=22.8$，去掉 3.6 剩 19.2，$19.2\\div 18=1\\frac{1}{15}$。',
-        '(2) 剩下 18 个数总和 19.2，再去掉一个后剩 17 个，平均数是 1，总和 17。去掉的数是 $19.2-17=2.2=\\frac{11}{5}$。',
-        '易错：(1) 用 $3.6\\div\\frac{2}{15}$ 或 $2.4\\div\\frac{2}{15}$ 当成原来的个数。',
+        '思路：设原来有 $n$ 个数，先用 $n$ 表示去掉的数，再看条件。',
+        '原来总和 $1.2\\times n$，去掉后剩 $n-1$ 个，总和 $1\\frac{1}{15}\\times(n-1)$。去掉的数 $=\\frac{6}{5}\\times n-\\frac{16}{15}\\times(n-1)=\\frac{18\\times n-16\\times n+16}{15}=\\frac{2\\times n+16}{15}$。',
+        '(1) $\\frac{2\\times n+16}{15}=3.6=\\frac{54}{15}$，$2\\times n+16=54$，$n=19$。',
+        '(2) $\\frac{2\\times n+16}{15}$ 要能化成有限小数：分母 $15=3\\times 5$ 里的 3 必须约掉，也就是 $2\\times n+16$ 能被 3 整除，即 $n+8$ 能被 3 整除，$n$ 除以 3 余 1。',
+        '$n$ 至少是 2、不超过 20：4、7、10、13、16、19，共 6 种（去掉的数依次是 1.6、2、2.4、2.8、3.2、3.6）。',
+        '易错：(2) 把 $n=1$ 也算上（去掉后没有数了）；或者忘了先约分再判断。',
       ],
       verify: () => {
-        let n = 0;
-        for (let m = 2; m < 200; m++) if (F(m).mul(F(6).div(5)).sub(F(18).div(5)).div(m - 1).eq(F(16).div(15))) n = m;
-        const rest = F(n).mul(F(6).div(5)).sub(F(18).div(5));
-        return [n, rest.sub(n - 2)];
+        let n1 = 0;
+        const ok = [];
+        for (let n = 2; n <= 20; n++) {
+          const x = F(n).mul(F(6).div(5)).sub(F(16).div(15).mul(n - 1));
+          if (x.eq(F(18).div(5))) n1 = n;
+          let d = Number(x.d);
+          while (d % 2 === 0) d /= 2;
+          while (d % 5 === 0) d /= 5;
+          if (d === 1 && x.cmp(0) > 0) ok.push(n);
+        }
+        return [n1, ok.length];
       },
     },
     {
