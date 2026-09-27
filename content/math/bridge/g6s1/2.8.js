@@ -16,7 +16,7 @@ Content.section({
       title: '运算顺序',
       body: '分数、小数的四则混合运算，顺序和整数一样：**先乘除，后加减，有括号先算括号里面的**；同一级运算从左往右算。',
       example: '$\\frac{2}{5}+0.6\\times\\frac{1}{3}=\\frac{2}{5}+\\frac{1}{5}=\\frac{3}{5}$。',
-      pitfall: '只有乘除的式子也要从左往右：$\\frac{1}{2}\\div\\frac{1}{2}\\times 4=4$，不是 $\\frac{1}{4}$。',
+      pitfall: '只有乘除的式子也要从左往右：$\\frac{1}{2}\\div\\frac{1}{4}\\times 2=4$，不是 1。',
     },
     {
       title: '统一成分数还是小数',
@@ -26,7 +26,7 @@ Content.section({
     {
       title: '常用的分数和小数',
       body: '记住一些常用的对应关系，便于凑整和约分：$0.5=\\frac{1}{2}$，$0.25=\\frac{1}{4}$，$0.75=\\frac{3}{4}$，$0.2=\\frac{1}{5}$，$0.125=\\frac{1}{8}$，$0.375=\\frac{3}{8}$，$0.625=\\frac{5}{8}$。',
-      example: '$0.125\\times 17+\\frac{1}{8}\\times 15=\\frac{1}{8}\\times(17+15)=4$。',
+      example: '$0.125\\times 72=\\frac{1}{8}\\times 8\\times 9=9$；$0.25\\times 0.8\\times 1.25\\times 4=(0.25\\times 4)\\times(0.8\\times 1.25)=1$。',
     },
   ],
 
@@ -100,25 +100,29 @@ Content.section({
       id: '2.8-e01',
       level: 'extended',
       type: 'fill',
-      stem: '用简便方法计算：$3.75\\times 8.2+3\\frac{3}{4}\\times 1.8$',
-      blanks: [{ kind: 'num', answer: '75/2' }],
+      stem: '用简便方法计算：$2025\\times\\frac{2027}{2026}$',
+      blanks: [{ kind: 'num', answer: '4104675/2026' }],
       explain: [
-        '$3\\frac{3}{4}=3.75$，提取公因数：$3.75\\times(8.2+1.8)=3.75\\times 10=37.5$。',
-        '易错：没发现 $3\\frac{3}{4}$ 就是 3.75。',
+        '拆成接近整数的形式：$2025=2026-1$，$\\frac{2027}{2026}=1+\\frac{1}{2026}$。',
+        '$(2026-1)\\times\\left(1+\\frac{1}{2026}\\right)=2026\\times 1+2026\\times\\frac{1}{2026}-1\\times 1-1\\times\\frac{1}{2026}=2026+1-1-\\frac{1}{2026}$。',
+        '结果是 $2026-\\frac{1}{2026}=2025\\frac{2025}{2026}$。',
+        '易错：只拆一个数，例如 $2025\\times\\left(1+\\frac{1}{2026}\\right)=2025+\\frac{2025}{2026}$，这样也对，但如果用分配律时漏乘，就会出错。',
       ],
-      verify: () => F(15).div(4).mul(F(41).div(5)).add(F(15).div(4).mul(F(9).div(5))),
+      verify: () => F(2025).mul(F(2027).div(2026)),
     },
     {
       id: '2.8-e02',
       level: 'extended',
       type: 'fill',
-      stem: '用简便方法计算：$4.5\\times 1\\frac{1}{5}+5.5\\times 1.2-1\\frac{1}{5}$',
-      blanks: [{ kind: 'num', answer: '54/5' }],
+      stem: '求 $\\square$ 里的数：$\\left[\\left(\\square+0.\\dot{3}\\right)\\times 1.5-0.25\\right]\\div\\frac{1}{4}=5$',
+      blanks: [{ kind: 'num', answer: '2/3' }],
       explain: [
-        '$1\\frac{1}{5}=1.2$，三项都有因数 1.2，最后一项是 $1.2\\times 1$：$1.2\\times(4.5+5.5-1)=1.2\\times 9=10.8$。',
-        '易错：最后一项当成 0 去提取，得 $1.2\\times 10=12$。',
+        '从外往里倒推。中括号里的数 $\\div\\frac{1}{4}=5$，中括号里是 $5\\times\\frac{1}{4}=\\frac{5}{4}$。',
+        '$(\\square+0.\\dot{3})\\times 1.5-0.25=\\frac{5}{4}$，所以 $(\\square+0.\\dot{3})\\times 1.5=\\frac{3}{2}$，$\\square+0.\\dot{3}=1$。',
+        '$0.\\dot{3}=\\frac{1}{3}$，$\\square=\\frac{2}{3}$。',
+        '易错：把 $0.\\dot{3}$ 当成 0.33 算，得到近似值 0.67。',
       ],
-      verify: () => F(9).div(2).mul(F(6).div(5)).add(F(11).div(2).mul(F(6).div(5))).sub(F(6).div(5)),
+      verify: () => { for (let n = 1; n < 50; n++) for (let d = 1; d < 50; d++) { const x = F(n).div(d); if (x.add(F(1).div(3)).mul(F(3).div(2)).sub(F(1).div(4)).div(F(1).div(4)).eq(5)) return x; } return F(0); },
     },
     {
       id: '2.8-e03',
@@ -137,40 +141,41 @@ Content.section({
       id: '2.8-e04',
       level: 'extended',
       type: 'fill',
-      stem: '求 $\\square$ 里的数：$\\left(\\square-1.2\\right)\\times\\frac{5}{6}=\\frac{2}{3}$',
-      blanks: [{ kind: 'num', answer: '2' }],
+      stem: '已知 $A\\times 1\\frac{1}{4}=B\\times 0.75=C\\div 2$，并且 $A$、$B$、$C$ 都不为 0。三个数中最大的数是最小的数的几倍？',
+      blanks: [{ kind: 'num', answer: '5/2' }],
       explain: [
-        '括号里的差 $=\\frac{2}{3}\\div\\frac{5}{6}=\\frac{4}{5}=0.8$。',
-        '$\\square=0.8+1.2=2$。',
-        '易错：先算 $1.2\\times\\frac{5}{6}$，把括号去掉了。',
+        '$C\\div 2=C\\times\\frac{1}{2}$。三个积相等，乘的数越大，被乘的数越小。比较 $1\\frac{1}{4}$、$0.75$、$\\frac{1}{2}$：$A$ 乘的最大，$A$ 最小；$C$ 乘的最小，$C$ 最大。',
+        '设三个积都等于 1：$A=\\frac{4}{5}$，$B=\\frac{4}{3}$，$C=2$。',
+        '最大的是最小的 $2\\div\\frac{4}{5}=\\frac{5}{2}$ 倍。',
+        '易错：看到 $C$ 后面是"除以 2"，以为 $C$ 最小。',
       ],
-      verify: () => F(2).div(3).div(F(5).div(6)).add(F(6).div(5)),
+      verify: () => { const v = [F(1).div(F(5).div(4)), F(1).div(F(3).div(4)), F(2)]; v.sort((a, b) => a.cmp(b)); return v[2].div(v[0]); },
     },
     {
       id: '2.8-e05',
       level: 'extended',
       type: 'fill',
-      stem: '规定 $a\\odot b=\\frac{a\\times b}{a+b}$（$a$、$b$ 都是正数）。计算 $(0.5\\odot\\frac{1}{3})\\odot 0.25$。',
-      blanks: [{ kind: 'num', answer: '1/9' }],
+      stem: '规定 $[a,b,c]=(a+b)\\div c$。计算 $\\left[0.5,\\ \\frac{1}{3},\\ [0.25,\\ \\frac{1}{4},\\ 0.2]\\right]$。',
+      blanks: [{ kind: 'num', answer: '1/3' }],
       explain: [
-        '先算括号：$0.5\\odot\\frac{1}{3}=\\frac{\\frac{1}{2}\\times\\frac{1}{3}}{\\frac{1}{2}+\\frac{1}{3}}=\\frac{1}{6}\\div\\frac{5}{6}=\\frac{1}{5}$。',
-        '再算 $\\frac{1}{5}\\odot\\frac{1}{4}=\\frac{1}{20}\\div\\frac{9}{20}=\\frac{1}{9}$。',
-        '观察：$\\frac{1}{a\\odot b}=\\frac{a+b}{a\\times b}=\\frac{1}{a}+\\frac{1}{b}$，所以结果的倒数是 $2+3+4=9$。',
+        '先算里面的：$[0.25,\\ \\frac{1}{4},\\ 0.2]=\\left(\\frac{1}{4}+\\frac{1}{4}\\right)\\div\\frac{1}{5}=\\frac{1}{2}\\times 5=\\frac{5}{2}$。',
+        '再算外面的：$\\left(0.5+\\frac{1}{3}\\right)\\div\\frac{5}{2}=\\frac{5}{6}\\times\\frac{2}{5}=\\frac{1}{3}$。',
+        '易错：外层先算，把 0.2 当成 $c$；或者按从左往右把六个数串起来算。',
       ],
-      verify: () => { const op = (a, b) => a.mul(b).div(a.add(b)); return op(op(F(1).div(2), F(1).div(3)), F(1).div(4)); },
+      verify: () => { const g = (a, b, c) => a.add(b).div(c); return g(F(1).div(2), F(1).div(3), g(F(1).div(4), F(1).div(4), F(1).div(5))); },
     },
     {
       id: '2.8-e06',
       level: 'extended',
       type: 'fill',
-      stem: '已知 $1\\frac{1}{4}\\times A=0.75\\times B=2\\div C=1$。求 $A+B+C$。',
-      blanks: [{ kind: 'num', answer: '62/15' }],
+      stem: '计算：$0.\\dot{1}\\dot{2}\\times 0.\\dot{2}\\dot{7}\\div 0.\\dot{0}\\dot{3}$（结果写成分数）',
+      blanks: [{ kind: 'num', answer: '12/11' }],
       explain: [
-        '$1\\frac{1}{4}\\times A=1$，$A$ 是 $\\frac{5}{4}$ 的倒数 $\\frac{4}{5}$；$0.75\\times B=1$，$B=\\frac{4}{3}$；$2\\div C=1$，$C=2$。',
-        '$A+B+C=\\frac{4}{5}+\\frac{4}{3}+2=\\frac{12+20+30}{15}=\\frac{62}{15}$。',
-        '易错：$2\\div C=1$ 时误以为 $C$ 是 2 的倒数 $\\frac{1}{2}$。',
+        '三个都是循环节 2 位的纯循环小数：$0.\\dot{1}\\dot{2}=\\frac{12}{99}$，$0.\\dot{2}\\dot{7}=\\frac{27}{99}$，$0.\\dot{0}\\dot{3}=\\frac{3}{99}$。',
+        '$\\frac{12}{99}\\times\\frac{27}{99}\\div\\frac{3}{99}=\\frac{12}{99}\\times\\frac{27}{99}\\times\\frac{99}{3}=\\frac{12\\times 9}{99}=\\frac{108}{99}=\\frac{12}{11}$。',
+        '易错：把 $0.\\dot{0}\\dot{3}$ 当成 $\\frac{3}{9}$；或者先约分时把两个 99 都约掉。',
       ],
-      verify: () => F(1).div(F(5).div(4)).add(F(1).div(F(3).div(4))).add(F(2).div(1)),
+      verify: () => F(12).div(99).mul(F(27).div(99)).div(F(3).div(99)),
     },
     {
       id: '2.8-e07',
@@ -190,28 +195,28 @@ Content.section({
       id: '2.8-e08',
       level: 'extended',
       type: 'fill',
-      stem: '计算：$0.\\dot{3}+0.25\\times 1\\frac{1}{3}-0.1\\dot{6}$',
-      blanks: [{ kind: 'num', answer: '1/2' }],
+      stem: '计算：$0.\\dot{1}\\dot{2}+0.\\dot{2}\\dot{7}+0.\\dot{6}\\dot{0}+0.1\\dot{6}\\times 6$',
+      blanks: [{ kind: 'num', answer: '2' }],
       explain: [
-        '循环小数化分数：$0.\\dot{3}=\\frac{1}{3}$，$0.1\\dot{6}=\\frac{16-1}{90}=\\frac{1}{6}$。',
-        '$0.25\\times 1\\frac{1}{3}=\\frac{1}{4}\\times\\frac{4}{3}=\\frac{1}{3}$。',
-        '原式 $=\\frac{1}{3}+\\frac{1}{3}-\\frac{1}{6}=\\frac{1}{2}$。',
-        '易错：循环小数按有限小数 0.33、0.17 近似计算。',
+        '前三个都是循环节 2 位的纯循环小数，分母都是 99：$\\frac{12+27+60}{99}=\\frac{99}{99}=1$。',
+        '$0.1\\dot{6}=\\frac{16-1}{90}=\\frac{1}{6}$，乘 6 得 1。',
+        '原式 $=1+1=2$。易错：$0.\\dot{6}\\dot{0}$ 看成 $0.\\dot{6}$；或者按近似值计算。',
       ],
-      verify: () => F(1).div(3).add(F(1).div(4).mul(F(4).div(3))).sub(F(15).div(90)),
+      verify: () => F(12).div(99).add(F(27).div(99)).add(F(60).div(99)).add(F(15).div(90).mul(6)),
     },
     {
       id: '2.8-e09',
       level: 'extended',
       type: 'fill',
-      stem: '用简便方法计算：$2025\\times\\frac{2027}{2026}-2027\\times\\frac{2024}{2026}$',
-      blanks: [{ kind: 'num', answer: '2027/2026' }],
+      stem: '计算：$1\\div\\left[1+1\\div\\left(1+1\\div 1.5\\right)\\right]$',
+      blanks: [{ kind: 'num', answer: '5/8' }],
       explain: [
-        '两项都有 2027 和 $\\frac{1}{2026}$：$2025\\times\\frac{2027}{2026}=\\frac{2027}{2026}\\times 2025$，$2027\\times\\frac{2024}{2026}=\\frac{2027}{2026}\\times 2024$。',
-        '提取公因数：$\\frac{2027}{2026}\\times(2025-2024)=\\frac{2027}{2026}$。',
-        '易错：分别约分或化带分数，计算繁琐。',
+        '从最里层往外算。$1\\div 1.5=\\frac{2}{3}$，$1+\\frac{2}{3}=\\frac{5}{3}$。',
+        '$1\\div\\frac{5}{3}=\\frac{3}{5}$，$1+\\frac{3}{5}=\\frac{8}{5}$。',
+        '$1\\div\\frac{8}{5}=\\frac{5}{8}$。',
+        '易错：从左往右算，先算 $1\\div 1$。',
       ],
-      verify: () => F(2025).mul(F(2027).div(2026)).sub(F(2027).mul(F(2024).div(2026))),
+      verify: () => F(1).div(F(1).add(F(1).div(F(1).add(F(1).div(F(3).div(2)))))),
     },
     {
       id: '2.8-e10',
@@ -263,41 +268,20 @@ Content.section({
       id: '2.8-c02',
       level: 'challenge',
       type: 'fill',
-      stem: '计算 $\\frac{1}{1\\times 2\\times 3}+\\frac{1}{2\\times 3\\times 4}+\\frac{1}{3\\times 4\\times 5}+\\cdots$。',
+      stem: '在 $0.5\\ \\square\\ \\frac{1}{3}\\ \\square\\ 0.25\\ \\square\\ \\frac{1}{6}$ 的三个 $\\square$ 里各填一个运算符号（从 $+$、$-$、$\\times$、$\\div$ 中选），按运算顺序计算。计算过程中出现"不够减"的填法不算。',
       blanks: [
-        { kind: 'num', label: '(1) 前 8 项的和是', answer: '11/45' },
-        { kind: 'num', label: '(2) 前 $n$ 项的和第一次超过 0.24 时，$n=$', answer: '6' },
+        { kind: 'num', label: '(1) 如果三个符号互不相同，结果最大是多少', answer: '5/3' },
+        { kind: 'num', label: '(2) 符号可以重复，结果是正整数的填法有几种', answer: '6' },
       ],
       explain: [
-        '思路：三个数的积不能直接套两项裂项。试一试相邻两个"两数积的倒数"之差：$\\frac{1}{1\\times 2}-\\frac{1}{2\\times 3}=\\frac{3-1}{1\\times 2\\times 3}=\\frac{2}{1\\times 2\\times 3}$。',
-        '所以 $\\frac{1}{k\\times(k+1)\\times(k+2)}=\\frac{1}{2}\\times\\left(\\frac{1}{k\\times(k+1)}-\\frac{1}{(k+1)\\times(k+2)}\\right)$。',
-        '前 $n$ 项和 $=\\frac{1}{2}\\times\\left(\\frac{1}{2}-\\frac{1}{(n+1)\\times(n+2)}\\right)$。',
-        '(1) $n=8$：$\\frac{1}{2}\\times\\left(\\frac{1}{2}-\\frac{1}{90}\\right)=\\frac{1}{2}\\times\\frac{44}{90}=\\frac{11}{45}$。',
-        '(2) 要超过 0.24：$\\frac{1}{2}-\\frac{1}{(n+1)\\times(n+2)}>0.48$，$\\frac{1}{(n+1)\\times(n+2)}<0.02=\\frac{1}{50}$，$(n+1)\\times(n+2)>50$。$6\\times 7=42$ 不够，$7\\times 8=56$ 可以，$n+1=7$，$n=6$。',
-        '易错：裂项时忘了乘 $\\frac{1}{2}$。',
-      ],
-      verify: () => {
-        const sumTo = n => { let s = F(0); for (let k = 1; k <= n; k++) s = s.add(F(1).div(k * (k + 1) * (k + 2))); return s; };
-        let n = 1;
-        while (sumTo(n).cmp(F(24).div(100)) <= 0) n++;
-        return [sumTo(8), n];
-      },
-    },
-    {
-      id: '2.8-c03',
-      level: 'challenge',
-      type: 'fill',
-      stem: '在 $0.5\\ \\square\\ \\frac{1}{3}\\ \\square\\ 0.25\\ \\square\\ \\frac{1}{6}$ 的三个 $\\square$ 里各填一个运算符号（$+$、$-$、$\\times$、$\\div$ 中选，可以重复），按运算顺序计算。',
-      blanks: [
-        { kind: 'num', label: '(1) 结果最大是多少', answer: '36' },
-        { kind: 'num', label: '(2) 结果恰好等于 1 的填法有几种', answer: '2' },
-      ],
-      explain: [
-        '思路：四个数都比 1 小。乘一个比 1 小的数会变小，除以一个比 1 小的数会变大，所以要大就多用除号。',
-        '(1) 三个都填 $\\div$：$\\frac{1}{2}\\div\\frac{1}{3}\\div\\frac{1}{4}\\div\\frac{1}{6}=\\frac{1}{2}\\times 3\\times 4\\times 6=36$。其他填法：把某个 $\\div$ 换成 $+$、$-$、$\\times$，那个数就不再"放大"结果，逐个算可知其余填法的结果都不超过 9（最大的是 $0.5+\\frac{1}{3}\\div 0.25\\div\\frac{1}{6}=8\\frac{1}{2}$），比 36 小。所以最大是 36。',
-        '(2) 分类找等于 1 的：',
-        '全是乘除：结果是 $\\frac{1}{2}$ 乘或除以 $\\frac{1}{3}$、$\\frac{1}{4}$、$\\frac{1}{6}$。要等于 1，需要"除以的数的积"是"乘的数的积"的 $\\frac{1}{2}$：$\\frac{1}{3}\\times\\frac{1}{4}=\\frac{1}{12}$，$\\frac{1}{12}\\div\\frac{1}{6}=\\frac{1}{2}$，所以 $\\div\\frac{1}{3}\\div\\frac{1}{4}\\times\\frac{1}{6}$ 可以：$\\frac{1}{2}\\div\\frac{1}{3}\\div\\frac{1}{4}\\times\\frac{1}{6}=1$。',
-        '有加减：$\\frac{1}{2}+\\frac{1}{3}\\times\\frac{1}{4}\\div\\frac{1}{6}=\\frac{1}{2}+\\frac{1}{2}=1$。逐个检验其余填法都不等于 1，所以共 2 种。',
+        '四个数都比 1 小：乘它们会变小，除以它们会变大。',
+        '(1) 三个符号不同，恰好有一个除号。按除号的位置分三类，每类再试另外两个符号：',
+        '除号在第 1 个：$0.5\\div\\frac{1}{3}=\\frac{3}{2}$，后面接 $\\frac{1}{4}$、$\\frac{1}{6}$，最大是 $\\frac{3}{2}+\\frac{1}{4}-\\frac{1}{6}=\\frac{19}{12}$。',
+        '除号在第 2 个：$\\frac{1}{3}\\div\\frac{1}{4}=\\frac{4}{3}$，最大是 $0.5+\\frac{4}{3}-\\frac{1}{6}=\\frac{5}{3}$（$0.5-\\frac{4}{3}$ 不够减）。',
+        '除号在第 3 个：$\\frac{1}{4}\\div\\frac{1}{6}=\\frac{3}{2}$，最大是 $0.5-\\frac{1}{3}+\\frac{3}{2}=\\frac{5}{3}$ 或 $0.5\\times\\frac{1}{3}+\\frac{3}{2}=\\frac{5}{3}$；若乘号在除号前，$\\frac{1}{3}\\times\\frac{1}{4}\\div\\frac{1}{6}=\\frac{1}{2}$，结果更小。',
+        '比较三类，最大是 $\\frac{5}{3}$。',
+        '(2) 按除号的个数分类，逐个计算后，结果是正整数的有：$0.5\\div\\frac{1}{3}\\div 0.25\\div\\frac{1}{6}=36$；$0.5\\times\\frac{1}{3}\\div 0.25\\div\\frac{1}{6}=4$；$0.5\\div\\frac{1}{3}\\div 0.25\\times\\frac{1}{6}=1$；$0.5\\div\\frac{1}{3}+0.25\\div\\frac{1}{6}=3$；$0.5+\\frac{1}{3}\\div 0.25+\\frac{1}{6}=2$；$0.5+\\frac{1}{3}\\times 0.25\\div\\frac{1}{6}=1$。共 6 种。',
+        '（没有除号时结果都比 2 小且不是整数；其余填法检验后都不是正整数或不够减。）易错：漏掉三个除号的那一种，或者把不够减的也算进去。',
       ],
       verify: () => {
         const nums = [F(1).div(2), F(1).div(3), F(1).div(4), F(1).div(6)];
@@ -311,17 +295,43 @@ Content.section({
             else { os.push(o[i]); vals.push(nums[i + 1]); }
           }
           let r = vals[0];
-          os.forEach((op, i) => { r = op === '+' ? r.add(vals[i + 1]) : r.sub(vals[i + 1]); });
-          return r;
+          let neg = false;
+          os.forEach((op, i) => { r = op === '+' ? r.add(vals[i + 1]) : r.sub(vals[i + 1]); if (r.cmp(0) < 0) neg = true; });
+          return neg ? null : r;
         };
         let best = null;
-        let ones = 0;
+        let ints = 0;
         for (const a of ops) for (const b of ops) for (const c of ops) {
           const r = ev([a, b, c]);
-          if (!best || r.cmp(best) > 0) best = r;
-          if (r.eq(1)) ones++;
+          if (!r) continue;
+          if (new Set([a, b, c]).size === 3 && (!best || r.cmp(best) > 0)) best = r;
+          if (r.d === 1n && r.cmp(0) > 0) ints++;
         }
-        return [best, ones];
+        return [best, ints];
+      },
+    },
+    {
+      id: '2.8-c03',
+      level: 'challenge',
+      type: 'fill',
+      stem: '一组数的平均数是 1.2。去掉其中一个数 3.6 后，剩下的数的平均数是 $1\\frac{1}{15}$。',
+      blanks: [
+        { kind: 'num', label: '(1) 原来一共有几个数', answer: '19' },
+        { kind: 'num', label: '(2) 再去掉一个数后，剩下的数的平均数恰好是 1，第二次去掉的数是多少', answer: '11/5' },
+      ],
+      explain: [
+        '思路：平均数变化的原因是去掉的数比平均数大，多出来的部分被剩下的数"分摊"了。',
+        '(1) 3.6 比原平均数 1.2 多 2.4。去掉它后，剩下的每个数的平均数比 1.2 少了 $1.2-1\\frac{1}{15}=\\frac{6}{5}-\\frac{16}{15}=\\frac{2}{15}$。',
+        '原来这 2.4 是被所有数平分的；也就是说，去掉 3.6 后，剩下的数的总和比"个数 × 1.2"少了 2.4，平均下来每个少 $\\frac{2}{15}$。剩下的个数 $=2.4\\div\\frac{2}{15}=18$，原来 19 个。',
+        '检验：原总和 $19\\times 1.2=22.8$，去掉 3.6 剩 19.2，$19.2\\div 18=1\\frac{1}{15}$。',
+        '(2) 剩下 18 个数总和 19.2，再去掉一个后剩 17 个，平均数是 1，总和 17。去掉的数是 $19.2-17=2.2=\\frac{11}{5}$。',
+        '易错：(1) 用 $3.6\\div\\frac{2}{15}$ 或 $2.4\\div\\frac{2}{15}$ 当成原来的个数。',
+      ],
+      verify: () => {
+        let n = 0;
+        for (let m = 2; m < 200; m++) if (F(m).mul(F(6).div(5)).sub(F(18).div(5)).div(m - 1).eq(F(16).div(15))) n = m;
+        const rest = F(n).mul(F(6).div(5)).sub(F(18).div(5));
+        return [n, rest.sub(n - 2)];
       },
     },
     {
@@ -331,21 +341,22 @@ Content.section({
       stem: '规定 $a\\star b=\\frac{a+b}{1+a\\times b}$（$a$、$b$ 都是正数），多个数的运算从左往右依次进行。',
       blanks: [
         { kind: 'num', label: '(1) $0.5\\star\\frac{1}{3}\\star 0.25=$', answer: '9/11' },
-        { kind: 'num', label: '(2) $0.5\\star 0.5\\star 0.5\\star 0.5\\star 0.5$（5 个 0.5）$=$', answer: '121/122' },
+        { kind: 'num', label: '(2) 把 $n$ 个 0.5 依次做 $\\star$ 运算（$0.5\\star 0.5\\star\\cdots\\star 0.5$），结果第一次超过 0.999 时，$n$ 最小是多少', answer: '7' },
       ],
       explain: [
-        '(1) $0.5\\star\\frac{1}{3}=\\frac{\\frac{5}{6}}{\\frac{7}{6}}=\\frac{5}{7}$；$\\frac{5}{7}\\star\\frac{1}{4}=\\frac{\\frac{27}{28}}{\\frac{33}{28}}=\\frac{27}{33}=\\frac{9}{11}$。',
-        '(2) 思路：一步一步算，看结果有什么规律。2 个 0.5：$\\frac{1}{1\\frac{1}{4}}=\\frac{4}{5}$；3 个：$\\frac{4}{5}\\star\\frac{1}{2}=\\frac{\\frac{13}{10}}{\\frac{14}{10}}=\\frac{13}{14}$；4 个：$\\frac{13}{14}\\star\\frac{1}{2}=\\frac{\\frac{40}{28}}{\\frac{41}{28}}=\\frac{40}{41}$。',
-        '规律：结果都是 $\\frac{m}{m+1}$，分子 1、4、13、40，每次乘 3 再加 1。',
-        '为什么？$\\frac{m}{m+1}\\star\\frac{1}{2}$：分子 $\\frac{m}{m+1}+\\frac{1}{2}=\\frac{3\\times m+1}{2\\times(m+1)}$，分母 $1+\\frac{m}{2\\times(m+1)}=\\frac{3\\times m+2}{2\\times(m+1)}$，相除得 $\\frac{3\\times m+1}{3\\times m+2}$。确实是新分子 $3\\times m+1$、分母比分子大 1。',
-        '5 个：$m=3\\times 40+1=121$，结果 $\\frac{121}{122}$。',
-        '易错：以为 $a\\star a=a$ 或者结果越来越接近 0.5。',
+        '(1) $0.5\\star\\frac{1}{3}=\\frac{5}{6}\\div\\frac{7}{6}=\\frac{5}{7}$；$\\frac{5}{7}\\star\\frac{1}{4}=\\frac{27}{28}\\div\\frac{33}{28}=\\frac{9}{11}$。',
+        '(2) 思路：先算前几个，找规律，再推广。2 个：$\\frac{1}{1\\frac{1}{4}}=\\frac{4}{5}$；3 个：$\\frac{4}{5}\\star\\frac{1}{2}=\\frac{13}{10}\\div\\frac{14}{10}=\\frac{13}{14}$；4 个：$\\frac{13}{14}\\star\\frac{1}{2}=\\frac{40}{41}$。',
+        '规律：结果都是 $\\frac{m}{m+1}$，$m$ 依次是 1、4、13、40，每次乘 3 再加 1。说明：$\\frac{m}{m+1}\\star\\frac{1}{2}$ 的分子 $\\frac{3\\times m+1}{2\\times(m+1)}$，分母 $\\frac{3\\times m+2}{2\\times(m+1)}$，相除得 $\\frac{3\\times m+1}{3\\times m+2}$。',
+        '$\\frac{m}{m+1}$ 超过 $0.999=\\frac{999}{1000}$，就是离 1 差的 $\\frac{1}{m+1}$ 比 $\\frac{1}{1000}$ 小，$m+1>1000$，$m\\ge 1000$。',
+        '$m$ 依次是 1、4、13、40、121、364、1093：第 7 个是 1093，才超过 1000。所以 $n=7$。',
+        '易错：只算到第 4、5 个就猜答案；或者以为结果越来越接近 0.5。',
       ],
       verify: () => {
         const st = (a, b) => a.add(b).div(F(1).add(a.mul(b)));
         let x = F(1).div(2);
-        for (let i = 2; i <= 5; i++) x = st(x, F(1).div(2));
-        return [st(st(F(1).div(2), F(1).div(3)), F(1).div(4)), x];
+        let n = 1;
+        while (x.cmp(F(999).div(1000)) <= 0) { x = st(x, F(1).div(2)); n++; }
+        return [st(st(F(1).div(2), F(1).div(3)), F(1).div(4)), n];
       },
     },
     {
@@ -355,20 +366,26 @@ Content.section({
       stem: '规定 $a\\otimes b=a\\div b+b\\div a$（$a$、$b$ 都是正数）。',
       blanks: [
         { kind: 'nums', label: '(1) 如果 $0.5\\otimes x=2\\frac{1}{6}$，$x$ 可能是（全部填出，用逗号隔开）', answer: ['1/3', '3/4'] },
-        { kind: 'num', label: '(2) $(0.5\\otimes 0.25)\\otimes 1=$', answer: '29/10' },
+        { kind: 'nums', label: '(2) 如果 $x$ 是分数（或整数），并且 $0.5\\otimes x$ 是整数，$x$ 可能是（全部填出，用逗号隔开）', answer: ['1/2'] },
       ],
       explain: [
-        '(1) 思路：$0.5\\otimes x=\\frac{0.5}{x}+\\frac{x}{0.5}$，两项正好互为倒数。设 $t=\\frac{x}{0.5}$（即 $x$ 的 2 倍），则 $t+\\frac{1}{t}=2\\frac{1}{6}=\\frac{13}{6}$。',
-        '两个互为倒数的数，和是 $\\frac{13}{6}$：把 $\\frac{13}{6}$ 拆成 $\\frac{a}{b}+\\frac{b}{a}=\\frac{a\\times a+b\\times b}{a\\times b}$，试 $a\\times b=6$：$2\\times 3$，$4+9=13$，正好。所以 $t=\\frac{3}{2}$ 或 $\\frac{2}{3}$。',
-        '$x=\\frac{t}{2}$：$x=\\frac{3}{4}$ 或 $\\frac{1}{3}$。检验：$0.5\\div\\frac{3}{4}+\\frac{3}{4}\\div 0.5=\\frac{2}{3}+\\frac{3}{2}=\\frac{13}{6}$；$0.5\\div\\frac{1}{3}+\\frac{1}{3}\\div 0.5=\\frac{3}{2}+\\frac{2}{3}=\\frac{13}{6}$。',
-        '(2) $0.5\\otimes 0.25=2+\\frac{1}{2}=\\frac{5}{2}$；$\\frac{5}{2}\\otimes 1=\\frac{5}{2}+\\frac{2}{5}=\\frac{29}{10}$。',
-        '易错：(1) 只找到一个 $x$；没发现两项互为倒数，硬凑。',
+        '思路：$0.5\\otimes x=\\frac{0.5}{x}+\\frac{x}{0.5}$，两项正好互为倒数。设 $t=\\frac{x}{0.5}$（$x$ 的 2 倍），式子就是 $t+\\frac{1}{t}$。',
+        '(1) $t+\\frac{1}{t}=\\frac{13}{6}$。把 $t$ 写成最简分数 $\\frac{p}{q}$，$\\frac{p}{q}+\\frac{q}{p}=\\frac{p\\times p+q\\times q}{p\\times q}$。$p\\times q$ 与 $p\\times p+q\\times q$ 互素（$p$、$q$ 互素时，$p$ 的素因数整除不了 $q\\times q$），所以这个分数已经最简，$p\\times q=6$，$p\\times p+q\\times q=13$。',
+        '$p\\times q=6$ 只有 1 和 6、2 和 3 两种，$1+36=37$ 不行，$4+9=13$ 可以。所以 $t=\\frac{2}{3}$ 或 $\\frac{3}{2}$，$x=\\frac{1}{3}$ 或 $\\frac{3}{4}$，恰好两个。',
+        '(2) 同样，$t+\\frac{1}{t}=\\frac{p\\times p+q\\times q}{p\\times q}$ 已是最简分数，要是整数，分母 $p\\times q=1$，$p=q=1$，$t=1$，$x=\\frac{1}{2}$（这时 $0.5\\otimes 0.5=2$）。',
+        '易错：(1) 只凑出一个 $x$；(2) 以为 $x=1$、$x=2$ 这样的整数也行（$0.5\\otimes 1=2\\frac{1}{2}$，不是整数）。',
       ],
       verify: () => {
         const ot = (a, b) => a.div(b).add(b.div(a));
-        const r = new Set();
-        for (let n = 1; n <= 40; n++) for (let d = 1; d <= 40; d++) { const x = F(n).div(d); if (ot(F(1).div(2), x).eq(F(13).div(6))) r.add(x.toString()); }
-        return [[...r].map(s => F(s)), ot(ot(F(1).div(2), F(1).div(4)), F(1))];
+        const r1 = new Set();
+        const r2 = new Set();
+        for (let n = 1; n <= 60; n++) for (let d = 1; d <= 60; d++) {
+          const x = F(n).div(d);
+          const v = ot(F(1).div(2), x);
+          if (v.eq(F(13).div(6))) r1.add(x.toString());
+          if (v.d === 1n) r2.add(x.toString());
+        }
+        return [[...r1].map(s => F(s)), [...r2].map(s => F(s))];
       },
     },
   ],
