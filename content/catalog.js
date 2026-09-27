@@ -346,7 +346,7 @@ Content.catalog = {
                     { no: '2.4', title: '分数的加减法', ready: true },
                     { no: '2.5', title: '分数的乘法', ready: true },
                     { no: '2.6', title: '分数的除法', ready: true },
-                    { no: '2.7', title: '分数与小数的互化', ready: false },
+                    { no: '2.7', title: '分数与小数的互化', ready: true },
                     { no: '2.8', title: '分数、小数的四则混合运算', ready: false },
                     { no: '2.9', title: '分数运算的应用', ready: false },
                   ],
