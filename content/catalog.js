@@ -314,6 +314,47 @@ Content.catalog = {
             },
           ],
         },
+        {
+          // 六年级衔接：新教材和小学教材之间的断层，学校 9 月仍用旧版沪教版六年级第一学期补课，只补第一、二章（数的整除、分数），之后回到新教材。
+          // 册 ID 和新教材 6 上相同，首页选六年级上册时两张卡片并列。设计见 docs/superpowers/specs/2026-09-27-g6-bridge-design.md
+          id: 'bridge',
+          name: '衔接内容（旧版沪教版六年级第一学期）',
+          volumes: [
+            {
+              id: 'g6s1',
+              name: '六年级衔接',
+              chapters: [
+                {
+                  no: 1,
+                  title: '数的整除',
+                  sections: [
+                    { no: '1.1', title: '整数和整除的意义', ready: true },
+                    { no: '1.2', title: '因数和倍数', ready: true },
+                    { no: '1.3', title: '能被 2、5 整除的数', ready: false },
+                    { no: '1.4', title: '素数、合数与分解素因数', ready: false },
+                    { no: '1.5', title: '公因数与最大公因数', ready: false },
+                    { no: '1.6', title: '公倍数与最小公倍数', ready: false },
+                  ],
+                },
+                {
+                  no: 2,
+                  title: '分数',
+                  sections: [
+                    { no: '2.1', title: '分数与除法', ready: false },
+                    { no: '2.2', title: '分数的基本性质', ready: false },
+                    { no: '2.3', title: '分数的大小比较', ready: false },
+                    { no: '2.4', title: '分数的加减法', ready: false },
+                    { no: '2.5', title: '分数的乘法', ready: false },
+                    { no: '2.6', title: '分数的除法', ready: false },
+                    { no: '2.7', title: '分数与小数的互化', ready: false },
+                    { no: '2.8', title: '分数、小数的四则混合运算', ready: false },
+                    { no: '2.9', title: '分数运算的应用', ready: false },
+                  ],
+                },
+              ],
+            },
+          ],
+        },
       ],
     },
   ],
