@@ -9,12 +9,13 @@
 //   #/eq/<真题卷ID>/<题目ID> 做真题
 //   #/exam...           限时测试（src/exam.js 负责渲染）
 //   #/g/<游戏ID>[/<关卡ID>] 挂在小节上的动手玩游戏（window.Games 里注册）
+//   #/english-bank[/<题目ID>] 英语错题库
+//   #/english-plan[/<天数>[/result]] 英语七天复习计划、每日作答与错题结果
 
 (function () {
   const app = document.getElementById('app');
   const { renderText, escapeHtml, LEVEL_NAMES, DIFFICULTY_NAMES } = Quiz;
   const LEVEL_ORDER = ['basic', 'extended', 'challenge'];
-
   // 题目按 基础 → 扩展 → 挑战 排序，同档内保持文件中的顺序
   function orderedQuestions(section) {
     return LEVEL_ORDER.flatMap(lv => section.questions.filter(q => q.level === lv));
@@ -116,6 +117,21 @@
     { name: '立体图形', tag: '展开图 · 截面', when: '不限年级', icon: '◆', color: '#2f6fd6', href: 'src/games/solids/index.html' },
   ];
 
+  function appendVolumeCard(main, v) {
+    const metas = Content.sectionMetas().filter(s => s.volumeId === v.id);
+    const ready = metas.filter(s => s.section.ready).length;
+    const solved = metas.reduce((n, s) => n + Progress.solvedCount(s.id), 0);
+    const card = document.createElement('a');
+    card.className = 'card volume';
+    card.href = `#/v/${v.id}`;
+    card.innerHTML =
+      `<span class="tag">${escapeHtml(v.subject.name)}</span>` +
+      `<h2>${escapeHtml(v.volume.name)}</h2>` +
+      `<p>${escapeHtml(v.edition.name)}</p>` +
+      `<p class="meta">已上线 ${ready} / ${metas.length} 节 · 已答对 ${solved} 题</p>`;
+    main.appendChild(card);
+  }
+
   // ---------- 首页 ----------
   function home() {
     const main = page('学趣闯关', null, '跟着课本学，一节一关');
@@ -125,27 +141,13 @@
     mountSemesterSwitcher(header, semester && semester.id, username);
     AccountUI.mount(header);
     const volumes = semester ? Content.volumes().filter(v => v.volume.id === semester.id) : [];
-    for (const v of volumes) {
-      const metas = Content.sectionMetas().filter(s => s.volumeId === v.id);
-      const ready = metas.filter(s => s.section.ready).length;
-      const solved = metas.reduce((n, s) => n + Progress.solvedCount(s.id), 0);
-      const card = document.createElement('a');
-      card.className = 'card volume';
-      card.href = `#/v/${v.id}`;
-      card.innerHTML =
-        `<span class="tag">${escapeHtml(v.subject.name)}</span>` +
-        `<h2>${escapeHtml(v.volume.name)}</h2>` +
-        `<p>${escapeHtml(v.edition.name)}</p>` +
-        `<p class="meta">已上线 ${ready} / ${metas.length} 节 · 已答对 ${solved} 题</p>`;
-      main.appendChild(card);
-    }
+    volumes.forEach(v => appendVolumeCard(main, v));
     const exam = document.createElement('a');
     exam.className = 'card volume exam-entry';
     exam.innerHTML =
       `<span class="tag">试卷</span>` +
       `<h2>试卷</h2>` +
       `<p>先交卷，再看分数和错题解析</p>`;
-    // 短按才跳转；长按（>500ms）不触发
     let pressStart = 0;
     let longPressed = false;
     exam.addEventListener('pointerdown', () => {
@@ -163,6 +165,21 @@
     });
     exam.addEventListener('contextmenu', e => e.preventDefault());
     main.appendChild(exam);
+
+    const english = document.createElement('section');
+    english.className = 'home-english';
+    english.innerHTML = '<h3 class="group">英语</h3>';
+    for (const entry of [
+      { title: '英语学习大纲', desc: '查看上海初中英语知识点梳理', href: 'content/english/shanghai-junior-outline.html' },
+      { title: '英语试题库', desc: '按知识点和题型练习错题', href: '#/english-bank' },
+    ]) {
+      const link = document.createElement('a');
+      link.className = 'card home-english-entry';
+      link.href = entry.href;
+      link.innerHTML = `<h2>${escapeHtml(entry.title)}</h2><p>${escapeHtml(entry.desc)}</p>`;
+      english.appendChild(link);
+    }
+    main.appendChild(english);
     // 趣味玩法：宫格，每格只写名字、练什么、课本位置，详细玩法进了游戏再看
     const games = document.createElement('section');
     games.innerHTML =
@@ -399,11 +416,39 @@
   // 上一个页面：从首页进游戏时返回键回首页，其余回游戏所在的小节
   let prevParts = [];
 
+  async function englishBankPage(id) {
+    const main = page(id ? '英语试题' : '英语试题库', id ? '#/english-bank' : '#/', '先学知识点，再练错题');
+    try {
+      const questions = await EnglishBank.load();
+      if (id) EnglishBank.detailPage(main, questions, id);
+      else EnglishBank.listPage(main, questions);
+    } catch (error) {
+      showError(main, '英语试题库暂时无法加载，请稍后重试。');
+    }
+  }
+
+  async function englishPlanPage(day, view) {
+    const main = page(view === 'result' ? `第 ${day} 天 · 错题回顾` :
+      (day ? `英语复习 · 第 ${day} 天` : '英语 7 天复习计划'),
+      view === 'result' ? `#/english-plan/${day}` :
+        (day ? '#/english-plan' : '#/english-bank'), '按知识点复习错题');
+    try {
+      const questions = await EnglishBank.load();
+      if (day && view === 'result') EnglishPlan.renderResult(main, questions, day);
+      else if (day) EnglishPlan.renderDay(main, questions, day);
+      else EnglishPlan.renderOverview(main, questions);
+    } catch (error) {
+      showError(main, '英语复习计划暂时无法加载，请稍后重试。');
+    }
+  }
+
   function route() {
     const parts = (location.hash.slice(1) || '/').split('/').filter(Boolean);
     const prev = prevParts;
     prevParts = parts;
     window.scrollTo(0, 0);
+    if (parts[0] === 'english-bank') return englishBankPage(parts[1]);
+    if (parts[0] === 'english-plan') return englishPlanPage(parts[1], parts[2]);
     if (parts[0] === 'v') return volumePage(parts.slice(1).join('/'));
     if (parts[0] === 's') return sectionPage(parts.slice(1).join('/'));
     if (parts[0] === 'q') return questionPage(parts.slice(1, -1).join('/'), parts[parts.length - 1]);

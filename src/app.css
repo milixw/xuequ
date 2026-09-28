@@ -70,10 +70,186 @@ a { color: inherit; text-decoration: none; }
   background: var(--primary); color: #fff; margin-bottom: 6px;
 }
 
-.exam-entry {
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  user-select: none;
+/* 首页只额外保留英语大纲和试题库两个入口。 */
+.home-english { margin-top: 18px; }
+.home-english .group { margin: 0 0 8px; }
+.home-english-entry { min-height: 64px; }
+
+/* 英语错题库：知识介绍先于题目。 */
+.english-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 16px 0 6px; }
+.english-controls input, .english-controls select {
+  min-width: 0; min-height: 40px; padding: 8px; border: 1px solid var(--line);
+  border-radius: 8px; background: var(--card); color: var(--text); font: inherit;
+}
+.english-controls input { grid-column: 1 / -1; width: 100%; }
+.english-controls select { width: 100%; }
+.english-knowledge-group { margin-top: 24px; }
+.english-knowledge-group .group { margin: 0 0 8px; }
+.english-knowledge-intro {
+  background: var(--card); border-left: 4px solid var(--primary);
+  border-radius: 8px; padding: 12px 14px; margin-bottom: 12px;
+}
+.english-knowledge-intro > strong { display: block; font-size: 14px; margin-bottom: 4px; }
+.english-knowledge-intro p { margin: 0; font-size: 14px; }
+.english-knowledge-intro .english-knowledge-subtitle { display: block; margin-top: 10px; font-size: 13px; }
+.english-knowledge-steps { margin: 4px 0 0; padding-left: 22px; font-size: 13px; }
+.english-knowledge-steps li + li { margin-top: 5px; }
+.english-knowledge-intro .english-knowledge-example { margin-top: 10px; padding: 8px 10px; background: #eef3fb; border-radius: 7px; }
+.english-knowledge-errors { margin-top: 10px; padding-top: 8px; border-top: 1px solid var(--line); font-size: 13px; }
+.english-knowledge-errors strong { color: var(--warn); }
+.english-knowledge-errors ul { margin: 4px 0 0; padding-left: 20px; }
+.english-knowledge-errors li + li { margin-top: 6px; }
+.english-conjunction-guide { margin-top: 14px; }
+.english-conjunction-guide h4 { margin: 0 0 4px; font-size: 14px; }
+.english-conjunction-guide > p { color: var(--muted); font-size: 12px; }
+.english-conjunction-group { margin-top: 8px; border: 1px solid var(--line); border-radius: 8px; }
+.english-conjunction-group summary {
+  min-height: 40px; padding: 8px 10px; cursor: pointer;
+  font-size: 13px; font-weight: 600;
+}
+.english-conjunction-group[open] summary { border-bottom: 1px solid var(--line); }
+.english-conjunction-group ul { margin: 0; padding: 0 10px; list-style: none; }
+.english-conjunction-group li { padding: 7px 0; font-size: 12px; }
+.english-conjunction-group li + li { border-top: 1px solid var(--line); }
+.english-conjunction-group li strong { display: block; font-size: 13px; color: var(--primary); overflow-wrap: anywhere; }
+.english-conjunction-group li span { display: block; }
+.english-conjunction-group li em { display: block; margin-top: 2px; font-style: normal; color: var(--muted); overflow-wrap: anywhere; }
+.english-confusable-guide { margin-top: 16px; }
+.english-confusable-guide h4 { margin: 0 0 8px; font-size: 14px; }
+.english-confusable-card { margin-top: 8px; padding: 10px 12px; border-radius: 8px; background: var(--warn-bg); }
+.english-confusable-card h5 { margin: 0 0 5px; font-size: 13px; color: var(--warn); }
+.english-confusable-card p, .english-confusable-card li { font-size: 12px; }
+.english-confusable-card ul { margin: 7px 0; padding-left: 18px; }
+.english-confusable-card li + li { margin-top: 3px; }
+.english-confusable-card .english-confusable-pitfall { margin-top: 7px; font-weight: 600; }
+.english-summary { color: var(--muted); font-size: 13px; }
+.english-plan-entry, .english-plan-action, .english-plan-day-link {
+  display: inline-flex; align-items: center; min-height: 40px;
+  color: var(--primary); font-size: 14px;
+}
+.english-plan-entry {
+  width: 100%; margin-top: 12px; padding: 8px 12px;
+  border: 1px solid var(--primary); border-radius: 9px;
+  background: var(--card); font-weight: 600;
+}
+.english-plan-intro { font-size: 14px; margin: 12px 0; }
+.english-plan-actions { display: flex; flex-wrap: wrap; gap: 8px 16px; }
+.english-plan-action { border: 0; background: none; padding: 0; font: inherit; cursor: pointer; }
+.english-plan-primer { margin-top: 18px; }
+.english-plan-primer .group { margin: 0 0 8px; }
+.english-plan-primer-details > summary {
+  min-height: 40px; padding: 8px 10px; border: 1px solid var(--line);
+  border-radius: 8px; background: var(--card); cursor: pointer;
+  font-size: 13px; font-weight: 600;
+}
+.english-plan-primer-details > .english-knowledge-intro { margin-top: 8px; }
+.english-plan-days { display: grid; gap: 9px; margin-top: 14px; }
+.english-plan-day {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: 10px; padding: 10px 13px; break-inside: avoid;
+}
+.english-plan-day h2 { font-size: 16px; margin: 0 0 4px; }
+.english-plan-day p { font-size: 13px; margin: 3px 0; }
+.english-plan-day .english-plan-topics { color: var(--primary); }
+.english-plan-day .english-plan-record { margin-top: 7px; color: var(--muted); }
+.english-plan-day-link { margin-top: 3px; }
+.english-plan-question { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 14px; }
+.english-plan-number { white-space: nowrap; }
+.english-plan-item { border-left: 4px solid var(--line); }
+.english-plan-item.solved { border-left-color: var(--ok); }
+.english-plan-item.tried, .english-plan-item.revealed { border-left-color: var(--warn); }
+.english-plan-item h3, .english-plan-review h3 { margin: 0 0 8px; font-size: 14px; }
+.english-plan-choices { display: flex; flex-wrap: wrap; align-items: flex-start; gap: 6px; margin: 10px 0 0; }
+.english-plan-choices label {
+  display: inline-flex; flex: none; align-items: flex-start; gap: 5px; min-height: 36px;
+  width: max-content; max-width: 100%; padding: 6px 8px;
+  border: 1px solid var(--line); border-radius: 7px;
+  font-size: 14px; cursor: pointer;
+}
+.english-plan-choices label:has(input:checked) { border-color: var(--primary); background: #eef3fb; }
+.english-plan-choices input { flex: none; margin-top: 4px; accent-color: var(--primary); }
+.english-plan-choices span { overflow-wrap: anywhere; white-space: normal; }
+.english-plan-cloze { display: grid; gap: 8px; margin-top: 12px; }
+.english-plan-cloze label { display: flex; align-items: center; gap: 8px; font-size: 13px; }
+.english-plan-cloze label span { flex: 0 0 48px; }
+.english-plan-cloze select {
+  min-width: 0; flex: 1; min-height: 40px; padding: 7px;
+  border: 1px solid var(--line); border-radius: 8px;
+  background: var(--card); color: var(--text); font: inherit;
+}
+.english-plan-ungraded { margin-top: 8px !important; color: var(--warn) !important; font-size: 12px !important; }
+.english-plan-question-link { display: inline-flex; align-items: center; min-height: 40px; color: var(--primary); font-size: 13px; }
+.english-plan-submit {
+  position: sticky; bottom: 0; z-index: 8; padding: 10px 0 12px;
+  background: var(--bg); border-top: 1px solid var(--line);
+}
+.english-plan-count { margin: 0 0 6px; font-size: 12px; color: var(--muted); }
+.english-plan-submit button {
+  width: 100%; min-height: 44px; border: 0; border-radius: 8px;
+  background: var(--primary); color: #fff; font: inherit; cursor: pointer;
+}
+.english-plan-review .english-plan-your-answer,
+.english-plan-review .english-plan-correct-answer {
+  margin-top: 10px; padding: 8px 10px; border-radius: 7px;
+  font-size: 14px; overflow-wrap: anywhere;
+}
+.english-plan-review .english-plan-your-answer { background: var(--fail-bg); color: var(--fail); }
+.english-plan-review .english-plan-correct-answer { background: var(--ok-bg); color: var(--ok); }
+.english-result { border-left: 4px solid var(--line); }
+.english-result.solved { border-left-color: var(--ok); }
+.english-result.tried, .english-result.revealed { border-left-color: var(--warn); }
+.english-result strong { display: block; color: var(--primary); }
+.english-result small { display: block; color: var(--muted); }
+.english-result p { margin-top: 6px; overflow-wrap: anywhere; }
+.english-question-text { white-space: pre-wrap; overflow-wrap: anywhere; font-size: 15px; }
+.english-question h2 { color: var(--primary); }
+.english-choices { display: flex; flex-wrap: wrap; gap: 8px; }
+.english-choices button, .english-reveal, .english-more {
+  min-width: 40px; min-height: 40px; padding: 8px 12px;
+  border: 1px solid var(--primary); border-radius: 8px;
+  background: var(--card); color: var(--primary); font: inherit; cursor: pointer;
+}
+.english-reveal { margin-top: 10px; }
+.english-reset {
+  min-height: 40px; margin: 10px 0 0 8px; padding: 8px 12px;
+  border: 1px solid var(--line); border-radius: 8px;
+  background: var(--card); color: var(--muted); font: inherit; cursor: pointer;
+}
+.english-more { display: block; width: 100%; }
+.english-feedback.ok { color: var(--ok); }
+.english-feedback.fail { color: var(--fail); }
+.english-cloze-note { margin-top: 12px !important; color: var(--warn) !important; }
+.english-cloze-form { display: grid; gap: 10px; }
+.english-cloze-row { display: flex; align-items: center; gap: 10px; font-size: 14px; }
+.english-cloze-row span { flex: 0 0 54px; }
+.english-cloze-row select {
+  flex: 1; min-width: 0; min-height: 40px; padding: 8px;
+  border: 1px solid var(--line); border-radius: 8px;
+  background: var(--card); color: var(--text); font: inherit;
+}
+.english-cloze-form button {
+  min-height: 40px; padding: 8px 12px; border: 0; border-radius: 8px;
+  background: var(--primary); color: white; font: inherit; cursor: pointer;
+}
+@media (max-width: 360px) {
+  .english-controls { grid-template-columns: 1fr; }
+  .english-controls input, .english-controls select { width: 100%; }
+}
+
+@page { size: A4; margin: 12mm; }
+@media print {
+  body { background: white; color: black; }
+  #app { max-width: none; padding: 0; }
+  .bar { position: static; margin: 0 0 8px; padding: 0; border: 0; background: white; }
+  .bar .back, .english-plan-actions, .english-plan-day-link, .english-plan-note,
+  .english-plan-primer { display: none !important; }
+  .bar h1 { font-size: 18pt; }
+  .english-plan-intro { margin: 4px 0 8px; font-size: 10pt; }
+  .english-plan-days { gap: 5px; margin-top: 6px; }
+  .english-plan-day { box-shadow: none; padding: 6px 9px; border-color: #aaa; }
+  .english-plan-day h2 { font-size: 11pt; }
+  .english-plan-day p { font-size: 9pt; margin: 2px 0; }
+  .english-plan-day .english-plan-topics { color: black; }
 }
 
 /* === 学期切换器 === */

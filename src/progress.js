@@ -45,6 +45,16 @@
       save();
     },
 
+    // 删除指定题目的尝试、完成和看答案记录，不影响同组其它题。
+    clear(sectionId, qid) {
+      const section = data[sectionId];
+      if (!section || !Object.prototype.hasOwnProperty.call(section, qid)) return false;
+      delete section[qid];
+      if (!Object.keys(section).length) delete data[sectionId];
+      save();
+      return true;
+    },
+
     // 题目状态：solved 答对 / revealed 看过解析未答对 / tried 答错过 / new 未做
     status(sectionId, qid) {
       const e = Progress.get(sectionId, qid);

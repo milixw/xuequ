@@ -1,0 +1,1747 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>上海初中英语知识点系统梳理（六~九年级）</title>
+<style>
+*{box-sizing:border-box}
+:root{
+  --bg:#f4f6f9; --card:#ffffff; --ink:#1b2430; --ink2:#4a5568; --ink3:#7c8798;
+  --line:#e3e8ee; --line2:#eef1f5;
+  --blue:#1f6fd0; --blue-soft:#eaf2fd;
+  --green:#1c8a52; --green-soft:#e9f6ef;
+  --amber:#b3761a; --amber-soft:#fdf4e3;
+  --red:#c9403a; --red-soft:#fdeceb;
+  --purple:#6d4ede; --purple-soft:#f0ecfe;
+  --radius:12px;
+}
+html{scroll-behavior:smooth}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Microsoft YaHei","PingFang SC","Segoe UI",system-ui,-apple-system,sans-serif;
+  font-size:15px;line-height:1.85;-webkit-font-smoothing:antialiased;
+}
+.en{font-family:"Segoe UI","Helvetica Neue",Arial,sans-serif}
+
+/* ---------- 封面 ---------- */
+.cover{
+  background:linear-gradient(135deg,#1f6fd0 0%,#3f8ae0 45%,#5aa7f0 100%);
+  color:#fff;padding:46px 0 40px;position:relative;overflow:hidden;
+}
+.cover::after{
+  content:"";position:absolute;right:-60px;top:-60px;width:320px;height:320px;
+  border-radius:50%;background:rgba(255,255,255,.09);
+}
+.cover::before{
+  content:"";position:absolute;right:80px;bottom:-120px;width:240px;height:240px;
+  border-radius:50%;background:rgba(255,255,255,.07);
+}
+.cover-inner{max-width:1240px;margin:0 auto;padding:0 28px;position:relative;z-index:2}
+.cover h1{margin:0 0 10px;font-size:33px;letter-spacing:1px;font-weight:700}
+.cover .sub{font-size:15px;opacity:.94;margin-bottom:20px}
+.badges{display:flex;flex-wrap:wrap;gap:10px}
+.badge{
+  background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);
+  padding:5px 13px;border-radius:999px;font-size:13px;backdrop-filter:blur(4px);
+}
+
+/* ---------- 布局 ---------- */
+.wrap{max-width:1240px;margin:0 auto;padding:26px 28px 90px;display:grid;grid-template-columns:246px 1fr;gap:26px;align-items:start}
+nav.toc{
+  position:sticky;top:16px;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--radius);padding:16px 14px;max-height:calc(100vh - 40px);overflow:auto;
+  box-shadow:0 2px 10px rgba(20,40,70,.04);font-size:13.5px;
+}
+nav.toc .t{font-weight:700;font-size:13px;color:var(--ink3);letter-spacing:1px;margin:0 0 10px 6px}
+nav.toc a{display:block;color:var(--ink2);text-decoration:none;padding:4px 8px;border-radius:7px;border-left:2px solid transparent}
+nav.toc a:hover{background:var(--blue-soft);color:var(--blue);border-left-color:var(--blue)}
+nav.toc a.lv1{font-weight:700;color:var(--ink);margin-top:8px}
+nav.toc a.lv2{padding-left:16px;font-size:13px}
+
+/* ---------- 通用块 ---------- */
+section{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);
+  padding:26px 28px;margin-bottom:20px;box-shadow:0 2px 10px rgba(20,40,70,.04);scroll-margin-top:14px}
+h2{font-size:22px;margin:0 0 6px;display:flex;align-items:center;gap:11px;letter-spacing:.5px}
+h2 .num{
+  display:inline-flex;align-items:center;justify-content:center;min-width:34px;height:34px;
+  background:linear-gradient(135deg,#1f6fd0,#4b93e6);color:#fff;border-radius:9px;
+  font-size:15px;font-weight:700;flex:none;
+}
+h2 .en-sub{font-size:12px;color:var(--ink3);font-weight:400;letter-spacing:.5px}
+h3{font-size:17px;margin:26px 0 10px;padding-left:11px;border-left:4px solid var(--blue);line-height:1.3}
+h4{font-size:15px;margin:18px 0 8px;color:var(--ink)}
+p{margin:8px 0}
+.lead{color:var(--ink2);font-size:14.5px;border-bottom:1px dashed var(--line);padding-bottom:12px;margin-bottom:4px}
+.muted{color:var(--ink3);font-size:13px}
+ul,ol{margin:8px 0;padding-left:22px}
+li{margin:4px 0}
+li::marker{color:var(--blue)}
+b,strong{color:#12314f}
+code{background:#f1f4f8;border:1px solid var(--line);border-radius:5px;padding:1px 6px;
+  font-family:"Consolas","Courier New",monospace;font-size:13px;color:#22405e}
+
+/* ---------- 提示块 ---------- */
+.tip,.exam,.err,.note{border-radius:10px;padding:12px 16px;margin:12px 0;font-size:14px;border-left:4px solid}
+.exam{background:var(--blue-soft);border-color:var(--blue)}
+.exam b:first-child{color:var(--blue)}
+.err{background:var(--red-soft);border-color:var(--red)}
+.err b:first-child{color:var(--red)}
+.tip{background:var(--green-soft);border-color:var(--green)}
+.tip b:first-child{color:var(--green)}
+.note{background:var(--amber-soft);border-color:var(--amber)}
+.note b:first-child{color:var(--amber)}
+
+/* ---------- 表格 ---------- */
+.tbl{width:100%;border-collapse:collapse;margin:12px 0;font-size:13.5px;
+  border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.tbl th{background:#f2f6fb;color:#173a5e;font-weight:700;text-align:left;padding:9px 12px;
+  border-bottom:1px solid var(--line);white-space:nowrap}
+.tbl td{padding:8px 12px;border-bottom:1px solid var(--line2);vertical-align:top;color:var(--ink2)}
+.tbl tr:last-child td{border-bottom:none}
+.tbl tr:nth-child(even) td{background:#fbfcfe}
+.tbl td strong{color:var(--ink)}
+.tbl.center td,.tbl.center th{text-align:center}
+.tbl.compact td{padding:5px 10px;font-size:13px}
+
+/* ---------- 卡片网格 ---------- */
+.grid{display:grid;gap:13px;margin:14px 0}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.card{background:#fbfcfe;border:1px solid var(--line);border-radius:10px;padding:13px 15px;font-size:13.8px}
+.card .h{font-weight:700;color:#173a5e;margin-bottom:6px;font-size:14px;display:flex;align-items:center;gap:7px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--blue);flex:none}
+.dot.g{background:var(--green)}.dot.a{background:var(--amber)}.dot.r{background:var(--red)}.dot.p{background:var(--purple)}
+.card ul{padding-left:18px;margin:4px 0}
+.card li{margin:2px 0;font-size:13.4px}
+
+/* ---------- 例句 ---------- */
+.eg{background:#f7fafd;border:1px solid var(--line);border-left:3px solid #8fbbea;
+  border-radius:8px;padding:9px 14px;margin:9px 0;font-size:13.8px;color:#2a4a68}
+.eg em{color:var(--red);font-style:normal;font-weight:700}
+.eg .zh{color:var(--ink3);font-size:12.8px}
+
+/* ---------- 标签 ---------- */
+.pill{display:inline-block;background:var(--blue-soft);color:var(--blue);border-radius:999px;
+  padding:1px 10px;font-size:12.5px;margin:2px 4px 2px 0;font-weight:600}
+.pill.g{background:var(--green-soft);color:var(--green)}
+.pill.r{background:var(--red-soft);color:var(--red)}
+.pill.a{background:var(--amber-soft);color:var(--amber)}
+.pill.p{background:var(--purple-soft);color:var(--purple)}
+
+/* ---------- 语法专题卡 ---------- */
+.gm{border:1px solid var(--line);border-radius:11px;margin:14px 0;overflow:hidden;scroll-margin-top:14px}
+.gm>.gt{background:linear-gradient(90deg,#eef4fb,#f8fbfe);border-bottom:1px solid var(--line);
+  padding:10px 16px;display:flex;align-items:center;gap:10px}
+.gm>.gt .gid{background:#1f6fd0;color:#fff;border-radius:6px;font-size:12px;font-weight:700;
+  padding:1px 8px;flex:none}
+.gm>.gt .gn{font-weight:700;font-size:15.5px;color:#12314f}
+.gm>.gt .ge{font-size:12.5px;color:var(--ink3)}
+.gm>.gb{padding:12px 16px 16px}
+
+.footer{max-width:1240px;margin:0 auto;padding:0 28px 60px;color:var(--ink3);font-size:12.5px;line-height:1.9}
+
+@media(max-width:1000px){
+  .wrap{grid-template-columns:1fr;padding:18px 16px 60px}
+  nav.toc{position:static;max-height:none}
+  .g3,.g4{grid-template-columns:repeat(2,1fr)}
+  .cover-inner,.footer{padding-left:18px;padding-right:18px}
+}
+@media(max-width:640px){
+  .g2,.g3,.g4{grid-template-columns:1fr}
+  section{padding:18px 16px}
+  .cover h1{font-size:24px}
+}
+@media print{
+  body{background:#fff;font-size:11pt}
+  nav.toc{display:none}
+  .wrap{display:block;max-width:none;padding:0}
+  section{border:none;box-shadow:none;padding:0;margin:0 0 16px;page-break-inside:auto}
+  .cover{background:#1f6fd0!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  .gm,.card,.tbl,.eg,.tip,.exam,.err,.note{page-break-inside:avoid}
+  h2{page-break-after:avoid}
+}
+</style>
+</head>
+<body>
+
+<header class="cover">
+  <div class="cover-inner">
+    <h1>上海初中英语知识点系统梳理</h1>
+    <div class="sub">六年级 · 七年级 · 八年级 · 九年级 &nbsp;|&nbsp; 语音 · 词汇 · 语法 · 题型 · 应考</div>
+    <div class="badges">
+      <span class="badge">沪教牛津版 / 牛津上海版</span>
+      <span class="badge">中考 150 分（笔试 140 + 听说 10）</span>
+      <span class="badge">语法 24 专题</span>
+      <span class="badge">四大题型突破 + 附录工具表</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+
+<nav class="toc">
+  <div class="t">目 录</div>
+  <a class="lv1" href="#p1">一、总览：教材与中考考情</a>
+  <a class="lv2" href="#s1-1">1. 学制与教材版本</a>
+  <a class="lv2" href="#s1-2">2. 中考英语考情</a>
+  <a class="lv2" href="#s1-3">3. 四年能力进阶路线</a>
+  <a class="lv2" href="#s1-4">4. 知识地图</a>
+  <a class="lv1" href="#p2">二、语音与词汇</a>
+  <a class="lv2" href="#s2-1">1. 语音知识</a>
+  <a class="lv2" href="#s2-2">2. 构词法</a>
+  <a class="lv2" href="#s2-3">3. 主题词汇网络</a>
+  <a class="lv2" href="#s2-4">4. 易混词辨析</a>
+  <a class="lv2" href="#s2-5">5. 高频固定搭配</a>
+  <a class="lv1" href="#p3">三、语法体系（24 专题）</a>
+  <a class="lv2" href="#g1">1 名词</a>
+  <a class="lv2" href="#g2">2 代词</a>
+  <a class="lv2" href="#g3">3 冠词</a>
+  <a class="lv2" href="#g4">4 数词</a>
+  <a class="lv2" href="#g5">5 介词</a>
+  <a class="lv2" href="#g6">6 连词</a>
+  <a class="lv2" href="#g7">7 形容词与副词</a>
+  <a class="lv2" href="#g8">8 动词与动词形式</a>
+  <a class="lv2" href="#g9">9 八大时态</a>
+  <a class="lv2" href="#g10">10 被动语态</a>
+  <a class="lv2" href="#g11">11 情态动词</a>
+  <a class="lv2" href="#g12">12 非谓语动词</a>
+  <a class="lv2" href="#g13">13 主谓一致</a>
+  <a class="lv2" href="#g14">14 句子成分与基本句型</a>
+  <a class="lv2" href="#g15">15 句子种类与疑问句</a>
+  <a class="lv2" href="#g16">16 宾语从句</a>
+  <a class="lv2" href="#g17">17 定语从句</a>
+  <a class="lv2" href="#g18">18 状语从句</a>
+  <a class="lv2" href="#g19">19 直接引语变间接引语</a>
+  <a class="lv2" href="#g20">20 反意疑问句</a>
+  <a class="lv2" href="#g21">21 There be 与倒装</a>
+  <a class="lv2" href="#g22">22 强调与省略</a>
+  <a class="lv2" href="#g23">23 虚拟语气初步</a>
+  <a class="lv2" href="#g24">24 交际功能与情景用语</a>
+  <a class="lv1" href="#p4">四、分年级知识点</a>
+  <a class="lv2" href="#s4-1">六年级</a>
+  <a class="lv2" href="#s4-2">七年级</a>
+  <a class="lv2" href="#s4-3">八年级</a>
+  <a class="lv2" href="#s4-4">九年级</a>
+  <a class="lv2" href="#s4-5">跨年级语法分布对照</a>
+  <a class="lv1" href="#p5">五、题型突破</a>
+  <a class="lv2" href="#s5-1">1. 听力</a>
+  <a class="lv2" href="#s5-2">2. 语法与词汇</a>
+  <a class="lv2" href="#s5-3">3. 阅读</a>
+  <a class="lv2" href="#s5-4">4. 写作</a>
+  <a class="lv2" href="#s5-5">5. 听说测试</a>
+  <a class="lv1" href="#p6">六、附录</a>
+  <a class="lv2" href="#s6-1">A 不规则动词表</a>
+  <a class="lv2" href="#s6-2">B 同义句转换 50 组</a>
+  <a class="lv2" href="#s6-3">C 写作高分句型</a>
+  <a class="lv2" href="#s6-4">D 复习计划模板</a>
+</nav>
+
+<main>
+
+<!-- ============ 第一部分 ============ -->
+<section id="p1">
+  <h2><span class="num">一</span>总览：教材与中考考情 <span class="en-sub">Overview</span></h2>
+  <p class="lead">先看清"学什么书、考什么卷、四年怎么走"，再进入知识与题型。这一部分决定了后面所有内容的取舍权重。</p>
+
+  <h3 id="s1-1">1. 学制与教材版本</h3>
+  <p>上海初中为<b>四年制</b>（六年级／预初 — 九年级），英语是中考必考科目，也是区分度最大的科目之一。教材以<b>沪教牛津版（牛津上海版）</b>为主流，另有<b>新世纪版</b>（上海外语教育出版社）在部分学校使用。</p>
+
+  <div class="note">
+    <b>版本提示：</b>上海自 2024 年秋季起按《义务教育英语课程标准（2022 年版）》逐步启用<b>新课标新版教材</b>，逐年替换。
+    因此同一学校不同年级可能同时存在"老版（Module—Unit 结构）"和"新版（话题单元结构）"两套体系。
+    本资料按<b>语言知识 + 语言技能</b>两条线组织，两套教材通用，具体单元请以自己手上的课本为准。
+  </div>
+
+  <h4>（1）新版教材单元结构（每册 6 个话题单元）</h4>
+  <p>新版单元按"A 看听 — B 说 — C 读与语法 — D 写与探究 — E 项目"的闭环编排，语法不再孤立讲解，而是嵌在语篇里。书末统一附有 <span class="en">Culture corner / Literature corner / Notes / Grammar file / 词表 / 不规则动词表</span>。</p>
+  <table class="tbl compact">
+    <tr><th>册次</th><th>单元话题（举例）</th></tr>
+    <tr><td>新版 七年级下册</td><td>Music；Language and communication；A helping hand；Honesty；Wild animals；Trees</td></tr>
+    <tr><td>新版 八年级下册</td><td>Art and artists；Great inventions and discoveries；Money；Fashion；Natural disasters；Friendship</td></tr>
+    <tr><td>新版 九年级上册</td><td>Teenage life；People and their jobs；Travellers' tales；Folk customs；Buildings；Pollution</td></tr>
+  </table>
+
+  <h4>（2）老版牛津上海版（Module—Unit 结构）册次与单元</h4>
+  <table class="tbl compact">
+    <tr><th>册次</th><th>模块 / 单元</th></tr>
+    <tr><td><b>6A</b></td><td>1 Family and relatives｜2 I have a good friend｜3 Spending a day out together｜4 What would you like to be?｜5 Open Day｜6 Going to school｜7 Rules round us｜8 The food we eat｜9 Picnics are fun｜10 Healthy eating｜11 Let's make a pizza</td></tr>
+    <tr><td><b>6B</b></td><td>M1 City life：1 Great cities in Asia｜2 At the airport｜3 Dragon Boat Festival｜4 Staying healthy　M2 Changes：5 What will I be like?｜6 Seasonal changes｜7 Travelling in Garden City　M3 The natural world：8 Windy weather｜9 Sea water and rain water｜10 Forests and land｜11 Controlling fire</td></tr>
+    <tr><td><b>7A</b></td><td>1 Relatives in Beijing｜2 Our animal friends｜3 Friends from other countries｜4 Jobs people do｜5 Choosing a new flat｜6 Different places｜7 Signs around us｜8 Growing healthy, growing strong｜9 International Food Festival｜10 A birthday party｜11 My food project</td></tr>
+    <tr><td><b>7B</b></td><td>1 Writing a travel guide｜2 Going to see a film｜3 A visit to Garden City｜4 Let's go shopping｜5 What can we learn from others?｜6 Hard work for a better life｜7 In the future｜8 A more enjoyable school life｜9 The wind is blowing｜10 Water Festival｜11 Electricity</td></tr>
+    <tr><td><b>8A</b></td><td>M1 My life：1 Penfriends｜2 Work and play｜3 Trouble!　M2 Amazing things：4 Numbers｜5 Encyclopaedias　M3 Science fiction：6 Nobody wins (I)｜7 Nobody wins (II)</td></tr>
+    <tr><td><b>8B</b></td><td>M1 Nature and environment：1 Trees｜2 Water｜3 Electricity　M2 Mass media：4 Newspapers｜5 Magazine articles　M3 Leisure time：6 Travel｜7 Poems</td></tr>
+    <tr><td><b>9A</b></td><td>M1 Myths, traditions and opinions：1 Ancient Greece｜2 Traditional skills｜3 Pets　M2 Computers vs humans：4 Computers｜5 The human brain　M3 Fighting crime：6 Detectives｜7 Escaping from kidnappers</td></tr>
+    <tr><td><b>9B</b></td><td>M1 Environment and life：1 Saving the Earth｜2 Life in the future　M2 Recreation and entertainment：3 Going places｜4 All about films and TV｜5 A story by Mark Twain</td></tr>
+  </table>
+  <p class="muted">读单元话题即可看出规律：<b>六年级是"我"和身边的人与物</b>；<b>七年级扩展到城市、职业、饮食、旅行</b>；<b>八年级进入科学、媒体、科幻、自然与人文</b>；<b>九年级转向传统、科技、社会与伦理</b>。写作与阅读的话题库基本沿着这条线走。</p>
+
+  <h3 id="s1-2">2. 中考英语考情（现行方案）</h3>
+  <p>英语中考总分 <b>150 分</b>，由 <b>笔试 140 分 + 听说测试 10 分</b>（人机对话）构成。笔试时长 <b>90 分钟</b>。</p>
+
+  <table class="tbl center">
+    <tr><th>板块</th><th>题型</th><th>题量 / 分值</th><th>说明</th></tr>
+    <tr><td rowspan="4"><b>Part 1<br>听力</b><br>25 分</td><td>听句子选图</td><td>5 题 · 5 分</td><td>看图辨义，抓关键名词/动作</td></tr>
+    <tr><td>听对话选答案</td><td>5 题 · 5 分</td><td>地点、人物关系、数字、态度</td></tr>
+    <tr><td>听短文判断 T/F</td><td>5 题 · 5 分</td><td>注意否定词、比较、时间顺序</td></tr>
+    <tr><td>听短文 / 对话填词</td><td>10 分</td><td>失分最多，需拼写准确、注意词形</td></tr>
+    <tr><td rowspan="4"><b>Part 2<br>语法和词汇</b><br>45 分</td><td>单项选择</td><td>15 题 · 15 分</td><td>时态、语态、从句、冠词、代词、介词</td></tr>
+    <tr><td>选词填空（完成短文）</td><td>8 题 · 8 分</td><td>语篇中选词，可能要变形</td></tr>
+    <tr><td>词形转换</td><td>8 题 · 8 分</td><td>用所给词的适当形式填空</td></tr>
+    <tr><td>句型转换</td><td>7 题 · 14 分</td><td>按要求改写，每格 2 分，不能漏词</td></tr>
+    <tr><td rowspan="4"><b>Part 3<br>阅读</b><br>50 分</td><td>A 篇 选择</td><td>12 分</td><td>细节、主旨、推断、词义猜测</td></tr>
+    <tr><td>B 篇 选词完成短文</td><td>12 分</td><td>语境 + 搭配</td></tr>
+    <tr><td>C 篇 首字母填空</td><td>14 分</td><td>公认最难，考词性判断与上下文</td></tr>
+    <tr><td>D 篇 回答问题</td><td>12 分</td><td>含开放题，须完整成句、语法正确</td></tr>
+    <tr><td><b>写作</b></td><td>话题 / 应用文写作</td><td>20 分</td><td>要点齐全、语言准确、结构连贯</td></tr>
+    <tr><td colspan="4" style="background:#f2f6fb;color:#173a5e"><b>合计 140 分（笔试）＋ 听说测试 10 分（朗读句子、交际应答、复述、表达）＝ 150 分</b></td></tr>
+  </table>
+
+  <div class="note">
+    <b>关于题型变化：</b>公开信息显示，自 <b>2027 年</b>起上海中考英语的题型结构可能调整（方向是<b>听力比重上升、语法单项压缩、阅读比重显著提高</b>）。
+    备考时请务必以当年的《上海市初中英语课程终结性评价指南》及上海市教育考试院官方文件为准。本资料的语法与词汇体系不受题型调整影响，长期有效。
+  </div>
+
+  <div class="exam">
+    <b>命题趋势三条：</b>
+    ① <b>语境化</b>——语法题几乎都放在句意/语境里判断，纯背规则不够；
+    ② <b>语篇化</b>——选词填空、首字母填空、回答问题都要求读懂整段逻辑；
+    ③ <b>真实任务与本土题材</b>——青少年成长、科技环保、传统文化、上海城市文化是高频话题。
+  </div>
+
+  <h3 id="s1-3">3. 四年能力进阶路线</h3>
+  <table class="tbl">
+    <tr><th>年级</th><th>累计词汇量（参考）</th><th>语法主线</th><th>读写目标</th></tr>
+    <tr>
+      <td><b>六年级</b></td><td>约 800 — 1000 词</td>
+      <td>一般现在时、现在进行时、一般过去时、一般将来时；名词、代词、冠词、数词、基础介词；can / must / may；祈使句、There be</td>
+      <td>读懂 100—150 词短文；写出 40—60 词的短文（自我介绍、家庭、学校生活）</td>
+    </tr>
+    <tr>
+      <td><b>七年级</b></td><td>约 1200 — 1500 词</td>
+      <td>过去进行时、现在完成时（引入）、情态动词、形容词副词比较级最高级、不定式与动名词、时间/条件状语从句（主将从现）</td>
+      <td>读懂 250—350 词短文；写出 60—80 词短文（购物、旅行、计划），会用连接词</td>
+    </tr>
+    <tr>
+      <td><b>八年级</b></td><td>约 1500 — 1800 词</td>
+      <td>被动语态、宾语从句、状语从句系统化、非谓语动词、主谓一致、反意疑问句、间接引语入门</td>
+      <td>读懂 350—450 词文章（科普、媒体、科幻）；写出 80—100 词短文，尝试复合句</td>
+    </tr>
+    <tr>
+      <td><b>九年级</b></td><td>2000 词以上</td>
+      <td>定语从句、过去完成时、时态语态综合、虚拟语气常用句型、强调与倒装（理解）、交际用语系统复习</td>
+      <td>读懂 450—550 词文章；写出 100—120 词作文（话题/应用文），有句式亮点</td>
+    </tr>
+  </table>
+  <p class="muted">词汇量来自多方公开资料的区间（中考课标核心词汇一般表述为 <b>约 1600—2000 词</b>，另加 300—500 个高频拓展词）。最终以教材词表与当年考试要求为准，不必纠结绝对数字，重点是<b>能不能在语境中准确使用</b>。</p>
+
+  <h3 id="s1-4">4. 知识地图：四大板块</h3>
+  <div class="grid g4">
+    <div class="card">
+      <div class="h"><span class="dot"></span>语音与词汇</div>
+      <ul>
+        <li>48 音标与拼读规则</li>
+        <li>-ed / -s 的读音</li>
+        <li>连读、弱读、失爆、语调</li>
+        <li>构词法：派生·合成·转化</li>
+        <li>主题词汇 + 固定搭配</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="h"><span class="dot p"></span>语法体系</div>
+      <ul>
+        <li>词法：名代冠数、介连、形副</li>
+        <li>动词：时态·语态·情态·非谓语</li>
+        <li>句法：五基本句型、四类句子</li>
+        <li>三大从句 + 引语 + 反意问句</li>
+        <li>主谓一致与特殊结构</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="h"><span class="dot g"></span>语篇与技能</div>
+      <ul>
+        <li>听力四种题型</li>
+        <li>阅读四种题型与解题步骤</li>
+        <li>首字母填空、选词填空</li>
+        <li>写作框架与句式升级</li>
+        <li>听说测试人机对话</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="h"><span class="dot a"></span>话题与文化</div>
+      <ul>
+        <li>人与自我 / 人与社会 / 人与自然</li>
+        <li>上海本土文化与国际理解</li>
+        <li>中华优秀传统文化表达</li>
+        <li>交际功能意念项目</li>
+        <li>跨文化对比与思维品质</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 第二部分 ============ -->
+<section id="p2">
+  <h2><span class="num">二</span>语音与词汇 <span class="en-sub">Phonetics &amp; Vocabulary</span></h2>
+  <p class="lead">语音管"听得准、读得对"，词汇管"认得出、用得上"。这两块是听力和首字母填空的底层能力，也是唯一没法靠技巧绕过的地方。</p>
+
+  <h3 id="s2-1">1. 语音知识</h3>
+
+  <h4>（1）48 个国际音标</h4>
+  <table class="tbl compact">
+    <tr><th style="width:120px">类别</th><th>音标</th><th>代表词</th></tr>
+    <tr><td><b>单元音（12）</b></td><td class="en">/iː/ /ɪ/ /e/ /æ/ /ɑː/ /ɒ/ /ɔː/ /ʊ/ /uː/ /ʌ/ /ɜː/ /ə/</td><td class="en">see, sit, bed, cat, car, hot, door, book, food, cup, bird, about</td></tr>
+    <tr><td><b>双元音（8）</b></td><td class="en">/eɪ/ /aɪ/ /ɔɪ/ /aʊ/ /əʊ/ /ɪə/ /eə/ /ʊə/</td><td class="en">day, my, boy, how, go, here, there, tour</td></tr>
+    <tr><td><b>清辅音（11）</b></td><td class="en">/p/ /t/ /k/ /f/ /θ/ /s/ /ʃ/ /tʃ/ /tr/ /ts/ /h/</td><td class="en">pen, ten, cat, five, think, see, she, chair, tree, cats, hat</td></tr>
+    <tr><td><b>浊辅音（17）</b></td><td class="en">/b/ /d/ /g/ /v/ /ð/ /z/ /ʒ/ /dʒ/ /dr/ /dz/ /m/ /n/ /ŋ/ /l/ /r/ /j/ /w/</td><td class="en">bag, dog, go, very, this, zoo, usually, job, dress, beds, man, no, sing, leg, red, yes, we</td></tr>
+  </table>
+  <p class="muted">清浊成对的共 8 对：<span class="en">p-b, t-d, k-g, f-v, θ-ð, s-z, ʃ-ʒ, tʃ-dʒ</span>。抓住"成对"关系，背单词时一起记，听辨能力提升最快。</p>
+
+  <h4>（2）高频字母组合的读音</h4>
+  <table class="tbl compact">
+    <tr><th>组合</th><th>常见读音</th><th>例词</th></tr>
+    <tr><td class="en">a / a-e</td><td class="en">/æ/ /eɪ/ /ɑː/ /ə/</td><td class="en">cat / cake / father / about；want / water 中为 /ɒ/ /ɔː/</td></tr>
+    <tr><td class="en">e / ee / ea</td><td class="en">/e/ /iː/ /iː/ /e/</td><td class="en">pen / he / see / tea；bread, head 中 ea 读 /e/</td></tr>
+    <tr><td class="en">i / i-e / y</td><td class="en">/ɪ/ /aɪ/ /ɪ/ /aɪ/</td><td class="en">sit / nice；happy / my</td></tr>
+    <tr><td class="en">o / o-e / oo</td><td class="en">/ɒ/ /ʌ/ /əʊ/ /uː/ /ʊ/</td><td class="en">hot / son / home / food / book</td></tr>
+    <tr><td class="en">u / u-e</td><td class="en">/ʌ/ /juː/ /ʊ/ /ə/</td><td class="en">cup / music / put / autumn</td></tr>
+    <tr><td class="en">ar / er / ir / or / ur</td><td class="en">/ɑː/ /ɜː/ /ɜː/ /ɔː/ /ɜː/</td><td class="en">car / her / bird / door / turn（非重读时多为 /ə/：teacher, doctor）</td></tr>
+    <tr><td class="en">ai / ay / ea</td><td class="en">/eɪ/ /eɪ/ /iː/</td><td class="en">rain / play / meat</td></tr>
+    <tr><td class="en">ou / ow</td><td class="en">/aʊ/ /əʊ/ /uː/</td><td class="en">house / know / group</td></tr>
+    <tr><td class="en">oi / oy</td><td class="en">/ɔɪ/</td><td class="en">noise / boy</td></tr>
+    <tr><td class="en">th</td><td class="en">/θ/ /ð/</td><td class="en">think, three / this, mother</td></tr>
+    <tr><td class="en">ch / tch / sh</td><td class="en">/tʃ/ /tʃ/ /ʃ/</td><td class="en">chair, watch / watch / she</td></tr>
+    <tr><td class="en">wh</td><td class="en">/w/ /h/</td><td class="en">what, white / who, whose</td></tr>
+    <tr><td class="en">ck / ng / nk</td><td class="en">/k/ /ŋ/ /ŋk/</td><td class="en">back / sing / think</td></tr>
+    <tr><td class="en">ph / gh</td><td class="en">/f/ /f/ /∅/</td><td class="en">photo / laugh / light</td></tr>
+  </table>
+
+  <h4>（3）两条"必考"的读音规则</h4>
+  <div class="grid g2">
+    <div class="card">
+      <div class="h"><span class="dot r"></span>-ed 的三种读音</div>
+      <ul>
+        <li class="en">在 /t/ /d/ 后读 <b>/ɪd/</b>：wanted, needed, decided, started</li>
+        <li class="en">在清辅音（/p/ /k/ /f/ /s/ /ʃ/ /tʃ/）后读 <b>/t/</b>：helped, worked, laughed, passed, watched</li>
+        <li class="en">其余（含元音和浊辅音）读 <b>/d/</b>：played, opened, lived, cleaned, enjoyed</li>
+        <li>口诀：<b>"清清读 /t/，浊浊读 /d/，t、d 后面读 /ɪd/"</b></li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="h"><span class="dot r"></span>-(e)s 的三种读音</div>
+      <ul>
+        <li class="en">在 /s/ /z/ /ʃ/ /ʒ/ /tʃ/ /dʒ/ 后读 <b>/ɪz/</b>：boxes, watches, wishes, pages</li>
+        <li class="en">在清辅音后读 <b>/s/</b>：books, cats, stops, months</li>
+        <li class="en">其余（元音、浊辅音）读 <b>/z/</b>：dogs, pens, plays, boys</li>
+        <li>注意：<span class="en">houses /zɪz/，clothes /z/</span> 是常考例外</li>
+      </ul>
+    </div>
+  </div>
+
+  <h4>（4）语流中的语音现象（听力失分重灾区）</h4>
+  <table class="tbl compact">
+    <tr><th>现象</th><th>说明</th><th>示例</th></tr>
+    <tr><td><b>连读</b></td><td>前词以辅音结尾、后词以元音开头时连读</td><td class="en">look at it / an hour / get up</td></tr>
+    <tr><td><b>失爆（不完全爆破）</b></td><td>爆破音相遇，前者只做口型不发声</td><td class="en">a doc(t)or / goo(d) boy / wha(t) time</td></tr>
+    <tr><td><b>同化</b></td><td>相邻音相互影响而变化</td><td class="en">don't you → /dəʊntʃu/；would you → /wʊdʒu/</td></tr>
+    <tr><td><b>弱读</b></td><td>虚词（a, an, the, of, for, to, and, can）在句中弱读为 /ə/ 等</td><td class="en">a lot of → /ə lɒt əv/；cup of tea</td></tr>
+    <tr><td><b>重音</b></td><td>实词重读，虚词弱读；句重音落在关键信息上</td><td class="en">I didn't <b>say</b> that.（重音不同，句意不同）</td></tr>
+    <tr><td><b>语调</b></td><td>一般疑问句升调，特殊疑问句与陈述句降调；选择疑问句前升后降</td><td class="en">Are you ↗ready? / Where are you ↘from?</td></tr>
+  </table>
+
+  <h3 id="s2-2">2. 构词法（词形转换题的根）</h3>
+  <p>上海中考的"用所给词的适当形式填空"共 8 分，几乎全靠构词法。掌握下面这套"词性—后缀"对照，比死背单词效率高得多。</p>
+
+  <h4>（1）常用前缀（改变词义，不改变词性）</h4>
+  <table class="tbl compact">
+    <tr><th>前缀</th><th>含义</th><th>例词</th></tr>
+    <tr><td class="en">un- / in- / im- / ir- / il- / dis-</td><td>否定</td><td class="en">unhappy, incorrect, impossible, irregular, illegal, disagree</td></tr>
+    <tr><td class="en">re-</td><td>再、重新</td><td class="en">rebuild, reuse, recycle, repeat, return</td></tr>
+    <tr><td class="en">mis-</td><td>错误地</td><td class="en">mistake, misunderstand, mislead</td></tr>
+    <tr><td class="en">pre- / post-</td><td>前 / 后</td><td class="en">preview, prepare, postpone</td></tr>
+    <tr><td class="en">over- / under-</td><td>过度 / 不足</td><td class="en">overwork, overweight, underground, understand</td></tr>
+    <tr><td class="en">en-</td><td>使成为</td><td class="en">enable, enrich, enlarge</td></tr>
+    <tr><td class="en">inter- / tele- / super-</td><td>之间 / 远 / 超级</td><td class="en">international, Internet, telephone, supermarket</td></tr>
+  </table>
+
+  <h4>（2）常用后缀（改变词性，这是得分关键）</h4>
+  <table class="tbl compact">
+    <tr><th>后缀</th><th>构成</th><th>例词</th></tr>
+    <tr><td class="en">-er / -or / -ist / -ian / -ant</td><td>动词/名词 → <b>人</b>（名词）</td><td class="en">teacher, worker, actor, visitor, scientist, musician, assistant</td></tr>
+    <tr><td class="en">-ness / -tion / -sion / -ment / -ance / -ence / -ty / -th / -ship / -hood</td><td>形容词/动词 → <b>抽象名词</b></td><td class="en">happiness, kindness, invention, decision, movement, importance, difference, safety, truth, friendship, childhood</td></tr>
+    <tr><td class="en">-ful / -less / -ous / -ive / -able / -al / -y / -ly / -ern</td><td>名词/动词 → <b>形容词</b></td><td class="en">useful, careless, famous, active, comfortable, national, healthy, friendly, southern</td></tr>
+    <tr><td class="en">-ly</td><td>形容词 → <b>副词</b></td><td class="en">quickly, carefully, suddenly, successfully</td></tr>
+    <tr><td class="en">-en / -ize / -ise / -ify</td><td>形容词/名词 → <b>动词</b></td><td class="en">widen, strengthen, modernize, realize, classify</td></tr>
+    <tr><td class="en">-teen / -ty / -th</td><td>→ 数词</td><td class="en">fifteen, fifty, fifth</td></tr>
+  </table>
+
+  <div class="tip">
+    <b>高频词性转换清单（考前必过一遍）：</b>
+    <span class="en">succeed → success → successful → successfully</span>；
+    <span class="en">safe → safely → safety</span>；
+    <span class="en">decide → decision</span>；
+    <span class="en">difficult → difficulty</span>；
+    <span class="en">true → truth → truly</span>；
+    <span class="en">possible → impossible → possibility</span>；
+    <span class="en">die → death → dead → dying</span>；
+    <span class="en">beauty → beautiful → beautifully</span>；
+    <span class="en">health → healthy → healthily</span>；
+    <span class="en">science → scientist → scientific</span>；
+    <span class="en">invent → invention → inventor</span>；
+    <span class="en">know → knowledge → knowledgeable</span>。
+  </div>
+
+  <h4>（3）合成与转化</h4>
+  <ul>
+    <li><b>合成词</b>：<span class="en">classroom, blackboard, homework, weekend, football, however, somewhere, without, everyone, newspaper, earthquake</span></li>
+    <li><b>转化（词形不变，词性变）</b>：<span class="en">water (n. 水) → water (v. 浇水)；face (n.) → face (v. 面对)；book (n.) → book (v. 预订)；place (n.) → place (v. 放置)；hand (n.) → hand (v. 递)</span></li>
+    <li><b>缩略词</b>：<span class="en">TV, ad, exam, phone, fridge, photo, bike, bus, flu</span></li>
+  </ul>
+
+  <h3 id="s2-3">3. 主题词汇网络（12 大话题）</h3>
+  <p>中考阅读与写作的话题高度集中在下面 12 个领域。按主题成串背单词，比按字母表背更牢，也更容易在写作里调用。</p>
+  <table class="tbl compact">
+    <tr><th style="width:150px">主题</th><th>核心词与搭配</th></tr>
+    <tr><td><b>1 自我与成长</b></td><td class="en">personality, confident, honest, patient, curious, brave, proud, shy, mood, feeling, grow up, make progress, overcome, challenge, attitude, mistake, experience</td></tr>
+    <tr><td><b>2 家庭与朋友</b></td><td class="en">relative, couple, neighbour, generation, support, understand, trust, share, care for, get along with, argue with, keep in touch, be proud of</td></tr>
+    <tr><td><b>3 学校生活</b></td><td class="en">subject, term, schedule, uniform, rule, activity, club, competition, exam, result, attend, take part in, hand in, be absent from</td></tr>
+    <tr><td><b>4 职业与社会</b></td><td class="en">engineer, doctor, nurse, lawyer, designer, scientist, volunteer, responsibility, duty, serve, contribute, work as, be responsible for</td></tr>
+    <tr><td><b>5 城市与交通</b></td><td class="en">traffic, crowded, convenient, route, crossroad, passenger, subway, tunnel, bridge, park, direction, get on/off, take a taxi, lose one's way</td></tr>
+    <tr><td><b>6 饮食与健康</b></td><td class="en">diet, balanced, nutrition, energy, vegetable, protein, sugar, salt, snack, illness, symptom, medicine, exercise, sleep, keep fit, lose weight</td></tr>
+    <tr><td><b>7 天气与自然</b></td><td class="en">forecast, temperature, shower, thunder, storm, flood, drought, earthquake, disaster, shelter, escape, warn, protect...from, in case of</td></tr>
+    <tr><td><b>8 环境与动物</b></td><td class="en">pollution, rubbish, plastic, recycle, resource, energy, solar, wildlife, endangered, species, habitat, survive, die out, take action</td></tr>
+    <tr><td><b>9 科技与未来</b></td><td class="en">invention, technology, device, application, robot, Internet, network, information, discover, develop, replace, be used for, in the future</td></tr>
+    <tr><td><b>10 旅行与文化</b></td><td class="en">journey, tourist, attraction, scenery, souvenir, custom, tradition, festival, culture, celebrate, experience, take photos, be famous for</td></tr>
+    <tr><td><b>11 文学与艺术</b></td><td class="en">novel, character, plot, author, poem, painting, musician, performance, audience, masterpiece, tale, be based on, come out</td></tr>
+    <tr><td><b>12 社会交往</b></td><td class="en">appreciate, apologize, congratulate, invite, accept, refuse, suggest, complain, communicate, respect, in my opinion, make a difference</td></tr>
+  </table>
+
+  <h3 id="s2-4">4. 高频易混词辨析（考前集中过一遍）</h3>
+  <table class="tbl compact">
+    <tr><th style="width:190px">词组</th><th>区别与用法</th></tr>
+    <tr><td class="en">borrow / lend</td><td class="en">borrow <b>借入</b>（borrow sth from sb）；lend <b>借出</b>（lend sb sth = lend sth to sb）</td></tr>
+    <tr><td class="en">speak / say / tell / talk</td><td class="en">speak + 语言 / 电话中"讲话"；say + 说话内容；tell sb sth（tell a lie/a story/the truth）；talk with/to sb about sth</td></tr>
+    <tr><td class="en">look / see / watch / read</td><td class="en">look 看（强调动作，后接 at）；see 看见（结果）/ 看电影戏剧；watch 观看动态事物（比赛、电视）；read 阅读</td></tr>
+    <tr><td class="en">bring / take / carry / fetch</td><td class="en">bring 带来（向说话人方向）；take 带走；carry 搬运（无方向）；fetch 去取来（一去一回）</td></tr>
+    <tr><td class="en">spend / take / cost / pay</td><td class="en">sb spend 时间/钱 on sth / (in) doing；It takes sb time to do；sth costs sb money；sb pays money for sth</td></tr>
+    <tr><td class="en">arrive / reach / get to</td><td class="en">arrive in + 大地点 / at + 小地点；reach + 地点（及物，不加介词）；get to + 地点；home/here/there 前不加介词</td></tr>
+    <tr><td class="en">join / join in / take part in</td><td class="en">join + 组织/团体（入党、入团、参军）；join in + 活动（口语化）；take part in + 活动（较正式）</td></tr>
+    <tr><td class="en">too much / too many / much too</td><td class="en">too much + 不可数名词；too many + 可数名词复数；much too + 形容词/副词（= 实在太）</td></tr>
+    <tr><td class="en">already / yet / still</td><td class="en">already 已经（肯定句）；yet 已经/还（疑问、否定句句末）；still 仍然（强调持续）</td></tr>
+    <tr><td class="en">maybe / may be</td><td class="en">maybe 副词，放句首；may be 情态动词 + be，放句中（He may be at home.）</td></tr>
+    <tr><td class="en">sometime / some time / sometimes / some times</td><td class="en">sometime 某个时候；some time 一段时间；sometimes 有时；some times 几次</td></tr>
+    <tr><td class="en">hard / hardly</td><td class="en">hard 努力地/猛烈地（副词）、困难的（形容词）；hardly 几乎不（否定副词）</td></tr>
+    <tr><td class="en">such / so</td><td class="en">such + a/an + adj. + 可数名词单数；so + adj./adv.；so + adj. + a/an + 名词（so good a boy）</td></tr>
+    <tr><td class="en">because / because of</td><td class="en">because + 句子；because of + 名词/代词/动名词</td></tr>
+    <tr><td class="en">besides / except</td><td class="en">besides 除…之外还有（包括）；except 除…之外都（不包括）</td></tr>
+    <tr><td class="en">among / between</td><td class="en">among 三者及以上之间；between 两者之间（between A and B）</td></tr>
+    <tr><td class="en">raise / rise</td><td class="en">raise 及物（raise money/hands）；rise 不及物（The sun rises.）</td></tr>
+    <tr><td class="en">lie / lay</td><td class="en">lie-lay-lain-lying 躺 / 位于；lie-lied-lied-lying 说谎；lay-laid-laid-laying 放置、下蛋</td></tr>
+    <tr><td class="en">win / beat</td><td class="en">win + 比赛/奖项；beat + 对手/队伍（beat sb in the match）</td></tr>
+    <tr><td class="en">listen to / hear</td><td class="en">listen to 有意识地听（动作）；hear 听到（结果），hear sb do/doing</td></tr>
+    <tr><td class="en">everyday / every day</td><td class="en">everyday 形容词（everyday life）；every day 时间状语（I read every day.）</td></tr>
+    <tr><td class="en">asleep / sleepy / sleeping</td><td class="en">be asleep 睡着了（表状态）；sleepy 困倦的；sleeping 正在睡觉的（sleeping bag）</td></tr>
+    <tr><td class="en">in front of / in the front of</td><td class="en">in front of 在…前面（外部）；in the front of 在…前部（内部）</td></tr>
+    <tr><td class="en">used to / be used to / be used for</td><td class="en">used to do 过去常常；be used to doing 习惯于；be used to do / for doing 被用来</td></tr>
+    <tr><td class="en">other / others / the other / another</td><td class="en">other + 名词；others 泛指另一些（= other ones）；the other 两者中的另一个；another 三者以上中的另一个</td></tr>
+    <tr><td class="en">as well / also / too / either</td><td class="en">as well、too 用于肯定句句末；also 用于肯定句句中；either 用于否定句句末</td></tr>
+    <tr><td class="en">before long / long before</td><td class="en">before long 不久以后；long before 很久以前</td></tr>
+    <tr><td class="en">no more / no longer</td><td class="en">no more 强调数量不再；no longer 强调时间/状态不再（= not...any longer）</td></tr>
+    <tr><td class="en">accept / receive</td><td class="en">accept 主动接受（心理同意）；receive 收到（客观动作）</td></tr>
+    <tr><td class="en">discover / invent / find</td><td class="en">discover 发现已存在的事物；invent 发明新事物；find 找到（丢失的东西）</td></tr>
+  </table>
+
+  <h3 id="s2-5">5. 高频固定搭配</h3>
+  <div class="grid g3">
+    <div class="card">
+      <div class="h"><span class="dot"></span>动词 + 介词/副词</div>
+      <ul class="en">
+        <li>look after / for / up / forward to</li>
+        <li>take off / up / after / care of</li>
+        <li>put on / off / up / out</li>
+        <li>turn on / off / up / down</li>
+        <li>get on / off / up / along with</li>
+        <li>come true / up with / across</li>
+        <li>go over / through / on (doing)</li>
+        <li>give up / away / out / in</li>
+        <li>make up / out / progress / a decision</li>
+        <li>keep on doing / in touch with</li>
+        <li>set up / off / out</li>
+        <li>break down / out / into</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="h"><span class="dot g"></span>形容词 + 介词</div>
+      <ul class="en">
+        <li>be good at / for / to</li>
+        <li>be afraid of / be full of</li>
+        <li>be proud of / be fond of</li>
+        <li>be interested in</li>
+        <li>be famous for / as</li>
+        <li>be different from / similar to</li>
+        <li>be angry with sb / at sth</li>
+        <li>be worried about</li>
+        <li>be strict with sb / in sth</li>
+        <li>be busy with / (in) doing</li>
+        <li>be ready for / be worth doing</li>
+        <li>be used to doing</li>
+        <li>be responsible for</li>
+        <li>be satisfied with</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="h"><span class="dot a"></span>名词与固定短语</div>
+      <ul class="en">
+        <li>take part in / take place</li>
+        <li>pay attention to</li>
+        <li>make a difference</li>
+        <li>make friends with</li>
+        <li>have a good time</li>
+        <li>in order to / so as to</li>
+        <li>as a result / as a whole</li>
+        <li>in my opinion / in fact</li>
+        <li>by the way / on the way</li>
+        <li>at least / at most / at first</li>
+        <li>instead of / rather than</li>
+        <li>according to</li>
+        <li>in charge of</li>
+        <li>ahead of time / in time</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 第三部分 ============ -->
+<section id="p3">
+  <h2><span class="num">三</span>语法体系（24 专题） <span class="en-sub">Grammar</span></h2>
+  <p class="lead">按中考考查权重排列。每个专题给出"核心要点 → 中考考法 → 易错提醒 → 例句"，重点看加粗部分和红框提示。</p>
+  <div class="exam">
+    <b>上海中考语法权重速览：</b>
+    时态辨析（每卷 3—4 题）＞ 宾语从句与定语从句（2—3 题）＞ 非谓语动词、被动语态、情态动词（各 1—2 题）＞ 冠词、代词、介词、比较级（各 1 题）。
+    也就是说：<b>时态 + 从句 + 非谓语</b>三项就占语法单选的一半以上。
+  </div>
+
+  <!-- 1 名词 -->
+  <div class="gm" id="g1">
+    <div class="gt"><span class="gid">01</span><span class="gn">名词</span><span class="ge">Nouns</span></div>
+    <div class="gb">
+      <p><b>核心要点</b></p>
+      <ul>
+        <li><b>可数 vs 不可数</b>：不可数名词无复数、不加 a/an，计量用 <span class="en">a piece of / a glass of / two cups of / a bottle of</span>。常见不可数：<span class="en">news, information, advice, work, homework, furniture, weather, music, bread, money, fun, progress, trouble</span>。</li>
+        <li><b>复数变化规则</b>：一般加 -s；以 s / x / ch / sh 结尾加 -es；辅音字母 + y 变 y 为 i 加 -es；<span class="en">f / fe → ves</span>（leaf, life, knife, shelf, wife, thief, half, wolf, self）；以 o 结尾多数加 -es（<span class="en">potato, tomato, hero, echo</span>），少数加 -s（<span class="en">photo, piano, radio, zoo, video</span>）。</li>
+        <li><b>不规则复数</b>：<span class="en">man→men, woman→women, child→children, foot→feet, tooth→teeth, mouse→mice, goose→geese</span>；单复同形：<span class="en">sheep, deer, fish, means, series</span>；<span class="en">Chinese, Japanese</span> 单复同形。</li>
+        <li><b>复合名词复数</b>：<span class="en">grown-up → grown-ups, passer-by → passers-by</span>；由 man / woman 修饰时前后都变：<span class="en">men doctors, women teachers</span>。</li>
+        <li><b>所有格</b>：有生命、时间、距离、国家城市用 <span class="en">'s</span>（<span class="en">today's newspaper, ten minutes' walk, China's cities</span>）；无生命用 of；双重所有格 <span class="en">a friend of my father's</span>。</li>
+        <li><b>名词修饰名词</b>时第一个名词一般用单数：<span class="en">shoe shop, two apple trees, a book store</span>。</li>
+      </ul>
+      <div class="err"><b>易错提醒：</b>
+        <span class="en">news / maths / physics / politics</span> 形复意单，谓语用单数；<span class="en">police / people / cattle</span> 形单意复，谓语用复数；
+        <span class="en">a number of</span>（许多，谓语复数）与 <span class="en">the number of</span>（…的数量，谓语单数）必须分清。
+      </div>
+      <div class="eg en">There is some <em>good news</em> for you. &nbsp;<span class="zh">news 不可数，用 is</span></div>
+      <div class="eg en">My <em>father's</em> office is ten <em>minutes'</em> walk from here. &nbsp;<span class="zh">所有格两种形式</span></div>
+    </div>
+  </div>
+
+  <!-- 2 代词 -->
+  <div class="gm" id="g2">
+    <div class="gt"><span class="gid">02</span><span class="gn">代词</span><span class="ge">Pronouns</span></div>
+    <div class="gb">
+      <table class="tbl compact center">
+        <tr><th>人称</th><th>主格</th><th>宾格</th><th>形容词性物主</th><th>名词性物主</th><th>反身代词</th></tr>
+        <tr><td>第一人称单数</td><td class="en">I</td><td class="en">me</td><td class="en">my</td><td class="en">mine</td><td class="en">myself</td></tr>
+        <tr><td>第二人称单数</td><td class="en">you</td><td class="en">you</td><td class="en">your</td><td class="en">yours</td><td class="en">yourself</td></tr>
+        <tr><td>第三人称单数（阳/阴/中）</td><td class="en">he / she / it</td><td class="en">him / her / it</td><td class="en">his / her / its</td><td class="en">his / hers / its</td><td class="en">himself / herself / itself</td></tr>
+        <tr><td>第一人称复数</td><td class="en">we</td><td class="en">us</td><td class="en">our</td><td class="en">ours</td><td class="en">ourselves</td></tr>
+        <tr><td>第二人称复数</td><td class="en">you</td><td class="en">you</td><td class="en">your</td><td class="en">yours</td><td class="en">yourselves</td></tr>
+        <tr><td>第三人称复数</td><td class="en">they</td><td class="en">them</td><td class="en">their</td><td class="en">theirs</td><td class="en">themselves</td></tr>
+      </table>
+      <p><b>要点补充</b></p>
+      <ul>
+        <li><b>反身代词固定搭配</b>：<span class="en">enjoy oneself, help oneself to, teach oneself, by oneself, hurt oneself, look after oneself, make oneself at home, say to oneself</span>。</li>
+        <li><b>不定代词</b>：<span class="en">some</span>（肯定句，或表请求/建议的疑问句）、<span class="en">any</span>（否定/疑问）；
+          <span class="en">many / few / a few</span> + 可数复数，<span class="en">much / little / a little</span> + 不可数；
+          <span class="en">each / every / either / neither</span> + 单数，<span class="en">both / all / some / most</span> 视意义定；
+          <span class="en">something / anything / nothing / everything</span> 作主语谓语用单数，形容词后置（<span class="en">something important</span>）。</li>
+        <li><b>it 的用法</b>：指代前文事物；指时间、天气、距离；作形式主语（<span class="en">It's important to learn English well.</span>）；作形式宾语（<span class="en">I find it hard to finish it on time.</span>）；强调句。</li>
+        <li><b>one / ones 与 that / those</b>：<span class="en">The red pen is mine and the blue one is yours. / The weather in Shanghai is warmer than that in Beijing.</span></li>
+      </ul>
+      <div class="exam"><b>中考考法：</b>单选 1—2 题，多在语境中区分"形容词性物主 vs 名词性物主"；词形转换常考 <span class="en">they → their / theirs / themselves</span>。</div>
+    </div>
+  </div>
+
+  <!-- 3 冠词 -->
+  <div class="gm" id="g3">
+    <div class="gt"><span class="gid">03</span><span class="gn">冠词</span><span class="ge">Articles</span></div>
+    <div class="gb">
+      <ul>
+        <li><b>a / an 看读音不看字母</b>：<span class="en">a useful book, a university, a European country, a one-way street</span>；<span class="en">an hour, an honest boy, an X-ray, an umbrella, an 80-year-old man</span>。</li>
+        <li><b>用 the</b>：特指（双方都知道的）；上文提到过的；独一无二（<span class="en">the sun, the earth, the Great Wall</span>）；最高级、序数词前；乐器前（<span class="en">play the piano</span>）；方位、江河湖海山脉群岛；<span class="en">the + 形容词</span> 表一类人（<span class="en">the young, the rich</span>）；姓的复数表一家（<span class="en">the Smiths</span>）；<span class="en">the same / the next</span>。</li>
+        <li><b>零冠词</b>：球类、棋类（<span class="en">play football / chess</span>）；一日三餐（<span class="en">have breakfast</span>，但有形容词修饰时可用 <span class="en">a big lunch</span>）；学科、语言、节日；称呼（<span class="en">Turn left, Doctor.</span>）；表职位的名词作表语（<span class="en">He became president.</span>）；<span class="en">by bus / on foot / go to school</span>。</li>
+      </ul>
+      <div class="err"><b>易错对比：</b>
+        <span class="en">go to school</span>（上学）／<span class="en">go to the school</span>（去这所学校办事）；
+        <span class="en">in front of</span>（外部前面）／<span class="en">in the front of</span>（内部前部）；
+        <span class="en">take place</span>（发生，无冠词）／<span class="en">take the place of</span>（代替）；
+        <span class="en">at table</span>（吃饭）／<span class="en">at the table</span>（在桌旁）。
+      </div>
+      <div class="eg en">He is <em>an</em> honest boy, and he plays <em>the</em> violin very well. &nbsp;<span class="zh">an 看音素；乐器加 the</span></div>
+    </div>
+  </div>
+
+  <!-- 4 数词 -->
+  <div class="gm" id="g4">
+    <div class="gt"><span class="gid">04</span><span class="gn">数词</span><span class="ge">Numerals</span></div>
+    <div class="gb">
+      <ul>
+        <li><b>序数词变化</b>：<span class="en">one→first, two→second, three→third, five→fifth, eight→eighth, nine→ninth, twelve→twelfth, twenty→twentieth</span>；两位数只把个位变成序数词（<span class="en">twenty-first, forty-second</span>）。</li>
+        <li><b>概数</b>：具体数字 + hundred / thousand / million <b>不加 s</b>（<span class="en">three hundred students</span>）；表示"数百"用 <span class="en">hundreds of, thousands of, millions of</span>。</li>
+        <li><b>分数</b>：分子用基数词、分母用序数词，分子大于 1 时分母加 s（<span class="en">one third, two thirds, a quarter, three quarters</span>）；百分数 <span class="en">30 percent</span>；小数 <span class="en">0.5 = zero point five</span>。</li>
+        <li><b>时间</b>：<span class="en">7:15 = a quarter past seven / seven fifteen</span>；<span class="en">8:45 = a quarter to nine</span>；<span class="en">8:30 = half past eight</span>。</li>
+        <li><b>日期与年份</b>：<span class="en">September 1st</span> / <span class="en">the first of September</span>；<span class="en">in 2026</span>；<span class="en">in the 1990s</span>；<span class="en">in the 21st century</span>。</li>
+        <li><b>编号</b>：<span class="en">Lesson One = the first lesson</span>；<span class="en">Bus No. 5</span>；<span class="en">Room 302</span>。</li>
+        <li><b>年龄</b>：<span class="en">in his thirties</span>；<span class="en">a five-year-old boy</span>（作定语时用连字符且名词不加 s）。</li>
+      </ul>
+      <div class="err"><b>易错提醒：</b>"我们班二十多岁的学生有二十多个"类句子中，<b>hundred 与 hundreds of 绝不可混用</b>；<span class="en">a five-year-old boy</span> 不能说成 <span class="en">a five-years-old boy</span>。</div>
+    </div>
+  </div>
+
+  <!-- 5 介词 -->
+  <div class="gm" id="g5">
+    <div class="gt"><span class="gid">05</span><span class="gn">介词</span><span class="ge">Prepositions</span></div>
+    <div class="gb">
+      <table class="tbl compact">
+        <tr><th style="width:110px">类别</th><th>要点</th></tr>
+        <tr><td><b>时间</b></td><td class="en"><b>at</b> 时刻 / 中午 / 午夜 / 某瞬间（at 7:00, at noon, at midnight, at that moment）；<b>on</b> 具体某天 / 某天的早中晚 / 星期（on Monday, on May 1st, on a cold morning）；<b>in</b> 月份 / 季节 / 年份 / 世纪 / 一天中的早中晚（in May, in summer, in 2026, in the morning）。<br>持续：<b>for</b> + 一段 / <b>since</b> + 起点；<b>during</b> + 期间；<b>until / till</b>；<b>by</b> 到…为止；<b>in</b> + 一段时间表将来（in two days）；<b>after / before / within</b>。</td></tr>
+        <tr><td><b>方位</b></td><td class="en"><b>in / on / to</b> 表位置关系（在上海内 / 接壤 / 隔开）；<b>over</b> 正上方 · <b>above</b> 上方 · <b>on</b> 接触；<b>below / under</b>；<b>between</b> 两者 · <b>among</b> 三者以上；<b>across</b> 表面横过 · <b>through</b> 内部穿过 · <b>over</b> 越过；<b>beside</b> 在旁 · <b>besides</b> 除…还有。</td></tr>
+        <tr><td><b>方式手段</b></td><td class="en"><b>by</b> + 交通/手段（by bus, by email）；<b>with</b> + 工具（with a pen, with one's help）；<b>in</b> + 语言/材料（in English, in ink）；<b>on</b> foot / on the phone / on the Internet。</td></tr>
+        <tr><td><b>其他常考</b></td><td class="en">as（作为）, like（像）, about, for, from, with, without, except, instead of, according to, because of, thanks to, in spite of</td></tr>
+      </table>
+      <div class="tip"><b>记忆口诀：</b>时间"<b>in 大 on 小 at 点</b>"；交通"<b>by 车 on 脚</b>"；工具"<b>with 具 in 语</b>"。</div>
+      <div class="eg en">We will have a sports meeting <em>in</em> two weeks <em>on</em> a Saturday morning. &nbsp;<span class="zh">in + 段时间表将来；on + 具体某天早上</span></div>
+    </div>
+  </div>
+
+  <!-- 6 连词 -->
+  <div class="gm" id="g6">
+    <div class="gt"><span class="gid">06</span><span class="gn">连词</span><span class="ge">Conjunctions</span></div>
+    <div class="gb">
+      <div class="grid g2">
+        <div class="card">
+          <div class="h"><span class="dot"></span>并列连词</div>
+          <ul class="en">
+            <li>and / but / or / so / for</li>
+            <li>both…and…（谓语用复数）</li>
+            <li>either…or…（就近原则）</li>
+            <li>neither…nor…（就近原则）</li>
+            <li>not only…but also…（就近原则）</li>
+            <li>as well as（谓语随前者）</li>
+          </ul>
+        </div>
+        <div class="card">
+          <div class="h"><span class="dot p"></span>从属连词</div>
+          <ul class="en">
+            <li>时间：when / while / as / before / after / until / as soon as / since</li>
+            <li>条件：if / unless / as long as</li>
+            <li>原因：because / since / as</li>
+            <li>结果：so…that… / such…that…</li>
+            <li>目的：so that / in order that</li>
+            <li>让步：though / although / even if / no matter how</li>
+            <li>比较：than / as…as</li>
+          </ul>
+        </div>
+      </div>
+      <div class="err"><b>易错三条：</b>
+        ① <b>because 与 so 不能同现</b>，<b>though 与 but 不能同现</b>（中文习惯"因为…所以…"要砍掉一个）；
+        ② <span class="en">not…until</span> 的强调结构是 <span class="en">It was not until…that…</span>；
+        ③ <span class="en">while</span> 后接延续性动作，<span class="en">when</span> 可接短暂动作（<span class="en">When the bell rang, we were talking.</span>）。
+      </div>
+    </div>
+  </div>
+
+  <!-- 7 形容词与副词 -->
+  <div class="gm" id="g7">
+    <div class="gt"><span class="gid">07</span><span class="gn">形容词与副词</span><span class="ge">Adjectives &amp; Adverbs</span></div>
+    <div class="gb">
+      <ul>
+        <li><b>位置</b>：作定语在名词前（<span class="en">a beautiful garden</span>）；作表语在系动词后；修饰不定代词时后置（<span class="en">something new</span>）；<span class="en">enough</span> 修饰形容词/副词时后置（<span class="en">old enough, carefully enough</span>）。</li>
+        <li><b>-ing 与 -ed 形容词</b>：<span class="en">interesting</span> 修饰事物（令人…的），<span class="en">interested</span> 修饰人（感到…的）。同类：<span class="en">exciting/excited, surprising/surprised, boring/bored, tiring/tired, moving/moved</span>。</li>
+        <li><b>副词构成</b>：形容词 + ly；特殊变化：<span class="en">hard→hard（努力地）/ hardly（几乎不）；late→late（迟）/ lately（最近）；high→high（高）/ highly（高度地）；near→near / nearly（几乎）；wide→wide / widely（广泛地）</span>。</li>
+      </ul>
+      <p><b>比较级与最高级</b></p>
+      <table class="tbl compact">
+        <tr><th style="width:140px">类型</th><th>规则 / 例</th></tr>
+        <tr><td>单音节、部分双音节</td><td class="en">+ -er / -est：tall→taller→tallest；nicer；bigger（双写）；happy→happier（变 y 为 i）</td></tr>
+        <tr><td>多音节词</td><td class="en">more / most + 原级：more difficult, most interesting</td></tr>
+        <tr><td>不规则</td><td class="en">good/well→better→best；bad/badly/ill→worse→worst；many/much→more→most；little→less→least；far→farther/further→farthest/furthest；old→older/elder→oldest/eldest</td></tr>
+        <tr><td>常用句式</td><td class="en">as…as（原级）；not as / so…as；比较级 + than；比较级 + and + 比较级（越来越…）；the + 比较级, the + 比较级（越…越…）；the + 最高级 + in / of；one of the + 最高级 + 复数名词</td></tr>
+        <tr><td>表倍数</td><td class="en">This room is three times as big as that one. = …three times the size of that one.</td></tr>
+        <tr><td>比较级表最高级</td><td class="en">He is taller than any other student in his class.</td></tr>
+        <tr><td>修饰比较级</td><td class="en">much, far, a lot, even, still, rather, a bit, a little, no（不能再用 very / too）</td></tr>
+      </table>
+      <div class="eg en">The more you read, the <em>more</em> knowledge you will get. &nbsp;<span class="zh">the + 比较级, the + 比较级</span></div>
+      <div class="eg en">English is <em>much more interesting</em> than I thought. &nbsp;<span class="zh">much 修饰比较级</span></div>
+    </div>
+  </div>
+
+  <!-- 8 动词 -->
+  <div class="gm" id="g8">
+    <div class="gt"><span class="gid">08</span><span class="gn">动词与动词形式</span><span class="ge">Verbs</span></div>
+    <div class="gb">
+      <ul>
+        <li><b>四类动词</b>：<b>实义动词</b>（及物需带宾语，不及物不带）、<b>系动词</b>（be, look, feel, sound, taste, smell, become, get, turn, grow, seem, stay, keep, remain）、<b>助动词</b>（be, do, have, will/shall）、<b>情态动词</b>。</li>
+        <li><b>第三人称单数</b>：一般 + s；以 s/x/ch/sh/o 结尾 + es；辅音 + y 变 y 为 i 加 es（<span class="en">study → studies</span>）。</li>
+        <li><b>现在分词</b>：一般 + ing；以不发音 e 结尾去 e 加 ing（<span class="en">make → making</span>）；重读闭音节末尾单辅音双写再加 ing（<span class="en">run → running, begin → beginning, swim → swimming</span>）。</li>
+        <li><b>过去式 / 过去分词</b>：规则加 -ed（读音见第二部分）；不规则动词见附录 A，必须整体背。</li>
+        <li><b>系动词后接形容词</b>：<span class="en">The soup tastes good.（不能说 tastes well）</span></li>
+      </ul>
+      <div class="err"><b>易错：</b><span class="en">lie / lay</span> 三个动词共用一个词形，务必按附录表区分；<span class="en">hang</span>（悬挂 hanged/hung）也常考。</div>
+    </div>
+  </div>
+
+  <!-- 9 时态 -->
+  <div class="gm" id="g9">
+    <div class="gt"><span class="gid">09</span><span class="gn">八大时态</span><span class="ge">Tenses</span><span class="pill r" style="margin-left:auto">全卷最高频</span></div>
+    <div class="gb">
+      <table class="tbl compact">
+        <tr><th style="width:118px">时态</th><th style="width:150px">构成</th><th>标志词</th><th>用法与例句</th></tr>
+        <tr>
+          <td><b>一般现在时</b></td><td class="en">do / does<br>am/is/are</td>
+          <td class="en">always, usually, often, sometimes, every day, once a week</td>
+          <td>经常性动作、习惯、客观真理、时刻表<br><span class="en">The sun rises in the east.</span></td>
+        </tr>
+        <tr>
+          <td><b>一般过去时</b></td><td class="en">did<br>was/were</td>
+          <td class="en">yesterday, last week, …ago, in 2015, just now, once</td>
+          <td>过去某时发生的动作或状态<br><span class="en">I visited the museum last Sunday.</span></td>
+        </tr>
+        <tr>
+          <td><b>一般将来时</b></td><td class="en">will do<br>be going to do</td>
+          <td class="en">tomorrow, next week, in the future, in two days, soon</td>
+          <td><span class="en">will</span> 表意愿、单纯预测；<span class="en">be going to</span> 表事先计划或有迹象<br><span class="en">Look at the clouds! It's going to rain.</span></td>
+        </tr>
+        <tr>
+          <td><b>现在进行时</b></td><td class="en">am/is/are doing</td>
+          <td class="en">now, at the moment, Look!, Listen!, these days</td>
+          <td>此刻或现阶段正在发生<br><span class="en">Listen! Someone is singing next door.</span></td>
+        </tr>
+        <tr>
+          <td><b>过去进行时</b></td><td class="en">was/were doing</td>
+          <td class="en">at this time yesterday, at 8 last night, when/while 引导</td>
+          <td>过去某时刻正在进行的动作<br><span class="en">We were having dinner when he called.</span></td>
+        </tr>
+        <tr>
+          <td><b>现在完成时</b></td><td class="en">have/has done</td>
+          <td class="en">already, yet, just, ever, never, before, twice, since, for, so far, recently, in the past few years</td>
+          <td>① 过去动作对现在有影响；② 从过去持续到现在<br><span class="en">I have already finished my homework.</span></td>
+        </tr>
+        <tr>
+          <td><b>过去完成时</b></td><td class="en">had done</td>
+          <td class="en">by the end of last term, by the time…, before/after/when 引导的先后</td>
+          <td>"过去的过去"<br><span class="en">By the time we got there, the film had begun.</span></td>
+        </tr>
+        <tr>
+          <td><b>过去将来时</b></td><td class="en">would do<br>was/were going to do</td>
+          <td class="en">宾语从句中，主句为过去时</td>
+          <td><span class="en">He said he would come the next day.</span></td>
+        </tr>
+      </table>
+
+      <div class="err">
+        <b>时态三大易错点：</b><br>
+        ① <b>一般过去时 vs 现在完成时</b>：有明确的过去时间状语（yesterday, last week, in 2015）只能用一般过去时；<span class="en">have been to</span>（去过，已回来）与 <span class="en">have gone to</span>（去了，还没回）不能混。<br>
+        ② <b>短暂性动词不能与 for / since 连用</b>：<span class="en">buy → have had；borrow → have kept；join → have been in / have been a member of；begin → have been on；die → have been dead；leave → have been away from</span>。<br>
+        ③ <b>主将从现</b>：<span class="en">if / when / as soon as / until / before / after</span> 引导的时间、条件状语从句中，用<b>一般现在时</b>代替一般将来时。
+      </div>
+      <div class="eg en">I <em>will call</em> you as soon as I <em>arrive</em> in Beijing. &nbsp;<span class="zh">主将从现</span></div>
+      <div class="eg en">My uncle <em>has lived</em> here since he <em>moved</em> to Shanghai. &nbsp;<span class="zh">since + 过去时从句，主句用现在完成时</span></div>
+    </div>
+  </div>
+
+  <!-- 10 被动语态 -->
+  <div class="gm" id="g10">
+    <div class="gt"><span class="gid">10</span><span class="gn">被动语态</span><span class="ge">Passive Voice</span></div>
+    <div class="gb">
+      <p>基本结构：<code>be + 过去分词 (+ by 执行者)</code></p>
+      <table class="tbl compact">
+        <tr><th style="width:150px">时态</th><th>结构</th><th>例句</th></tr>
+        <tr><td>一般现在时</td><td class="en">am/is/are + done</td><td class="en">Rice <b>is grown</b> in the south of China.</td></tr>
+        <tr><td>一般过去时</td><td class="en">was/were + done</td><td class="en">The bridge <b>was built</b> in 1998.</td></tr>
+        <tr><td>一般将来时</td><td class="en">will be + done / be going to be + done</td><td class="en">A new library <b>will be built</b> next year.</td></tr>
+        <tr><td>现在进行时</td><td class="en">am/is/are being + done</td><td class="en">The road <b>is being repaired</b> now.</td></tr>
+        <tr><td>过去进行时</td><td class="en">was/were being + done</td><td class="en">The house <b>was being painted</b> when I passed by.</td></tr>
+        <tr><td>现在完成时</td><td class="en">have/has been + done</td><td class="en">The work <b>has been finished</b> already.</td></tr>
+        <tr><td>过去完成时</td><td class="en">had been + done</td><td class="en">The letter <b>had been sent</b> before he came.</td></tr>
+        <tr><td>情态动词</td><td class="en">情态动词 + be + done</td><td class="en">Waste paper <b>can be recycled</b>.</td></tr>
+      </table>
+
+      <p><b>五个特殊考点</b></p>
+      <ul>
+        <li><b>双宾语的被动</b>：<span class="en">He gave me a book.</span> → <span class="en">I was given a book.</span> / <span class="en">A book was given to me.</span></li>
+        <li><b>复合宾语的被动要还原 to</b>：<span class="en">make/let/see/hear/watch/feel/notice + sb do</span> → 被动时 <span class="en">be made/seen/heard <b>to do</b></span>（let 变 <span class="en">be allowed to do</span>）。<br>
+          <span class="en">The boy was made to clean the room.</span></li>
+        <li><b>短语动词不能拆开</b>：<span class="en">be taken care of, be looked after, be laughed at, be listened to</span>。</li>
+        <li><b>不用被动语态</b>：<span class="en">happen, take place, appear, belong to, cost, fit, suit, have, lack, break out</span>。</li>
+        <li><b>主动形式表被动</b>：<span class="en">The book sells well. / This pen writes smoothly. / The house needs painting. (= needs to be painted)</span></li>
+      </ul>
+      <div class="exam"><b>中考考法：</b>1—2 题，常出现在"科技、环保"话题句里，如 <span class="en">New energy cars ______ (produce) widely now.</span> → <span class="en">are produced</span>。</div>
+    </div>
+  </div>
+
+  <!-- 11 情态动词 -->
+  <div class="gm" id="g11">
+    <div class="gt"><span class="gid">11</span><span class="gn">情态动词</span><span class="ge">Modal Verbs</span></div>
+    <div class="gb">
+      <table class="tbl compact">
+        <tr><th style="width:130px">情态动词</th><th>主要用法</th><th>注意</th></tr>
+        <tr><td class="en">can / could</td><td>能力（能、会）；请求（Could you…? 更委婉）；可能性</td><td>否定 can't 表"不可能"，语气最强</td></tr>
+        <tr><td class="en">may / might</td><td>允许（May I…?）；可能（might 语气更弱）</td><td>答语常用 Certainly. / Of course. / I'm afraid not.</td></tr>
+        <tr><td class="en">must / have to</td><td>must 主观"必须"；have to 客观"不得不"（有人称时态变化）</td><td class="en">mustn't 表<b>禁止</b>；needn't / don't have to 表<b>不必</b>（这是关键区别）</td></tr>
+        <tr><td class="en">should / ought to</td><td>应该（建议、义务）</td><td class="en">You'd better (not) do…；Why not do…?</td></tr>
+        <tr><td class="en">need</td><td>情态：needn't do；实义：need to do / need doing</td><td>疑问句 <span class="en">Need I…?</span></td></tr>
+        <tr><td class="en">had better</td><td>最好（not）做</td><td>后接动词原形</td></tr>
+        <tr><td class="en">will / would</td><td>意愿；Would you like…? / Would you please…?</td><td>过去将来时也用它</td></tr>
+        <tr><td class="en">shall</td><td>征求意见：Shall we…? / Shall I…?</td><td>限第一人称</td></tr>
+      </table>
+      <div class="tip"><b>表推测：</b><b>must</b>（一定是，用于肯定句）＞ <b>can / could</b>（可能是）＞ <b>may / might</b>（也许）＞ <b>can't</b>（不可能是）。
+        <span class="en">He must be at home. / He can't be at home. / He may be at home.</span></div>
+      <div class="err"><b>易错：</b>情态动词后一律接<b>动词原形</b>，没有三单和过去式变化（have to 除外）。</div>
+    </div>
+  </div>
+
+  <!-- 12 非谓语动词 -->
+  <div class="gm" id="g12">
+    <div class="gt"><span class="gid">12</span><span class="gn">非谓语动词</span><span class="ge">Non-finite Verbs</span></div>
+    <div class="gb">
+      <p><b>（1）不定式 to do</b></p>
+      <ul>
+        <li>作主语：<span class="en">It's important <b>to protect</b> the environment.</span>（It 作形式主语）</li>
+        <li>作宾语：<span class="en">want / hope / decide / plan / would like / agree / choose / learn / promise / refuse / offer / expect / manage / fail</span> + to do</li>
+        <li>作宾语补足语：<span class="en">ask / tell / want / would like / invite / warn / allow sb <b>to do</b></span></li>
+        <li>作定语：<span class="en">I have something <b>to eat</b>.</span></li>
+        <li>作状语表目的：<span class="en">He got up early <b>in order to catch</b> the first bus.</span></li>
+        <li>疑问词 + to do：<span class="en">I don't know <b>what to do / how to get</b> there.</span></li>
+      </ul>
+      <p><b>（2）动名词 doing（介词后、固定搭配后）</b></p>
+      <div class="grid g2">
+        <div class="card">
+          <div class="h"><span class="dot g"></span>只接 doing 的动词</div>
+          <p class="en">enjoy, finish, mind, practise, suggest, advise, consider, keep, avoid, miss, give up, put off, be worth, be busy, look forward to, be used to, devote…to, pay attention to, prefer doing to doing</p>
+        </div>
+        <div class="card">
+          <div class="h"><span class="dot r"></span>接 to do / doing 意义不同</div>
+          <ul class="en">
+            <li>stop to do 停下来去做 / stop doing 停止做</li>
+            <li>remember to do 记得去做 / remember doing 记得做过</li>
+            <li>forget / regret 同理</li>
+            <li>try to do 努力做 / try doing 试着做</li>
+            <li>go on to do 接着做另一件 / go on doing 继续做同一件</li>
+            <li>mean to do 打算 / mean doing 意味着</li>
+          </ul>
+        </div>
+      </div>
+      <p><b>（3）感官动词与使役动词（高频）</b></p>
+      <div class="eg en">I saw him <em>cross</em> the street. &nbsp;<span class="zh">看见他过了马路（全过程）</span></div>
+      <div class="eg en">I saw him <em>crossing</em> the street. &nbsp;<span class="zh">看见他正在过马路（进行）</span></div>
+      <div class="eg en">The teacher made us <em>read</em> the text aloud. / We were made <em>to read</em> the text aloud. &nbsp;<span class="zh">主动不带 to，被动要还原 to</span></div>
+      <div class="tip"><b>口诀：</b>"<b>一感二听三让四看</b>"——feel；hear, listen to；let, make, have；see, watch, notice, observe。这些动词后接<b>省略 to 的动词原形</b>（变被动时 to 要回来）。</div>
+    </div>
+  </div>
+
+  <!-- 13 主谓一致 -->
+  <div class="gm" id="g13">
+    <div class="gt"><span class="gid">13</span><span class="gn">主谓一致</span><span class="ge">Subject-Verb Agreement</span></div>
+    <div class="gb">
+      <table class="tbl compact">
+        <tr><th style="width:190px">情形</th><th>规则</th></tr>
+        <tr><td>不定代词作主语</td><td class="en">everyone, everybody, someone, nobody, nothing, each, either, neither → <b>单数谓语</b></td></tr>
+        <tr><td class="en">each / every + 名词</td><td class="en">Each student <b>has</b> a book.</td></tr>
+        <tr><td class="en">both / all / some / most</td><td class="en">both / all 用复数；some / most / half / none of + 名词，<b>由后面的名词决定</b></td></tr>
+        <tr><td class="en">a number of / the number of</td><td class="en">A number of students <b>are</b>…；The number of students <b>is</b>…</td></tr>
+        <tr><td class="en">there be</td><td><b>就近原则</b>：There <b>is</b> a pen and two books on the desk.</td></tr>
+        <tr><td>并列主语</td><td class="en">and 连接两个不同人或物 → 复数；指同一人/物 → 单数（The writer <b>and</b> teacher is coming.）</td></tr>
+        <tr><td class="en">either…or / neither…nor / not only…but also</td><td><b>就近原则</b>：谓语与最近的主语一致</td></tr>
+        <tr><td class="en">with / together with / as well as / except / besides</td><td>谓语与<b>前面</b>的主语一致（The teacher, with his students, <b>is</b>…）</td></tr>
+        <tr><td>时间、距离、金钱作整体</td><td class="en">Ten years <b>is</b> a long time.</td></tr>
+        <tr><td>形复意单 / 形单意复</td><td class="en">news, maths, physics → 单数；police, people → 复数</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- 14 句子成分 -->
+  <div class="gm" id="g14">
+    <div class="gt"><span class="gid">14</span><span class="gn">句子成分与五种基本句型</span><span class="ge">Sentence Elements</span></div>
+    <div class="gb">
+      <p><b>七种成分：</b>主语、谓语、宾语（直接/间接）、表语、宾语补足语、定语、状语（＋同位语）。</p>
+      <table class="tbl compact">
+        <tr><th style="width:60px">序号</th><th>句型</th><th>例句</th></tr>
+        <tr><td>①</td><td class="en">S + V</td><td class="en">The baby <b>cried</b>.</td></tr>
+        <tr><td>②</td><td class="en">S + V + O</td><td class="en">She <b>likes</b> music.</td></tr>
+        <tr><td>③</td><td class="en">S + V + P</td><td class="en">The soup <b>tastes</b> delicious.</td></tr>
+        <tr><td>④</td><td class="en">S + V + IO + DO</td><td class="en">He <b>gave</b> me a book.</td></tr>
+        <tr><td>⑤</td><td class="en">S + V + O + OC</td><td class="en">We <b>keep</b> the classroom clean. / They <b>made</b> him monitor.</td></tr>
+      </table>
+      <p><b>There be 句型</b>：表示"某处有某物"，be 与后面的名词就近一致；<span class="en">there will be / there have been / there must be</span> 都是常考形式。与 <span class="en">have</span> 的区别：<b>There be 表"存在"，have 表"拥有"</b>。</p>
+      <div class="eg en">There <em>is</em> a book and two rulers on the desk. &nbsp;<span class="zh">就近原则</span></div>
+      <div class="eg en">There <em>is going to be</em> a football match tomorrow. &nbsp;<span class="zh">不能用 there is going to have</span></div>
+    </div>
+  </div>
+
+  <!-- 15 句子种类 -->
+  <div class="gm" id="g15">
+    <div class="gt"><span class="gid">15</span><span class="gn">句子种类与疑问句</span><span class="ge">Sentence Types</span></div>
+    <div class="gb">
+      <ul>
+        <li><b>陈述句</b>：肯定 / 否定（否定转移：<span class="en">I don't think he is right. = I think he isn't right.</span>）</li>
+        <li><b>疑问句</b>：
+          <ul>
+            <li>一般疑问句：<span class="en">Do you…? / Have you…? / Can you…?</span>（升调）</li>
+            <li>特殊疑问句：疑问词 + 一般疑问语序（降调）；疑问词 <span class="en">what, which, who(m), whose, when, where, why, how, how many/much/long/often/soon/far</span></li>
+            <li>选择疑问句：<span class="en">Is it red or blue?</span>（前升后降）</li>
+            <li>反意疑问句：见专题 20</li>
+          </ul>
+        </li>
+        <li><b>祈使句</b>：肯定以动词原形开头（<span class="en">Open the door.</span>）；否定用 <span class="en">Don't…</span>；<span class="en">Let's…</span> 表建议；祈使句 + and / or 可转成条件句：<span class="en">Hurry up, or you'll be late.</span></li>
+        <li><b>感叹句</b>：
+          <div class="eg en">What + a/an + adj. + 单数可数名词 + 主谓！ → <em>What a clever boy he is!</em></div>
+          <div class="eg en">What + adj. + 复数名词/不可数名词 + 主谓！ → <em>What fine weather it is!</em></div>
+          <div class="eg en">How + adj./adv. + 主谓！ → <em>How fast he runs!</em> / <em>How beautiful the flowers are!</em></div>
+        </li>
+      </ul>
+      <div class="tip"><b>判断技巧：</b>划出感叹句的核心名词——<b>有名词用 What，没名词用 How</b>。注意 <span class="en">How + adj. + a/an + 名词</span> 也可以：<span class="en">How clever a boy he is!</span></div>
+    </div>
+  </div>
+
+  <!-- 16 宾语从句 -->
+  <div class="gm" id="g16">
+    <div class="gt"><span class="gid">16</span><span class="gn">宾语从句</span><span class="ge">Object Clauses</span><span class="pill r" style="margin-left:auto">高频</span></div>
+    <div class="gb">
+      <p><b>三要素：连接词 · 语序 · 时态</b></p>
+      <table class="tbl compact">
+        <tr><th style="width:150px">要素</th><th>要点</th></tr>
+        <tr><td><b>① 连接词</b></td><td class="en">陈述句 → <b>that</b>（口语中可省略）；一般疑问句 → <b>if / whether</b>；特殊疑问句 → 用原疑问词 <b>what / where / when / why / how / who…</b></td></tr>
+        <tr><td><b>② 语序</b></td><td><b>必须是陈述语序</b>（主语 + 谓语），不能用疑问语序<br><span class="en">Could you tell me <b>where the bank is</b>?</span>（不是 where is the bank）</td></tr>
+        <tr><td><b>③ 时态</b></td><td>主句是现在时 → 从句时态按需要；主句是过去时 → 从句用<b>相应的过去时态</b>；但从句表示<b>客观真理</b>时永远用一般现在时</td></tr>
+      </table>
+      <p><b>几个必须知道的细节</b></p>
+      <ul>
+        <li><b>只能用 whether 的情况</b>：介词后（<span class="en">It depends on whether he comes.</span>）、与 or not 直接连用（<span class="en">whether or not…</span>）、后接不定式（<span class="en">I haven't decided whether to go.</span>）。</li>
+        <li><b>否定转移</b>：主句谓语是 <span class="en">think / believe / suppose / guess / imagine</span> 且主语为第一人称时，否定要在主句上：<span class="en">I <b>don't</b> think she will come.</span></li>
+        <li><b>宾语从句的反意疑问句</b>看<b>主句</b>主语：<span class="en">I think he is right, <b>isn't he</b>? / I don't think he is right, <b>is he</b>?</span></li>
+      </ul>
+      <div class="eg en">He asked me <em>how long</em> I <em>had been</em> in Shanghai. &nbsp;<span class="zh">语序 + 时态呼应</span></div>
+      <div class="eg en">The teacher told us that light <em>travels</em> faster than sound. &nbsp;<span class="zh">客观真理用现在时</span></div>
+    </div>
+  </div>
+
+  <!-- 17 定语从句 -->
+  <div class="gm" id="g17">
+    <div class="gt"><span class="gid">17</span><span class="gn">定语从句</span><span class="ge">Relative Clauses</span></div>
+    <div class="gb">
+      <table class="tbl compact">
+        <tr><th style="width:150px">关系词</th><th>先行词</th><th>在从句中的作用</th><th>例句</th></tr>
+        <tr><td class="en">who / whom</td><td>人</td><td>主语 / 宾语</td><td class="en">The man <b>who</b> helped me is a doctor.</td></tr>
+        <tr><td class="en">whose</td><td>人 / 物</td><td>定语（谁的）</td><td class="en">I know the girl <b>whose</b> father is a pilot.</td></tr>
+        <tr><td class="en">which</td><td>物</td><td>主语 / 宾语</td><td class="en">The book <b>which</b> I bought yesterday is interesting.</td></tr>
+        <tr><td class="en">that</td><td>人 / 物</td><td>主语 / 宾语</td><td class="en">This is the best film <b>that</b> I have ever seen.</td></tr>
+        <tr><td class="en">when / where / why</td><td>时间 / 地点 / 原因</td><td>状语</td><td class="en">I'll never forget the day <b>when</b> we first met.</td></tr>
+      </table>
+      <div class="err"><b>只能用 that 的五种情况（必背）：</b><br>
+        ① 先行词是 <span class="en">all, everything, anything, nothing, little, much</span> 等不定代词；<br>
+        ② 先行词被 <span class="en">the only, the very, the same</span> 或序数词、最高级修饰；<br>
+        ③ 先行词既有人又有物；<br>
+        ④ 主句以 <span class="en">Who / Which</span> 开头；<br>
+        ⑤ 先行词是 <span class="en">anything / nothing</span> 等。
+      </div>
+      <div class="tip"><b>写作提分用法：</b>把两个简单句合并成一个含定语从句的复合句，是作文中提升"句式多样性"最稳的手段。<br>
+        <span class="en">I like the book. The book was written by a Chinese writer.</span> → <span class="en">I like the book <b>which was written</b> by a Chinese writer.</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 18 状语从句 -->
+  <div class="gm" id="g18">
+    <div class="gt"><span class="gid">18</span><span class="gn">状语从句</span><span class="ge">Adverbial Clauses</span></div>
+    <div class="gb">
+      <table class="tbl compact">
+        <tr><th style="width:120px">类型</th><th>常用引导词</th><th>注意</th></tr>
+        <tr><td>时间</td><td class="en">when, while, as, before, after, until, till, as soon as, since</td><td class="en">not…until 直到…才；as soon as 一…就</td></tr>
+        <tr><td>条件</td><td class="en">if, unless, as long as, in case</td><td><b>主将从现</b></td></tr>
+        <tr><td>原因</td><td class="en">because, since, as</td><td>because 语气最强，回答 why</td></tr>
+        <tr><td>结果</td><td class="en">so…that…, such…that…, so that</td><td class="en">so + adj./adv.；such + 名词短语</td></tr>
+        <tr><td>目的</td><td class="en">so that, in order that（+ 从句）；to, in order to, so as to（+ 动词原形）</td><td>目的从句常带 can / could / may</td></tr>
+        <tr><td>让步</td><td class="en">though, although, even though, even if, no matter what/how, wherever</td><td>不能与 but 连用</td></tr>
+        <tr><td>比较</td><td class="en">than, as…as, not so…as</td><td>见专题 07</td></tr>
+        <tr><td>地点</td><td class="en">where, wherever</td><td>—</td></tr>
+      </table>
+      <div class="eg en"><em>Although</em> it was raining hard, they went on working. &nbsp;<span class="zh">不能再加 but</span></div>
+      <div class="eg en">He spoke <em>so</em> fast <em>that</em> nobody could follow him. &nbsp;<span class="zh">so + 副词 + that</span></div>
+      <div class="eg en">We won't start <em>until</em> everyone <em>arrives</em>. &nbsp;<span class="zh">not…until + 主将从现</span></div>
+    </div>
+  </div>
+
+  <!-- 19 间接引语 -->
+  <div class="gm" id="g19">
+    <div class="gt"><span class="gid">19</span><span class="gn">直接引语变间接引语</span><span class="ge">Reported Speech</span></div>
+    <div class="gb">
+      <p><b>五变：人称变、时态变、时间状语变、地点状语变、指示代词变。</b></p>
+      <table class="tbl compact">
+        <tr><th style="width:170px">变化项</th><th>直接引语 → 间接引语</th></tr>
+        <tr><td>人称</td><td>第一人称随主语，第二人称随宾语，第三人称不变</td></tr>
+        <tr><td>时态（主句为过去时）</td><td class="en">一般现在→一般过去；现在进行→过去进行；一般将来→过去将来；现在完成→过去完成；一般过去→过去完成；can→could；may→might；must→had to</td></tr>
+        <tr><td>时间状语</td><td class="en">now→then；today→that day；yesterday→the day before；tomorrow→the next day；last week→the week before；next week→the next week；ago→before</td></tr>
+        <tr><td>地点 / 指示</td><td class="en">here→there；this→that；these→those；come→go；bring→take</td></tr>
+        <tr><td>句式</td><td class="en">陈述句 that（可省）；一般疑问句 if / whether + 陈述语序；特殊疑问句 疑问词 + 陈述语序；祈使句 tell / ask / order sb (not) to do</td></tr>
+      </table>
+      <div class="eg en">"I will come here tomorrow," he said. → He said that he <em>would go there the next day</em>.</div>
+      <div class="eg en">"Don't be late again," the teacher said. → The teacher <em>told us not to be</em> late again.</div>
+    </div>
+  </div>
+
+  <!-- 20 反意疑问句 -->
+  <div class="gm" id="g20">
+    <div class="gt"><span class="gid">20</span><span class="gn">反意疑问句</span><span class="ge">Tag Questions</span></div>
+    <div class="gb">
+      <p><b>基本规则：前肯后否，前否后肯；助动词/be/情态动词与前后保持一致，主语用代词。</b></p>
+      <table class="tbl compact">
+        <tr><th style="width:250px">前半句</th><th>后半句</th></tr>
+        <tr><td class="en">I am…</td><td class="en">aren't I?</td></tr>
+        <tr><td class="en">Let's…</td><td class="en">shall we?</td></tr>
+        <tr><td class="en">Let us…</td><td class="en">will you?</td></tr>
+        <tr><td class="en">祈使句（Close the door,…）</td><td class="en">will you? / won't you?</td></tr>
+        <tr><td class="en">There be…</td><td class="en">isn't there? / aren't there?</td></tr>
+        <tr><td class="en">have to</td><td class="en">don't / doesn't…?</td></tr>
+        <tr><td class="en">must（必须）</td><td class="en">needn't…?</td></tr>
+        <tr><td class="en">must（推测）</td><td>与从句时态一致：<span class="en">He must be at home, isn't he?</span></td></tr>
+        <tr><td class="en">used to</td><td class="en">didn't / usedn't…?</td></tr>
+        <tr><td>前半句含 <span class="en">never, hardly, little, few, nothing, nobody, no one</span></td><td>视为否定 → 后半句用<b>肯定</b></td></tr>
+      </table>
+      <div class="err"><b>答语陷阱：</b>回答一律"依事实，看前后是否一致"。<br>
+        <span class="en">— You didn't come to school yesterday, did you?</span><br>
+        <span class="en">— Yes, I did.（不，我来了）/ No, I didn't.（是的，我没来）</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 21 There be 与倒装 -->
+  <div class="gm" id="g21">
+    <div class="gt"><span class="gid">21</span><span class="gn">There be 与倒装句</span><span class="ge">Inversion</span></div>
+    <div class="gb">
+      <ul>
+        <li><b>There be</b>：就近原则；<span class="en">there will be, there have been, there must be, there used to be, there seems to be</span>。</li>
+        <li><b>完全倒装</b>（副词置于句首）：<span class="en">Here comes the bus. / There goes the bell.</span> 但主语为代词时不倒装：<span class="en">Here it is.</span></li>
+        <li><b>So / Neither / Nor + 助动词 + 主语</b> 表"（另一个人）也 / 也不"：
+          <div class="eg en">He likes English. So <em>do I</em>. / I can't swim. Neither <em>can he</em>.</div>
+          <div class="eg en">对比：He likes English. So <em>he does</em>.（他确实如此——表赞同，不倒装）</div>
+        </li>
+        <li><b>Only + 状语置于句首</b>引起部分倒装（理解为主）：<span class="en">Only then did he realize his mistake.</span></li>
+        <li><b>not only…but also…</b> 置于句首时，前半句倒装（了解）。</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 22 强调与省略 -->
+  <div class="gm" id="g22">
+    <div class="gt"><span class="gid">22</span><span class="gn">强调与省略</span><span class="ge">Emphasis &amp; Ellipsis</span></div>
+    <div class="gb">
+      <ul>
+        <li><b>It is / was + 被强调部分 + that / who + 其余部分</b>：<span class="en">It was <b>Tom who</b> broke the window. / It is <b>English that</b> I like best.</span></li>
+        <li><b>助动词 do / does / did 表强调</b>：<span class="en">I <b>do</b> hope you can come. / She <b>did</b> tell me the truth.</span></li>
+        <li><b>省略</b>：并列句中省略重复部分（<span class="en">I like English and she (likes) Chinese.</span>）；状语从句中省略"主语 + be"（<span class="en">When (you are) in doubt, ask your teacher.</span>）。</li>
+        <li><b>写作中的强调手段</b>：倒装、强调句、<span class="en">What matters most is…</span>、<span class="en">There is no doubt that…</span>——用在开头或结尾最容易得分。</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 23 虚拟语气 -->
+  <div class="gm" id="g23">
+    <div class="gt"><span class="gid">23</span><span class="gn">虚拟语气（初步）</span><span class="ge">Subjunctive Mood</span></div>
+    <div class="gb">
+      <p>上海初中阶段只要求掌握<b>几个固定句型</b>，不要求系统掌握虚拟语气。</p>
+      <table class="tbl compact">
+        <tr><th style="width:180px">句型</th><th>结构</th><th>例句</th></tr>
+        <tr><td class="en">wish</td><td class="en">wish + 过去时（现在） / had done（过去） / could do（将来）</td><td class="en">I wish I <b>were</b> a bird. / I wish I <b>had taken</b> your advice.</td></tr>
+        <tr><td class="en">if 虚拟</td><td class="en">if + 过去时，主句 would/could + do</td><td class="en">If I <b>were</b> you, I <b>would</b> accept the offer.</td></tr>
+        <tr><td class="en">would rather</td><td class="en">would rather (not) do</td><td class="en">I'd rather <b>stay</b> at home.</td></tr>
+        <tr><td class="en">It's time…</td><td class="en">It's time for sb to do / It's time sb did</td><td class="en">It's time for us <b>to go</b> to bed.</td></tr>
+      </table>
+      <div class="tip"><b>写作加分：</b><span class="en">If I were the headmaster, I would give students more free time.</span>——一句虚拟语气能让作文的语言层次明显提高。</div>
+    </div>
+  </div>
+
+  <!-- 24 交际功能 -->
+  <div class="gm" id="g24">
+    <div class="gt"><span class="gid">24</span><span class="gn">交际功能与情景用语</span><span class="ge">Functional Language</span><span class="pill" style="margin-left:auto">听说测试直接考</span></div>
+    <div class="gb">
+      <table class="tbl compact">
+        <tr><th style="width:150px">功能</th><th>典型句型</th></tr>
+        <tr><td>问候 / 介绍</td><td class="en">How do you do? / Nice to meet you. / Let me introduce myself. I'm… / This is my friend, Tom.</td></tr>
+        <tr><td>感谢与应答</td><td class="en">Thanks a lot. / I really appreciate it. — You're welcome. / It's my pleasure. / Not at all.</td></tr>
+        <tr><td>道歉与应答</td><td class="en">I'm sorry for being late. / I apologize. — Never mind. / That's all right. / It doesn't matter.</td></tr>
+        <tr><td>建议 / 征求意见</td><td class="en">Why not do…? / What about doing…? / How about…? / You'd better… / Shall we…? / Would you like to…?</td></tr>
+        <tr><td>请求与许可</td><td class="en">Could / Would you please…? / Do you mind if I…? / May I…? — Of course. / I'm afraid not. / Go ahead.</td></tr>
+        <tr><td>打电话</td><td class="en">Hello, this is Li Ming speaking. / Who's that? / Hold on, please. / Can I take a message? / I'll call back later.</td></tr>
+        <tr><td>问路与指路</td><td class="en">Excuse me, how can I get to the museum? — Go along this road and turn left at the second crossing. It's about ten minutes' walk.</td></tr>
+        <tr><td>购物</td><td class="en">Can I help you? / I'd like… / How much is it? / What size do you want? / May I try it on? / I'll take it.</td></tr>
+        <tr><td>就餐</td><td class="en">A table for two, please. / Would you like something to drink? / I'd like a bowl of noodles. / The bill, please.</td></tr>
+        <tr><td>看病</td><td class="en">What's wrong / the matter with you? / I've got a headache and a fever. / Take the medicine three times a day and drink more water.</td></tr>
+        <tr><td>观点与态度</td><td class="en">In my opinion… / I agree with you. / I'm afraid I can't agree. / That's a good idea. / It sounds great.</td></tr>
+        <tr><td>祝愿与祝贺</td><td class="en">Good luck! / Best wishes! / Congratulations! / Have a good trip! / The same to you!</td></tr>
+        <tr><td>天气与闲谈</td><td class="en">What's the weather like today? / It's sunny and warm. / Lovely day, isn't it?</td></tr>
+        <tr><td>安慰与鼓励</td><td class="en">Take it easy. / Don't worry. / Cheer up! / You can do it! / That's OK, everyone makes mistakes.</td></tr>
+      </table>
+      <div class="exam"><b>上海听说测试的"交际应答"就是从这里出题：</b>听到问句后要在几秒内用完整、得体的一句话回应，平时要按"功能"成组练习，而不是零散背句子。</div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ 第四部分 ============ -->
+<section id="p4">
+  <h2><span class="num">四</span>分年级知识点（六 → 九年级） <span class="en-sub">Grade by Grade</span></h2>
+  <p class="lead">语法是螺旋上升的：同一个知识点会在不同年级反复出现、不断加深。下面按年级列出"教材话题 — 语法重点 — 词汇与功能 — 读写目标 — 易错清单"，方便对号入座地补漏。</p>
+
+  <h3 id="s4-1">六年级（预备年级）：打地基</h3>
+  <div class="grid g2">
+    <div class="card">
+      <div class="h"><span class="dot"></span>教材话题（以老版 6A/6B 为例）</div>
+      <p class="en">6A：Family and relatives｜I have a good friend｜Spending a day out together｜What would you like to be?｜Open Day｜Going to school｜Rules round us｜The food we eat｜Picnics are fun｜Healthy eating｜Let's make a pizza</p>
+      <p class="en">6B：Great cities in Asia｜At the airport｜Dragon Boat Festival｜Staying healthy｜What will I be like?｜Seasonal changes｜Travelling in Garden City｜Windy weather｜Sea water and rain water｜Forests and land｜Controlling fire</p>
+      <p class="muted">新版教材同年级话题也集中在"家庭、朋友、学校、饮食、天气、动物"这些离自己最近的领域。</p>
+    </div>
+    <div class="card">
+      <div class="h"><span class="dot p"></span>语法重点</div>
+      <ul class="en">
+        <li>一般现在时（含三单变化）</li>
+        <li>现在进行时</li>
+        <li>一般过去时（be 动词 + 规则动词 + 常用不规则动词）</li>
+        <li>一般将来时（will / be going to）</li>
+        <li>名词单复数与不可数名词</li>
+        <li>人称代词与物主代词</li>
+        <li>冠词 a / an / the 的基本用法</li>
+        <li>基数词与序数词、时间日期表达</li>
+        <li>时间与地点介词 in / on / at</li>
+        <li>can / must / may 表能力与许可</li>
+        <li>祈使句、There be 句型</li>
+        <li>形容词作定语与表语</li>
+      </ul>
+    </div>
+  </div>
+  <table class="tbl compact">
+    <tr><th style="width:130px">维度</th><th>具体要求</th></tr>
+    <tr><td><b>核心词汇</b></td><td class="en">家庭成员、身体与外貌、情绪、食物与饮料、学校科目与设施、动物、天气与季节、颜色数字、日常动作、时间表达（约 800—1000 词）</td></tr>
+    <tr><td><b>功能用语</b></td><td class="en">自我介绍与介绍他人；问候与告别；表达喜好（I like / I don't like）；请求与回应；简单问路；描述天气；点餐；打电话</td></tr>
+    <tr><td><b>读写目标</b></td><td>读懂 100—150 词的短文并完成判断题、选择题；能写 40—60 词的短文（自我介绍、我的家庭、我的学校、我的一天）</td></tr>
+  </table>
+  <div class="err"><b>六年级最常错：</b>
+    ① 一般现在时三单漏加 -s（<span class="en">He go to school</span> ✗ → <span class="en">He goes</span> ✓）；
+    ② <span class="en">be</span> 动词与实义动词混用（<span class="en">He is like apples.</span> ✗）；
+    ③ 名词复数和不可数名词乱加 -s（<span class="en">two breads</span> ✗ → <span class="en">two pieces of bread</span> ✓）；
+    ④ 星期、日期、月份的介词用错；
+    ⑤ 第三人称代词 he / she / it 混用，写作中人称不一致。
+  </div>
+
+  <h3 id="s4-2">七年级：从"我"走向"我们生活的世界"</h3>
+  <div class="grid g2">
+    <div class="card">
+      <div class="h"><span class="dot"></span>教材话题（以老版 7A/7B 为例）</div>
+      <p class="en">7A：Relatives in Beijing｜Our animal friends｜Friends from other countries｜Jobs people do｜Choosing a new flat｜Different places｜Signs around us｜Growing healthy, growing strong｜International Food Festival｜A birthday party｜My food project</p>
+      <p class="en">7B：Writing a travel guide｜Going to see a film｜A visit to Garden City｜Let's go shopping｜What can we learn from others?｜Hard work for a better life｜In the future｜A more enjoyable school life｜The wind is blowing｜Water Festival｜Electricity</p>
+    </div>
+    <div class="card">
+      <div class="h"><span class="dot p"></span>语法重点</div>
+      <ul class="en">
+        <li>过去进行时（when / while 引导）</li>
+        <li>现在完成时（引入：already / yet / just / ever / never / since / for）</li>
+        <li>形容词与副词的比较级、最高级</li>
+        <li>情态动词 should / had better / need</li>
+        <li>不定式作宾语与目的状语</li>
+        <li>动名词作主语、介词后接 doing</li>
+        <li>时间状语从句、条件状语从句（主将从现）</li>
+        <li>because / so / if / when 等连词的选用</li>
+        <li>疑问词 + 不定式</li>
+      </ul>
+    </div>
+  </div>
+  <table class="tbl compact">
+    <tr><th style="width:130px">维度</th><th>具体要求</th></tr>
+    <tr><td><b>核心词汇</b></td><td class="en">职业与工作场所、城市设施与标志、购物与价格、交通出行、旅游景点、饮食与营养、身体健康、语言与国家、性格与品质、未来计划（累计约 1200—1500 词）</td></tr>
+    <tr><td><b>功能用语</b></td><td class="en">提出建议与征求意见；购物询价与试穿；描述路线与指路；谈论计划与打算；表达同意与不同意见；谈论健康与饮食习惯</td></tr>
+    <tr><td><b>读写目标</b></td><td>读懂 250—350 词文章（说明文、记叙文、应用文）；能写 60—80 词短文（旅行计划、购物经历、健康生活），开始使用连接词</td></tr>
+  </table>
+  <div class="err"><b>七年级最常错：</b>
+    ① <b>一般过去时 vs 现在完成时</b>选错（有明确过去时间只能用过去时）；
+    ② 现在完成时与 <span class="en">for / since</span> 搭配时用了短暂性动词（<span class="en">have bought it for two years</span> ✗ → <span class="en">have had it for two years</span> ✓）；
+    ③ 比较级前加 <span class="en">very</span>（<span class="en">very better</span> ✗ → <span class="en">much better</span> ✓）；
+    ④ <span class="en">look forward to</span> 后误接动词原形（应为 doing）；
+    ⑤ <span class="en">when</span> 与 <span class="en">while</span> 混用。
+  </div>
+
+  <h3 id="s4-3">八年级：语法的"陡坡期"</h3>
+  <div class="grid g2">
+    <div class="card">
+      <div class="h"><span class="dot"></span>教材话题（以老版 8A/8B 为例）</div>
+      <p class="en">8A：Penfriends｜Work and play｜Trouble!｜Numbers｜Encyclopaedias｜Nobody wins (I)｜Nobody wins (II)</p>
+      <p class="en">8B：Trees｜Water｜Electricity｜Newspapers｜Magazine articles｜Travel｜Poems</p>
+      <p class="muted">新版八年级下册：Art and artists｜Great inventions and discoveries｜Money｜Fashion｜Natural disasters｜Friendship——科普与人文比重明显上升。</p>
+    </div>
+    <div class="card">
+      <div class="h"><span class="dot p"></span>语法重点</div>
+      <ul class="en">
+        <li>被动语态（各时态、双宾语、复合宾语、短语动词）</li>
+        <li>宾语从句（连接词、语序、时态呼应）</li>
+        <li>状语从句系统化（时间、条件、原因、结果、目的、让步）</li>
+        <li>非谓语动词（不定式、动名词、分词）</li>
+        <li>主谓一致</li>
+        <li>反意疑问句</li>
+        <li>直接引语变间接引语（入门）</li>
+        <li>形容词副词的位置与比较结构</li>
+      </ul>
+    </div>
+  </div>
+  <table class="tbl compact">
+    <tr><th style="width:130px">维度</th><th>具体要求</th></tr>
+    <tr><td><b>核心词汇</b></td><td class="en">科学技术与发明、数字与语言、报纸与媒体、自然环境（树、水、电）、科幻叙事词汇、诗歌与文学、问题与解决（累计约 1500—1800 词）</td></tr>
+    <tr><td><b>功能用语</b></td><td class="en">描述过程与顺序；解释原因与结果；提出并解决问题；表达推测与可能；转述他人的话；就话题发表看法</td></tr>
+    <tr><td><b>读写目标</b></td><td>读懂 350—450 词的说明文、科普文、科幻故事；能写 80—100 词短文，能写出含从句的复合句</td></tr>
+  </table>
+  <div class="err"><b>八年级最常错：</b>
+    ① 被动语态漏 <span class="en">be</span> 或用了错误时态（<span class="en">The window broken by Tom.</span> ✗）；
+    ② <span class="en">make / see / hear sb do</span> 变被动后忘记还原 <span class="en">to</span>；
+    ③ 宾语从句仍用疑问语序（<span class="en">Do you know where is he?</span> ✗）；
+    ④ 宾语从句时态不呼应（主句过去，从句用现在）；
+    ⑤ <span class="en">although</span> 与 <span class="en">but</span>、<span class="en">because</span> 与 <span class="en">so</span> 同时出现。
+  </div>
+
+  <h3 id="s4-4">九年级：总复习与中考应考</h3>
+  <div class="grid g2">
+    <div class="card">
+      <div class="h"><span class="dot"></span>教材话题（以老版 9A/9B 为例）</div>
+      <p class="en">9A：Ancient Greece｜Traditional skills｜Pets｜Computers｜The human brain｜Detectives｜Escaping from kidnappers</p>
+      <p class="en">9B：Saving the Earth｜Life in the future｜Going places｜All about films and TV｜A story by Mark Twain</p>
+      <p class="muted">新版九年级上册：Teenage life｜People and their jobs｜Travellers' tales｜Folk customs｜Buildings｜Pollution——传统文化、城市与环保是重点话题。</p>
+    </div>
+    <div class="card">
+      <div class="h"><span class="dot p"></span>语法重点（拉分点）</div>
+      <ul class="en">
+        <li>定语从句（who / which / that / whose / when / where）</li>
+        <li>过去完成时与"过去的过去"</li>
+        <li>时态、语态综合判断</li>
+        <li>宾语从句 + 定语从句 + 状语从句的混合辨析</li>
+        <li>虚拟语气常用句型（wish / If I were…）</li>
+        <li>主谓一致综合</li>
+        <li>强调句与倒装（理解并会用于写作）</li>
+        <li>交际用语系统复习（听说测试）</li>
+      </ul>
+    </div>
+  </div>
+  <table class="tbl compact">
+    <tr><th style="width:130px">维度</th><th>具体要求</th></tr>
+    <tr><td><b>核心词汇</b></td><td class="en">传统文化与技艺、电脑与人脑、侦探与推理、环保与能源、未来生活、影视与文学（累计 2000 词以上，其中大量为阅读中的学术/抽象词，需要靠上下文推测）</td></tr>
+    <tr><td><b>功能用语</b></td><td class="en">表达观点并说明理由；提出建议与解决方案；描述趋势与变化；转述与评价；就图表/现象写分析性短文</td></tr>
+    <tr><td><b>读写目标</b></td><td>读懂 450—550 词文章（含图表、广告、说明文），会做推理判断题与词义猜测题；能写 100—120 词的作文，结构完整、有句式亮点</td></tr>
+  </table>
+  <div class="err"><b>九年级最常错：</b>
+    ① 定语从句关系词选错（先行词被最高级/序数词/不定代词修饰时只能用 <span class="en">that</span>）；
+    ② <span class="en">by the time</span> / <span class="en">by the end of</span> 后的过去完成时漏用；
+    ③ 首字母填空只填对词形错、或只填原形不变形；
+    ④ 写作时态突然切换（开头一般现在、中间变过去）；
+    ⑤ 回答问题用不完整句或答非所问。
+  </div>
+
+  <h3 id="s4-5">跨年级语法分布对照表</h3>
+  <p class="muted">用这张表可以一眼看出某个语法点"什么时候学、什么时候再考、什么时候加深"。</p>
+  <table class="tbl">
+    <tr><th style="width:150px">语法项目</th><th>六年级</th><th>七年级</th><th>八年级</th><th>九年级</th></tr>
+    <tr><td><b>时态</b></td><td>一般现在 / 现在进行 / 一般过去 / 一般将来</td><td>过去进行 / 现在完成（引入）</td><td>现在完成（深化）</td><td>过去完成 / 时态综合</td></tr>
+    <tr><td><b>语态</b></td><td>—</td><td>接触（理解）</td><td>被动语态系统学习</td><td>各时态被动综合</td></tr>
+    <tr><td><b>名词 / 代词 / 冠词</b></td><td>基础用法</td><td>不定代词深化</td><td>it 的形式主语/宾语</td><td>综合复习</td></tr>
+    <tr><td><b>形容词 / 副词</b></td><td>作定语、表语</td><td>比较级、最高级</td><td>位置与比较结构深化</td><td>综合与写作运用</td></tr>
+    <tr><td><b>情态动词</b></td><td>can / must / may</td><td>should / need / had better</td><td>表推测（must / can't）</td><td>综合与语境判断</td></tr>
+    <tr><td><b>非谓语动词</b></td><td>—</td><td>不定式、动名词</td><td>分词、感官使役动词</td><td>综合运用</td></tr>
+    <tr><td><b>从句</b></td><td>—</td><td>时间、条件状语从句</td><td>宾语从句、状语从句系统化</td><td>定语从句、三从句辨析</td></tr>
+    <tr><td><b>其他句式</b></td><td>There be、祈使句、感叹句</td><td>反意疑问句（接触）</td><td>反意疑问句、间接引语</td><td>强调句、倒装、虚拟</td></tr>
+  </table>
+</section>
+
+<!-- ============ 第五部分 ============ -->
+<section id="p5">
+  <h2><span class="num">五</span>题型突破与解题方法 <span class="en-sub">Exam Skills</span></h2>
+  <p class="lead">语法会了不等于会考试。这一部分按中考卷面顺序，给出每种题型的"做法步骤 + 时间建议 + 常见陷阱"。</p>
+
+  <div class="exam">
+    <b>90 分钟时间分配建议（可按个人情况微调）：</b>
+    听力 15 min ｜ 单选 5 min ｜ 选词填空 + 词形转换 + 句型转换 10 min ｜ 阅读 A、B 篇 14 min ｜ 阅读 C、D 篇 16 min ｜ 写作 16 min ｜ 检查 4 min。
+    核心原则：<b>阅读（50 分）+ 写作（20 分）占卷面一半以上，时间不够时优先保这两块</b>，单选不要恋战。
+  </div>
+
+  <h3 id="s5-1">1. 听力（25 分）</h3>
+  <table class="tbl compact">
+    <tr><th style="width:150px">题型</th><th>做法</th><th>陷阱</th></tr>
+    <tr>
+      <td><b>听句子选图</b></td>
+      <td>先横向比较 5 张图的差别，抓住每张图的"唯一特征词"（动作、地点、数量）</td>
+      <td>近音词、同类词的干扰（如 walk / work；thirteen / thirty）</td>
+    </tr>
+    <tr>
+      <td><b>听对话选答案</b></td>
+      <td>预读选项并预判问题方向（Where / When / How much / What does the man mean）</td>
+      <td>转折词后是答案（but, however）；数字要算（如打了折、迟到了几分钟）</td>
+    </tr>
+    <tr>
+      <td><b>听短文判断 T/F</b></td>
+      <td>先划题干关键词，听时逐条核对，注意原文与题干的细微改动</td>
+      <td>把 all 改成 some、把 always 改成 sometimes 这类"偷换程度"的题</td>
+    </tr>
+    <tr>
+      <td><b>听短文填词</b></td>
+      <td>听前预判词性；听到即写，用缩写速记；最后补全拼写与词形</td>
+      <td>只写对读音没写对拼写；名词单复数、动词时态、形容词副词形式没变</td>
+    </tr>
+  </table>
+  <div class="tip">
+    <b>听力提分的三件小事：</b>
+    ① 每次听力前<b>一定要预读题干和选项</b>，这是唯一能主动做的事；
+    ② 听不懂就<b>立刻放手</b>，不要为一道题丢掉后面三道；
+    ③ 平时用"整段听 + 跟读"训练，能读准才能听准——连读、弱读、失爆是听力障碍的根源。
+  </div>
+
+  <h3 id="s5-2">2. 语法与词汇（45 分）</h3>
+
+  <h4>（1）单项选择（15 题 × 1 分）</h4>
+  <ol>
+    <li><b>先看空前空后找"信号"</b>：时间状语 → 定时态；主语与动词的关系 → 定主动被动；空前是否有介词/固定搭配 → 定非谓语形式。</li>
+    <li><b>再看语境</b>：上海卷的语法题近年几乎都带语境，读完整个句子再选，不要只看空前后两个词。</li>
+    <li><b>排除法兜底</b>：时态题先排掉不可能的时间关系；选项中有原形、doing、to do 时，回到搭配上判断。</li>
+  </ol>
+
+  <h4>（2）选词填空 / 完成短文（8 题 × 1 分）</h4>
+  <p><b>三步法：判词性 → 选单词 → 定形式</b></p>
+  <ol>
+    <li><b>先通读全文</b>，把握大意与逻辑（转折？因果？举例？）。</li>
+    <li><b>判断每个空需要什么词性</b>：空格前是冠词/形容词 → 名词；空前是主语、空后是宾语 → 谓语动词；空前是 be 动词 → 形容词；修饰动词/整个句子 → 副词。</li>
+    <li><b>从给定单词中选语义合适的词</b>，注意有的词已经给的是原形，需要变形；有的给了复数或过去式，那通常说明它的形式已经定好。</li>
+    <li><b>代入复读</b>，检查语法与逻辑是否都通顺。</li>
+  </ol>
+
+  <h4>（3）词形转换（8 题 × 1 分）</h4>
+  <p>这类题考的就是"构词法 + 语法形式"两件事，判断顺序如下：</p>
+  <table class="tbl compact">
+    <tr><th style="width:60px">步骤</th><th>判断内容</th><th>示例</th></tr>
+    <tr><td>①</td><td>判断填空需要的<b>词性</b></td><td class="en">He finished the work ____ (success). → 修饰动词，用副词 successfully</td></tr>
+    <tr><td>②</td><td>考虑<b>名词（单复数、所有格）</b></td><td class="en">Many ____ (visit) come here. → visitors</td></tr>
+    <tr><td>③</td><td>考虑<b>动词（时态、语态、主谓一致）</b></td><td class="en">The window ____ (break) yesterday. → was broken</td></tr>
+    <tr><td>④</td><td>考虑<b>形容词/副词（比较级最高级）</b></td><td class="en">This is the ____ (good) way. → best</td></tr>
+    <tr><td>⑤</td><td>考虑<b>数词、反身代词</b></td><td class="en">We enjoyed ____ (we). → ourselves</td></tr>
+  </table>
+
+  <h4>（4）句型转换（7 题 × 2 分）——最容易"会做但丢分"</h4>
+  <p>改写题按"每格 2 分"计分，<b>漏一个词就丢分</b>。把下面这张清单完整过一遍，基本覆盖全部考法。</p>
+  <table class="tbl compact">
+    <tr><th style="width:170px">类型</th><th>要点与示例</th></tr>
+    <tr><td>改一般疑问句</td><td class="en">把 be / 助动词 / 情态动词提前；实义动词用 do/does/did + 原形。<br>I have finished it. → <b>Have you finished</b> it?</td></tr>
+    <tr><td>改否定句</td><td class="en">be / 助动词后加 not；实义动词用 don't/doesn't/didn't + 原形。<br>She went there. → She <b>didn't go</b> there.</td></tr>
+    <tr><td>对划线部分提问</td><td class="en">先确定疑问词（人 who / 物 what / 地点 where / 时间 when / 原因 why / 方式 how / 数量 how many·how much / 频率 how often / 时长 how long / 距离 how far / 年龄 how old），再把剩下的部分改成一般疑问语序。</td></tr>
+    <tr><td>改反意疑问句</td><td class="en">前肯后否、前否后肯，注意 Let's → shall we?、祈使句 → will you?</td></tr>
+    <tr><td>改感叹句</td><td class="en">有名词用 What + a/an + adj. + n.；无名词用 How + adj./adv.。</td></tr>
+    <tr><td>改被动语态</td><td class="en">宾语提为主语 + be + 过去分词 + by 原主语；注意时态与第三人称。<br>They built the bridge in 1998. → The bridge <b>was built</b> in 1998.</td></tr>
+    <tr><td>合并句子</td><td class="en">用 too…to / so…that / enough to / because / although / 定语从句 / 宾语从句 / not only…but also 等合并。<br>He is very young. He can't go to school. → He is <b>too young to</b> go to school.</td></tr>
+    <tr><td>同义句转换</td><td class="en">见附录 B 的 50 组高频转换。</td></tr>
+    <tr><td>改复数形式</td><td class="en">主语、代词、所有格、be 动词、指示代词全部要改。<br>This is my child. → <b>These are our children.</b></td></tr>
+    <tr><td>保持句意不变</td><td class="en">常见套路：spend ↔ take ↔ cost ↔ pay；borrow ↔ lend；prefer A to B ↔ like A better than B；What's wrong with…? ↔ What's the matter with…?</td></tr>
+  </table>
+
+  <h3 id="s5-3">3. 阅读（50 分）</h3>
+
+  <h4>（1）通用策略：三步定位法</h4>
+  <ol>
+    <li><b>读题干抓关键词</b>（人名、地名、数字、名词）——不要一上来就通读全文。</li>
+    <li><b>回原文定位</b>，找到与关键词对应的句子（可能是同义替换）。</li>
+    <li><b>比对选项</b>，排除"原文没提""偷换概念""过度推断"的干扰项。</li>
+  </ol>
+
+  <h4>（2）四篇题型分工</h4>
+  <table class="tbl compact">
+    <tr><th style="width:120px">篇目</th><th>考查能力</th><th>做法</th></tr>
+    <tr><td><b>A 篇 选择</b>（12 分）</td><td>细节理解、主旨大意、推理判断、词义猜测</td><td>顺序题占多数，按段落顺序找答案；主旨题看首尾段和各段首句；词义题回到上下文找解释或举例（that is, such as, 破折号后常有解释）</td></tr>
+    <tr><td><b>B 篇 选词完成短文</b>（12 分）</td><td>语境 + 词汇搭配 + 逻辑</td><td>先通读一遍判断文体与主线，再逐空选词；注意上下文中的复现词、同义词、反义词线索</td></tr>
+    <tr><td><b>C 篇 首字母填空</b>（14 分）</td><td>最难：词性判断 + 语境推断 + 词形</td><td>见下方专项</td></tr>
+    <tr><td><b>D 篇 回答问题</b>（12 分）</td><td>信息提取 + 完整表达</td><td>答案必须是<b>完整句子</b>，注意人称、时态与原文一致；问 How many 答数字，问 Why 用 Because 或完整句；开放题（What do you think of…?）要有观点 + 一句理由</td></tr>
+  </table>
+
+  <div class="tip">
+    <b>首字母填空四步法：</b><br>
+    ① <b>判词性</b>——空前是 the / a / 形容词 → 名词；空前是主语 → 谓语动词；空前是 be → 形容词；修饰动词 → 副词。<br>
+    ② <b>断句意</b>——把整句连起来读一遍，用中文说一遍这句话该是什么意思，再想对应的英文单词。<br>
+    ③ <b>定形式</b>——名词看单复数与所有格；动词看时态、语态、三单、非谓语；形容词副词看比较级；代词看主宾格。<br>
+    ④ <b>复读验证</b>——填完后整段读一遍，看逻辑（转折/因果）、搭配（介词）、拼写是否都对。
+  </div>
+  <div class="err">
+    <b>阅读常见干扰项类型：</b>
+    ① 原文没提（无中生有）；② 张冠李戴（把 A 的特征安到 B 身上）；③ 过度推断（原文说 may，选项说 must）；④ 范围扩大或缩小（原文说 some，选项说 all）；⑤ 因果倒置或强加因果。
+  </div>
+
+  <h3 id="s5-4">4. 写作（20 分）</h3>
+
+  <h4>（1）评分维度</h4>
+  <table class="tbl compact">
+    <tr><th style="width:130px">维度</th><th>要求</th></tr>
+    <tr><td><b>内容</b></td><td>要点齐全，不跑题，有具体细节（不要空话）</td></tr>
+    <tr><td><b>语言</b></td><td>语法正确、词汇准确；能适当使用复合句、非谓语、连接词体现水平</td></tr>
+    <tr><td><b>结构</b></td><td>有开头、主体、结尾；段落分明；逻辑连贯</td></tr>
+    <tr><td><b>书写</b></td><td>字迹工整、大小写规范、标点正确——这部分是"送分"，不能丢</td></tr>
+  </table>
+
+  <h4>（2）五步写作法</h4>
+  <ol>
+    <li><b>审题</b>：人称（I / we）、时态（记叙用过去、议论用现在、计划用将来）、文体（书信/通知/议论文）。</li>
+    <li><b>列要点</b>：把提示要点编号，确保一个不漏（漏要点是最大的扣分项）。</li>
+    <li><b>搭框架</b>：三段式——引入话题 / 分点展开 / 总结或建议。</li>
+    <li><b>写句子</b>：先写简单句保证正确，再挑 2—3 处升级为复合句或非谓语结构。</li>
+    <li><b>检查</b>：时态、人称、单复数、拼写、大小写、标点、字数。留 2—3 分钟专门检查。</li>
+  </ol>
+
+  <h4>（3）三段式框架模板</h4>
+  <div class="grid g3">
+    <div class="card">
+      <div class="h"><span class="dot"></span>开头段（1—2 句）</div>
+      <p class="en">Nowadays, ... is becoming more and more important.<br>I'm writing to tell you about ...<br>Recently, our class had a discussion about ...<br>As we all know, ...</p>
+    </div>
+    <div class="card">
+      <div class="h"><span class="dot g"></span>主体段（3—5 句）</div>
+      <p class="en">First of all, ... Besides, ... What's more, ...<br>For example, ...<br>On the one hand, ... On the other hand, ...<br>It is not only ... but also ...</p>
+    </div>
+    <div class="card">
+      <div class="h"><span class="dot a"></span>结尾段（1—2 句）</div>
+      <p class="en">In a word, ...<br>In my opinion, we should ...<br>I hope everyone can ...<br>Let's take action from now on!</p>
+    </div>
+  </div>
+
+  <h4>（4）常用连接词（让文章立刻"顺"起来）</h4>
+  <table class="tbl compact">
+    <tr><th style="width:130px">逻辑</th><th>连接词</th></tr>
+    <tr><td>并列 / 递进</td><td class="en">and, besides, what's more, in addition, not only…but also…, as well as</td></tr>
+    <tr><td>转折</td><td class="en">but, however, on the contrary, although, instead</td></tr>
+    <tr><td>因果</td><td class="en">because, since, so, therefore, as a result, that's why</td></tr>
+    <tr><td>举例</td><td class="en">for example, such as, like, take…as an example</td></tr>
+    <tr><td>时间顺序</td><td class="en">first, then, after that, finally, meanwhile, later</td></tr>
+    <tr><td>条件 / 让步</td><td class="en">if, unless, as long as, even if, in spite of</td></tr>
+    <tr><td>总结</td><td class="en">in a word, in short, all in all, generally speaking, to sum up</td></tr>
+  </table>
+
+  <h4>（5）常见体裁与注意事项</h4>
+  <table class="tbl compact">
+    <tr><th style="width:150px">体裁</th><th>格式与要点</th></tr>
+    <tr><td>书信 / 电子邮件</td><td class="en">Dear Tom, / Yours, Li Ming；开头问候 + 说明来意，结尾表达期待<br>I'm glad to hear from you. I'm writing to invite you to…</td></tr>
+    <tr><td>通知</td><td class="en">NOTICE 居中；写清时间、地点、活动、参加对象、注意事项；落款单位与日期</td></tr>
+    <tr><td>演讲稿 / 倡议书</td><td class="en">Hello, everyone! I'm very glad to share my ideas about…；要有呼告与号召</td></tr>
+    <tr><td>看图作文</td><td class="en">先概括图意，再按时序展开；注意图中人物关系、地点、动作</td></tr>
+    <tr><td>话题议论文</td><td class="en">观点 → 理由（2 点以上）→ 举例或说明 → 结论/建议；避免只罗列观点不讲理由</td></tr>
+  </table>
+  <p class="muted">更多可直接套用的高分句型见<b>附录 C</b>。</p>
+
+  <h3 id="s5-5">5. 听说测试（10 分）</h3>
+  <table class="tbl compact">
+    <tr><th style="width:130px">题型</th><th>做法</th></tr>
+    <tr><td><b>朗读句子 / 短文</b></td><td>注意重音、连读、失爆、语调；遇到生词也要按拼读规则读出来，不要停顿过长</td></tr>
+    <tr><td><b>交际应答</b></td><td>听到问句后要<b>完整、得体地回应</b>（不是只答 Yes/No）；重点练专题 24 的十四个功能场景</td></tr>
+    <tr><td><b>复述</b></td><td>听时记关键词（谁、何时、何地、做什么、结果如何），复述时用完整句子串起来，不必逐字照搬</td></tr>
+    <tr><td><b>表达（话题说话）</b></td><td>按"观点 + 两个理由 + 例子 + 小结"的结构说；宁可说简单正确的句子，不要硬凑复杂句导致卡壳</td></tr>
+  </table>
+  <div class="tip"><b>日常训练建议：</b>每天 10 分钟"跟读 + 录音回听"。听自己的录音能最快发现语法和发音问题，比反复做题有效得多。</div>
+</section>
+
+<!-- ============ 第六部分 ============ -->
+<section id="p6">
+  <h2><span class="num">六</span>附录：工具表 <span class="en-sub">Appendix</span></h2>
+  <p class="lead">四张可以直接打印出来贴在书桌前的表：不规则动词、同义句转换、写作高分句型、复习计划。</p>
+
+  <h3 id="s6-1">附录 A　不规则动词表（按变化规律分组，便于成组记忆）</h3>
+
+  <p><b>① 三式同形（AAA）</b></p>
+  <table class="tbl compact">
+    <tr><th>原形</th><th>过去式</th><th>过去分词</th><th>原形</th><th>过去式</th><th>过去分词</th></tr>
+    <tr><td class="en">cost 花费</td><td class="en">cost</td><td class="en">cost</td><td class="en">put 放</td><td class="en">put</td><td class="en">put</td></tr>
+    <tr><td class="en">cut 切</td><td class="en">cut</td><td class="en">cut</td><td class="en">read 读</td><td class="en">read</td><td class="en">read</td></tr>
+    <tr><td class="en">hit 打</td><td class="en">hit</td><td class="en">hit</td><td class="en">set 设置</td><td class="en">set</td><td class="en">set</td></tr>
+    <tr><td class="en">hurt 伤害</td><td class="en">hurt</td><td class="en">hurt</td><td class="en">shut 关</td><td class="en">shut</td><td class="en">shut</td></tr>
+    <tr><td class="en">let 让</td><td class="en">let</td><td class="en">let</td><td class="en">spread 传播</td><td class="en">spread</td><td class="en">spread</td></tr>
+  </table>
+
+  <p><b>② 过去式 = 过去分词（ABB）——数量最多，重点记</b></p>
+  <table class="tbl compact">
+    <tr><th>原形</th><th>过去式</th><th>过去分词</th><th>原形</th><th>过去式</th><th>过去分词</th></tr>
+    <tr><td class="en">bring</td><td class="en">brought</td><td class="en">brought</td><td class="en">sell</td><td class="en">sold</td><td class="en">sold</td></tr>
+    <tr><td class="en">build</td><td class="en">built</td><td class="en">built</td><td class="en">send</td><td class="en">sent</td><td class="en">sent</td></tr>
+    <tr><td class="en">burn</td><td class="en">burnt / burned</td><td class="en">burnt / burned</td><td class="en">shine</td><td class="en">shone</td><td class="en">shone</td></tr>
+    <tr><td class="en">buy</td><td class="en">bought</td><td class="en">bought</td><td class="en">shoot</td><td class="en">shot</td><td class="en">shot</td></tr>
+    <tr><td class="en">catch</td><td class="en">caught</td><td class="en">caught</td><td class="en">sit</td><td class="en">sat</td><td class="en">sat</td></tr>
+    <tr><td class="en">deal</td><td class="en">dealt</td><td class="en">dealt</td><td class="en">sleep</td><td class="en">slept</td><td class="en">slept</td></tr>
+    <tr><td class="en">dig</td><td class="en">dug</td><td class="en">dug</td><td class="en">smell</td><td class="en">smelt / smelled</td><td class="en">smelt / smelled</td></tr>
+    <tr><td class="en">feed</td><td class="en">fed</td><td class="en">fed</td><td class="en">spend</td><td class="en">spent</td><td class="en">spent</td></tr>
+    <tr><td class="en">feel</td><td class="en">felt</td><td class="en">felt</td><td class="en">stand</td><td class="en">stood</td><td class="en">stood</td></tr>
+    <tr><td class="en">fight</td><td class="en">fought</td><td class="en">fought</td><td class="en">stick</td><td class="en">stuck</td><td class="en">stuck</td></tr>
+    <tr><td class="en">find</td><td class="en">found</td><td class="en">found</td><td class="en">sweep</td><td class="en">swept</td><td class="en">swept</td></tr>
+    <tr><td class="en">get</td><td class="en">got</td><td class="en">got / gotten</td><td class="en">teach</td><td class="en">taught</td><td class="en">taught</td></tr>
+    <tr><td class="en">hang</td><td class="en">hung（悬挂）</td><td class="en">hung</td><td class="en">tell</td><td class="en">told</td><td class="en">told</td></tr>
+    <tr><td class="en">have</td><td class="en">had</td><td class="en">had</td><td class="en">think</td><td class="en">thought</td><td class="en">thought</td></tr>
+    <tr><td class="en">hear</td><td class="en">heard</td><td class="en">heard</td><td class="en">understand</td><td class="en">understood</td><td class="en">understood</td></tr>
+    <tr><td class="en">hold</td><td class="en">held</td><td class="en">held</td><td class="en">win</td><td class="en">won</td><td class="en">won</td></tr>
+    <tr><td class="en">keep</td><td class="en">kept</td><td class="en">kept</td><td class="en">lay</td><td class="en">laid</td><td class="en">laid</td></tr>
+    <tr><td class="en">learn</td><td class="en">learnt / learned</td><td class="en">learnt / learned</td><td class="en">lead</td><td class="en">led</td><td class="en">led</td></tr>
+    <tr><td class="en">leave</td><td class="en">left</td><td class="en">left</td><td class="en">lend</td><td class="en">lent</td><td class="en">lent</td></tr>
+    <tr><td class="en">lose</td><td class="en">lost</td><td class="en">lost</td><td class="en">mean</td><td class="en">meant</td><td class="en">meant</td></tr>
+    <tr><td class="en">make</td><td class="en">made</td><td class="en">made</td><td class="en">meet</td><td class="en">met</td><td class="en">met</td></tr>
+    <tr><td class="en">pay</td><td class="en">paid</td><td class="en">paid</td><td class="en">say</td><td class="en">said</td><td class="en">said</td></tr>
+  </table>
+
+  <p><b>③ 三式不同（ABC）</b></p>
+  <table class="tbl compact">
+    <tr><th>原形</th><th>过去式</th><th>过去分词</th><th>原形</th><th>过去式</th><th>过去分词</th></tr>
+    <tr><td class="en">be (am/is/are)</td><td class="en">was / were</td><td class="en">been</td><td class="en">shake</td><td class="en">shook</td><td class="en">shaken</td></tr>
+    <tr><td class="en">begin</td><td class="en">began</td><td class="en">begun</td><td class="en">sing</td><td class="en">sang</td><td class="en">sung</td></tr>
+    <tr><td class="en">bite</td><td class="en">bit</td><td class="en">bitten</td><td class="en">sink</td><td class="en">sank</td><td class="en">sunk</td></tr>
+    <tr><td class="en">blow</td><td class="en">blew</td><td class="en">blown</td><td class="en">speak</td><td class="en">spoke</td><td class="en">spoken</td></tr>
+    <tr><td class="en">break</td><td class="en">broke</td><td class="en">broken</td><td class="en">steal</td><td class="en">stole</td><td class="en">stolen</td></tr>
+    <tr><td class="en">choose</td><td class="en">chose</td><td class="en">chosen</td><td class="en">swim</td><td class="en">swam</td><td class="en">swum</td></tr>
+    <tr><td class="en">do</td><td class="en">did</td><td class="en">done</td><td class="en">take</td><td class="en">took</td><td class="en">taken</td></tr>
+    <tr><td class="en">draw</td><td class="en">drew</td><td class="en">drawn</td><td class="en">throw</td><td class="en">threw</td><td class="en">thrown</td></tr>
+    <tr><td class="en">drink</td><td class="en">drank</td><td class="en">drunk</td><td class="en">wake</td><td class="en">woke</td><td class="en">woken</td></tr>
+    <tr><td class="en">drive</td><td class="en">drove</td><td class="en">driven</td><td class="en">wear</td><td class="en">wore</td><td class="en">worn</td></tr>
+    <tr><td class="en">eat</td><td class="en">ate</td><td class="en">eaten</td><td class="en">write</td><td class="en">wrote</td><td class="en">written</td></tr>
+    <tr><td class="en">fall</td><td class="en">fell</td><td class="en">fallen</td><td class="en">show</td><td class="en">showed</td><td class="en">shown</td></tr>
+    <tr><td class="en">fly</td><td class="en">flew</td><td class="en">flown</td><td class="en">forget</td><td class="en">forgot</td><td class="en">forgotten</td></tr>
+    <tr><td class="en">freeze</td><td class="en">froze</td><td class="en">frozen</td><td class="en">give</td><td class="en">gave</td><td class="en">given</td></tr>
+    <tr><td class="en">go</td><td class="en">went</td><td class="en">gone</td><td class="en">grow</td><td class="en">grew</td><td class="en">grown</td></tr>
+    <tr><td class="en">hide</td><td class="en">hid</td><td class="en">hidden</td><td class="en">know</td><td class="en">knew</td><td class="en">known</td></tr>
+    <tr><td class="en">lie（躺）</td><td class="en">lay</td><td class="en">lain</td><td class="en">lie（说谎）</td><td class="en">lied</td><td class="en">lied</td></tr>
+    <tr><td class="en">ride</td><td class="en">rode</td><td class="en">ridden</td><td class="en">ring</td><td class="en">rang</td><td class="en">rung</td></tr>
+    <tr><td class="en">rise</td><td class="en">rose</td><td class="en">risen</td><td class="en">see</td><td class="en">saw</td><td class="en">seen</td></tr>
+  </table>
+
+  <p><b>④ 原形 = 过去分词（ABA）</b></p>
+  <table class="tbl compact">
+    <tr><th>原形</th><th>过去式</th><th>过去分词</th><th>原形</th><th>过去式</th><th>过去分词</th></tr>
+    <tr><td class="en">become</td><td class="en">became</td><td class="en">become</td><td class="en">run</td><td class="en">ran</td><td class="en">run</td></tr>
+    <tr><td class="en">come</td><td class="en">came</td><td class="en">come</td><td class="en">overcome</td><td class="en">overcame</td><td class="en">overcome</td></tr>
+  </table>
+
+  <p><b>⑤ 易混提醒：</b><span class="en">hang</span> 表"悬挂"是 <span class="en">hang-hung-hung</span>，表"绞死"是 <span class="en">hang-hanged-hanged</span>；
+    <span class="en">lie</span> 三个身份（躺 / 说谎 / 放置 lay-laid-laid）必须分清；
+    <span class="en">beat-beat-beaten</span> 是唯一"过去式与原形同形"的三式不同动词。</p>
+
+  <h3 id="s6-2">附录 B　同义句转换 50 组（句型转换题常考）</h3>
+  <table class="tbl compact">
+    <tr><th style="width:44px">#</th><th>原句</th><th>同义表达</th></tr>
+    <tr><td>1</td><td class="en">He is too young to go to school.</td><td class="en">He is not old enough to go to school. / He is so young that he can't go to school.</td></tr>
+    <tr><td>2</td><td class="en">It took me two hours to finish the work.</td><td class="en">I spent two hours finishing / on the work.</td></tr>
+    <tr><td>3</td><td class="en">The book cost me 20 yuan.</td><td class="en">I spent 20 yuan on the book. / I paid 20 yuan for the book.</td></tr>
+    <tr><td>4</td><td class="en">He lent me a book.</td><td class="en">He lent a book to me. / I borrowed a book from him.</td></tr>
+    <tr><td>5</td><td class="en">What's wrong with you?</td><td class="en">What's the matter / the trouble with you?</td></tr>
+    <tr><td>6</td><td class="en">She is busy doing her homework.</td><td class="en">She is busy with her homework.</td></tr>
+    <tr><td>7</td><td class="en">I don't know what I should do.</td><td class="en">I don't know what to do.</td></tr>
+    <tr><td>8</td><td class="en">I prefer music to sports.</td><td class="en">I like music better than sports.</td></tr>
+    <tr><td>9</td><td class="en">I would like to join you.</td><td class="en">I want to join you.</td></tr>
+    <tr><td>10</td><td class="en">How do you like the film?</td><td class="en">What do you think of the film? / How do you find the film?</td></tr>
+    <tr><td>11</td><td class="en">It's time to have lunch.</td><td class="en">It's time for lunch.</td></tr>
+    <tr><td>12</td><td class="en">What a clever boy he is!</td><td class="en">How clever a boy he is!</td></tr>
+    <tr><td>13</td><td class="en">He is interested in English.</td><td class="en">He shows interest in English.</td></tr>
+    <tr><td>14</td><td class="en">She is good at singing.</td><td class="en">She does well in singing.</td></tr>
+    <tr><td>15</td><td class="en">Please take care of the baby.</td><td class="en">Please look after the baby.</td></tr>
+    <tr><td>16</td><td class="en">Do it at once.</td><td class="en">Do it right away / immediately.</td></tr>
+    <tr><td>17</td><td class="en">In the end, we won the game.</td><td class="en">Finally / At last, we won the game.</td></tr>
+    <tr><td>18</td><td class="en">Because it rained, we stayed at home.</td><td class="en">Because of the rain, we stayed at home.</td></tr>
+    <tr><td>19</td><td class="en">Tom is not as tall as Jack.</td><td class="en">Tom is shorter than Jack.</td></tr>
+    <tr><td>20</td><td class="en">Only Tom knows the answer.</td><td class="en">No one but Tom knows the answer.</td></tr>
+    <tr><td>21</td><td class="en">He didn't come until eight.</td><td class="en">He came at eight.</td></tr>
+    <tr><td>22</td><td class="en">If you don't hurry, you'll be late.</td><td class="en">Hurry up, or you'll be late.</td></tr>
+    <tr><td>23</td><td class="en">He is the tallest in his class.</td><td class="en">He is taller than any other student in his class.</td></tr>
+    <tr><td>24</td><td class="en">He joined the army two years ago.</td><td class="en">He has been in the army for two years.</td></tr>
+    <tr><td>25</td><td class="en">I have kept the book for a week.</td><td class="en">I borrowed the book a week ago.</td></tr>
+    <tr><td>26</td><td class="en">It seems that he is right.</td><td class="en">He seems to be right.</td></tr>
+    <tr><td>27</td><td class="en">I found it hard to understand him.</td><td class="en">I found it was hard to understand him.</td></tr>
+    <tr><td>28</td><td class="en">Do you mind my opening the window?</td><td class="en">Would you mind if I opened the window?</td></tr>
+    <tr><td>29</td><td class="en">What's the price of the ticket?</td><td class="en">How much is the ticket?</td></tr>
+    <tr><td>30</td><td class="en">He decided to leave.</td><td class="en">He made a decision to leave. / He made up his mind to leave.</td></tr>
+    <tr><td>31</td><td class="en">I hope you can come.</td><td class="en">I'm looking forward to your coming.</td></tr>
+    <tr><td>32</td><td class="en">Please tell me when we will start.</td><td class="en">Please tell me when to start.</td></tr>
+    <tr><td>33</td><td class="en">You'd better not be late.</td><td class="en">You shouldn't be late.</td></tr>
+    <tr><td>34</td><td class="en">He speaks English best in his class.</td><td class="en">He speaks English better than any other student in his class.</td></tr>
+    <tr><td>35</td><td class="en">The box is filled with books.</td><td class="en">The box is full of books.</td></tr>
+    <tr><td>36</td><td class="en">Could you tell me the way to the zoo?</td><td class="en">Could you tell me how to get to the zoo?</td></tr>
+    <tr><td>37</td><td class="en">He is in charge of the club.</td><td class="en">The club is in the charge of him.</td></tr>
+    <tr><td>38</td><td class="en">I can't wait to see you.</td><td class="en">I'm eager to see you.</td></tr>
+    <tr><td>39</td><td class="en">He was too tired to walk on.</td><td class="en">He was so tired that he couldn't walk on.</td></tr>
+    <tr><td>40</td><td class="en">It is important that we protect nature.</td><td class="en">It is important for us to protect nature.</td></tr>
+    <tr><td>41</td><td class="en">The meeting will begin in ten minutes.</td><td class="en">The meeting will begin ten minutes later.</td></tr>
+    <tr><td>42</td><td class="en">He is used to getting up early.</td><td class="en">He has got used to getting up early.</td></tr>
+    <tr><td>43</td><td class="en">Both he and I are students.</td><td class="en">Not only he but also I am a student.</td></tr>
+    <tr><td>44</td><td class="en">Nobody knows the truth except him.</td><td class="en">He is the only one who knows the truth.</td></tr>
+    <tr><td>45</td><td class="en">The old man died three years ago.</td><td class="en">The old man has been dead for three years.</td></tr>
+    <tr><td>46</td><td class="en">What's the weather like today?</td><td class="en">How is the weather today?</td></tr>
+    <tr><td>47</td><td class="en">He is so kind that everyone likes him.</td><td class="en">He is such a kind man that everyone likes him.</td></tr>
+    <tr><td>48</td><td class="en">I spent 100 yuan on the shoes.</td><td class="en">The shoes cost me 100 yuan.</td></tr>
+    <tr><td>49</td><td class="en">The bridge was built by them in 1998.</td><td class="en">They built the bridge in 1998.</td></tr>
+    <tr><td>50</td><td class="en">If you don't work hard, you won't succeed.</td><td class="en">Unless you work hard, you won't succeed.</td></tr>
+  </table>
+
+  <h3 id="s6-3">附录 C　写作高分句型（按功能分类，背 20 句就够用）</h3>
+  <table class="tbl compact">
+    <tr><th style="width:120px">功能</th><th>句型</th></tr>
+    <tr><td><b>开头引入</b></td><td class="en">Nowadays, more and more people are paying attention to …<br>With the development of society / technology, …<br>Recently, our class had a discussion about …<br>It is well known that …<br>Have you ever thought about …?</td></tr>
+    <tr><td><b>表达观点</b></td><td class="en">In my opinion, … plays an important role in our life.<br>As far as I'm concerned, …<br>I strongly believe that …<br>There is no doubt that …<br>What matters most is …</td></tr>
+    <tr><td><b>列举理由</b></td><td class="en">First of all, … Besides, … What's more, …<br>On the one hand, … On the other hand, …<br>For one thing, … For another, …<br>Another reason is that …</td></tr>
+    <tr><td><b>举例论证</b></td><td class="en">For example, … / Take … as an example.<br>Such as …, which is quite common among teenagers.</td></tr>
+    <tr><td><b>提出建议</b></td><td class="en">We should / had better …<br>Why not …? / How about …?<br>It's necessary for us to …<br>It's a good idea to …</td></tr>
+    <tr><td><b>表达因果</b></td><td class="en">…, so that …<br>As a result, …<br>That's why …<br>Because of …, …</td></tr>
+    <tr><td><b>让步转折</b></td><td class="en">Although …, we still …<br>However, it doesn't mean that …<br>In spite of the difficulties, …</td></tr>
+    <tr><td><b>提升句式</b></td><td class="en">定语从句：…, which makes a big difference to us.<br>非谓语：To solve this problem, we can …<br>It 形式主语：It's important for us to …<br>强调句：It is our actions that will change the future.<br>虚拟：If I were you, I would …<br>倒装：Not only should we study hard, but we should also …</td></tr>
+    <tr><td><b>结尾总结</b></td><td class="en">In a word, … / All in all, …<br>Let's take action from now on!<br>I hope everyone can …<br>Only in this way can we have a better future.</td></tr>
+  </table>
+
+  <h3 id="s6-4">附录 D　复习计划模板</h3>
+  <h4>（1）四轮复习法</h4>
+  <table class="tbl compact">
+    <tr><th style="width:110px">轮次</th><th>目标</th><th>做法</th></tr>
+    <tr><td><b>第一轮<br>基础过关</b></td><td>词汇 + 语法框架不遗漏</td><td>按教材单元过词汇（每天 20—30 词）；按本文档第三部分的 24 个专题逐个过一遍，每个专题配 10—15 题练习</td></tr>
+    <tr><td><b>第二轮<br>专题突破</b></td><td>攻克薄弱题型的专项</td><td>按题型分块练：首字母填空、回答问题、句型转换各集中练 3—5 天，总结自己的错误类型</td></tr>
+    <tr><td><b>第三轮<br>限时套卷</b></td><td>时间分配与应试节奏</td><td>每周 1—2 套限时 90 分钟；严格按"听力 15 / 单选 5 / 词汇 10 / 阅读 AB 14 / 阅读 CD 16 / 写作 16 / 检查 4"执行</td></tr>
+    <tr><td><b>第四轮<br>查漏补缺</b></td><td>只看错题，不做新题</td><td>把错题本按"语法点"归类，只复习重复出错的三类问题；背诵本资料附录 A、B、C</td></tr>
+  </table>
+
+  <h4>（2）每周可执行的节奏（示例）</h4>
+  <table class="tbl compact center">
+    <tr><th>日</th><th>一</th><th>二</th><th>三</th><th>四</th><th>五</th><th>六</th><th>日</th></tr>
+    <tr>
+      <td>词汇 20 词<br>+ 听力 10 min</td>
+      <td>语法 1 个专题<br>+ 单选 15 题</td>
+      <td>阅读 A、B 篇<br>+ 选词填空</td>
+      <td>首字母填空<br>+ 词形转换</td>
+      <td>句型转换<br>+ 听力 10 min</td>
+      <td>写作 1 篇<br>（限时 20 min）</td>
+      <td>限时套卷<br>或错题重做</td>
+      <td>本周错题整理<br>+ 背诵句型</td>
+    </tr>
+  </table>
+
+  <h4>（3）错题本怎么用才有效</h4>
+  <ul>
+    <li><b>三栏记录</b>：原题 → 正确答案 → <b>错因归类</b>（语法点 / 词形 / 理解 / 粗心）。</li>
+    <li><b>按语法点归类，不按试卷顺序</b>——这样才能看出"我到底弱在哪"。</li>
+    <li><b>只重做错题，不抄题</b>：剪贴或拍照打印，节省时间。</li>
+    <li><b>每周日回看</b>，同一类错误连续两周不再出现就可以移出错题本。</li>
+    <li><b>写作也要建错题库</b>：把老师圈出的语法错误抄一遍并改对，比背范文更能提分。</li>
+  </ul>
+</section>
+
+
+</main>
+</div>
+
+<div class="footer">
+  <p><b>使用说明：</b>本文档按"知识体系"组织，可用于六年级入门、七八年级同步、九年级中考总复习。建议配合自己的教材单元顺序，按"先扫框架 — 再补薄弱 — 后限时练"的顺序使用；文档支持浏览器直接打印（Ctrl+P）或另存为 PDF。</p>
+  <p><b>免责说明：</b>教材册次、单元名称、中考分值与题型均整理自公开资料，题型与政策可能调整，请以所用教材和上海市教育考试院官方发布为准。语法规则与词汇搭配部分为通用语言知识，长期有效。</p>
+</div>
+
+</body>
+</html>

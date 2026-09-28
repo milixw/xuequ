@@ -37,8 +37,10 @@ src/
   demos.js                        解析里的演示动画（题目的 demo 字段），依赖 DOM
   quiz.js                         做题引擎：题目渲染、作答、判分反馈、解析、快捷输入栏、renderText 排版
   exam.js                         限时测试：会话状态机、计时、交卷判分、结果页
+  english-bank.js                 独立英语错题库：知识点介绍、题型筛选、作答与重置
+  english-plan.js                 英语七天复习计划：每日全部原题直接作答、保存草稿、提交后查看错题，以及 A4 打印概览
   account-ui.js                   右上角账号区和登录弹窗
-  app.js                          hash 路由和页面：首页（学期切换）→ 册 → 小节 / 真题卷 → 做题
+  app.js                          hash 路由和页面：首页（教材、试卷、趣味玩法，另有英语大纲和试题库入口）→ 册 → 小节 / 真题卷 → 做题
   app.css                         全部样式
   games/function-track/           函数轨道小游戏（独立页面，首页“趣味玩法”进入）
   games/solids/                   立体图形实验室（独立页面）：geo3d.js 纯几何，game.js 关卡、控件和 Canvas 渲染
@@ -58,6 +60,9 @@ content/
     bridge/g6s1/                  六年级衔接：旧版沪教版六年级第一学期的数的整除、分数两章（1.1～2.9），难度按月考真卷定
   exams/
     math/sh2024/g8s1/*.js         真题卷，一份试卷一个文件，路径 = 真题卷 ID
+  english/question-bank.js        从本地错题 PDF 提取的英语试题（待核对）
+  english/knowledge.js            英语知识点讲解、steps 判断步骤、例子、commonErrors 带错因反例、连词分类例句与各题型 confusables 易混辨析、自动归类规则（待人工审核）；复习时先讲再练
+  english/shanghai-junior-outline.html  用户提供的上海初中英语学习大纲原件，首页可离线打开
   <其他学科>/                     预留，比如 physics/、english/，结构相同
 tests/
   run.js                          测试入口
@@ -66,6 +71,9 @@ tests/
   content.test.js                 内容校验：目录与文件一致、题量配比、字段、公式渲染、答案自检、verify
   accounts.test.js                账号、考试历史、学期偏好
   account-ui.test.js              账号区和登录弹窗
+  english-bank.test.js            英语题库与知识点归类校验
+  english-plan.test.js            七天计划覆盖、路由入口和 A4 打印校验
+  home-subjects.test.js           首页原布局与英语两个入口、脚本接入校验
   exam.test.js                    限时测试的计时、判分、会话存取
   function-track.test.js          函数轨道关卡校验
   solids.test.js                  立体图形实验室：展开图、圆柱圆锥展开、最短路径、截面、关卡数据
@@ -87,7 +95,7 @@ docs/
   textbooks/                      教材目录与各章知识范围（出题前必读），每册一个文件，按完整课本整理（8 下只有第 23 章）
   references/                     外部参考资料的笔记（原件放 refs/，不入库）
 .github/ISSUE_TEMPLATE/           Issue 模板：题目纠错、功能建议
-scripts/                          start.sh / stop.sh：本地开发服务器；build.sh：打包；serve.js / run.sh：部署到服务器上运行；pdf-page.sh：把教材 PDF 的某页渲染成图片，用来核对课本原文
+scripts/                          start.sh / stop.sh：本地开发服务器；build.sh：打包；serve.js / run.sh：部署到服务器上运行；pdf-page.sh：教材 PDF 渲染；import-english-bank.py：导入本地英语错题 PDF
 dist/                             打包产物，不入库
 pic/                              用户拍的教材照片，不入库
 refs/                             教材 PDF、教辅等参考资料原件，不入库；完整课本在 refs/沪教版五四制初中数学/（6 上～9 上，2022 课标修订版，可以用 pypdf 直接提取文字）
@@ -97,12 +105,14 @@ refs/                             教材 PDF、教辅等参考资料原件，不
 
 | hash | 页面 |
 |---|---|
-| `#/` | 首页：按当前学期列出各学科的册，右上角学期切换和账号区 |
+| `#/` | 首页：右上角切换学期，展示该学期教材、独立试卷入口和趣味玩法；额外只保留英语学习大纲与英语试题库两个入口 |
+| `#/english-plan` / `#/english-plan/<天数>` / `#/english-plan/<天数>/result` | 英语错题七天计划（可打印 A4）、每日完整原题直接作答、提交后的错题与参考答案；不改题目 ID 或原题文本 |
 | `#/v/<册ID>` | 册：章节列表 + 本册的真题卷 |
 | `#/s/<小节ID>` | 小节：知识点 + 题目列表 |
 | `#/q/<小节ID>/<题目ID>` | 做题 |
 | `#/e/<真题卷ID>`、`#/eq/<真题卷ID>/<题目ID>` | 真题卷（按教材小节归类）、做真题 |
 | `#/exam`、`#/exam/...` | 限时测试：列表、答题、结果（未登录会先要求登录） |
+| `#/english-bank`、`#/english-bank/<题目ID>` | 英语试题库：先学知识点，再按题型浏览和作答 |
 | `#/g/<游戏ID>`、`#/g/<游戏ID>/<关卡ID>` | 挂在小节上的动手玩游戏，返回键回到小节 |
 
 ### 本地存储
@@ -111,7 +121,8 @@ refs/                             教材 PDF、教辅等参考资料原件，不
 
 | 键 | 位置 | 内容 |
 |---|---|---|
-| `xq.progress.v2` | localStorage | 做题进度；真题卷的进度用 `exam:<真题卷ID>` 作小节 ID，不按账号区分 |
+| `xq.progress.v2` | localStorage | 做题进度；真题卷用 `exam:<真题卷ID>`、英语试题库用 `english-bank` 作分组 ID，不按账号区分；英语题目可单题重置 |
+| `xq.english-plan.v1` | localStorage | 英语七天复习每天的选择草稿及最近一次提交结果（错题快照）；不按账号区分 |
 | `xq.account.v1` | localStorage | 当前登录的账号 `{ name }` |
 | `xq.history.v1.<账号>` | localStorage | 该账号的考试历史，退出登录也保留 |
 | `xq.grade.v1.<账号>` / `xq.grade.v1` | localStorage | 首页选的学期（登录 / 未登录），默认 `g6s1` |
