@@ -48,7 +48,7 @@ src/
   games/magic/                    数学魔术揭秘（应用内页面，挂在 2.3）：logic.js 补数、撕牌、约瑟夫、一次式、1089，game.js 关卡和交互
 vendor/katex/                     KaTeX 0.18.7 本地副本（只保留 woff2 字体）
 content/
-  catalog.js                      学科 → 教材 → 册 → 章 → 节 的目录，册下可挂 exams（真题卷）；ready: true 表示已上线
+  catalog.js                      学科 → 教材 → 册 → 章 → 节 的目录，册下可挂 exams（真题卷）；ready: true 表示已上线。sh2024 登记了 6 上～9 上七册（8 下按试读片段的目录；8 下完整版、9 下还没出）
   math/
     sh2024/                       教材：上海教育出版社 2024 版（五·四学制）
       g6s1/                       册：六年级上册（g=年级，s1=上册，s2=下册）
@@ -84,13 +84,13 @@ docs/
   plan-*.md                       早期开发计划（已完成，仅供参考）
   superpowers/specs/              功能设计文档
   superpowers/plans/              功能实施计划（开发过程记录，已完成的以代码为准）
-  textbooks/                      教材目录与各章知识范围（出题前必读）
+  textbooks/                      教材目录与各章知识范围（出题前必读），每册一个文件，按完整课本整理（8 下只有第 23 章）
   references/                     外部参考资料的笔记（原件放 refs/，不入库）
 .github/ISSUE_TEMPLATE/           Issue 模板：题目纠错、功能建议
 scripts/                          start.sh / stop.sh：本地开发服务器；build.sh：打包；serve.js / run.sh：部署到服务器上运行；pdf-page.sh：把教材 PDF 的某页渲染成图片，用来核对课本原文
 dist/                             打包产物，不入库
 pic/                              用户拍的教材照片，不入库
-refs/                             教材 PDF、教辅等参考资料原件，不入库
+refs/                             教材 PDF、教辅等参考资料原件，不入库；完整课本在 refs/沪教版五四制初中数学/（6 上～9 上，2022 课标修订版，可以用 pypdf 直接提取文字）
 ```
 
 ### 页面路由

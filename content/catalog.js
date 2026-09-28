@@ -58,6 +58,55 @@ Content.catalog = {
               ],
             },
             {
+              id: 'g6s2',
+              name: '六年级下册',
+              chapters: [
+                {
+                  no: 5,
+                  title: '比与比例',
+                  sections: [
+                    { no: '5.1', title: '比、比例及其性质', ready: false },
+                    { no: '5.2', title: '百分数', ready: false },
+                  ],
+                },
+                {
+                  no: 6,
+                  title: '圆与扇形',
+                  sections: [
+                    { no: '6.1', title: '圆的周长与弧长', ready: false },
+                    { no: '6.2', title: '圆与扇形的面积', ready: false },
+                  ],
+                },
+                {
+                  no: 7,
+                  title: '可能性与统计图表',
+                  sections: [
+                    { no: '7.1', title: '随机现象及其结果的可能性', ready: false },
+                    { no: '7.2', title: '数据的收集、整理与表达', ready: false },
+                    { no: '7.3', title: '百分数的统计意义', ready: false },
+                  ],
+                },
+                {
+                  no: 8,
+                  title: '圆柱与圆锥',
+                  sections: [
+                    { no: '8.1', title: '圆柱及其侧面展开图', ready: false },
+                    { no: '8.2', title: '圆锥及其侧面展开图', ready: false },
+                  ],
+                },
+                {
+                  no: 9,
+                  title: '二元一次方程组',
+                  sections: [
+                    { no: '9.1', title: '二元一次方程组的概念', ready: false },
+                    { no: '9.2', title: '二元一次方程组的解法', ready: false },
+                    { no: '9.3', title: '二元一次方程组的应用', ready: false },
+                    { no: '9.4', title: '简单的三元一次方程组', ready: false },
+                  ],
+                },
+              ],
+            },
+            {
               id: 'g7s1',
               name: '七年级上册',
               chapters: [
@@ -308,6 +357,50 @@ Content.catalog = {
                     { no: '26.1', title: '反比例函数的概念', ready: false },
                     { no: '26.2', title: '反比例函数的图像与性质', ready: false },
                     { no: '26.3', title: '反比例函数的应用', ready: false },
+                  ],
+                },
+              ],
+            },
+            {
+              id: 'g9s1',
+              name: '九年级上册',
+              chapters: [
+                {
+                  no: 27,
+                  title: '二次函数',
+                  sections: [
+                    { no: '27.1', title: '二次函数的概念', ready: false },
+                    { no: '27.2', title: '二次函数的图像与性质', ready: false },
+                    { no: '27.3', title: '确定二次函数的表达式', ready: false },
+                    { no: '27.4', title: '二次函数与一元二次方程', ready: false },
+                    { no: '27.5', title: '二次函数的简单应用', ready: false },
+                  ],
+                },
+                {
+                  no: 28,
+                  title: '相似三角形',
+                  sections: [
+                    { no: '28.1', title: '成比例的线段', ready: false },
+                    { no: '28.2', title: '相似三角形', ready: false },
+                    { no: '28.3', title: '相似多边形', ready: false },
+                    { no: '28.4', title: '位似多边形', ready: false },
+                  ],
+                },
+                {
+                  no: 29,
+                  title: '三角初步',
+                  sections: [
+                    { no: '29.1', title: '锐角的正弦、余弦与正切', ready: false },
+                    { no: '29.2', title: '解直角三角形', ready: false },
+                  ],
+                },
+                {
+                  no: 30,
+                  title: '投影与视图',
+                  sections: [
+                    { no: '30.1', title: '投影', ready: false },
+                    { no: '30.2', title: '三视图', ready: false },
+                    { no: '30.3', title: '立体模型的制作', ready: false },
                   ],
                 },
               ],
