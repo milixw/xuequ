@@ -8,7 +8,7 @@ Content.section({
   id: 'math/sh2024/g6s1/1.5',
   title: '有理数的混合运算',
   review: { status: 'pending' },
-  audit: { blind: '2026-09-20', rounds: 3, note: '难度上移后子代理复核三轮：新题答案全部一致，第 3 轮判定整节通过（按意见换掉 e09、c05 增加第 3 问）' },
+  audit: { blind: '2026-09-29', rounds: 2, note: '改用真卷标尺（基础 9 + 扩展 6 + 挑战 5），删掉 e02、e03、e06（用到积的乘方法则）、e10、c01。子代理盲解复核两轮，答案全部一致：第 1 轮新写 b06～b09 通过，指出 c01 只到扩展水平、c03 用了 Sₙ 和字母通项；第 2 轮 c01 换成 c06（绝对值和定范围 + 乘方奇偶比较 + 去重计数），c03 改为不含字母的说法，判定整节通过。可选意见未处理：c02 与 e05 用同一个正负交替数列' },
 
   intro: [
     {
@@ -109,6 +109,86 @@ Content.section({
         return [pos, dist.mul('0.2')];
       },
     },
+    {
+      id: '1.5-b06',
+      level: 'basic',
+      type: 'choice',
+      stem: '下列计算正确的是（　　）',
+      options: ['$-3^2=9$', '$(-2)^3-3^2=-17$', '$-6\\div 3\\times\\frac{1}{3}=-6$', '$\\left(-\\frac{1}{2}\\right)^2\\times(-2)^2=-1$'],
+      answer: 1,
+      explain: [
+        'A 错：$-3^2$ 表示 $3^2$ 的相反数，等于 $-9$。',
+        'B 对：$(-2)^3=-8$，$3^2=9$，$-8-9=-17$。',
+        'C 错：乘除按从左到右算，$-6\\div 3=-2$，$-2\\times\\frac{1}{3}=-\\frac{2}{3}$。得 $-6$ 是先算了 $3\\times\\frac{1}{3}$。',
+        'D 错：$\\left(-\\frac{1}{2}\\right)^2=\\frac{1}{4}$，$(-2)^2=4$，都是正数，积是 1。选 B。',
+      ],
+      verify: () => {
+        const ok = [
+          F(3).mul(3).neg().eq(9),
+          F(-2).mul(-2).mul(-2).sub(9).eq(-17),
+          F(-6).div(3).mul(F(1).div(3)).eq(-6),
+          F('-1/2').mul('-1/2').mul(F(-2).mul(-2)).eq(-1),
+        ];
+        const idx = ok.map((v, i) => (v ? i : -1)).filter(i => i >= 0);
+        return idx.length === 1 ? idx[0] : null;
+      },
+    },
+    {
+      id: '1.5-b07',
+      level: 'basic',
+      type: 'fill',
+      stem: '计算下面两个式子。',
+      blanks: [
+        { kind: 'num', label: '(1) $\\left(-\\frac{3}{4}+\\frac{5}{6}-\\frac{7}{12}\\right)\\div\\left(-\\frac{1}{24}\\right)=$', answer: '12' },
+        { kind: 'num', label: '(2) $\\left(-\\frac{1}{24}\\right)\\div\\left(-\\frac{3}{4}+\\frac{5}{6}-\\frac{7}{12}\\right)=$', answer: '1/12' },
+      ],
+      explain: [
+        '(1) 除以 $-\\frac{1}{24}$ 就是乘 $-24$，可以用分配律：$-\\frac{3}{4}\\times(-24)+\\frac{5}{6}\\times(-24)-\\frac{7}{12}\\times(-24)=18-20+14=12$。',
+        '(2) 这次括号在除数的位置，**不能**拆成 $\\left(-\\frac{1}{24}\\right)\\div\\left(-\\frac{3}{4}\\right)+\\cdots$，除法对除数没有分配律。要先算括号：$-\\frac{18}{24}+\\frac{20}{24}-\\frac{14}{24}=-\\frac{12}{24}=-\\frac{1}{2}$。',
+        '再算 $\\left(-\\frac{1}{24}\\right)\\div\\left(-\\frac{1}{2}\\right)=\\frac{1}{24}\\times 2=\\frac{1}{12}$。也可以这样看：(2) 的式子正好是 (1) 的倒数，所以是 $\\frac{1}{12}$。',
+      ],
+      verify: () => {
+        const s = F('-3/4').add('5/6').sub('7/12');
+        return [s.div('-1/24'), F('-1/24').div(s)];
+      },
+    },
+    {
+      id: '1.5-b08',
+      level: 'basic',
+      type: 'fill',
+      stem: '某地一周七天的最低气温（单位：℃）依次是：$-3,\\ -5,\\ 0,\\ 2,\\ -4,\\ -1,\\ -3$。',
+      blanks: [
+        { kind: 'num', label: '(1) 这一周最低气温的平均数是', answer: '-2', suffix: '℃' },
+        { kind: 'num', label: '(2) 最低气温高于这个平均数的有几天？', answer: '3', suffix: '天' },
+      ],
+      explain: [
+        '(1) 七个数的和：$(-3)+(-5)+0+2+(-4)+(-1)+(-3)=2-16=-14$，平均数是 $-14\\div 7=-2$（℃）。',
+        '(2) 高于 $-2$ 的是 0、2、$-1$，共 3 天。注意 $-1>-2$，而 $-3$、$-4$、$-5$ 都比 $-2$ 低。',
+      ],
+      verify: () => {
+        const t = [-3, -5, 0, 2, -4, -1, -3].map(x => F(x));
+        const avg = t.reduce((s, x) => s.add(x), F(0)).div(t.length);
+        return [avg, t.filter(x => x.cmp(avg) > 0).length];
+      },
+    },
+    {
+      id: '1.5-b09',
+      level: 'basic',
+      type: 'fill',
+      stem: '在方框里填一个数，使等式成立：$-2^2-\\square\\div\\frac{1}{2}=6$。方框里的数是多少？',
+      blanks: [{ kind: 'num', answer: '-5' }],
+      explain: [
+        '先算已知部分：$-2^2=-4$（不是 4）。',
+        '$-4$ 减去一个数得 6，这个数是 $-4-6=-10$，即 $\\square\\div\\frac{1}{2}=-10$。',
+        '一个数除以 $\\frac{1}{2}$ 得 $-10$，这个数是 $-10\\times\\frac{1}{2}=-5$。检验：$-4-(-5)\\div\\frac{1}{2}=-4+10=6$。',
+      ],
+      verify: () => {
+        const xs = [];
+        for (let i = -80; i <= 80; i++) xs.push(F(i).div(4));
+        const r = xs.filter(x => F(2).mul(2).neg().sub(x.div('1/2')).eq(6));
+        return r.length === 1 ? r[0] : null;
+      },
+    },
 
     // ---------- 扩展 ----------
     {
@@ -126,41 +206,6 @@ Content.section({
         const r = [];
         for (const a of [3, -3]) for (const b of [2, -2]) if (a < b) r.push(F(a + b).pow(3));
         return r;
-      },
-    },
-    {
-      id: '1.5-e02',
-      level: 'extended',
-      type: 'fill',
-      stem: '观察下列等式：$1^3=1^2$，$1^3+2^3=3^2$，$1^3+2^3+3^3=6^2$，$1^3+2^3+3^3+4^3=10^2$，……按照这个规律，计算 $11^3+12^3+13^3+\\cdots+20^3$。',
-      blanks: [{ kind: 'num', answer: '41075' }],
-      explain: [
-        '找规律：等号右边的底数 1，3，6，10 分别是 $1$，$1+2$，$1+2+3$，$1+2+3+4$。所以 $1^3+2^3+\\cdots+n^3=(1+2+\\cdots+n)^2$。',
-        '$1^3+2^3+\\cdots+20^3=(1+2+\\cdots+20)^2=210^2=44100$。',
-        '$1^3+2^3+\\cdots+10^3=(1+2+\\cdots+10)^2=55^2=3025$。',
-        '所求的和是两者之差：$44100-3025=41075$。',
-      ],
-      verify: () => {
-        let s = F(0);
-        for (let k = 11; k <= 20; k++) s = s.add(F(k).pow(3));
-        return s;
-      },
-    },
-    {
-      id: '1.5-e03',
-      level: 'extended',
-      type: 'fill',
-      stem: '计算：$1^2-2^2+3^2-4^2+5^2-6^2+\\cdots+99^2-100^2$',
-      blanks: [{ kind: 'num', answer: '-5050' }],
-      explain: [
-        '两两分组，先算几组找规律：$1^2-2^2=-3$，$3^2-4^2=-7$，$5^2-6^2=-11$……',
-        '观察发现，每一组的值恰好是这两个数之和的相反数：$-3=-(1+2)$，$-7=-(3+4)$，$-11=-(5+6)$……可以再多算几组验证这个规律（比如 $7^2-8^2=49-64=-15=-(7+8)$）。',
-        '所以原式 $=-(1+2)-(3+4)-\\cdots-(99+100)=-(1+2+3+\\cdots+100)=-5050$。',
-      ],
-      verify: () => {
-        let s = F(0);
-        for (let k = 1; k <= 100; k++) s = k % 2 ? s.add(F(k).pow(2)) : s.sub(F(k).pow(2));
-        return s;
       },
     },
     {
@@ -215,20 +260,6 @@ Content.section({
         }
         return [sum, pos.div(neg)];
       },
-    },
-    {
-      id: '1.5-e06',
-      level: 'extended',
-      type: 'fill',
-      stem: '计算：$(-0.125)^{2025}\\times 8^{2026}$',
-      blanks: [{ kind: 'num', answer: '-8' }],
-      explain: [
-        '直接算不可能，要找能凑整的配对：$0.125\\times 8=1$。',
-        '把 $8^{2026}$ 拆成 $8^{2025}\\times 8$。$(-0.125)^{2025}\\times 8^{2025}$ 是 2025 个 $(-0.125)$ 和 2025 个 8 相乘，用交换律、结合律把它们一一配对：',
-        '每一对 $(-0.125)\\times 8=-1$，共 2025 对，乘积是 $(-1)^{2025}=-1$。',
-        '所以原式 $=-1\\times 8=-8$。',
-      ],
-      verify: () => F('-0.125').pow(2025).mul(F(8).pow(2026)),
     },
     {
       id: '1.5-e07',
@@ -299,53 +330,8 @@ Content.section({
         return [F(hi).sub(lo), total, total.mul(2).add(extra).sub(less.mul('1.5'))];
       },
     },
-    {
-      id: '1.5-e10',
-      level: 'extended',
-      type: 'fill',
-      stem: '已知 $|x|=4$，$|y|=\\frac{1}{2}$，并且 $xy<0$。求 $x\\div y-(x+y)^2$ 的所有可能值。（有几个就填几个，只有一个就填一个）',
-      blanks: [{ kind: 'nums', answer: ['-81/4'] }],
-      explain: [
-        '$xy<0$，$x$、$y$ 异号，有两种情况：$x=4,\\ y=-\\frac{1}{2}$，或 $x=-4,\\ y=\\frac{1}{2}$。',
-        '第一种：$x\\div y=4\\div\\left(-\\frac{1}{2}\\right)=-8$，$x+y=\\frac{7}{2}$，$(x+y)^2=\\frac{49}{4}$，原式 $=-8-\\frac{49}{4}=-\\frac{81}{4}$。',
-        '第二种：$x\\div y=-8$，$x+y=-\\frac{7}{2}$，$(x+y)^2=\\frac{49}{4}$，原式也是 $-\\frac{81}{4}$。',
-        '两种情况结果相同，所以只有一个值 $-\\frac{81}{4}$。分类后发现结果一样，也要写清楚。',
-      ],
-      verify: () => {
-        const vals = new Set();
-        for (const [x, y] of [[4, '-1/2'], [-4, '1/2']]) vals.add(F(x).div(y).sub(F(x).add(y).pow(2)).toString());
-        return [...vals];
-      },
-    },
 
     // ---------- 挑战 ----------
-    {
-      id: '1.5-c01',
-      level: 'challenge',
-      type: 'fill',
-      stem: '已知 $x$、$y$ 是有理数，$|x+1|+|x-2|+(y-3)^2$ 的值记为 $M$。',
-      blanks: [
-        { kind: 'num', label: '(1) $M$ 的最小值是', answer: '3' },
-        { kind: 'num', label: '(2) 当 $M$ 取最小值时，$x^y$ 的最大值是', answer: '8' },
-        { kind: 'num', label: '(3) 当 $M$ 取最小值时，$x^y$ 的最小值是', answer: '-1' },
-      ],
-      explain: [
-        '$M$ 由两部分组成，可以分别求最小值：$|x+1|+|x-2|$ 是数轴上点 $x$ 到 $-1$ 和 2 的距离之和，最小值是 $2-(-1)=3$，在 $-1\\le x\\le 2$ 时取到；$(y-3)^2\\ge 0$，最小值 0，在 $y=3$ 时取到。',
-        '(1) 两部分同时取最小，$M$ 的最小值是 $3+0=3$。',
-        '此时 $y=3$，$x$ 可以是 $-1$ 到 2 之间（含端点）的任意有理数，要研究 $x^3$ 的范围。',
-        '$x$ 在 $-1$ 到 0 之间时，$x^3$ 是负数，$|x^3|$ 不超过 1，所以 $-1\\le x^3\\le 0$；$x$ 在 0 到 2 之间时，$x^3$ 是正数，而且 $x$ 越大 $x^3$ 越大，$0\\le x^3\\le 8$。',
-        '(2) 最大值 $2^3=8$；(3) 最小值 $(-1)^3=-1$。关键是先看出“最小值在一段范围内取到”，而不是只在一个点。',
-      ],
-      verify: () => {
-        const M = (x, y) => x.sub(-1).abs().add(x.sub(2).abs()).add(y.sub(3).pow(2));
-        const pts = [];
-        for (let i = -12; i <= 16; i++) for (let j = 0; j <= 24; j++) pts.push([F(i).div(4), F(j).div(4)]);
-        const min = pts.map(([x, y]) => M(x, y)).reduce((a, b) => (a.cmp(b) < 0 ? a : b));
-        const vals = pts.filter(([x, y]) => M(x, y).eq(min)).map(([x, y]) => x.pow(Number(y.n)));
-        vals.sort((a, b) => a.cmp(b));
-        return [min, vals[vals.length - 1], vals[0]];
-      },
-    },
     {
       id: '1.5-c02',
       level: 'challenge',
@@ -381,17 +367,17 @@ Content.section({
       id: '1.5-c03',
       level: 'challenge',
       type: 'fill',
-      stem: '记 $S_n=\\frac{1}{1\\times 2\\times 3}+\\frac{1}{2\\times 3\\times 4}+\\frac{1}{3\\times 4\\times 5}+\\cdots+\\frac{1}{n(n+1)(n+2)}$（共 $n$ 项）。',
+      stem: '一列分数 $\\frac{1}{1\\times 2\\times 3},\\ \\frac{1}{2\\times 3\\times 4},\\ \\frac{1}{3\\times 4\\times 5},\\ \\dots$：第 1 个的分母是 $1\\times 2\\times 3$，第 2 个的分母是 $2\\times 3\\times 4$，依此类推。从第 1 个开始依次往后相加。',
       blanks: [
-        { kind: 'num', label: '(1) $S_{98}=$', answer: '4949/19800' },
-        { kind: 'num', label: '(2) 使 $S_n>0.2499$ 的最小正整数 $n$ 是', answer: '70' },
+        { kind: 'num', label: '(1) 加到第 98 个（$\\frac{1}{98\\times 99\\times 100}$）为止，和是', answer: '4949/19800' },
+        { kind: 'num', label: '(2) 加到第几个时，和第一次超过 0.2499？', answer: '70' },
       ],
       explain: [
         '仿照两个数之积的裂项，试着把每一项拆成“前两个数之积的倒数”减“后两个数之积的倒数”：$\\frac{1}{1\\times 2}-\\frac{1}{2\\times 3}=\\frac{3-1}{1\\times 2\\times 3}=\\frac{2}{1\\times 2\\times 3}$，是原来那一项的 2 倍。',
-        '所以 $\\frac{1}{1\\times 2\\times 3}=\\frac{1}{2}\\times\\left(\\frac{1}{1\\times 2}-\\frac{1}{2\\times 3}\\right)$，后面每一项同理。相加时中间抵消：$S_n=\\frac{1}{2}\\times\\left(\\frac{1}{2}-\\frac{1}{(n+1)(n+2)}\\right)=\\frac{1}{4}-\\frac{1}{2(n+1)(n+2)}$。',
-        '(1) $S_{98}=\\frac{1}{4}-\\frac{1}{2\\times 99\\times 100}=\\frac{1}{4}-\\frac{1}{19800}=\\frac{4950-1}{19800}=\\frac{4949}{19800}$。',
-        '(2) $S_n$ 永远比 $\\frac{1}{4}=0.25$ 小，差是 $\\frac{1}{2(n+1)(n+2)}$。要 $S_n>0.2499$，差要小于 0.0001，即 $2(n+1)(n+2)>10000$，$(n+1)(n+2)>5000$。',
-        '$70\\times 71=4970<5000$（$n=69$），$71\\times 72=5112>5000$（$n=70$），所以最小的 $n$ 是 70。',
+        '所以 $\\frac{1}{1\\times 2\\times 3}=\\frac{1}{2}\\times\\left(\\frac{1}{1\\times 2}-\\frac{1}{2\\times 3}\\right)$，后面每一项同理。相加时中间抵消，只剩头尾：加到某一个为止，和等于 $\\frac{1}{4}$ 减去“1 除以最后一个分母中后两个数之积的 2 倍”。',
+        '(1) 最后一个分母是 $98\\times 99\\times 100$，和 $=\\frac{1}{4}-\\frac{1}{2\\times 99\\times 100}=\\frac{1}{4}-\\frac{1}{19800}=\\frac{4950-1}{19800}=\\frac{4949}{19800}$。',
+        '(2) 每多加一个正数，和就变大一点，并且越来越接近 $\\frac{1}{4}$，但永远比 $\\frac{1}{4}=0.25$ 小，差是“1 除以最后一个分母中后两个数之积的 2 倍”。要和超过 0.2499，差要小于 0.0001，后两个数之积的 2 倍要大于 10000，也就是后两个数之积大于 5000。',
+        '第 69 个的分母是 $69\\times 70\\times 71$，$70\\times 71=4970<5000$，不够；第 70 个的分母是 $70\\times 71\\times 72$，$71\\times 72=5112>5000$。所以加到第 70 个时和第一次超过 0.2499。',
       ],
       verify: () => {
         let s = F(0);
@@ -475,6 +461,40 @@ Content.section({
         let c = F(0);
         for (let k = 1; k <= 50; k++) c = c.add(k * k);
         return [a, b, c];
+      },
+    },
+    {
+      id: '1.5-c06',
+      level: 'challenge',
+      type: 'fill',
+      stem: '已知 $x$、$y$ 都是整数，记 $M=|x+3|+|x-2|+|y-2|+|y-3|$。',
+      blanks: [
+        { kind: 'num', label: '(1) $M$ 的最小值是', answer: '6' },
+        { kind: 'num', label: '(2) 当 $M$ 取最小值时，$x^y$ 的最大值是', answer: '9' },
+        { kind: 'num', label: '(3) 当 $M$ 取最小值时，$x^y$ 的最小值是', answer: '-27' },
+        { kind: 'num', label: '(4) 当 $M$ 取最小值时，$x^y$ 一共有几个不同的值？', answer: '8', suffix: '个' },
+      ],
+      explain: [
+        '(1) $|x+3|+|x-2|$ 是数轴上表示 $x$ 的点到表示 $-3$ 和 2 的两点的距离之和，$x$ 在 $-3$ 和 2 之间（含端点）时最小，是 5。同理 $|y-2|+|y-3|$ 在 $y$ 在 2 和 3 之间（含端点）时最小，是 1。两部分互不影响，$M$ 的最小值是 6。',
+        '这时 $x$ 是 $-3,\\ -2,\\ -1,\\ 0,\\ 1,\\ 2$ 中的一个，$y$ 是 2 或 3。关键是把“求最值”变成“在这 12 种组合里比较”，再按指数的奇偶分开看。',
+        '(2) $y=2$（偶数次方）时结果都不是负数，最大是 $(-3)^2=9$；$y=3$（奇数次方）时最大是 $2^3=8$。所以最大值是 9。指数大的反而不是最大，这是本题的坑。',
+        '(3) $y=2$ 时结果都不小于 0；$y=3$ 时负数的立方是负数，最小是 $(-3)^3=-27$。所以最小值是 $-27$。',
+        '(4) $y=2$ 时，六个数的平方是 9，4，1，0，1，4，不同的有 0，1，4，9 四个；$y=3$ 时，六个数的立方是 $-27,\\ -8,\\ -1,\\ 0,\\ 1,\\ 8$，六个互不相同。',
+        '两组里 0 和 1 都出现了，只能算一次，所以一共有 $4+6-2=8$ 个不同的值。',
+      ],
+      verify: () => {
+        const M = (x, y) => Math.abs(x + 3) + Math.abs(x - 2) + Math.abs(y - 2) + Math.abs(y - 3);
+        let min = Infinity;
+        for (let x = -10; x <= 10; x++) for (let y = -10; y <= 10; y++) min = Math.min(min, M(x, y));
+        const vals = [];
+        for (let x = -10; x <= 10; x++) for (let y = -10; y <= 10; y++) {
+          if (M(x, y) !== min) continue;
+          let p = F(1);
+          for (let i = 0; i < y; i++) p = p.mul(x);
+          if (!vals.some(v => v.eq(p))) vals.push(p);
+        }
+        const sorted = vals.sort((a, b) => a.cmp(b));
+        return [min, sorted[sorted.length - 1], sorted[0], sorted.length];
       },
     },
   ],
