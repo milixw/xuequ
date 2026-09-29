@@ -8,7 +8,7 @@ Content.section({
   id: 'math/sh2024/g6s1/3.1',
   title: '方程与列方程',
   review: { status: 'pending' },
-  audit: { blind: '2026-09-21', rounds: 2, note: '子代理盲解复核两轮：答案全部一致；第 2 轮按意见重做 c03（去掉首位提示，加 5 倍的不存在）、c04（改为距离差分三段 + 无数解 + 右边含 x 的验根）、c05（去掉 S=3m 提示，加 −4～4 数集的分类与排除），换掉 e03、e09（原为盈亏、选方程，与 b03、e10 重复），b02 不再“已知解求参数”，判定整节通过' },
+  audit: { blind: '2026-09-29', rounds: 1, note: '改用真卷标尺（基础 9 + 扩展 6 + 挑战 5），删掉 e02、e05、e06、e09。子代理盲解复核一轮，新写 b06～b09 答案一致，档位全部放对，判定整节通过' },
 
   intro: [
     {
@@ -171,6 +171,85 @@ Content.section({
         return [s1, s2.length === 1 ? s2[0] : null, s3.length];
       },
     },
+    {
+      id: '3.1-b06',
+      level: 'basic',
+      type: 'fill',
+      stem: '今年父亲 40 岁，儿子 14 岁。小明想知道“几年后父亲的年龄是儿子的 3 倍”，他设 $x$ 年后父亲的年龄是儿子的 3 倍。',
+      blanks: [
+        { kind: 'text', label: '(1) 正确的方程是', options: ['$40+x=3(14+x)$', '$40+x=3\\times 14+x$', '$40=3(14+x)$', '$40-x=3(14-x)$'], answer: '$40+x=3(14+x)$' },
+        { kind: 'num', label: '(2) 这个方程的解是 $x=$', answer: '-1' },
+        { kind: 'text', label: '(3) 父亲的年龄是儿子的 3 倍是在', options: ['1 年后', '1 年前', '永远不会'], answer: '1 年前' },
+      ],
+      explain: [
+        '(1) $x$ 年后父亲 $(40+x)$ 岁，儿子 $(14+x)$ 岁，两人都长了 $x$ 岁。“父亲是儿子的 3 倍”：$40+x=3(14+x)$。第二个选项只给父亲加了 $x$，括号漏了。',
+        '(2) 右边去括号是 $42+3x$。两边相等，就是 $42+3x$ 与 $40+x$ 的差为 0：$2+2x=0$，所以 $2x=-2$，$x=-1$。检验：左边 39，右边 $3\\times 13=39$。',
+        '(3) $x=-1$ 表示“$-1$ 年后”，也就是 1 年前：那时父亲 39 岁，儿子 13 岁，正好 3 倍。以后儿子长大，倍数只会越来越小，不会再是 3 倍。解是负数时要回到题意去解释。',
+      ],
+      verify: () => {
+        const xs = [];
+        for (let i = -80; i <= 80; i++) xs.push(F(i).div(4));
+        const sol = xs.filter(x => F(40).add(x).eq(F(14).add(x).mul(3)));
+        return ['$40+x=3(14+x)$', sol.length === 1 ? sol[0] : null, sol[0].cmp(0) < 0 ? '1 年前' : '1 年后'];
+      },
+    },
+    {
+      id: '3.1-b07',
+      level: 'basic',
+      type: 'fill',
+      stem: '根据方程的解求字母 $a$ 的值（$a$ 是常数）。',
+      blanks: [
+        { kind: 'num', label: '(1) 若 $x=3$ 是方程 $2x-a=4$ 的解，则 $a=$', answer: '2' },
+        { kind: 'num', label: '(2) 若关于 $x$ 的方程 $ax+3=7$ 的解是 $x=-2$，则 $a=$', answer: '-2' },
+      ],
+      explain: [
+        '方程的解就是能使方程左右两边相等的未知数的值，所以把解代进去，等式一定成立。',
+        '(1) 代入 $x=3$：$6-a=4$，6 减去一个数得 4，这个数是 2，$a=2$。',
+        '(2) 代入 $x=-2$：$-2a+3=7$，一个数加 3 得 7，这个数是 4，即 $-2a=4$，$a=-2$。注意 $a$ 乘 $-2$ 得 4，$a$ 是负数。',
+      ],
+      verify: () => {
+        const as = [];
+        for (let i = -40; i <= 40; i++) as.push(F(i).div(4));
+        const a1 = as.filter(a => F(6).sub(a).eq(4));
+        const a2 = as.filter(a => a.mul(-2).add(3).eq(7));
+        return [a1[0], a2[0]];
+      },
+    },
+    {
+      id: '3.1-b08',
+      level: 'basic',
+      type: 'fill',
+      stem: '用逆运算解下列方程。',
+      blanks: [
+        { kind: 'num', label: '(1) $\\frac{2x-1}{3}=-3$，$x=$', answer: '-4' },
+        { kind: 'num', label: '(2) $5-\\frac{x}{2}=8$，$x=$', answer: '-6' },
+      ],
+      explain: [
+        '(1) 一个数除以 3 得 $-3$，这个数是 $-9$，即 $2x-1=-9$；一个数减 1 得 $-9$，这个数是 $-8$，即 $2x=-8$，$x=-4$。',
+        '(2) 5 减去一个数得 8，这个数是 $5-8=-3$，即 $\\frac{x}{2}=-3$，$x=-6$。常见错误是把“5 减去一个数得 8”算成这个数是 3。',
+      ],
+      verify: () => {
+        const xs = [];
+        for (let i = -80; i <= 80; i++) xs.push(F(i).div(4));
+        return [xs.find(x => F(2).mul(x).sub(1).div(3).eq(-3)), xs.find(x => F(5).sub(x.div(2)).eq(8))];
+      },
+    },
+    {
+      id: '3.1-b09',
+      level: 'basic',
+      type: 'fill',
+      stem: '某班共有 45 人，男生人数比女生人数的 2 倍少 3 人。设女生有 $x$ 人。',
+      blanks: [
+        { kind: 'expr', label: '(1) 男生有（人，用含 $x$ 的式子表示）', answer: '2x-3' },
+        { kind: 'num', label: '(2) 女生有（人）', answer: '16' },
+        { kind: 'num', label: '(3) 男生有（人）', answer: '29' },
+      ],
+      explain: [
+        '(1) “比女生的 2 倍少 3”：先算 2 倍 $2x$，再减 3，是 $(2x-3)$ 人。不要写成 $2(x-3)$。',
+        '(2) 男生 + 女生 = 45：$x+(2x-3)=45$，合并得 $3x-3=45$；一个数减 3 得 45，这个数是 48，$3x=48$，$x=16$。',
+        '(3) 男生 $2\\times 16-3=29$（人）。检验：$16+29=45$。',
+      ],
+    },
 
     // ---------- 扩展 ----------
     {
@@ -204,37 +283,6 @@ Content.section({
         // 检验 root 确实是方程的解
         if (!as.every(a => root(a).mul(2).add(a).eq(1))) return null;
         return [same[0], opp[0], dist3];
-      },
-    },
-    {
-      id: '3.1-e02',
-      level: 'extended',
-      type: 'fill',
-      stem: '解与分数串有关的方程。',
-      blanks: [
-        { kind: 'num', label: '(1) 方程 $\\frac{x}{1\\times 3}+\\frac{x}{3\\times 5}+\\frac{x}{5\\times 7}+\\cdots+\\frac{x}{19\\times 21}=20$ 的解是 $x=$', answer: '42' },
-        { kind: 'num', label: '(2) $n$ 是正整数，若方程 $\\frac{x}{1\\times 2}+\\frac{x}{2\\times 3}+\\cdots+\\frac{x}{n(n+1)}=2026$ 的解是 $x=2027$，则 $n=$', answer: '2026' },
-      ],
-      explain: [
-        '左边每一项都有 $x$，把 $x$ 看成公共的因数，由分配律，左边 $=x\\times(\\text{一串分数之和})$。关键是先算出这串分数的和。',
-        '(1) 裂项：$\\frac{1}{1\\times 3}=\\frac{1}{2}\\times\\left(1-\\frac{1}{3}\\right)$，$\\frac{1}{3\\times 5}=\\frac{1}{2}\\times\\left(\\frac{1}{3}-\\frac{1}{5}\\right)$，……，$\\frac{1}{19\\times 21}=\\frac{1}{2}\\times\\left(\\frac{1}{19}-\\frac{1}{21}\\right)$。',
-        '相加时中间的项两两抵消，和是 $\\frac{1}{2}\\times\\left(1-\\frac{1}{21}\\right)=\\frac{1}{2}\\times\\frac{20}{21}=\\frac{10}{21}$。',
-        '于是方程变成 $\\frac{10}{21}x=20$。由乘除互逆，$x=20\\div\\frac{10}{21}=20\\times\\frac{21}{10}=42$。',
-        '(2) 同样裂项：$\\frac{1}{1\\times 2}+\\frac{1}{2\\times 3}+\\cdots+\\frac{1}{n(n+1)}=1-\\frac{1}{n+1}=\\frac{n}{n+1}$。',
-        '所以左边是 $\\frac{n}{n+1}x$。$x=2027$ 是解，代入得 $\\frac{n}{n+1}\\times 2027=2026$，即 $\\frac{n}{n+1}=\\frac{2026}{2027}$。',
-        '分子比分母小 1 的分数，分子是 2026 时分母正好是 2027，所以 $n=2026$。（$\\frac{n}{n+1}$ 随 $n$ 增大而增大，不会有第二个 $n$ 给出同一个值。）',
-      ],
-      verify: () => {
-        let s1 = F(0);
-        for (let k = 1; k <= 19; k += 2) s1 = s1.add(F(1).div(k * (k + 2)));
-        const x1 = F(20).div(s1);
-        let s = F(0);
-        let n2 = null;
-        for (let n = 1; n <= 3000 && n2 === null; n++) {
-          s = s.add(F(1).div(n * (n + 1)));
-          if (s.mul(2027).eq(2026)) n2 = n;
-        }
-        return [x1, n2];
       },
     },
     {
@@ -298,63 +346,6 @@ Content.section({
       },
     },
     {
-      id: '3.1-e05',
-      level: 'extended',
-      type: 'fill',
-      stem: '几个数相乘，积为 0，那么其中至少有一个因数为 0。利用这一点求下列方程的所有解。（全部填出，用逗号隔开）',
-      blanks: [
-        { kind: 'nums', label: '(1) $(x-1)(|x|-2)=0$ 的解是', answer: ['1', '2', '-2'] },
-        { kind: 'nums', label: '(2) $x(x+2)=x$ 的解是', answer: ['0', '-1'] },
-        { kind: 'nums', label: '(3) $(x^2+1)(x-3)(|x|+2)=0$ 的解是', answer: ['3'] },
-      ],
-      explain: [
-        '(1) 积为 0，分两种情况：$x-1=0$，得 $x=1$；或 $|x|-2=0$，即 $|x|=2$，得 $x=2$ 或 $x=-2$。一共三个解。',
-        '(2) 右边不是 0，不能直接用。先看成“左边减右边等于 0”：$x(x+2)-x=0$。',
-        '由分配律，$x(x+2)-x=x\\times(x+2)-x\\times 1=x\\times(x+2-1)=x(x+1)$。于是 $x(x+1)=0$，得 $x=0$ 或 $x=-1$。',
-        '易错：看到两边都有 $x$，就把两边同时“除以 $x$”得到 $x+2=1$，只剩 $x=-1$，漏掉了 $x=0$。$x$ 可能是 0，而 0 不能作除数。',
-        '(3) 三个因数中，$x^2$ 不会是负数，所以 $x^2+1$ 至少是 1，不可能为 0；$|x|$ 不会是负数，所以 $|x|+2$ 至少是 2，也不可能为 0。',
-        '只能是 $x-3=0$，所以方程只有一个解 $x=3$。不要以为三个因数就一定有三个解。',
-      ],
-      verify: () => {
-        const grid = [];
-        for (let i = -200; i <= 200; i++) grid.push(F(i).div(4));
-        const s1 = grid.filter(x => x.sub(1).mul(x.abs().sub(2)).isZero());
-        const s2 = grid.filter(x => x.mul(x.add(2)).eq(x));
-        const s3 = grid.filter(x => x.mul(x).add(1).mul(x.sub(3)).mul(x.abs().add(2)).isZero());
-        return [s1, s2, s3];
-      },
-    },
-    {
-      id: '3.1-e06',
-      level: 'extended',
-      type: 'fill',
-      stem: '规定一种新运算：$a\\bigstar b=2a-b$。例如 $5\\bigstar 1=2\\times 5-1=9$。',
-      blanks: [
-        { kind: 'num', label: '(1) 方程 $3\\bigstar x=x\\bigstar 3$ 的解是 $x=$', answer: '3' },
-        { kind: 'text', label: '(2) 方程 $x\\bigstar(x\\bigstar 3)=3$ 的解的情况是', options: ['只有一个解', '没有解', '任何数都是解'], answer: '任何数都是解' },
-        { kind: 'num', label: '(3) $k$ 是常数，若方程 $x\\bigstar(x\\bigstar k)=5$ 有解，则 $k=$', answer: '5' },
-      ],
-      explain: [
-        '(1) 按规定展开：左边 $3\\bigstar x=6-x$，右边 $x\\bigstar 3=2x-3$。方程是 $6-x=2x-3$。',
-        '两边相等，就是左边减右边为 0：$(6-x)-(2x-3)=9-3x$，所以 $9-3x=0$，$3x=9$，$x=3$。',
-        '(2) 先算里层：$x\\bigstar 3=2x-3$。再算外层：$x\\bigstar(2x-3)=2x-(2x-3)=2x-2x+3=3$。',
-        '左边化简后恒等于 3，不论 $x$ 取什么数，左边都等于右边的 3，所以任何数都是这个方程的解。',
-        '(3) 同理，$x\\bigstar(x\\bigstar k)=2x-(2x-k)=k$，左边恒等于 $k$。',
-        '如果 $k\\ne 5$，左边永远不等于 5，方程没有解；只有 $k=5$ 时方程有解（而且任何数都是解）。所以 $k=5$。',
-      ],
-      verify: () => {
-        const op = (a, b) => F(a).mul(2).sub(b);
-        const xs = [];
-        for (let i = -60; i <= 60; i++) xs.push(F(i).div(3));
-        const s1 = xs.filter(x => op(3, x).eq(op(x, 3)));
-        const s2 = xs.filter(x => op(x, op(x, 3)).eq(3));
-        const kind = s2.length === xs.length ? '任何数都是解' : s2.length === 1 ? '只有一个解' : s2.length === 0 ? '没有解' : null;
-        const ks = [];
-        for (let k = -30; k <= 30; k++) if (xs.some(x => op(x, op(x, k)).eq(5))) ks.push(k);
-        return [s1.length === 1 ? s1[0] : null, kind, ks.length === 1 ? ks[0] : null];
-      },
-    },
-    {
       id: '3.1-e07',
       level: 'extended',
       type: 'fill',
@@ -411,35 +402,6 @@ Content.section({
           return false;
         });
         return [ms, pos.length === 1 ? pos[0] : null];
-      },
-    },
-    {
-      id: '3.1-e09',
-      level: 'extended',
-      type: 'fill',
-      stem: '方程 $3x+\\square=10$ 中，$\\square$ 处被墨迹盖住了，只知道它是 $-10$ 到 $10$ 之间（含 $-10$ 和 $10$）的一个整数。',
-      blanks: [
-        { kind: 'num', label: '(1) 若这个方程的解是正整数，则 $\\square$ 处的数共有', answer: '6', suffix: '种可能' },
-        { kind: 'num', label: '(2) 这些可能的数之和是', answer: '-3' },
-        { kind: 'num', label: '(3) 若这个方程的解是整数（可以是负数或 0），则 $\\square$ 处的数共有', answer: '7', suffix: '种可能' },
-      ],
-      explain: [
-        '反过来想：先确定解，再倒推 $\\square$。若解是 $x$，则 $3x+\\square=10$，$\\square=10-3x$。',
-        '(1) $x$ 是正整数：$x=1,2,3,\\dots$ 时，$\\square$ 依次是 $7,\\ 4,\\ 1,\\ -2,\\ -5,\\ -8,\\ -11,\\ \\dots$，每次减少 3。',
-        '要在 $-10$ 到 $10$ 之间，只能是 $7,4,1,-2,-5,-8$，共 6 种（$x=7$ 时是 $-11$，超出范围）。',
-        '(2) $7+4+1+(-2)+(-5)+(-8)=12-15=-3$。',
-        '(3) $x$ 还可以是 0 和负整数：$x=0$ 时 $\\square=10$，在范围内；$x=-1$ 时 $\\square=13$，超出范围。所以比 (1) 多一种，共 7 种。',
-        '另一种看法：$\\square=10-3x$，所以 $10-\\square$ 必须是 3 的倍数，在 $-10$ 到 $10$ 中这样的数是 $10,7,4,1,-2,-5,-8$。',
-      ],
-      verify: () => {
-        const pos = [];
-        const ints = [];
-        for (let s = -10; s <= 10; s++) {
-          const x = F(10 - s).div(3);   // 3x+s=10 的解（x 每增加 1，左边增加 3）
-          if (!x.mul(3).add(s).eq(10)) return null;
-          if (x.d === 1n) { ints.push(s); if (x.n > 0n) pos.push(s); }
-        }
-        return [pos.length, pos.reduce((p, q) => p + q, 0), ints.length];
       },
     },
     {
