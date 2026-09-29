@@ -8,7 +8,7 @@ Content.section({
   id: 'math/sh2024/g6s1/2.3',
   title: '一次式',
   review: { status: 'pending' },
-  audit: { blind: '2026-09-20', rounds: 2, note: '子代理盲解复核两轮：答案全部一致；第 2 轮按意见重做 c01（双参恒等 + 奇偶不可能）、c03（去掉选项，改为通项与不动点）、c05（系数配成 1 + 余数结构），并修掉三处卡片泄题、升级 b01/b02/e01/e03/e05，判定整节通过' },
+  audit: { blind: '2026-09-29', rounds: 2, note: '改用真卷标尺（基础 9 + 扩展 6 + 挑战 5），删掉 e02、e04、e07、e10。子代理盲解复核两轮，答案全部一致：第 1 轮新写 b06～b09 通过，指出 b07 的 C 项与 b02、b03 中间步骤相同、e02 偏低且与 b04 同模板、c01(3) 条件空转、c02(5) 二选一且三道挑战题都以整数性收尾；第 2 轮换 b07 的 C 项、e02 换回 e09、c01(3) 改为偶数计数、c02(5) 改为最接近 0 的和，判定整节通过' },
 
   intro: [
     {
@@ -176,6 +176,64 @@ Content.section({
         return [`${yi(1).sub(yi(0))}*x+${yi(0)}`, `${sum(1).sub(sum(0))}*x+${sum(0)}`, sum(-1)];
       },
     },
+    {
+      id: '2.3-b06',
+      level: 'basic',
+      type: 'choice',
+      stem: '下列各组中的两项，是同类项的是（　　）',
+      options: ['$3x$ 与 $3y$', '$-\\frac{x}{2}$ 与 $2x$', '$5$ 与 $5a$', '$0.5m$ 与 $0.5$'],
+      answer: 1,
+      explain: [
+        '同类项看的是字母部分是否相同，和系数是多少无关。',
+        'A：字母不同（$x$ 和 $y$），不是同类项。',
+        'B：$-\\frac{x}{2}$ 就是 $-\\frac{1}{2}x$，和 $2x$ 字母相同，是同类项。系数写在分数里不影响判断。',
+        'C、D：一个是常数，一个含字母，不是同类项；数字相同不代表是同类项。选 B。',
+      ],
+    },
+    {
+      id: '2.3-b07',
+      level: 'basic',
+      type: 'choice',
+      stem: '下列去括号正确的是（　　）',
+      options: ['$-(2a-3)=-2a-3$', '$3(x-2)=3x-2$', '$-3(m-2)=-3m+6$', '$a-(b-c)=a-b-c$'],
+      answer: 2,
+      explain: [
+        'A 错：括号前是“$-$”，括号里每一项都要变号，$-(2a-3)=-2a+3$。',
+        'B 错：3 要乘括号里的每一项，$3(x-2)=3x-6$，漏乘了 $-2$。',
+        'C 对：$-3\\times m=-3m$，$-3\\times(-2)=6$。',
+        'D 错：$a-(b-c)=a-b+c$，最后一项没变号。选 C。',
+      ],
+    },
+    {
+      id: '2.3-b08',
+      level: 'basic',
+      type: 'fill',
+      stem: '化简下列各式。',
+      blanks: [
+        { kind: 'expr', label: '(1) $\\frac{1}{2}x-\\frac{2}{3}x+x=$', answer: '5x/6', simplified: true },
+        { kind: 'expr', label: '(2) $-(3a-2)+\\frac{1}{2}(4a-6)=$', answer: '-a-1', simplified: true },
+      ],
+      explain: [
+        '(1) 系数相加：$\\frac{1}{2}-\\frac{2}{3}+1=\\frac{3}{6}-\\frac{4}{6}+\\frac{6}{6}=\\frac{5}{6}$，结果是 $\\frac{5}{6}x$。$x$ 的系数是 1，不要漏掉。',
+        '(2) 先去括号：$-(3a-2)=-3a+2$；$\\frac{1}{2}(4a-6)=2a-3$。',
+        '再合并：$-3a+2a+2-3=-a-1$。',
+      ],
+    },
+    {
+      id: '2.3-b09',
+      level: 'basic',
+      type: 'fill',
+      stem: '一件商品的进价是 $a$ 元，商店先按进价提高 $40\\%$ 标价，再按标价打八折出售。',
+      blanks: [
+        { kind: 'expr', label: '(1) 这件商品的售价是（元，结果要化简）', answer: '1.12a', simplified: true },
+        { kind: 'expr', label: '(2) 每件的利润是（元，结果要化简）', answer: '0.12a', simplified: true },
+      ],
+      explain: [
+        '(1) 标价是 $(1+40\\%)a=1.4a$ 元，打八折后售价是 $0.8\\times 1.4a=1.12a$（元）。',
+        '(2) 利润 = 售价 − 进价 $=1.12a-a=0.12a$（元）。',
+        '常见错误是以为“提高 40% 再降 20%”等于提高 20%，得到 $0.2a$。打折是按提价后的标价打的。',
+      ],
+    },
 
     // ---------- 扩展 ----------
     {
@@ -212,28 +270,6 @@ Content.section({
       },
     },
     {
-      id: '2.3-e02',
-      level: 'extended',
-      type: 'fill',
-      stem: '先化简，再求值：$2(3x-1)-3(2x-5)+x$，其中 $x=-\\frac{1}{2}$。',
-      blanks: [
-        { kind: 'expr', label: '(1) 化简的结果是', answer: 'x+13', simplified: true },
-        { kind: 'num', label: '(2) 当 $x=-\\frac{1}{2}$ 时，它的值是', answer: '25/2' },
-      ],
-      explain: [
-        '(1) 先去括号，注意每个括号前的数都要乘遍括号里的每一项：',
-        '$2(3x-1)=6x-2$；$-3(2x-5)=-6x+15$（第二项是 $-3\\times(-5)=+15$，最容易在这里丢负号）。',
-        '于是原式 $=6x-2-6x+15+x$。',
-        '合并含 $x$ 的项：系数 $6-6+1=1$，得 $x$；常数项 $-2+15=13$。所以结果是 $x+13$。',
-        '$6x$ 与 $-6x$ 正好抵消，化简后只剩 1 个 $x$，这一步没算清就会得到错误的式子。',
-        '(2) 代入 $x=-\\frac{1}{2}$：$-\\frac{1}{2}+13=\\frac{25}{2}$。',
-      ],
-      verify: () => {
-        const f = x => F(x).mul(3).sub(1).mul(2).sub(F(x).mul(2).sub(5).mul(3)).add(x);
-        return [`${f(1).sub(f(0))}*x+${f(0)}`, f('-1/2')];
-      },
-    },
-    {
       id: '2.3-e03',
       level: 'extended',
       type: 'fill',
@@ -263,39 +299,6 @@ Content.section({
           v3.add(x.mul(3).sub(y.mul(3)).mul(2).sub(y.sub(x).mul(4)).add(x.sub(y).div(3)).toString());
         }
         return [v1, v2, v3].map(s => (s.size === 1 ? [...s][0] : null));
-      },
-    },
-    {
-      id: '2.3-e04',
-      level: 'extended',
-      type: 'fill',
-      stem: '小丽现有存款 $a$ 元，以后每月存 30 元；小华现有存款 $b$ 元，以后每月存 50 元。',
-      blanks: [
-        { kind: 'expr', label: '(1) $n$ 个月后，小丽的存款是（元）', answer: 'a+30n' },
-        { kind: 'expr', label: '(2) $n$ 个月后，两人的存款之和是（元）', answer: 'a+b+80n' },
-        { kind: 'num', label: '(3) 若 $a=500$，$b=200$，则（）个月后两人的存款相同', answer: '15' },
-        { kind: 'num', label: '(4) 在 (3) 中，那时每人的存款是（元）', answer: '950' },
-      ],
-      explain: [
-        '(1) $n$ 个月共存 $30n$ 元，加上原有的 $a$ 元，是 $(a+30n)$ 元。',
-        '(2) 小华 $n$ 个月后有 $(b+50n)$ 元。两人合计 $a+30n+b+50n$，含 $n$ 的两项是同类项，合并得 $(a+b+80n)$ 元。',
-        '(3) 现在小丽比小华多 $500-200=300$ 元，而小华每月比小丽多存 $50-30=20$ 元。',
-        '每过一个月，差距缩小 20 元，要追平 300 元的差距需要 $300\\div 20=15$ 个月。',
-        '(4) 15 个月后小丽有 $500+30\\times 15=950$ 元，小华有 $200+50\\times 15=950$ 元，两人都是 950 元，确实相同。',
-      ],
-      verify: () => {
-        const li = (a, n) => F(a).add(F(n).mul(30));
-        const hua = (b, n) => F(b).add(F(n).mul(50));
-        const lin2 = f => `${f(1, 0).sub(f(0, 0))}*a+${f(0, 1).sub(f(0, 0))}*n+${f(0, 0)}`;
-        const both = f => `${f(1, 0, 0).sub(f(0, 0, 0))}*a+${f(0, 1, 0).sub(f(0, 0, 0))}*b+${f(0, 0, 1).sub(f(0, 0, 0))}*n+${f(0, 0, 0)}`;
-        let same = null;
-        for (let n = 0; n <= 100; n++) if (li(500, n).eq(hua(200, n))) same = n;
-        return [
-          lin2((a, n) => li(a, n)),
-          both((a, b, n) => li(a, n).add(hua(b, n))),
-          same,
-          li(500, same),
-        ];
       },
     },
     {
@@ -361,36 +364,6 @@ Content.section({
       },
     },
     {
-      id: '2.3-e07',
-      level: 'extended',
-      type: 'fill',
-      stem: '规定一种新运算：对任意两个数 $a$、$b$，都有 $a\\ast b=2a-b$。',
-      blanks: [
-        { kind: 'expr', label: '(1) $(3x)\\ast(x-1)=$（结果要化简）', answer: '5x+1', simplified: true },
-        { kind: 'num', label: '(2) 若 $x\\ast 4=0$，则 $x=$', answer: '2' },
-        { kind: 'expr', label: '(3) $(2\\ast x)\\ast 3=$（结果要化简）', answer: '5-2x', simplified: true },
-      ],
-      explain: [
-        '新运算的意思是：前面那个数乘 2，再减去后面那个数。',
-        '(1) $(3x)\\ast(x-1)=2\\times 3x-(x-1)=6x-x+1=5x+1$。注意减去整个 $(x-1)$，括号里每一项都要变号。',
-        '(2) $x\\ast 4=2x-4$。要它等于 0，就是 $2x=4$，所以 $x=2$。',
-        '(3) 先算括号里的：$2\\ast x=2\\times 2-x=4-x$。',
-        '再算外层：$(4-x)\\ast 3=2(4-x)-3=8-2x-3=5-2x$。',
-        '算新运算一定要按定义一步一步来，先算括号里的那一层。',
-      ],
-      verify: () => {
-        const star = (a, b) => F(a).mul(2).sub(b);
-        const lin = f => `${f(1).sub(f(0))}*x+${f(0)}`;
-        let root = null;
-        for (let i = -40; i <= 40; i++) if (star(F(i).div(4), 4).isZero()) root = F(i).div(4);
-        return [
-          lin(x => star(F(x).mul(3), F(x).sub(1))),
-          root,
-          lin(x => star(star(2, x), 3)),
-        ];
-      },
-    },
-    {
       id: '2.3-e08',
       level: 'extended',
       type: 'fill',
@@ -440,33 +413,6 @@ Content.section({
         return [`${c1}*x`, `${c2}*x`, F(c2).mul('-0.02')];
       },
     },
-    {
-      id: '2.3-e10',
-      level: 'extended',
-      type: 'fill',
-      stem: '某班有男生 $x$ 人，女生人数比男生人数的 2 倍少 5 人。',
-      blanks: [
-        { kind: 'expr', label: '(1) 全班共有（人）', answer: '3x-5', simplified: true },
-        { kind: 'num', label: '(2) 若全班有 43 人，则男生有（人）', answer: '16' },
-        { kind: 'text', label: '(3) 这个班的人数', options: ['可能是 45 人', '不可能是 45 人'], answer: '不可能是 45 人' },
-      ],
-      explain: [
-        '(1) 女生有 $(2x-5)$ 人，全班共 $x+(2x-5)$ 人。合并同类项：$(1+2)x=3x$，结果是 $(3x-5)$ 人。',
-        '(2) 由 $3x-5=43$ 反推：$3x=48$，$x=16$。检验：女生 $2\\times 16-5=27$ 人，$16+27=43$ 人，正确。',
-        '(3) 若全班 45 人，则 $3x=50$，而 $50\\div 3$ 不是整数，男生人数不可能是分数，所以不可能。',
-        '换句话说，全班人数加上 5 以后必须是 3 的倍数，这是判断“可不可能”的依据。',
-      ],
-      verify: () => {
-        const total = x => F(x).mul(3).sub(5);
-        let boys = null;
-        const can45 = [];
-        for (let x = 1; x <= 100; x++) {
-          if (total(x).eq(43)) boys = x;
-          if (total(x).eq(45)) can45.push(x);
-        }
-        return [`${total(1).sub(total(0))}*x+${total(0)}`, boys, can45.length ? '可能是 45 人' : '不可能是 45 人'];
-      },
-    },
 
     // ---------- 挑战 ----------
     {
@@ -477,7 +423,7 @@ Content.section({
       blanks: [
         { kind: 'expr', label: '(1) 化简 $M$，结果是（用含 $a$、$b$、$x$ 的式子表示）', answer: '(2a-2b)x+3b-a' },
         { kind: 'num', label: '(2) 若 $M$ 的值与 $x$ 无关（$a$ 不为 0），则 $\\frac{b}{a}=$', answer: '1' },
-        { kind: 'num', label: '(3) 在 (2) 的条件下，若 $a$、$b$ 都是正整数，且此时 $M=30$，则 $a+b=$', answer: '30' },
+        { kind: 'num', label: '(3) 在 (2) 的条件下，若 $a$、$b$ 都是正整数，且 $M$ 的值在 20 到 40 之间（含 20 和 40），则 $M$ 可能的值共有几个？', answer: '11', suffix: '个' },
         {
           kind: 'text',
           label: '(4) 若 $a$、$b$ 都是整数，$M$ 化简后能不能恰好是 $-x+7$？',
@@ -491,7 +437,8 @@ Content.section({
         '含 $x$ 的两项是同类项，合并得 $(2a-2b)x$；常数部分是 $-a+3b$。所以 $M=(2a-2b)x+(3b-a)$。',
         '(2) “与 $x$ 无关”就是不论 $x$ 取什么值结果都一样，这要求含 $x$ 的项整个消失，即 $2a-2b=0$。',
         '$2a$ 与 $2b$ 相等，说明 $a$ 与 $b$ 相等，所以 $\\frac{b}{a}=1$。',
-        '(3) 当 $a=b$ 时，常数部分是 $3a-a=2a$，即 $M=2a$。由 $2a=30$ 得 $a=15$，从而 $b=15$，$a+b=30$。',
+        '(3) 当 $a=b$ 时，常数部分是 $3a-a=2a$，即 $M=2a$。$a$ 是正整数，所以 $M$ 一定是偶数，不能是 20 到 40 之间的奇数。',
+        '$M$ 可以是 20，22，24，……，40（对应 $a=10,\\ 11,\\ \\dots,\\ 20$），共 11 个。只看范围会以为有 21 个，要用上“正整数”推出的“偶数”。',
         '(4) 要使 $M$ 化简后是 $-x+7$，含 $x$ 的项必须对上：$2a-2b=-1$。',
         '但是 $2a-2b=2(a-b)$，$a$、$b$ 是整数时 $a-b$ 也是整数，$2(a-b)$ 一定是偶数，而 $-1$ 是奇数，两者不可能相等。',
         '所以不用再去看常数项，就能断定做不到。（如果不限制 $a$、$b$ 是整数，那么取 $a-b=-\\frac{1}{2}$ 是可以让含 $x$ 的项对上的，但常数项又对不上，这里限制为整数，一步就否定了。）',
@@ -510,8 +457,9 @@ Content.section({
           if (!a && !b) continue;
           if (new Set(xs.map(x => M(x, a, b).toString())).size === 1) free.push([a, b]);
         }
-        let sum30 = null;
-        for (let a = 1; a <= 60; a++) if (M(0, a, a).eq(30)) sum30 = 2 * a;
+        const ms = new Set();
+        for (let a = 1; a <= 60; a++) { const m = M(0, a, a); if (m.cmp(20) >= 0 && m.cmp(40) <= 0) ms.add(m.toString()); }
+        const sum30 = ms.size;
         let can = false;
         for (let a = -60; a <= 60; a++) for (let b = -60; b <= 60; b++) {
           if (xs.every(x => M(x, a, b).eq(F(x).neg().add(7)))) can = true;
@@ -532,9 +480,9 @@ Content.section({
       blanks: [
         { kind: 'expr', label: '(1) 第 $n$ 个式子是（用含 $n$、$x$ 的式子表示）', answer: 'nx+2n-1' },
         { kind: 'expr', label: '(2) 前 10 个式子的和是（用含 $x$ 的式子表示，结果要化简）', answer: '55x+100', simplified: true },
-        { kind: 'num', label: '(3) 当 $x=-2$ 时，前 10 个式子的和是', answer: '-10' },
+        { kind: 'num', label: '(3) 当 $x=-1$ 时，前 10 个式子的和是', answer: '45' },
         { kind: 'num', label: '(4) 当 $x=1$ 时，前 $n$ 个式子的和第一次超过 2025，此时 $n=$', answer: '37' },
-        { kind: 'text', label: '(5) 当 $x$ 取整数时，前 10 个式子的和', options: ['能等于 0', '不能等于 0'], answer: '不能等于 0' },
+        { kind: 'num', label: '(5) 当 $x$ 取整数时，前 10 个式子的和中，最接近 0 的是', answer: '-10' },
       ],
       explain: [
         '(1) 分两部分找规律。含 $x$ 的项的系数依次是 $1,2,3,4,\\dots$，第 $n$ 个是 $n$；常数项依次是 $1,3,5,7,\\dots$，是第 $n$ 个奇数，即 $2n-1$。',
@@ -542,14 +490,15 @@ Content.section({
         '(2) 前 10 个式子相加，含 $x$ 的项的系数相加：$1+2+\\cdots+10$，首尾配对得 $11\\times 5=55$；',
         '常数项相加：$1+3+5+\\cdots+19$，首尾配对得 $20\\times 5=100$（也可以记住“前 $n$ 个奇数之和是 $n^2$”，$10^2=100$）。',
         '所以和是 $55x+100$。',
-        '(3) 代入 $x=-2$：$55\\times(-2)+100=-110+100=-10$。',
+        '(3) 代入 $x=-1$：$55\\times(-1)+100=45$。',
         '(4) 先写出一般情形：前 $n$ 个式子的和 $=(1+2+\\cdots+n)x+(1+3+\\cdots+(2n-1))$。',
         '用首尾配对，$1+2+\\cdots+n=\\frac{n(n+1)}{2}$；前 $n$ 个奇数之和是 $n^2$。所以和是 $\\frac{n(n+1)}{2}x+n^2$。',
         '当 $x=1$ 时，和就是 $\\frac{n(n+1)}{2}+n^2$。它随 $n$ 越来越大，所以只要找出临界的 $n$。',
         '试算：$n=36$ 时是 $\\frac{36\\times 37}{2}+36^2=666+1296=1962<2025$；$n=37$ 时是 $\\frac{37\\times 38}{2}+37^2=703+1369=2072>2025$。',
         '所以第一次超过 2025 时 $n=37$。',
-        '(5) 前 10 个式子的和是 $55x+100$。要它等于 0，就要 55 个 $x$ 正好抵消 100，即 $x$ 是 $-100$ 的 $\\frac{1}{55}$，也就是 $-\\frac{100}{55}=-\\frac{20}{11}$。',
-        '它不是整数，所以当 $x$ 取整数时，这个和不可能是 0。',
+        '(5) 前 10 个式子的和是 $55x+100$。$x$ 每增加 1，和就增加 55；$x$ 每减少 1，和就减少 55。',
+        '$x=-1$ 时是 45，还是正数；$x=-2$ 时是 $-10$，已经是负数；再往两边走，$x=0$ 时是 100，$x=-3$ 时是 $-65$，离 0 越来越远。',
+        '45 和 $-10$ 比，$-10$ 离 0 更近，所以最接近 0 的是 $-10$。注意答案是和的值 $-10$，不是 $x$ 的值。',
       ],
       verify: () => {
         const nth = (n, x) => F(x).mul(n).add(2 * n - 1);
@@ -560,14 +509,14 @@ Content.section({
         const c0 = nth(3, 0);
         let first = null;
         for (let n = 1; n <= 200 && first === null; n++) if (sum(n, 1).cmp(2025) > 0) first = n;
-        const zero = [];
-        for (let x = -50; x <= 50; x++) if (sum(10, x).isZero()) zero.push(x);
+        let closest = null;
+        for (let x = -50; x <= 50; x++) { const v = sum(10, x); if (!closest || v.abs().cmp(closest.abs()) < 0) closest = v; }
         return [
           `${cx.div(3)}*n*x+${c0.add(1).div(3)}*n-1`,
           linX(x => sum(10, x)),
-          sum(10, -2),
+          sum(10, -1),
           first,
-          zero.length ? '能等于 0' : '不能等于 0',
+          closest,
         ];
       },
     },
