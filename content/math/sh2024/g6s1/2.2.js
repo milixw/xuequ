@@ -12,7 +12,7 @@ Content.section({
   id: 'math/sh2024/g6s1/2.2',
   title: '代数式与代数式的值',
   review: { status: 'pending' },
-  audit: { blind: '2026-09-20', rounds: 2, note: '子代理盲解复核两轮：答案全部一致；第 2 轮按意见重做 c01(4)(5)（改为最值与调整法）、c02(4)、c03（改为正整数下求 abcd 最值）、c05(5)，并升级 b01/b04/e01/e03/e04/e05/e09/e10，判定整节通过' },
+  audit: { blind: '2026-09-29', rounds: 2, note: '改用真卷标尺（基础 9 + 扩展 6 + 挑战 5），删掉 e04、e06、e07、e08、c03。子代理盲解复核两轮，答案全部一致：第 1 轮新写 b06～b09 通过，指出 e01(5) 用了合并同类项、c02(4) 要平方拆分超纲、c03 只有枚举难度不够；第 2 轮 e01 换成整体在分子里的一问、c02(4) 改一次式分子、c03 换成 c06（数值转换机倒推），判定整节通过' },
 
   intro: [
     {
@@ -158,6 +158,72 @@ Content.section({
         return [f(25), back, ups.size === 1 ? [...ups][0] : null];
       },
     },
+    {
+      id: '2.2-b06',
+      level: 'basic',
+      type: 'fill',
+      stem: '当 $x=-\\frac{1}{2}$ 时，求下列代数式的值。',
+      blanks: [
+        { kind: 'num', label: '(1) $2x^2-x^3=$', answer: '5/8' },
+        { kind: 'num', label: '(2) $(2x)^2=$', answer: '1' },
+      ],
+      explain: [
+        '(1) 负数代入要加括号：$2\\times\\left(-\\frac{1}{2}\\right)^2-\\left(-\\frac{1}{2}\\right)^3=2\\times\\frac{1}{4}-\\left(-\\frac{1}{8}\\right)=\\frac{1}{2}+\\frac{1}{8}=\\frac{5}{8}$。',
+        '$\\left(-\\frac{1}{2}\\right)^3$ 是负数，前面还有减号，减去负数变成加，这里最容易错。',
+        '(2) $(2x)^2$ 是先算 $2x=-1$ 再平方，得 1；而 $2x^2$ 只把 $x$ 平方，是 $\\frac{1}{2}$。两者不同。',
+      ],
+      verify: () => {
+        const x = F('-1/2');
+        return [F(2).mul(x).mul(x).sub(x.mul(x).mul(x)), F(2).mul(x).mul(F(2).mul(x))];
+      },
+    },
+    {
+      id: '2.2-b07',
+      level: 'basic',
+      type: 'fill',
+      stem: '一个两位数，个位数字是 $a$，十位数字比个位数字大 2。',
+      blanks: [
+        { kind: 'expr', label: '(1) 这个两位数用代数式表示是', answer: '10(a+2)+a' },
+        { kind: 'num', label: '(2) 当 $a=3$ 时，这个两位数是', answer: '53' },
+      ],
+      explain: [
+        '(1) 十位数字是 $a+2$，表示 $(a+2)$ 个十；个位数字 $a$ 表示 $a$ 个一。这个两位数是 $10(a+2)+a$。',
+        '常见错误是写成 $(a+2)a$，那表示两个数相乘，不是把数字并排写。',
+        '(2) $a=3$ 时，$10\\times(3+2)+3=53$。检验：十位 5 比个位 3 大 2，对上了。',
+      ],
+    },
+    {
+      id: '2.2-b08',
+      level: 'basic',
+      type: 'fill',
+      stem: '已知 $a-b=3$，$ab=-2$，求 $(a-b)^2-3ab+(b-a)$ 的值。',
+      blanks: [{ kind: 'num', answer: '12' }],
+      explain: [
+        '把 $a-b$、$ab$ 都看成整体代入：$(a-b)^2=3^2=9$，$-3ab=-3\\times(-2)=6$。',
+        '$b-a$ 和 $a-b$ 互为相反数，$b-a=-3$。这里最容易直接代成 3。',
+        '原式 $=9+6+(-3)=12$。',
+      ],
+      verify: () => {
+        const d = F(3);
+        const p = F(-2);
+        return d.mul(d).sub(p.mul(3)).add(d.neg());
+      },
+    },
+    {
+      id: '2.2-b09',
+      level: 'basic',
+      type: 'fill',
+      stem: '某种手机套餐的通话按分钟计费，每分钟 0.12 元。某月小王一共通话 $a$ 小时 $b$ 分钟。',
+      blanks: [
+        { kind: 'expr', label: '(1) 这个月的通话费是（元）', answer: '0.12(60a+b)' },
+        { kind: 'num', label: '(2) 当 $a=2$，$b=15$ 时，通话费是（元）', answer: '16.2' },
+      ],
+      explain: [
+        '(1) 先统一成分钟：$a$ 小时是 $60a$ 分钟，一共 $(60a+b)$ 分钟，通话费是 $0.12(60a+b)$ 元。',
+        '常见错误是写成 $0.12(a+b)$，把小时和分钟直接相加。',
+        '(2) $60\\times 2+15=135$（分钟），$0.12\\times 135=16.2$（元）。',
+      ],
+    },
 
     // ---------- 扩展 ----------
     {
@@ -169,19 +235,14 @@ Content.section({
         { kind: 'num', label: '(1) $4a+2b-3=$', answer: '7' },
         { kind: 'num', label: '(2) $10-(2a+b)^2=$', answer: '-15' },
         { kind: 'num', label: '(3) $\\frac{4a+2b-1}{2a+b+4}=$', answer: '1' },
-        { kind: 'num', label: '(4) 若还知道 $a-b=1$，则 $(2a+b)+(a-b)=$', answer: '6' },
-        { kind: 'num', label: '(5) 由 (4) 可知 $a=$', answer: '2' },
+        { kind: 'num', label: '(4) $\\frac{2a+b}{3}-\\frac{6-(2a+b)}{2}=$', answer: '7/6' },
       ],
       explain: [
         '(1)(2)(3) 都求不出 $a$、$b$ 各是多少，只能把式子凑成 $2a+b$ 再整体代入。',
         '(1) $4a+2b$ 是 2 个 $(2a+b)$（分配律：$2(2a+b)=4a+2b$），等于 $2\\times 5=10$，所以原式 $=10-3=7$。',
         '(2) 括号里正好是 $2a+b=5$，原式 $=10-5^2=10-25=-15$。',
         '(3) 分子分母要分别凑：分子 $4a+2b-1=2\\times 5-1=9$；分母 $2a+b+4=5+4=9$。所以商是 $9\\div 9=1$。',
-        '(4) 这一问多给了一个条件。两个已知的式子的值都知道，把它们相加就是 $5+1=6$。',
-        '(5) 再看 $(2a+b)+(a-b)$ 这个代数式本身：去括号后是 $2a+b+a-b$，其中 $b$ 与 $-b$ 抵消，$2a$ 与 $a$ 合起来是 3 个 $a$，所以它就是 $3a$。',
-        '于是 $3a=6$，$a$ 是 6 的三分之一，即 $a=2$。',
-        '检验：$a=2$ 时由 $2a+b=5$ 得 $b=1$，确实有 $a-b=1$。',
-        '这里没有“解方程”，只是先算出一个代数式的值，再看出这个代数式等于 $3a$。',
+        '(4) 两处都出现了整体 $2a+b$，直接代入 5：$\\frac{5}{3}-\\frac{6-5}{2}=\\frac{5}{3}-\\frac{1}{2}=\\frac{10}{6}-\\frac{3}{6}=\\frac{7}{6}$。注意 $6-(2a+b)$ 的括号是一个整体，是 $6-5=1$。',
       ],
       verify: () => {
         const vals = [new Set(), new Set(), new Set()];
@@ -192,13 +253,8 @@ Content.section({
           vals[1].add(F(10).sub(a.mul(2).add(b).pow(2)).toString());
           vals[2].add(a.mul(4).add(b.mul(2)).sub(1).div(a.mul(2).add(b).add(4)).toString());
         }
-        let hit = null;
-        for (let i = -100; i <= 100; i++) {
-          const a = F(i).div(4);
-          const b = F(5).sub(a.mul(2));
-          if (a.sub(b).eq(1)) hit = a;
-        }
-        return [...vals.map(s => (s.size === 1 ? [...s][0] : null)), F(5).add(1), hit];
+        const w = F(5);
+        return [...vals.map(s => (s.size === 1 ? [...s][0] : null)), w.div(3).sub(F(6).sub(w).div(2))];
       },
     },
     {
@@ -279,41 +335,6 @@ Content.section({
       },
     },
     {
-      id: '2.2-e04',
-      level: 'extended',
-      type: 'fill',
-      stem: '数轴上点 $A$ 表示 $-2$，点 $B$ 表示 6。点 $P$ 从点 $A$ 出发，沿数轴向右匀速运动，速度是每秒 3 个单位长度，运动时间为 $t$ 秒（$t\\ge 0$）。',
-      blanks: [
-        { kind: 'expr', label: '(1) $t$ 秒时，点 $P$ 表示的数是', answer: '3t-2' },
-        { kind: 'num', label: '(2) 当 $t=3$ 时，$P$、$B$ 两点间的距离是', answer: '1' },
-        { kind: 'num', label: '(3) 当 $PA=PB$ 时，$t=$', answer: '4/3' },
-        { kind: 'nums', label: '(4) 当 $PA=2PB$ 时，$t$ 的所有可能值是（全部填出，用逗号隔开）', answer: ['16/9', '16/3'] },
-      ],
-      explain: [
-        '(1) $t$ 秒走了 $3t$ 个单位，从 $-2$ 向右走，所以 $P$ 表示 $-2+3t$，即 $3t-2$。',
-        '(2) $t=3$ 时 $P$ 表示 $3\\times 3-2=7$，它在 $B$（表示 6）的右边，距离是 $7-6=1$。',
-        '(3) $PA=PB$ 说明 $P$ 是 $A$、$B$ 的中点，中点表示的数是 $\\frac{-2+6}{2}=2$。由 $3t-2=2$ 反推：$3t=4$，$t=\\frac{4}{3}$。',
-        '(4) $P$ 一直向右走，所以 $PA=3t$。但 $PB$ 要分两种情况，这是本题的关键。',
-        '情况一：$P$ 还没走过 $B$（即 $3t-2\\le 6$）。此时 $PB=6-(3t-2)=8-3t$，且 $PA+PB=AB=8$。',
-        '由 $PA=2PB$ 知 $PA$ 占 8 中的 2 份、$PB$ 占 1 份，所以 $PA=\\frac{16}{3}$，由 $3t=\\frac{16}{3}$ 得 $t=\\frac{16}{9}$。此时 $P$ 表示 $\\frac{10}{3}$，确实在 $A$、$B$ 之间。',
-        '情况二：$P$ 已经走过 $B$。此时 $PA-PB=AB=8$，而 $PA=2PB$，所以 $2PB-PB=PB=8$，$PA=16$。由 $3t=16$ 得 $t=\\frac{16}{3}$。此时 $P$ 表示 14，确实在 $B$ 右边。',
-        '两种情况都成立，所以 $t=\\frac{16}{9}$ 或 $t=\\frac{16}{3}$。只答一个就漏解了。',
-      ],
-      verify: () => {
-        const p = t => F(t).mul(3).sub(2);
-        const lin = f => `${f(1).sub(f(0))}*t+${f(0)}`;
-        const eq = [], twice = [];
-        for (let i = 0; i <= 7200; i++) {
-          const t = F(i).div(720);
-          const pa = p(t).sub(-2).abs();
-          const pb = p(t).sub(6).abs();
-          if (pa.eq(pb)) eq.push(t);
-          if (pa.eq(pb.mul(2))) twice.push(t);
-        }
-        return [lin(p), p(3).sub(6).abs(), eq[0], twice];
-      },
-    },
-    {
       id: '2.2-e05',
       level: 'extended',
       type: 'fill',
@@ -343,94 +364,6 @@ Content.section({
         const okGrass = boxes.every(([a, b]) => grass(a, b) === (a - 1) * (b - 1));
         const okRoad = boxes.every(([a, b]) => a * b - grass(a, b) === a + b - 1);
         return [okRoad ? 'a+b-1' : '0', okGrass ? '(a-1)(b-1)' : '0', grass(20, 12)];
-      },
-    },
-    {
-      id: '2.2-e06',
-      level: 'extended',
-      type: 'fill',
-      stem: '已知 $x$ 是整数，且 $-2\\le x\\le 3$。',
-      blanks: [
-        { kind: 'num', label: '(1) 代数式 $x^2-2x$ 的最小值是', answer: '-1' },
-        { kind: 'num', label: '(2) 代数式 $x^2-2x$ 的最大值是', answer: '8' },
-        { kind: 'num', label: '(3) 代数式 $x^2-2x$ 的值中，互不相同的共有（个）', answer: '4' },
-      ],
-      explain: [
-        '$x$ 只能取 $-2,-1,0,1,2,3$ 这 6 个整数，逐个代入即可，注意负数要加括号。',
-        '$x=-2$：$(-2)^2-2\\times(-2)=4+4=8$；$x=-1$：$1+2=3$；$x=0$：$0$。',
-        '$x=1$：$1-2=-1$；$x=2$：$4-4=0$；$x=3$：$9-6=3$。',
-        '(1) 六个值中最小的是 $-1$。特别注意 $x$ 最小时代数式的值反而最大，不能想当然。',
-        '(2) 最大的是 8。',
-        '(3) 六个值是 $8,\\ 3,\\ 0,\\ -1,\\ 0,\\ 3$，其中 3 出现了两次、0 出现了两次，互不相同的只有 $8,\\ 3,\\ 0,\\ -1$ 共 4 个。',
-      ],
-      verify: () => {
-        const vals = [];
-        for (let x = -2; x <= 3; x++) vals.push(F(x).pow(2).sub(F(x).mul(2)));
-        vals.sort((p, q) => p.cmp(q));
-        const uniq = new Set(vals.map(v => v.toString()));
-        return [vals[0], vals[vals.length - 1], uniq.size];
-      },
-    },
-    {
-      id: '2.2-e07',
-      level: 'extended',
-      type: 'fill',
-      stem: '已知 $|a|=5$，$|b|=3$，且 $a+b\\ge 0$。',
-      blanks: [
-        { kind: 'nums', label: '(1) $a-b$ 的所有可能值是（全部填出，用逗号隔开）', answer: ['2', '8'] },
-        { kind: 'nums', label: '(2) $\\frac{a}{b}$ 的所有可能值是（全部填出，用逗号隔开）', answer: ['5/3', '-5/3'] },
-      ],
-      explain: [
-        '由绝对值得 $a=5$ 或 $a=-5$，$b=3$ 或 $b=-3$，一共四种搭配，但还要用 $a+b\\ge 0$ 筛一遍。',
-        '$a=5,\\ b=3$：和是 8，符合；$a=5,\\ b=-3$：和是 2，符合。',
-        '$a=-5,\\ b=3$：和是 $-2$，不符合；$a=-5,\\ b=-3$：和是 $-8$，不符合。',
-        '所以只剩两种情况，都有 $a=5$。',
-        '(1) $5-3=2$，$5-(-3)=8$，所以 $a-b$ 是 2 或 8。',
-        '(2) $\\frac{5}{3}$ 或 $\\frac{5}{-3}=-\\frac{5}{3}$。注意两问的答案都有两个，漏掉一种就错了。',
-      ],
-      verify: () => {
-        const d = [], q = [];
-        for (const a of [5, -5]) for (const b of [3, -3]) {
-          if (a + b < 0) continue;
-          d.push(F(a).sub(b));
-          q.push(F(a).div(b));
-        }
-        return [d, q];
-      },
-    },
-    {
-      id: '2.2-e08',
-      level: 'extended',
-      type: 'fill',
-      stem: '一根绳子长 $a$ 米。第一次剪去全长的一半，第二次剪去剩下的一半，第三次再剪去这时剩下的一半。',
-      demo: {
-        type: 'ropeCut',
-        rows: [
-          { label: '第一种：每次剪去剩下的一半', cuts: [[1 / 2, 'a/2'], [1 / 4, 'a/4'], [1 / 8, 'a/8']] },
-          { label: '第二种：每次剪去 a/4', cuts: [[1 / 4, '3a/4'], [1 / 4, 'a/2'], [1 / 4, 'a/4']] },
-        ],
-        summary: '三次之后：第一种剩 a/8，第二种剩 a/4（第一种每次剪得越来越短）',
-      },
-      blanks: [
-        { kind: 'expr', label: '(1) 三次之后还剩（米）', answer: 'a/8' },
-        { kind: 'expr', label: '(2) 若改成每次都剪去 $\\frac{a}{4}$ 米，共剪三次，三次之后还剩（米）', answer: 'a/4' },
-        { kind: 'num', label: '(3) 当 $a=8$ 时，第一种剪法剩下的比第二种剩下的少（米）', answer: '1' },
-        { kind: 'num', label: '(4) 若把第二种剪法改成每次都剪去全长的 $\\frac{k}{24}$，要使两种剪法剩下的一样多，则 $k=$', answer: '7' },
-      ],
-      explain: [
-        '(1) 每次剩下上一次的一半：$a\\to\\frac{a}{2}\\to\\frac{a}{4}\\to\\frac{a}{8}$，三次后剩 $\\frac{a}{8}$ 米。',
-        '(2) 三次共剪去 $3\\times\\frac{a}{4}=\\frac{3a}{4}$ 米，还剩 $a-\\frac{3a}{4}=\\frac{a}{4}$ 米。',
-        '(3) $a=8$ 时，第一种剩 1 米，第二种剩 2 米，第一种少 1 米。',
-        '注意两种剪法“剪的次数一样，剪掉的却不一样”：第一种每次剪的越来越短。',
-        '(4) 要使剩下的都是 $\\frac{a}{8}$，三次一共要剪去 $a-\\frac{a}{8}=\\frac{7a}{8}$。',
-        '每次剪去 $\\frac{k}{24}$，三次共剪去 $\\frac{3k}{24}=\\frac{k}{8}$。所以 $\\frac{k}{8}=\\frac{7}{8}$，$k=7$。',
-      ],
-      verify: () => {
-        const half3 = a => F(a).div(2).div(2).div(2);
-        const fixed = (a, part) => F(a).sub(F(a).mul(part).mul(3));
-        let k = null;
-        for (let i = 1; i <= 24; i++) if (fixed(96, F(i).div(24)).eq(half3(96))) k = i;
-        return [half3(1) + '*a', fixed(1, F(1).div(4)) + '*a', fixed(8, F(1).div(4)).sub(half3(8)), k];
       },
     },
     {
@@ -548,7 +481,7 @@ Content.section({
         { kind: 'num', label: '(1) 使 $\\frac{12}{n+2}$ 的值是整数的 $n$ 共有（个）', answer: '4' },
         { kind: 'num', label: '(2) 使 $\\frac{n+9}{n+1}$ 的值是整数的 $n$ 共有（个）', answer: '3' },
         { kind: 'nums', label: '(3) 使 $\\frac{3n+2}{n-1}$ 的值是整数的 $n$ 的所有可能值是（全部填出，用逗号隔开）', answer: ['2', '6'] },
-        { kind: 'num', label: '(4) 使 $\\frac{n^2+5}{n+1}$ 的值是整数的 $n$ 共有（个）', answer: '3' },
+        { kind: 'num', label: '(4) 使 $\\frac{2n+13}{n+1}$ 的值是整数的 $n$ 是', answer: '10' },
         { kind: 'num', label: '(5) 使 $\\frac{12}{n+2}$ 与 $\\frac{n+9}{n+1}$ 的值都是整数的 $n$ 是', answer: '1' },
       ],
       explain: [
@@ -556,14 +489,11 @@ Content.section({
         '因为 $n$ 是正整数，$n+2\\ge 3$，所以 $n+2$ 只能取 $3,4,6,12$，对应 $n=1,2,4,10$，共 4 个。',
         '(2) 分子含字母，不能直接看约数，要先把分子“凑”成分母的样子：$n+9=(n+1)+8$。',
         '所以 $\\frac{n+9}{n+1}=1+\\frac{8}{n+1}$。整数部分 1 不用管，只要 $\\frac{8}{n+1}$ 是整数，即 $n+1$ 是 8 的约数。由 $n\\ge 1$ 得 $n+1\\ge 2$，所以 $n+1$ 取 $2,4,8$，即 $n=1,3,7$，共 3 个。',
-        '(3) 分母是 $n-1$，先凑出 3 个 $(n-1)$：$3n+2=3(n-1)+5$，所以 $\\frac{3n+2}{n-1}=3+\\frac{5}{n-1}$。',
+        '(3) 分母是 $n-1$。$n-1$ 的 3 倍是 $3n-3$，$3n+2$ 比它多 5，所以 $\\frac{3n+2}{n-1}=3+\\frac{5}{n-1}$。',
         '分母不能为 0，所以 $n\\ne 1$；又 $n$ 是正整数，故 $n-1\\ge 1$，取 5 的约数 1 和 5，得 $n=2$ 或 $n=6$。',
-        '(4) 分子是 $n^2+5$，怎么凑？先用 $n^2=n\\times n$ 与 $n+1$ 搭一次：$n(n+1)=n^2+n$，所以 $n^2=n(n+1)-n$。',
-        '于是 $n^2+5=n(n+1)-n+5$。式子里还有一个 $-n$，再凑一次：$-n=-(n+1)+1$，所以 $n^2+5=n(n+1)-(n+1)+6$。',
-        '前两块都能被 $n+1$ 整除，所以只要 $n+1$ 是 6 的约数。由 $n+1\\ge 2$ 得 $n+1$ 取 $2,3,6$，即 $n=1,2,5$，共 3 个。',
-        '检验：$n=5$ 时 $\\frac{25+5}{6}=5$，确实是整数。',
+        '(4) $n+1$ 的 2 倍是 $2n+2$，$2n+13$ 比它多 11，所以 $\\frac{2n+13}{n+1}=2+\\frac{11}{n+1}$。$n+1$ 要是 11 的约数，而 $n+1\\ge 2$，只能是 11，所以 $n=10$。检验：$\\frac{33}{11}=3$。',
         '(5) 把 (1) 的答案 $\\{1,2,4,10\\}$ 和 (2) 的答案 $\\{1,3,7\\}$ 取公共部分，只有 $n=1$。',
-        '这一节的通法：把分子拆成“分母的整数倍 + 一个常数”，问题就变成找这个常数的约数；分子含 $n^2$ 时要拆两次。',
+        '这一节的通法：把分子拆成“分母的整数倍 + 一个常数”，问题就变成找这个常数的约数。'
       ],
       verify: () => {
         const list = (f, skip) => {
@@ -577,57 +507,9 @@ Content.section({
         const a = list(n => F(12).div(n + 2));
         const b = list(n => F(n + 9).div(n + 1));
         const c = list(n => F(3 * n + 2).div(n - 1), n => n === 1);
-        const d = list(n => F(n * n + 5).div(n + 1));
+        const d = list(n => F(2 * n + 13).div(n + 1));
         const both = a.filter(n => b.includes(n));
-        return [a.length, b.length, c.map(F), d.length, both.length === 1 ? both[0] : null];
-      },
-    },
-    {
-      id: '2.2-c03',
-      level: 'challenge',
-      type: 'fill',
-      stem: '已知 $a+b=5$，$b+c=7$，$c+d=9$。',
-      blanks: [
-        { kind: 'num', label: '(1) $a+b+c+d=$', answer: '14' },
-        { kind: 'num', label: '(2) $d+a=$', answer: '7' },
-        { kind: 'nums', label: '(3) 若 $a$、$b$、$c$、$d$ 都是正整数，则 $a$ 的所有可能值是（全部填出，用逗号隔开）', answer: ['1', '2', '3', '4'] },
-        { kind: 'num', label: '(4) 在 (3) 的条件下，$abcd$ 的最大值是', answer: '120' },
-        { kind: 'num', label: '(5) 在 (3) 的条件下，$abcd$ 的最小值是', answer: '72' },
-      ],
-      explain: [
-        '(1) 把 $a+b=5$ 与 $c+d=9$ 相加，正好得到四个数的和：$a+b+c+d=5+9=14$。',
-        '(2) 四个数的和去掉 $b+c$ 就是 $d+a$：$14-7=7$。这里用的是“配对”的想法：$(a+b)+(c+d)$ 与 $(b+c)+(d+a)$ 都等于四个数的总和。',
-        '(3) 四个数其实只有一个可以自由选。只要定下 $a$，就依次定下 $b=5-a$、$c=7-b=2+a$、$d=9-c=7-a$。',
-        '要求它们都是正整数：$a\\ge 1$；$b=5-a\\ge 1$ 得 $a\\le 4$；$c=2+a$ 自然满足；$d=7-a\\ge 1$ 得 $a\\le 6$。',
-        '几个限制取最严的，得到 $a$ 只能是 $1,\\ 2,\\ 3,\\ 4$。',
-        '(4)(5) 把四种情况逐一算出来：',
-        '$a=1$ 时四数是 $1,4,3,6$，积为 72；$a=2$ 时是 $2,3,4,5$，积为 120；',
-        '$a=3$ 时是 $3,2,5,4$，积为 120；$a=4$ 时是 $4,1,6,3$，积为 72。',
-        '所以最大值是 120，最小值是 72。',
-        '可以看出一个有意思的现象：四个数的和固定是 14，几个数越接近，乘积越大；相差越悬殊，乘积越小。',
-      ],
-      verify: () => {
-        const chain = a => [F(a), F(5).sub(a), F(2).add(a), F(7).sub(a)];
-        const sums = new Set(), das = new Set();
-        for (let i = -20; i <= 20; i++) {
-          const [a, b, c, d] = chain(F(i).div(2));
-          sums.add(a.add(b).add(c).add(d).toString());
-          das.add(d.add(a).toString());
-        }
-        const good = [];
-        for (let a = 1; a <= 30; a++) {
-          const four = chain(a);
-          if (four.every(v => v.d === 1n && v.cmp(0) > 0)) good.push([a, four.reduce((p, x) => p.mul(x), F(1))]);
-        }
-        const prods = good.map(g => g[1]);
-        prods.sort((p, q) => p.cmp(q));
-        return [
-          sums.size === 1 ? [...sums][0] : null,
-          das.size === 1 ? [...das][0] : null,
-          good.map(g => F(g[0])),
-          prods[prods.length - 1],
-          prods[0],
-        ];
+        return [a.length, b.length, c.map(F), d.length === 1 ? d[0] : null, both.length === 1 ? both[0] : null];
       },
     },
     {
@@ -725,6 +607,41 @@ Content.section({
         }
         const same = [123, 456, 987, 100].every(n => n % 9 === String(n).split('').reduce((p, q) => p + Number(q), 0) % 9);
         return [same ? '$a+b+c$' : '$a$', a6, rem.size === 1 ? [...rem][0] : null, ok9.length, pick];
+      },
+    },
+    {
+      id: '2.2-c06',
+      level: 'challenge',
+      type: 'fill',
+      stem: '一个“数值转换机”的规则是：输入一个正整数 $x$，如果 $x$ 是偶数，就输出 $\\frac{x}{2}$；如果 $x$ 是奇数，就输出 $3x+1$。再把输出的结果输入，这样一直进行下去。',
+      blanks: [
+        { kind: 'num', label: '(1) 第一次输入 12，第 2025 次输出的结果是', answer: '1' },
+        { kind: 'nums', label: '(2) 若第 6 次输出的结果是 1，则第一次输入的数的所有可能值是（全部填出，用逗号隔开）', answer: ['1', '8', '10', '64'] },
+        { kind: 'nums', label: '(3) 若第 6 次输出的结果是 1，并且前 5 次输出的结果都不是 1，则第一次输入的数是（全部填出，用逗号隔开）', answer: ['10', '64'] },
+      ],
+      explain: [
+        '(1) 依次输出：6，3，10，5，16，8，4，2，1，4，2，1，……从第 7 次输出起，4，2，1 三个一循环：第 7、8、9 次分别是 4、2、1。',
+        '第 2025 次比第 6 次多 $2025-6=2019$ 次，$2019\\div 3=673$，正好整除，对应循环里的最后一个，是 1。',
+        '(2) 关键是倒推：输出 $y$ 可能来自哪些输入？一定可以来自偶数 $2y$（$2y\\div 2=y$）；如果 $y-1$ 能被 3 整除，并且商是正的奇数，还可以来自这个奇数（它乘 3 加 1 得 $y$）。',
+        '从第 6 次输出的 1 一层一层往回推：第 5 次输出只能是 2（$(1-1)\\div 3=0$ 不是正整数）；第 4 次只能是 4；第 3 次可以是 8，也可以是奇数 1（$1\\times 3+1=4$）。',
+        '第 2 次：8 只能来自 16，1 只能来自 2，所以是 16 或 2。第 1 次：16 可以来自 32 或奇数 5（$5\\times 3+1=16$），2 只能来自 4，所以是 32、5 或 4。',
+        '输入的数：32 只能来自 64；5 只能来自 10（$(5-1)\\div 3$ 不是整数）；4 可以来自 8 或 1。所以第一次输入的数可能是 64、10、8、1。',
+        '(3) 检查每个输入前 5 次的输出：输入 1 时第 3 次输出就是 1；输入 8 时依次是 4，2，1，也在第 3 次就到了 1。这两个不符合。输入 10（5，16，8，4，2，1）和 64（32，16，8，4，2，1）都是第 6 次才第一次得到 1。所以是 10 和 64。',
+        '这道题先用 (1) 发现“到了 1 就在 4，2，1 里打转”，倒推时就要想到 1 也能往回推出 4，这样才不会漏掉 1 和 8；(3) 再把它们排除。',
+      ],
+      verify: () => {
+        const f = x => (x % 2 === 0 ? x / 2 : 3 * x + 1);
+        const outs = (x, n) => { const r = []; for (let i = 0; i < n; i++) { x = f(x); r.push(x); } return r; };
+        const o2025 = outs(12, 2025)[2024];
+        const all = [];
+        const first = [];
+        for (let x = 1; x <= 5000; x++) {
+          const o = outs(x, 6);
+          if (o[5] !== 1) continue;
+          all.push(F(x));
+          if (!o.slice(0, 5).includes(1)) first.push(F(x));
+        }
+        return [o2025, all, first];
       },
     },
   ],
