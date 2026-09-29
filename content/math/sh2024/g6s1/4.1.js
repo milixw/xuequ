@@ -14,7 +14,7 @@ Content.section({
   id: 'math/sh2024/g6s1/4.1',
   title: '线段',
   review: { status: 'pending' },
-  audit: { blind: '2026-09-21', rounds: 2, note: '子代理盲解复核两轮：答案全部一致；第 2 轮按意见重做 c04（加入反向，重叠分四段 + 舍解）、c05（改为直线条数的所有可能值，按共线分组构造与排除），换掉 e07（三等分点 → 小棒加减量长度）、e10（整数点个数、原点为端点），e03(2) 改为真正两解，b02 注明射线的数法；复核意见“e07 题干例子泄露 (3) 的答案，改掉后整节通过”，已把例子换成 5 cm 和 2 cm' },
+  audit: { blind: '2026-09-29', rounds: 1, note: '改用真卷标尺（基础 9 + 扩展 6 + 挑战 5），删掉 e04、e06、e07、e09。子代理盲解复核一轮，新写 b06～b09 答案一致，判定整节通过；按建议把 b09 的“公路旁”改成“公路上”。可选意见未处理：e03(1) 与 b04(2) 设问形式接近' },
 
   intro: [
     {
@@ -162,6 +162,88 @@ Content.section({
         return [M, N, N.sub(-3)];
       },
     },
+    {
+      id: '4.1-b06',
+      level: 'basic',
+      type: 'choice',
+      stem: '下列现象中，可以用“两点之间，线段最短”来解释的是（　　）',
+      options: ['用两根钉子就能把一根木条固定在墙上', '植树时，先定下两端两棵树的位置，就能让一行树栽在同一条直线上', '从教学楼到食堂，有些同学斜穿草坪走', '射击时，眼睛、准星和靶心要在同一条直线上'],
+      answer: 2,
+      explain: [
+        'A、B、D 都是“经过两点有一条直线，并且只有一条直线”（两点确定一条直线）的应用：定下两个点，直线就定了。',
+        'C 斜穿草坪是因为两点之间线段最短，走直线比沿着小路拐弯近。选 C。（斜穿草坪会踩坏草坪，不提倡。）',
+      ],
+    },
+    {
+      id: '4.1-b07',
+      level: 'basic',
+      type: 'fill',
+      stem: '已知线段 $AB=4$。延长线段 $AB$ 到点 $C$，使 $BC=\\frac{1}{2}AB$；再反向延长线段 $AB$ 到点 $D$，使 $AD=AC$。',
+      blanks: [
+        { kind: 'num', label: '(1) $AC=$', answer: '6' },
+        { kind: 'num', label: '(2) $CD=$', answer: '12' },
+      ],
+      explain: [
+        '(1) 延长 $AB$ 到 $C$，$C$ 在 $B$ 的外侧：$BC=2$，$AC=AB+BC=4+2=6$。',
+        '(2) 反向延长 $AB$ 到 $D$，是从 $A$ 往 $B$ 的反方向延长，$D$ 在 $A$ 的外侧：$AD=6$。',
+        '从左到右依次是 $D$、$A$、$B$、$C$，$CD=AD+AC=6+6=12$。常见错误是把 $D$ 画在 $B$ 那一侧。',
+      ],
+      verify: () => {
+        const A = F(0);
+        const B = F(4);
+        const C = B.add(B.sub(A).div(2));
+        const D = A.sub(C.sub(A));
+        return [C.sub(A), C.sub(D)];
+      },
+    },
+    {
+      id: '4.1-b08',
+      level: 'basic',
+      type: 'fill',
+      stem: '线段 $AB=18$，点 $C$ 在线段 $AB$ 上，$AC$ 比 $BC$ 的 2 倍少 3。',
+      blanks: [
+        { kind: 'num', label: '(1) $BC=$', answer: '7' },
+        { kind: 'num', label: '(2) $AC=$', answer: '11' },
+      ],
+      explain: [
+        '设 $BC=x$，那么 $AC=2x-3$。$C$ 在线段 $AB$ 上，所以 $AC+BC=AB$：$2x-3+x=18$。',
+        '$3x=21$，$x=7$，所以 $BC=7$，$AC=2\\times 7-3=11$。检验：$11+7=18$。',
+        '注意“比 $BC$ 的 2 倍少 3”是 $2x-3$，不是 $2(x-3)$。',
+      ],
+      verify: () => {
+        for (let i = 1; i <= 180; i++) {
+          const x = F(i).div(10);
+          if (x.mul(2).sub(3).add(x).eq(18)) return [x, x.mul(2).sub(3)];
+        }
+        return null;
+      },
+    },
+    {
+      id: '4.1-b09',
+      level: 'basic',
+      type: 'fill',
+      stem: '一条笔直的公路上依次有 $A$、$B$、$C$ 三个村庄，$A$、$B$ 两村相距 6 千米，$B$、$C$ 两村相距 4 千米。要在这条公路旁建一个车站，使车站到三个村庄的距离之和最小。',
+      blanks: [
+        { kind: 'text', label: '(1) 车站应建在', options: ['$A$ 村', '$B$ 村', '$C$ 村', '$A$、$C$ 两村的正中间'], answer: '$B$ 村' },
+        { kind: 'num', label: '(2) 这个最小的距离之和是（千米）', answer: '10' },
+      ],
+      explain: [
+        '车站到 $A$、$C$ 两村的距离之和，只要车站在 $A$、$C$ 之间，就等于 $AC=10$ 千米（两点之间线段最短，在外面会更长）。',
+        '再加上到 $B$ 村的距离：建在 $B$ 村时这一段是 0，总和最小，是 10 千米。',
+        '建在 $A$、$C$ 的正中间（离 $A$ 5 千米）时，到 $B$ 还有 1 千米，总和 11 千米，反而更大。',
+      ],
+      verify: () => {
+        const pts = [0, 6, 10];
+        let best = null;
+        let at = null;
+        for (let i = -40; i <= 80; i++) {
+          const x = F(i).div(4);
+          const s = pts.reduce((t, p) => t.add(x.sub(p).abs()), F(0));
+          if (!best || s.cmp(best) < 0) { best = s; at = x; }
+        }
+        return [at.eq(6) ? '$B$ 村' : null, best];
+      },
+    },
 
     // ---------- 扩展 ----------
     {
@@ -245,32 +327,6 @@ Content.section({
       },
     },
     {
-      id: '4.1-e04',
-      level: 'extended',
-      type: 'fill',
-      stem: '数轴上点 $A$ 表示 $-10$，点 $B$ 表示 $20$。动点 $P$ 从 $A$ 出发，以每秒 3 个单位的速度向右运动；同时动点 $Q$ 从 $B$ 出发，以每秒 2 个单位的速度向左运动。设运动时间为 $t$ 秒。',
-      blanks: [
-        { kind: 'num', label: '(1) 当 $PB=2PA$ 时，$t=$', answer: '10/3' },
-        { kind: 'nums', label: '(2) 当 $P$、$Q$ 两点相距 5 个单位时，$t$ 的值是（全部填出，用逗号隔开）', answer: ['5', '7'] },
-      ],
-      explain: [
-        '$t$ 秒后 $P$ 表示 $-10+3t$，$Q$ 表示 $20-2t$，$PA=3t$。',
-        '(1) $PB=|20-(-10+3t)|=|30-3t|$。要 $|30-3t|=2\\times 3t=6t$。',
-        '若 $P$ 还没到 $B$（$30-3t$ 不是负数）：$30-3t=6t$，$t=\\frac{10}{3}$，此时 $3t=10<30$，符合。',
-        '若 $P$ 已过 $B$：$3t-30=6t$，$t=-10$，不符合。所以 $t=\\frac{10}{3}$。',
-        '(2) $PQ=|(20-2t)-(-10+3t)|=|30-5t|$。相遇前 $30-5t=5$，$t=5$；相遇后 $5t-30=5$，$t=7$。',
-      ],
-      verify: () => {
-        const ts = [];
-        for (let i = 0; i <= 1200; i++) ts.push(F(i).div(60));
-        const P = t => F(-10).add(t.mul(3)), Q = t => F(20).sub(t.mul(2));
-        return [
-          ts.filter(t => t.cmp(0) > 0 && F(20).sub(P(t)).abs().eq(P(t).sub(-10).mul(2)))[0],
-          ts.filter(t => Q(t).sub(P(t)).abs().eq(5)),
-        ];
-      },
-    },
-    {
       id: '4.1-e05',
       level: 'extended',
       type: 'fill',
@@ -297,68 +353,6 @@ Content.section({
       },
     },
     {
-      id: '4.1-e06',
-      level: 'extended',
-      type: 'fill',
-      stem: '把长 10 cm 的线段 $AB$ 十等分，连同 $A$、$B$ 共得到 11 个点。以这 11 个点中任意两点为端点的线段：',
-      blanks: [
-        { kind: 'num', label: '(1) 共有', answer: '55', suffix: '条' },
-        { kind: 'num', label: '(2) 长度不同的线段有', answer: '10', suffix: '种' },
-        { kind: 'num', label: '(3) 所有这些线段的长度之和是', answer: '220', suffix: 'cm' },
-      ],
-      explain: [
-        '(1) 11 个点，$\\frac{11\\times 10}{2}=55$ 条。',
-        '(2) 相邻两点相距 1 cm，线段长度可以是 1、2、……、10 cm，共 10 种。',
-        '(3) 按长度分类计数：长 1 cm 的有 10 条，长 2 cm 的有 9 条，……，长 10 cm 的有 1 条。总长 $=1\\times 10+2\\times 9+3\\times 8+\\cdots+10\\times 1$。',
-        '首尾配对：$1\\times 10=10$，$2\\times 9=18$，$3\\times 8=24$，$4\\times 7=28$，$5\\times 6=30$，后五项与前五项对称相同，和为 $2\\times(10+18+24+28+30)=220$ cm。',
-        '另一种想法：看每一小段（相邻两点之间 1 cm）被多少条线段覆盖。第 $k$ 小段左边有 $k$ 个点、右边有 $(11-k)$ 个点，被 $k(11-k)$ 条线段覆盖，结果相同。',
-      ],
-      verify: () => {
-        let cnt = 0, sum = 0;
-        const lens = new Set();
-        for (let i = 0; i <= 10; i++) for (let j = i + 1; j <= 10; j++) { cnt++; sum += j - i; lens.add(j - i); }
-        return [cnt, lens.size, sum];
-      },
-    },
-    {
-      id: '4.1-e07',
-      level: 'extended',
-      type: 'fill',
-      stem: '用几根长度已知的小棒沿同一条直线摆放来“量”长度：可以首尾相接（长度相加），也可以并排重叠、一端对齐（长度相减），每根小棒最多用一次。例如用 5 cm 和 2 cm 的小棒可以量出 5 cm、2 cm、7 cm 和 3 cm。',
-      blanks: [
-        { kind: 'num', label: '(1) 用 1 cm、3 cm、9 cm 的小棒各一根，能量出的不同长度（整厘米）共有', answer: '13', suffix: '种' },
-        { kind: 'num', label: '(2) 用 1 cm、2 cm、6 cm 的小棒各一根，能量出的不同长度共有', answer: '9', suffix: '种' },
-        { kind: 'num', label: '(3) 用两根整厘米长的小棒（长度不同），要能量出 1 cm、2 cm、3 cm、4 cm 这四种长度，较长的那根最短是', answer: '3', suffix: 'cm' },
-      ],
-      explain: [
-        '量出的长度，就是若干根小棒的长度加加减减的结果（取正值）。有序地列举，按“用几根”分类。',
-        '(1) 用一根：1、3、9；用两根：$1+3=4$，$3-1=2$，$9+1=10$，$9-1=8$，$9+3=12$，$9-3=6$；用三根：$9+3+1=13$，$9+3-1=11$，$9-3+1=7$，$9-3-1=5$。',
-        '合起来是 1 到 13 的每一个整数，恰好 13 种，没有重复。',
-        '(2) 用一根：1、2、6；两根：3、1、7、5、8、4；三根：9、7、5、3。去掉重复后是 1、2、3、4、5、6、7、8、9，共 9 种。',
-        '(3) 两根小棒 $a<b$ 最多量出 $a$、$b$、$a+b$、$b-a$ 四种长度，要正好是 1、2、3、4。最大的 $a+b=4$，所以 $\\{a,b\\}$ 是 $\\{1,3\\}$（$\\{2,2\\}$ 长度相同不行）。检验：1、3、4、2，正好。较长的一根是 3 cm。',
-        '这里的“相减”就是线段的差：两根小棒一端对齐，另一端之间的距离。',
-      ],
-      verify: () => {
-        const measure = sticks => {
-          const set = new Set();
-          const go = (i, v) => {
-            if (i === sticks.length) { if (v > 0) set.add(Math.abs(v)); return; }
-            go(i + 1, v); go(i + 1, v + sticks[i]); go(i + 1, v - sticks[i]);
-          };
-          go(0, 0);
-          for (const v of [...set]) if (v < 0) set.delete(v);
-          return [...set].map(Math.abs);
-        };
-        const kinds = s => new Set(measure(s)).size;
-        let best = null;
-        for (let b = 2; b <= 10 && best === null; b++) for (let a = 1; a < b; a++) {
-          const m = new Set(measure([a, b]));
-          if ([1, 2, 3, 4].every(v => m.has(v))) { best = b; break; }
-        }
-        return [kinds([1, 3, 9]), kinds([1, 2, 6]), best];
-      },
-    },
-    {
       id: '4.1-e08',
       level: 'extended',
       type: 'fill',
@@ -380,33 +374,6 @@ Content.section({
         const A = F(-4), B = F(6);
         const mid = t => A.add(B).div(2).eq(t) || t.add(B).div(2).eq(A) || A.add(t).div(2).eq(B);
         return [ts.filter(mid), ts.filter(t => t.sub(A).eq(t.sub(B).abs().mul(3)))];
-      },
-    },
-    {
-      id: '4.1-e09',
-      level: 'extended',
-      type: 'fill',
-      stem: '线段 $AB=32$。取 $AB$ 的中点 $C_1$，再取 $C_1B$ 的中点 $C_2$，再取 $C_2B$ 的中点 $C_3$，……，这样一直取下去。',
-      blanks: [
-        { kind: 'num', label: '(1) $C_5B=$', answer: '1' },
-        { kind: 'num', label: '(2) $AC_1+AC_2+AC_3+AC_4+AC_5=$', answer: '129' },
-        { kind: 'num', label: '(3) 使 $AC_n$ 超过 $AB$ 的 $99\\%$ 的最小的 $n$ 是', answer: '7' },
-      ],
-      explain: [
-        '每取一次中点，到 $B$ 的距离就减半：$C_1B=16$，$C_2B=8$，$C_3B=4$，$C_4B=2$，$C_5B=1$。',
-        '(1) $C_5B=1$。一般地，$C_nB$ 是 32 连续除以 $n$ 次 2。',
-        '(2) $AC_n=AB-C_nB$：依次是 $16,\\ 24,\\ 28,\\ 30,\\ 31$，和为 $129$。也可以算成 $5\\times 32-(16+8+4+2+1)=160-31=129$。',
-        '(3) $AC_n$ 超过 $AB$ 的 $99\\%$，就是 $C_nB$ 小于 $AB$ 的 $1\\%$，即 $C_nB$ 小于 $0.32$。',
-        '$C_5B=1$，$C_6B=0.5$，$C_7B=0.25<0.32$。所以最小的 $n=7$。',
-      ],
-      verify: () => {
-        const CB = [F(32)];
-        for (let k = 1; k <= 20; k++) CB.push(CB[k - 1].div(2));
-        let s = F(0);
-        for (let k = 1; k <= 5; k++) s = s.add(F(32).sub(CB[k]));
-        let n = null;
-        for (let k = 1; k <= 20 && n === null; k++) if (F(32).sub(CB[k]).cmp(F(32).mul('0.99')) > 0) n = k;
-        return [CB[5], s, n];
       },
     },
     {
