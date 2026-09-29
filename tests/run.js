@@ -2,6 +2,7 @@
 
 require('./answer.test.js');
 require('./content.test.js');
+require('./english-course.test.js');
 require('./exam.test.js');
 require('./function-track.test.js');
 require('./solids.test.js');

@@ -293,6 +293,16 @@ a { color: inherit; text-decoration: none; }
 .semester-menu button:hover { background: var(--bg); }
 
 /* 知识点 */
+.unit-reading h2 { margin-bottom: 12px; }
+.unit-reading p { margin: 0 0 12px; color: var(--text); font-size: 15px; line-height: 1.85; }
+.unit-reading p:last-of-type { margin-bottom: 0; }
+.reading-term { color: #174b91; background: #e6f0ff; border-bottom: 2px solid #7ca9e5; border-radius: 3px; padding: 0 2px; font-weight: 600; }
+.reading-term sup { margin-left: 1px; font-size: 10px; }
+.unit-reading h3 { margin: 18px 0 6px; font-size: 14px; }
+.unit-reading ol { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 4px 14px; padding-left: 24px; margin: 0; font-size: 13px; }
+.unit-reading li { padding: 2px 0; overflow-wrap: anywhere; }
+.unit-reading li strong { margin-right: 8px; color: #174b91; }
+.unit-reading li span { color: var(--muted); }
 .knowledge .body { font-size: 15px; }
 .knowledge .example, .knowledge .pitfall {
   margin-top: 8px; padding: 8px 10px; border-radius: 8px; font-size: 14px;

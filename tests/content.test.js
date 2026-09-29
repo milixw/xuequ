@@ -147,18 +147,49 @@ for (const meta of Content.sectionMetas()) {
       if (card.pitfall) checkMath(card.pitfall, `知识点 ${i + 1} 易错提醒`);
     });
 
+    if (meta.subject.id === 'english') {
+      const reading = s.reading;
+      assert(reading && typeof reading === 'object', '英语小节缺少单元阅读 reading');
+      checkMath(reading.title, `${meta.id} 阅读标题`);
+      assert(Array.isArray(reading.paragraphs) && reading.paragraphs.length >= 2, '英语阅读至少两段');
+      assert(Array.isArray(reading.vocabulary) && reading.vocabulary.length >= 5, '英语阅读至少标注五个重点词或短语');
+      const terms = reading.vocabulary.map(item => item.term);
+      assert(new Set(terms).size === terms.length, '英语阅读重点词或短语重复');
+      const used = [];
+      reading.paragraphs.forEach((paragraph, i) => {
+        checkMath(paragraph, `${meta.id} 阅读第 ${i + 1} 段`);
+        for (const match of paragraph.matchAll(/\[\[([^\]]+)\]\]/g)) {
+          assert(terms.includes(match[1]), `阅读标注 ${match[1]} 未在词表中`);
+          used.push(match[1]);
+        }
+        assert(!paragraph.replace(/\[\[[^\]]+\]\]/g, '').includes('[['), '阅读有未闭合的重点词标注');
+      });
+      reading.vocabulary.forEach(item => {
+        checkMath(item.term, `${meta.id} 重点词`);
+        checkMath(item.meaning, `${meta.id} ${item.term} 释义`);
+        assert(used.includes(item.term), `${item.term} 在词表中却未在文章中标注`);
+      });
+    }
+
     const qs = s.questions;
     const count = level => qs.filter(q => q.level === level).length;
-    assert(count('basic') >= 5 && count('basic') <= 10, `基础题应为 5～10 道，现在 ${count('basic')} 道`);
-    assert(count('challenge') === 5, `挑战题应为 5 道，现在 ${count('challenge')} 道`);
-    assert(count('extended') >= 5 && count('extended') <= 10, `扩展题应为 5～10 道，现在 ${count('extended')} 道`);
-    assert(qs.length >= 15 && qs.length <= 20, `题目总数应为 15～20 道，现在 ${qs.length} 道`);
+    if (meta.subject.id === 'english') {
+      for (const level of ['basic', 'extended', 'challenge']) {
+        assert(count(level) >= 2, `英语首批小节每档至少 2 题，${level} 只有 ${count(level)} 题`);
+      }
+      assert(qs.length >= 6, `英语首批小节至少 6 题，现在 ${qs.length} 道`);
+    } else {
+      assert(count('basic') >= 5 && count('basic') <= 10, `基础题应为 5～10 道，现在 ${count('basic')} 道`);
+      assert(count('challenge') === 5, `挑战题应为 5 道，现在 ${count('challenge')} 道`);
+      assert(count('extended') >= 5 && count('extended') <= 10, `扩展题应为 5～10 道，现在 ${count('extended')} 道`);
+      assert(qs.length >= 15 && qs.length <= 20, `题目总数应为 15～20 道，现在 ${qs.length} 道`);
+    }
     const ids = qs.map(q => q.id);
     assert(new Set(ids).size === ids.length, '题目 ID 有重复');
     qs.forEach(q => checkQuestion(q, meta.section.no, `题目 ${q.id || '(无 ID)'}`));
 
     const noVerify = qs.filter(q => !q.verify).map(q => q.id);
-    if (noVerify.length && !(s.audit && s.audit.blind)) {
+    if (meta.subject.id === 'math' && noVerify.length && !(s.audit && s.audit.blind)) {
       warn(`${meta.id}：${noVerify.length} 道题没有 verify，且还没做盲解复核（${noVerify.join('、')}）`);
     }
   });

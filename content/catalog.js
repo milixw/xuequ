@@ -450,5 +450,25 @@ Content.catalog = {
         },
       ],
     },
+    {
+      id: 'english',
+      name: '英语',
+      editions: [{
+        id: 'sh2022',
+        name: '上海教育出版社新版（五·四学制，2022 版课标）',
+        volumes: [{
+          id: 'g8s1',
+          name: '八年级上册',
+          chapters: [
+            { no: 1, title: 'Water（水）', sections: [{ no: '1.1', title: '水资源与时间状语从句（一）', ready: true }] },
+            { no: 2, title: 'Digital life（数字生活）', sections: [{ no: '2.1', title: '数字生活与时间状语从句（二）', ready: true }] },
+            { no: 3, title: 'Curious minds（好奇的心）', sections: [{ no: '3.1', title: '探究表达与动词不定式', ready: true }] },
+            { no: 4, title: 'Then and now（过去与现在）', sections: [{ no: '4.1', title: '今昔对比与让步状语从句', ready: true }] },
+            { no: 5, title: 'Teamwork（团队合作）', sections: [{ no: '5.1', title: '合作表达与原因状语从句', ready: true }] },
+            { no: 6, title: 'Life in the future（未来生活）', sections: [{ no: '6.1', title: '未来设想与条件状语从句', ready: true }] },
+          ],
+        }],
+      }],
+    },
   ],
 };

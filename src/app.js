@@ -21,6 +21,26 @@
     return LEVEL_ORDER.flatMap(lv => section.questions.filter(q => q.level === lv));
   }
 
+  // 英语原创阅读用 [[词或短语]] 标注重点词；正文始终先转义，不能把内容当 HTML 执行。
+  function renderReading(reading) {
+    const entries = new Map(reading.vocabulary.map((item, i) => [item.term, { ...item, number: i + 1 }]));
+    const paragraphs = reading.paragraphs.map(paragraph => {
+      const parts = paragraph.split(/(\[\[[^\]]+\]\])/g);
+      return `<p>${parts.map(part => {
+        const match = /^\[\[([^\]]+)\]\]$/.exec(part);
+        if (!match) return escapeHtml(part);
+        const entry = entries.get(match[1]);
+        if (!entry) return escapeHtml(part);
+        return `<mark class="reading-term" title="${escapeHtml(entry.meaning)}" aria-label="${escapeHtml(entry.term + '：' + entry.meaning)}">` +
+          `${escapeHtml(entry.term)}<sup>${entry.number}</sup></mark>`;
+      }).join('')}</p>`;
+    }).join('');
+    return `<h3 class="group">单元阅读 · 原创</h3><article class="card unit-reading">` +
+      `<h2>${escapeHtml(reading.title)}</h2>${paragraphs}` +
+      `<h3>重点词与短语</h3><ol>${reading.vocabulary.map(item =>
+        `<li><strong>${escapeHtml(item.term)}</strong><span>${escapeHtml(item.meaning)}</span></li>`).join('')}</ol></article>`;
+  }
+
   function page(title, backHref, subtitle) {
     app.innerHTML =
       `<header class="bar">` +
@@ -205,7 +225,8 @@
     for (const chapter of v.volume.chapters) {
       const box = document.createElement('section');
       box.className = 'chapter';
-      box.innerHTML = `<h3 class="group">第 ${chapter.no} 章　${escapeHtml(chapter.title)}</h3>`;
+      const chapterLabel = v.subject.id === 'english' ? `Unit ${chapter.no}` : `第 ${chapter.no} 章`;
+      box.innerHTML = `<h3 class="group">${chapterLabel}　${escapeHtml(chapter.title)}</h3>`;
       for (const s of metas.filter(m => m.chapter === chapter)) {
         const content = Content.sections[s.id];
         const row = document.createElement(content ? 'a' : 'div');
@@ -282,11 +303,14 @@
     const { meta, section } = await loadSection(id);
     if (!meta) return showError(page('找不到这一节', '#/'), '链接可能有误，请返回首页。');
     if (!section) return showError(page('内容还没准备好', `#/v/${meta.volumeId}`), '这一节正在制作中。');
-    const main = page(`${meta.section.no}　${section.title}`, `#/v/${meta.volumeId}`, `第 ${meta.chapter.no} 章 ${meta.chapter.title}`);
+    const chapterLabel = meta.subject.id === 'english' ? `Unit ${meta.chapter.no}` : `第 ${meta.chapter.no} 章`;
+    const main = page(`${meta.section.no}　${section.title}`, `#/v/${meta.volumeId}`, `${chapterLabel} ${meta.chapter.title}`);
 
     if (section.review.status !== 'approved') {
       main.insertAdjacentHTML('beforeend', '<p class="notice">本节内容由 AI 编写，尚未经过老师审核，如发现错误欢迎反馈。</p>');
     }
+
+    if (section.reading) main.insertAdjacentHTML('beforeend', renderReading(section.reading));
 
     main.insertAdjacentHTML('beforeend', '<h3 class="group">知识点</h3>');
     for (const card of section.intro) {
