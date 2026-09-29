@@ -62,7 +62,7 @@ content/
     math/sh2024/g8s1/*.js         真题卷，一份试卷一个文件，路径 = 真题卷 ID
   english/question-bank.js        从本地错题 PDF 提取的英语试题（待核对）
   english/knowledge.js            英语知识点讲解、steps 判断步骤、例子、commonErrors 带错因反例、连词分类例句与各题型 confusables 易混辨析、自动归类规则（待人工审核）；复习时先讲再练
-  english/shanghai-junior-outline.html  用户提供的上海初中英语学习大纲原件，首页可离线打开
+  english/shanghai-junior-outline.html  由用户提供的上海初中英语学习大纲改成的离线页面；手机端目录可收起、宽表格可单独横向滑动
   <其他学科>/                     预留，比如 physics/、english/，结构相同
 tests/
   run.js                          测试入口

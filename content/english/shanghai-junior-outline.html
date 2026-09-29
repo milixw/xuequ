@@ -47,12 +47,15 @@ body{
 }
 
 /* ---------- 布局 ---------- */
-.wrap{max-width:1240px;margin:0 auto;padding:26px 28px 90px;display:grid;grid-template-columns:246px 1fr;gap:26px;align-items:start}
-nav.toc{
+.wrap{max-width:1240px;margin:0 auto;padding:26px 28px 90px;display:grid;grid-template-columns:246px minmax(0,1fr);gap:26px;align-items:start}
+.wrap>main{min-width:0}
+.toc-panel{
   position:sticky;top:16px;background:var(--card);border:1px solid var(--line);
-  border-radius:var(--radius);padding:16px 14px;max-height:calc(100vh - 40px);overflow:auto;
+  border-radius:var(--radius);max-height:calc(100vh - 40px);overflow:auto;
   box-shadow:0 2px 10px rgba(20,40,70,.04);font-size:13.5px;
 }
+.toc-panel>summary{display:none}
+nav.toc{padding:16px 14px}
 nav.toc .t{font-weight:700;font-size:13px;color:var(--ink3);letter-spacing:1px;margin:0 0 10px 6px}
 nav.toc a{display:block;color:var(--ink2);text-decoration:none;padding:4px 8px;border-radius:7px;border-left:2px solid transparent}
 nav.toc a:hover{background:var(--blue-soft);color:var(--blue);border-left-color:var(--blue)}
@@ -103,6 +106,8 @@ code{background:#f1f4f8;border:1px solid var(--line);border-radius:5px;padding:1
 .tbl td strong{color:var(--ink)}
 .tbl.center td,.tbl.center th{text-align:center}
 .tbl.compact td{padding:5px 10px;font-size:13px}
+.table-scroll{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.table-scroll>.tbl{min-width:100%}
 
 /* ---------- 卡片网格 ---------- */
 .grid{display:grid;gap:13px;margin:14px 0}
@@ -144,18 +149,37 @@ code{background:#f1f4f8;border:1px solid var(--line);border-radius:5px;padding:1
 
 @media(max-width:1000px){
   .wrap{grid-template-columns:1fr;padding:18px 16px 60px}
-  nav.toc{position:static;max-height:none}
+  .toc-panel{position:static;max-height:none}
   .g3,.g4{grid-template-columns:repeat(2,1fr)}
   .cover-inner,.footer{padding-left:18px;padding-right:18px}
 }
 @media(max-width:640px){
+  body{font-size:14px;line-height:1.75}
+  .wrap{padding:12px 10px 48px;gap:12px}
+  .toc-panel>summary{display:block;min-height:44px;padding:9px 14px;font-weight:700;cursor:pointer}
+  .toc-panel[open]>summary{border-bottom:1px solid var(--line)}
+  nav.toc{max-height:48vh;overflow-y:auto;padding:8px 10px}
+  nav.toc a{min-height:38px;display:flex;align-items:center}
   .g2,.g3,.g4{grid-template-columns:1fr}
-  section{padding:18px 16px}
-  .cover h1{font-size:24px}
+  section{padding:16px 12px}
+  .cover{padding:28px 0 24px}
+  .cover-inner,.footer{padding-left:14px;padding-right:14px}
+  .cover h1{font-size:23px;line-height:1.35}
+  .cover .sub{line-height:1.5}
+  .badge{font-size:12px}
+  h2,.gm>.gt{flex-wrap:wrap}
+  h2{font-size:19px;gap:7px}
+  .gm>.gt{gap:5px 8px;padding:10px 12px}
+  .gm>.gb{padding:10px 12px 12px}
+  code{overflow-wrap:anywhere}
+  .table-scroll>.tbl:has(tr>:nth-child(4)){min-width:620px}
+  .table-scroll>.tbl:has(tr>:nth-child(6)){min-width:820px}
+  .table-scroll>.tbl{font-size:13px}
 }
 @media print{
   body{background:#fff;font-size:11pt}
-  nav.toc{display:none}
+  .toc-panel{display:none}
+  .table-scroll{overflow:visible}
   .wrap{display:block;max-width:none;padding:0}
   section{border:none;box-shadow:none;padding:0;margin:0 0 16px;page-break-inside:auto}
   .cover{background:#1f6fd0!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
@@ -181,6 +205,8 @@ code{background:#f1f4f8;border:1px solid var(--line);border-radius:5px;padding:1
 
 <div class="wrap">
 
+<details class="toc-panel" open>
+<summary>目录 · 点击展开或收起</summary>
 <nav class="toc">
   <div class="t">目 录</div>
   <a class="lv1" href="#p1">一、总览：教材与中考考情</a>
@@ -237,6 +263,7 @@ code{background:#f1f4f8;border:1px solid var(--line);border-radius:5px;padding:1
   <a class="lv2" href="#s6-3">C 写作高分句型</a>
   <a class="lv2" href="#s6-4">D 复习计划模板</a>
 </nav>
+</details>
 
 <main>
 
@@ -1737,6 +1764,26 @@ code{background:#f1f4f8;border:1px solid var(--line);border-radius:5px;padding:1
 
 </main>
 </div>
+
+<script>
+// 宽表格只在自身区域横向滑动，不把整张手机页面撑宽。
+for (const table of document.querySelectorAll('table.tbl')) {
+  const scroller = document.createElement('div');
+  scroller.className = 'table-scroll';
+  scroller.tabIndex = 0;
+  scroller.setAttribute('role', 'region');
+  scroller.setAttribute('aria-label', '表格，可左右滑动查看');
+  table.before(scroller);
+  scroller.appendChild(table);
+}
+const tocPanel = document.querySelector('.toc-panel');
+if (matchMedia('(max-width: 640px)').matches) tocPanel.open = false;
+tocPanel.addEventListener('click', event => {
+  if (event.target.closest('a') && matchMedia('(max-width: 640px)').matches) {
+    tocPanel.open = false;
+  }
+});
+</script>
 
 <div class="footer">
   <p><b>使用说明：</b>本文档按"知识体系"组织，可用于六年级入门、七八年级同步、九年级中考总复习。建议配合自己的教材单元顺序，按"先扫框架 — 再补薄弱 — 后限时练"的顺序使用；文档支持浏览器直接打印（Ctrl+P）或另存为 PDF。</p>

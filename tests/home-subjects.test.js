@@ -39,3 +39,13 @@ test('英语试题库脚本按依赖顺序加载', () => {
     previous = index;
   }
 });
+
+test('英语大纲适配手机目录和宽表格', () => {
+  const outline = fs.readFileSync(path.join(root, 'content/english/shanghai-junior-outline.html'), 'utf8');
+  assert(outline.includes('name="viewport" content="width=device-width, initial-scale=1.0"'));
+  assert(outline.includes('<details class="toc-panel" open>'));
+  assert(outline.includes("if (matchMedia('(max-width: 640px)').matches) tocPanel.open = false"));
+  assert(outline.includes('.table-scroll{max-width:100%;overflow-x:auto;'));
+  assert(outline.includes("document.querySelectorAll('table.tbl')"));
+  assert(outline.includes('grid-template-columns:246px minmax(0,1fr)'));
+});
