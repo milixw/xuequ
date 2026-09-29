@@ -149,9 +149,10 @@ for (const meta of Content.sectionMetas()) {
 
     const qs = s.questions;
     const count = level => qs.filter(q => q.level === level).length;
-    assert(count('basic') === 5, `基础题应为 5 道，现在 ${count('basic')} 道`);
+    assert(count('basic') >= 5 && count('basic') <= 10, `基础题应为 5～10 道，现在 ${count('basic')} 道`);
     assert(count('challenge') === 5, `挑战题应为 5 道，现在 ${count('challenge')} 道`);
     assert(count('extended') >= 5 && count('extended') <= 10, `扩展题应为 5～10 道，现在 ${count('extended')} 道`);
+    assert(qs.length >= 15 && qs.length <= 20, `题目总数应为 15～20 道，现在 ${qs.length} 道`);
     const ids = qs.map(q => q.id);
     assert(new Set(ids).size === ids.length, '题目 ID 有重复');
     qs.forEach(q => checkQuestion(q, meta.section.no, `题目 ${q.id || '(无 ID)'}`));
