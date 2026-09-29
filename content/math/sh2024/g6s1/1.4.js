@@ -8,7 +8,7 @@ Content.section({
   id: 'math/sh2024/g6s1/1.4',
   title: '有理数的乘方',
   review: { status: 'pending' },
-  audit: { blind: '2026-09-20', rounds: 3, note: '难度上移后子代理复核三轮：新题答案全部一致，第 3 轮判定整节通过（按意见换掉 c04、调整 c03 顺序、e07 改为反推）' },
+  audit: { blind: '2026-09-29', rounds: 1, note: '改用真卷标尺（基础 9 + 扩展 6 + 挑战 5），删掉 e01、e02、e09、e10。子代理盲解复核一轮，新写 b06～b09 答案一致，判定整节通过；按建议把 b06 的 C 项换成负号与分数线同时出现的组合。可选意见未处理：c03、c04 的关键转化相近，c01 略偏竞赛' },
 
   intro: [
     {
@@ -87,45 +87,101 @@ Content.section({
       explain: ['互为相反数的两数和为 0：$a+b=0$；互为倒数的两数积为 1：$cd=1$；$m=\\pm 2$，$m^2=4$。', '原式 $=0^{2025}-1^{2024}+4=0-1+4=3$。'],
       verify: () => F(0).pow(2025).sub(F(1).pow(2024)).add(F(2).pow(2)),
     },
-
-    // ---------- 扩展 ----------
     {
-      id: '1.4-e01',
-      level: 'extended',
-      type: 'multi',
-      stem: '下列说法中，正确的有（多选）',
-      options: [
-        '如果 $a^2>b^2$，那么 $a>b$',
-        '平方等于它本身的数是 0 和 1',
-        '如果 $a^3=-a^3$，那么 $a=0$',
-        '如果 $a^2=b^2$，那么 $a=b$',
-      ],
-      answer: [1, 2],
+      id: '1.4-b06',
+      level: 'basic',
+      type: 'choice',
+      stem: '下列各组数中，两个数的值相等的是（　　）',
+      options: ['$-3^2$ 与 $(-3)^2$', '$(-2)^3$ 与 $-2^3$', '$-\\frac{2^2}{3}$ 与 $\\left(-\\frac{2}{3}\\right)^2$', '$3^2$ 与 $2^3$'],
+      answer: 1,
       explain: [
-        'A 错：$(-3)^2>1^2$，但 $-3<1$。平方大的数不一定大，要看绝对值。',
-        'B 对：只有 $0^2=0$，$1^2=1$；$(-1)^2=1\\ne -1$。',
-        'C 对：一个数等于它的相反数，这个数只能是 0，所以 $a^3=0$，$a=0$。',
-        'D 错：$2^2=(-2)^2$，但 $2\\ne -2$。答案是 B、C。',
-      ],
-    },
-    {
-      id: '1.4-e02',
-      level: 'extended',
-      type: 'fill',
-      stem: '计算：$\\left(1-\\frac{1}{2^2}\\right)\\times\\left(1-\\frac{1}{3^2}\\right)\\times\\left(1-\\frac{1}{4^2}\\right)\\times\\cdots\\times\\left(1-\\frac{1}{2025^2}\\right)$',
-      blanks: [{ kind: 'num', answer: '1013/2025' }],
-      explain: [
-        '先算出几项找规律：$1-\\frac{1}{2^2}=\\frac{3}{4}=\\frac{1}{2}\\times\\frac{3}{2}$，$1-\\frac{1}{3^2}=\\frac{8}{9}=\\frac{2}{3}\\times\\frac{4}{3}$，$1-\\frac{1}{4^2}=\\frac{15}{16}=\\frac{3}{4}\\times\\frac{5}{4}$……',
-        '一般地，第 $n$ 项可以拆成 $\\frac{n-1}{n}\\times\\frac{n+1}{n}$。',
-        '把拆出来的因数分成两组：$\\left(\\frac{1}{2}\\times\\frac{2}{3}\\times\\cdots\\times\\frac{2024}{2025}\\right)\\times\\left(\\frac{3}{2}\\times\\frac{4}{3}\\times\\cdots\\times\\frac{2026}{2025}\\right)$。',
-        '第一组约分后剩 $\\frac{1}{2025}$，第二组约分后剩 $\\frac{2026}{2}=1013$。结果是 $\\frac{1013}{2025}$。',
+        'A：$-3^2$ 表示 $3^2$ 的相反数，是 $-9$；$(-3)^2=9$。不相等。',
+        'B：$(-2)^3=(-2)\\times(-2)\\times(-2)=-8$；$-2^3$ 表示 $2^3$ 的相反数，也是 $-8$。相等。',
+        'C：$-\\frac{2^2}{3}$ 只有分子 2 平方，再取相反数，是 $-\\frac{4}{3}$；$\\left(-\\frac{2}{3}\\right)^2=\\frac{4}{9}$，整个分数连同负号一起平方。不相等。',
+        'D：$3^2=9$，$2^3=8$，底数和指数不能交换。不相等。选 B。',
+        '注意 B 相等是因为指数是奇数；换成偶数指数，$(-2)^2$ 和 $-2^2$ 就不相等了。',
       ],
       verify: () => {
-        let p = F(1);
-        for (let k = 2; k <= 2025; k++) p = p.mul(F(1).sub(F(1).div(F(k).pow(2))));
-        return p;
+        const pairs = [
+          [F(3).mul(3).neg(), F(-3).mul(-3)],
+          [F(-2).mul(-2).mul(-2), F(2).mul(2).mul(2).neg()],
+          [F(4).div(3).neg(), F(-2).div(3).mul(F(-2).div(3))],
+          [F(9), F(8)],
+        ];
+        const eq = pairs.map(([p, q], i) => (p.eq(q) ? i : -1)).filter(i => i >= 0);
+        return eq.length === 1 ? eq[0] : null;
       },
     },
+    {
+      id: '1.4-b07',
+      level: 'basic',
+      type: 'multi',
+      stem: '下列各数中，是负数的有',
+      options: ['$-(-2)^2$', '$-(-3)^3$', '$(-1)^{2025}$', '$(-0.5)^4$', '$-(-1)^{2024}$'],
+      answer: [0, 2, 4],
+      explain: [
+        'A：$(-2)^2=4$，前面再加负号，得 $-4$，是负数。',
+        'B：$(-3)^3=-27$，它的相反数是 27，是正数。两个负号不能直接“抵消”着看，要先算乘方。',
+        'C：$-1$ 的奇数次幂是 $-1$，是负数。',
+        'D：负数的偶数次幂是正数，$(-0.5)^4=0.0625$。',
+        'E：$(-1)^{2024}=1$，它的相反数是 $-1$，是负数。所以选 A、C、E。',
+      ],
+      verify: () => {
+        const pow = (x, n) => { let r = F(1); for (let i = 0; i < n; i++) r = r.mul(x); return r; };
+        const vals = [pow(-2, 2).neg(), pow(-3, 3).neg(), pow(-1, 2025), pow('-0.5', 4), pow(-1, 2024).neg()];
+        return vals.map((v, i) => (v.cmp(0) < 0 ? i : -1)).filter(i => i >= 0);
+      },
+    },
+    {
+      id: '1.4-b08',
+      level: 'basic',
+      type: 'fill',
+      stem: '按要求填出所有满足条件的数。',
+      blanks: [
+        { kind: 'nums', label: '(1) 平方等于 $\\frac{25}{36}$ 的数是（全部填出，用逗号隔开）', answer: ['5/6', '-5/6'] },
+        { kind: 'nums', label: '(2) 立方等于 $-\\frac{8}{125}$ 的数是（全部填出，用逗号隔开）', answer: ['-2/5'] },
+      ],
+      explain: [
+        '(1) $\\left(\\frac{5}{6}\\right)^2=\\frac{25}{36}$，$\\left(-\\frac{5}{6}\\right)^2=\\frac{25}{36}$ 也成立。平方等于正数的数有两个，互为相反数，最容易漏掉负的那个。',
+        '(2) 立方是负数，这个数一定是负数。$\\left(-\\frac{2}{5}\\right)^3=-\\frac{8}{125}$，而 $\\left(\\frac{2}{5}\\right)^3=\\frac{8}{125}$ 不符合，所以只有 $-\\frac{2}{5}$ 一个。',
+      ],
+      verify: () => {
+        const xs = [];
+        for (let n = -12; n <= 12; n++) for (let d = 1; d <= 12; d++) {
+          const x = F(n).div(d);
+          if (!xs.some(y => y.eq(x))) xs.push(x);
+        }
+        return [xs.filter(x => x.mul(x).eq(F(25).div(36))), xs.filter(x => x.mul(x).mul(x).eq(F(-8).div(125)))];
+      },
+    },
+    {
+      id: '1.4-b09',
+      level: 'basic',
+      type: 'fill',
+      stem: '一根绳子长 1 米。第 1 次剪去它的一半，第 2 次剪去剩下的一半，第 3 次再剪去剩下的一半……这样一直剪下去。',
+      blanks: [
+        { kind: 'num', label: '(1) 第 6 次剪完后，剩下的绳子长多少米？', answer: '1/64', suffix: '米' },
+        { kind: 'num', label: '(2) 第几次剪完后，剩下的绳子第一次短于 1 厘米？', answer: '7' },
+      ],
+      explain: [
+        '(1) 每剪一次，剩下的长度变为原来的 $\\frac{1}{2}$。第 1 次后剩 $\\frac{1}{2}$ 米，第 2 次后剩 $\\left(\\frac{1}{2}\\right)^2$ 米……第 6 次后剩 $\\left(\\frac{1}{2}\\right)^6=\\frac{1}{64}$（米）。',
+        '常见错误是写成 $\\left(\\frac{1}{2}\\right)^5$ 或 $\\left(\\frac{1}{2}\\right)^7$，可以先用第 1、2 次核对指数。',
+        '(2) 1 厘米 $=\\frac{1}{100}$ 米。第 6 次后剩 $\\frac{1}{64}$ 米，比 $\\frac{1}{100}$ 米长；第 7 次后剩 $\\frac{1}{128}$ 米，比 $\\frac{1}{100}$ 米短。所以是第 7 次。',
+      ],
+      verify: () => {
+        let len = F(1);
+        let at6 = null;
+        let first = null;
+        for (let k = 1; k <= 20; k++) {
+          len = len.div(2);
+          if (k === 6) at6 = len;
+          if (!first && len.cmp(F(1).div(100)) < 0) first = k;
+        }
+        return [at6, first];
+      },
+    },
+
+    // ---------- 扩展 ----------
     {
       id: '1.4-e03',
       level: 'extended',
@@ -252,44 +308,6 @@ Content.section({
         const xs = [];
         for (let i = -40; i <= 40; i++) xs.push(F(i).div(4));
         return [xs.filter(a => a.pow(3).eq(a)), xs.filter(a => a.pow(2).eq(a.pow(3))), xs.filter(a => a.pow(3).eq(a.neg()))];
-      },
-    },
-    {
-      id: '1.4-e09',
-      level: 'extended',
-      type: 'fill',
-      stem: '在小于 1000 的正整数中：',
-      blanks: [
-        { kind: 'num', label: '(1) 是某个整数的平方的数有几个？', answer: '31', suffix: '个' },
-        { kind: 'num', label: '(2) 既是某个整数的平方、又是某个整数的立方的数有几个？', answer: '3', suffix: '个' },
-      ],
-      explain: [
-        '(1) $31^2=961<1000$，$32^2=1024>1000$，所以 $1^2,\\ 2^2,\\ \\dots,\\ 31^2$ 共 31 个。',
-        '(2) 小于 1000 的立方数有 $1,\\ 8,\\ 27,\\ 64,\\ 125,\\ 216,\\ 343,\\ 512,\\ 729$（$10^3=1000$ 不算）。逐个检查哪些也是平方数：$1=1^2$，$64=8^2$，$729=27^2$。',
-        '共 3 个。它们恰好是 $1^6,\\ 2^6,\\ 3^6$：6 个相同因数相乘，既可以看成 2 个一组（平方），也可以看成 3 个一组（立方）。',
-      ],
-      verify: () => {
-        const sq = new Set();
-        for (let k = 1; k * k < 1000; k++) sq.add(k * k);
-        let both = 0;
-        for (let k = 1; k * k * k < 1000; k++) if (sq.has(k * k * k)) both++;
-        return [sq.size, both];
-      },
-    },
-    {
-      id: '1.4-e10',
-      level: 'extended',
-      type: 'fill',
-      stem: '计算：$(-1)^1\\times 1+(-1)^2\\times 2+(-1)^3\\times 3+\\cdots+(-1)^{100}\\times 100$',
-      blanks: [{ kind: 'num', answer: '50' }],
-      explain: [
-        '先定每一项的符号：$(-1)^k$ 在 $k$ 为奇数时是 $-1$，偶数时是 1。所以原式 $=-1+2-3+4-\\cdots-99+100$。',
-        '两两一组：$(-1+2)+(-3+4)+\\cdots+(-99+100)$，每组为 1，共 50 组，和为 50。',
-      ],
-      verify: () => {
-        let s = F(0);
-        for (let k = 1; k <= 100; k++) s = s.add(F(-1).pow(k).mul(k));
-        return s;
       },
     },
 
