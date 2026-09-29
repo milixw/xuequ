@@ -30,7 +30,7 @@ Content.section({
   id: 'math/sh2024/g6s1/4.2',
   title: '角',
   review: { status: 'pending' },
-  audit: { blind: '2026-09-21', rounds: 2, note: '子代理盲解复核两轮：答案全部一致；第 2 轮按意见重做 c02（两角之和超过平角 + 含参舍解）、c04（分针平分 12 点方向与时针所成的角，过 6 点换侧）、c05（射线等分周角的角度和，按奇偶分类反求 n），c03 加与 x 有关的两段方程，升级 e04（无图分类）、e09（反复平分 + 度分秒阈值），e10 明确规则并去掉二选一，判定整节通过' },
+  audit: { blind: '2026-09-29', rounds: 2, note: '改用真卷标尺（基础 9 + 扩展 6 + 挑战 5），删掉 e03、e08、e09、e10。子代理盲解复核两轮，答案全部一致：第 1 轮指出 b09 的 125° 一眼可排除、没有坑；第 2 轮 b09 改为 165°（15 的倍数却画不出），b08 注明度分格式，判定整节通过。可选意见未处理：b06 与 b01 考点相同，c02 在挑战档偏弱' },
 
   intro: [
     {
@@ -172,6 +172,88 @@ Content.section({
         return [at(3, 30), at(8, 20)];
       },
     },
+    {
+      id: '4.2-b06',
+      level: 'basic',
+      type: 'choice',
+      stem: '下列换算正确的是（　　）',
+      options: ['$18.5^\\circ=18^\\circ 50\'$', '$35^\\circ 15\'=35.15^\\circ$', '$0.3^\\circ=18\'$', '$12\'=0.12^\\circ$'],
+      answer: 2,
+      explain: [
+        '度、分、秒是六十进制：$1^\\circ=60\'$，不是 100 分。',
+        'A 错：$0.5^\\circ=0.5\\times 60\'=30\'$，应是 $18^\\circ 30\'$。',
+        'B 错：$15\'=\\frac{15}{60}^\\circ=0.25^\\circ$，应是 $35.25^\\circ$。',
+        'C 对：$0.3\\times 60\'=18\'$。',
+        'D 错：$12\'=\\frac{12}{60}^\\circ=0.2^\\circ$。选 C。A、B、D 都是把小数点后的数字直接当成了分。',
+      ],
+      verify: () => {
+        const ok = [
+          F('18.5').eq(F(18).add(F(50).div(60))),
+          F(35).add(F(15).div(60)).eq('35.15'),
+          F('0.3').mul(60).eq(18),
+          F(12).div(60).eq('0.12'),
+        ];
+        const idx = ok.map((v, i) => (v ? i : -1)).filter(i => i >= 0);
+        return idx.length === 1 ? idx[0] : null;
+      },
+    },
+    {
+      id: '4.2-b07',
+      level: 'basic',
+      type: 'fill',
+      stem: '已知 $\\angle\\alpha$ 与 $\\angle\\beta$ 互余，$\\angle\\beta$ 与 $\\angle\\gamma$ 互补，$\\angle\\alpha=35^\\circ$。',
+      blanks: [
+        { kind: 'num', label: '(1) $\\angle\\gamma=$（度）', answer: '125' },
+        { kind: 'num', label: '(2) $\\angle\\gamma$ 比 $\\angle\\alpha$ 大（度）', answer: '90' },
+      ],
+      explain: [
+        '(1) 互余是和为 $90^\\circ$：$\\angle\\beta=90^\\circ-35^\\circ=55^\\circ$。互补是和为 $180^\\circ$：$\\angle\\gamma=180^\\circ-55^\\circ=125^\\circ$。',
+        '常见错误是把“互余”“互补”记反，或者直接用 $180^\\circ-35^\\circ$ 算 $\\angle\\gamma$。',
+        '(2) $125^\\circ-35^\\circ=90^\\circ$。其实不管 $\\angle\\alpha$ 是多少，“余角的补角”总比原来的角大 $90^\\circ$。',
+      ],
+      verify: () => {
+        const a = F(35);
+        const b = F(90).sub(a);
+        const g = F(180).sub(b);
+        return [g, g.sub(a)];
+      },
+    },
+    {
+      id: '4.2-b08',
+      level: 'basic',
+      type: 'fill',
+      stem: '射线 $OC$ 平分 $\\angle AOB$，$\\angle AOC=36^\\circ 45\'$。',
+      blanks: [
+        { kind: 'angle', label: '(1) $\\angle AOB=$（用度分表示）', answer: "73°30'" },
+        { kind: 'angle', label: '(2) $\\angle AOB$ 的补角是（用度分表示）', answer: "106°30'" },
+      ],
+      explain: [
+        '(1) $\\angle AOB=2\\angle AOC=2\\times 36^\\circ 45\'=72^\\circ 90\'$。90 分满 60 分要进 1 度：$72^\\circ 90\'=73^\\circ 30\'$。常见错误是写成 $72^\\circ 90\'$ 或 $73^\\circ 90\'$。',
+        '(2) $180^\\circ-73^\\circ 30\'$：把 $180^\\circ$ 看成 $179^\\circ 60\'$，得 $106^\\circ 30\'$。',
+      ],
+    },
+    {
+      id: '4.2-b09',
+      level: 'basic',
+      type: 'choice',
+      stem: '用一副三角尺（一块的三个角是 $30^\\circ$、$60^\\circ$、$90^\\circ$，另一块是 $45^\\circ$、$45^\\circ$、$90^\\circ$），只用其中一个角，或者从两块尺上各取一个角拼成它们的和或差（不能用三个及以上的角），**不能**画出的角是（　　）',
+      options: ['$15^\\circ$', '$105^\\circ$', '$135^\\circ$', '$165^\\circ$'],
+      answer: 3,
+      explain: [
+        '三角尺上的角只有 $30^\\circ$、$45^\\circ$、$60^\\circ$、$90^\\circ$，能拼出的角都是 $15^\\circ$ 的整数倍。',
+        '$15^\\circ=45^\\circ-30^\\circ$；$105^\\circ=60^\\circ+45^\\circ$；$135^\\circ=90^\\circ+45^\\circ$。',
+        '$165^\\circ$ 虽然是 $15^\\circ$ 的整数倍，但两角之和最大的几种是 $90^\\circ+90^\\circ=180^\\circ$、$60^\\circ+90^\\circ=150^\\circ$、$30^\\circ+90^\\circ=120^\\circ$、$60^\\circ+45^\\circ=105^\\circ$……没有一种等于 $165^\\circ$（要 $120^\\circ+45^\\circ$ 或 $180^\\circ-15^\\circ$，都得用三个角）。选 D。',
+        '常见误判是“只要是 $15^\\circ$ 的倍数就能画”，这里的规则只允许用一个或两个角。',
+      ],
+      verify: () => {
+        const a = [30, 60, 90];
+        const b = [45, 90];
+        const can = new Set([...a, ...b]);
+        for (const x of a) for (const y of b) { can.add(x + y); can.add(Math.abs(x - y)); }
+        const opts = [15, 105, 135, 165].map((v, i) => (can.has(v) ? -1 : i)).filter(i => i >= 0);
+        return opts.length === 1 ? opts[0] : null;
+      },
+    },
 
     // ---------- 扩展 ----------
     {
@@ -220,31 +302,6 @@ Content.section({
         let inner = null;
         for (let k = 0; k <= 20; k++) if (cnt(k + 2) === 28) inner = k;
         return [cnt(5), inner, cnt(inner + 3) - cnt(inner + 2)];
-      },
-    },
-    {
-      id: '4.2-e03',
-      level: 'extended',
-      type: 'fill',
-      stem: '钟面上，分针每分钟转 $6^\\circ$，时针每分钟转 $0.5^\\circ$。',
-      blanks: [
-        { kind: 'num', label: '(1) 2 点整之后，经过', answer: '120/11', suffix: '分钟时针与分针第一次重合' },
-        { kind: 'num', label: '(2) 2 点整之后，经过', answer: '480/11', suffix: '分钟时针与分针第一次成平角（在一条直线上且方向相反）' },
-        { kind: 'num', label: '(3) 10 点 10 分时，时针与分针所成的角是', answer: '115', suffix: '°' },
-      ],
-      explain: [
-        '分针比时针每分钟多转 $6^\\circ-0.5^\\circ=5.5^\\circ$，这是一个“追及”问题。',
-        '(1) 2 点整时时针在 $60^\\circ$ 处，分针在 $0^\\circ$，分针落后 $60^\\circ$。设 $t$ 分钟后重合：$5.5t=60$，$t=\\frac{120}{11}$。',
-        '(2) 成平角，分针要比时针多转 $60^\\circ+180^\\circ=240^\\circ$：$5.5t=240$，$t=\\frac{480}{11}$（约 43.6 分钟）。',
-        '（在重合之前，两针相差从 $60^\\circ$ 减小到 0，不会出现 $180^\\circ$。）',
-        '(3) 分针在 $60^\\circ$；时针在 $300^\\circ+5^\\circ=305^\\circ$。相差 $245^\\circ$，超过 $180^\\circ$，所以夹角是 $360^\\circ-245^\\circ=115^\\circ$。',
-        '易错：直接答 $245^\\circ$，或者以为时针在 10 上，得 $120^\\circ$。',
-      ],
-      verify: () => {
-        const ts = [];
-        for (let k = 1; k < 660; k++) ts.push(F(k).div(11));
-        const gap = t => angleBetween(t.mul(6), F(60).add(t.div(2)));
-        return [ts.find(t => gap(t).isZero()), ts.find(t => gap(t).eq(180)), angleBetween(F(60), F(305))];
       },
     },
     {
@@ -364,84 +421,6 @@ Content.section({
           ts.filter(t => angleBetween(C(t), D(t)).eq(30)),
           ts.find(t => t.cmp(0) > 0 && C(t).mul(2).eq(D(t))),
         ];
-      },
-    },
-    {
-      id: '4.2-e08',
-      level: 'extended',
-      type: 'fill',
-      stem: '射线 $OA$、$OB$、$OC$ 把周角分成三个角：$\\angle AOB:\\angle BOC:\\angle COA=2:3:4$（每个角都在另外两条射线之外，三个角恰好拼成周角）。',
-      blanks: [
-        { kind: 'num', label: '(1) 三个角中最大的是', answer: '160', suffix: '°' },
-        { kind: 'num', label: '(2) 若 $OM$、$ON$ 分别平分 $\\angle AOB$、$\\angle BOC$，则 $\\angle MON=$', answer: '100', suffix: '°' },
-        { kind: 'num', label: '(3) 三个角的平分线两两所成的三个角中，最大的是', answer: '140', suffix: '°' },
-      ],
-      explain: [
-        '(1) 设三个角为 $2x$、$3x$、$4x$，$9x=360^\\circ$，$x=40^\\circ$。三个角是 $80^\\circ$、$120^\\circ$、$160^\\circ$，最大 $160^\\circ$。',
-        '(2) $\\angle MON=\\angle MOB+\\angle BON=40^\\circ+60^\\circ=100^\\circ$。',
-        '(3) 同理，$\\angle BOC$ 与 $\\angle COA$ 的平分线所成的角是 $60^\\circ+80^\\circ=140^\\circ$；$\\angle COA$ 与 $\\angle AOB$ 的平分线所成的角是 $80^\\circ+40^\\circ=120^\\circ$。',
-        '三个角 $100^\\circ$、$140^\\circ$、$120^\\circ$ 也拼成周角（和为 $360^\\circ$），最大的是 $140^\\circ$。',
-        '规律：相邻两个角的平分线所成的角，等于这两个角之和的一半。',
-      ],
-      verify: () => {
-        let x = null;
-        for (let i = 1; i < 100; i++) if (9 * i === 360) x = i;
-        const A = F(0), B = F(2 * x), C = F(5 * x);   // 射线的方向（度）
-        const m1 = A.add(B).div(2), m2 = B.add(C).div(2), m3 = C.add(360).div(2);
-        const angs = [angleBetween(m1, m2), angleBetween(m2, m3), angleBetween(m3, m1)];
-        return [4 * x, angs[0], angs.reduce((p, q) => (p.cmp(q) > 0 ? p : q))];
-      },
-    },
-    {
-      id: '4.2-e09',
-      level: 'extended',
-      type: 'fill',
-      stem: '$\\angle AOB=80^\\circ$。作 $\\angle AOB$ 的平分线 $OA_1$，再作 $\\angle A_1OB$ 的平分线 $OA_2$，再作 $\\angle A_2OB$ 的平分线 $OA_3$，……，这样一直作下去。',
-      blanks: [
-        { kind: 'angle', label: '(1) $\\angle A_5OB=$（用度分秒表示）', answer: "2°30'" },
-        { kind: 'angle', label: '(2) $\\angle AOA_7=$（用度分秒表示）', answer: "79°22'30\"" },
-        { kind: 'num', label: '(3) 使 $\\angle A_nOB$ 小于 $1\'$ 的最小的 $n$ 是', answer: '13' },
-      ],
-      explain: [
-        '每作一次平分线，剩下的 $\\angle A_nOB$ 就减半：$\\angle A_1OB=40^\\circ$，$\\angle A_2OB=20^\\circ$，……，$\\angle A_nOB$ 是 80 连续除以 $n$ 次 2。',
-        '(1) $\\angle A_5OB=80^\\circ\\div 32=2.5^\\circ=2^\\circ 30\'$。',
-        '(2) $\\angle A_7OB=80^\\circ\\div 128=0.625^\\circ=37.5\'=37\' 30\'\'$。$\\angle AOA_7=80^\\circ-37\' 30\'\'=79^\\circ 22\' 30\'\'$（借 $1^\\circ$ 当 $60\'$，再借 $1\'$ 当 $60\'\'$）。',
-        '(3) $80^\\circ=4800\'$。要 $4800\'$ 除以 $n$ 次 2 后小于 $1\'$，就是 $2^n$ 要大于 4800。',
-        '$2^{12}=4096<4800$，$2^{13}=8192>4800$，所以最小的 $n=13$（此时约 $0.59\'$）。',
-        '易错：用度来比较时把 $1\'$ 当成 $0.1^\\circ$，那样会得到 $n=10$。',
-      ],
-      verify: () => {
-        const at = n => F(80).div(2 ** n);
-        let n3 = null;
-        for (let n = 1; n <= 30 && n3 === null; n++) if (at(n).mul(60).cmp(1) < 0) n3 = n;
-        return [dms(at(5)), dms(F(80).sub(at(7))), n3];
-      },
-    },
-    {
-      id: '4.2-e10',
-      level: 'extended',
-      type: 'fill',
-      stem: '一副三角尺中，一块的三个角是 $30^\\circ$、$60^\\circ$、$90^\\circ$，另一块是 $45^\\circ$、$45^\\circ$、$90^\\circ$。本题规定画角时只能用某一个角，或者用两块三角尺上各一个角拼成它们的和或差（不能用三个及以上的角）。',
-      blanks: [
-        { kind: 'num', label: '(1) 能画出的大于 $0^\\circ$、小于 $180^\\circ$ 的不同角共有', answer: '10', suffix: '种' },
-        { kind: 'num', label: '(2) 在 $15^\\circ$、$100^\\circ$、$105^\\circ$、$165^\\circ$、$170^\\circ$ 中，按规定能画出的有', answer: '2', suffix: '个' },
-        { kind: 'num', label: '(3) 在 (1) 的这些角中，补角也能画出来的角共有', answer: '9', suffix: '种' },
-      ],
-      explain: [
-        '有序列举，按“一个角、两角之和、两角之差”分类。',
-        '只用一个角：$30^\\circ$、$45^\\circ$、$60^\\circ$、$90^\\circ$。',
-        '两块各取一个角相加：$30+45=75$，$30+90=120$，$60+45=105$，$60+90=150$，$90+45=135$，$90+90=180$（不小于 $180^\\circ$，不算）。',
-        '两块各取一个角相减：$45-30=15$，$60-45=15$，$90-30=60$，$90-60=30$，$90-45=45$，$90-90=0$（不算）。',
-        '(1) 去掉重复，得到 $15^\\circ,30^\\circ,45^\\circ,\\dots,150^\\circ$，即 $15^\\circ$ 的 1 倍到 10 倍，共 10 种。',
-        '(2) 能画出的角都是 $15^\\circ$ 的倍数，且不超过 $150^\\circ$。$100^\\circ$、$170^\\circ$ 不是 15 的倍数；$165^\\circ$ 超过 $150^\\circ$。只有 $15^\\circ$ 和 $105^\\circ$ 可以，共 2 个。（如果允许用平角减去 $15^\\circ$ 等三个角的拼法，$165^\\circ$ 也能画，但本题规定不行。）',
-        '(3) 两个角的和为 $180^\\circ$ 才互补。配对：$30+150$，$45+135$，$60+120$，$75+105$，$90+90$。$15^\\circ$ 的补角 $165^\\circ$ 画不出。所以共 9 种。',
-      ],
-      verify: () => {
-        const t1 = [30, 60, 90], t2 = [45, 45, 90];
-        const set = new Set([...t1, ...t2]);
-        for (const a of t1) for (const b of t2) { set.add(a + b); set.add(Math.abs(a - b)); }
-        const ok = [...set].filter(v => v > 0 && v < 180);
-        return [ok.length, [15, 100, 105, 165, 170].filter(v => ok.includes(v)).length, ok.filter(v => ok.includes(180 - v)).length];
       },
     },
 
