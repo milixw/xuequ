@@ -33,7 +33,7 @@ Content.section({
   id: 'math/sh2024/g7s1/10.3',
   title: '整式的加法和减法',
   review: { status: 'pending' },
-  audit: { blind: '2026-09-23', rounds: 3, note: '子代理盲解复核三轮，答案三轮全部一致。第 1 轮打回：c02（盒底卡片）是区级常规题且 (5) 选项被 (4) 暗示；c04（两两之和）是熟模板；c05 递推周期与 e07 同模板、与 AIME 1985 第 5 题同型；e06 只有基础档；“系数为 0 求参数”重复 4 次。第 2 轮 c05 换成“二次整式五个值中有一个算错”（相邻差 + 逐个排除），e07 去掉递推只留嵌套括号符号规律，c02 推广到 p、q 张并加入阴影退化，e06 加入含参比较，c04 改为两差一和。第 3 轮 c04 再改为 m、k 两个参数的整除约束 + 一次项系数恰一个为 0 的计数，c02(4) 改为组合条件，c05(2) 减弱提示，判定整节通过。c02、c04 复核认为在挑战档下限' },
+  audit: { blind: '2026-09-29', rounds: 1, note: '改用真卷标尺（基础 9 + 扩展 6 + 挑战 5），原来 17 题，新写 b06～b09，删掉 e07。子代理盲解复核一轮，判定整节通过。可选意见未处理：c01、c03、c04 都以计数收尾，c01(4) 偏竞赛计数' },
 
   intro: [
     {
@@ -166,6 +166,62 @@ Content.section({
         ];
         return ok.map((v, i) => (v ? i : -1)).filter(i => i >= 0);
       },
+    },
+    {
+      id: '10.3-b06',
+      level: 'basic',
+      type: 'choice',
+      stem: '下列去括号正确的是（　　）',
+      options: ['$a^{2}-(2a-b+c)=a^{2}-2a-b+c$', '$-(x^{2}-y)+(z-1)=-x^{2}+y+z-1$', '$3x-2(x^{2}-1)=3x-2x^{2}-2$', '$-(-a+b)-c=a-b+c$'],
+      answer: 1,
+      explain: [
+        'A 错：括号前是“$-$”，括号里每一项都变号，应是 $a^{2}-2a+b-c$，只变了第一项。',
+        'B 对：$-(x^{2}-y)=-x^{2}+y$，$+(z-1)=z-1$。',
+        'C 错：$-2$ 乘括号里的 $-1$ 得 $+2$，应是 $3x-2x^{2}+2$。',
+        'D 错：$-c$ 在括号外面，不变号，应是 $a-b-c$。选 B。',
+      ],
+    },
+    {
+      id: '10.3-b07',
+      level: 'basic',
+      type: 'fill',
+      stem: '求整式 $2x^{2}-3x+1$ 与 $-x^{2}+2x-3$ 的差。',
+      blanks: [{ kind: 'expr', label: '结果是（要化简）', answer: '3x^2-5x+4', simplified: true }],
+      explain: [
+        '“$A$ 与 $B$ 的差”是 $A-B$，减数要整体加括号：$(2x^{2}-3x+1)-(-x^{2}+2x-3)$。',
+        '去括号，第二个括号里每一项都变号：$2x^{2}-3x+1+x^{2}-2x+3$。',
+        '合并：$3x^{2}-5x+4$。常见错误是只把 $-x^{2}$ 变号，后两项忘了变。',
+      ],
+    },
+    {
+      id: '10.3-b08',
+      level: 'basic',
+      type: 'fill',
+      stem: '某商店第一天卖出商品 $(3a+b)$ 件，第二天比第一天多卖 $(a-2b)$ 件，第三天比第二天少卖 $(2a+b)$ 件。',
+      blanks: [
+        { kind: 'expr', label: '(1) 第三天卖出（件，要化简）', answer: '2a-2b', simplified: true },
+        { kind: 'expr', label: '(2) 三天共卖出（件，要化简）', answer: '9a-2b', simplified: true },
+      ],
+      explain: [
+        '第二天：$(3a+b)+(a-2b)=4a-b$。',
+        '(1) 第三天：$(4a-b)-(2a+b)=4a-b-2a-b=2a-2b$。“少卖”要减，减去整个 $(2a+b)$，$b$ 也要变号。',
+        '(2) 三天共：$(3a+b)+(4a-b)+(2a-2b)=9a-2b$。',
+      ],
+    },
+    {
+      id: '10.3-b09',
+      level: 'basic',
+      type: 'fill',
+      stem: '先化简，再求值：$2(x^{2}y+xy)-3(x^{2}y-xy)-4x^{2}y$，其中 $x=1$，$y=-1$。',
+      blanks: [
+        { kind: 'expr', label: '(1) 化简的结果是', answer: '-5x^2*y+5x*y', simplified: true },
+        { kind: 'num', label: '(2) 求值的结果是', answer: '0' },
+      ],
+      explain: [
+        '(1) 去括号：$2x^{2}y+2xy-3x^{2}y+3xy-4x^{2}y$。注意 $-3\\times(-xy)=+3xy$。',
+        '合并：$(2-3-4)x^{2}y+(2+3)xy=-5x^{2}y+5xy$。',
+        '(2) $x=1$，$y=-1$ 时，$x^{2}y=-1$，$xy=-1$，原式 $=-5\\times(-1)+5\\times(-1)=5-5=0$。',
+      ],
     },
 
     // ---------- 扩展 ----------
@@ -352,42 +408,6 @@ Content.section({
         let cnt = 0;
         for (let k = 1; k <= 20; k++) if (pts.every(pt => e3(k).sub(e1).at(pt).cmp(0) > 0)) cnt++;
         return [String(e2), String(per), k3, cnt];
-      },
-    },
-    {
-      id: '10.3-e07',
-      level: 'extended',
-      type: 'fill',
-      stem: '观察一层套一层的括号，找出去括号后各项符号的规律。',
-      blanks: [
-        { kind: 'text', label: '(1) 把 $a-(b-(c-(d-(e-f))))$ 的括号全部去掉后，$d$ 前面的符号是', answer: '−', options: ['+', '−'] },
-        { kind: 'num', label: '(2) 把 $a_{1}-(a_{2}-(a_{3}-(\\cdots-(a_{2025}-a_{2026})\\cdots)))$ 的括号全部去掉后，前面是“$-$”号的字母有几个？', answer: '1013' },
-        { kind: 'num', label: '(3) $1-(2-(3-(4-(\\cdots-(99-100)\\cdots))))$ 的值是', answer: '-50' },
-        { kind: 'expr', label: '(4) 化简 $x^{2}-\\left(2x-\\left(x^{2}-\\left(2x-\\left(x^{2}-2x\\right)\\right)\\right)\\right)=$', answer: '3x^2-6x', simplified: true },
-      ],
-      explain: [
-        '(1) 从最里面一层开始去：$e-f$ 不变；$d-(e-f)=d-e+f$；$c-(d-e+f)=c-d+e-f$；……最后得 $a-b+c-d+e-f$。$d$ 前面是“$-$”。',
-        '规律：一个字母前面被几层“$-$( )”包着，就变几次号。第 $k$ 个字母被 $k-1$ 层包着（第 1 个不被包），所以第奇数个字母前面是“$+$”，第偶数个字母前面是“$-$”。',
-        '(2) 第偶数个字母前面是“$-$”，1 到 2026 中偶数有 1013 个。',
-        '(3) 去括号后是 $1-2+3-4+\\cdots+99-100$，两个一组，每组 $-1$，共 50 组，值是 $-50$。',
-        '(4) 式子里从左到右依次出现 $x^{2}$、$2x$、$x^{2}$、$2x$、$x^{2}$、$2x$ 六项。按规律，第奇数项取“$+$”，第偶数项取“$-$”：$x^{2}-2x+x^{2}-2x+x^{2}-2x=3x^{2}-6x$。',
-        '也可以从里往外逐层算来检验：$2x-(x^{2}-2x)=4x-x^{2}$，$x^{2}-(4x-x^{2})=2x^{2}-4x$，$2x-(2x^{2}-4x)=6x-2x^{2}$，$x^{2}-(6x-2x^{2})=3x^{2}-6x$。',
-      ],
-      verify: () => {
-        const letters = 'abcdef';
-        let p = Poly.of('f');
-        for (let i = 4; i >= 0; i--) p = Poly.of(letters[i]).sub(p);
-        let minus = 0;
-        for (let k = 1; k <= 2026; k++) {
-          // 第 k 个被 k−1 层“−( )”包着；用小例子验证规律后再计数
-          if ((k - 1) % 2 === 1) minus++;
-        }
-        const small = Poly.of('a-(b-(c-(d-(e-f))))');
-        if (!['a', 'c', 'e'].every(v => small.coef(v).eq(1)) || !['b', 'd', 'f'].every(v => small.coef(v).eq(-1))) return null;
-        let v = F(100);
-        for (let k = 99; k >= 1; k--) v = F(k).sub(v);
-        const q = Poly.of('x^2-(2x-(x^2-(2x-(x^2-2x))))');
-        return [p.coef('d').cmp(0) > 0 ? '+' : '−', minus, v, String(q)];
       },
     },
 
