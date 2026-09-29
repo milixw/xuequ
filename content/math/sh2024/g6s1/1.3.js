@@ -8,7 +8,7 @@ Content.section({
   id: 'math/sh2024/g6s1/1.3',
   title: '有理数的乘法与除法',
   review: { status: 'pending' },
-  audit: { blind: '2026-09-19', rounds: 3, note: '难度上移后子代理复核三轮：新题答案全部一致，第 3 轮判定整节通过（按意见调整 e08 解析措辞和运算符号）' },
+  audit: { blind: '2026-09-29', rounds: 2, note: '改用真卷标尺（基础 9 + 扩展 6 + 挑战 5），删掉 e05、e07、e09、e10、c05。子代理盲解复核两轮，答案全部一致：第 1 轮新写 b06～b09 通过，指出 c05 偏竞赛、c02(3) 与 e04 同模板、e07 偏低；第 2 轮 c05 换成 c06（填乘除号计数）、c02(3) 改为积为定值的取法、e07 换回 e08，判定整节通过' },
 
   intro: [
     {
@@ -103,6 +103,96 @@ Content.section({
       ],
       verify: () => F('-1/30').div(F('2/3').sub('1/10').add('1/6').sub('2/5')),
     },
+    {
+      id: '1.3-b06',
+      level: 'basic',
+      type: 'multi',
+      stem: '下列说法中，正确的有',
+      options: [
+        '几个有理数相乘，负因数的个数是奇数时，积一定是负数',
+        '一个数的倒数一定比这个数小',
+        '倒数等于它本身的数是 $1$ 和 $-1$',
+        '若 $a\\div b<0$，则 $ab<0$',
+        '两个绝对值相等的数（都不为 0）相除，商是 $1$',
+      ],
+      answer: [2, 3],
+      explain: [
+        'A 错：因数里有 0 时，积是 0，不是负数。“奇负得负”要在没有 0 因数的前提下才成立。',
+        'B 错：比如 $\\frac{1}{2}$ 的倒数是 2，比它大；$-2$ 的倒数是 $-\\frac{1}{2}$，也比它大。',
+        'C 对：$1\\times 1=1$，$(-1)\\times(-1)=1$，其他数的倒数都和它本身不同（0 没有倒数）。',
+        'D 对：商是负数，说明 $a$、$b$ 异号，那么积也是负数。',
+        'E 错：绝对值相等的两个数可能互为相反数，比如 $3\\div(-3)=-1$。',
+        '所以选 C、D。',
+      ],
+      verify: () => {
+        const xs = [];
+        for (let i = -8; i <= 8; i++) xs.push(F(i).div(4));
+        const nz = xs.filter(x => !x.eq(0));
+        const a = xs.every(x => xs.every(y => xs.every(z => {
+          const neg = [x, y, z].filter(t => t.cmp(0) < 0).length;
+          return neg % 2 === 0 || x.mul(y).mul(z).cmp(0) < 0;
+        })));
+        const b = nz.every(x => F(1).div(x).cmp(x) < 0);
+        const selfInv = nz.filter(x => F(1).div(x).eq(x));
+        const c = selfInv.length === 2 && selfInv.some(x => x.eq(1)) && selfInv.some(x => x.eq(-1));
+        const d = xs.every(x => nz.every(y => x.div(y).cmp(0) >= 0 || x.mul(y).cmp(0) < 0));
+        const e = nz.every(x => nz.every(y => !x.abs().eq(y.abs()) || x.div(y).eq(1)));
+        return [a, b, c, d, e].map((ok, i) => (ok ? i : -1)).filter(i => i >= 0);
+      },
+    },
+    {
+      id: '1.3-b07',
+      level: 'basic',
+      type: 'choice',
+      stem: '已知 $a<0$，$b>0$，$c<0$，并且 $|a|<|c|$。在 $abc,\\ a\\div c,\\ (a+c)\\times b,\\ (b-a)\\times c,\\ a-c$ 这五个式子中，值为正数的有',
+      options: ['1 个', '2 个', '3 个', '4 个'],
+      answer: 2,
+      explain: [
+        '$abc$：两个负因数，积为正。',
+        '$a\\div c$：同号相除，商为正。',
+        '$(a+c)\\times b$：$a+c$ 是两个负数的和，为负；再乘正数 $b$，为负。',
+        '$(b-a)\\times c$：$b-a=b+(-a)$ 是两个正数的和，为正；再乘负数 $c$，为负。',
+        '$a-c$：$a$、$c$ 都是负数，$|a|<|c|$ 说明 $a$ 离原点更近，$a>c$，所以 $a-c>0$，为正。这一项最容易判错。',
+        '值为正数的是 $abc$、$a\\div c$、$a-c$，共 3 个。',
+      ],
+      verify: () => {
+        const fs = [(a, b, c) => a.mul(b).mul(c), (a, b, c) => a.div(c), (a, b, c) => a.add(c).mul(b), (a, b, c) => b.sub(a).mul(c), (a, b, c) => a.sub(c)];
+        const cases = [];
+        for (let i = 1; i <= 6; i++) for (let j = 1; j <= 6; j++) for (let k = i + 1; k <= 7; k++) cases.push([F(-i).div(2), F(j).div(2), F(-k).div(2)]);
+        const always = fs.filter(f => cases.every(([a, b, c]) => f(a, b, c).cmp(0) > 0)).length;
+        const never = fs.filter(f => cases.every(([a, b, c]) => f(a, b, c).cmp(0) < 0)).length;
+        return always + never === 5 ? always - 1 : null;
+      },
+    },
+    {
+      id: '1.3-b08',
+      level: 'basic',
+      type: 'fill',
+      stem: '计算下面两个式子。',
+      blanks: [
+        { kind: 'num', label: '(1) $-6\\div\\left(-\\frac{1}{2}\\right)\\times 2=$', answer: '24' },
+        { kind: 'num', label: '(2) $-6\\div\\left[\\left(-\\frac{1}{2}\\right)\\times 2\\right]=$', answer: '6' },
+      ],
+      explain: [
+        '(1) 只有乘除，按从左到右的顺序算：$-6\\div\\left(-\\frac{1}{2}\\right)=-6\\times(-2)=12$，$12\\times 2=24$。',
+        '常见错误是先算 $\\left(-\\frac{1}{2}\\right)\\times 2=-1$，得到 $-6\\div(-1)=6$。乘除是同一级运算，不能随意先算后面的乘法。',
+        '(2) 有括号就先算括号里的：$\\left(-\\frac{1}{2}\\right)\\times 2=-1$，$-6\\div(-1)=6$。两个式子只差一个括号，结果差了 4 倍。',
+      ],
+      verify: () => [F(-6).div('-1/2').mul(2), F(-6).div(F('-1/2').mul(2))],
+    },
+    {
+      id: '1.3-b09',
+      level: 'basic',
+      type: 'fill',
+      stem: '高度每升高 1 千米，气温大约下降 6 ℃。某时地面气温是 4 ℃，一只探空气球所在高度的气温是 $-11$ ℃，这只气球离地面大约多高？',
+      blanks: [{ kind: 'num', answer: '5/2', suffix: '千米' }],
+      explain: [
+        '气温一共下降了 $4-(-11)=4+11=15$（℃）。',
+        '每升高 1 千米下降 6 ℃，所以高度是 $15\\div 6=2.5$（千米）。',
+        '常见错误是把温差算成 $4-11$ 或 $11-4=7$，忘了 $-11$ 是零下。',
+      ],
+      verify: () => F(4).sub(-11).div(6),
+    },
 
     // ---------- 扩展 ----------
     {
@@ -194,27 +284,6 @@ Content.section({
       },
     },
     {
-      id: '1.3-e05',
-      level: 'extended',
-      type: 'fill',
-      stem: '已知 $a$、$b$、$c$、$d$ 是四个互不相等的整数，并且 $abcd=9$。求 $a+b+c+d$ 的值。',
-      blanks: [{ kind: 'num', answer: '0' }],
-      explain: [
-        '四个数都是整数，乘积是 9，所以每个数都是 9 的因数，只能从 $\\pm 1,\\ \\pm 3,\\ \\pm 9$ 中选。',
-        '如果选了 9 或 $-9$，其余三个数的乘积就是 $1$ 或 $-1$，那三个数的绝对值都只能是 1，但绝对值为 1 的整数只有 1 和 $-1$ 两个，凑不出三个互不相等的数。所以不能选 $\\pm 9$。',
-        '只能从 $1,\\ -1,\\ 3,\\ -3$ 中选四个，也就是全选：$1\\times(-1)\\times 3\\times(-3)=9$，确实成立。',
-        '所以 $a+b+c+d=1-1+3-3=0$。',
-      ],
-      verify: () => {
-        const ds = [1, -1, 3, -3, 9, -9];
-        const sums = new Set();
-        for (let i = 0; i < ds.length; i++) for (let j = i + 1; j < ds.length; j++)
-          for (let k = j + 1; k < ds.length; k++) for (let l = k + 1; l < ds.length; l++)
-            if (ds[i] * ds[j] * ds[k] * ds[l] === 9) sums.add(ds[i] + ds[j] + ds[k] + ds[l]);
-        return sums.size === 1 ? [...sums][0] : null;
-      },
-    },
-    {
       id: '1.3-e06',
       level: 'extended',
       type: 'fill',
@@ -235,19 +304,6 @@ Content.section({
       },
     },
     {
-      id: '1.3-e07',
-      level: 'extended',
-      type: 'fill',
-      stem: '已知 $a$、$b$ 互为倒数，$c$、$d$ 互为相反数，$m$ 的绝对值是 2。求 $3ab-(c+d)\\div m+m$ 的所有可能值。（用逗号隔开）',
-      blanks: [{ kind: 'nums', answer: ['5', '1'] }],
-      explain: [
-        '互为倒数的两个数积为 1：$ab=1$；互为相反数的两个数和为 0：$c+d=0$；$m=2$ 或 $-2$（都不为 0，可以作除数）。',
-        '$(c+d)\\div m=0\\div m=0$。',
-        '原式 $=3\\times 1-0+m=3+m$。$m=2$ 时为 5，$m=-2$ 时为 1。',
-      ],
-      verify: () => [2, -2].map(m => F(3).mul(1).sub(F(0).div(m)).add(m)),
-    },
-    {
       id: '1.3-e08',
       level: 'extended',
       type: 'fill',
@@ -264,56 +320,6 @@ Content.section({
         const r = [];
         for (let i = -240; i <= 240; i++) if (op(F(i).div(12), 2).eq(5)) r.push(F(i).div(12));
         return r;
-      },
-    },
-    {
-      id: '1.3-e09',
-      level: 'extended',
-      type: 'multi',
-      stem: '已知有理数 $a$、$b$、$c$ 满足 $ab>0$，$bc<0$，并且 $|a|>|b|>|c|$。下列结论中**一定成立**的有（多选）',
-      options: ['$(a+b)\\times(b+c)>0$', '$(a+b)\\div c<0$', '$abc>0$', '$(b+c)\\div(a+b)>0$'],
-      answer: [0, 1, 3],
-      explain: [
-        '$ab>0$：$a$、$b$ 同号；$bc<0$：$b$、$c$ 异号。所以 $a$、$b$ 同号，$c$ 和它们异号。',
-        '$a+b$：同号相加，与 $b$ 同号。$b+c$：异号相加，$|b|>|c|$，符号跟 $b$，也与 $b$ 同号。',
-        'A：两个因数都与 $b$ 同号，积为正，成立。B：$a+b$ 与 $b$ 同号，$c$ 与 $b$ 异号，商为负，成立。D：两个数都与 $b$ 同号，商为正，成立。',
-        'C：$abc=(ab)\\times c$，$ab>0$，所以与 $c$ 同号，$c$ 可正可负（例如 $a=3,\\ b=2,\\ c=-1$ 与 $a=-3,\\ b=-2,\\ c=1$），不一定成立。答案是 A、B、D。',
-      ],
-      verify: () => {
-        const xs = [3, -3, 2, -2, 1, -1, 4, -4];
-        const claims = [
-          (a, b, c) => (a + b) * (b + c) > 0,
-          (a, b, c) => F(a + b).div(c).cmp(0) < 0,
-          (a, b, c) => a * b * c > 0,
-          (a, b, c) => F(b + c).div(a + b).cmp(0) > 0,
-        ];
-        const always = claims.map(() => true);
-        for (const a of xs) for (const b of xs) for (const c of xs) {
-          if (!(a * b > 0 && b * c < 0 && Math.abs(a) > Math.abs(b) && Math.abs(b) > Math.abs(c))) continue;
-          claims.forEach((f, i) => { if (!f(a, b, c)) always[i] = false; });
-        }
-        return always.map((ok, i) => (ok ? i : -1)).filter(i => i >= 0);
-      },
-    },
-    {
-      id: '1.3-e10',
-      level: 'extended',
-      type: 'fill',
-      stem: '已知 $a$、$b$ 都是整数，并且 $a\\times b=-6$。',
-      blanks: [
-        { kind: 'num', label: '(1) $a\\div b$ 的最大值是', answer: '-1/6' },
-        { kind: 'num', label: '(2) $a\\div b$ 的最小值是', answer: '-6' },
-      ],
-      explain: [
-        '$ab=-6$，$a$、$b$ 异号，所以 $a\\div b$ 一定是负数。按 $a$ 的值列举：$a$ 可以是 $\\pm 1,\\ \\pm 2,\\ \\pm 3,\\ \\pm 6$，对应 $b=-6\\div a$。',
-        '$|a\\div b|=|a|\\div|b|$：$|a|=1$ 时是 $\\frac{1}{6}$；$|a|=2$ 时是 $\\frac{2}{3}$；$|a|=3$ 时是 $\\frac{3}{2}$；$|a|=6$ 时是 6。',
-        '都是负数，绝对值越小越大：最大值是 $-\\frac{1}{6}$（如 $a=1,\\ b=-6$），最小值是 $-6$（如 $a=6,\\ b=-1$）。',
-      ],
-      verify: () => {
-        const vals = [];
-        for (let a = -6; a <= 6; a++) if (a && (-6) % a === 0) vals.push(F(a).div(-6 / a));
-        vals.sort((x, y) => x.cmp(y));
-        return [vals[vals.length - 1], vals[0]];
       },
     },
 
@@ -354,7 +360,7 @@ Content.section({
       blanks: [
         { kind: 'num', label: '(1) 积为正数的取法有几种？', answer: '46', suffix: '种' },
         { kind: 'num', label: '(2) 积为负数，并且大于 $-20$ 的取法有几种？', answer: '22', suffix: '种' },
-        { kind: 'num', label: '(3) 积的最大值是', answer: '90' },
+        { kind: 'num', label: '(3) 积等于 $-12$ 的取法有几种？', answer: '5', suffix: '种' },
       ],
       explain: [
         '负数有 6 个（$-6$～$-1$），正数有 3 个（1～3），还有 0。',
@@ -362,20 +368,22 @@ Content.section({
         '(2) 积为负：三个负数，或两正一负。要大于 $-20$，就是绝对值小于 20。',
         '三个负数：从 1～6 中取三个数，积小于 20 的有 $\\{1,2,3\\},\\{1,2,4\\},\\{1,2,5\\},\\{1,2,6\\},\\{1,3,4\\},\\{1,3,5\\},\\{1,3,6\\}$，共 7 种。注意 $\\{-1,-4,-5\\}$ 的积恰好是 $-20$，“大于 $-20$”不包括 $-20$，不算。',
         '两正一负：两个正数的积是 2（1 和 2）时，负数的绝对值 1～6 都行，6 种；积是 3 时，$3\\times 6=18<20$，也是 6 种；积是 6 时，负数的绝对值只能是 1～3，3 种。共 15 种。合计 $7+15=22$ 种。',
-        '(3) 三个正数最大是 6；一正两负取 $3\\times(-6)\\times(-5)=90$。最大值是 90。（最小值是 $(-6)\\times(-5)\\times(-4)=-120$，两者不对称。）',
+        '(3) 积是 $-12$，要么三个负数，要么一个负数两个正数。先看绝对值：三个数的绝对值相乘等于 12。',
+        '三个负数：从 1～6 中取三个不同的数，积为 12 的有 $\\{1,2,6\\}$、$\\{1,3,4\\}$，对应 $\\{-1,-2,-6\\}$、$\\{-1,-3,-4\\}$，2 种。',
+        '一负两正：两个正数从 1、2、3 里取，积为 2、3、6，负数分别是 $-6$、$-4$、$-2$，3 种。其中 $\\{-2,2,3\\}$ 里 $-2$ 和 2 绝对值相同，但是两个不同的数，可以同时取。合计 $2+3=5$ 种。',
       ],
       verify: () => {
         const xs = [-6, -5, -4, -3, -2, -1, 0, 1, 2, 3];
         let pos = 0;
         let neg = 0;
-        let max = -Infinity;
+        let m12 = 0;
         for (let i = 0; i < xs.length; i++) for (let j = i + 1; j < xs.length; j++) for (let k = j + 1; k < xs.length; k++) {
           const p = xs[i] * xs[j] * xs[k];
           if (p > 0) pos++;
           if (p < 0 && p > -20) neg++;
-          max = Math.max(max, p);
+          if (p === -12) m12++;
         }
-        return [pos, neg, max];
+        return [pos, neg, m12];
       },
     },
     {
@@ -445,35 +453,34 @@ Content.section({
       },
     },
     {
-      id: '1.3-c05',
+      id: '1.3-c06',
       level: 'challenge',
       type: 'fill',
-      stem: '分子是 1、分母是正整数的分数叫作单位分数，例如 $\\frac{1}{2}$，$\\frac{1}{7}$。把 1 写成几个分母互不相同的单位分数之和。',
+      stem: '在算式 $-12\\ \\square\\ 3\\ \\square\\ (-2)\\ \\square\\ \\frac{1}{2}\\ \\square\\ 4$ 的四个方框里，各填上“$\\times$”或“$\\div$”中的一个（可以重复），然后按从左到右的顺序计算。',
       blanks: [
-        { kind: 'num', label: '(1) 若写成 3 个单位分数之和，最大的分母是', answer: '6' },
-        { kind: 'num', label: '(2) 若写成 4 个单位分数之和，最大的分母最小是', answer: '12' },
+        { kind: 'num', label: '(1) 结果的最大值是', answer: '576' },
+        { kind: 'num', label: '(2) 结果的最小值是', answer: '1/4' },
+        { kind: 'num', label: '(3) 一共能得到多少个不同的结果？', answer: '10', suffix: '个' },
       ],
       explain: [
-        '单位分数就是正整数的倒数。把分母从小到大排：分母越小，倒数越大，最小的分母决定最大的那个单位分数。',
-        '(1) 最小分母若 $\\ge 3$，三个数之和最多 $\\frac{1}{3}+\\frac{1}{4}+\\frac{1}{5}<1$，不够，所以最小分母是 2，剩下两个数之和是 $\\frac{1}{2}$。第二个分母若 $\\ge 4$，最多 $\\frac{1}{4}+\\frac{1}{5}<\\frac{1}{2}$，所以是 3，第三个是 $\\frac{1}{2}-\\frac{1}{3}=\\frac{1}{6}$。只有 $1=\\frac{1}{2}+\\frac{1}{3}+\\frac{1}{6}$ 一种，最大分母是 6。',
-        '(2) 同理最小分母必须是 2（$\\frac{1}{3}+\\frac{1}{4}+\\frac{1}{5}+\\frac{1}{6}<1$），剩下三个数之和是 $\\frac{1}{2}$。第二个分母只能是 3、4 或 5（$\\ge 6$ 时 $\\frac{1}{6}+\\frac{1}{7}+\\frac{1}{8}<\\frac{1}{2}$）。',
-        '第二个是 3：剩 $\\frac{1}{6}$ 拆成两个，$\\frac{1}{7}+\\frac{1}{42}$、$\\frac{1}{8}+\\frac{1}{24}$、$\\frac{1}{9}+\\frac{1}{18}$、$\\frac{1}{10}+\\frac{1}{15}$，最大分母最小是 15。',
-        '第二个是 4：剩 $\\frac{1}{4}$ 拆成两个，$\\frac{1}{5}+\\frac{1}{20}$、$\\frac{1}{6}+\\frac{1}{12}$，最大分母最小是 12。第二个是 5：剩 $\\frac{3}{10}$，无法拆成两个更小的不同单位分数。',
-        '所以最小是 12：$1=\\frac{1}{2}+\\frac{1}{4}+\\frac{1}{6}+\\frac{1}{12}$。既要找到例子，又要说明更小的不可能。',
+        '关键想法：除以一个数等于乘它的倒数。所以不管怎么填，结果都是 $-12$ 依次乘上：3 或 $\\frac{1}{3}$，$-2$ 或 $-\\frac{1}{2}$，$\\frac{1}{2}$ 或 2，4 或 $\\frac{1}{4}$。',
+        '符号：负因数总是 $-12$ 和第三个因数两个，结果一定是正数。所以只要看 $12\\times(3\\text{ 或 }\\frac{1}{3})\\times(2\\text{ 或 }\\frac{1}{2})\\times(\\frac{1}{2}\\text{ 或 }2)\\times(4\\text{ 或 }\\frac{1}{4})$。',
+        '(1) 每个因数都取大的：$12\\times 3\\times 2\\times 2\\times 4=576$，填法是 $-12\\times 3\\times(-2)\\div\\frac{1}{2}\\times 4$。',
+        '(2) 每个因数都取小的：$12\\times\\frac{1}{3}\\times\\frac{1}{2}\\times\\frac{1}{2}\\times\\frac{1}{4}=\\frac{1}{4}$，填法是 $-12\\div 3\\div(-2)\\times\\frac{1}{2}\\div 4$。',
+        '(3) 16 种填法，但结果会重复。后三个因数都和 2 有关，把它们的积算出来：$2\\times 2\\times 4=16$；$2\\times\\frac{1}{2}\\times 4$ 和 $\\frac{1}{2}\\times 2\\times 4$ 都是 4；$\\frac{1}{2}\\times\\frac{1}{2}\\times 4$ 和 $2\\times 2\\times\\frac{1}{4}$ 都是 1；$2\\times\\frac{1}{2}\\times\\frac{1}{4}$ 和 $\\frac{1}{2}\\times 2\\times\\frac{1}{4}$ 都是 $\\frac{1}{4}$；$\\frac{1}{2}\\times\\frac{1}{2}\\times\\frac{1}{4}=\\frac{1}{16}$。只有 16、4、1、$\\frac{1}{4}$、$\\frac{1}{16}$ 这 5 种。',
+        '再乘 $12\\times 3=36$ 或 $12\\times\\frac{1}{3}=4$：得到 576、144、36、9、$\\frac{9}{4}$ 和 64、16、4、1、$\\frac{1}{4}$，这 10 个数互不相同。所以不同的结果有 $2\\times 5=10$ 个。',
+        '这道题先把除法变成乘法，看清符号固定不变，再找出哪些因数会互相抵消，这样才能数清楚，不用把 16 种填法都算一遍。',
       ],
       verify: () => {
-        const unit = (r, after) => r.cmp(0) > 0 && r.n === 1n && Number(r.d) > after;
-        let three = null;
-        for (let a = 2; a <= 20; a++) for (let b = a + 1; b <= 60; b++) {
-          const r = F(1).sub(F(1).div(a)).sub(F(1).div(b));
-          if (unit(r, b)) three = three === null ? Number(r.d) : Math.max(three, Number(r.d));
+        const nums = [3, -2, F(1).div(2), 4];
+        const vals = [];
+        for (let mask = 0; mask < 16; mask++) {
+          let v = F(-12);
+          nums.forEach((x, i) => { v = (mask >> i) & 1 ? v.div(x) : v.mul(x); });
+          if (!vals.some(u => u.eq(v))) vals.push(v);
         }
-        let best = null;
-        for (let a = 2; a <= 20; a++) for (let b = a + 1; b <= 60; b++) for (let c = b + 1; c <= 200; c++) {
-          const r = F(1).sub(F(1).div(a)).sub(F(1).div(b)).sub(F(1).div(c));
-          if (unit(r, c)) best = best === null ? Number(r.d) : Math.min(best, Number(r.d));
-        }
-        return [three, best];
+        const sorted = vals.sort((p, q) => p.cmp(q));
+        return [sorted[sorted.length - 1], sorted[0], sorted.length];
       },
     },
   ],
