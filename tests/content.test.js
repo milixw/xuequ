@@ -152,12 +152,17 @@ for (const meta of Content.sectionMetas()) {
       assert(reading && typeof reading === 'object', '英语小节缺少单元阅读 reading');
       checkMath(reading.title, `${meta.id} 阅读标题`);
       assert(Array.isArray(reading.paragraphs) && reading.paragraphs.length >= 2, '英语阅读至少两段');
+      assert(Array.isArray(reading.translations) && reading.translations.length === reading.paragraphs.length, '英语阅读译文段数不匹配');
       assert(Array.isArray(reading.vocabulary) && reading.vocabulary.length >= 5, '英语阅读至少标注五个重点词或短语');
       const terms = reading.vocabulary.map(item => item.term);
       assert(new Set(terms).size === terms.length, '英语阅读重点词或短语重复');
       const used = [];
       reading.paragraphs.forEach((paragraph, i) => {
         checkMath(paragraph, `${meta.id} 阅读第 ${i + 1} 段`);
+        const sentences = paragraph.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [];
+        assert(Array.isArray(reading.translations[i]) && reading.translations[i].length === sentences.length,
+          `${meta.id} 阅读第 ${i + 1} 段译文应与英文逐句对应`);
+        reading.translations[i].forEach((translation, j) => checkMath(translation, `${meta.id} 第 ${i + 1} 段第 ${j + 1} 句译文`));
         for (const match of paragraph.matchAll(/\[\[([^\]]+)\]\]/g)) {
           assert(terms.includes(match[1]), `阅读标注 ${match[1]} 未在词表中`);
           used.push(match[1]);
@@ -174,10 +179,9 @@ for (const meta of Content.sectionMetas()) {
     const qs = s.questions;
     const count = level => qs.filter(q => q.level === level).length;
     if (meta.subject.id === 'english') {
-      for (const level of ['basic', 'extended', 'challenge']) {
-        assert(count(level) >= 2, `英语首批小节每档至少 2 题，${level} 只有 ${count(level)} 题`);
-      }
-      assert(qs.length >= 6, `英语首批小节至少 6 题，现在 ${qs.length} 道`);
+      assert(count('basic') === 5 && count('extended') === 6 && count('challenge') === 5,
+        `英语八上小节应有 5 基础、6 扩展、5 挑战，现在是 ${count('basic')}/${count('extended')}/${count('challenge')}`);
+      assert(qs.length === 16, `英语八上小节应有 16 道原创练习，现在 ${qs.length} 道`);
     } else {
       assert(count('basic') >= 5 && count('basic') <= 10, `基础题应为 5～10 道，现在 ${count('basic')} 道`);
       assert(count('challenge') === 5, `挑战题应为 5 道，现在 ${count('challenge')} 道`);
@@ -186,6 +190,13 @@ for (const meta of Content.sectionMetas()) {
     }
     const ids = qs.map(q => q.id);
     assert(new Set(ids).size === ids.length, '题目 ID 有重复');
+    if (meta.subject.id === 'english') {
+      qs.forEach(q => {
+        const stemWithoutNotes = q.stem.replace(/\([^()]*[\u4e00-\u9fff][^()]*\)/g, '');
+        assert(!/[\u4e00-\u9fff]/.test(stemWithoutNotes), `${q.id} 原创题干应以英文为主，中文只作括号词汇备注`);
+        assert(q.options.every(option => !/[\u4e00-\u9fff]/.test(option)), `${q.id} 原创选项应使用英文`);
+      });
+    }
     qs.forEach(q => checkQuestion(q, meta.section.no, `题目 ${q.id || '(无 ID)'}`));
 
     const noVerify = qs.filter(q => !q.verify).map(q => q.id);

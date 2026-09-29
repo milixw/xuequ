@@ -24,19 +24,25 @@
   // 英语原创阅读用 [[词或短语]] 标注重点词；正文始终先转义，不能把内容当 HTML 执行。
   function renderReading(reading) {
     const entries = new Map(reading.vocabulary.map((item, i) => [item.term, { ...item, number: i + 1 }]));
-    const paragraphs = reading.paragraphs.map(paragraph => {
-      const parts = paragraph.split(/(\[\[[^\]]+\]\])/g);
-      return `<p>${parts.map(part => {
-        const match = /^\[\[([^\]]+)\]\]$/.exec(part);
-        if (!match) return escapeHtml(part);
-        const entry = entries.get(match[1]);
-        if (!entry) return escapeHtml(part);
-        return `<mark class="reading-term" title="${escapeHtml(entry.meaning)}" aria-label="${escapeHtml(entry.term + '：' + entry.meaning)}">` +
-          `${escapeHtml(entry.term)}<sup>${entry.number}</sup></mark>`;
-      }).join('')}</p>`;
+    const paragraphs = reading.paragraphs.map((paragraph, paragraphIndex) => {
+      const sentences = paragraph.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [];
+      return `<div class="reading-paragraph">${sentences.map((sentence, sentenceIndex) => {
+        const english = sentence.trim().split(/(\[\[[^\]]+\]\])/g).map(part => {
+          const match = /^\[\[([^\]]+)\]\]$/.exec(part);
+          if (!match) return escapeHtml(part);
+          const entry = entries.get(match[1]);
+          if (!entry) return escapeHtml(part);
+          return `<mark class="reading-term" title="${escapeHtml(entry.meaning)}" aria-label="${escapeHtml(entry.term + '：' + entry.meaning)}">` +
+            `${escapeHtml(entry.term)}<sup>${entry.number}</sup></mark>`;
+        }).join('');
+        const translation = reading.translations[paragraphIndex][sentenceIndex];
+        return `<div class="reading-line"><p class="reading-en">${english}</p>` +
+          `<p class="reading-translation" lang="zh-CN">${escapeHtml(translation)}</p></div>`;
+      }).join(' ')}</div>`;
     }).join('');
     return `<h3 class="group">单元阅读 · 原创</h3><article class="card unit-reading">` +
-      `<h2>${escapeHtml(reading.title)}</h2>${paragraphs}` +
+      `<div class="reading-heading"><h2>${escapeHtml(reading.title)}</h2>` +
+      `<label class="reading-toggle"><input type="checkbox">显示翻译</label></div>${paragraphs}` +
       `<h3>重点词与短语</h3><ol>${reading.vocabulary.map(item =>
         `<li><strong>${escapeHtml(item.term)}</strong><span>${escapeHtml(item.meaning)}</span></li>`).join('')}</ol></article>`;
   }
@@ -191,6 +197,7 @@
     english.innerHTML = '<h3 class="group">英语</h3>';
     for (const entry of [
       { title: '英语学习大纲', desc: '查看上海初中英语知识点梳理', href: 'content/english/shanghai-junior-outline.html' },
+      { title: '英语单词', desc: '查询上海中考英语单词和短语', href: 'content/english/shanghai-exam-vocabulary.html' },
       { title: '英语试题库', desc: '按知识点和题型练习错题', href: '#/english-bank' },
     ]) {
       const link = document.createElement('a');
@@ -310,7 +317,13 @@
       main.insertAdjacentHTML('beforeend', '<p class="notice">本节内容由 AI 编写，尚未经过老师审核，如发现错误欢迎反馈。</p>');
     }
 
-    if (section.reading) main.insertAdjacentHTML('beforeend', renderReading(section.reading));
+    if (section.reading) {
+      main.insertAdjacentHTML('beforeend', renderReading(section.reading));
+      const readingEl = main.querySelector('.unit-reading');
+      readingEl.querySelector('.reading-toggle input').addEventListener('change', event => {
+        readingEl.classList.toggle('show-translations', event.target.checked);
+      });
+    }
 
     main.insertAdjacentHTML('beforeend', '<h3 class="group">知识点</h3>');
     for (const card of section.intro) {
@@ -323,6 +336,25 @@
           (card.pitfall ? `<div class="pitfall"><b>易错</b>${renderText(card.pitfall)}</div>` : '') +
           `</article>`
       );
+    }
+
+    if (section.bankExamples && section.bankExamples.length) {
+      main.insertAdjacentHTML('beforeend', '<h3 class="group">题库原题 · 知识点例题</h3>');
+      main.insertAdjacentHTML('beforeend', '<p class="notice">例题和参考答案来自已导入题库，尚待人工逐题核对；原题文本未改动。</p>');
+      let bank = [];
+      try { bank = await EnglishBank.load(); } catch (e) {
+        main.insertAdjacentHTML('beforeend', '<p class="notice">题库暂时无法加载，请稍后重试。</p>');
+      }
+      for (const [index, example] of section.bankExamples.entries()) {
+        const original = bank.find(q => q.id === example.id);
+        if (!original) continue;
+        main.insertAdjacentHTML('beforeend',
+          `<article class="card unit-bank-example"><h2>例题 ${index + 1} · ${escapeHtml(example.point)}</h2>` +
+          `<div class="unit-bank-original">${escapeHtml(original.text)}</div>` +
+          `<details><summary>查看答案与讲解</summary><p><b>参考答案：${escapeHtml(original.answer || '待核对')}</b></p>` +
+          `<ol>${example.explain.map(step => `<li>${escapeHtml(step)}</li>`).join('')}</ol></details>` +
+          `<a class="unit-bank-link" href="#/english-bank/${escapeHtml(example.id)}">打开题库原题作答</a></article>`);
+      }
     }
 
     const games = sectionGames(meta.section);

@@ -20,13 +20,21 @@ test('首页保留原有教材、试卷和趣味玩法布局', () => {
   assert(!app.includes("if (parts[0] === 'subject')"));
 });
 
-test('首页额外只有英语学习大纲与试题库两个入口', () => {
+test('首页英语学习大纲、单词和试题库三个入口依次显示', () => {
   const home = app.slice(app.indexOf('function home()'), app.indexOf('// ---------- 册 ----------'));
-  assert(home.includes("title: '英语学习大纲'"));
+  const outlineIndex = home.indexOf("title: '英语学习大纲'");
+  const vocabIndex = home.indexOf("title: '英语单词'");
+  const bankIndex = home.indexOf("title: '英语试题库'");
+  assert(outlineIndex >= 0 && vocabIndex > outlineIndex && bankIndex > vocabIndex);
   assert(home.includes("href: 'content/english/shanghai-junior-outline.html'"));
-  assert(home.includes("title: '英语试题库'"));
+  assert(home.includes("href: 'content/english/shanghai-exam-vocabulary.html'"));
   assert(home.includes("href: '#/english-bank'"));
   assert(fs.existsSync(path.join(root, 'content/english/shanghai-junior-outline.html')));
+  const vocab = fs.readFileSync(path.join(root, 'content/english/shanghai-exam-vocabulary.html'), 'utf8');
+  assert(vocab.includes('name="viewport" content="width=device-width, initial-scale=1"'));
+  assert(vocab.includes('<script id="data" type="application/json">'));
+  assert(vocab.includes("localStorage.setItem('xq.vocab.ipa.v1'"));
+  assert(vocab.includes("localStorage.setItem('xq.vocab.src.v1'"));
   assert(app.includes("if (parts[0] === 'english-bank') return englishBankPage(parts[1]);"));
 });
 
