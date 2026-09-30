@@ -73,8 +73,8 @@ Content.catalog = {
                   no: 6,
                   title: '圆与扇形',
                   sections: [
-                    { no: '6.1', title: '圆的周长与弧长', ready: false },
-                    { no: '6.2', title: '圆与扇形的面积', ready: false },
+                    { no: '6.1', title: '圆的周长与弧长', ready: true },
+                    { no: '6.2', title: '圆与扇形的面积', ready: true },
                   ],
                 },
                 {
