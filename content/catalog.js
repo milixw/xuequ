@@ -90,8 +90,8 @@ Content.catalog = {
                   no: 8,
                   title: '圆柱与圆锥',
                   sections: [
-                    { no: '8.1', title: '圆柱及其侧面展开图', ready: false },
-                    { no: '8.2', title: '圆锥及其侧面展开图', ready: false },
+                    { no: '8.1', title: '圆柱及其侧面展开图', ready: true },
+                    { no: '8.2', title: '圆锥及其侧面展开图', ready: true },
                   ],
                 },
                 {
