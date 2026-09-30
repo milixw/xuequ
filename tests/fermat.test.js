@@ -137,8 +137,16 @@ test('费马点：填空答案由逻辑核对', () => {
   const sq = L.squareRoads([3, 1.2], 4);
   assert(near(L.angleAt(sq.sq[0], sq.P, sq.sq[3]), part('3-2', 2).blanks[0].answer, 1e-9), '3-2 岔口角度不对');
   // 解析里写的两个长度
-  const expl = part('3-2', 3).explain;
-  assert(expl.includes(sq.best.toFixed(2)) && expl.includes(sq.cross.toFixed(2)), '3-2 解析里的长度和计算不符');
+  for (const expl of [part('3-2', 3).explain, part('3-2', 1).explain.join('')]) {
+    assert(expl.includes(sq.best.toFixed(2)) && expl.includes(sq.cross.toFixed(2)), '3-2 解析里的长度和计算不符');
+  }
+  // 数轴解析里写的最小值、1-1 里 −3.5 处的距离和
+  for (const { l, p } of parts('line')) {
+    const m = L.lineMin(p.xs), text = p.explain.join('');
+    if (p.need === 1) assert(text.includes(`$${m.lo}$`), `${l.id} 解析里的最小位置不对`);
+    else assert(text.includes(`$${m.lo}$`) && text.includes(`$${m.hi}$`), `${l.id} 解析里的最小区间不对`);
+  }
+  assert(L.lineTotal(-3.5, [-2, 5]) === 10 && L.lineMin([-3, 1, 6]).value === 9, '1-1 解析里的数不对');
 });
 
 test('费马点：关卡格式、公式能渲染、答案能被判分器接受', () => {
@@ -150,7 +158,8 @@ test('费马点：关卡格式、公式能渲染、答案能被判分器接受',
     assert(CHAPTERS.some(c => l.id.startsWith(c.no + '-')), `${l.id} 不属于任何一章`);
     for (const p of l.parts) {
       assert(TYPES.includes(p.t), `${l.id} 有未知部件 ${p.t}`);
-      [p.md, p.stem, p.explain, ...(p.options || [])].filter(Boolean).forEach(texIn);
+      [p.md, p.stem, ...[].concat(p.explain || []), ...(p.options || [])].filter(Boolean).forEach(texIn);
+      if (['line', 'plane', 'rotate', 'roads'].includes(p.t)) assert(Array.isArray(p.explain) && p.explain.length >= 2, `${l.id} 的拖动部件缺少分步解析`);
       if (p.t === 'choice') assert(p.answer >= 0 && p.answer < p.options.length, `${l.id} 选择题答案越界`);
       if (p.t === 'fill') for (const b of p.blanks) assert(A.checkBlank(b, String(b.answer)).ok, `${l.id} 的答案 ${b.answer} 判分器不认`);
     }

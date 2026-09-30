@@ -19,6 +19,7 @@
   //   { t: 'text', md }                                   说明文字（支持 $...$ 和 **粗体**）
   //   { t: 'choice', stem, options, answer, explain }     选择题
   //   { t: 'fill', stem, blanks: [{ label, kind, answer }], explain }  填空，kind 同 answer.js
+  //   拖动部件（line、plane、rotate、roads）都带 explain: ['第一步', ...]，找到最短位置或点“看解析”后显示
   //   { t: 'line', xs, range, init, need }                数轴上拖 P，找到 need 个不同的最小位置
   //   { t: 'plane', pts, P, h, show, snap }               平面上拖 P 找最小点；show: 'angles' 找到后显示 P 处的角，'diag' 画对角线
   //   { t: 'rotate', A, B, C, P, h }                      把 △BPC 绕 B 转 60°，再把折线拉直
@@ -29,13 +30,15 @@
       id: '1-1', title: '两个点、三个点',
       parts: [
         { t: 'text', md: '一条笔直的街上住着几户人家，要在街边设一个快递站 P，让 P 到各户的**距离加起来最小**。先从两户开始，**左右拖动 P** 试试。' },
-        { t: 'line', xs: [-2, 5], range: [-4, 8], init: -3.5, need: 2 },
+        { t: 'line', xs: [-2, 5], range: [-4, 8], init: -3.5, need: 2,
+          explain: ['两户在 $-2$ 和 $5$。P 在两户之间时，P 到两户的距离加起来正好是两户之间的距离 $7$。', 'P 跑到两户外面，比如在 $-3.5$，距离之和是 $1.5+8.5=10$，多出了到 $-2$ 的一段来回。', '所以从 $-2$ 到 $5$（包括两端）的每个位置，距离之和都是最小值 $7$。'] },
         { t: 'choice', stem: '两户人家时，快递站放在哪里最好？',
           options: ['只有正中间那一点', '两户之间（包括两户门口）的任何位置都一样', '靠近其中一户', '两户的外面'],
           answer: 1,
           explain: 'P 在两户之间时，两段距离加起来正好是两户之间的距离 $7$，放在哪里都一样；P 跑到外面，就多出一段来回的路。' },
         { t: 'text', md: '再加一户人家。' },
-        { t: 'line', xs: [-3, 1, 6], range: [-5, 8], init: 7, need: 1 },
+        { t: 'line', xs: [-3, 1, 6], range: [-5, 8], init: 7, need: 1,
+          explain: ['左右两户 $-3$ 和 $6$ 是一对：P 在它们之间时，这两段加起来总是 $9$。', '中间一户在 $1$：P 正好在 $1$ 时，这一段是 $0$，离开 $1$ 这一段就变长。', '所以 P 在 $1$ 时最小，最小值是 $9+0=9$。'] },
         { t: 'choice', stem: '三户人家时，最好的位置是？',
           options: ['三户位置的平均数', '中间那一户的门口', '左右两户的正中间', '哪里都一样'],
           answer: 1,
@@ -46,11 +49,13 @@
       id: '1-2', title: '五个点、六个点',
       parts: [
         { t: 'text', md: '把户数加到五户、六户。上一关的窍门是**两边配对**：最左和最右是一对，次左和次右是一对……P 在一对的中间，这一对的两段加起来就最小。' },
-        { t: 'line', xs: [-6, -2, 1, 3, 8], range: [-7, 9], init: -5, need: 1 },
+        { t: 'line', xs: [-6, -2, 1, 3, 8], range: [-7, 9], init: -5, need: 1,
+          explain: ['配对：$-6$ 和 $8$ 一对，$-2$ 和 $3$ 一对，剩下正中间的 $1$。', 'P 在 $-2$ 到 $3$ 之间时，两对都在“中间”，都取到最小。', '再让正中间那一户的距离是 $0$：P 放在 $1$。'] },
         { t: 'fill', stem: '用绝对值写出来：$|x+6|+|x+2|+|x-1|+|x-3|+|x-8|$ 的最小值是？',
           blanks: [{ kind: 'num', answer: 19 }], line: [-6, -2, 1, 3, 8],
           explain: '配对：$-6$ 和 $8$ 一对，$x$ 在它们之间时这两项加起来是 $14$；$-2$ 和 $3$ 一对，加起来是 $5$；剩下 $|x-1|$，在 $x=1$ 时是 $0$。最小值是 $14+5+0=19$，这时 $x=1$。' },
-        { t: 'line', xs: [-6, -2, 1, 3, 8, 9], range: [-7, 10], init: 9.5, need: 2 },
+        { t: 'line', xs: [-6, -2, 1, 3, 8, 9], range: [-7, 10], init: 9.5, need: 2,
+          explain: ['配对：$-6$ 和 $9$、$-2$ 和 $8$、$1$ 和 $3$，正好三对，没有落单的。', 'P 在最里面那一对 $1$ 和 $3$ 之间时，三对都在“中间”，都取到最小。', '所以 $1$ 到 $3$ 之间（包括两端）都是最好的位置。'] },
         { t: 'fill', stem: '六户人家时，距离之和最小是多少？',
           blanks: [{ kind: 'num', answer: 27 }], line: [-6, -2, 1, 3, 8, 9],
           explain: '三对：$-6$ 和 $9$、$-2$ 和 $8$、$1$ 和 $3$，加起来是 $15+10+2=27$。' },
@@ -64,7 +69,8 @@
       id: '2-1', title: '合建水泵站',
       parts: [
         { t: 'text', md: '三个村子 A、B、C 合建一座水泵站 P，从 P 分别铺水管到三个村。P 建在哪里，水管总长最短？这回 P 可以放在平面上任何地方，**拖动 P** 试试。' },
-        { t: 'plane', pts: [[2.5, 1], [1, 6.5], [9, 5.5]], P: [7.6, 1.6], h: 7.5, show: 'angles' },
+        { t: 'plane', pts: [[2.5, 1], [1, 6.5], [9, 5.5]], P: [7.6, 1.6], h: 7.5, show: 'angles',
+          explain: ['P 往一个方向拖，总长先变小、再变大。最短的位置在三角形里面，往哪个方向挪一点，总长都会变大。', '看这个位置的三个角：$\\angle APB$、$\\angle BPC$、$\\angle CPA$ 都是 $120^\\circ$。', '为什么正好是 $120^\\circ$，2-3 用旋转 $60^\\circ$ 来证明；2-4 教你直接用尺规作出这个点。'] },
         { t: 'choice', stem: '找到最短的位置后，看看 $\\angle APB$、$\\angle BPC$、$\\angle CPA$，它们有什么特点？',
           options: ['都差不多是 $120^\\circ$', '都是 $90^\\circ$', '分别和三角形的三个内角相等', '没有什么规律'],
           answer: 0,
@@ -79,7 +85,8 @@
       id: '2-2', title: '有一个角很大',
       parts: [
         { t: 'text', md: '换三个村子：这回 $\\angle BAC$ 超过了 $120^\\circ$。再拖一次 P，找总长最短的位置。' },
-        { t: 'plane', pts: [[4.6, 4], [0.8, 2.2], [9.2, 1.4]], P: [5.4, 1.2], h: 5.4, show: 'angles', snap: true },
+        { t: 'plane', pts: [[4.6, 4], [0.8, 2.2], [9.2, 1.4]], P: [5.4, 1.2], h: 5.4, show: 'angles', snap: true,
+          explain: ['$\\angle BAC$ 超过了 $120^\\circ$。P 在三角形里面时，三个角不可能都是 $120^\\circ$。', 'P 放在 A 时，总长就是 $AB+AC$；P 离开 A，不管往哪边走，总长都变大。', '所以最短的位置是大角的顶点 A。'] },
         { t: 'choice', stem: '这次最短的位置在哪里？',
           options: ['就在村子 A，也就是大角的顶点', '在三角形里面，三个角都是 $120^\\circ$', '在 BC 的中点'],
           answer: 0,
@@ -90,7 +97,8 @@
       id: '2-3', title: '揭秘：转 60°',
       parts: [
         { t: 'text', md: '为什么是 $120^\\circ$？关键是一个巧妙的想法：把 $\\triangle BPC$ 绕点 B 旋转 $60^\\circ$，得到 $\\triangle BP\'C\'$。' },
-        { t: 'rotate', A: [3.9, 0.9], B: [1.4, 4.7], C: [8.6, 4.4], P: [6, 2.1], h: 11.6 },
+        { t: 'rotate', A: [3.9, 0.9], B: [1.4, 4.7], C: [8.6, 4.4], P: [6, 2.1], h: 11.6,
+          explain: ['转到 $60^\\circ$ 后，$PP\'=PB$，$P\'C\'=PC$（下面的问题说明为什么），所以 $PA+PB+PC$ 就是折线 A–P–$P\'$–$C\'$ 的长。', 'A 和 $C\'$ 都不随 P 移动。两点之间线段最短，折线拉直成线段 $AC\'$ 时最短。', '拉直时的 P 就是费马点，最小总长等于 $AC\'$ 的长。'] },
         { t: 'choice', stem: '$\\triangle BPP\'$ 是什么三角形？',
           options: ['等边三角形', '直角三角形', '等腰三角形，但不一定是等边三角形'],
           answer: 0,
@@ -128,7 +136,8 @@
       id: '3-1', title: '四个点', challenge: true,
       parts: [
         { t: 'text', md: '四个村子 A、B、C、D 围成一个四边形，建一个水泵站 P 连到四个村。三个点要转 $60^\\circ$，四个点是不是更难？拖一拖。' },
-        { t: 'plane', pts: [[1.2, 1.5], [7.8, 0.8], [9, 6.2], [2.2, 6.8]], P: [2.6, 3.4], h: 7.5, show: 'diag' },
+        { t: 'plane', pts: [[1.2, 1.5], [7.8, 0.8], [9, 6.2], [2.2, 6.8]], P: [2.6, 3.4], h: 7.5, show: 'diag',
+          explain: ['连两条对角线 AC、BD（图上的虚线）。', '最短的位置正好是两条对角线的交点，总长等于 $AC+BD$。', '为什么是交点，下面的问题一步步说明。'] },
         { t: 'choice', stem: '最短的位置在哪里？',
           options: ['两条对角线 AC、BD 的交点', '四个角都是 $90^\\circ$ 的点，不一定在对角线上', '四边形的某个顶点'],
           answer: 0,
@@ -147,7 +156,8 @@
       id: '3-2', title: '修路网', challenge: true,
       parts: [
         { t: 'text', md: '边长 4 千米的正方形四个角上有四个村子 A、B、C、D。这回要修路把四个村连通，路可以有岔口。最容易想到的是两条对角线，也就是 X 形。**拖动两个岔口 P、Q**，能修得更短吗？' },
-        { t: 'roads', o: [3, 1.2], s: 4, h: 6.4 },
+        { t: 'roads', o: [3, 1.2], s: 4, h: 6.4,
+          explain: ['X 形的路网在中心交叉，交叉处的角是 $90^\\circ$，还能改进。', '把中心拆成两个岔口：P 连 A、D、Q，Q 连 B、C、P。拉开到岔口处的三个角都是 $120^\\circ$ 时最短。', '这时总长约 $10.93$ 千米，比 X 形的约 $11.31$ 千米更短。'] },
         { t: 'fill', stem: '找到最短的路网后，看岔口 P 处的三个角 $\\angle APD$、$\\angle DPQ$、$\\angle QPA$，每个大约多少度？',
           blanks: [{ kind: 'num', answer: 120 }],
           explain: '三个角都是 $120^\\circ$，岔口 Q 处也一样。' },
@@ -325,6 +335,36 @@
       box.innerHTML = html;
     };
 
+    // 简单动画：k 从 0 到 1，两头慢中间快。用 setTimeout，不依赖 requestAnimationFrame
+    function tween(ms, step, fin) {
+      const t0 = Date.now();
+      const tick = () => {
+        const k = Math.min(1, (Date.now() - t0) / ms);
+        step(k * k * (3 - 2 * k));
+        if (k < 1) setTimeout(tick, 16); else if (fin) fin();
+      };
+      tick();
+    }
+    const lerp = (a, b, k) => [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k];
+
+    // 拖动部件的解析：先自己拖，动过一次后出现“看解析”，点了自动放到最短的位置。自己找到或点了按钮，都显示分步解析
+    function solution(node, p, auto) {
+      const box = el('div', 'fm-sol', '<div class="row"><button data-sol hidden>拖不准？看解析</button></div>');
+      node.appendChild(box);
+      const btn = box.querySelector('[data-sol]');
+      let shown = false;
+      btn.addEventListener('click', () => { btn.disabled = true; auto(); });
+      return {
+        arm() { if (!shown) btn.hidden = false; },
+        reveal() {
+          if (shown) return;
+          shown = true;
+          box.querySelector('.row').remove();
+          box.insertAdjacentHTML('beforeend', `<div class="fb ok"><b>解析</b><ol>${p.explain.map(x => `<li>${R(x)}</li>`).join('')}</ol></div>`);
+        },
+      };
+    }
+
     // ---------- 各种部件 ----------
     const PARTS = {
       text(node, p) { node.innerHTML = `<p>${R(p.md)}</p>`; },
@@ -388,6 +428,7 @@
         const min = FL.lineMin(p.xs);
         const found = new Set();
         const pts = { P: [X(p.init), baseY] };
+        let sol = null;
         const cur = () => Math.round(V(pts.P[0]) * 2) / 2;
         const render = () => {
           const x = cur();
@@ -410,15 +451,26 @@
           if (found.size >= p.need) msg = `<p class="ok">找到了！最小值是 ${min.value}。</p>`;
           else if (found.size) msg = `<p class="tip">找到一个最小的位置了。还有别的位置也一样小吗？</p>`;
           info(node, `<p>P 在 <b>${x < 0 ? '−' + -x : x}</b>　距离之和：${parts.join(' + ')} = <b>${t}</b></p>${msg}`);
-          if (found.size >= p.need) done();
+          if (found.size >= p.need) { if (sol) sol.reveal(); done(); }
         };
-        board(node, {
+        const bd = board(node, {
           w: W, h: H, pts,
           render,
           move: (k, q) => [X(Math.max(lo, Math.min(hi, Math.round(V(q[0]) * 2) / 2))), baseY],
           change: show,
+          end: () => sol.arm(),
         });
         show();
+        // 看解析：P 依次走到最小区间的两端（只有一个最小点时就走到那一点）
+        sol = solution(node, p, () => {
+          const stops = p.need > 1 ? [min.lo, min.hi] : [min.lo];
+          const walk = i => {
+            if (i >= stops.length) return;
+            const from = pts.P[0], to = X(stops[i]);
+            tween(600, k => { pts.P = [from + (to - from) * k, baseY]; bd.redraw(); show(); }, () => setTimeout(() => walk(i + 1), 300));
+          };
+          walk(0);
+        });
       },
 
       // 平面上拖 P
@@ -428,7 +480,7 @@
         const opt = FL.median(V), best = FL.total(opt, V);
         const mid = center(V);
         const pts = { P: p.P.slice() };
-        let won = false, low = Infinity;
+        let won = false, low = Infinity, sol = null, bd = null;
         const render = () => {
           const P = pts.P;
           let s = poly(V, 'shape');
@@ -440,7 +492,7 @@
         const show = () => {
           const P = pts.P, t = FL.total(P, V);
           low = Math.min(low, t);
-          if (!won && t <= best * (1 + TOL)) won = true;
+          if (!won && t <= best * (1 + TOL)) { won = true; if (bd) bd.redraw(); }
           let html = `<p>${names.map((n, i) => `<span class="d${i}">P${n} ${f2(FL.dist(P, V[i]))}</span>`).join(' + ')} = <b>${f2(t)}</b> 千米</p>` +
             `<p class="tip">目前最短：${f2(low)} 千米</p>`;
           if (won) {
@@ -452,18 +504,25 @@
             }
           }
           info(node, html);
-          if (won) done();
+          if (won) { if (sol) sol.reveal(); done(); }
         };
         // 找到后松手，P 吸到准确的最小点上，角度正好是 120°
-        const bd = board(node, {
+        bd = board(node, {
           w: W, h: H, pts, render, change: show,
-          end: () => { if (won && FL.total(pts.P, V) <= best * (1 + TOL)) { pts.P = opt.slice(); bd.redraw(); show(); } },
+          end: () => {
+            if (won && FL.total(pts.P, V) <= best * (1 + TOL)) { pts.P = opt.slice(); bd.redraw(); show(); }
+            sol.arm();
+          },
           move: (k, q) => {
             if (p.snap) for (const v of V) if (FL.dist(v, q) < 0.3) return v.slice();
             return q;
           },
         });
         show();
+        sol = solution(node, p, () => {
+          const from = pts.P.slice();
+          tween(800, k => { pts.P = lerp(from, opt, k); bd.redraw(); show(); });
+        });
       },
 
       // 旋转 60°：滑块转 △BPC，再拖 P 把折线拉直
@@ -471,7 +530,7 @@
         const W = 10, H = p.h, A = p.A, B = p.B, C = p.C;
         const sign = FL.awayTurn(A, B, C) / 60;
         const pts = { P: p.P.slice() };
-        let t = 0, won = false;
+        let t = 0, won = false, sol = null;
         const Cend = FL.rotate(C, B, sign * 60);
         const best = FL.dist(A, Cend), opt = FL.fermat(A, B, C);
         const render = () => {
@@ -491,7 +550,10 @@
         const range = node.querySelector('input[type=range]'), num = node.querySelector('.num');
         const bd = board(node, {
           w: W, h: H, pts, render, change: () => show(),
-          end: () => { if (won && t === 60 && FL.total(pts.P, [A, B, C]) <= best * (1 + TOL)) { pts.P = opt.slice(); bd.redraw(); show(); } },
+          end: () => {
+            if (won && t === 60 && FL.total(pts.P, [A, B, C]) <= best * (1 + TOL)) { pts.P = opt.slice(); bd.redraw(); show(); }
+            sol.arm();
+          },
         });
         const show = () => {
           const P = pts.P;
@@ -507,15 +569,23 @@
                 : `<p class="tip">② 拖动 P，让 A、P、P′、C′ 连成一条直线（虚线是 AC′）。</p>`);
           }
           info(node, html);
-          if (won) done();
+          if (won) { if (sol) sol.reveal(); done(); }
         };
-        range.addEventListener('input', () => {
-          t = Number(range.value);
+        const turn = v => {
+          t = v;
+          range.value = String(v);
           num.textContent = `${t}°`;
           bd.redraw();
           show();
-        });
+        };
+        range.addEventListener('input', () => { turn(Number(range.value)); sol.arm(); });
         show();
+        // 看解析：先转到 60°，再把 P 移到折线拉直的位置
+        sol = solution(node, p, () => {
+          const t0 = t, from = pts.P.slice();
+          tween(Math.max(1, 60 - t0) * 15, k => turn(Math.round(t0 + (60 - t0) * k)), () =>
+            setTimeout(() => tween(800, k => { pts.P = lerp(from, opt, k); bd.redraw(); show(); }), 300));
+        });
       },
 
       // 向外作等边三角形，拖 A、B、C
@@ -573,7 +643,7 @@
         const sq = FL.squareRoads(p.o, p.s);
         const V = sq.sq, c = center(V);
         const pts = { P: [c[0] - 0.15, c[1]], Q: [c[0] + 0.15, c[1]] };
-        let won = false, beat = false, low = Infinity;
+        let won = false, beat = false, low = Infinity, sol = null;
         const render = () => {
           const { P, Q } = pts;
           let s = poly(V, 'shape');
@@ -595,13 +665,20 @@
           } else if (beat) html += `<p class="tip">比 X 形短了！还能更短吗？</p>`;
           else html += `<p class="tip">P、Q 现在挨在正方形中心，差不多就是 X 形。把它们拖开试试。</p>`;
           info(node, html);
-          if (won) done();
+          if (won) { if (sol) sol.reveal(); done(); }
         };
         const bd = board(node, {
           w: W, h: H, pts, render, change: show,
-          end: () => { if (won && FL.roadLen(pts.P, pts.Q, V) <= sq.best * (1 + TOL)) { pts.P = sq.P.slice(); pts.Q = sq.Q.slice(); bd.redraw(); show(); } },
+          end: () => {
+            if (won && FL.roadLen(pts.P, pts.Q, V) <= sq.best * (1 + TOL)) { pts.P = sq.P.slice(); pts.Q = sq.Q.slice(); bd.redraw(); show(); }
+            sol.arm();
+          },
         });
         show();
+        sol = solution(node, p, () => {
+          const P0 = pts.P.slice(), Q0 = pts.Q.slice();
+          tween(900, k => { pts.P = lerp(P0, sq.P, k); pts.Q = lerp(Q0, sq.Q, k); bd.redraw(); show(); });
+        });
       },
     };
 

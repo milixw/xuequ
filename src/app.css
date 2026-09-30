@@ -891,6 +891,8 @@ a { color: inherit; text-decoration: none; }
 .fm-part .warn { color: var(--warn); background: var(--warn-bg); padding: 4px 8px; border-radius: 6px; font-size: 14px; }
 .fm-finish { text-align: center; margin: 12px 0; }
 .fm-finish p { color: var(--ok); font-weight: 600; margin: 4px 0; }
+.fm-sol ol { margin: 4px 0 0; padding-left: 20px; }
+.fm-sol .fb { font-size: 14px; font-weight: 400; color: var(--text); }
 .fm-info { font-size: 14px; font-variant-numeric: tabular-nums; }
 .fm-info p { margin: 3px 0; }
 .fm-wrap { margin: 4px -4px; }
