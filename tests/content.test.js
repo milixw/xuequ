@@ -16,7 +16,7 @@ require('../content/catalog.js');
 
 const ROOT = path.join(__dirname, '..');
 const LEVELS = { b: 'basic', e: 'extended', c: 'challenge' };
-const KINDS = ['num', 'nums', 'expr', 'real', 'reals', 'angle', 'text'];
+const KINDS = ['num', 'nums', 'expr', 'real', 'reals', 'angle', 'ratio', 'text'];
 const DEMOS = ['foldCut', 'numberLineFold', 'angleFold', 'ropeCut'];  // src/demos.js 里的演示类型
 
 // 取出文本里所有 $...$ / $$...$$ 公式，逐个用 KaTeX 编译
@@ -56,6 +56,10 @@ function verifyBlank(blank, v) {
     case 'real': return A.realEqual(typeof v === 'number' ? v : A.realValue(String(v)), A.realValue(blank.answer));
     case 'reals': return sameSet(v.map(x => (typeof x === 'number' ? x : A.realValue(String(x)))), blank.answer.map(A.realValue), (x, y) => A.realEqual(x, y));
     case 'angle': return A.parseAngle(String(v)).eq(A.parseAngle(blank.answer));
+    case 'ratio': {
+      const want = blank.answer.split(':').map(A.Frac.of);
+      return Array.isArray(v) && v.length === want.length && v.every((x, i) => A.Frac.of(x).eq(want[i]));
+    }
     case 'text': return (Array.isArray(blank.answer) ? blank.answer : [blank.answer]).includes(v);
   }
   return false;

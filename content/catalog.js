@@ -65,8 +65,8 @@ Content.catalog = {
                   no: 5,
                   title: '比与比例',
                   sections: [
-                    { no: '5.1', title: '比、比例及其性质', ready: false },
-                    { no: '5.2', title: '百分数', ready: false },
+                    { no: '5.1', title: '比、比例及其性质', ready: true },
+                    { no: '5.2', title: '百分数', ready: true },
                   ],
                 },
                 {

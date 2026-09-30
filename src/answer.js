@@ -17,6 +17,7 @@
       .replace(/²/g, '^2')
       .replace(/³/g, '^3')
       .replace(/、/g, ',')
+      .replace(/[∶︰]/g, ':')
       .replace(/　/g, ' ')
       .trim();
   }
@@ -503,6 +504,17 @@
         if (!v) return { ok: false, error: '请按 36°15′ 这样的格式填写，分、秒要小于 60' };
         return { ok: v.eq(parseAngle(blank.answer)) };
       }
+      case 'ratio': {
+        // 比：a:b 或 a:b:c，要求和标准答案（最简整数比）逐项相同；成比例但没化简时提示
+        const parts = s.split(':').map(t => parseNumber(t.trim()));
+        const want = String(blank.answer).split(':').map(t => Frac.of(t.trim()));
+        if (parts.length < 2 || parts.includes(null)) return { ok: false, error: '请按 3:4 这样的格式填写，用冒号隔开' };
+        if (parts.length !== want.length) return { ok: false };
+        if (parts.every((p, i) => p.eq(want[i]))) return { ok: true };
+        const k = want[0].isZero() ? null : parts[0].div(want[0]);
+        if (k && !k.isZero() && parts.every((p, i) => p.eq(want[i].mul(k)))) return { ok: false, error: '比是对的，但要化成最简整数比' };
+        return { ok: false };
+      }
       case 'text': {
         const answers = Array.isArray(blank.answer) ? blank.answer : [blank.answer];
         return { ok: answers.some(a => normalize(a) === s) };
@@ -536,6 +548,7 @@
       case 'real': return `$${blank.tex || texReal(parseReal(blank.answer))}$`;
       case 'reals': return blank.answer.map(a => `$${texReal(parseReal(a))}$`).join('，');
       case 'angle': return normalize(blank.answer).replace(/'/g, '′').replace(/"/g, '″');
+      case 'ratio': return `$${normalize(blank.answer)}$`;
       case 'text': return Array.isArray(blank.answer) ? blank.answer[0] : blank.answer;
     }
     return String(blank.answer);

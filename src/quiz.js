@@ -34,6 +34,7 @@
       if (b.options) continue;
       if (b.kind === 'num' || b.kind === 'nums') ['−', '/', '.'].forEach(k => keys.add(k));
       if (b.kind === 'nums') keys.add(',');
+      if (b.kind === 'ratio') [':', '.', '/'].forEach(k => keys.add(k));
       if (b.kind === 'expr') {
         const vars = b.vars || [...new Set(String(b.answer).match(/[a-zA-Z]/g) || [])];
         vars.forEach(v => keys.add(v));
@@ -143,8 +144,8 @@
           input.autocomplete = 'off';
           input.setAttribute('autocapitalize', 'off');
           input.spellcheck = false;
-          input.inputMode = blank.kind === 'num' || blank.kind === 'nums' ? 'decimal' : 'text';
-          input.placeholder = blank.kind === 'nums' ? '多个答案用逗号隔开' : '';
+          input.inputMode = blank.kind === 'num' || blank.kind === 'nums' || blank.kind === 'ratio' ? 'decimal' : 'text';
+          input.placeholder = blank.kind === 'nums' ? '多个答案用逗号隔开' : blank.kind === 'ratio' ? '比如 3:4' : '';
           input.addEventListener('focus', () => (lastInput = input));
           input.addEventListener('input', () => {
             if (locked) return;

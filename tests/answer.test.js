@@ -63,6 +63,17 @@ test('角度', () => {
   assert(A.checkBlank(b, '35°75′').error, '分大于 60 要提示');
 });
 
+test('比', () => {
+  const b = blank('ratio', '30:9:16');
+  for (const s of ['30:9:16', '30：9：16', '30 : 9 : 16', '30∶9∶16']) assert(ok(b, s), `应判对：${s}`);
+  assert(!ok(b, '30:16:9'), '顺序不同');
+  assert(!ok(b, '30:9'), '项数不同');
+  const r = A.checkBlank(b, '60:18:32');
+  assert(!r.ok && r.error, '没化简要提示');
+  assert(A.checkBlank(b, '30 9 16').error, '没有冒号要提示');
+  assert(ok(blank('ratio', '4:3'), '4:3'), '两项的比');
+});
+
 test('符号填空', () => {
   const b = blank('text', '>');
   assert(ok(b, '>'), '>');
@@ -106,4 +117,5 @@ test('标准答案展示', () => {
   assert(A.answerText(blank('real', '(1+√5)/2')) === '$\\frac{1+\\sqrt{5}}{2}$', 'real 分式');
   assert(A.answerText(blank('real', '∛(-8)')) === '$\\sqrt[3]{-8}$', 'real 立方根');
   assert(A.answerText(blank('angle', "36°15'")) === '36°15′', 'angle');
+  assert(A.answerText(blank('ratio', '4:13:31')) === '$4:13:31$', 'ratio');
 });
