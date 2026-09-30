@@ -65,7 +65,7 @@ content/
   english/question-bank.js        从本地错题 PDF 提取的英语试题（待核对）
   english/knowledge.js            英语知识点讲解、steps 判断步骤、例子、commonErrors 带错因反例、连词分类例句与各题型 confusables 易混辨析、自动归类规则（待人工审核）；复习时先讲再练
   english/shanghai-junior-outline.html  由用户提供的上海初中英语学习大纲改成的离线页面；手机端目录可收起、宽表格可单独横向滑动
-  english/shanghai-exam-vocabulary.html  用户提供的上海中考英语词汇总表，独立离线页面，首页英语单词入口打开
+  english/shanghai-exam-vocabulary.html  用户提供的上海中考英语词汇总表，独立离线页面，首页英语单词入口打开；每条带 🔊 朗读（设备自带英文语音，口音跟音标开关；没有英文语音时放有道在线读音）
   english/sh2022/g8s1/            沪教版五四制英语八上，六个 Unit 各一节综合入门（目录标题先英文原题再中文主题；原创阅读 + 重点词标注 + 知识卡 + 分级选择题，待教师审核）
   <其他学科>/                     预留，比如 physics/，结构相同
 tests/

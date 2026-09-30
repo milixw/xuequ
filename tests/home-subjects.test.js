@@ -38,6 +38,38 @@ test('首页英语学习大纲、单词和试题库三个入口依次显示', ()
   assert(app.includes("if (parts[0] === 'english-bank') return englishBankPage(parts[1]);"));
 });
 
+test('英语单词页每条都有朗读按钮，词表写法能整理成可读文本', () => {
+  const vocab = fs.readFileSync(path.join(root, 'content/english/shanghai-exam-vocabulary.html'), 'utf8');
+  assert(vocab.includes('<button class="say" type="button" data-say="'));
+  assert(vocab.includes('speechSynthesis'));
+  assert(vocab.includes('https://dict.youdao.com/dictvoice?audio='));
+  const start = vocab.indexOf('function speakText(en){');
+  const end = vocab.indexOf('\n  }\n', start) + 4;
+  assert(start >= 0 && end > start, '找不到 speakText');
+  const speakText = new Function(vocab.slice(start, end) + '\nreturn speakText;')();
+  const cases = {
+    'Math(s)': 'Maths',
+    'although / though': 'although, though',
+    'at breakfast / lunch /supper': 'at breakfast, lunch, supper',
+    'a lot of (lots of)': 'a lot of, lots of',
+    'go to (the) hospital': 'go to the hospital',
+    'add … to': 'add to',
+    'provide...with': 'provide with',
+    'apologize to sb. for sth.': 'apologize to somebody for something',
+    'change one’s mind': "change one's mind",
+    'so that (': 'so that',
+    'A.M.': 'A.M.',
+  };
+  for (const [en, want] of Object.entries(cases)) {
+    assert(speakText(en) === want, `${en} → ${speakText(en)}，应为 ${want}`);
+  }
+  const data = JSON.parse(vocab.slice(vocab.indexOf('>', vocab.indexOf('<script id="data"')) + 1, vocab.indexOf('</script>', vocab.indexOf('<script id="data"'))));
+  for (const it of data.words.concat(data.phrases)) {
+    const t = speakText(it.en);
+    assert(/^[A-Za-z\u00C0-\u024F][A-Za-z\u00C0-\u024F' ,.-]*$/.test(t), `${it.en} 整理后是 “${t}”`);
+  }
+});
+
 test('英语试题库脚本按依赖顺序加载', () => {
   const ordered = ['content/english/knowledge.js', 'src/english-bank.js', 'src/app.js'];
   let previous = -1;

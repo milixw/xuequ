@@ -101,7 +101,7 @@
   .row{display:grid;grid-template-columns:minmax(150px,270px) 1fr;gap:4px 16px;padding:9px 14px;border-bottom:1px solid #f1f3f6}
   .row:last-child{border-bottom:0}
   .row:hover{background:#fafbfd}
-  .hd{display:flex;flex-wrap:wrap;align-items:baseline;gap:5px 7px;min-width:0}
+  .hd{display:flex;flex-wrap:wrap;align-items:baseline;align-content:flex-start;gap:5px 7px;min-width:0}
   .en{
     font-family:Georgia,"Times New Roman","Songti SC",serif;font-size:16.5px;color:var(--text);
     text-decoration:none;border-bottom:1px solid transparent;word-break:break-word
@@ -136,6 +136,15 @@
   .stag.e{color:#5b7bd5;border-color:#d6e0ff}
   .stag.t{color:#c07a2a;border-color:#f2e0c6}
 
+  /* 朗读按钮：点击区 36px，上下负边距免得把每行撑高 */
+  .say{
+    flex:0 0 auto;align-self:center;width:36px;height:36px;margin:-6px -4px;padding:0;
+    border:0;background:transparent;border-radius:8px;cursor:pointer;font-size:16px;line-height:36px;
+    color:#9aa3b2;-webkit-tap-highlight-color:transparent
+  }
+  .say:hover{background:#eef1f6;color:var(--accent)}
+  .say.on{color:var(--accent);background:var(--accent-soft)}
+
   /* 默写模式 */
   .quiz .cn{filter:blur(5px);cursor:pointer;transition:filter .15s;user-select:none}
   .quiz .cn:hover{filter:blur(2.5px)}
@@ -166,7 +175,7 @@
   }
   @media print{
     body{background:#fff}
-    .toolbar,.srcbar,.alpha,.searchbar,.hint,footer .cred{display:none!important}
+    .toolbar,.srcbar,.alpha,.searchbar,.hint,footer .cred,.say{display:none!important}
     .list{max-height:none;overflow:visible}
     .panel{border:0;box-shadow:none}
     .row{break-inside:avoid;padding:5px 0}
@@ -400,6 +409,68 @@
     syncSrc(); buildAlpha(); render();
   });
 
+  /* ---------- 朗读 ---------- */
+  /* 词表写法整理成能读的文本：斜杠分隔的并列项中间停顿，sb./sth. 读全称，
+     省略号去掉；括号紧跟字母的是词尾（Math(s)），直接去掉括号；括号里有空格的
+     是另一种说法（a lot of (lots of)），前面停顿；其余括号只去掉括号本身 */
+  function speakText(en){
+    return String(en)
+      .replace(/’/g, "'")
+      .replace(/\bsb\./g, 'somebody').replace(/\bsth\./g, 'something')
+      .replace(/…|\.{3}/g, ' ')
+      .replace(/([A-Za-z])\(([a-z]+)\)/g, '$1$2')
+      .replace(/\s*\(([^()]*\s[^()]*)\)/g, ', $1')
+      .replace(/[()]/g, ' ')
+      .replace(/\s*\/\s*/g, ', ')
+      .replace(/\s+,/g, ',').replace(/,(\s*,)+/g, ',')
+      .replace(/\s+/g, ' ').replace(/^[\s,]+|[\s,]+$/g, '');
+  }
+  /* 优先用设备自带的英文语音（离线可用），口音跟音标开关；设备上没有英文语音时改放有道在线读音 */
+  var synth = window.speechSynthesis, voices = [], sayBtn = null, sayAudio = null;
+  var accent = state.ipa === 'us' ? 'us' : 'uk';
+  function loadVoices(){
+    try{ voices = synth.getVoices().filter(function(v){ return /^en/i.test(v.lang); }); }catch(e){ voices = []; }
+  }
+  if(synth){
+    loadVoices();
+    if(synth.addEventListener) synth.addEventListener('voiceschanged', loadVoices);
+    else synth.onvoiceschanged = loadVoices;
+  }
+  function pickVoice(){
+    var want = accent === 'us' ? /^en[-_]US/i : /^en[-_]GB/i;
+    return voices.filter(function(v){ return want.test(v.lang); })[0] || voices[0] || null;
+  }
+  function sayDone(btn){ if(btn) btn.classList.remove('on'); if(sayBtn === btn) sayBtn = null; }
+  function playOnline(text, btn){
+    try{
+      sayAudio = new Audio('https://dict.youdao.com/dictvoice?audio=' + encodeURIComponent(text) +
+                           '&type=' + (accent === 'us' ? 2 : 1));
+      sayAudio.onended = sayAudio.onerror = function(){ sayDone(btn); };
+      var p = sayAudio.play();
+      if(p && p.catch) p.catch(function(){ sayDone(btn); });
+    }catch(e){ sayDone(btn); }
+  }
+  function say(en, btn){
+    if(sayBtn) sayDone(sayBtn);
+    if(sayAudio){ try{ sayAudio.pause(); }catch(e){} sayAudio = null; }
+    if(synth) synth.cancel();
+    sayBtn = btn; btn.classList.add('on');
+    var text = speakText(en), voice = synth && pickVoice();
+    if(!voice){ playOnline(text, btn); return; }
+    var u = new SpeechSynthesisUtterance(text);
+    u.voice = voice; u.lang = voice.lang; u.rate = 0.9;
+    u.onend = function(){ sayDone(btn); };
+    u.onerror = function(e){
+      if(e.error === 'interrupted' || e.error === 'canceled') sayDone(btn);
+      else playOnline(text, btn);
+    };
+    synth.speak(u);
+  }
+  $list.addEventListener('click', function(e){
+    var b = e.target.closest('.say');
+    if(b) say(b.dataset.say, b);
+  });
+
   /* ---------- 音标开关 ---------- */
   function syncIpaSeg(){
     [].forEach.call($ipaseg.children, function(b){ b.classList.toggle('on', b.dataset.ipa === state.ipa); });
@@ -407,6 +478,7 @@
   $ipaseg.addEventListener('click', function(e){
     var b = e.target.closest('button'); if(!b) return;
     state.ipa = b.dataset.ipa;
+    if(state.ipa !== 'off') accent = state.ipa;
     try{ localStorage.setItem('xq.vocab.ipa.v1', state.ipa); }catch(err){}
     syncIpaSeg(); render();
   });
@@ -492,7 +564,9 @@
       }
       var head = '<a class="en" href="https://dict.youdao.com/result?word=' +
                  encodeURIComponent(it.en) + '&lang=en" target="_blank" rel="noopener" title="在线词典查读音">' +
-                 hl(it.en, q) + '</a>';
+                 hl(it.en, q) + '</a>' +
+                 '<button class="say" type="button" data-say="' + esc(it.en) + '" aria-label="朗读 ' +
+                 esc(it.en) + '" title="听发音">🔊</button>';
       var ip = ipaText(it);
       if(isWord){
         if(ip) head += '<span class="ipa">' + esc(ip) + '</span>';
