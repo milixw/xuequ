@@ -138,6 +138,7 @@
     { name: '24 点', tag: '有理数运算', when: '六上第 1 章', icon: '24', color: '#c0513a', href: 'src/games/24/index.html' },
     { name: '数学魔术', tag: '字母表示数', when: '六上第 2 章', icon: '?!', color: '#8a4fb0', href: '#/g/magic' },
     { name: '天平解方程', tag: '等式的性质', when: '六上第 3 章', icon: '=', color: '#3f9a5a', href: '#/g/balance' },
+    { name: '费马点', tag: '距离和最小', when: '七下第 18 章', icon: 'P', color: '#c2417a', href: '#/g/fermat' },
     { name: '函数轨道', tag: '一次、二次函数', when: '八下第 25 章', icon: 'y=', color: '#b46a24', href: 'src/games/function-track/index.html' },
     { name: '取石子', tag: '策略推理', when: '不限年级', icon: '●●', color: '#2f6f7a', href: 'src/games/nim/index.html' },
     { name: '立体图形', tag: '展开图 · 截面', when: '不限年级', icon: '◆', color: '#2f6fd6', href: 'src/games/solids/index.html' },

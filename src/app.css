@@ -848,6 +848,76 @@ a { color: inherit; text-decoration: none; }
 .mg-part .match .card { min-width: 60px; height: 34px; font-size: 16px; }
 .mg-part .words { color: var(--challenge); letter-spacing: 2px; }
 
+/* 费马点（src/games/fermat） */
+.fm-game button {
+  font: inherit; font-size: 14px; color: var(--text); cursor: pointer;
+  min-height: 36px; padding: 0 10px; border-radius: 8px; border: 1px solid var(--line); background: var(--card);
+}
+.fm-game button:disabled { opacity: .4; cursor: default; }
+.fm-game button.go { background: var(--primary); border-color: var(--primary); color: #fff; }
+.fm-levels { display: flex; flex-direction: column; gap: 4px; margin: 4px 0 8px; }
+.fm-chapter { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; }
+.fm-chapter span { font-size: 13px; color: var(--muted); min-width: 44px; }
+.fm-chapter button { min-width: 44px; padding: 0 6px; font-size: 13px; }
+.fm-chapter button.done { background: var(--ok-bg); border-color: #b7dcc0; color: var(--ok); }
+.fm-chapter button.current { outline: 2px solid var(--text); outline-offset: 1px; }
+.fm-title { font-size: 17px; margin: 12px 0 4px; }
+.fm-title small { font-size: 12px; color: #fff; background: var(--challenge); padding: 1px 6px; border-radius: 4px; vertical-align: 2px; }
+.fm-part { background: var(--card); border-radius: 10px; padding: 10px 12px; margin: 8px 0; font-size: 15px; }
+.fm-part > p { margin: 4px 0; }
+.fm-text { background: transparent; padding: 2px 0; }
+.fm-part .stem { font-weight: 600; }
+.fm-part .tip { font-size: 13px; color: var(--muted); }
+.fm-part .row { display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 6px 0; }
+.fm-part .num { min-width: 36px; text-align: center; font-size: 16px; }
+.fm-part input:not([type=range]) {
+  font: inherit; font-size: 16px; min-height: 36px; padding: 0 8px; min-width: 0; width: 7em;
+  border: 1px solid var(--line); border-radius: 8px; background: #fff;
+}
+.fm-part input[type=range] { flex: 1; min-width: 120px; height: 36px; }
+.fm-part input.bad { border-color: var(--fail); }
+.fm-part .opts { display: flex; flex-direction: column; gap: 6px; }
+.fm-part .opts button { text-align: left; padding: 6px 10px; line-height: 1.5; }
+.fm-part .opts button.right { background: var(--ok-bg); border-color: var(--ok); }
+.fm-part .opts button.wrong { background: var(--fail-bg); border-color: #efb9b1; }
+.fm-part .blanks { display: flex; flex-wrap: wrap; gap: 6px 12px; margin: 6px 0; }
+.fm-part .blanks label { display: inline-flex; align-items: center; gap: 6px; }
+.fm-part .blanks span { font-size: 13px; color: var(--muted); }
+.fm-part .fb { font-size: 14px; margin: 6px 0 0; }
+.fm-part .fb:empty { display: none; }
+.fm-part .fb.ok { background: var(--ok-bg); padding: 6px 10px; border-radius: 8px; }
+.fm-part .fb.bad { color: var(--fail); }
+.fm-part .ok { color: var(--ok); font-weight: 600; }
+.fm-part .warn { color: var(--warn); background: var(--warn-bg); padding: 4px 8px; border-radius: 6px; font-size: 14px; }
+.fm-finish { text-align: center; margin: 12px 0; }
+.fm-finish p { color: var(--ok); font-weight: 600; margin: 4px 0; }
+.fm-info { font-size: 14px; font-variant-numeric: tabular-nums; }
+.fm-info p { margin: 3px 0; }
+.fm-wrap { margin: 4px -4px; }
+.fm-board { display: block; width: 100%; height: auto; background: #fbf8f1; border-radius: 8px; touch-action: none; user-select: none; -webkit-user-select: none; }
+.fm-board line, .fm-board polygon { vector-effect: non-scaling-stroke; }
+.fm-board .axis { stroke: var(--muted); stroke-width: 1.5; }
+.fm-board .tick { stroke: var(--muted); stroke-width: 1; }
+.fm-board .shape { fill: #efe8d8; stroke: #c9bfa9; stroke-width: 1; stroke-dasharray: 4 3; }
+.fm-board .tri0 { fill: rgba(47, 111, 214, .12); stroke: none; }
+.fm-board .tri1 { fill: rgba(192, 81, 58, .14); stroke: none; }
+.fm-board .eq { fill: rgba(47, 111, 214, .08); stroke: #9db7e6; stroke-width: 1; }
+.fm-board .diag, .fm-board .guide { stroke: var(--muted); stroke-width: 1; stroke-dasharray: 5 4; }
+.fm-board .road { stroke: #6b5a3a; stroke-width: 4; stroke-linecap: round; }
+.fm-board .d0, .fm-info .d0 { stroke: #2f6fd6; color: #2f6fd6; }
+.fm-board .d1, .fm-info .d1 { stroke: #c0513a; color: #c0513a; }
+.fm-board .d2, .fm-info .d2 { stroke: #2f8a4c; color: #2f8a4c; }
+.fm-board .d3, .fm-info .d3 { stroke: #8a4fb0; color: #8a4fb0; }
+.fm-board line.d0, .fm-board line.d1, .fm-board line.d2, .fm-board line.d3 { stroke-width: 3; stroke-linecap: round; }
+.fm-board .pt { fill: var(--text); }
+.fm-board .fp { fill: #c2417a; }
+.fm-board .house { fill: #6b5a3a; }
+.fm-board .halo { fill: rgba(47, 111, 214, .18); }
+.fm-board .knob { fill: var(--primary); stroke: #fff; stroke-width: 2; }
+.fm-board .lb { font-size: 20px; font-weight: 600; fill: var(--text); text-anchor: middle; font-style: italic; }
+.fm-board .lb.sm { font-size: 16px; font-style: normal; font-weight: 400; fill: var(--muted); }
+.fm-board .lb.fp { fill: #c2417a; }
+
 /* 首页趣味玩法宫格 */
 .fun-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 .fun-tile {

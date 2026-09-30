@@ -196,7 +196,7 @@ Content.catalog = {
                     { no: '18.1', title: '等腰三角形的性质', ready: false },
                     { no: '18.2', title: '等腰三角形的判定', ready: false },
                     { no: '18.3', title: '等边三角形', ready: false },
-                    { no: '18.4', title: '线段的垂直平分线', ready: false },
+                    { no: '18.4', title: '线段的垂直平分线', ready: false, games: ['fermat'] },
                   ],
                 },
               ],

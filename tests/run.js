@@ -10,6 +10,7 @@ require('./24.test.js');
 require('./nim.test.js');
 require('./balance.test.js');
 require('./magic.test.js');
+require('./fermat.test.js');
 require('./accounts.test.js');
 require('./account-ui.test.js');
 require('./english-bank.test.js');
