@@ -81,9 +81,9 @@ Content.catalog = {
                   no: 7,
                   title: '可能性与统计图表',
                   sections: [
-                    { no: '7.1', title: '随机现象及其结果的可能性', ready: false },
-                    { no: '7.2', title: '数据的收集、整理与表达', ready: false },
-                    { no: '7.3', title: '百分数的统计意义', ready: false },
+                    { no: '7.1', title: '随机现象及其结果的可能性', ready: true },
+                    { no: '7.2', title: '数据的收集、整理与表达', ready: true },
+                    { no: '7.3', title: '百分数的统计意义', ready: true },
                   ],
                 },
                 {
