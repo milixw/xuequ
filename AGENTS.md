@@ -32,13 +32,13 @@ index.html                        应用入口（按顺序加载下面的脚本�
 src/
   answer.js                       判分纯函数：精确分数 Frac、数值/多值/代数式/实数（根号、π）/角度/比（ratio，要求最简整数比）的解析与比较、“已化简”检查
   accounts.js                     本地账号（无密码）、按账号保存的考试历史、学期偏好
-  progress.js                     做题进度（小节和真题卷共用）
+  progress.js                     做题进度（小节和真题卷共用）、独立累计答错次数及按提交事件去重
   content.js                      内容注册表：目录查询、学期列表、按需加载小节文件和真题卷文件
   demos.js                        解析里的演示动画（题目的 demo 字段），依赖 DOM
   quiz.js                         做题引擎：题目渲染、作答、判分反馈、解析、快捷输入栏、renderText 排版
   exam.js                         限时测试：会话状态机、计时、交卷判分、结果页
   english-bank.js                 独立英语错题库：知识点介绍、题型筛选、作答与重置
-  english-plan.js                 英语七天复习计划：每日全部原题直接作答、保存草稿、提交后查看错题，以及 A4 打印概览
+  english-plan.js                 英语七天复习计划：每日全部原题直接作答、保存草稿、提交后保存错题打印记录，可切换历史记录及 A4 打印
   account-ui.js                   右上角账号区和登录弹窗
   app.js                          hash 路由和页面：首页（教材、试卷、趣味玩法，另有英语大纲和试题库入口）→ 册 → 小节 / 真题卷 → 做题
   app.css                         全部样式
@@ -62,7 +62,8 @@ content/
     bridge/g6s1/                  六年级衔接：旧版沪教版六年级第一学期的数的整除、分数两章（1.1～2.9），难度按月考真卷定
   exams/
     math/sh2024/g8s1/*.js         真题卷，一份试卷一个文件，路径 = 真题卷 ID
-  english/question-bank.js        从本地错题 PDF 提取的英语试题（待核对）
+  english/question-bank.js        从本地错题 PDF 提取的英语试题，explanation 保存原题解析，缺失为 null（待核对）
+  english/explanation-supplements.js  原 PDF 没有解析但答案明确的题目补充讲解，按题目 ID 索引，review.status 为 pending；不改变原题或答案
   english/knowledge.js            英语知识点讲解、steps 判断步骤、例子、commonErrors 带错因反例、连词分类例句与各题型 confusables 易混辨析、自动归类规则（待人工审核）；复习时先讲再练
   english/shanghai-junior-outline.html  由用户提供的上海初中英语学习大纲改成的离线页面；手机端目录可收起、宽表格可单独横向滑动
   english/shanghai-exam-vocabulary.html  用户提供的上海中考英语词汇总表，独立离线页面，首页英语单词入口打开；每条带 🔊 朗读（优先用设备英文语音，缺少时用有道在线读音）；单词行按词条加载例句，未覆盖的标记待补充
@@ -73,12 +74,15 @@ tests/
   run.js                          测试入口
   harness.js                      极简测试工具（test / warn / assert）
   answer.test.js                  判分逻辑单元测试
+  progress.test.js                累计错误次数、历史提交回填、事件去重、刷新和重置校验
   content.test.js                 内容校验：目录与文件一致、题量配比、字段、公式渲染、答案自检、verify
   english-course.test.js          英语八上六个 Unit 的目录、内容、待审核状态与入口校验
   accounts.test.js                账号、考试历史、学期偏好
   account-ui.test.js              账号区和登录弹窗
   english-bank.test.js            英语题库与知识点归类校验
+  import-english-bank.test.py      PDF 解析提取回归（单独用 Python 运行，需 pdfplumber）；覆盖复合小题、跨页解析和空解析
   english-plan.test.js            七天计划覆盖、路由入口和 A4 打印校验
+  english-plan-retry.test.js      提交记录重做、快照还原、草稿隔离、新记录与错误统计、存储异常及打印校验
   home-subjects.test.js           首页原布局、英语三个入口与词汇例句的离线接入校验
   exam.test.js                    限时测试的计时、判分、会话存取
   function-track.test.js          函数轨道关卡校验
@@ -110,16 +114,19 @@ refs/                             教材 PDF、教辅等参考资料原件，不
 
 ### 页面路由
 
+补回已发布英语题库解析时，使用 `python scripts/import-english-bank.py <PDF目录> --supplement-explanations`，只按文件和原题号更新 `explanation`，保留题干、答案、来源、题目 ID 和审核字段；不要用全量重导覆盖已人工修正的题目。
+
 | hash | 页面 |
 |---|---|
 | `#/` | 首页：右上角切换学期，展示该学期教材、独立试卷入口和趣味玩法；额外保留英语学习大纲、英语单词、英语试题库三个入口（依次排列） |
-| `#/english-plan` / `#/english-plan/<天数>` / `#/english-plan/<天数>/result` | 英语错题七天计划（可打印 A4）、每日完整原题直接作答、提交后的错题与参考答案；不改题目 ID 或原题文本 |
+| `#/english-plan` / `#/english-plan/<天数>` / `#/english-plan/<天数>/result` / `#/english-plan/<天数>/result/<记录ID>` | 英语七天计划、每日作答及按提交时间查看错题；屏幕显示订正答案和解析（旧记录按 ID 补取当前解析），A4 打印只保留原题和题号，不打印答案或解析；不改题目 ID 或原题文本 |
+| `#/english-plan/<天数>/retry/<记录ID>` | 独立重做该提交记录中的错题；按快照恢复原题及答案，草稿不影响每日练习；提交追加新时间点记录（含全对），原记录不变；新错题可继续重做，重做答对题的答案和解析只在屏幕展示、不打印 |
 | `#/v/<册ID>` | 册：章节列表 + 本册的真题卷 |
 | `#/s/<小节ID>` | 小节：知识点 + 题目列表 |
 | `#/q/<小节ID>/<题目ID>` | 做题 |
 | `#/e/<真题卷ID>`、`#/eq/<真题卷ID>/<题目ID>` | 真题卷（按教材小节归类）、做真题 |
 | `#/exam`、`#/exam/...` | 限时测试：列表、答题、结果（未登录会先要求登录） |
-| `#/english-bank`、`#/english-bank/<题目ID>` | 英语试题库：先学知识点，再按题型浏览和作答 |
+| `#/english-bank`、`#/english-bank/<题目ID>` | 英语试题库：先学知识点，再按题型浏览和作答；作答或查看答案后展示解析，重置隐藏解析，原题解析与 AI 补充解析分别标待核对 / 待审核 |
 | `#/g/<游戏ID>`、`#/g/<游戏ID>/<关卡ID>` | 挂在小节上的动手玩游戏，返回键回到小节 |
 
 ### 本地存储
@@ -129,8 +136,11 @@ refs/                             教材 PDF、教辅等参考资料原件，不
 | 键 | 位置 | 内容 |
 |---|---|---|
 | `xq.progress.v2` | localStorage | 做题进度；真题卷用 `exam:<真题卷ID>`、英语试题库用 `english-bank` 作分组 ID，不按账号区分；英语题目可单题重置 |
+| `xq.errors.v1` | localStorage | `{ counts: { [分组ID]: { [题目ID]: 次数 } }, events: { [提交事件ID]: true } }`；累计已判分错答次数，从已保存的七天错题结果补回明确事件并去重。`Progress.errorCount` 查询单题，`errorStats` 返回按次数降序的统计；重置练习不清除累计错误，打印隐藏次数 |
 | `xq.vocab.ipa.v1` / `xq.vocab.src.v1` | localStorage | 独立英语单词页的音标与词表来源偏好；读取时兼容原页面的 `shvocab.ipa` / `shvocab.src` |
 | `xq.english-plan.v1` | localStorage | 英语七天复习每天的选择草稿及最近一次提交结果（错题快照）；不按账号区分 |
+| `xq.english-plan-prints.v1` | localStorage | 七天计划的错题打印记录数组；以天数和提交时间去重，保存题干、知识点、选择和参考答案；每次有效提交（包括零错题）及打开已有结果页时自动保存，不覆盖旧记录；每条有提交时间入口，打印隐藏选择与参考答案 |
+| `xq.english-plan-retry.v1` | localStorage | `{ drafts: { [源记录ID]: 作答 }, submissions: { [新记录ID]: { sourceId, review: [题干、题目ID、知识点、选择、参考答案快照] } } }`；重做仅针对该记录错题，首次空白，草稿独立；提交后保存所有已判分题供查看答案，同时按原格式追加错题打印记录，清空该重做草稿；不改旧存储结构，不覆盖每日最近结果 |
 | `xq.account.v1` | localStorage | 当前登录的账号 `{ name }` |
 | `xq.history.v1.<账号>` | localStorage | 该账号的考试历史，退出登录也保留 |
 | `xq.grade.v1.<账号>` / `xq.grade.v1` | localStorage | 首页选的学期（登录 / 未登录），默认 `g6s1` |

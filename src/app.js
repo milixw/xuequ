@@ -10,7 +10,7 @@
 //   #/exam...           限时测试（src/exam.js 负责渲染）
 //   #/g/<游戏ID>[/<关卡ID>] 挂在小节上的动手玩游戏（window.Games 里注册）
 //   #/english-bank[/<题目ID>] 英语错题库
-//   #/english-plan[/<天数>[/result]] 英语七天复习计划、每日作答与错题结果
+//   #/english-plan[/<天数>[/(result|retry)/<记录ID>]] 英语七天复习计划、每日作答、错题记录与重做
 
 (function () {
   const app = document.getElementById('app');
@@ -484,14 +484,15 @@
     }
   }
 
-  async function englishPlanPage(day, view) {
-    const main = page(view === 'result' ? `第 ${day} 天 · 错题回顾` :
+  async function englishPlanPage(day, view, reportId) {
+    const main = page(view === 'retry' ? `第 ${day} 天 · 错题重做` : view === 'result' ? `第 ${day} 天 · 错题回顾` :
       (day ? `英语复习 · 第 ${day} 天` : '英语 7 天复习计划'),
-      view === 'result' ? `#/english-plan/${day}` :
+      view === 'retry' ? `#/english-plan/${day}/result/${reportId}` : view === 'result' ? `#/english-plan/${day}` :
         (day ? '#/english-plan' : '#/english-bank'), '按知识点复习错题');
     try {
       const questions = await EnglishBank.load();
-      if (day && view === 'result') EnglishPlan.renderResult(main, questions, day);
+      if (day && view === 'retry') EnglishPlan.renderRetry(main, questions, day, reportId);
+      else if (day && view === 'result') EnglishPlan.renderResult(main, questions, day, reportId);
       else if (day) EnglishPlan.renderDay(main, questions, day);
       else EnglishPlan.renderOverview(main, questions);
     } catch (error) {
@@ -505,7 +506,7 @@
     prevParts = parts;
     window.scrollTo(0, 0);
     if (parts[0] === 'english-bank') return englishBankPage(parts[1]);
-    if (parts[0] === 'english-plan') return englishPlanPage(parts[1], parts[2]);
+    if (parts[0] === 'english-plan') return englishPlanPage(parts[1], parts[2], parts[3]);
     if (parts[0] === 'v') return volumePage(parts.slice(1).join('/'));
     if (parts[0] === 's') return sectionPage(parts.slice(1).join('/'));
     if (parts[0] === 'q') return questionPage(parts.slice(1, -1).join('/'), parts[parts.length - 1]);

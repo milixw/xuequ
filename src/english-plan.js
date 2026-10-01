@@ -9,6 +9,8 @@
     ? require('./english-bank.js')
     : root.EnglishBank;
   const STORE_KEY = 'xq.english-plan.v1';
+  const PRINT_KEY = 'xq.english-plan-prints.v1';
+  const RETRY_KEY = 'xq.english-plan-retry.v1';
   const PROGRESS_ID = 'english-bank';
   const DAYS = [
     { title: '连接句意', points: ['connectors'], target: '15 道',
@@ -45,9 +47,104 @@
   }
 
   const state = loadState();
+  const retries = loadRetries();
+
+  function loadRetries() {
+    try {
+      const saved = JSON.parse(root.localStorage.getItem(RETRY_KEY));
+      if (saved && typeof saved === 'object') return { drafts: saved.drafts || {}, submissions: saved.submissions || {} };
+    } catch {}
+    return { drafts: {}, submissions: {} };
+  }
+
+  function saveRetries() {
+    try { root.localStorage.setItem(RETRY_KEY, JSON.stringify(retries)); return true; } catch { return false; }
+  }
+
+  function nextSubmittedAt(dayNumber) {
+    return Math.max(Date.now(), (state.results[dayNumber] && state.results[dayNumber].submittedAt || 0) + 1,
+      ...reportsFor(dayNumber).map(report => (report.submittedAt || 0) + 1));
+  }
+
+  function retryQuestions(report) {
+    return report.wrong.map(wrong => ({ id: wrong.id, text: wrong.text,
+      type: Array.isArray(wrong.answer) ? (BANK.parseCloze(wrong.text) ? 'cloze' : 'reading') : 'choice',
+      answer: Array.isArray(wrong.answer)
+        ? wrong.answer.map((letter, index) => `(${index + 1}) ${letter}`).join(' ') : wrong.answer,
+      sources: [], review: 'pending' }));
+  }
 
   function saveState() {
     try { root.localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch {}
+  }
+
+  function loadReports() {
+    try {
+      const saved = JSON.parse(root.localStorage.getItem(PRINT_KEY));
+      if (Array.isArray(saved)) return saved;
+    } catch {}
+    return [];
+  }
+
+  function createReport(dayNumber, result, questions) {
+    const byId = new Map(questions.map(q => [q.id, q]));
+    return {
+      id: `${dayNumber}-${result.submittedAt || 'legacy'}`,
+      day: Number(dayNumber), submittedAt: result.submittedAt || null,
+      attempted: result.attempted, correct: result.correct,
+      unanswered: result.unanswered, ungradable: result.ungradable,
+      wrong: result.wrong.map(wrong => {
+        const q = byId.get(wrong.id);
+        const point = q && KNOWLEDGE.get(KNOWLEDGE.classify(q));
+        return { ...wrong,
+          selected: Array.isArray(wrong.selected) ? wrong.selected.slice() : wrong.selected,
+          answer: Array.isArray(wrong.answer) ? wrong.answer.slice() : wrong.answer,
+          text: q ? q.text : '此题原文暂不可用，请根据题号查看原题。',
+          topic: point ? point.title : '待核对知识点' };
+      }),
+    };
+  }
+
+  function saveReport(report) {
+    try {
+      const reports = loadReports();
+      if (reports.some(saved => saved.id === report.id)) return true;
+      root.localStorage.setItem(PRINT_KEY, JSON.stringify([...reports, report]));
+      return true;
+    } catch { return false; }
+  }
+
+  function reportsFor(dayNumber) {
+    return loadReports().filter(report => report.day === Number(dayNumber))
+      .sort((a, b) => (b.submittedAt || 0) - (a.submittedAt || 0));
+  }
+
+  function reportDate(report) {
+    return report.submittedAt ? new Date(report.submittedAt).toLocaleString('zh-CN', { hour12: false })
+      : '较早提交';
+  }
+
+  function appendReportLinks(main, dayNumber, activeId) {
+    const reports = reportsFor(dayNumber);
+    if (!reports.length) return;
+    const history = element('nav', 'english-plan-history');
+    history.setAttribute('aria-label', '按提交时间查看错题');
+    history.appendChild(element('h3', null, '提交记录'));
+    for (const report of reports) {
+      const row = element('div', 'english-plan-history-row');
+      const link = element('a', null, `${reportDate(report)} · ${report.wrong.length} 道错题`);
+      link.href = `#/english-plan/${dayNumber}/result/${report.id}`;
+      if (report.id === activeId) link.setAttribute('aria-current', 'page');
+      row.appendChild(link);
+      if (report.wrong.length) {
+        const retry = element('a', 'english-plan-retry-link', '重做');
+        retry.href = `#/english-plan/${dayNumber}/retry/${report.id}`;
+        retry.setAttribute('aria-label', `重做 ${reportDate(report)} 的错题`);
+        row.appendChild(retry);
+      } else row.appendChild(element('span', 'english-plan-count', '无错题可重做'));
+      history.appendChild(row);
+    }
+    main.appendChild(history);
   }
 
   function draftFor(dayNumber) {
@@ -176,14 +273,6 @@
     const note = element('p', 'notice english-plan-note',
       '题目和答案来自 PDF 机器提取，分类也待人工核对。无参考答案的题可讨论，不计入正确率；做题后按第 1、3、7 天间隔重做仍错的题。');
     main.appendChild(note);
-    const primer = element('section', 'english-plan-primer');
-    primer.appendChild(element('h2', 'group', '先学：连词与状语从句'));
-    const primerDetails = element('details', 'english-plan-primer-details');
-    primerDetails.open = true;
-    primerDetails.appendChild(element('summary', null, '完整讲解、连词用法清单与常见错误'));
-    primerDetails.appendChild(root.EnglishBank.knowledgeIntro(KNOWLEDGE.get('connectors')));
-    primer.appendChild(primerDetails);
-    main.appendChild(primer);
     const list = element('div', 'english-plan-days');
     for (const day of plan) {
       const card = element('section', 'english-plan-day');
@@ -197,6 +286,12 @@
       const link = element('a', 'english-plan-day-link', '查看今天的原题 →');
       link.href = `#/english-plan/${day.number}`;
       card.append(heading, topics, target, learn, check, record, link);
+      if (state.results[day.number] || reportsFor(day.number).length) {
+        const saved = element('a', 'english-plan-day-link', '查看已记录的错题 / 打印');
+        saved.href = `#/english-plan/${day.number}/result`;
+        card.appendChild(saved);
+      }
+      appendReportLinks(card, day.number);
       list.appendChild(card);
     }
     main.appendChild(list);
@@ -213,14 +308,90 @@
     const back = element('a', 'english-plan-action', '返回 7 天计划');
     back.href = '#/english-plan';
     main.appendChild(back);
+    if (state.results[day.number] || reportsFor(day.number).length) {
+      const saved = element('a', 'english-plan-action', '查看已记录的错题 / 打印');
+      saved.href = `#/english-plan/${day.number}/result`;
+      const actions = element('div', 'english-plan-actions');
+      actions.appendChild(saved);
+      main.appendChild(actions);
+    }
+    appendReportLinks(main, day.number);
+    renderPracticeForm(main, day, draftFor(day.number), (id, value) => selectAnswer(day.number, id, value), score => {
+      const previous = state.results[day.number];
+      if (previous) saveReport(createReport(day.number, previous, questions));
+      state.results[day.number] = { ...score, submittedAt: nextSubmittedAt(day.number) };
+      const reportId = `${day.number}-${state.results[day.number].submittedAt}`;
+      recordScore(score, reportId);
+      saveReport(createReport(day.number, state.results[day.number], questions));
+      saveState();
+      root.location.hash = `#/english-plan/${day.number}/result`;
+    });
+  }
+
+  function recordScore(score, reportId) {
+    for (const item of score.graded) {
+      root.Progress.record(PROGRESS_ID, item.id, item.correct, `english-plan:${reportId}:${item.id}`);
+    }
+    for (const item of score.wrong) root.Progress.reveal(PROGRESS_ID, item.id);
+  }
+
+  function renderRetry(main, questions, number, reportId) {
+    const report = reportsFor(number).find(item => item.id === reportId);
+    if (!report || !DAYS[Number(number) - 1] || String(Number(number)) !== String(number)) {
+      main.appendChild(element('p', 'notice', '找不到这次提交记录，请从提交记录的重做按钮进入。'));
+      return;
+    }
+    const back = element('a', 'english-plan-action', '返回原提交记录');
+    back.href = `#/english-plan/${number}/result/${reportId}`;
+    main.appendChild(back);
+    if (!report.wrong.length) {
+      main.appendChild(element('p', 'notice', '本次提交没有错题可重做。'));
+      return;
+    }
+    const items = retryQuestions(report);
+    const day = { number: Number(number), groups: [{ questions: items }] };
+    const draft = retries.drafts[reportId] = retries.drafts[reportId] || {};
+    let submitted = false;
+    main.appendChild(element('p', 'english-plan-intro',
+      `重做 ${reportDate(report)} 的 ${items.length} 道错题。选择会独立保存；提交后查看答案与解析，并产生新记录，原记录不变。`));
+    renderPracticeForm(main, day, draft, (id, value) => {
+      draft[id] = value;
+      if (!saveRetries()) warning.textContent = '重做草稿未能保存，离开页面可能丢失。';
+    }, score => {
+      if (submitted) return;
+      const result = { ...score, submittedAt: nextSubmittedAt(number) };
+      const newReport = createReport(number, result, items);
+      const graded = items.filter(q => score.graded.some(item => item.id === q.id)).map(q =>
+        ({ id: q.id, selected: draft[q.id], answer: questionMode(q).answer }));
+      retries.submissions[newReport.id] = { sourceId: reportId,
+        review: createReport(number, { ...result, wrong: graded }, items).wrong };
+      if (!saveRetries() || !saveReport(newReport)) {
+        delete retries.submissions[newReport.id];
+        saveRetries();
+        warning.textContent = '无法保存新提交记录，浏览器存储可能已满或被禁用；你的选择仍保留在当前页面，请稍后重试。';
+        return;
+      }
+      recordScore(score, newReport.id);
+      submitted = true;
+      delete retries.drafts[reportId];
+      saveRetries();
+      root.location.hash = `#/english-plan/${number}/result/${newReport.id}`;
+    }, true);
+    const warning = element('p', 'notice english-plan-save-note');
+    warning.setAttribute('role', 'status');
+    main.appendChild(warning);
+  }
+
+  function renderPracticeForm(main, day, draft, onSelect, onSubmit, retry = false) {
     const form = element('form', 'english-plan-form');
-    const draft = draftFor(day.number);
     let ordinal = 0;
     for (const group of day.groups) {
       if (!group.questions.length) continue;
       const section = element('section', 'english-knowledge-group');
-      section.appendChild(element('h2', 'group', `${group.point.title} · 知识点讲解 · ${group.questions.length} 题`));
-      section.appendChild(root.EnglishBank.knowledgeIntro(group.point));
+      if (!retry) {
+        section.appendChild(element('h2', 'group', `${group.point.title} · 知识点讲解 · ${group.questions.length} 题`));
+        section.appendChild(root.EnglishBank.knowledgeIntro(group.point));
+      }
       for (const q of group.questions) {
         ordinal++;
         const mode = questionMode(q);
@@ -236,7 +407,7 @@
             radio.value = option.letter;
             radio.checked = draft[q.id] === option.letter;
             radio.addEventListener('change', () => {
-              selectAnswer(day.number, q.id, option.letter);
+              onSelect(q.id, option.letter);
               refreshCount();
             });
             label.append(radio, element('span', null, `${option.letter}. ${option.text}`));
@@ -266,10 +437,10 @@
             }
             select.value = Array.isArray(draft[q.id]) ? draft[q.id][index] || '' : '';
             select.addEventListener('change', () => {
-              const values = Array.isArray(draftFor(day.number)[q.id])
-                ? draftFor(day.number)[q.id].slice() : new Array(mode.items.length).fill('');
+              const values = Array.isArray(draft[q.id])
+                ? draft[q.id].slice() : new Array(mode.items.length).fill('');
               values[index] = select.value;
-              selectAnswer(day.number, q.id, values);
+              onSelect(q.id, values);
               refreshCount();
             });
             label.appendChild(select);
@@ -293,81 +464,128 @@
     const footer = element('div', 'english-plan-submit');
     const count = element('p', 'english-plan-count');
     function refreshCount() {
-      const score = gradeDay(day, draftFor(day.number));
+      const score = gradeDay(day, draft);
       count.textContent = `已完整作答 ${score.attempted} / ${score.gradable} 道可判分题` +
         ` · 待答 ${score.unanswered} 道 · 暂不可判分 ${score.ungradable} 道`;
     }
     refreshCount();
-    const submit = element('button', null, '提交本次作答，查看错题');
+    const submit = element('button', null, retry ? '提交重做，查看答案与解析' : '提交本次作答，查看错题');
     submit.type = 'submit';
     footer.append(count, submit);
     form.appendChild(footer);
     form.addEventListener('submit', event => {
       event.preventDefault();
-      const score = gradeDay(day, draftFor(day.number));
+      const score = gradeDay(day, draft);
       if (!score.attempted) {
         count.textContent = score.gradable
           ? '请先完整作答至少一道可判分题，再提交。'
           : '今天暂无可自动判分的题目，请通过原题页练习。';
         return;
       }
-      for (const item of score.graded) root.Progress.record(PROGRESS_ID, item.id, item.correct);
-      for (const item of score.wrong) root.Progress.reveal(PROGRESS_ID, item.id);
-      state.results[day.number] = { ...score, submittedAt: Date.now() };
-      saveState();
-      root.location.hash = `#/english-plan/${day.number}/result`;
+      onSubmit(score);
     });
     main.appendChild(form);
   }
 
-  function renderResult(main, questions, number) {
+  function renderResult(main, questions, number, reportId) {
     const day = buildPlan(questions)[Number(number) - 1];
     if (!day || String(day.number) !== String(number)) {
       main.appendChild(element('p', 'error', '找不到这一天的复习计划。'));
       return;
     }
+    const actions = element('div', 'english-plan-actions');
     const back = element('a', 'english-plan-action', '返回当天题目');
     back.href = `#/english-plan/${day.number}`;
-    main.appendChild(back);
-    const result = state.results[day.number];
-    if (!result) {
+    actions.appendChild(back);
+    main.appendChild(actions);
+    const latest = state.results[day.number];
+    let current = latest && createReport(day.number, latest, questions);
+    const saved = current ? saveReport(current) : true;
+    const reports = reportsFor(day.number);
+    if (current) current = reports.find(report => report.id === current.id) || current;
+    const available = (current ? [current, ...reports.filter(report => report.id !== current.id)] : reports)
+      .sort((a, b) => (b.submittedAt || 0) - (a.submittedAt || 0));
+    if (!available.length) {
       main.appendChild(element('p', 'notice', '这一天还没有提交记录。请先到当天题目页作答并提交。'));
       return;
     }
-    main.appendChild(element('p', 'english-plan-intro',
-      `本次提交 ${result.attempted} 道可判分题：答对 ${result.correct} 道，答错 ${result.wrong.length} 道；` +
-      `未答 ${result.unanswered} 道，暂不可判分 ${result.ungradable} 道。`));
-    if (!result.wrong.length) {
-      main.appendChild(element('p', 'card', '本次提交没有答错的题。未答或无法可靠判分的题不计入错题。'));
+    const print = element('button', 'english-plan-action', '打印 A4 错题');
+    print.type = 'button';
+    print.addEventListener('click', () => root.print());
+    actions.appendChild(print);
+    const selected = reportId ? available.find(report => report.id === reportId) : available[0];
+    appendReportLinks(main, day.number, selected && selected.id);
+    if (!selected) {
+      main.appendChild(element('p', 'notice', '找不到这次提交记录，请通过上方时间入口选择。'));
       return;
     }
-    main.appendChild(element('h2', 'group', '本次答错的原题与参考答案'));
-    const byId = new Map(questions.map(q => [q.id, q]));
-    for (const [index, wrong] of result.wrong.entries()) {
-      const q = byId.get(wrong.id);
-      if (!q) continue;
-      const card = element('article', 'card english-plan-review');
-      card.appendChild(element('h3', null, `错题 ${index + 1} · ${KNOWLEDGE.get(KNOWLEDGE.classify(q)).title}`));
-      card.appendChild(element('p', 'english-plan-question', q.text));
-      if (Array.isArray(wrong.answer)) {
-        card.appendChild(element('p', 'english-plan-your-answer',
-          `你的选择：${wrong.selected.map((value, i) => `(${i + 1}) ${value}`).join('　')}`));
-        card.appendChild(element('p', 'english-plan-correct-answer',
-          `参考答案：${wrong.answer.map((value, i) => `(${i + 1}) ${value}`).join('　')}`));
-      } else {
-        card.appendChild(element('p', 'english-plan-your-answer', `你的选择：${wrong.selected}`));
-        card.appendChild(element('p', 'english-plan-correct-answer', `参考答案：${wrong.answer}`));
-      }
-      const link = element('a', 'english-plan-question-link', '打开原题再练');
-      link.href = `#/english-bank/${q.id}`;
-      card.appendChild(link);
-      main.appendChild(card);
+    if (selected.wrong.length) {
+      const retry = element('a', 'english-plan-action', '重做本次错题');
+      retry.href = `#/english-plan/${day.number}/retry/${selected.id}`;
+      actions.appendChild(retry);
     }
-    main.appendChild(element('p', 'notice', '参考答案由 PDF 机器提取，尚待人工核对；发现疑点时请以原卷为准。'));
+    main.appendChild(element('p', 'notice english-plan-save-note', saved
+      ? '错题记录已保存在此浏览器。下次可从当天题目页进入查看和打印；清除浏览器数据会删除记录。'
+      : '错题记录未能保存，浏览器存储可能已满或被禁用。请先打印或另存为 PDF。'));
+    const output = element('section', 'english-plan-saved-result');
+    const byId = new Map(questions.map(q => [q.id, q]));
+    main.appendChild(output);
+    function showReport(result) {
+      output.textContent = '';
+      output.appendChild(element('p', 'english-plan-record-date', `第 ${day.number} 天 · 提交时间：${reportDate(result)}`));
+      output.appendChild(element('p', 'english-plan-intro',
+        `本次提交 ${result.attempted} 道可判分题：答对 ${result.correct} 道，答错 ${result.wrong.length} 道；` +
+        `未答 ${result.unanswered} 道，暂不可判分 ${result.ungradable} 道。`));
+      if (!result.wrong.length) {
+        output.appendChild(element('p', 'card', '本次提交没有答错的题。未答或无法可靠判分的题不计入错题。'));
+      }
+      if (result.wrong.length) output.appendChild(element('h2', 'group', '本次答错的原题'));
+      for (const [index, wrong] of result.wrong.entries()) {
+        appendReview(wrong, index);
+      }
+      const submission = retries.submissions[result.id];
+      if (submission) {
+        const source = reports.find(report => report.id === submission.sourceId);
+        const sourceLink = element('a', 'english-plan-action english-plan-retry-correct',
+          `查看重做来源：${source ? reportDate(source) : '原提交记录'}`);
+        sourceLink.href = `#/english-plan/${day.number}/result/${submission.sourceId}`;
+        output.appendChild(sourceLink);
+        const wrongIds = new Set(result.wrong.map(item => item.id));
+        const correct = submission.review.filter(item => !wrongIds.has(item.id));
+        if (correct.length) output.appendChild(element('h2', 'group english-plan-retry-correct', '本次重做答对的题 · 答案与解析'));
+        for (const [index, item] of correct.entries()) appendReview(item, result.wrong.length + index, true);
+      }
+      output.appendChild(element('p', 'notice english-plan-answer-note', '参考答案与原题解析由 PDF 机器提取，尚待人工核对；AI 补充解析待教师审核，发现疑点时请以原卷为准。'));
+    }
+    function appendReview(wrong, index, correct = false) {
+        const card = element('article', `card english-plan-review${correct ? ' english-plan-retry-correct' : ''}`);
+        appendQuestion(card, index + 1, wrong.text);
+        card.appendChild(element('p', 'english-error-count',
+          `累计答错 ${root.Progress.errorCount(PROGRESS_ID, wrong.id)} 次`));
+        if (Array.isArray(wrong.answer)) {
+          card.appendChild(element('p', 'english-plan-your-answer',
+            `你的选择：${wrong.selected.map((value, i) => `(${i + 1}) ${value}`).join('　')}`));
+          card.appendChild(element('p', 'english-plan-correct-answer',
+            `参考答案：${wrong.answer.map((value, i) => `(${i + 1}) ${value}`).join('　')}`));
+        } else {
+          card.appendChild(element('p', 'english-plan-your-answer', `你的选择：${wrong.selected}`));
+          card.appendChild(element('p', 'english-plan-correct-answer', `参考答案：${wrong.answer}`));
+        }
+        // 历史快照保留原题；解析按稳定 ID 补取，旧记录无需重新提交。
+        const info = BANK.explanationFor(byId.get(wrong.id));
+        const explanation = element('section', 'english-explanation');
+        explanation.append(element('h4', null, info.title), element('p', null, info.text));
+        card.appendChild(explanation);
+        const link = element('a', 'english-plan-question-link', '打开原题再练');
+        link.href = `#/english-bank/${wrong.id}`;
+        card.appendChild(link);
+        output.appendChild(card);
+    }
+    showReport(selected);
   }
 
   const EnglishPlan = { DAYS, buildPlan, parseChoice, questionMode, gradeDay,
-    renderOverview, renderDay, renderResult };
+    createReport, saveReport, reportsFor, retryQuestions, renderOverview, renderDay, renderRetry, renderResult };
   if (typeof module !== 'undefined') module.exports = EnglishPlan;
   else root.EnglishPlan = EnglishPlan;
 })(this);

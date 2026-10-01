@@ -2,7 +2,7 @@
 """从新东方错题 PDF 导出英语题库；需要 pdfplumber。
 
 用法：python scripts/import-english-bank.py <PDF 目录>
-只导出题目文本和参考答案，不复制含学生信息的原 PDF 或页眉。
+导出题目文本、参考答案和解析，不复制含学生信息的原 PDF 或页眉。
 """
 
 from __future__ import annotations
@@ -71,6 +71,32 @@ def answers_from(text):
     return answers
 
 
+def explanations_from(text):
+    """外层原题号与阅读小题编号分开，防止把下一小题的解析漏掉。"""
+    markers = list(ANSWER.finditer(text))
+    explanations = {}
+    for index, marker in enumerate(markers):
+        end = markers[index + 1].start() if index + 1 < len(markers) else len(text)
+        block = text[marker.end():end]
+        subnumber = re.search(r"\s+(\d+)[.．]\s*答案", marker.group(0))
+        parts = re.split(r"(?m)^\s*(\d+)[.．]\s*答案[:：]?[ \t]*", block)
+        numbered = len(parts) > 1 or subnumber is not None
+        sections = [(int(subnumber.group(1)) if subnumber else 1, parts[0])]
+        sections.extend((int(parts[i]), parts[i + 1]) for i in range(1, len(parts), 2))
+        kept = []
+        for number, section in sections:
+            split = re.split(r"解析\s*[:：]?[ \t]*", section, maxsplit=1)
+            if len(split) < 2:
+                continue
+            explanation = split[1].replace("\x00", "–").strip()
+            if not explanation or explanation in {"无", "暂无", "略", "无解析"}:
+                continue
+            kept.append((f"第 {number} 小题：\n" if numbered else "") + explanation)
+        if kept:
+            explanations[int(marker.group(1))] = "\n\n".join(kept)
+    return explanations
+
+
 def extract(source_dir):
     records = {}
     seen_files = set()
@@ -95,6 +121,7 @@ def extract(source_dir):
         answer_marker = ANSWER.search(text)
         answer_start = answer_marker.start() if answer_marker else len(text)
         answer_map = answers_from(text[answer_start:])
+        explanation_map = explanations_from(text[answer_start:])
         markers = list(QUESTION.finditer(text[:answer_start]))
         stats["question_blocks"] += len(markers)
         for index, marker in enumerate(markers):
@@ -112,10 +139,13 @@ def extract(source_dir):
             key = fingerprint(body)
             source = {"file": path.name, "number": int(marker.group(1)), "page": page_no}
             answer = answer_map.get(source["number"])
+            explanation = explanation_map.get(source["number"])
             if key in records:
                 records[key]["sources"].append(source)
                 if not records[key]["answer"] and answer:
                     records[key]["answer"] = answer
+                if len(explanation or "") > len(records[key].get("explanation") or ""):
+                    records[key]["explanation"] = explanation
                 stats["duplicate_questions"] += 1
                 continue
             records[key] = {
@@ -123,6 +153,7 @@ def extract(source_dir):
                 "type": kind,
                 "text": body,
                 "answer": answer,
+                "explanation": explanation,
                 "sources": [source],
                 "review": "pending",
             }
@@ -141,12 +172,24 @@ def main():
         type=Path,
         default=Path(__file__).resolve().parents[1] / "content" / "english" / "question-bank.js",
     )
+    parser.add_argument("--supplement-explanations", action="store_true",
+                        help="只补充现有输出文件的解析，保留所有已发布题目字段")
     args = parser.parse_args()
     questions, stats = extract(args.source_dir)
+    if args.supplement_explanations:
+        original = args.output.read_text(encoding="utf-8")
+        start = original.index("const questions =") + len("const questions =")
+        existing, _ = json.JSONDecoder().raw_decode(original[start:].lstrip())
+        by_source = {(source["file"], source["number"]): q.get("explanation")
+                     for q in questions for source in q["sources"] if q.get("explanation")}
+        for question in existing:
+            candidates = [by_source.get((s["file"], s["number"])) for s in question["sources"]]
+            question["explanation"] = max((c for c in candidates if c), key=len, default=None)
+        questions = existing
     args.output.parent.mkdir(parents=True, exist_ok=True)
     content = (
         "'use strict';\n"
-        "// 由 scripts/import-english-bank.py 从错题 PDF 提取；文本和答案待人工核对。\n"
+        "// 由 scripts/import-english-bank.py 从错题 PDF 提取；文本、答案和解析待人工核对。\n"
         "(function (root) {\n"
         "  const questions = "
         + json.dumps(questions, ensure_ascii=False, indent=2)
@@ -158,6 +201,7 @@ def main():
     args.output.write_text(content, encoding="utf-8")
     print(f"已导出 {len(questions)} 道，题型 {dict(Counter(q['type'] for q in questions))}")
     print(f"重复文件 {stats['duplicate_files']}，重复题块 {stats['duplicate_questions']}")
+    print(f"有效解析 {sum(bool(q.get('explanation')) for q in questions)} 道；暂无原文解析 {sum(not q.get('explanation') for q in questions)} 道")
     print(args.output)
 
 

@@ -15,7 +15,29 @@
     ['other', '其他'],
   ];
   const PROGRESS_ID = 'english-bank';
+  const SUPPLEMENTS = typeof module !== 'undefined'
+    ? require('../content/english/explanation-supplements.js')
+    : root.EnglishExplanationSupplements;
   let loading;
+
+  function explanationFor(q) {
+    if (q && q.explanation) return { title: '原题解析（待核对）', text: q.explanation };
+    const supplement = q && SUPPLEMENTS && SUPPLEMENTS[q.id];
+    if (supplement) return { title: '补充解析（AI 编写·待审核）', text: supplement.explanation };
+    return { title: '题目解析', text: '原 PDF 未提供可用解析，暂待补充；请勿将尚未核对的答案作为订正依据。' };
+  }
+
+  function explanationNode(q) {
+    const info = explanationFor(q);
+    const section = document.createElement('section');
+    section.className = 'english-explanation';
+    const title = document.createElement('h4');
+    title.textContent = info.title;
+    const body = document.createElement('p');
+    body.textContent = info.text;
+    section.append(title, body);
+    return section;
+  }
 
   function filterQuestions(questions, type, query, knowledge = 'all') {
     const needle = (query || '').trim().toLocaleLowerCase();
@@ -96,7 +118,7 @@
     if (!loading) {
       loading = new Promise((resolve, reject) => {
         const script = document.createElement('script');
-        script.src = 'content/english/question-bank.js';
+        script.src = 'content/english/question-bank.js?v=20261001-explanations';
         script.onload = () => root.EnglishBankQuestions
           ? resolve(root.EnglishBankQuestions)
           : reject(new Error('英语题库数据未注册'));
@@ -113,7 +135,7 @@
   function notice(main) {
     const p = document.createElement('p');
     p.className = 'notice';
-    p.textContent = '题目和参考答案由 PDF 机器提取，尚未人工逐题核对；若发现缺字、排版或配图问题，请以原 PDF 为准。源 PDF 未打包，以免公开学生信息。';
+    p.textContent = '题目、参考答案和原题解析由 PDF 机器提取，尚未人工逐题核对；补充解析由 AI 编写、待教师审核。若发现缺字、排版或配图问题，请以原 PDF 为准。源 PDF 未打包，以免公开学生信息。';
     main.appendChild(p);
   }
 
@@ -225,6 +247,13 @@
     const preview = document.createElement('p');
     preview.textContent = q.text.replace(/\s+/g, ' ').slice(0, 130);
     link.append(heading, preview);
+    const wrongCount = Progress.errorCount(PROGRESS_ID, q.id);
+    if (wrongCount) {
+      const count = document.createElement('small');
+      count.className = 'english-error-count';
+      count.textContent = `累计答错 ${wrongCount} 次`;
+      link.appendChild(count);
+    }
     return link;
   }
 
@@ -346,8 +375,17 @@
 
     const answerBox = document.createElement('section');
     answerBox.className = 'card english-answer';
+    const explanation = explanationNode(q);
+    explanation.hidden = !Progress.get(PROGRESS_ID, q.id);
     const feedback = document.createElement('p');
     feedback.className = 'english-feedback';
+    const errorCount = document.createElement('p');
+    errorCount.className = 'english-error-count';
+    function refreshErrorCount() {
+      errorCount.textContent = `累计答错 ${Progress.errorCount(PROGRESS_ID, q.id)} 次`;
+    }
+    refreshErrorCount();
+    answerBox.appendChild(errorCount);
     let resetInputs = () => {};
     if (cloze) {
       const form = document.createElement('form');
@@ -391,9 +429,11 @@
         }
         const correct = selects.filter((select, i) => select.value === answers[i]).length;
         Progress.record(PROGRESS_ID, q.id, correct === selects.length);
+        refreshErrorCount();
         feedback.textContent = `答对 ${correct} / ${selects.length} 空。` +
           (correct === selects.length ? '全部正确！' : '可以修改选项后再试，或查看参考答案。');
         feedback.className = `english-feedback ${correct === selects.length ? 'ok' : 'fail'}`;
+        explanation.hidden = false;
       });
       resetInputs = () => form.reset();
       answerBox.appendChild(form);
@@ -408,8 +448,10 @@
         button.addEventListener('click', () => {
           const correct = letter === q.answer;
           Progress.record(PROGRESS_ID, q.id, correct);
+          refreshErrorCount();
           feedback.textContent = correct ? '答对了！' : '还不对，可以再试一次或查看参考答案。';
           feedback.className = `english-feedback ${correct ? 'ok' : 'fail'}`;
+          explanation.hidden = false;
         });
         choices.appendChild(button);
       }
@@ -419,11 +461,12 @@
       const reveal = document.createElement('button');
       reveal.type = 'button';
       reveal.className = 'english-reveal';
-      reveal.textContent = '查看参考答案';
+      reveal.textContent = '查看参考答案与解析';
       reveal.addEventListener('click', () => {
         Progress.reveal(PROGRESS_ID, q.id);
         feedback.textContent = `PDF 参考答案（待核对）：${q.answer}`;
         feedback.className = 'english-feedback';
+        explanation.hidden = false;
       });
       answerBox.appendChild(reveal);
     } else {
@@ -435,19 +478,21 @@
     reset.textContent = '重置本题';
     reset.addEventListener('click', () => {
       if (Progress.get(PROGRESS_ID, q.id) &&
-          !window.confirm('重置后将删除这道题的答题和完成记录，确定吗？')) return;
+          !window.confirm('重置后将取消本题的练习进度，累计错误次数和历史提交仍会保留，确定吗？')) return;
       Progress.clear(PROGRESS_ID, q.id);
       resetInputs();
       feedback.textContent = '已重置本题，完成记录已取消。';
       feedback.className = 'english-feedback';
+      explanation.hidden = true;
     });
     answerBox.appendChild(reset);
     answerBox.appendChild(feedback);
+    answerBox.appendChild(explanation);
     main.appendChild(answerBox);
   }
 
   const EnglishBank = { load, listPage, detailPage, knowledgeIntro, filterQuestions, categoryCounts, knowledgeCounts, optionLetters,
-    parseCloze, parseClozeAnswers, TYPES };
+    parseCloze, parseClozeAnswers, explanationFor, explanationNode, TYPES };
   if (typeof module !== 'undefined') module.exports = EnglishBank;
   else root.EnglishBank = EnglishBank;
 })(this);

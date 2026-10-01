@@ -135,14 +135,19 @@ a { color: inherit; text-decoration: none; }
 .english-plan-intro { font-size: 14px; margin: 12px 0; }
 .english-plan-actions { display: flex; flex-wrap: wrap; gap: 8px 16px; }
 .english-plan-action { border: 0; background: none; padding: 0; font: inherit; cursor: pointer; }
-.english-plan-primer { margin-top: 18px; }
-.english-plan-primer .group { margin: 0 0 8px; }
-.english-plan-primer-details > summary {
-  min-height: 40px; padding: 8px 10px; border: 1px solid var(--line);
-  border-radius: 8px; background: var(--card); cursor: pointer;
-  font-size: 13px; font-weight: 600;
+.english-plan-actions .english-plan-action { display: inline-flex; align-items: center; min-height: 36px; }
+.english-plan-history { display: grid; gap: 4px; margin: 12px 0; }
+.english-plan-history h3 { margin: 0; font-size: 14px; }
+.english-plan-history a { display: flex; align-items: center; min-height: 36px; color: var(--primary); font-size: 13px; overflow-wrap: anywhere; }
+.english-plan-history a[aria-current="page"] { font-weight: 700; }
+.english-plan-history-row { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 12px; }
+.english-plan-history-row > a:first-child { flex: 1 1 210px; }
+.english-plan-history-row .english-plan-retry-link {
+  flex: none; justify-content: center; min-width: 48px; padding: 0 10px;
+  border: 1px solid var(--primary); border-radius: 7px; text-decoration: none;
 }
-.english-plan-primer-details > .english-knowledge-intro { margin-top: 8px; }
+.english-plan-record-date { font-size: 13px; color: var(--muted); }
+.english-error-count { font-size: 12px; color: var(--warn); margin: 6px 0; }
 .english-plan-days { display: grid; gap: 9px; margin-top: 14px; }
 .english-plan-day {
   background: var(--card); border: 1px solid var(--line);
@@ -195,6 +200,7 @@ a { color: inherit; text-decoration: none; }
 }
 .english-plan-review .english-plan-your-answer { background: var(--fail-bg); color: var(--fail); }
 .english-plan-review .english-plan-correct-answer { background: var(--ok-bg); color: var(--ok); }
+.english-plan-retry-correct .english-plan-your-answer { background: var(--ok-bg); color: var(--ok); }
 .english-result { border-left: 4px solid var(--line); }
 .english-result.solved { border-left-color: var(--ok); }
 .english-result.tried, .english-result.revealed { border-left-color: var(--warn); }
@@ -218,6 +224,10 @@ a { color: inherit; text-decoration: none; }
 .english-more { display: block; width: 100%; }
 .english-feedback.ok { color: var(--ok); }
 .english-feedback.fail { color: var(--fail); }
+.english-explanation { margin-top: 14px; padding-top: 10px; border-top: 1px dashed var(--line); }
+.english-explanation h4 { margin: 0 0 8px; font-size: 14px; color: var(--primary); }
+.english-explanation p { margin: 0; white-space: pre-wrap; overflow-wrap: anywhere; font-size: 14px; line-height: 1.7; }
+.english-explanation[hidden] { display: none; }
 .english-cloze-note { margin-top: 12px !important; color: var(--warn) !important; }
 .english-cloze-form { display: grid; gap: 10px; }
 .english-cloze-row { display: flex; align-items: center; gap: 10px; font-size: 14px; }
@@ -241,8 +251,7 @@ a { color: inherit; text-decoration: none; }
   body { background: white; color: black; }
   #app { max-width: none; padding: 0; }
   .bar { position: static; margin: 0 0 8px; padding: 0; border: 0; background: white; }
-  .bar .back, .english-plan-actions, .english-plan-day-link, .english-plan-note,
-  .english-plan-primer { display: none !important; }
+  .bar .back, .english-plan-actions, .english-plan-day-link, .english-plan-note { display: none !important; }
   .bar h1 { font-size: 18pt; }
   .english-plan-intro { margin: 4px 0 8px; font-size: 10pt; }
   .english-plan-days { gap: 5px; margin-top: 6px; }
@@ -250,6 +259,14 @@ a { color: inherit; text-decoration: none; }
   .english-plan-day h2 { font-size: 11pt; }
   .english-plan-day p { font-size: 9pt; margin: 2px 0; }
   .english-plan-day .english-plan-topics { color: black; }
+  .english-plan-save-note, .english-plan-history, .english-plan-answer-note, .english-error-count,
+  .english-explanation,
+  .english-plan-retry-correct,
+  .english-plan-review .english-plan-question-link,
+  .english-plan-review .english-plan-your-answer,
+  .english-plan-review .english-plan-correct-answer { display: none !important; }
+  .english-plan-review { box-shadow: none; border: 1px solid #aaa; padding: 10px; break-inside: avoid; }
+  .english-plan-review .english-plan-question { font-size: 10pt; line-height: 1.5; }
 }
 
 /* === 学期切换器 === */

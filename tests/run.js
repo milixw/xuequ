@@ -1,6 +1,7 @@
 'use strict';
 
 require('./answer.test.js');
+require('./progress.test.js');
 require('./content.test.js');
 require('./english-course.test.js');
 require('./exam.test.js');
@@ -15,6 +16,7 @@ require('./accounts.test.js');
 require('./account-ui.test.js');
 require('./english-bank.test.js');
 require('./english-plan.test.js');
+require('./english-plan-retry.test.js');
 require('./home-subjects.test.js');
 
 process.exit(require('./harness').run() ? 1 : 0);

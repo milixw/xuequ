@@ -36,6 +36,84 @@ test('英语题库不包含 PDF 页眉及学生标识', () => {
   assert(!/学号|SH\d{6,}|新东方智慧学习机|英语错题|梁恩铭/.test(text), '疑似包含源 PDF 学生信息');
 });
 
+test('英语原题解析补回并与 AI 待审核讲解区分', () => {
+  const supplements = require('../content/english/explanation-supplements.js');
+  assert(questions.filter(q => q.explanation).length === 430, '原文解析覆盖数量异常');
+  for (const q of questions) {
+    assert(q.explanation === null || typeof q.explanation === 'string');
+    if (q.explanation) {
+      assert(q.explanation !== '无' && bank.explanationFor(q).text === q.explanation);
+      assert(bank.explanationFor(q).title.includes('原题解析'));
+    }
+    if (q.answer) assert(q.explanation || supplements[q.id], `${q.id} 有答案但缺少解析`);
+  }
+  assert(Object.keys(supplements).length === 10);
+  for (const [id, entry] of Object.entries(supplements)) {
+    const q = questions.find(q => q.id === id);
+    assert(q && q.answer && !q.explanation, `${id} 不应覆盖原文解析`);
+    assert(entry.review.status === 'pending' && entry.source === 'ai-supplement');
+    assert(entry.explanation.length > 100 && bank.explanationFor(q).title.includes('AI'));
+  }
+  assert(bank.explanationFor({ id: 'missing' }).text.includes('待补充'));
+  const when = questions.find(q => /I was writing a letter at home/.test(q.text));
+  assert(when.explanation.includes('while') && when.explanation.includes('故选B'));
+  const storytelling = questions.find(q => q.text.startsWith('Storytelling is one of humanity'));
+  assert(storytelling.explanation.includes('oldest') && storytelling.explanation.includes('likely'));
+  const index = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf8');
+  assert(index.indexOf('content/english/explanation-supplements.js') < index.indexOf('src/english-bank.js'));
+});
+
+test('英语答题后显示解析，重新打开保留，重置隐藏', () => {
+  const vm = require('vm');
+  class Node {
+    constructor(tag) { this.tag = tag; this.children = []; this.events = {}; }
+    set textContent(value) { this.text = String(value); this.children = []; }
+    get textContent() { return (this.text || '') + this.children.map(n => n.textContent).join(''); }
+    appendChild(node) { this.children.push(node); return node; }
+    append(...nodes) { this.children.push(...nodes); }
+    setAttribute(key, value) { this[key] = value; }
+    addEventListener(name, handler) { this.events[name] = handler; }
+    all() { return [this, ...this.children.flatMap(n => n.all())]; }
+  }
+  const values = new Map();
+  const context = {
+    EnglishKnowledge: knowledge,
+    EnglishExplanationSupplements: require('../content/english/explanation-supplements.js'),
+    document: { createElement: tag => new Node(tag) },
+    localStorage: { getItem: key => values.get(key) || null, setItem: (key, value) => values.set(key, value) },
+  };
+  context.window = { confirm: () => true };
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../src/progress.js'), 'utf8'), context);
+  vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../src/english-bank.js'), 'utf8'), context);
+  const q = questions.find(q => q.type === 'choice' && q.answer && q.explanation);
+  function open() {
+    const main = new Node('main'); context.EnglishBank.detailPage(main, [q], q.id); return main.all();
+  }
+  const nodes = open();
+  const explanation = nodes.find(n => n.className === 'english-explanation');
+  assert(explanation.hidden, '作答前不能泄露解析');
+  const choice = nodes.find(n => n['aria-label'] === `选择 ${q.answer === 'A' ? 'B' : 'A'}`);
+  choice.events.click();
+  assert(!explanation.hidden && explanation.textContent.includes(q.explanation), '答错后必须显示原解析');
+  assert(!open().find(n => n.className === 'english-explanation').hidden, '刷新后应显示已作答题的解析');
+  nodes.find(n => n.className === 'english-reset').events.click();
+  assert(explanation.hidden, '重置后应隐藏解析');
+  nodes.find(n => n.className === 'english-reveal').events.click();
+  assert(!explanation.hidden, '查看答案也应显示解析');
+  const cloze = questions.find(q => q.text.startsWith('Storytelling is one of humanity'));
+  const clozePage = new Node('main');
+  context.EnglishBank.detailPage(clozePage, [cloze], cloze.id);
+  const clozeNodes = clozePage.all();
+  const clozeExplanation = clozeNodes.find(n => n.className === 'english-explanation');
+  const selects = clozeNodes.filter(n => n.tag === 'select');
+  const form = clozeNodes.find(n => n.tag === 'form');
+  form.events.submit({ preventDefault() {} });
+  assert(clozeExplanation.hidden, '未答完不应展示解析');
+  selects.forEach(select => { select.value = 'A'; });
+  form.events.submit({ preventDefault() {} });
+  assert(!clozeExplanation.hidden && clozeExplanation.textContent.includes(cloze.explanation));
+});
+
 test('英语题库筛选及选项识别', () => {
   const filtered = bank.filterQuestions(questions, 'choice', 'national flag');
   assert(filtered.length > 0 && filtered.every(q => q.type === 'choice' && /national flag/i.test(q.text)));
@@ -179,6 +257,8 @@ test('重置英语本题会取消完成记录且不影响其它题', () => {
   Progress.record(group, first, true);
   Progress.reveal(group, first);
   Progress.record(group, second, false);
+  assert(Progress.errorCount(group, second) > 0);
+  const secondErrors = Progress.errorCount(group, second);
   assert(Progress.status(group, first) === 'solved');
   assert(Progress.clear(group, first) === true);
   assert(Progress.get(group, first) === null);
@@ -188,4 +268,5 @@ test('重置英语本题会取消完成记录且不影响其它题', () => {
   assert(!JSON.parse(localStorage.getItem('xq.progress.v2'))[group][first]);
   assert(Progress.clear(group, first) === false);
   Progress.clear(group, second);
+  assert(Progress.errorCount(group, second) === secondErrors, '重置练习应保留累计错误次数');
 });
