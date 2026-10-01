@@ -65,7 +65,8 @@ content/
   english/question-bank.js        从本地错题 PDF 提取的英语试题（待核对）
   english/knowledge.js            英语知识点讲解、steps 判断步骤、例子、commonErrors 带错因反例、连词分类例句与各题型 confusables 易混辨析、自动归类规则（待人工审核）；复习时先讲再练
   english/shanghai-junior-outline.html  由用户提供的上海初中英语学习大纲改成的离线页面；手机端目录可收起、宽表格可单独横向滑动
-  english/shanghai-exam-vocabulary.html  用户提供的上海中考英语词汇总表，独立离线页面，首页英语单词入口打开；每条带 🔊 朗读（设备自带英文语音，口音跟音标开关；没有英文语音时放有道在线读音）
+  english/shanghai-exam-vocabulary.html  用户提供的上海中考英语词汇总表，独立离线页面，首页英语单词入口打开；每条带 🔊 朗读（优先用设备英文语音，缺少时用有道在线读音）；单词行按词条加载例句，未覆盖的标记待补充
+  english/vocabulary-examples.js   首批常用单词的原创双语例句，review.status 为 pending；不修改原词表与释义
   english/sh2022/g8s1/            沪教版五四制英语八上，六个 Unit 各一节综合入门（目录标题先英文原题再中文主题；原创阅读 + 重点词标注 + 知识卡 + 分级选择题，待教师审核）
   <其他学科>/                     预留，比如 physics/，结构相同
 tests/
@@ -78,7 +79,7 @@ tests/
   account-ui.test.js              账号区和登录弹窗
   english-bank.test.js            英语题库与知识点归类校验
   english-plan.test.js            七天计划覆盖、路由入口和 A4 打印校验
-  home-subjects.test.js           首页原布局与英语三个入口、脚本接入校验
+  home-subjects.test.js           首页原布局、英语三个入口与词汇例句的离线接入校验
   exam.test.js                    限时测试的计时、判分、会话存取
   function-track.test.js          函数轨道关卡校验
   solids.test.js                  立体图形实验室：展开图、圆柱圆锥展开、最短路径、截面、关卡数据

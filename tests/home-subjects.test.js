@@ -43,10 +43,9 @@ test('英语单词页每条都有朗读按钮，词表写法能整理成可读�
   assert(vocab.includes('<button class="say" type="button" data-say="'));
   assert(vocab.includes('speechSynthesis'));
   assert(vocab.includes('https://dict.youdao.com/dictvoice?audio='));
-  const start = vocab.indexOf('function speakText(en){');
-  const end = vocab.indexOf('\n  }\n', start) + 4;
-  assert(start >= 0 && end > start, '找不到 speakText');
-  const speakText = new Function(vocab.slice(start, end) + '\nreturn speakText;')();
+  const speakTextSource = vocab.match(/  function speakText\(en\)\{[\s\S]*?\r?\n  \}/);
+  assert(speakTextSource, '找不到 speakText');
+  const speakText = new Function(speakTextSource[0] + '\nreturn speakText;')();
   const cases = {
     'Math(s)': 'Maths',
     'although / though': 'although, though',
@@ -88,4 +87,26 @@ test('英语大纲适配手机目录和宽表格', () => {
   assert(outline.includes('.table-scroll{max-width:100%;overflow-x:auto;'));
   assert(outline.includes("document.querySelectorAll('table.tbl')"));
   assert(outline.includes('grid-template-columns:246px minmax(0,1fr)'));
+});
+
+test('英语单词页离线展示首批原创例句，未覆盖单词明确标注待补充', () => {
+  const vocab = fs.readFileSync(path.join(root, 'content/english/shanghai-exam-vocabulary.html'), 'utf8');
+  const match = vocab.match(/<script id="data" type="application\/json">([\s\S]*?)<\/script>/);
+  assert(match, '找不到原词表数据');
+  const data = JSON.parse(match[1]);
+  const examples = require('../content/english/vocabulary-examples.js');
+  assert(examples.review.status === 'pending', 'AI 原创例句必须待审核');
+  const keys = Object.keys(examples.entries);
+  assert(keys.length >= 50, '首批应覆盖至少 50 个常用单词');
+  const words = new Set(data.words.map(word => word.en.toLowerCase()));
+  for (const key of keys) {
+    assert(words.has(key), `例句词条 ${key} 不在原词表中`);
+    const pair = examples.entries[key];
+    assert(Array.isArray(pair) && pair.length === 2 && pair[0].trim() && pair[1].trim(), `${key} 缺少双语例句`);
+    assert(pair[0].toLowerCase().includes(key), `${key} 的英文例句未使用目标词`);
+  }
+  assert(vocab.includes('<script src="vocabulary-examples.js"></script>'), '离线例句脚本未加载');
+  assert(vocab.includes('var pair = EXAMPLES[it.en.toLowerCase()]'), '单词行未按词条查找例句');
+  assert(vocab.includes('例句待补充'), '未覆盖词条缺少明确提示');
+  assert(vocab.includes("esc(pair[0])") && vocab.includes("esc(pair[1])"), '例句须安全显示');
 });
