@@ -97,7 +97,8 @@ test('错题打印记录独立保存题干和答案，重复打开不重复，�
   function load() {
     const context = { localStorage: storage, EnglishKnowledge: knowledge,
       EnglishBank: require('../src/english-bank.js') };
-    vm.runInNewContext(source, context);
+    context.LearningStore = require('../src/learning-store.js').create(context.localStorage);
+  vm.runInNewContext(source, context);
     return context.EnglishPlan;
   }
   const api = load();
@@ -140,7 +141,7 @@ test('已有结果页自动记录当前错题，刷新后可脱离题库还原�
   const wrong = mode.options.find(option => option.letter !== mode.answer).letter;
   const submitted = { submittedAt: 1000, attempted: 1, correct: 0, unanswered: 0, ungradable: 0,
     wrong: [{ id: q.id, selected: wrong, answer: mode.answer }] };
-  const values = new Map([['xq.english-plan.v1', JSON.stringify({ drafts: {}, results: { 1: submitted } })]]);
+  const values = new Map([['xq.english-plan.v2.guest', JSON.stringify({ drafts: {}, results: { 1: submitted } })]]);
   const storage = { getItem: key => values.get(key) || null, setItem: (key, value) => values.set(key, value) };
   let prints = 0;
   const source = fs.readFileSync(path.join(__dirname, '../src/english-plan.js'), 'utf8');
@@ -151,8 +152,10 @@ test('已有结果页自动记录当前错题，刷新后可脱离题库还原�
         const node = new Node('#text'); node.textContent = text; return node;
       } },
       print: () => prints++, location: {} };
+    context.LearningStore = require('../src/learning-store.js').create(context.localStorage);
     vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../src/progress.js'), 'utf8'), context);
-    vm.runInNewContext(source, context);
+    context.LearningStore = require('../src/learning-store.js').create(context.localStorage);
+  vm.runInNewContext(source, context);
     const main = new Node('main');
     if (view === 'day') context.EnglishPlan.renderDay(main, bank, 1);
     else context.EnglishPlan.renderResult(main, bank, 1, reportId);
@@ -163,15 +166,15 @@ test('已有结果页自动记录当前错题，刷新后可脱离题库还原�
   assert(page.textContent.includes(plan.questionMode(q).answer));
   assert(page.textContent.includes(require('../src/english-bank.js').explanationFor(q).text), '错题页必须补取题目解析');
   assert(page.textContent.includes('累计答错 1 次'), '现有错题应回填并显示错误次数');
-  assert(JSON.parse(values.get('xq.english-plan-prints.v1')).length === 1, '现有结果应自动保存');
-  const firstReport = JSON.parse(values.get('xq.english-plan-prints.v1'))[0];
-  values.set('xq.english-plan.v1', JSON.stringify({ drafts: { 1: { [q.id]: mode.answer } }, results: { 1: submitted } }));
+  assert(JSON.parse(values.get('xq.english-plan-prints.v2.guest')).length === 1, '现有结果应自动保存');
+  const firstReport = JSON.parse(values.get('xq.english-plan-prints.v2.guest'))[0];
+  values.set('xq.english-plan.v2.guest', JSON.stringify({ drafts: { 1: { [q.id]: mode.answer } }, results: { 1: submitted } }));
   const answerPage = open(questions, undefined, 'day');
   answerPage.find('form').events.submit({ preventDefault() {} });
-  const afterSubmit = JSON.parse(values.get('xq.english-plan-prints.v1'));
+  const afterSubmit = JSON.parse(values.get('xq.english-plan-prints.v2.guest'));
   assert(afterSubmit.length === 2 && afterSubmit[1].wrong.length === 0, '每次有效提交都应留记录，包括全部答对');
   const latestPage = open(questions);
-  assert(JSON.parse(values.get('xq.errors.v1')).counts['english-bank'][q.id] === 1, '答对不能增加错误次数');
+  assert(JSON.parse(values.get('xq.errors.v2.guest')).counts['english-bank'][q.id] === 1, '答对不能增加错误次数');
   const links = latestPage.findAll('a').map(link => link.href);
   for (const report of afterSubmit) {
     assert(links.includes(`#/english-plan/1/result/${report.id}`), '每次提交应有时间点独立入口');
@@ -182,7 +185,7 @@ test('已有结果页自动记录当前错题，刷新后可脱离题库还原�
   const supplemented = open(questions.map(item => item.id === q.id ? { ...item, explanation: '重新补回的原题解析' } : item), firstReport.id);
   assert(supplemented.textContent.includes('重新补回的原题解析'), '旧时间点入口应读取新增解析，无需重新提交');
   assert(historicPage.textContent.includes('待补充'), '题库暂不可用时不应编造解析');
-  values.delete('xq.english-plan.v1');
+  values.delete('xq.english-plan.v2.guest');
   const restored = open([], firstReport.id);
   assert(restored.textContent.includes(q.text), '原题暂不可用时应从打印快照还原');
   assert(restored.textContent.includes(`你的选择：${wrong}`));

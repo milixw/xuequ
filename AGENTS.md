@@ -33,6 +33,7 @@ src/
   answer.js                       判分纯函数：精确分数 Frac、数值/多值/代数式/实数（根号、π）/角度/比（ratio，要求最简整数比）的解析与比较、“已化简”检查
   accounts.js                     本地账号（无密码）、按账号保存的考试历史、学期偏好
   progress.js                     做题进度（小节和真题卷共用）、独立累计答错次数及按提交事件去重
+  learning-store.js               学习数据账号归属、旧共享数据备份与指定账号迁移；未登录访客独立，不回退至他人数据
   content.js                      内容注册表：目录查询、学期列表、按需加载小节文件和真题卷文件
   demos.js                        解析里的演示动画（题目的 demo 字段），依赖 DOM
   quiz.js                         做题引擎：题目渲染、作答、判分反馈、解析、快捷输入栏、renderText 排版
@@ -83,6 +84,7 @@ tests/
   import-english-bank.test.py      PDF 解析提取回归（单独用 Python 运行，需 pdfplumber）；覆盖复合小题、跨页解析和空解析
   english-plan.test.js            七天计划覆盖、路由入口和 A4 打印校验
   english-plan-retry.test.js      提交记录重做、快照还原、草稿隔离、新记录与错误统计、存储异常及打印校验
+  learning-accounts.test.js       账号/访客隔离、同页切换、旧页面拒绝写入、旧共享数据迁移与备份校验
   home-subjects.test.js           首页原布局、英语三个入口与词汇例句的离线接入校验
   exam.test.js                    限时测试的计时、判分、会话存取
   function-track.test.js          函数轨道关卡校验
@@ -135,12 +137,14 @@ refs/                             教材 PDF、教辅等参考资料原件，不
 
 | 键 | 位置 | 内容 |
 |---|---|---|
-| `xq.progress.v2` | localStorage | 做题进度；真题卷用 `exam:<真题卷ID>`、英语试题库用 `english-bank` 作分组 ID，不按账号区分；英语题目可单题重置 |
-| `xq.errors.v1` | localStorage | `{ counts: { [分组ID]: { [题目ID]: 次数 } }, events: { [提交事件ID]: true } }`；累计已判分错答次数，从已保存的七天错题结果补回明确事件并去重。`Progress.errorCount` 查询单题，`errorStats` 返回按次数降序的统计；重置练习不清除累计错误，打印隐藏次数 |
+| `xq.progress.v2` | localStorage | 数学小节和真题卷的共享进度，真题卷用 `exam:<真题卷ID>` 作分组 ID；旧英语分组仅作为迁移备份，不再写入 |
+| `xq.english-progress.v1.<归属>` | localStorage | 英语题库练习进度，结构同旧英语分组，按账号隔离；英语题目可单题重置，重置不清除累计错误 |
+| `xq.errors.v2.<归属>` | localStorage | `{ counts: { [分组ID]: { [题目ID]: 次数 } }, events: { [提交事件ID]: true } }`；按账号记录累计错答次数及事件去重，从本账号七天记录补回明确事件；`Progress.errorCount` 查询单题，`errorStats` 返回次数降序统计；重置不清除，打印隐藏次数；旧 v1 保留备份 |
 | `xq.vocab.ipa.v1` / `xq.vocab.src.v1` | localStorage | 独立英语单词页的音标与词表来源偏好；读取时兼容原页面的 `shvocab.ipa` / `shvocab.src` |
-| `xq.english-plan.v1` | localStorage | 英语七天复习每天的选择草稿及最近一次提交结果（错题快照）；不按账号区分 |
-| `xq.english-plan-prints.v1` | localStorage | 七天计划的错题打印记录数组；以天数和提交时间去重，保存题干、知识点、选择和参考答案；每次有效提交（包括零错题）及打开已有结果页时自动保存，不覆盖旧记录；每条有提交时间入口，打印隐藏选择与参考答案 |
-| `xq.english-plan-retry.v1` | localStorage | `{ drafts: { [源记录ID]: 作答 }, submissions: { [新记录ID]: { sourceId, review: [题干、题目ID、知识点、选择、参考答案快照] } } }`；重做仅针对该记录错题，首次空白，草稿独立；提交后保存所有已判分题供查看答案，同时按原格式追加错题打印记录，清空该重做草稿；不改旧存储结构，不覆盖每日最近结果 |
+| `xq.english-plan.v2.<归属>` | localStorage | 本账号七天复习每日草稿及最近提交结果，切换账号重新加载；未登录独立 |
+| `xq.english-plan-prints.v2.<归属>` | localStorage | 本账号错题打印记录数组；按提交 ID 去重，保留原题、知识点、选择和答案；含零错题记录，每条有时间入口，打印隐藏选择、答案和解析 |
+| `xq.english-plan-retry.v2.<归属>` | localStorage | `{ drafts: { [源记录ID]: 作答 }, submissions: { [新记录ID]: { sourceId, review: [题干、ID、知识点、选择、答案快照] } } }`；本账号独立重做草稿和订正结果，不覆盖每日最近结果；提交清空本轮草稿 |
+| `xq.learning-migration.v1` | localStorage | 旧共享学习数据迁移完成标记。用户指定归入“我是臭恩铭”，首次加载合并并保留旧 v1 键及 `.legacy` 副本；完整写入成功才标记，失败下次加载重试，不给其他账号自动导入 |
 | `xq.account.v1` | localStorage | 当前登录的账号 `{ name }` |
 | `xq.history.v1.<账号>` | localStorage | 该账号的考试历史，退出登录也保留 |
 | `xq.grade.v1.<账号>` / `xq.grade.v1` | localStorage | 首页选的学期（登录 / 未登录），默认 `g6s1` |
@@ -154,6 +158,8 @@ refs/                             教材 PDF、教辅等参考资料原件，不
 | `xq.fermat.v1` | localStorage | 费马点：`{ done: [关卡ID] }` |
 
 ### 编号规则
+
+学习数据的 `<归属>` 为 `user:<encodeURIComponent(账号名)>`，未登录为 `guest`；`.legacy` 是旧共享数据备份，不参与账号或访客读取。七天草稿、提交、重做、英语进度和累计错误均由 `LearningStore` 按当前账号定位，不能回退读取其他人的数据。登录/退出触发路由重绘，模块检测归属变化后重新加载；旧表单检测账号变化后拒绝写入。迁移实现及约定见 `docs/superpowers/specs/2026-10-01-account-learning-data.md`。
 
 - 学科：`math`、以后可能有 `physics`、`chinese` 等
 - 学科：`english` 已接入八年级上册单元内容；英语错题库仍是独立入口

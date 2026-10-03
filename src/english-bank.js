@@ -15,6 +15,8 @@
     ['other', '其他'],
   ];
   const PROGRESS_ID = 'english-bank';
+  const store = typeof module !== 'undefined'
+    ? require('./learning-store.js').create(() => globalThis.localStorage) : root.LearningStore;
   const SUPPLEMENTS = typeof module !== 'undefined'
     ? require('../content/english/explanation-supplements.js')
     : root.EnglishExplanationSupplements;
@@ -337,6 +339,7 @@
   }
 
   function detailPage(main, questions, id) {
+    const owner = store.scope();
     const q = questions.find(item => item.id === id);
     if (!q) {
       const error = document.createElement('p');
@@ -379,6 +382,11 @@
     explanation.hidden = !Progress.get(PROGRESS_ID, q.id);
     const feedback = document.createElement('p');
     feedback.className = 'english-feedback';
+    function unchangedAccount() {
+      if (owner === store.scope()) return true;
+      feedback.textContent = '账号已切换，请重新打开本题后作答。';
+      return false;
+    }
     const errorCount = document.createElement('p');
     errorCount.className = 'english-error-count';
     function refreshErrorCount() {
@@ -418,6 +426,7 @@
       form.appendChild(submit);
       form.addEventListener('submit', event => {
         event.preventDefault();
+        if (!unchangedAccount()) return;
         if (selects.some(select => !select.value)) {
           feedback.textContent = '请先完成每一空，再提交。';
           return;
@@ -446,6 +455,7 @@
         button.textContent = letter;
         button.setAttribute('aria-label', `选择 ${letter}`);
         button.addEventListener('click', () => {
+          if (!unchangedAccount()) return;
           const correct = letter === q.answer;
           Progress.record(PROGRESS_ID, q.id, correct);
           refreshErrorCount();
@@ -463,6 +473,7 @@
       reveal.className = 'english-reveal';
       reveal.textContent = '查看参考答案与解析';
       reveal.addEventListener('click', () => {
+        if (!unchangedAccount()) return;
         Progress.reveal(PROGRESS_ID, q.id);
         feedback.textContent = `PDF 参考答案（待核对）：${q.answer}`;
         feedback.className = 'english-feedback';
@@ -477,6 +488,7 @@
     reset.className = 'english-reset';
     reset.textContent = '重置本题';
     reset.addEventListener('click', () => {
+      if (!unchangedAccount()) return;
       if (Progress.get(PROGRESS_ID, q.id) &&
           !window.confirm('重置后将取消本题的练习进度，累计错误次数和历史提交仍会保留，确定吗？')) return;
       Progress.clear(PROGRESS_ID, q.id);

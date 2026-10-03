@@ -17,6 +17,7 @@ require('./account-ui.test.js');
 require('./english-bank.test.js');
 require('./english-plan.test.js');
 require('./english-plan-retry.test.js');
+require('./learning-accounts.test.js');
 require('./home-subjects.test.js');
 
 process.exit(require('./harness').run() ? 1 : 0);

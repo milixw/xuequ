@@ -83,6 +83,7 @@ test('英语答题后显示解析，重新打开保留，重置隐藏', () => {
     localStorage: { getItem: key => values.get(key) || null, setItem: (key, value) => values.set(key, value) },
   };
   context.window = { confirm: () => true };
+  context.LearningStore = require('../src/learning-store.js').create(context.localStorage);
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../src/progress.js'), 'utf8'), context);
   vm.runInNewContext(fs.readFileSync(path.join(__dirname, '../src/english-bank.js'), 'utf8'), context);
   const q = questions.find(q => q.type === 'choice' && q.answer && q.explanation);
@@ -265,7 +266,7 @@ test('重置英语本题会取消完成记录且不影响其它题', () => {
   assert(Progress.status(group, first) === 'new');
   assert(Progress.status(group, second) === 'tried');
   assert(Progress.solvedCount(group) === 0);
-  assert(!JSON.parse(localStorage.getItem('xq.progress.v2'))[group][first]);
+  assert(!JSON.parse(localStorage.getItem(require('../src/learning-store.js').create(localStorage).key('xq.english-progress.v1')))[group][first]);
   assert(Progress.clear(group, first) === false);
   Progress.clear(group, second);
   assert(Progress.errorCount(group, second) === secondErrors, '重置练习应保留累计错误次数');

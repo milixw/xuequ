@@ -37,7 +37,7 @@ function setup() {
   const report = plan.createReport(6, { submittedAt: 500, attempted: 3, correct: 0,
     unanswered: 0, ungradable: 0, wrong }, fixtures);
   const daily = JSON.stringify({ drafts: { 6: { unrelated: 'B' } }, results: {} });
-  const values = new Map([['xq.english-plan-prints.v1', JSON.stringify([report])], ['xq.english-plan.v1', daily]]);
+  const values = new Map([['xq.english-plan-prints.v2.guest', JSON.stringify([report])], ['xq.english-plan.v2.guest', daily]]);
   const storage = { getItem: key => values.get(key) || null, setItem: (key, value) => values.set(key, value) };
   function open(view, id = report.id, live = fixtures) {
     class FixedDate extends NativeDate { static now() { return 1000; } }
@@ -46,6 +46,7 @@ function setup() {
       document: { createElement: tag => new Node(tag), createTextNode: text => {
         const node = new Node('#text'); node.textContent = text; return node;
       } }, location: {} };
+    context.LearningStore = require('../src/learning-store.js').create(context.localStorage);
     vm.runInNewContext(progress, context);
     vm.runInNewContext(source, context);
     const main = new Node('main');
@@ -91,12 +92,12 @@ test('重做草稿刷新可恢复，与每日草稿独立，未回答不能提�
   const s = setup();
   const page = s.open('retry');
   s.submit(page);
-  assert(JSON.parse(s.values.get('xq.english-plan-prints.v1')).length === 1);
+  assert(JSON.parse(s.values.get('xq.english-plan-prints.v2.guest')).length === 1);
   assert(page.main.textContent.includes('请先完整作答至少一道'));
   s.answer(page, s.fixtures[0], plan.questionMode(s.fixtures[0]).answer);
   const restored = s.open('retry');
   assert(restored.nodes.some(node => node.tag === 'input' && node.checked), '刷新丢失重做选择');
-  assert(s.values.get('xq.english-plan.v1') === s.daily, '重做不能改每日草稿或结果');
+  assert(s.values.get('xq.english-plan.v2.guest') === s.daily, '重做不能改每日草稿或结果');
 });
 
 test('重做提交追加记录、累计错误，新错题可继续重做，原记录不变', () => {
@@ -109,25 +110,25 @@ test('重做提交追加记录、累计错误，新错题可继续重做，原�
   s.answer(page, s.fixtures[1], plan.questionMode(s.fixtures[1]).answer);
   s.submit(page);
   s.submit(page); // 连击不能为同一轮产生两条记录。
-  const records = JSON.parse(s.values.get('xq.english-plan-prints.v1'));
+  const records = JSON.parse(s.values.get('xq.english-plan-prints.v2.guest'));
   assert(records.length === 2 && JSON.stringify(records[0]) === before);
   const added = records[1];
   assert(added.attempted === 2 && added.correct === 1 && added.unanswered === 1 && added.wrong.length === 1);
   assert(page.context.location.hash === `#/english-plan/6/result/${added.id}`);
-  assert(s.values.get('xq.english-plan.v1') === s.daily);
-  assert(!JSON.parse(s.values.get('xq.english-plan-retry.v1')).drafts[s.report.id], '提交后清空本轮草稿');
+  assert(s.values.get('xq.english-plan.v2.guest') === s.daily);
+  assert(!JSON.parse(s.values.get('xq.english-plan-retry.v2.guest')).drafts[s.report.id], '提交后清空本轮草稿');
   const result = s.open('result', added.id);
   assert(result.main.textContent.includes('本次重做答对的题 · 答案与解析'));
   assert(result.main.textContent.includes(bank.explanationFor(s.fixtures[1]).text));
   assert(result.nodes.some(node => node.href === `#/english-plan/6/retry/${added.id}`));
   assert(s.open('result').main.textContent.includes(s.fixtures[0].text), '旧入口须保留原题');
-  assert(JSON.parse(s.values.get('xq.errors.v1')).counts['english-bank'][choice.id] === 2, '原错答与重做错答各计一次');
+  assert(JSON.parse(s.values.get('xq.errors.v2.guest')).counts['english-bank'][choice.id] === 2, '原错答与重做错答各计一次');
   const next = s.open('retry', added.id, []);
   assert(next.nodes.filter(node => node.tag === 'input').every(node => !node.checked));
   assert(next.nodes.filter(node => node.tag === 'select').length === 0, '下轮只能重做新记录的错题');
   s.answer(next, choice, mode.answer);
   s.submit(next);
-  const after = JSON.parse(s.values.get('xq.english-plan-prints.v1'));
+  const after = JSON.parse(s.values.get('xq.english-plan-prints.v2.guest'));
   assert(after.length === 3 && after[2].wrong.length === 0 && after[2].id !== added.id);
   const allCorrect = s.open('result', after[2].id);
   assert(allCorrect.main.textContent.includes(`参考答案：${mode.answer}`), '全对也能查看答案');
@@ -135,7 +136,7 @@ test('重做提交追加记录、累计错误，新错题可继续重做，原�
   assert(s.open('retry', after[2].id).main.textContent.includes('没有错题可重做'));
   const latest = s.open('result', null);
   assert(latest.main.textContent.includes('本次提交没有答错的题'));
-  assert(JSON.parse(s.values.get('xq.errors.v1')).counts['english-bank'][choice.id] === 2, '刷新或答对不能增加错误次数');
+  assert(JSON.parse(s.values.get('xq.errors.v2.guest')).counts['english-bank'][choice.id] === 2, '刷新或答对不能增加错误次数');
 });
 
 test('重做保存失败可重试，无效记录安全提示，打印隐藏答对题和解析', () => {
@@ -147,17 +148,17 @@ test('重做保存失败可重试，无效记录安全提示，打印隐藏答�
   s.answer(page, s.fixtures[0], plan.questionMode(s.fixtures[0]).answer);
   s.submit(page);
   assert(page.main.textContent.includes('无法保存新提交记录'));
-  assert(!page.context.location.hash && JSON.parse(s.values.get('xq.english-plan-prints.v1')).length === 1);
+  assert(!page.context.location.hash && JSON.parse(s.values.get('xq.english-plan-prints.v2.guest')).length === 1);
   s.storage.setItem = (key, value) => {
-    if (key === 'xq.english-plan-prints.v1') throw new Error('print quota');
+    if (key === 'xq.english-plan-prints.v2.guest') throw new Error('print quota');
     setter(key, value);
   };
   s.submit(page);
-  assert(Object.keys(JSON.parse(s.values.get('xq.english-plan-retry.v1')).submissions).length === 0,
+  assert(Object.keys(JSON.parse(s.values.get('xq.english-plan-retry.v2.guest')).submissions).length === 0,
     '错题记录保存失败时应撤销对应重做元数据');
   s.storage.setItem = setter;
   s.submit(page);
-  assert(JSON.parse(s.values.get('xq.english-plan-prints.v1')).length === 2);
+  assert(JSON.parse(s.values.get('xq.english-plan-prints.v2.guest')).length === 2);
   const css = fs.readFileSync(path.join(__dirname, '../src/app.css'), 'utf8');
   assert(css.slice(css.indexOf('@media print')).includes('.english-plan-retry-correct,'));
   const app = fs.readFileSync(path.join(__dirname, '../src/app.js'), 'utf8');
@@ -169,10 +170,10 @@ test('重做复合小题逐空提交，全对记录仍保留，之后每日提�
   const page = s.open('retry');
   for (const q of s.fixtures) s.answer(page, q, plan.questionMode(q).answer);
   s.submit(page);
-  const records = JSON.parse(s.values.get('xq.english-plan-prints.v1'));
+  const records = JSON.parse(s.values.get('xq.english-plan-prints.v2.guest'));
   const report = records[1];
   assert(report.attempted === 3 && report.correct === 3 && report.wrong.length === 0);
-  const review = JSON.parse(s.values.get('xq.english-plan-retry.v1')).submissions[report.id].review;
+  const review = JSON.parse(s.values.get('xq.english-plan-retry.v2.guest')).submissions[report.id].review;
   assert(review.length === 3 && Array.isArray(review[2].answer), '阅读复合小题答案必须保存完整');
   const result = s.open('result', report.id);
   assert(result.main.textContent.includes(s.fixtures[2].text));
@@ -182,6 +183,6 @@ test('重做复合小题逐空提交，全对记录仍保留，之后每日提�
   const selects = daily.nodes.filter(node => node.tag === 'select');
   selects.forEach((select, index) => { select.value = clozeAnswers[index]; select.events.change(); });
   s.submit(daily);
-  const after = JSON.parse(s.values.get('xq.english-plan-prints.v1'));
+  const after = JSON.parse(s.values.get('xq.english-plan-prints.v2.guest'));
   assert(after.length === 3 && after[2].submittedAt > report.submittedAt);
 });

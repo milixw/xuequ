@@ -8,9 +8,11 @@
   const BANK = typeof module !== 'undefined'
     ? require('./english-bank.js')
     : root.EnglishBank;
-  const STORE_KEY = 'xq.english-plan.v1';
-  const PRINT_KEY = 'xq.english-plan-prints.v1';
-  const RETRY_KEY = 'xq.english-plan-retry.v1';
+  const store = typeof module !== 'undefined'
+    ? require('./learning-store.js').create(() => root.localStorage || globalThis.localStorage) : root.LearningStore;
+  const STORE_KEY = 'xq.english-plan.v2';
+  const PRINT_KEY = 'xq.english-plan-prints.v2';
+  const RETRY_KEY = 'xq.english-plan-retry.v2';
   const PROGRESS_ID = 'english-bank';
   const DAYS = [
     { title: '连接句意', points: ['connectors'], target: '15 道',
@@ -38,7 +40,7 @@
 
   function loadState() {
     try {
-      const saved = JSON.parse(root.localStorage.getItem(STORE_KEY));
+      const saved = store.read(STORE_KEY, null, scope);
       if (saved && typeof saved === 'object') {
         return { drafts: saved.drafts || {}, results: saved.results || {} };
       }
@@ -46,19 +48,27 @@
     return { drafts: {}, results: {} };
   }
 
-  const state = loadState();
-  const retries = loadRetries();
+  let scope;
+  let state;
+  let retries;
+  function syncScope() {
+    if (scope === store.scope()) return;
+    scope = store.scope();
+    state = loadState();
+    retries = loadRetries();
+  }
+  syncScope();
 
   function loadRetries() {
     try {
-      const saved = JSON.parse(root.localStorage.getItem(RETRY_KEY));
+      const saved = store.read(RETRY_KEY, null, scope);
       if (saved && typeof saved === 'object') return { drafts: saved.drafts || {}, submissions: saved.submissions || {} };
     } catch {}
     return { drafts: {}, submissions: {} };
   }
 
   function saveRetries() {
-    try { root.localStorage.setItem(RETRY_KEY, JSON.stringify(retries)); return true; } catch { return false; }
+    return store.write(RETRY_KEY, retries, scope);
   }
 
   function nextSubmittedAt(dayNumber) {
@@ -66,21 +76,25 @@
       ...reportsFor(dayNumber).map(report => (report.submittedAt || 0) + 1));
   }
 
-  function retryQuestions(report) {
-    return report.wrong.map(wrong => ({ id: wrong.id, text: wrong.text,
-      type: Array.isArray(wrong.answer) ? (BANK.parseCloze(wrong.text) ? 'cloze' : 'reading') : 'choice',
+  function retryQuestions(report, questions = []) {
+    const byId = new Map(questions.map(q => [q.id, q]));
+    return report.wrong.map(wrong => {
+      const text = wrong.text || byId.get(wrong.id)?.text || '此题原文暂不可用，请根据题号查看原题。';
+      return { id: wrong.id, text,
+      type: Array.isArray(wrong.answer) ? (BANK.parseCloze(text) ? 'cloze' : 'reading') : 'choice',
       answer: Array.isArray(wrong.answer)
         ? wrong.answer.map((letter, index) => `(${index + 1}) ${letter}`).join(' ') : wrong.answer,
-      sources: [], review: 'pending' }));
+      sources: [], review: 'pending' };
+    });
   }
 
   function saveState() {
-    try { root.localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch {}
+    store.write(STORE_KEY, state, scope);
   }
 
   function loadReports() {
     try {
-      const saved = JSON.parse(root.localStorage.getItem(PRINT_KEY));
+      const saved = store.read(PRINT_KEY, null, scope);
       if (Array.isArray(saved)) return saved;
     } catch {}
     return [];
@@ -106,15 +120,16 @@
   }
 
   function saveReport(report) {
+    syncScope();
     try {
       const reports = loadReports();
       if (reports.some(saved => saved.id === report.id)) return true;
-      root.localStorage.setItem(PRINT_KEY, JSON.stringify([...reports, report]));
-      return true;
+      return store.write(PRINT_KEY, [...reports, report], scope);
     } catch { return false; }
   }
 
   function reportsFor(dayNumber) {
+    syncScope();
     return loadReports().filter(report => report.day === Number(dayNumber))
       .sort((a, b) => (b.submittedAt || 0) - (a.submittedAt || 0));
   }
@@ -148,6 +163,7 @@
   }
 
   function draftFor(dayNumber) {
+    syncScope();
     return (state.drafts[dayNumber] = state.drafts[dayNumber] || {});
   }
 
@@ -250,6 +266,17 @@
     return node;
   }
 
+  function accountNotice(main) {
+    const owner = store.current();
+    main.appendChild(element('p', 'notice english-plan-save-note', owner
+      ? `当前学习账号：${owner}。提交记录和错误次数仅保存在本账号中。`
+      : '当前为未登录访客。访客记录独立保存，登录后不会自动归入账号。'));
+    if (owner === '我是臭恩铭' && store.migrationPending()) {
+      main.appendChild(element('p', 'notice english-plan-save-note',
+        '旧共享数据尚未完成迁移，原数据仍保留。请检查浏览器存储空间后刷新重试，暂勿清除浏览器数据。'));
+    }
+  }
+
   function appendQuestion(card, ordinal, text) {
     const line = element('p', 'english-plan-question');
     line.appendChild(element('strong', 'english-plan-number', `第 ${ordinal} 题 · `));
@@ -258,6 +285,8 @@
   }
 
   function renderOverview(main, questions) {
+    syncScope();
+    accountNotice(main);
     const plan = buildPlan(questions);
     const intro = element('p', 'english-plan-intro',
       `题库共 ${questions.length} 道原题，按知识点分到 7 天。每天先完成建议量，其余同类题留作下一轮；这不是要求一周刷完全部题目。`);
@@ -298,6 +327,8 @@
   }
 
   function renderDay(main, questions, number) {
+    syncScope();
+    accountNotice(main);
     const day = buildPlan(questions)[Number(number) - 1];
     if (!day || String(day.number) !== String(number)) {
       main.appendChild(element('p', 'error', '找不到这一天的复习计划。'));
@@ -336,6 +367,8 @@
   }
 
   function renderRetry(main, questions, number, reportId) {
+    syncScope();
+    accountNotice(main);
     const report = reportsFor(number).find(item => item.id === reportId);
     if (!report || !DAYS[Number(number) - 1] || String(Number(number)) !== String(number)) {
       main.appendChild(element('p', 'notice', '找不到这次提交记录，请从提交记录的重做按钮进入。'));
@@ -348,7 +381,7 @@
       main.appendChild(element('p', 'notice', '本次提交没有错题可重做。'));
       return;
     }
-    const items = retryQuestions(report);
+    const items = retryQuestions(report, questions);
     const day = { number: Number(number), groups: [{ questions: items }] };
     const draft = retries.drafts[reportId] = retries.drafts[reportId] || {};
     let submitted = false;
@@ -383,7 +416,13 @@
   }
 
   function renderPracticeForm(main, day, draft, onSelect, onSubmit, retry = false) {
+    const owner = scope;
     const form = element('form', 'english-plan-form');
+    function unchangedAccount() {
+      if (owner === store.scope()) return true;
+      count.textContent = '账号已切换，请刷新或重新打开本页后作答。旧页面不会写入其他账号。';
+      return false;
+    }
     let ordinal = 0;
     for (const group of day.groups) {
       if (!group.questions.length) continue;
@@ -407,6 +446,7 @@
             radio.value = option.letter;
             radio.checked = draft[q.id] === option.letter;
             radio.addEventListener('change', () => {
+              if (!unchangedAccount()) return;
               onSelect(q.id, option.letter);
               refreshCount();
             });
@@ -437,6 +477,7 @@
             }
             select.value = Array.isArray(draft[q.id]) ? draft[q.id][index] || '' : '';
             select.addEventListener('change', () => {
+              if (!unchangedAccount()) return;
               const values = Array.isArray(draft[q.id])
                 ? draft[q.id].slice() : new Array(mode.items.length).fill('');
               values[index] = select.value;
@@ -475,6 +516,7 @@
     form.appendChild(footer);
     form.addEventListener('submit', event => {
       event.preventDefault();
+      if (!unchangedAccount()) return;
       const score = gradeDay(day, draft);
       if (!score.attempted) {
         count.textContent = score.gradable
@@ -488,6 +530,8 @@
   }
 
   function renderResult(main, questions, number, reportId) {
+    syncScope();
+    accountNotice(main);
     const day = buildPlan(questions)[Number(number) - 1];
     if (!day || String(day.number) !== String(number)) {
       main.appendChild(element('p', 'error', '找不到这一天的复习计划。'));
@@ -559,7 +603,7 @@
     }
     function appendReview(wrong, index, correct = false) {
         const card = element('article', `card english-plan-review${correct ? ' english-plan-retry-correct' : ''}`);
-        appendQuestion(card, index + 1, wrong.text);
+        appendQuestion(card, index + 1, wrong.text || byId.get(wrong.id)?.text || '此题原文暂不可用，请根据题号查看原题。');
         card.appendChild(element('p', 'english-error-count',
           `累计答错 ${root.Progress.errorCount(PROGRESS_ID, wrong.id)} 次`));
         if (Array.isArray(wrong.answer)) {

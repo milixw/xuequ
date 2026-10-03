@@ -11,6 +11,7 @@ function progressWith(values) {
     getItem: key => values.get(key) || null,
     setItem: (key, value) => values.set(key, value),
   } };
+  context.LearningStore = require('../src/learning-store.js').create(context.localStorage);
   vm.runInNewContext(source, context);
   return context.Progress;
 }
@@ -38,9 +39,9 @@ test('历史七天错题按提交事件导入去重，新提交重复答错继�
   const result = { submittedAt: 1000, wrong: [{ id: 'q1' }, { id: 'q2' }] };
   const report = { ...result, id: '1-1000', day: 1 };
   const values = new Map([
-    ['xq.english-plan.v1', JSON.stringify({ results: { 1: result } })],
-    ['xq.english-plan-prints.v1', JSON.stringify([report, report])],
-    ['xq.progress.v2', JSON.stringify({ 'english-bank': {
+    ['xq.english-plan.v2.guest', JSON.stringify({ results: { 1: result } })],
+    ['xq.english-plan-prints.v2.guest', JSON.stringify([report, report])],
+    ['xq.english-progress.v1.guest', JSON.stringify({ 'english-bank': {
       q1: { tries: 9, solved: true, revealed: true },
       old: { tries: 3, solved: true, revealed: false },
     } })],
@@ -53,7 +54,7 @@ test('历史七天错题按提交事件导入去重，新提交重复答错继�
   progress.record('english-bank', 'q1', false, 'english-plan:1-2000:q1');
   assert(progress.errorCount('english-bank', 'q1') === 2);
   assert(progress.get('english-bank', 'q1').tries === 10, '同一事件的重复调用不能重复记录尝试');
-  values.set('xq.english-plan-prints.v1', JSON.stringify([report,
+  values.set('xq.english-plan-prints.v2.guest', JSON.stringify([report,
     { id: '1-2000', day: 1, submittedAt: 2000, wrong: [{ id: 'q1' }] }]));
   progress = progressWith(values);
   assert(progress.errorCount('english-bank', 'q1') === 2, '刷新不能再次累加已经统计的新提交');
@@ -61,6 +62,7 @@ test('历史七天错题按提交事件导入去重，新提交重复答错继�
 
 test('浏览器存储不可用时错误统计仍可在当前会话使用', () => {
   const context = { localStorage: { getItem() { throw Error('disabled'); }, setItem() { throw Error('disabled'); } } };
+  context.LearningStore = require('../src/learning-store.js').create(context.localStorage);
   vm.runInNewContext(source, context);
   context.Progress.record('english-bank', 'q', false);
   assert(context.Progress.errorCount('english-bank', 'q') === 1);
