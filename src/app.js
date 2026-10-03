@@ -200,6 +200,7 @@
       { title: '英语学习大纲', desc: '查看上海初中英语知识点梳理', href: 'content/english/shanghai-junior-outline.html' },
       { title: '英语单词', desc: '查询上海中考英语单词和短语', href: 'content/english/shanghai-exam-vocabulary.html' },
       { title: '英语试题库', desc: '按知识点和题型练习错题', href: '#/english-bank' },
+      { title: '英语中考真题', desc: '按年份直接作答上海英语中考文字题', href: '#/english-exams' },
     ]) {
       const link = document.createElement('a');
       link.className = 'card home-english-entry';
@@ -484,6 +485,32 @@
     }
   }
 
+  function englishExamsPage(region, city, year) {
+    if (!region) {
+      const main = page('英语中考真题', '#/', '按地区、城市和年份查看');
+      return EnglishExams.renderRegions(main, EnglishPastPapers, JiangsuEnglishPastPapers);
+    }
+    if (region === 'jiangsu') {
+      const catalog = JiangsuEnglishPastPapers;
+      if (!city) return EnglishExams.renderCities(page('江苏英语中考真题', '#/english-exams', '选择城市'), catalog);
+      const entry = catalog.cities.find(c => c.id === city);
+      if (!entry) return showError(page('未收录这一城市', '#/english-exams/jiangsu'), '请返回江苏城市目录。');
+      const paper = year && EnglishExams.find(catalog, year, city);
+      const main = page(year ? (paper ? paper.title : '未收录这一年份') : entry.name + '英语中考真题',
+        year ? '#/english-exams/jiangsu/' + city : '#/english-exams/jiangsu', '江苏' + entry.name + ' · 网页文字作答');
+      if (year) EnglishExams.renderYear(main, catalog, year, city);
+      else EnglishExams.renderList(main, catalog, city);
+      return;
+    }
+    // Preserve old /<year> bookmarks and Shanghai progress keys.
+    const shanghaiYear = region === 'shanghai' ? city : region;
+    const paper = shanghaiYear && EnglishExams.find(EnglishPastPapers, shanghaiYear);
+    const main = page(shanghaiYear ? (paper ? paper.title : '未收录这一年份') : '上海英语中考真题',
+      shanghaiYear ? '#/english-exams/shanghai' : '#/english-exams', '上海历年原题 · 网页文字作答');
+    if (shanghaiYear) EnglishExams.renderYear(main, EnglishPastPapers, shanghaiYear);
+    else EnglishExams.renderList(main, EnglishPastPapers);
+  }
+
   async function englishPlanPage(day, view, reportId) {
     const main = page(view === 'retry' ? `第 ${day} 天 · 错题重做` : view === 'result' ? `第 ${day} 天 · 错题回顾` :
       (day ? `英语复习 · 第 ${day} 天` : '英语 7 天复习计划'),
@@ -501,11 +528,13 @@
   }
 
   function route() {
+    EnglishExams.stopMedia();
     const parts = (location.hash.slice(1) || '/').split('/').filter(Boolean);
     const prev = prevParts;
     prevParts = parts;
     window.scrollTo(0, 0);
     if (parts[0] === 'english-bank') return englishBankPage(parts[1]);
+    if (parts[0] === 'english-exams') return englishExamsPage(parts[1], parts[2], parts[3]);
     if (parts[0] === 'english-plan') return englishPlanPage(parts[1], parts[2], parts[3]);
     if (parts[0] === 'v') return volumePage(parts.slice(1).join('/'));
     if (parts[0] === 's') return sectionPage(parts.slice(1).join('/'));

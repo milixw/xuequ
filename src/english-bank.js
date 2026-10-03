@@ -266,6 +266,11 @@
     plan.href = '#/english-plan';
     plan.textContent = '查看 7 天错题复习计划（可打印 A4）';
     main.appendChild(plan);
+    const exams = document.createElement('a');
+    exams.className = 'english-plan-entry';
+    exams.href = '#/english-exams';
+    exams.textContent = '英语中考真题 · 上海历年文字题直接作答';
+    main.appendChild(exams);
     const counts = categoryCounts(questions);
     const controls = document.createElement('div');
     controls.className = 'english-controls';

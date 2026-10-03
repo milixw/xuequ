@@ -70,10 +70,31 @@ a { color: inherit; text-decoration: none; }
   background: var(--primary); color: #fff; margin-bottom: 6px;
 }
 
-/* 首页只额外保留英语大纲和试题库两个入口。 */
+/* 首页英语资料入口。 */
 .home-english { margin-top: 18px; }
 .home-english .group { margin: 0 0 8px; }
 .home-english-entry { min-height: 64px; }
+
+/* 英语历年中考文字题，320px 手机优先。 */
+.english-exams-year { margin-top: 14px; }
+.english-exams-meta { overflow-wrap: anywhere; }
+.english-exams-meta { color: var(--muted); font-size: 13px; margin: 10px 0; }
+.english-exams-passage, .english-exams-stem, .english-exams-question .english-explanation {
+  white-space: pre-wrap; overflow-wrap: anywhere;
+}
+.english-exams-passage { border-bottom: 1px solid var(--line); padding-bottom: 14px; margin-bottom: 14px; }
+.english-exams-stem { margin: 0; }
+.english-exams-subquestion + .english-exams-subquestion { border-top: 1px solid var(--line); margin-top: 16px; padding-top: 16px; }
+.english-exams-choices { display: flex; flex-wrap: wrap; gap: 4px 12px; margin: 12px 0; }
+.english-exams-choices label { min-height: 40px; display: inline-flex; align-items: center;
+  flex-wrap: wrap; gap: 4px; max-width: 100%; cursor: pointer; }
+.english-exams-choices input { width: 18px; height: 18px; }
+.english-exams-fill, .english-exams-filter select { min-height: 40px; max-width: 100%;
+  padding: 8px; border: 1px solid var(--line); border-radius: 8px; font: inherit; background: var(--card); }
+.english-exams-filter { margin: 16px 0; }
+.english-exams-question button { min-height: 40px; margin: 8px 8px 0 0; padding: 6px 12px;
+  border: 1px solid var(--line); background: var(--card); color: var(--primary); border-radius: 8px; font: inherit; }
+main > audio { max-width: 100%; }
 
 /* 英语错题库：知识介绍先于题目。 */
 .english-controls { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 16px 0 6px; }

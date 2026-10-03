@@ -15,6 +15,10 @@
   let errors;
   let data = load();
 
+  function isEnglish(sectionId) {
+    return sectionId === 'english-bank' || sectionId.startsWith('english-exam:');
+  }
+
   function syncScope() {
     if (scope === store.scope()) return;
     scope = store.scope();
@@ -69,7 +73,7 @@
   }
 
   function save(sectionId) {
-    if (sectionId === 'english-bank') { store.write('xq.english-progress.v1', englishData, scope); return; }
+    if (isEnglish(sectionId)) { store.write('xq.english-progress.v1', englishData, scope); return; }
     try {
       localStorage.setItem(KEY, JSON.stringify(data));
     } catch {}
@@ -77,7 +81,7 @@
 
   function entry(sectionId, qid) {
     syncScope();
-    const target = sectionId === 'english-bank' ? englishData : data;
+    const target = isEnglish(sectionId) ? englishData : data;
     const s = (target[sectionId] = target[sectionId] || {});
     return (s[qid] = s[qid] || { tries: 0, solved: false, revealed: false });
   }
@@ -85,7 +89,7 @@
   const Progress = {
     get(sectionId, qid) {
       syncScope();
-      return ((sectionId === 'english-bank' ? englishData : data)[sectionId] || {})[qid] || null;
+      return ((isEnglish(sectionId) ? englishData : data)[sectionId] || {})[qid] || null;
     },
 
     record(sectionId, qid, correct, eventId) {
@@ -124,7 +128,7 @@
     // 删除练习进度，累计错误次数独立保留，不影响同组其它题。
     clear(sectionId, qid) {
       syncScope();
-      const target = sectionId === 'english-bank' ? englishData : data;
+      const target = isEnglish(sectionId) ? englishData : data;
       const section = target[sectionId];
       if (!section || !Object.prototype.hasOwnProperty.call(section, qid)) return false;
       delete section[qid];
@@ -144,7 +148,7 @@
 
     solvedCount(sectionId) {
       syncScope();
-      return Object.values((sectionId === 'english-bank' ? englishData : data)[sectionId] || {}).filter(e => e.solved).length;
+      return Object.values((isEnglish(sectionId) ? englishData : data)[sectionId] || {}).filter(e => e.solved).length;
     },
   };
 

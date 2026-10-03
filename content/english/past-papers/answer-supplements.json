@@ -1,0 +1,24 @@
+{
+  "2018": {
+    "sourceSha256": "281d876f539982c8ace2d6def95f9d60f0ecb7d62912b010adbcb7e1aff6251d",
+    "answerSource": {
+      "kind": "public-supplement",
+      "urls": [
+        "https://www.xuebawang.net/t/43202",
+        "https://www.yeyulingfeng.com/wendang/146650.html"
+      ],
+      "checkedAt": "2026-10-03",
+      "review": { "status": "pending" }
+    },
+    "answers": {
+      "27": "A", "28": "A", "29": "B", "30": "D", "31": "B",
+      "32": "D", "33": "D", "34": "A", "35": "C", "36": "A",
+      "37": "C", "38": "D", "39": "C", "40": "B", "41": "D",
+      "42": "B", "43": "B", "44": "A", "45": "C",
+      "54": "stamps", "55": "sixth", "56": "herself", "57": "unusual",
+      "58": "seriously", "60": "forget", "61": "careless",
+      "69": "C", "70": "A", "71": "D", "73": "B", "74": "A",
+      "75": "D", "76": "B", "77": "C", "80": "B"
+    }
+  }
+}

@@ -40,6 +40,7 @@ src/
   exam.js                         限时测试：会话状态机、计时、交卷判分、结果页
   english-bank.js                 独立英语错题库：知识点介绍、题型筛选、作答与重置
   english-plan.js                 英语七天复习计划：每日全部原题直接作答、保存草稿、提交后保存错题打印记录，可切换历史记录及 A4 打印
+  english-exams.js                上海及江苏英语中考文字题：地区 → 城市 → 年份目录，阅读/完形合并作答、原答案与解析、按账号累计错误；不展示图片或 Word
   account-ui.js                   右上角账号区和登录弹窗
   app.js                          hash 路由和页面：首页（教材、试卷、趣味玩法，另有英语大纲和试题库入口）→ 册 → 小节 / 真题卷 → 做题
   app.css                         全部样式
@@ -69,6 +70,10 @@ content/
   english/shanghai-junior-outline.html  由用户提供的上海初中英语学习大纲改成的离线页面；手机端目录可收起、宽表格可单独横向滑动
   english/shanghai-exam-vocabulary.html  用户提供的上海中考英语词汇总表，独立离线页面，首页英语单词入口打开；每条带 🔊 朗读（优先用设备英文语音，缺少时用有道在线读音）；单词行按词条加载例句，未覆盖的标记待补充
   english/vocabulary-examples.js   首批常用单词的原创双语例句，review.status 为 pending；不修改原词表与释义
+  english/past-papers/catalog.js   上海历年中考原题文字数据，保留原资料题号、题干、选项、答案、解析及来源 SHA-256；目前部分导入，回忆版和缺失内容明确标注，review.status 为 pending
+  english/past-papers/answer-supplements.json  上海原文件缺答案时经公开资料核对的补充表，仅供导入脚本使用；关联原文件 SHA-256，答案来源网址与核对日期写入 answerSource，待教师审核
+  english/past-papers/jiangsu.js   江苏 13 城市原题文字数据，按 city / year 定位；资料无法可靠提取的年份标待补充，同篇阅读/完形在界面合并，原小题 ID 保持稳定
+  english/past-papers/<年份>/      仅存听力媒体，不用 PDF、图片、Word 链接代替网页题目；原件本地参考放 refs/english-past-papers/
   english/sh2022/g8s1/            沪教版五四制英语八上，六个 Unit 各一节综合入门（目录标题先英文原题再中文主题；原创阅读 + 重点词标注 + 知识卡 + 分级选择题，待教师审核）
   <其他学科>/                     预留，比如 physics/，结构相同
 tests/
@@ -86,6 +91,9 @@ tests/
   english-plan-retry.test.js      提交记录重做、快照还原、草稿隔离、新记录与错误统计、存储异常及打印校验
   learning-accounts.test.js       账号/访客隔离、同页切换、旧页面拒绝写入、旧共享数据迁移与备份校验
   home-subjects.test.js           首页原布局、英语三个入口与词汇例句的离线接入校验
+  english-exams.test.js           历年文字题数据、原题标记、路由入口、判分、账号隔离及无原件展示校验
+  import-english-past-papers.test.py  原题文字提取回归（单独 Python 运行，需 pypdf、python-docx）：旧 Word 题号、原答案、下划线、图片依赖和缺失题干
+  import-jiangsu-english.test.py   江苏解析回归（单独 Python 运行）：行内答案、交错解析、文章分组、缺图与重复题号跳过
   exam.test.js                    限时测试的计时、判分、会话存取
   function-track.test.js          函数轨道关卡校验
   solids.test.js                  立体图形实验室：展开图、圆柱圆锥展开、最短路径、截面、关卡数据
@@ -120,7 +128,9 @@ refs/                             教材 PDF、教辅等参考资料原件，不
 
 | hash | 页面 |
 |---|---|
-| `#/` | 首页：右上角切换学期，展示该学期教材、独立试卷入口和趣味玩法；额外保留英语学习大纲、英语单词、英语试题库三个入口（依次排列） |
+| `#/` | 首页：右上角切换学期，展示该学期教材、独立试卷入口和趣味玩法；额外保留英语学习大纲、英语单词、英语试题库、英语中考真题四个入口（依次排列） |
+| `#/english-exams` / `#/english-exams/shanghai` | 中考地区目录 / 上海年份目录；旧 `#/english-exams/<年份>` 与 `#/english-exams/shanghai/<年份>` 均可作答上海题目 |
+| `#/english-exams/jiangsu` / `#/english-exams/jiangsu/<城市ID>` / `#/english-exams/jiangsu/<城市ID>/<年份>` | 江苏城市目录 → 年份目录 → 原题作答；按城市隔离试卷，同篇阅读/完形合为一道大题、文章显示一次、全部小题统一提交，原小题 ID 和逐题错误统计不变；无答案不评分，无法提取的年份标待补充 |
 | `#/english-plan` / `#/english-plan/<天数>` / `#/english-plan/<天数>/result` / `#/english-plan/<天数>/result/<记录ID>` | 英语七天计划、每日作答及按提交时间查看错题；屏幕显示订正答案和解析（旧记录按 ID 补取当前解析），A4 打印只保留原题和题号，不打印答案或解析；不改题目 ID 或原题文本 |
 | `#/english-plan/<天数>/retry/<记录ID>` | 独立重做该提交记录中的错题；按快照恢复原题及答案，草稿不影响每日练习；提交追加新时间点记录（含全对），原记录不变；新错题可继续重做，重做答对题的答案和解析只在屏幕展示、不打印 |
 | `#/v/<册ID>` | 册：章节列表 + 本册的真题卷 |
@@ -138,7 +148,7 @@ refs/                             教材 PDF、教辅等参考资料原件，不
 | 键 | 位置 | 内容 |
 |---|---|---|
 | `xq.progress.v2` | localStorage | 数学小节和真题卷的共享进度，真题卷用 `exam:<真题卷ID>` 作分组 ID；旧英语分组仅作为迁移备份，不再写入 |
-| `xq.english-progress.v1.<归属>` | localStorage | 英语题库练习进度，结构同旧英语分组，按账号隔离；英语题目可单题重置，重置不清除累计错误 |
+| `xq.english-progress.v1.<归属>` | localStorage | 英语题库及中考文字题练习进度，结构同旧英语分组，按账号隔离；上海中考分组保持 `english-exam:<年份>`，江苏分组为 `english-exam:js-<城市ID>-<年份>`；英语题库可单题重置，重置不清除累计错误 |
 | `xq.errors.v2.<归属>` | localStorage | `{ counts: { [分组ID]: { [题目ID]: 次数 } }, events: { [提交事件ID]: true } }`；按账号记录累计错答次数及事件去重，从本账号七天记录补回明确事件；`Progress.errorCount` 查询单题，`errorStats` 返回次数降序统计；重置不清除，打印隐藏次数；旧 v1 保留备份 |
 | `xq.vocab.ipa.v1` / `xq.vocab.src.v1` | localStorage | 独立英语单词页的音标与词表来源偏好；读取时兼容原页面的 `shvocab.ipa` / `shvocab.src` |
 | `xq.english-plan.v2.<归属>` | localStorage | 本账号七天复习每日草稿及最近提交结果，切换账号重新加载；未登录独立 |
@@ -160,6 +170,14 @@ refs/                             教材 PDF、教辅等参考资料原件，不
 ### 编号规则
 
 学习数据的 `<归属>` 为 `user:<encodeURIComponent(账号名)>`，未登录为 `guest`；`.legacy` 是旧共享数据备份，不参与账号或访客读取。七天草稿、提交、重做、英语进度和累计错误均由 `LearningStore` 按当前账号定位，不能回退读取其他人的数据。登录/退出触发路由重绘，模块检测归属变化后重新加载；旧表单检测账号变化后拒绝写入。迁移实现及约定见 `docs/superpowers/specs/2026-10-01-account-learning-data.md`。
+
+上海英语中考文字题提取使用 `python scripts/import-english-past-papers.py <中考真题目录> <网盘下载目录>`，依赖 pdfplumber 环境中的 pypdf 和 python-docx；旧 .doc 由 `scripts/word-binary-text.py` 读取主文字流。不得凭答案生成缺失题干，不可靠识别的下划线、图片依赖题或选项先跳过。私用字体的英文撇号恢复成可见撇号，源下划线保留为 `[[u]]...[[/u]]`，界面纯文本转义，只解释下划线标记。来源文件不作为运行时链接。新增导入保留已发布 ID `sh<年份>-q<原资料题号>`，不要全量覆盖人工订正，设计见 `docs/superpowers/specs/2026-10-03-english-past-papers.md`。
+
+江苏使用 `python scripts/import-jiangsu-english.py <中考真题目录> <网盘下载目录>`，额外用本地 7-Zip 读取压缩包内文档，临时提取目录限在工作区 `tmp/pdfs/jiangsu/` 并校验成员路径，不执行压缩包内容；源文件 SHA-256 去重，优先可读文字与原解析，重复小题号导致答案关联不清时跳过。试卷 ID 为 `js-<城市ID>-<年份>`、题目 ID 为 `<试卷ID>-q<原资料题号>`，复导保留原 ID 和人工修改，来源变动拒绝静默替换。13 城市 ID 为 nanjing、wuxi、xuzhou、changzhou、suzhou、nantong、lianyungang、huaian、yancheng、zhenjiang、yangzhou、taizhou、suqian。设计与导入限制见 `docs/superpowers/specs/2026-10-03-jiangsu-english-exams.md`。
+
+補齐上海答案使用 `python scripts/import-english-past-papers.py <中考真题目录> <网盘下载目录> --supplement-answers`，验证来源 SHA-256 后仅补 `answer: null`，不改题干、选项、ID、已有答案、解析或审核状态。2017 年两题取本地原答案表；2018 年 35 题取 `answer-supplements.json` 中两份公开资料核对的答案，`answerSource: { kind: 'public-supplement', urls: [...], checkedAt, review: { status: 'pending' } }` 保存来源，屏幕与本地原答案分别标注，不冒充官方答案；复导保留补充字段与说明。当前上海已导入 253 小题均有参考答案，不代表完整试卷或教师已审核。
+
+补齐已导入江苏题目的原答案使用同一命令加 `--supplement-answers`，仅补 `answer: null` 及相应缺失原解析，先验证来源 SHA-256；支持紧凑答案表、题号范围与原解析中的明确“故选”，冲突不猜。保留题干、选项、题号、ID、已有答案和人工订正。当前 1,493 个已导入江苏作答项均有原资料参考答案，仍待教师审核，不代表整卷导入。
 
 - 学科：`math`、以后可能有 `physics`、`chinese` 等
 - 学科：`english` 已接入八年级上册单元内容；英语错题库仍是独立入口
