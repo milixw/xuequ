@@ -976,3 +976,22 @@ main > audio { max-width: 100%; }
   font-style: normal; font-size: 11px; color: var(--primary); background: #e6eefc;
   border-radius: 8px; padding: 0 6px; margin-top: 3px; white-space: nowrap;
 }
+/* 上海语文/数学原题：长文保留行序，公式不撑破手机页面。 */
+.subject-papers-question { min-width: 0; }
+.subject-papers-text { white-space: normal; overflow-wrap: anywhere; overflow-x: auto; line-height: 1.85; }
+.subject-papers-response { display: block; width: 100%; box-sizing: border-box; min-height: 72px; margin: 12px 0; padding: 10px; font: inherit; resize: vertical; }
+.subject-papers-filter { min-height: 40px; max-width: 100%; margin-bottom: 16px; font: inherit; }
+.subject-papers-dot { text-emphasis-style: dot; text-emphasis-position: under; }
+.subject-papers-question button { min-height: 40px; margin: 8px 8px 8px 0; }
+.subject-papers-image { display: block; max-width: 100%; min-height: 36px; margin: 10px 0; }
+.subject-papers-image img { display: block; width: auto; max-width: 100%; height: auto; background: white; }
+@media print {
+  .subject-papers-question form input, .subject-papers-question form textarea,
+  .subject-papers-question form button, .subject-papers-question form > p,
+  .subject-papers-question .english-explanation,
+  .subject-papers-question .english-feedback, .subject-papers-image-hint,
+  .subject-papers-filter { display: none !important; }
+  .subject-papers-question { break-inside: auto; box-shadow: none; }
+  .subject-papers-image { break-inside: avoid; }
+  .subject-papers-image img { max-width: 100%; max-height: 250mm; object-fit: contain; }
+}

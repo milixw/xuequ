@@ -20,5 +20,6 @@ require('./english-plan-retry.test.js');
 require('./learning-accounts.test.js');
 require('./home-subjects.test.js');
 require('./english-exams.test.js');
+require('./subject-papers.test.js');
 
 process.exit(require('./harness').run() ? 1 : 0);

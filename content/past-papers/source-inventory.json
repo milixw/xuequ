@@ -1,0 +1,609 @@
+{
+  "scannedAt": "2026-10-04",
+  "roots": [
+    "download",
+    "netdisk"
+  ],
+  "sources": [
+    {
+      "sha256": "5087f691003a57cef5d5027649231fe02d92e8014595f53fba88d2420325170e",
+      "year": 2023,
+      "subject": "math",
+      "paths": [
+        {
+          "root": "download",
+          "file": "2023年上海市中考数学试卷.pdf"
+        }
+      ],
+      "status": "partial-imported",
+      "paperId": "sh-math-2023",
+      "questionCount": 12
+    },
+    {
+      "sha256": "63c7bc76edeb02a626472cbf2135595a5228b1b0e30a0eadf3a7ca5adf821fc0",
+      "year": 2023,
+      "subject": "chinese",
+      "paths": [
+        {
+          "root": "download",
+          "file": "2023年上海市中考语文试卷.pdf"
+        }
+      ],
+      "status": "partial-imported",
+      "paperId": "sh-chinese-2023",
+      "questionCount": 5
+    },
+    {
+      "sha256": "03af4b5b06ee6b03645adca76238291d7f971d312531dd7090a83dba6765de8d",
+      "year": 2024,
+      "subject": "math",
+      "paths": [
+        {
+          "root": "download",
+          "file": "2024年上海市中考数学试卷.pdf"
+        }
+      ],
+      "status": "partial-imported",
+      "paperId": "sh-math-2024",
+      "questionCount": 13
+    },
+    {
+      "sha256": "9d810165b01fbef526750090c203e48ba8b908f73aca8a58e712b0dfe2a2e870",
+      "year": 2024,
+      "subject": "chinese",
+      "paths": [
+        {
+          "root": "download",
+          "file": "2024年上海市中考语文试卷.pdf"
+        }
+      ],
+      "status": "partial-imported",
+      "paperId": "sh-chinese-2024",
+      "questionCount": 5
+    },
+    {
+      "sha256": "f8b95c38bfa87a3fe7ab5f3df4a06d5c3302efc91748a5b1a643c6d60190ff8a",
+      "year": 2025,
+      "subject": "math",
+      "paths": [
+        {
+          "root": "download",
+          "file": "2025年上海市中考数学试卷（回忆版）.pdf"
+        }
+      ],
+      "status": "partial-imported",
+      "paperId": "sh-math-2025",
+      "questionCount": 13
+    },
+    {
+      "sha256": "e2f375bd85855aab33aaf66d77c58cabacb289944c84d53e0d75bda9fb259c2c",
+      "year": 2025,
+      "subject": "chinese",
+      "paths": [
+        {
+          "root": "download",
+          "file": "2025年上海市中考语文试卷.pdf"
+        }
+      ],
+      "status": "partial-imported",
+      "paperId": "sh-chinese-2025",
+      "questionCount": 3
+    },
+    {
+      "sha256": "603a620926ea149d417f67beeb4d03b9331489b9266b109ddd0c317a33bcf235",
+      "year": 2025,
+      "subject": "math",
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/2025年全国中考真题答案（按省市分类）/上海市/数学/2025上海市中考数学真题试题(高清).pdf"
+        }
+      ],
+      "status": "pending-transcription"
+    },
+    {
+      "sha256": "09ac6264d54d4c1639fb6228d7c588602c10a734b8630881ce383a6efa417a18",
+      "year": 2025,
+      "subject": "math",
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/2025年全国中考真题答案（按省市分类）/上海市/数学/2025年上海市中考数学真题.pdf"
+        }
+      ],
+      "status": "pending-transcription"
+    },
+    {
+      "sha256": "244b39c82145fae72e868e70d524dca21f459c70ca6a468794020bc5352c19fc",
+      "year": 2025,
+      "subject": "math",
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/2025年全国中考真题答案（按省市分类）/上海市/数学/2025年上海市中考数学真题试题（含答案）.docx"
+        }
+      ],
+      "status": "pending-transcription"
+    },
+    {
+      "sha256": "c57213ab200b2253ddbbfa0300cc814fae986c7642682010401b47ee6b0d256a",
+      "year": 2025,
+      "subject": "chinese",
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/2025年全国中考真题答案（按省市分类）/上海市/语文/2025年上海市中考语文真题.pdf"
+        }
+      ],
+      "status": "pending-transcription"
+    },
+    {
+      "sha256": "2c03b46802e710ef05a4b3ef2401b50d070e39066e7b03c1ba52108eed307b79",
+      "year": 2025,
+      "subject": "chinese",
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/2025年全国中考真题答案（按省市分类）/上海市/语文/2025年上海市中考语文答案详解（含作文范文）版本二.pdf"
+        }
+      ],
+      "status": "pending-transcription"
+    },
+    {
+      "sha256": "ca084023b0b4ba45b6878d625191787787a5eb53f678e4301777c407becdcfc1",
+      "year": 2025,
+      "subject": "chinese",
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/2025年全国中考真题答案（按省市分类）/上海市/语文/2025年上海市语文中考真题答案.pdf"
+        }
+      ],
+      "status": "pending-transcription"
+    },
+    {
+      "sha256": "71ba391a1787f08a1133546072afee49b51a3554e7d161bd2e175014c72ad45e",
+      "year": 2026,
+      "subject": "chinese",
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/2026上海中考语文回忆版真题及解析.pdf"
+        },
+        {
+          "root": "netdisk",
+          "file": "2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/2026上海中考语文回忆版真题及解析.pdf"
+        }
+      ],
+      "status": "pending-transcription",
+      "paperId": "sh-chinese-2026",
+      "questionCount": 0
+    },
+    {
+      "sha256": "23e0b8bd1a19b25e16e96d6aafab004b378e8aa303c19e1410863f2f37fbdea6",
+      "year": 2026,
+      "subject": "chinese",
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/2026年上海中考语文真题答案（最全估分版）.docx"
+        },
+        {
+          "root": "netdisk",
+          "file": "2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/2026年上海中考语文真题答案（最全估分版）.docx"
+        }
+      ],
+      "status": "pending-transcription"
+    },
+    {
+      "sha256": "b21a053c323a43ba649aa0336b4cb54c89975c7be35a30e459f2a61962cba0b4",
+      "year": 2026,
+      "subject": "chinese",
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/2026年上海中考语文真题（完整版）.docx"
+        },
+        {
+          "root": "netdisk",
+          "file": "2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/2026年上海中考语文真题（完整版）.docx"
+        }
+      ],
+      "status": "pending-transcription"
+    },
+    {
+      "sha256": "24e0bbd3c7ba4dcb23d29eecb2162d79435643d942f766ddf9d8a57c785bfdd9",
+      "year": 2026,
+      "subject": "math",
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/5、数学（真题+答案）/2026上海中考数学真题及答案(附件下载).pdf"
+        },
+        {
+          "root": "netdisk",
+          "file": "2026年全国中考真题答案（按省市分类）/上海市/5、数学（真题+答案）/2026上海中考数学真题及答案(附件下载).pdf"
+        }
+      ],
+      "status": "pending-transcription"
+    },
+    {
+      "sha256": "780dcd69c1006d3cb4cd13a4425527502064e73c3a860411394e4bf832dbace9",
+      "year": 2026,
+      "subject": "math",
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/5、数学（真题+答案）/2026年上海市中考数学参考答案解析.pdf"
+        },
+        {
+          "root": "netdisk",
+          "file": "2026年全国中考真题答案（按省市分类）/上海市/5、数学（真题+答案）/2026年上海市中考数学参考答案解析.pdf"
+        }
+      ],
+      "status": "reference-answer"
+    },
+    {
+      "sha256": "ac9c7a71810b5ea0bd6fdb73ec3bcbad2bc9654939c566a77c8057f305c5a811",
+      "year": 2026,
+      "subject": "math",
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/5、数学（真题+答案）/2026年上海市中考数学真题试卷.pdf"
+        },
+        {
+          "root": "netdisk",
+          "file": "2026年全国中考真题答案（按省市分类）/上海市/5、数学（真题+答案）/2026年上海市中考数学真题试卷.pdf"
+        }
+      ],
+      "status": "partial-imported",
+      "paperId": "sh-math-2026",
+      "questionCount": 14
+    },
+    {
+      "sha256": "3adb9ffbef4a462de91bfc41019258710a42cfd0f127c4cf42cb4bb6906fa9b5",
+      "year": 2013,
+      "subject": "chinese",
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/1.初中语文 历年中考真题（2013-2024）/初中语文 历年中考真题（2013-2023）/03上海卷/2013上海语文试卷+答案+解析(word整理版).doc"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中语文 历年中考真题（2013-2024）/2013上海语文试卷+答案+解析(word整理版).doc"
+        }
+      ],
+      "status": "partial-imported",
+      "paperId": "sh-chinese-2013",
+      "questionCount": 3
+    },
+    {
+      "sha256": "d0055945e54d26b6925ae50cef47900c80bc4e82e11d2445750af10596ad609c",
+      "year": 2014,
+      "subject": "chinese",
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/1.初中语文 历年中考真题（2013-2024）/初中语文 历年中考真题（2013-2023）/03上海卷/2014上海语文试卷+答案+解析(word整理版).doc"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中语文 历年中考真题（2013-2024）/2014上海语文试卷+答案+解析(word整理版).doc"
+        }
+      ],
+      "status": "partial-imported",
+      "paperId": "sh-chinese-2014",
+      "questionCount": 3
+    },
+    {
+      "sha256": "9f98227f86d7be3d14f13ef398251e30b6f99e54ece22242cc6db4de87c36ec7",
+      "year": 2015,
+      "subject": "chinese",
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/1.初中语文 历年中考真题（2013-2024）/初中语文 历年中考真题（2013-2023）/03上海卷/2015上海语文试卷+答案+解析(word整理版).doc"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中语文 历年中考真题（2013-2024）/2015上海语文试卷+答案+解析(word整理版).doc"
+        }
+      ],
+      "status": "partial-imported",
+      "paperId": "sh-chinese-2015",
+      "questionCount": 3
+    },
+    {
+      "sha256": "8237be0f791eeed452ffbeae1487c65cf7aba330c754c01ac7a097c3ca798940",
+      "year": 2016,
+      "subject": "chinese",
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/1.初中语文 历年中考真题（2013-2024）/初中语文 历年中考真题（2013-2023）/03上海卷/2016上海语文试卷+答案+解析(word整理版).doc"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中语文 历年中考真题（2013-2024）/2016上海语文试卷+答案+解析(word整理版).doc"
+        }
+      ],
+      "status": "pending-transcription",
+      "paperId": "sh-chinese-2016",
+      "questionCount": 0
+    },
+    {
+      "sha256": "a54951bc5bed1160f716e68f40e64d35f198886120e5a19b5baf5d9563709a9d",
+      "year": 2017,
+      "subject": "chinese",
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/1.初中语文 历年中考真题（2013-2024）/初中语文 历年中考真题（2013-2023）/03上海卷/2017上海语文试卷+答案+解析(word整理版).doc"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中语文 历年中考真题（2013-2024）/2017上海语文试卷+答案+解析(word整理版).doc"
+        }
+      ],
+      "status": "partial-imported",
+      "paperId": "sh-chinese-2017",
+      "questionCount": 3
+    },
+    {
+      "sha256": "49bfa67f99f7722c6707d4dc4be887fe718a29363330940478069b8ba69412d4",
+      "year": 2018,
+      "subject": "chinese",
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/1.初中语文 历年中考真题（2013-2024）/初中语文 历年中考真题（2013-2023）/03上海卷/2018上海语文试卷+答案+解析(word整理版).doc"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中语文 历年中考真题（2013-2024）/2018上海语文试卷+答案+解析(word整理版).doc"
+        }
+      ],
+      "status": "partial-imported",
+      "paperId": "sh-chinese-2018",
+      "questionCount": 4
+    },
+    {
+      "sha256": "1c27afb94c0c4d4c63d16380cc2ff80c70f96062e4183f2e9211e9d86057593d",
+      "year": 2019,
+      "subject": "chinese",
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/1.初中语文 历年中考真题（2013-2024）/初中语文 历年中考真题（2013-2023）/03上海卷/2019上海语文试卷+答案+解析(word整理版).docx"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中语文 历年中考真题（2013-2024）/2019上海语文试卷+答案+解析(word整理版).docx"
+        }
+      ],
+      "status": "partial-imported",
+      "paperId": "sh-chinese-2019",
+      "questionCount": 3
+    },
+    {
+      "sha256": "71d5b6b72ad9a945e145e02407e873c1bce0142445a4770b45092f806d8b7283",
+      "year": 2020,
+      "subject": "chinese",
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/1.初中语文 历年中考真题（2013-2024）/初中语文 历年中考真题（2013-2023）/03上海卷/2020上海语文试卷+答案(word整理版).docx"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中语文 历年中考真题（2013-2024）/2020上海语文试卷+答案(word整理版).docx"
+        }
+      ],
+      "status": "partial-imported",
+      "paperId": "sh-chinese-2020",
+      "questionCount": 2
+    },
+    {
+      "sha256": "d0a7292506994469ee95a64cb8a8129e033e03236d704f4aa825785bdabd8f1f",
+      "year": 2013,
+      "subject": "math",
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/2.初中数学 历年中考真题（2013-2024）/初中数学 历年中考真题（2013-2023）/03上海卷/2013上海数学试卷+答案+解析(word整理版).docx"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中数学 历年中考真题（2013-2024）/2013上海数学试卷+答案+解析(word整理版).docx"
+        }
+      ],
+      "status": "partial-imported",
+      "paperId": "sh-math-2013",
+      "questionCount": 7
+    },
+    {
+      "sha256": "b2af4c38589d3a86fe56358fcbae16a8bacd6636409d758f52afe2771f6caee3",
+      "year": 2014,
+      "subject": "math",
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/2.初中数学 历年中考真题（2013-2024）/初中数学 历年中考真题（2013-2023）/03上海卷/2014上海数学试卷+答案+解析(word整理版).docx"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中数学 历年中考真题（2013-2024）/2014上海数学试卷+答案+解析(word整理版).docx"
+        }
+      ],
+      "status": "partial-imported",
+      "paperId": "sh-math-2014",
+      "questionCount": 8
+    },
+    {
+      "sha256": "1b8e8583adfd7ab7fec42dcf6e3d9f704eb98169bda221b2e3f0f67a29cda27b",
+      "year": 2015,
+      "subject": "math",
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/2.初中数学 历年中考真题（2013-2024）/初中数学 历年中考真题（2013-2023）/03上海卷/2015上海数学试卷+答案(word整理版).doc"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中数学 历年中考真题（2013-2024）/2015上海数学试卷+答案(word整理版).doc"
+        }
+      ],
+      "status": "pending-transcription",
+      "paperId": "sh-math-2015",
+      "questionCount": 0
+    },
+    {
+      "sha256": "b1a1dd38460adbd23eb6e82c6dbaef0b5e3cf259418780f9274ff693de2c5a89",
+      "year": 2016,
+      "subject": "math",
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/2.初中数学 历年中考真题（2013-2024）/初中数学 历年中考真题（2013-2023）/03上海卷/2016上海数学试卷+答案(word整理版).doc"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中数学 历年中考真题（2013-2024）/2016上海数学试卷+答案(word整理版).doc"
+        }
+      ],
+      "status": "pending-transcription",
+      "paperId": "sh-math-2016",
+      "questionCount": 0
+    },
+    {
+      "sha256": "8f434bf2fe72c366966c0cf05cae3074299517d6b608c9e1aa2750dec06c51ee",
+      "year": 2017,
+      "subject": "math",
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/2.初中数学 历年中考真题（2013-2024）/初中数学 历年中考真题（2013-2023）/03上海卷/2017上海数学试卷+答案(word整理版).doc"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中数学 历年中考真题（2013-2024）/2017上海数学试卷+答案(word整理版).doc"
+        }
+      ],
+      "status": "pending-transcription",
+      "paperId": "sh-math-2017",
+      "questionCount": 0
+    },
+    {
+      "sha256": "2b9e66b9d3e63b8fa094661de8fd12993f33e2edebd20a42b140bc409115b784",
+      "year": 2018,
+      "subject": "math",
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/2.初中数学 历年中考真题（2013-2024）/初中数学 历年中考真题（2013-2023）/03上海卷/2018上海数学试卷+答案(word整理版).doc"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中数学 历年中考真题（2013-2024）/2018上海数学试卷+答案(word整理版).doc"
+        }
+      ],
+      "status": "partial-imported",
+      "paperId": "sh-math-2018",
+      "questionCount": 6
+    },
+    {
+      "sha256": "1521e10bd059473a1a0a1f3e1a0e9151dd261c06ef17e594c9866437bd394ac9",
+      "year": 2018,
+      "subject": "math",
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/2.初中数学 历年中考真题（2013-2024）/初中数学 历年中考真题（2013-2023）/03上海卷/2018上海数学试卷+答案+解析(word整理版).doc"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中数学 历年中考真题（2013-2024）/2018上海数学试卷+答案+解析(word整理版).doc"
+        }
+      ],
+      "status": "pending-transcription"
+    },
+    {
+      "sha256": "a40fec53e135131d68da55dd2768002c3814401808dca9836e42fd8d36665818",
+      "year": 2019,
+      "subject": "math",
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/2.初中数学 历年中考真题（2013-2024）/初中数学 历年中考真题（2013-2023）/03上海卷/2019上海数学试卷+答案+解析(word整理版).docx"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中数学 历年中考真题（2013-2024）/2019上海数学试卷+答案+解析(word整理版).docx"
+        }
+      ],
+      "status": "partial-imported",
+      "paperId": "sh-math-2019",
+      "questionCount": 5
+    },
+    {
+      "sha256": "cb903b79e663ef15db9f5d49499ea12dd5c4ef48ed856988b70aff32c169b4f9",
+      "year": 2020,
+      "subject": "math",
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/2.初中数学 历年中考真题（2013-2024）/初中数学 历年中考真题（2013-2023）/03上海卷/2020上海数学试卷+答案+解析(PDF整理版).pdf"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中数学 历年中考真题（2013-2024）/2020上海数学试卷+答案+解析(PDF整理版).pdf"
+        }
+      ],
+      "status": "pending-transcription",
+      "paperId": "sh-math-2020",
+      "questionCount": 0
+    },
+    {
+      "sha256": "48514ca1d261dbabb88a3bd7ea3beda179bf0d9f970b69699c83c5472eee8337",
+      "year": 2024,
+      "subject": "math",
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/2.初中数学 历年中考真题（2013-2024）/初中数学 历年中考真题（2013-2023）/03上海卷/2024年上海市中考数学真题 （原卷版）.docx"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/2.初中数学 历年中考真题（2013-2024）/初中数学 历年中考真题（2024）/2024年上海市中考数学真题 （原卷版）.docx"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中数学 历年中考真题（2013-2024）/2024年上海市中考数学真题 （原卷版）.docx"
+        }
+      ],
+      "status": "pending-transcription"
+    },
+    {
+      "sha256": "0ff72458316908245db5cfb8bd6489f835410431952c946576ef24c6fa5c1b90",
+      "year": 2024,
+      "subject": "math",
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/2.初中数学 历年中考真题（2013-2024）/初中数学 历年中考真题（2013-2023）/03上海卷/2024年上海市中考数学真题 （解析版）.docx"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/2.初中数学 历年中考真题（2013-2024）/初中数学 历年中考真题（2024）/2024年上海市中考数学真题 （解析版）.docx"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中数学 历年中考真题（2013-2024）/2024年上海市中考数学真题 （解析版）.docx"
+        }
+      ],
+      "status": "pending-transcription"
+    }
+  ]
+}

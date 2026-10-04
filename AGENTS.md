@@ -41,6 +41,7 @@ src/
   english-bank.js                 独立英语错题库：知识点介绍、题型筛选、作答与重置
   english-plan.js                 英语七天复习计划：每日全部原题直接作答、保存草稿、提交后保存错题打印记录，可切换历史记录及 A4 打印
   english-exams.js                上海及江苏英语中考文字题：地区 → 城市 → 年份目录，阅读/完形合并作答、原答案与解析、按账号累计错误；不展示图片或 Word
+  subject-papers.js               上海语数物化真题：文字与本地题图混合，题图可放大，答案图只在订正区；按账号保存，打印不含答案
   account-ui.js                   右上角账号区和登录弹窗
   app.js                          hash 路由和页面：首页（教材、试卷、趣味玩法，另有英语大纲和试题库入口）→ 册 → 小节 / 真题卷 → 做题
   app.css                         全部样式
@@ -74,6 +75,13 @@ content/
   english/past-papers/answer-supplements.json  上海原文件缺答案时经公开资料核对的补充表，仅供导入脚本使用；关联原文件 SHA-256，答案来源网址与核对日期写入 answerSource，待教师审核
   english/past-papers/jiangsu.js   江苏 13 城市原题文字数据，按 city / year 定位；资料无法可靠提取的年份标待补充，同篇阅读/完形在界面合并，原小题 ID 保持稳定
   english/past-papers/<年份>/      仅存听力媒体，不用 PDF、图片、Word 链接代替网页题目；原件本地参考放 refs/english-past-papers/
+  past-papers/shanghai.js          上海语文、数学、物理、化学历年部分原题文字数据，复合小问不拆开；来源 SHA-256、稳定资料题号、待审核、跳过题声明
+  past-papers/math-transcripts.json  数学原 PDF 页面核对的题干、选项、参考答案与源文件 SHA-256；公式用 KaTeX，不根据答案补造题干
+  past-papers/math-2026-transcripts.json  2026 数学扫描卷逐页核对的文字题及参考答案，绑定题卷、答案卷 SHA-256
+  past-papers/source-inventory.json  两个用户目录递归扫描的上海语数资料清单，按 SHA-256 去重并保留重复路径、已导入/待转录状态；不是运行时原文件链接
+  past-papers/science-source-inventory.json  上海物化资料独立清单，按 SHA-256 去重，保留两个根目录的来源路径、年份与转录状态
+  past-papers/images/<试卷ID>/    原 PDF 裁切的本地原题和答案 PNG，源页号、点坐标 bbox 与像素尺寸存入题目；不把答案图放进题图
+  past-papers/image-supplement-inventory.json  图片补题清单与不能自动定位的资料说明，绑定原文件 SHA-256
   english/sh2022/g8s1/            沪教版五四制英语八上，六个 Unit 各一节综合入门（目录标题先英文原题再中文主题；原创阅读 + 重点词标注 + 知识卡 + 分级选择题，待教师审核）
   <其他学科>/                     预留，比如 physics/，结构相同
 tests/
@@ -92,6 +100,11 @@ tests/
   learning-accounts.test.js       账号/访客隔离、同页切换、旧页面拒绝写入、旧共享数据迁移与备份校验
   home-subjects.test.js           首页原布局、英语三个入口与词汇例句的离线接入校验
   english-exams.test.js           历年文字题数据、原题标记、路由入口、判分、账号隔离及无原件展示校验
+  subject-papers.test.js          上海语数原题、数学公式、参考答案、主观题不误判、账号隔离、存储失败、筛选与离线入口
+  import-shanghai-subject-papers.test.py  上海语数提取回归：答案分界、重复题号、原标注、页脚及压平公式解析拒绝展示（单独 Python 运行，需 pypdf）
+  expand-shanghai-subject-papers.test.py  扩充回归：正文 XML 中公式对象不丢失、原上标标注、原题及人工修正不覆盖、两目录去重与整组阅读（单独 Python 运行，需 pypdf、python-docx）
+  import-shanghai-science-papers.test.py  物化提取回归：上下标、公式对象、原答案解析、复合题与不完整公式拒绝导入（单独 Python 运行）
+  supplement-shanghai-question-images.test.py  PDF 题号、答案边界、单选答案、跨页裁图及空白过滤回归（单独 Python 运行，需 pdfplumber）
   import-english-past-papers.test.py  原题文字提取回归（单独 Python 运行，需 pypdf、python-docx）：旧 Word 题号、原答案、下划线、图片依赖和缺失题干
   import-jiangsu-english.test.py   江苏解析回归（单独 Python 运行）：行内答案、交错解析、文章分组、缺图与重复题号跳过
   exam.test.js                    限时测试的计时、判分、会话存取
@@ -129,6 +142,7 @@ refs/                             教材 PDF、教辅等参考资料原件，不
 | hash | 页面 |
 |---|---|
 | `#/` | 首页：右上角切换学期，展示该学期教材、独立试卷入口和趣味玩法；额外保留英语学习大纲、英语单词、英语试题库、英语中考真题四个入口（依次排列） |
+| `#/shanghai-papers/<学科>` / `#/shanghai-papers/<学科>/<年份>` | 首页“上海中考真题”进入 math、chinese、physics、chemistry 的年份目录；原题文字与本地图片混合、题图点击放大，答案图在订正区、打印隐藏答案与作答控件；单选判分，其余人工订正；跨页小问不拆题，未能定位的资料待补 |
 | `#/english-exams` / `#/english-exams/shanghai` | 中考地区目录 / 上海年份目录；旧 `#/english-exams/<年份>` 与 `#/english-exams/shanghai/<年份>` 均可作答上海题目 |
 | `#/english-exams/jiangsu` / `#/english-exams/jiangsu/<城市ID>` / `#/english-exams/jiangsu/<城市ID>/<年份>` | 江苏城市目录 → 年份目录 → 原题作答；按城市隔离试卷，同篇阅读/完形合为一道大题、文章显示一次、全部小题统一提交，原小题 ID 和逐题错误统计不变；无答案不评分，无法提取的年份标待补充 |
 | `#/english-plan` / `#/english-plan/<天数>` / `#/english-plan/<天数>/result` / `#/english-plan/<天数>/result/<记录ID>` | 英语七天计划、每日作答及按提交时间查看错题；屏幕显示订正答案和解析（旧记录按 ID 补取当前解析），A4 打印只保留原题和题号，不打印答案或解析；不改题目 ID 或原题文本 |
@@ -156,6 +170,7 @@ refs/                             教材 PDF、教辅等参考资料原件，不
 | `xq.english-plan-retry.v2.<归属>` | localStorage | `{ drafts: { [源记录ID]: 作答 }, submissions: { [新记录ID]: { sourceId, review: [题干、ID、知识点、选择、答案快照] } } }`；本账号独立重做草稿和订正结果，不覆盖每日最近结果；提交清空本轮草稿 |
 | `xq.learning-migration.v1` | localStorage | 旧共享学习数据迁移完成标记。用户指定归入“我是臭恩铭”，首次加载合并并保留旧 v1 键及 `.legacy` 副本；完整写入成功才标记，失败下次加载重试，不给其他账号自动导入 |
 | `xq.account.v1` | localStorage | 当前登录的账号 `{ name }` |
+| `xq.subject-papers.v1.<归属>` | localStorage | 上海语数物化 `{ [试卷ID]: { [题目ID]: { response, attempts, wrongCount, revealed, solved } } }`；通过 LearningStore 按账号/访客隔离，只累计单选题错误，主观题不标答对；查看答案不增加提交次数，切换账号后旧表单拒绝写入 |
 | `xq.history.v1.<账号>` | localStorage | 该账号的考试历史，退出登录也保留 |
 | `xq.grade.v1.<账号>` / `xq.grade.v1` | localStorage | 首页选的学期（登录 / 未登录），默认 `g6s1` |
 | `xq.exam.v1` | sessionStorage | 进行中的限时测试（含截止时间） |
@@ -168,6 +183,10 @@ refs/                             教材 PDF、教辅等参考资料原件，不
 | `xq.fermat.v1` | localStorage | 费马点：`{ done: [关卡ID] }` |
 
 ### 编号规则
+
+后续上海语数扩充使用 `python scripts/expand-shanghai-subject-papers.py "D:\下载\中考真题" "F:\BaiduNetdiskDownload"`，需 pypdf、python-docx 和现有 `word-binary-text.py`。两目录共找到 64 个资料路径，内容 SHA-256 去重后 37 个版本；目录覆盖 2013—2020、2023—2026 共 24 个学科/年份入口。当前 18 个入口可作答：数学 78 题、语文 34 道整组题，全部有原参考答案；另外 6 个入口明确标资料已找到、题目待转录，不伪装完整试卷。扩充保留原有 ID 和人工修正，主观题不自动评分；缺失公式、图像、关键标注或答案的题仍跳过。DOCX 从正文 XML 保留数字上标、下划线和加点；包括位于普通 run 之外的 OMML/对象也必须标缺失，不能静默删掉公式。新语文 `originalNumbers` 记录整组小题号，`originalNo` 为首题号（按源资料编号）；阅读正文及所有小问一起作答。2026 数学逐页转录 14 题，并绑定独立答案卷哈希；无原解析不冒充原解析。基础导入脚本复导也保留扩充年份。扩充设计见 `docs/superpowers/specs/2026-10-04-shanghai-papers-expansion.md`。
+
+上海语数中考导入使用 `python scripts/import-shanghai-subject-papers.py <中考真题目录>`，依赖 pypdf。首批只收录本地 2023—2025 上海资料：数学 38 题，语文 13 道整组题（含多个小问），均有原资料参考答案，不代表完整试卷。2025 数学明确标回忆版。数学题干、选项及答案来自页面核对的 `math-transcripts.json`；原解析包含被压平的指数、分数或几何标记时不展示，标待完整转录，不冒充可靠解析。语文 `[[u]]...[[/u]]` 和 `[[dot]]...[[/dot]]` 恢复人工核对的下划线/加点，正文安全转义；跨题引用材料存 `context` 与 `contextLabel`。图表、标注不能完整恢复的题先跳过。试卷 ID `sh-<math或chinese>-<年份>`，题目 ID `<试卷ID>-q<资料题号>`，复导保留已有题目与人工修改，源 SHA-256 变动拒绝替换。设计见 `docs/superpowers/specs/2026-10-04-shanghai-chinese-math-papers.md`。
 
 学习数据的 `<归属>` 为 `user:<encodeURIComponent(账号名)>`，未登录为 `guest`；`.legacy` 是旧共享数据备份，不参与账号或访客读取。七天草稿、提交、重做、英语进度和累计错误均由 `LearningStore` 按当前账号定位，不能回退读取其他人的数据。登录/退出触发路由重绘，模块检测归属变化后重新加载；旧表单检测账号变化后拒绝写入。迁移实现及约定见 `docs/superpowers/specs/2026-10-01-account-learning-data.md`。
 
@@ -437,6 +456,20 @@ Content.exam({
 - 拖动部件都带 `explain`（分步解析）：拖过一次后出现“拖不准？看解析”，点了自动把点移到最短的位置；自己找到或点了按钮，都显示解析。测试要求每个拖动部件都有解析，解析里的数由逻辑核对
 - 不用勾股定理和根号，长度都由程序量出来；钝角 ≥ 120° 时“费马点是顶点”只作观察结论
 - 改关卡数据后跑测试：要求各三角形的角度符合关卡设计、初始位置没达到最小、点都在画面里
+
+## 上海原题图片补充（2026-10-04 用户同意）
+
+原来“只用文字”的限制对上海语数物化真题改为混合方案：已发布文字题不替换，缺图表或复杂公式的未添加题允许本地原 PDF 截图。英语独立题库尚未接入图片补题，仍沿用其原约定。题图不含答案，`stemImages` 与 `answerImages` 为 `{ src, page, bbox, width, height }` 数组；路径限定 `content/past-papers/images/<试卷ID>/q<题号>-stem或answer-<序号>.png`，page 一基，bbox 为原 PDF 点坐标。`optionsInImage: true` 表示原选项已在题图中，网页只显示 A—D 作答控件，答案明确的单选题才自动判分。
+
+脚本 `python scripts/supplement-shanghai-question-images.py "D:\下载\中考真题" "F:\BaiduNetdiskDownload"` 依赖 pdfplumber 和 Poppler pdftoppm，校验原源 SHA-256、独立答案区、题号连续唯一及题卷/答案对应；只追加稳定原 ID，不改文字题。`--refresh-images` 仅重新裁切已接入图片题的图片和裁切元数据，不替换题干、答案、类型或 ID；不对未经确认的扫描件猜题号。图片支持离线加载、手机自适应、原图放大及打印，打印隐藏答案与解析（包括图片），保留文字选项和题图。
+
+首批新增 98 道图片题：数学 37、物理 25、化学 36；按当前资料题号补齐数学 2023—2025、物理 2023/2025、化学 2023—2025 共八份 PDF 的剩余题目。已有文字题及账号记录不变，全部待教师审核，回忆版不冒充官方卷。2020、2026 等扫描件、只有 Word 的旧资料以及英语题目仍需后续定位，不宣称所有资料已补齐。`imageSupplement` 保存源哈希、独立答案边界和原题号清单，供题/答案图片隔离校验。设计见 `docs/superpowers/specs/2026-10-04-original-question-images.md`。
+
+## 上海物理、化学中考资料
+
+首页增加两个独立学科入口，沿用上海中考按年份目录。文字导入命令为 `python scripts/import-shanghai-science-papers.py "D:\下载\中考真题" "F:\BaiduNetdiskDownload"`，依赖 pdfplumber、pypdf、python-docx 和现有旧 Word 读取器。两个目录去重找到 29 个物化版本，分别登记 2013、2014、2015、2016、2018、2019、2020、2023、2024、2025、2026 年；文字阶段物理 69 题、化学 77 题，加上图片补题后分别为 94、113 题，均有原资料参考答案。2016、2020、2026 暂无可靠题目，明确标待转录，不宣称所有试卷完整，全部待教师审核。
+
+试卷 ID 为 `sh-physics-<年>` 或 `sh-chemistry-<年>`，题目 ID 沿用 `<试卷ID>-q<原题号>`。复导仅追加同一来源的未发布题号，不覆盖已有内容或语数试卷。DOCX 保留原数字上下标；图表、嵌入公式、丢失编号、压平化学式和科学记数法的题暂跳过。原解析不能完整提取时不展示，不生成假原解析。单选自动判分，其余题包括多选按主观题保存作答、人工核对，复合小问不拆开。版本标明整理版/回忆版非官方。设计见 `docs/superpowers/specs/2026-10-04-shanghai-science-papers.md`。
 
 ## 已知问题
 

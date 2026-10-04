@@ -1,0 +1,90 @@
+{
+  "entries": [
+    {
+      "paperId": "sh-math-2023",
+      "sha256": "5087f691003a57cef5d5027649231fe02d92e8014595f53fba88d2420325170e",
+      "status": "image-supplemented",
+      "addedThisRun": 0,
+      "imageQuestions": 13
+    },
+    {
+      "paperId": "sh-math-2024",
+      "sha256": "03af4b5b06ee6b03645adca76238291d7f971d312531dd7090a83dba6765de8d",
+      "status": "image-supplemented",
+      "addedThisRun": 0,
+      "imageQuestions": 12
+    },
+    {
+      "paperId": "sh-math-2025",
+      "sha256": "f8b95c38bfa87a3fe7ab5f3df4a06d5c3302efc91748a5b1a643c6d60190ff8a",
+      "status": "image-supplemented",
+      "addedThisRun": 0,
+      "imageQuestions": 12
+    },
+    {
+      "paperId": "sh-math-2026",
+      "sha256": "ac9c7a71810b5ea0bd6fdb73ec3bcbad2bc9654939c566a77c8057f305c5a811",
+      "status": "pending-manual-crops",
+      "reason": "No independent answer boundary"
+    },
+    {
+      "paperId": "sh-math-2020",
+      "sha256": "cb903b79e663ef15db9f5d49499ea12dd5c4ef48ed856988b70aff32c169b4f9",
+      "status": "pending-manual-crops",
+      "reason": "No independent answer boundary"
+    },
+    {
+      "paperId": "sh-chemistry-2020",
+      "sha256": "8046b2694990883bf2a55316d76052400fc45808f4f9cf6a35570b4947ba4242",
+      "status": "pending-manual-crops",
+      "reason": "No independent answer boundary"
+    },
+    {
+      "paperId": "sh-chemistry-2023",
+      "sha256": "11bba1a2a7f1c5c271fbadfa425d17aaaade4dfedb106d1af05bdfd7554b1985",
+      "status": "image-supplemented",
+      "addedThisRun": 0,
+      "imageQuestions": 12
+    },
+    {
+      "paperId": "sh-chemistry-2024",
+      "sha256": "118e8aa09fa056a78d64644c37ae729f4e21b88d13e2ade0200f0346f0941667",
+      "status": "image-supplemented",
+      "addedThisRun": 0,
+      "imageQuestions": 10
+    },
+    {
+      "paperId": "sh-chemistry-2025",
+      "sha256": "c7a11aae6f6e5f65361b39b73c09d0c91aa73470934525e15efe7c19c25de956",
+      "status": "image-supplemented",
+      "addedThisRun": 0,
+      "imageQuestions": 14
+    },
+    {
+      "paperId": "sh-chemistry-2026",
+      "sha256": "cae42320cccc05e2db7203f8ec6ed57d810fdc4c612787d65354e95a9cc428e0",
+      "status": "pending-manual-crops",
+      "reason": "No independent answer boundary"
+    },
+    {
+      "paperId": "sh-physics-2023",
+      "sha256": "4d685e65da8eec7fa4e865cc32b3c8d6585a42824ffeba4dc353562412840858",
+      "status": "image-supplemented",
+      "addedThisRun": 0,
+      "imageQuestions": 12
+    },
+    {
+      "paperId": "sh-physics-2025",
+      "sha256": "4cb0c9214f1b4470027981bfe1e8af594e64246565182bb442fe66a4885dacdd",
+      "status": "image-supplemented",
+      "addedThisRun": 0,
+      "imageQuestions": 13
+    },
+    {
+      "paperId": "sh-physics-2026",
+      "sha256": "b6be015f514d688327f115bd091f274d83c69dbffd3e036cf987f7a46ff5510e",
+      "status": "pending-manual-crops",
+      "reason": "No independent answer boundary"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "sourceFile": "2026年上海市中考数学真题试卷.pdf",
+  "sourceSha256": "ac9c7a71810b5ea0bd6fdb73ec3bcbad2bc9654939c566a77c8057f305c5a811",
+  "answerFile": "2026年上海市中考数学参考答案解析.pdf",
+  "answerSha256": "780dcd69c1006d3cb4cd13a4425527502064e73c3a860411394e4bf832dbace9",
+  "questions": {
+    "1": {"type":"choice","stem":"下列选项中是无理数的是（　　）","options":["$\\frac{5}{7}$","4","$\\sqrt{2}$","$\\sqrt{9}$"],"answer":"C"},
+    "2": {"type":"choice","stem":"下列选项中，与 $2a^2bc$ 是同类项的是（　　）","options":["$ab^2c$","$a^2bc$","$2abc$","$2ab^2c$"],"answer":"B"},
+    "3": {"type":"choice","stem":"下列方程无实数根的是（　　）","options":["$x^2-2x=0$","$x^2-2=0$","$x^2+2x=0$","$x^2+2=0$"],"answer":"D"},
+    "4": {"type":"choice","stem":"⊙A 半径为 3，⊙B 半径为 7，$AB=2$，则两圆的位置关系是（　　）","options":["内含","相交","相切","相离"],"answer":"A"},
+    "5": {"type":"choice","stem":"周一至周五某同学的运动时间为 34、28、40、36、32，为了一周 7 天活动时间的平均数达到 40 分钟，下列选项中可以的是（　　）","options":["50，60","45，60","50，50","55，60"],"answer":"A"},
+    "7": {"type":"written","stem":"$(m^4)^2=$________。","answer":"$m^8$"},
+    "8": {"type":"written","stem":"在 1，−2，−3，4，5 这 5 个数中选一个数，选出一个正数的概率是________。","answer":"$\\frac{3}{5}$"},
+    "9": {"type":"written","stem":"若 $\\sqrt{13x-1}=5$，则 $x=$________。","answer":"2"},
+    "10": {"type":"written","stem":"在 △ABC 中，$\\angle C=90^\\circ$，$AB=10$，$AC=6$，则 $\\tan B=$________。","answer":"$\\frac{3}{4}$"},
+    "11": {"type":"written","stem":"等腰三角形 ABC 中，$\\angle A\\ne\\angle B$，$\\angle A=80^\\circ$，$\\angle B=$________。","answer":"50° 或 20°"},
+    "12": {"type":"written","stem":"点 $A(m,n)$ 与点 $B(3,4)$ 在同一条反比例函数 $y=\\frac{k}{x}$ 上，若 $0<m<3$，则 n 的取值范围是________。","answer":"$n>4$"},
+    "14": {"type":"written","stem":"某市 2024 年进出口集装箱 $5.15\\times10^7$ 个，2025 年进出口集装箱 $5.5\\times10^7$ 个，则 2025 年较 2024 年集装箱的进出口数量增加了________。（用科学记数法表示）","answer":"$3.5\\times10^6$"},
+    "18": {"type":"written","stem":"（本题 10 分）计算：$\\left(-\\frac{1}{4}\\right)^0+|\\sqrt{3}-1|-\\sqrt{48}+\\frac{4}{\\sqrt{3}-1}$。","answer":"$2-\\sqrt{3}$"},
+    "19": {"type":"written","stem":"（本题 10 分）解方程组：$\\begin{cases}y^2-2x=7\\\\x-y=4\\end{cases}$。","answer":"$\\begin{cases}x=1\\\\y=-3\\end{cases}$ 或 $\\begin{cases}x=9\\\\y=5\\end{cases}$"}
+  }
+}

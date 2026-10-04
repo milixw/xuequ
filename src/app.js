@@ -193,6 +193,20 @@
     exam.addEventListener('contextmenu', e => e.preventDefault());
     main.appendChild(exam);
 
+    const shanghai = document.createElement('section');
+    shanghai.innerHTML = '<h3 class="group">上海中考真题</h3>';
+    for (const entry of [
+      { title: '数学中考真题', desc: '按年份练习上海数学原题', href: '#/shanghai-papers/math' },
+      { title: '语文中考真题', desc: '整篇阅读作答，查看原资料参考答案', href: '#/shanghai-papers/chinese' },
+      { title: '物理中考真题', desc: '按年份练习上海物理原题和原答案', href: '#/shanghai-papers/physics' },
+      { title: '化学中考真题', desc: '按年份练习上海化学原题和原答案', href: '#/shanghai-papers/chemistry' },
+    ]) {
+      const link = document.createElement('a');
+      link.className = 'card'; link.href = entry.href;
+      link.innerHTML = `<h2>${escapeHtml(entry.title)}</h2><p>${escapeHtml(entry.desc)}</p>`;
+      shanghai.appendChild(link);
+    }
+    main.appendChild(shanghai);
     const english = document.createElement('section');
     english.className = 'home-english';
     english.innerHTML = '<h3 class="group">英语</h3>';
@@ -511,6 +525,15 @@
     else EnglishExams.renderList(main, EnglishPastPapers);
   }
 
+  function subjectPapersPage(subject, year) {
+    const name = { math: '数学', chinese: '语文', physics: '物理', chemistry: '化学' }[subject];
+    const paper = year && SubjectPapers.find(ShanghaiSubjectPapers, subject, year);
+    const main = page(year ? (paper ? paper.title : '未收录这一年份') : '上海' + (name || '') + '中考真题',
+      year ? '#/shanghai-papers/' + subject : '#/', '上海原题 · 部分导入 · 待教师审核');
+    if (year) SubjectPapers.renderYear(main, ShanghaiSubjectPapers, subject, year);
+    else SubjectPapers.renderList(main, ShanghaiSubjectPapers, subject);
+  }
+
   async function englishPlanPage(day, view, reportId) {
     const main = page(view === 'retry' ? `第 ${day} 天 · 错题重做` : view === 'result' ? `第 ${day} 天 · 错题回顾` :
       (day ? `英语复习 · 第 ${day} 天` : '英语 7 天复习计划'),
@@ -535,6 +558,7 @@
     window.scrollTo(0, 0);
     if (parts[0] === 'english-bank') return englishBankPage(parts[1]);
     if (parts[0] === 'english-exams') return englishExamsPage(parts[1], parts[2], parts[3]);
+    if (parts[0] === 'shanghai-papers') return subjectPapersPage(parts[1], parts[2]);
     if (parts[0] === 'english-plan') return englishPlanPage(parts[1], parts[2], parts[3]);
     if (parts[0] === 'v') return volumePage(parts.slice(1).join('/'));
     if (parts[0] === 's') return sectionPage(parts.slice(1).join('/'));

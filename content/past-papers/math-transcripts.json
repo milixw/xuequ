@@ -1,0 +1,55 @@
+{
+  "2023": {
+    "sourceSha256": "5087f691003a57cef5d5027649231fe02d92e8014595f53fba88d2420325170e",
+    "questions": {
+      "1": {"type":"choice","stem":"下列运算正确的是（ ）","options":["$a^5\\div a^2=a^3$","$a^3+a^3=a^6$","$(a^3)^2=a^5$","$\\sqrt{a^2}=a$"],"answer":"A"},
+      "2": {"type":"choice","stem":"在分式方程 $\\frac{2x-1}{x^2}+\\frac{x^2}{2x-1}=5$ 中，设 $\\frac{2x-1}{x^2}=y$，可得到关于 $y$ 的整式方程为（ ）","options":["$y^2+5y+5=0$","$y^2-5y+5=0$","$y^2+5y+1=0$","$y^2-5y+1=0$"],"answer":"D"},
+      "3": {"type":"choice","stem":"下列函数中，函数值 $y$ 随 $x$ 的增大而减小的是（ ）","options":["$y=6x$","$y=-6x$","$y=\\frac{6}{x}$","$y=-\\frac{6}{x}$"],"answer":"B"},
+      "5": {"type":"choice","stem":"在四边形 $ABCD$ 中，$AD\\parallel BC$，$AB=CD$．下列说法能使四边形 $ABCD$ 为矩形的是（ ）","options":["$AB\\parallel CD$","$AD=BC$","$\\angle A=\\angle B$","$\\angle A=\\angle D$"],"answer":"C"},
+      "7": {"type":"written","stem":"分解因式：$n^2-9=$ ______．","answer":"$(n+3)(n-3)$"},
+      "8": {"type":"written","stem":"化简：$\\frac{2}{1-x}-\\frac{2x}{1-x}$ 的结果为 ______．","answer":"2"},
+      "9": {"type":"written","stem":"已知关于 $x$ 的方程 $\\sqrt{x-14}=2$，则 $x=$ ______．","answer":"18"},
+      "10": {"type":"written","stem":"函数 $f(x)=\\frac{1}{x-23}$ 的定义域为 ______．","answer":"$x\\ne23$"},
+      "11": {"type":"written","stem":"已知关于 $x$ 的一元二次方程 $ax^2+6x+1=0$ 没有实数根，那么 $a$ 的取值范围是 ______．","answer":"$a>9$"},
+      "12": {"type":"written","stem":"在不透明的盒子中装有一个黑球，两个白球，三个红球，四个绿球，这十个球除颜色外完全相同．那么从中随机摸出一个球是绿球的概率为 ______．","answer":"$\\frac{2}{5}$"},
+      "13": {"type":"written","stem":"如果一个正多边形的中心角是 $20^\\circ$，那么这个正多边形的边数为 ______．","answer":"18"},
+      "14": {"type":"written","stem":"一个二次函数 $y=ax^2+bx+c$ 的顶点在 $y$ 轴正半轴上，且其对称轴左侧的部分是上升的，那么这个二次函数的解析式可以是 ______．","answer":"$y=-x^2+1$（答案不唯一）"}
+    }
+  },
+  "2024": {
+    "sourceSha256": "03af4b5b06ee6b03645adca76238291d7f971d312531dd7090a83dba6765de8d",
+    "questions": {
+      "1": {"type":"choice","stem":"如果 $x>y$，那么下列正确的是（ ）","options":["$x+5\\le y+5$","$x-5<y-5$","$5x>5y$","$-5x>-5y$"],"answer":"C"},
+      "2": {"type":"choice","stem":"函数 $f(x)=\\frac{2-x}{x-3}$ 的定义域是（ ）","options":["$x=2$","$x\\ne2$","$x=3$","$x\\ne3$"],"answer":"D"},
+      "3": {"type":"choice","stem":"以下一元二次方程有两个相等实数根的是（ ）","options":["$x^2-6x=0$","$x^2-9=0$","$x^2-6x+6=0$","$x^2-6x+9=0$"],"answer":"D"},
+      "5": {"type":"choice","stem":"四边形 $ABCD$ 为矩形，过 $A$、$C$ 作对角线 $BD$ 的垂线，过 $B$、$D$ 作对角线 $AC$ 的垂线．如果四个垂线拼成一个四边形，那这个四边形为（ ）","options":["菱形","矩形","直角梯形","等腰梯形"],"answer":"A"},
+      "6": {"type":"choice","stem":"在 $\\triangle ABC$ 中，$AC=3$，$BC=4$，$AB=5$，点 $P$ 在 $ABC$ 内，分别以 $A$、$B$、$P$ 为圆心画圆，圆 $A$ 半径为 1，圆 $B$ 半径为 2，圆 $P$ 半径为 3，圆 $A$ 与圆 $P$ 内切，圆 $P$ 与圆 $B$ 的关系是（ ）","options":["内含","相交","外切","相离"],"answer":"B"},
+      "7": {"type":"written","stem":"计算：$(4x^2)^3=$ ______．","answer":"$64x^6$"},
+      "8": {"type":"written","stem":"计算：$(a+b)(b-a)=$ ______．","answer":"$b^2-a^2$"},
+      "9": {"type":"written","stem":"已知 $\\sqrt{2x-1}=1$，则 $x=$ ______．","answer":"1"},
+      "10": {"type":"written","stem":"科学家研发了一种新的蓝光唱片，一张蓝光唱片的容量约为 $2\\times10^5$ GB，一张普通唱片的容量约为 25 GB，则蓝光唱片的容量是普通唱片的 ______ 倍．（用科学记数法表示）","answer":"$8\\times10^3$"},
+      "11": {"type":"written","stem":"若正比例函数 $y=kx$ 的图象经过点 $(7,-13)$，则 $y$ 的值随 $x$ 的增大而 ______．（选填“增大”或“减小”）","answer":"减小"},
+      "12": {"type":"written","stem":"在菱形 $ABCD$ 中，$\\angle ABC=66^\\circ$，则 $\\angle BAC=$ ______ $^\\circ$．","answer":"57"},
+      "13": {"type":"written","stem":"某种商品的销售量 $y$（万元）与广告投入 $x$（万元）成一次函数关系，当投入 10 万元时销售额 1000 万元，当投入 90 万元时销售量 5000 万元．则投入 80 万元时，销售额为 ______ 万元．","answer":"4500"},
+      "14": {"type":"written","stem":"一个袋子中有若干个白球和绿球，它们除了颜色外都相同．随机从中摸一个球，恰好摸到绿球的概率是 $\\frac{3}{5}$，则袋子中至少有 ______ 个绿球．","answer":"3"}
+    }
+  },
+  "2025": {
+    "sourceSha256": "f8b95c38bfa87a3fe7ab5f3df4a06d5c3302efc91748a5b1a643c6d60190ff8a",
+    "questions": {
+      "1": {"type":"choice","stem":"下列运算中，正确的是（ ）","options":["$m^3+m^3=2m^3$","$m^3+m^3=m^6$","$m^3\\cdot m^3=m^9$","$(m^3)^3=m^6$"],"answer":"A"},
+      "2": {"type":"choice","stem":"下列代数式中，能表示“$x$ 与 $y$ 的差的平方”的是（ ）","options":["$x^2-y^2$","$(x-y)^2$","$x^2-y$","$x-y^2$"],"answer":"B"},
+      "3": {"type":"choice","stem":"下列函数中，是正比例函数的是（ ）","options":["$y=3x+1$","$y=3x^2$","$y=\\frac{3}{x}$","$y=\\frac{x}{3}$"],"answer":"D"},
+      "5": {"type":"choice","stem":"在正方形 $ABCD$ 中，$|\\overrightarrow{AB}+\\overrightarrow{BC}|:|\\overrightarrow{CD}|$ 的值是（ ）","options":["$\\frac{\\sqrt{2}}{2}$","$\\frac{1}{2}$","$\\sqrt{2}$","2"],"answer":"C"},
+      "6": {"type":"choice","stem":"在锐角三角形 $ABC$ 中，$AB=AC$，$BC=8$，它的外接圆 $O$ 的半径长为 5，若点 $D$ 是边 $BC$ 的中点，以点 $D$ 为圆心的圆和 $\\odot O$ 相交，那么 $\\odot D$ 的半径长可以是（ ）","options":["2","5","8","10"],"answer":"B"},
+      "7": {"type":"written","stem":"分解因式：$a^2b+ab^2=$ ______．","answer":"$ab(a+b)$"},
+      "8": {"type":"written","stem":"不等式组 $\\begin{cases}\\frac{x}{2}-1>0\\\\2x+3\\ge x\\end{cases}$ 的解集是 ______．","answer":"$x>2$"},
+      "9": {"type":"written","stem":"方程 $\\sqrt{x-6}=2$ 的解为 ______．","answer":"$x=10$"},
+      "10": {"type":"written","stem":"一元二次方程 $2x^2+x+m=0$ 没有实数根，那么 $m$ 的取值范围是 ______．","answer":"$m>\\frac{1}{8}$"},
+      "11": {"type":"written","stem":"抛物线 $y=3x^2$ 向下平移两个单位所得的抛物线解析式为 ______．","answer":"$y=3x^2-2$"},
+      "12": {"type":"written","stem":"已知一个反比例函数，在每个象限内，函数值 $y$ 随 $x$ 的增大而减小，那么这个反比例函数的解析式可以是 ______．（只需写出一个）","answer":"$y=\\frac{1}{x}$（答案不唯一）"},
+      "13": {"type":"written","stem":"小明手中有 1、2、3、4 四张牌，小军手中有 2、4、6、8 四张牌，若小明从小军手中抽一张牌，抽到任何牌的概率相等，那么抽到的牌和自己原有的牌的数字相等的概率为 ______．","answer":"$\\frac{1}{2}$"},
+      "16": {"type":"written","stem":"已知我国通过科技，研究出了一种超皮秒工具，进行一次擦除仅仅需要 400 皮秒，已知 1 皮秒等于 $1\\times10^{-12}$ 秒，那么这个工具 1 秒可以擦除 ______ 次（用科学记数法表示）．","answer":"$2.5\\times10^9$"}
+    }
+  }
+}

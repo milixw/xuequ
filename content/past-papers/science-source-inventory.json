@@ -1,0 +1,493 @@
+{
+  "scannedAt": "2026-10-04",
+  "roots": [
+    "download",
+    "netdisk"
+  ],
+  "sources": [
+    {
+      "sha256": "11bba1a2a7f1c5c271fbadfa425d17aaaade4dfedb106d1af05bdfd7554b1985",
+      "subject": "chemistry",
+      "year": 2023,
+      "paths": [
+        {
+          "root": "download",
+          "file": "2023年上海市中考化学试卷.pdf"
+        }
+      ],
+      "status": "partial-imported",
+      "paperId": "sh-chemistry-2023",
+      "questionCount": 9
+    },
+    {
+      "sha256": "4d685e65da8eec7fa4e865cc32b3c8d6585a42824ffeba4dc353562412840858",
+      "subject": "physics",
+      "year": 2023,
+      "paths": [
+        {
+          "root": "download",
+          "file": "2023年上海市中考物理试卷.pdf"
+        }
+      ],
+      "status": "partial-imported",
+      "paperId": "sh-physics-2023",
+      "questionCount": 8
+    },
+    {
+      "sha256": "118e8aa09fa056a78d64644c37ae729f4e21b88d13e2ade0200f0346f0941667",
+      "subject": "chemistry",
+      "year": 2024,
+      "paths": [
+        {
+          "root": "download",
+          "file": "2024年上海中考化学试卷.pdf"
+        }
+      ],
+      "status": "partial-imported",
+      "paperId": "sh-chemistry-2024",
+      "questionCount": 11
+    },
+    {
+      "sha256": "c7a11aae6f6e5f65361b39b73c09d0c91aa73470934525e15efe7c19c25de956",
+      "subject": "chemistry",
+      "year": 2025,
+      "paths": [
+        {
+          "root": "download",
+          "file": "2025年上海市中考化学试卷.pdf"
+        }
+      ],
+      "status": "partial-imported",
+      "paperId": "sh-chemistry-2025",
+      "questionCount": 7
+    },
+    {
+      "sha256": "4cb0c9214f1b4470027981bfe1e8af594e64246565182bb442fe66a4885dacdd",
+      "subject": "physics",
+      "year": 2025,
+      "paths": [
+        {
+          "root": "download",
+          "file": "2025年上海市中考物理试卷（回忆版）.pdf"
+        }
+      ],
+      "status": "partial-imported",
+      "paperId": "sh-physics-2025",
+      "questionCount": 7
+    },
+    {
+      "sha256": "84428d0653dccbc0f62f60f20d94c1384fa59ecaae935e39125d080c2df41ad7",
+      "subject": "physics",
+      "year": 2025,
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/2025年全国中考真题答案（按省市分类）/上海市/物理/2025年上海市中考物理真题原卷.pdf"
+        }
+      ],
+      "status": "pending-transcription"
+    },
+    {
+      "sha256": "4d989a131e84b90841f78eaaac5bfef50b8e8dfb57aae168cd8540914ab9df31",
+      "subject": "physics",
+      "year": 2025,
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/2025年全国中考真题答案（按省市分类）/上海市/物理/2025年上海市中考物理真题试题（含答案）.docx"
+        }
+      ],
+      "status": "pending-transcription"
+    },
+    {
+      "sha256": "61e1df3ffac696ad8ecf97b2b59de1e40f3d03ab3925d384ed426ef66a7a1785",
+      "subject": "physics",
+      "year": 2025,
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/2025年全国中考真题答案（按省市分类）/上海市/物理/25年上海中考物理试卷含答案.doc"
+        }
+      ],
+      "status": "pending-transcription"
+    },
+    {
+      "sha256": "cae42320cccc05e2db7203f8ec6ed57d810fdc4c612787d65354e95a9cc428e0",
+      "subject": "chemistry",
+      "year": 2026,
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/2、综合测试（真题+答案）/2026上海中考化学及跨学科回忆版真题及解析.pdf"
+        },
+        {
+          "root": "netdisk",
+          "file": "2026年全国中考真题答案（按省市分类）/上海市/2、综合测试（真题+答案）/2026上海中考化学及跨学科回忆版真题及解析.pdf"
+        }
+      ],
+      "status": "pending-transcription",
+      "paperId": "sh-chemistry-2026",
+      "questionCount": 0
+    },
+    {
+      "sha256": "e2ea0b9ffd97287c07ab7478beaa511064c0e98daa0ef48ce2769cdf4b19af01",
+      "subject": "chemistry",
+      "year": 2026,
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/2、综合测试（真题+答案）/2026上海中考化学真题 还原版 含答案.docx"
+        },
+        {
+          "root": "netdisk",
+          "file": "2026年全国中考真题答案（按省市分类）/上海市/2、综合测试（真题+答案）/2026上海中考化学真题 还原版 含答案.docx"
+        }
+      ],
+      "status": "pending-transcription"
+    },
+    {
+      "sha256": "b6be015f514d688327f115bd091f274d83c69dbffd3e036cf987f7a46ff5510e",
+      "subject": "physics",
+      "year": 2026,
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/2、综合测试（真题+答案）/2026上海中考物理回忆版真题及解析.pdf"
+        },
+        {
+          "root": "netdisk",
+          "file": "2026年全国中考真题答案（按省市分类）/上海市/2、综合测试（真题+答案）/2026上海中考物理回忆版真题及解析.pdf"
+        }
+      ],
+      "status": "pending-transcription",
+      "paperId": "sh-physics-2026",
+      "questionCount": 0
+    },
+    {
+      "sha256": "6a7df07fe2d4d24e8e7490301cecf0e2c4927c3379a91646f43479dfe9480b1e",
+      "subject": "chemistry",
+      "year": 2026,
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/2、综合测试（真题+答案）/2026年上海市中考化学部分试题及答案解析.pdf"
+        },
+        {
+          "root": "netdisk",
+          "file": "2026年全国中考真题答案（按省市分类）/上海市/2、综合测试（真题+答案）/2026年上海市中考化学部分试题及答案解析.pdf"
+        }
+      ],
+      "status": "pending-transcription"
+    },
+    {
+      "sha256": "66f5dc34919a4554ad6b567b20bf507a9129d8dc87effd0b4fe59dc5f4552e24",
+      "subject": "physics",
+      "year": 2026,
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/2、综合测试（真题+答案）/上海市中考物理真题试卷.pdf"
+        },
+        {
+          "root": "netdisk",
+          "file": "2026年全国中考真题答案（按省市分类）/上海市/2、综合测试（真题+答案）/上海市中考物理真题试卷.pdf"
+        }
+      ],
+      "status": "pending-transcription"
+    },
+    {
+      "sha256": "eca697273d30f5870299191f90c421f85f07bdc26dd707704465db96a1d100f0",
+      "subject": "chemistry",
+      "year": 2013,
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/6.初中化学 历年中考真题（2013-2024）/初中化学 历年中考真题（2013-2024）/03上海卷/2013上海化学试卷+答案+解析(word整理版).doc"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中化学 历年中考真题（2013-2024）/2013上海化学试卷+答案+解析(word整理版).doc"
+        }
+      ],
+      "status": "partial-imported",
+      "paperId": "sh-chemistry-2013",
+      "questionCount": 8
+    },
+    {
+      "sha256": "edeec0e0c5e07ff21db6297ff7e58ed37c1ae97d8b59af16323dc9435d4266ae",
+      "subject": "chemistry",
+      "year": 2014,
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/6.初中化学 历年中考真题（2013-2024）/初中化学 历年中考真题（2013-2024）/03上海卷/2014上海化学试卷+答案+解析(word整理版).doc"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中化学 历年中考真题（2013-2024）/2014上海化学试卷+答案+解析(word整理版).doc"
+        }
+      ],
+      "status": "partial-imported",
+      "paperId": "sh-chemistry-2014",
+      "questionCount": 10
+    },
+    {
+      "sha256": "1677e9fa8a5f87d9b83644ddcd798888864795d5cd38e5e5e31313f757191d84",
+      "subject": "chemistry",
+      "year": 2015,
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/6.初中化学 历年中考真题（2013-2024）/初中化学 历年中考真题（2013-2024）/03上海卷/2015上海化学试卷+答案+解析(word整理版).doc"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中化学 历年中考真题（2013-2024）/2015上海化学试卷+答案+解析(word整理版).doc"
+        }
+      ],
+      "status": "partial-imported",
+      "paperId": "sh-chemistry-2015",
+      "questionCount": 12
+    },
+    {
+      "sha256": "158c6223c3dd72ef3862da1f7af2124704c220e7b94f0ade45b78a6c453c30b5",
+      "subject": "chemistry",
+      "year": 2016,
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/6.初中化学 历年中考真题（2013-2024）/初中化学 历年中考真题（2013-2024）/03上海卷/2016上海化学试卷+答案(word整理版).docx"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中化学 历年中考真题（2013-2024）/2016上海化学试卷+答案(word整理版).docx"
+        }
+      ],
+      "status": "pending-transcription",
+      "paperId": "sh-chemistry-2016",
+      "questionCount": 0
+    },
+    {
+      "sha256": "713022d08d53ea724da70411b63a352be2a8b0a66c4353c0b732d487bb9864bc",
+      "subject": "chemistry",
+      "year": 2018,
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/6.初中化学 历年中考真题（2013-2024）/初中化学 历年中考真题（2013-2024）/03上海卷/2018上海化学试卷+答案+解析(word整理版).doc"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中化学 历年中考真题（2013-2024）/2018上海化学试卷+答案+解析(word整理版).doc"
+        }
+      ],
+      "status": "partial-imported",
+      "paperId": "sh-chemistry-2018",
+      "questionCount": 11
+    },
+    {
+      "sha256": "41960686c60b5356ff152524d2fc9c4a5107ae96bc6bd4de240946026b9959f8",
+      "subject": "chemistry",
+      "year": 2019,
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/6.初中化学 历年中考真题（2013-2024）/初中化学 历年中考真题（2013-2024）/03上海卷/2019上海化学试卷+答案+解析(word整理版).doc"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中化学 历年中考真题（2013-2024）/2019上海化学试卷+答案+解析(word整理版).doc"
+        }
+      ],
+      "status": "partial-imported",
+      "paperId": "sh-chemistry-2019",
+      "questionCount": 9
+    },
+    {
+      "sha256": "8046b2694990883bf2a55316d76052400fc45808f4f9cf6a35570b4947ba4242",
+      "subject": "chemistry",
+      "year": 2020,
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/6.初中化学 历年中考真题（2013-2024）/初中化学 历年中考真题（2013-2024）/03上海卷/2020上海化学试卷+答案(PDF整理版).pdf"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中化学 历年中考真题（2013-2024）/2020上海化学试卷+答案(PDF整理版).pdf"
+        }
+      ],
+      "status": "pending-transcription",
+      "paperId": "sh-chemistry-2020",
+      "questionCount": 0
+    },
+    {
+      "sha256": "8f8759416b391ea9055116102a6950691cce7f912ed3207a428a77350ff18d29",
+      "subject": "physics",
+      "year": 2013,
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/9.初中物理 历年中考真题（2013-2024）/初中物理 历年中考真题（2013-2024）/03上海卷/2013上海物理试卷+答案+解析(word整理版).docx"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中物理 历年中考真题（2013-2024）/2013上海物理试卷+答案+解析(word整理版).docx"
+        }
+      ],
+      "status": "partial-imported",
+      "paperId": "sh-physics-2013",
+      "questionCount": 6
+    },
+    {
+      "sha256": "a1c52a43906f1d5315ea4f7390f1cf023f1b82ab80d62a1a80a6ac16a6dd0416",
+      "subject": "physics",
+      "year": 2014,
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/9.初中物理 历年中考真题（2013-2024）/初中物理 历年中考真题（2013-2024）/03上海卷/2014上海物理试卷+答案+解析(word整理版).docx"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中物理 历年中考真题（2013-2024）/2014上海物理试卷+答案+解析(word整理版).docx"
+        }
+      ],
+      "status": "partial-imported",
+      "paperId": "sh-physics-2014",
+      "questionCount": 12
+    },
+    {
+      "sha256": "0e886475212c94bd5ae4a73e5e9cc1f129a4324c2062b290db0217b9770553a2",
+      "subject": "physics",
+      "year": 2015,
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/9.初中物理 历年中考真题（2013-2024）/初中物理 历年中考真题（2013-2024）/03上海卷/2015上海物理试卷+答案+解析(word整理版).docx"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中物理 历年中考真题（2013-2024）/2015上海物理试卷+答案+解析(word整理版).docx"
+        }
+      ],
+      "status": "partial-imported",
+      "paperId": "sh-physics-2015",
+      "questionCount": 9
+    },
+    {
+      "sha256": "29188b3d2242034f118b50cfbdd5eeefdd8213adff82662f158de0e133339551",
+      "subject": "physics",
+      "year": 2016,
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/9.初中物理 历年中考真题（2013-2024）/初中物理 历年中考真题（2013-2024）/03上海卷/2016上海物理试卷+答案(word整理版).docx"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中物理 历年中考真题（2013-2024）/2016上海物理试卷+答案(word整理版).docx"
+        }
+      ],
+      "status": "pending-transcription",
+      "paperId": "sh-physics-2016",
+      "questionCount": 0
+    },
+    {
+      "sha256": "8a83932cf56ad58f19f7e9069866944230305da473230f8fd4723bafc69ed8d2",
+      "subject": "physics",
+      "year": 2018,
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/9.初中物理 历年中考真题（2013-2024）/初中物理 历年中考真题（2013-2024）/03上海卷/2018上海物理试卷+答案+解析(word整理版).doc"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中物理 历年中考真题（2013-2024）/2018上海物理试卷+答案+解析(word整理版).doc"
+        }
+      ],
+      "status": "partial-imported",
+      "paperId": "sh-physics-2018",
+      "questionCount": 11
+    },
+    {
+      "sha256": "542d8b4b6ab596221b2f300c60f5627fdcbe03ae8844a4620ec459191cdce783",
+      "subject": "physics",
+      "year": 2019,
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/9.初中物理 历年中考真题（2013-2024）/初中物理 历年中考真题（2013-2024）/03上海卷/2019上海物理试卷+答案+解析(word整理版).doc"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中物理 历年中考真题（2013-2024）/2019上海物理试卷+答案+解析(word整理版).doc"
+        }
+      ],
+      "status": "partial-imported",
+      "paperId": "sh-physics-2019",
+      "questionCount": 7
+    },
+    {
+      "sha256": "722843882658798e0dbe1ee31871e457ba392d0118577c7520a51c321436e7d7",
+      "subject": "physics",
+      "year": 2020,
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/9.初中物理 历年中考真题（2013-2024）/初中物理 历年中考真题（2013-2024）/03上海卷/2020上海物理试卷+答案(word整理版).docx"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中物理 历年中考真题（2013-2024）/2020上海物理试卷+答案(word整理版).docx"
+        }
+      ],
+      "status": "pending-transcription",
+      "paperId": "sh-physics-2020",
+      "questionCount": 0
+    },
+    {
+      "sha256": "52885e6cb4f42593c12189fe4bdc2169a3b27545930a6f8a1d322a5657f4c5d5",
+      "subject": "physics",
+      "year": 2024,
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/9.初中物理 历年中考真题（2013-2024）/初中物理 历年中考真题（2013-2024）/03上海卷/2024年上海市中考物理真题（原卷版）.docx"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/9.初中物理 历年中考真题（2013-2024）/初中物理 历年中考真题（2024）/2024年上海市中考物理真题（原卷版）.docx"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中地理 历年中考真题（2013-2024）/2024年上海市中考物理真题（原卷版）.docx"
+        }
+      ],
+      "status": "pending-transcription"
+    },
+    {
+      "sha256": "af1d574a5d356b63519e384120c96bb13a7f88b4e5941e1a1f4b7b4cf8cd7219",
+      "subject": "physics",
+      "year": 2024,
+      "paths": [
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/9.初中物理 历年中考真题（2013-2024）/初中物理 历年中考真题（2013-2024）/03上海卷/2024年上海市中考物理真题（解析版）.docx"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本一，按科目划分）/9.初中物理 历年中考真题（2013-2024）/初中物理 历年中考真题（2024）/2024年上海市中考物理真题（解析版）.docx"
+        },
+        {
+          "root": "download",
+          "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中地理 历年中考真题（2013-2024）/2024年上海市中考物理真题（解析版）.docx"
+        }
+      ],
+      "status": "partial-imported",
+      "paperId": "sh-physics-2024",
+      "questionCount": 9
+    }
+  ]
+}
