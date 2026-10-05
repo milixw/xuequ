@@ -119,3 +119,31 @@ test('标准答案展示', () => {
   assert(A.answerText(blank('angle', "36°15'")) === '36°15′', 'angle');
   assert(A.answerText(blank('ratio', '4:13:31')) === '$4:13:31$', 'ratio');
 });
+
+test('因式分解：要写成积并且分解彻底', () => {
+  const b = blank('factor', '3x(x+2)(x-2)');
+  for (const s of ['3x(x+2)(x-2)', '3x(x-2)(x+2)', '-3x(2-x)(x+2)', '(x+2)·3x·(x-2)', '3(x-2)(x+2)x']) assert(ok(b, s), `应判对：${s}`);
+  assert(!ok(b, '3x^3-12x'), '没有分解');
+  assert(A.checkBlank(b, '3x^3-12x').error, '没有分解时提示写成积');
+  assert(!ok(b, '3x(x^2-4)'), '没有分解彻底');
+  assert(/彻底/.test(A.checkBlank(b, 'x(3x^2-12)').error), '公因式没提完要提示');
+  assert(!ok(b, '3x(x+2)(x+2)'), '与原式不相等');
+  const sq = blank('factor', '(a-2b)^2');
+  for (const s of ['(a-2b)^2', '(2b-a)^2', '(a-2b)(a-2b)']) assert(ok(sq, s), `应判对：${s}`);
+  assert(!ok(sq, 'a^2-4ab+4b^2'), '展开式不算分解');
+  const two = blank('factor', '(x-y)^2(a+b)');
+  assert(ok(two, '(a+b)(y-x)^2'), '底数互为相反数的平方');
+  assert(!ok(two, '(x-y)(ax+bx-ay-by)'), '还能继续分');
+});
+
+
+test('最简分式：相等并且约分到最简', () => {
+  const b = blank('frac', '(a+2)/(a-2)');
+  for (const s of ['(a+2)/(a-2)', '-(a+2)/(2-a)', '(-a-2)/(2-a)']) assert(ok(b, s), `应判对：${s}`);
+  assert(!ok(b, '(a^2-4)/(a^2-4a+4)'), '没有约分');
+  assert(/最简/.test(A.checkBlank(b, '(2a+4)/(2a-4)').error), '数字公因数没约要提示');
+  assert(!ok(b, '(a-2)/(a+2)'), '不相等');
+  const m = blank('frac', '-2x/(3y^2)');
+  for (const s of ['-2x/(3y^2)', '2x/(-3y^2)', '-(2x)/(3y^2)']) assert(ok(m, s), `应判对：${s}`);
+  assert(!ok(m, '-4x^2/(6x*y^2)'), '单项式没约完');
+});

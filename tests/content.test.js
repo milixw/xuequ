@@ -16,7 +16,7 @@ require('../content/catalog.js');
 
 const ROOT = path.join(__dirname, '..');
 const LEVELS = { b: 'basic', e: 'extended', c: 'challenge' };
-const KINDS = ['num', 'nums', 'expr', 'real', 'reals', 'angle', 'ratio', 'text'];
+const KINDS = ['num', 'nums', 'expr', 'factor', 'frac', 'real', 'reals', 'angle', 'ratio', 'text'];
 const DEMOS = ['foldCut', 'numberLineFold', 'angleFold', 'ropeCut'];  // src/demos.js 里的演示类型
 
 // 取出文本里所有 $...$ / $$...$$ 公式，逐个用 KaTeX 编译
@@ -53,6 +53,8 @@ function verifyBlank(blank, v) {
     case 'num': return A.Frac.of(v).eq(A.Frac.of(blank.answer));
     case 'nums': return sameSet(v.map(A.Frac.of), blank.answer.map(A.Frac.of), (x, y) => x.eq(y));
     case 'expr': return A.equivalent(A.parseExpr(String(v)), A.parseExpr(blank.answer));
+    case 'factor': return A.checkBlank(blank, String(v)).ok;  // verify 算出的分解结果要和标准答案的因式一一对应
+    case 'frac': return A.checkBlank(blank, String(v)).ok;  // verify 算出的结果要是同一个最简分式
     case 'real': return A.realEqual(typeof v === 'number' ? v : A.realValue(String(v)), A.realValue(blank.answer));
     case 'reals': return sameSet(v.map(x => (typeof x === 'number' ? x : A.realValue(String(x)))), blank.answer.map(A.realValue), (x, y) => A.realEqual(x, y));
     case 'angle': return A.parseAngle(String(v)).eq(A.parseAngle(blank.answer));

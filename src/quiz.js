@@ -35,7 +35,7 @@
       if (b.kind === 'num' || b.kind === 'nums') ['−', '/', '.'].forEach(k => keys.add(k));
       if (b.kind === 'nums') keys.add(',');
       if (b.kind === 'ratio') [':', '.', '/'].forEach(k => keys.add(k));
-      if (b.kind === 'expr') {
+      if (b.kind === 'expr' || b.kind === 'factor' || b.kind === 'frac') {
         const vars = b.vars || [...new Set(String(b.answer).match(/[a-zA-Z]/g) || [])];
         vars.forEach(v => keys.add(v));
         ['+', '−', '/', '(', ')', '^'].forEach(k => keys.add(k));

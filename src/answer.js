@@ -460,6 +460,89 @@
     return parseNumber(m[1]).mul(3600).add(min * 60 + sec);
   }
 
+  // ---------- 因式分解 ----------
+  // 把式子拆成“因式”的列表：乘积、乘方、负号、数字系数都展开；遇到加减（整个是一个和）就作为一个因式。
+  // 不含字母的部分算常数，不进列表。式子里有除以字母的地方，返回 null（不是整式的积）。
+  function factorList(node, out = []) {
+    switch (node.t) {
+      case 'paren': return factorList(node.a, out);
+      case 'neg': return factorList(node.a, out);
+      case 'mul': return factorList(node.a, out) && factorList(node.b, out);
+      case 'num': return out;
+      case 'var': out.push(node); return out;
+      case 'pow': {
+        if (node.k < 0) return null;
+        const inner = factorList(node.a, []);
+        if (!inner) return null;
+        for (let i = 0; i < node.k; i++) out.push(...inner);
+        return out;
+      }
+      case 'div': return variables(node.b).size ? null : factorList(node.a, out);
+      default:  // add、sub：一个和，本身是一个因式；不含字母的和是常数
+        if (variables(node).size) out.push(node);
+        return out;
+    }
+  }
+
+  // 两个因式只差一个正负号（f = ±g）
+  function sameUpToSign(f, g) {
+    const names = [...new Set([...variables(f), ...variables(g)])];
+    const rand = rng(20261005);
+    let sign = 0;
+    let checked = 0;
+    for (let attempt = 0; attempt < 60 && checked < 8; attempt++) {
+      const env = {};
+      for (const v of names) env[v] = new Frac(BigInt(Math.floor(rand() * 19) - 9 || 7), BigInt(Math.floor(rand() * 4) + 1));
+      let x;
+      let y;
+      try { x = evaluate(f, env); y = evaluate(g, env); } catch (e) { continue; }
+      if (x.isZero() && y.isZero()) continue;
+      const s = x.eq(y) ? 1 : x.eq(y.neg()) ? -1 : 0;
+      if (!s || (sign && s !== sign)) return false;
+      sign = s;
+      checked++;
+    }
+    return checked > 0;
+  }
+
+  // 因式分解的答案：与标准答案相等，写成积的形式，而且非常数因式和标准答案一一对应（只允许差正负号）
+  function checkFactor(node, answer) {
+    if (!equivalent(node, answer)) return { ok: false };
+    let top = node;
+    while (top.t === 'paren' || top.t === 'neg') top = top.a;
+    if (top.t === 'add' || top.t === 'sub') return { ok: false, error: '结果正确，但还没有写成几个整式的积' };
+    const got = factorList(node);
+    const want = factorList(answer);
+    if (!got) return { ok: false, error: '请写成几个整式的积' };
+    const left = [...got];
+    for (const w of want) {
+      const i = left.findIndex(g => sameUpToSign(g, w));
+      if (i < 0) return { ok: false, error: '结果正确，但还没有分解彻底' };
+      left.splice(i, 1);
+    }
+    if (left.length) return { ok: false, error: '结果正确，但还没有分解彻底' };
+    return { ok: true };
+  }
+
+  // 最简分式：拆成“分子/分母”（不是除法时分母是 1）
+  function splitFraction(node) {
+    let n = node;
+    while (n.t === 'paren' || n.t === 'neg') n = n.a;
+    if (n.t !== 'div') return [node, { t: 'num', v: new Frac(1n) }];
+    let top = n.a;
+    while (top.t === 'neg') top = top.a;
+    return [top, n.b];
+  }
+
+  // 与标准答案相等，并且分子、分母分别和标准答案只差正负号（所以已经约分到最简）
+  function checkLowest(node, answer) {
+    if (!equivalent(node, answer)) return { ok: false };
+    const [n, d] = splitFraction(node);
+    const [an, ad] = splitFraction(answer);
+    if (sameUpToSign(n, an) && sameUpToSign(d, ad)) return { ok: true };
+    return { ok: false, error: '结果正确，但还不是最简分式' };
+  }
+
   // ---------- 判分 ----------
   // 返回 { ok, error? }：error 表示输入看不懂，提示学生改写，不算答错
   function checkBlank(blank, input) {
@@ -484,6 +567,16 @@
         if (!equivalent(node, parseExpr(blank.answer))) return { ok: false };
         if (blank.simplified && !isSimplified(node)) return { ok: false, error: '结果正确，但还可以再化简' };
         return { ok: true };
+      }
+      case 'frac': {
+        let node;
+        try { node = parseExpr(s); } catch (e) { return { ok: false, error: '式子看不懂：' + e.message }; }
+        return checkLowest(node, parseExpr(blank.answer));
+      }
+      case 'factor': {
+        let node;
+        try { node = parseExpr(s); } catch (e) { return { ok: false, error: '式子看不懂：' + e.message }; }
+        return checkFactor(node, parseExpr(blank.answer));
       }
       case 'real': {
         let v;
@@ -545,6 +638,8 @@
       case 'num': return `$${Frac.of(blank.answer).toTeX()}$`;
       case 'nums': return blank.answer.map(x => `$${Frac.of(x).toTeX()}$`).join('，');
       case 'expr': return `$${normalize(blank.answer).replace(/\*/g, '\\cdot ')}$`;
+      case 'factor': return `$${normalize(blank.answer).replace(/\*/g, '\\cdot ')}$`;
+      case 'frac': return `$${normalize(blank.answer).replace(/\*/g, '\\cdot ')}$`;
       case 'real': return `$${blank.tex || texReal(parseReal(blank.answer))}$`;
       case 'reals': return blank.answer.map(a => `$${texReal(parseReal(a))}$`).join('，');
       case 'angle': return normalize(blank.answer).replace(/'/g, '′').replace(/"/g, '″');

@@ -123,25 +123,25 @@ Content.catalog = {
                   no: 11,
                   title: '整式的乘除',
                   sections: [
-                    { no: '11.1', title: '整式的乘法', ready: false },
-                    { no: '11.2', title: '乘法公式', ready: false },
-                    { no: '11.3', title: '整式的除法', ready: false },
+                    { no: '11.1', title: '整式的乘法', ready: true },
+                    { no: '11.2', title: '乘法公式', ready: true },
+                    { no: '11.3', title: '整式的除法', ready: true },
                   ],
                 },
                 {
                   no: 12,
                   title: '因式分解',
                   sections: [
-                    { no: '12.1', title: '因式分解的意义', ready: false },
-                    { no: '12.2', title: '因式分解的方法', ready: false },
+                    { no: '12.1', title: '因式分解的意义', ready: true },
+                    { no: '12.2', title: '因式分解的方法', ready: true },
                   ],
                 },
                 {
                   no: 13,
                   title: '分式',
                   sections: [
-                    { no: '13.1', title: '分式及其性质', ready: false },
-                    { no: '13.2', title: '分式的运算', ready: false },
+                    { no: '13.1', title: '分式及其性质', ready: true },
+                    { no: '13.2', title: '分式的运算', ready: true },
                     { no: '13.3', title: '分式方程', ready: false },
                   ],
                 },
