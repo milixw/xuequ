@@ -165,6 +165,7 @@ Content.section({
       title: '旋转的性质',
       body: '旋转后：① 每组对应点到旋转中心的距离相等；② 每组对应点与旋转中心连线所成的角都等于旋转角；③ 对应线段相等，对应角相等；④ 形状相同、大小相等。',
       pitfall: '对应点的连线一般**不经过**旋转中心；旋转中心可以在图形上、图形内，也可以在图形外。',
+      demo: { type: 'motion', mode: 'rotate', shape: [[5, 2], [7, 2], [5, 4]], angle: 90, centers: [{ name: '中心在图形外', c: [3, 1] }, { name: '中心是顶点 A', c: [5, 2] }, { name: '中心在图形内', c: [5.6, 2.6] }], view: [-1, 9, -1, 7] },
     },
     {
       title: '找旋转中心和旋转角',
@@ -520,6 +521,7 @@ Content.section({
         { kind: 'num', label: '(2)', answer: '6' },
         { kind: 'num', label: '(3)', answer: '18' },
       ],
+      demo: { type: 'rotOverlap' },
       explain: [
         '(1) 只知道 $BE$，还要 $BF$。关键想法：用旋转把 $BF$ “搬”到已知的地方。正方形绕中心 $O$ 顺时针旋转 $90^\\circ$ 后与自身重合，$A$ 转到 $B$，$B$ 转到 $C$，边 $AB$ 转到边 $BC$。',
         '$\\angle MON=90^\\circ$，射线 $OM$ 顺时针转 $90^\\circ$ 正好是射线 $ON$。点 $E$ 既在 $OM$ 上又在 $AB$ 上，转过去后既在 $ON$ 上又在 $BC$ 上，就是点 $F$。所以线段 $AE$ 转到线段 $BF$，$BF=AE=6-2=4$。',

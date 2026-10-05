@@ -35,7 +35,7 @@ src/
   progress.js                     做题进度（小节和真题卷共用）、独立累计答错次数及按提交事件去重
   learning-store.js               学习数据账号归属、旧共享数据备份与指定账号迁移；未登录访客独立，不回退至他人数据
   content.js                      内容注册表：目录查询、学期列表、按需加载小节文件和真题卷文件
-  demos.js                        解析里的演示动画（题目的 demo 字段），依赖 DOM
+  demos.js                        演示动画：题目的 demo 字段放在解析里，知识点卡片的 demo 字段放在卡片末尾；第 14 章用 motion（平移、旋转、翻折、旋转 180° 的过程）、sweep、rotOverlap、billiard，依赖 DOM
   quiz.js                         做题引擎：题目渲染、作答、判分反馈、解析、快捷输入栏、renderText 排版
   exam.js                         限时测试：会话状态机、计时、交卷判分、结果页
   english-bank.js                 独立英语错题库：知识点介绍、题型筛选、作答与重置
@@ -215,7 +215,7 @@ Content.section({
   review: { status: 'pending' },          // pending 待审核 / approved 已审核（附审核人、日期）
   audit: { blind: '2026-09-19', rounds: 2, note: '...' },  // 盲解复核记录，没有它测试会提醒
   intro: [                                // 知识点卡片，3～6 张
-    { title: '正数和负数', body: '...', example: '...', pitfall: '...' },  // pitfall 为易错提醒，可选
+    { title: '正数和负数', body: '...', example: '...', pitfall: '...' },  // pitfall 为易错提醒，可选；demo 为卡片里的演示动画，可选，格式同题目的 demo
   ],
   questions: [
     {

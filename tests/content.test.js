@@ -17,7 +17,7 @@ require('../content/catalog.js');
 const ROOT = path.join(__dirname, '..');
 const LEVELS = { b: 'basic', e: 'extended', c: 'challenge' };
 const KINDS = ['num', 'nums', 'expr', 'factor', 'frac', 'real', 'reals', 'angle', 'ratio', 'text'];
-const DEMOS = ['foldCut', 'numberLineFold', 'angleFold', 'ropeCut'];  // src/demos.js 里的演示类型
+const DEMOS = ['foldCut', 'numberLineFold', 'angleFold', 'ropeCut', 'motion', 'sweep', 'rotOverlap', 'billiard'];  // src/demos.js 里的演示类型
 
 // 取出文本里所有 $...$ / $$...$$ 公式，逐个用 KaTeX 编译
 function checkMath(text, where) {
@@ -151,6 +151,7 @@ for (const meta of Content.sectionMetas()) {
       checkMath(card.body, `知识点 ${i + 1} 正文`);
       if (card.example) checkMath(card.example, `知识点 ${i + 1} 例子`);
       if (card.pitfall) checkMath(card.pitfall, `知识点 ${i + 1} 易错提醒`);
+      if (card.demo) assert(DEMOS.includes(card.demo.type), `知识点 ${i + 1}：未知演示类型 ${card.demo.type}`);
     });
 
     if (meta.subject.id === 'english') {

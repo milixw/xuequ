@@ -352,6 +352,8 @@
           (card.pitfall ? `<div class="pitfall"><b>易错</b>${renderText(card.pitfall)}</div>` : '') +
           `</article>`
       );
+      // 知识点卡片里的演示动画（如图形的平移、旋转过程），放在卡片末尾
+      if (card.demo && window.Demos) Demos.mount(main.lastElementChild, card.demo);
     }
 
     if (section.bankExamples && section.bankExamples.length) {

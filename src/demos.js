@@ -555,7 +555,316 @@
     return `rgb(${ch(16)},${ch(8)},${ch(0)})`;
   }
 
-  const TYPES = { foldCut, numberLineFold, angleFold, ropeCut };
+  // ---------- 第 14 章 图形的运动 ----------
+  // 坐标用“格”为单位、y 轴向上；view = [xmin, xmax, ymin, ymax]，画布宽 320
+  function gridView(view, w = 320, pad = 14) {
+    const [x0, x1, y0, y1] = view;
+    const u = (w - 2 * pad) / (x1 - x0);
+    const h = Math.round((y1 - y0) * u + 2 * pad);
+    const P = ([x, y]) => [pad + (x - x0) * u, pad + (y1 - y) * u];
+    let grid = '';
+    for (let x = Math.ceil(x0); x <= x1; x++) grid += `<line x1="${P([x, y0])[0].toFixed(1)}" y1="${P([x, y0])[1].toFixed(1)}" x2="${P([x, y1])[0].toFixed(1)}" y2="${P([x, y1])[1].toFixed(1)}" stroke="#e4ddd0" stroke-width="1"/>`;
+    for (let y = Math.ceil(y0); y <= y1; y++) grid += `<line x1="${P([x0, y])[0].toFixed(1)}" y1="${P([x0, y])[1].toFixed(1)}" x2="${P([x1, y])[0].toFixed(1)}" y2="${P([x1, y])[1].toFixed(1)}" stroke="#e4ddd0" stroke-width="1"/>`;
+    return { w, h, u, P, grid };
+  }
+  const ptsAttr = (P, pts) => pts.map(p => P(p).map(v => v.toFixed(1)).join(',')).join(' ');
+  const rotPt = ([x, y], [cx, cy], deg) => {
+    const a = (deg * Math.PI) / 180, c = Math.cos(a), s = Math.sin(a);
+    return [cx + (x - cx) * c - (y - cy) * s, cy + (x - cx) * s + (y - cy) * c];
+  };
+
+  // 平移、旋转、翻折（轴对称）、旋转 180°（中心对称）的过程演示，放在知识点卡片里
+  // opts：mode（translate / rotate / reflect / half）、shape 顶点、labels、view，
+  //   translate 用 v，rotate 用 center、angle（逆时针为正）及可选的 centers 供切换，reflect 用 axis（两点），half 用 center
+  function motion(container, opts) {
+    const mode = opts.mode;
+    const g = gridView(opts.view);
+    const shape = opts.shape;
+    const labels = opts.labels || ['A', 'B', 'C', 'D'].slice(0, shape.length);
+    let center = opts.center || (opts.centers ? opts.centers[0].c : null);
+    const centers = opts.centers;
+    const s = shell(container, {
+      w: g.w,
+      h: g.h,
+      aria: { translate: '平移过程演示', rotate: '旋转过程演示', reflect: '翻折过程演示', half: '旋转 180° 演示' }[mode],
+      controls: centers ? '<span class="demo-row"><span class="seg"></span></span>' : '',
+    });
+    if (centers) {
+      segButtons(s.box.querySelector('.seg'), centers.map(c => c.name), centers[0].name, (v, i) => {
+        center = centers[i].c;
+        s.reset();
+        draw(0, 0);
+      });
+    }
+    const angle = mode === 'half' ? 180 : opts.angle || 0;
+    const move = (p, f) => {
+      if (mode === 'translate') return [p[0] + opts.v[0] * f, p[1] + opts.v[1] * f];
+      if (mode === 'rotate' || mode === 'half') return rotPt(p, center, angle * f);
+      // 翻折：垂直于对称轴的分量按 cos 缩放，像纸片翻过去
+      const [a, b] = opts.axis;
+      const dx = b[0] - a[0], dy = b[1] - a[1], len2 = dx * dx + dy * dy;
+      const t = ((p[0] - a[0]) * dx + (p[1] - a[1]) * dy) / len2;
+      const foot = [a[0] + t * dx, a[1] + t * dy];
+      const c = Math.cos(Math.PI * f);
+      return [foot[0] + (p[0] - foot[0]) * c, foot[1] + (p[1] - foot[1]) * c];
+    };
+    const ends = {
+      translate: '对应点的连线平行且相等，长度都等于平移的距离；形状、大小都没变',
+      rotate: '每个点都沿以旋转中心为圆心的圆弧转过同样的角度：到中心的距离不变，转过的角都等于旋转角',
+      reflect: '对称点的连线都和对称轴垂直，并且被对称轴平分',
+      half: '转了 180°：每组对称点的连线都经过对称中心，并且被它平分',
+    };
+    const doing = { translate: '平移中……', rotate: '旋转中……', reflect: '沿对称轴翻折中……', half: '绕对称中心旋转 180° 中……' };
+    const prime = t => t + '′';
+
+    function draw(f, mark) {
+      const P = g.P;
+      let html = g.grid;
+      if (mode === 'reflect') {
+        const [a, b] = opts.axis;
+        const k = 20;
+        const A = [a[0] - (b[0] - a[0]) * k, a[1] - (b[1] - a[1]) * k], B = [b[0] + (b[0] - a[0]) * k, b[1] + (b[1] - a[1]) * k];
+        html += `<line x1="${P(A)[0].toFixed(1)}" y1="${P(A)[1].toFixed(1)}" x2="${P(B)[0].toFixed(1)}" y2="${P(B)[1].toFixed(1)}" stroke="${RED}" stroke-width="1.8" stroke-dasharray="6 4"/>`;
+      }
+      const now = shape.map(p => move(p, f));
+      // 轨迹
+      shape.forEach((p, i) => {
+        if (mode === 'rotate' || mode === 'half') {
+          const n = 24, arc = [];
+          for (let j = 0; j <= n; j++) arc.push(move(p, (f * j) / n));
+          html += `<polyline points="${ptsAttr(P, arc)}" fill="none" stroke="${GREEN}" stroke-width="1.4" stroke-dasharray="4 3"/>`;
+          if (mark > 0) {
+            html += `<line x1="${P(center)[0].toFixed(1)}" y1="${P(center)[1].toFixed(1)}" x2="${P(p)[0].toFixed(1)}" y2="${P(p)[1].toFixed(1)}" stroke="${MUTED}" stroke-width="1" opacity="${mark}"/>`;
+            html += `<line x1="${P(center)[0].toFixed(1)}" y1="${P(center)[1].toFixed(1)}" x2="${P(now[i])[0].toFixed(1)}" y2="${P(now[i])[1].toFixed(1)}" stroke="${MUTED}" stroke-width="1" opacity="${mark}"/>`;
+          }
+        } else {
+          html += `<line x1="${P(p)[0].toFixed(1)}" y1="${P(p)[1].toFixed(1)}" x2="${P(now[i])[0].toFixed(1)}" y2="${P(now[i])[1].toFixed(1)}" stroke="${GREEN}" stroke-width="1.4" stroke-dasharray="4 3"/>`;
+          if (mode === 'reflect' && mark > 0) {
+            const m = [(p[0] + now[i][0]) / 2, (p[1] + now[i][1]) / 2];
+            html += `<circle cx="${P(m)[0].toFixed(1)}" cy="${P(m)[1].toFixed(1)}" r="3" fill="${RED}" opacity="${mark}"/>`;
+          }
+        }
+      });
+      html += `<polygon points="${ptsAttr(P, shape)}" fill="#cfe3f7" stroke="${INK}" stroke-width="1.6"/>`;
+      const back = mode === 'reflect' && f > 0.5;
+      if (f > 0) html += `<polygon points="${ptsAttr(P, now)}" fill="${back ? '#f2c6a0' : '#f6d8b8'}" fill-opacity="0.85" stroke="${INK}" stroke-width="1.6"/>`;
+      shape.forEach((p, i) => {
+        html += `<text x="${(P(p)[0] - 8).toFixed(1)}" y="${(P(p)[1] - 5).toFixed(1)}" font-size="13" fill="${BLUE}">${labels[i]}</text>`;
+        if (f > 0.05) html += `<text x="${(P(now[i])[0] + 4).toFixed(1)}" y="${(P(now[i])[1] - 5).toFixed(1)}" font-size="13" fill="${RED}">${prime(labels[i])}</text>`;
+      });
+      if (center) {
+        html += `<circle cx="${P(center)[0].toFixed(1)}" cy="${P(center)[1].toFixed(1)}" r="3.2" fill="${INK}"/>`;
+        html += `<text x="${(P(center)[0] - 12).toFixed(1)}" y="${(P(center)[1] + 15).toFixed(1)}" font-size="13" fill="${INK}">O</text>`;
+      }
+      s.svg.innerHTML = html;
+    }
+
+    const phases = [{ kind: 'move', dur: 2200 }, { kind: 'mark', dur: 900 }];
+    s.frame = ms => {
+      let f = 0, mark = 0;
+      walk(phases, ms, (p, t) => {
+        if (p.kind === 'move') f = ease(t);
+        else mark = t;
+      });
+      draw(f, mark);
+      s.caption.textContent = mark > 0 ? opts.caption || ends[mode] : doing[mode];
+    };
+    s.duration = () => totalOf(phases);
+    s.reset();
+    draw(0, 0);
+    s.caption.textContent = '点「播放」看图形怎样运动';
+    return s;
+  }
+
+  // 正方形斜向平移扫过的区域（14.1-c01）：opts.side 边长，opts.v 每单位 t 的位移，opts.tMax
+  function sweep(container, opts) {
+    const a = opts.side, [vx, vy] = opts.v, T = opts.tMax;
+    const g = gridView([0, a + vx * T + 0.5, 0, a + vy * T + 0.5]);
+    const s = shell(container, { w: g.w, h: g.h, aria: '正方形平移扫过区域的演示' });
+    function draw(t, mark) {
+      const P = g.P;
+      const dx = vx * t, dy = vy * t;
+      const hex = [[0, 0], [a, 0], [a + dx, dy], [a + dx, a + dy], [dx, a + dy], [0, a]];
+      let html = g.grid;
+      html += `<polygon points="${ptsAttr(P, hex)}" fill="#f6d8b8" fill-opacity="0.7" stroke="${RED}" stroke-width="1.4"/>`;
+      if (mark > 0) {
+        html += `<rect x="${P([0, a + dy])[0]}" y="${P([0, a + dy])[1]}" width="${((a + dx) * g.u).toFixed(1)}" height="${((a + dy) * g.u).toFixed(1)}" fill="none" stroke="${MUTED}" stroke-dasharray="5 3" opacity="${mark}"/>`;
+        html += `<polygon points="${ptsAttr(P, [[a, 0], [a + dx, 0], [a + dx, dy]])}" fill="#ddd" opacity="${mark}"/>`;
+        html += `<polygon points="${ptsAttr(P, [[0, a], [dx, a + dy], [0, a + dy]])}" fill="#ddd" opacity="${mark}"/>`;
+      }
+      html += `<polygon points="${ptsAttr(P, [[0, 0], [a, 0], [a, a], [0, a]])}" fill="#cfe3f7" fill-opacity="0.8" stroke="${INK}" stroke-width="1.4" stroke-dasharray="5 3"/>`;
+      html += `<polygon points="${ptsAttr(P, [[dx, dy], [a + dx, dy], [a + dx, a + dy], [dx, a + dy]])}" fill="#cfe3f7" fill-opacity="0.9" stroke="${INK}" stroke-width="1.6"/>`;
+      s.svg.innerHTML = html;
+      const area = a * a + (a * vy + a * vx) * t;
+      s.caption.textContent = mark > 0
+        ? `扫过的区域 = 外框 ${(a + dx).toFixed(0)}×${(a + dy).toFixed(0)} 减去两个灰色三角形 = ${area.toFixed(0)}`
+        : `t = ${t.toFixed(1)}，扫过的面积 ${area.toFixed(1)}`;
+    }
+    const phases = [{ kind: 'move', dur: 3000 }, { kind: 'mark', dur: 900 }];
+    s.frame = ms => {
+      let t = 0, mark = 0;
+      walk(phases, ms, (p, f) => {
+        if (p.kind === 'move') t = T * f;
+        else mark = f;
+      });
+      draw(t, mark);
+    };
+    s.duration = () => totalOf(phases);
+    s.reset();
+    draw(0, 0);
+    s.caption.textContent = '点「播放」，看扫过的区域怎样长出来';
+    return s;
+  }
+
+  // 正方形中心的直角绕中心旋转，重叠面积不变（14.2-c01）。屏幕坐标：A(0,0) 左上，B(0,6)，C(6,6)，D(6,0)，O(3,3)
+  function rotOverlap(container) {
+    const k = 34, ox = 40, oy = 22;
+    const Q = ([x, y]) => [ox + x * k, oy + y * k];
+    const s = shell(container, { w: 6 * k + 2 * ox, h: 6 * k + 2 * oy + 20, aria: '直角绕正方形中心旋转的演示' });
+    const O = [3, 3];
+    const rot = ([x, y]) => [y, -x];  // 把 OB 方向转到 OC 方向
+    function geom(th) {
+      const d = [Math.cos(th), Math.sin(th)];
+      const e = rot(d);
+      const E = [3 + d[0] * (3 / Math.abs(d[0])), 3 + d[1] * (3 / Math.abs(d[0]))];
+      const F = [3 + e[0] * (3 / Math.abs(e[1])), 3 + e[1] * (3 / Math.abs(e[1]))];
+      return { E, F, d, e };
+    }
+    const pa = pts => pts.map(p => Q(p).map(v => v.toFixed(1)).join(',')).join(' ');
+    function draw(th, spin) {
+      const { E, F, d, e } = geom(th);
+      const B = [0, 6], C = [6, 6];
+      const M = [3 + d[0] * 5, 3 + d[1] * 5], N = [3 + e[0] * 5, 3 + e[1] * 5];
+      let html = `<polygon points="${pa([O, E, B, F])}" fill="#cfe3f7"/>`;
+      html += `<polygon points="${pa([[0, 0], [0, 6], [6, 6], [6, 0]])}" fill="none" stroke="${INK}" stroke-width="1.6"/>`;
+      html += `<polygon points="${pa([O, B, E])}" fill="none" stroke="${BLUE}" stroke-width="2"/>`;
+      html += `<polygon points="${pa([O, C, F])}" fill="#f6d8b8" fill-opacity="0.6" stroke="${RED}" stroke-width="2"/>`;
+      if (spin > 0) {
+        // 三角形 OBE 绕 O 转过 spin×90°，落到 OCF 上
+        const r = p => {
+          const a = (-spin * Math.PI) / 2, c = Math.cos(a), sn = Math.sin(a);
+          const x = p[0] - 3, y = p[1] - 3;
+          return [3 + x * c - y * sn, 3 + x * sn + y * c];
+        };
+        html += `<polygon points="${pa([O, B, E].map(r))}" fill="${BLUE}" fill-opacity="0.25" stroke="${BLUE}" stroke-width="1.4" stroke-dasharray="4 3"/>`;
+      }
+      html += `<line x1="${Q(O)[0]}" y1="${Q(O)[1]}" x2="${Q(M)[0].toFixed(1)}" y2="${Q(M)[1].toFixed(1)}" stroke="${INK}" stroke-width="1.6"/>`;
+      html += `<line x1="${Q(O)[0]}" y1="${Q(O)[1]}" x2="${Q(N)[0].toFixed(1)}" y2="${Q(N)[1].toFixed(1)}" stroke="${INK}" stroke-width="1.6"/>`;
+      const lab = (t, p, dx, dy, col = INK) => `<text x="${(Q(p)[0] + dx).toFixed(1)}" y="${(Q(p)[1] + dy).toFixed(1)}" font-size="13" fill="${col}">${t}</text>`;
+      html += lab('A', [0, 0], -14, 4) + lab('B', B, -14, 14) + lab('C', C, 6, 14) + lab('D', [6, 0], 6, 4) + lab('O', O, 6, -4);
+      html += lab('E', E, -14, -4, BLUE) + lab('F', F, -4, 16, RED);
+      s.svg.innerHTML = html;
+      // 面积：四边形 OEBF = 三角形 OEB + 三角形 OBF
+      const area = (6 - E[1]) * 3 / 2 + F[0] * 3 / 2;
+      return area;
+    }
+    const th0 = (140 * Math.PI) / 180, th1 = (220 * Math.PI) / 180;
+    const phases = [{ kind: 'turn', from: th0, to: th1, dur: 2400 }, { kind: 'turn', from: th1, to: (175 * Math.PI) / 180, dur: 1400 }, { kind: 'spin', dur: 1600 }];
+    s.frame = ms => {
+      let th = th0, spin = 0;
+      walk(phases, ms, (p, f) => {
+        if (p.kind === 'turn') th = lerp(p.from, p.to, ease(f));
+        else spin = ease(f);
+      });
+      const area = draw(th, spin);
+      s.caption.textContent = spin > 0
+        ? '三角形 OBE 绕 O 转 90°，正好盖住三角形 OCF，所以阴影面积总等于三角形 OBC'
+        : `直角转动时，阴影 OEBF 的面积始终是 ${area.toFixed(1)}`;
+    };
+    s.duration = () => totalOf(phases);
+    s.reset();
+    draw(th0, 0);
+    s.caption.textContent = '点「播放」，转动直角，观察阴影面积';
+    return s;
+  }
+
+  // 台球反弹与“翻折展开”（14.3-c02）：opts.sizes = [[W,H], ...]
+  function billiard(container, opts) {
+    const sizes = opts.sizes;
+    let [W, H] = sizes[0];
+    const gcd = (x, y) => (y ? gcd(y, x % y) : x);
+    const sw = 320, sh = 230;
+    const s = shell(container, {
+      w: sw,
+      h: sh,
+      aria: '台球反弹与展开的演示',
+      controls: sizes.length > 1 ? '<span class="demo-row"><span>桌子</span><span class="seg"></span></span>' : '',
+    });
+    if (sizes.length > 1) {
+      segButtons(s.box.querySelector('.seg'), sizes.map(([w, h]) => `${w}×${h}`), `${W}×${H}`, (v, i) => {
+        [W, H] = sizes[i];
+        s.reset();
+        draw(0, 0);
+        s.caption.textContent = '点「播放」';
+      });
+    }
+    const corner = (x, y) => (x === 0 ? (y === 0 ? 'A' : 'D') : (y === 0 ? 'B' : 'C'));
+    function draw(f, g2) {
+      const L = (W * H) / gcd(W, H);
+      let html = '';
+      if (g2 === 0) {
+        // 桌面视图：球沿 45° 走，碰边反弹
+        const k = Math.min((sw - 40) / W, (sh - 40) / H);
+        const ox = (sw - W * k) / 2, oy = (sh - H * k) / 2;
+        const P = ([x, y]) => [ox + x * k, oy + (H - y) * k];
+        const fold = (v, m) => {
+          const r = v % (2 * m);
+          return r > m ? 2 * m - r : r;
+        };
+        const sAt = f * L;
+        const pts = [[0, 0]];
+        const step = Math.max(1, Math.round(L / 400));
+        for (let t = step; t < sAt; t += step) pts.push([fold(t, W), fold(t, H)]);
+        pts.push([fold(sAt, W), fold(sAt, H)]);
+        html += `<rect x="${ox}" y="${oy}" width="${(W * k).toFixed(1)}" height="${(H * k).toFixed(1)}" fill="#e3f1e3" stroke="${INK}" stroke-width="2"/>`;
+        html += `<polyline points="${ptsAttr(P, pts)}" fill="none" stroke="${RED}" stroke-width="1.6"/>`;
+        const cur = pts[pts.length - 1];
+        html += `<circle cx="${P(cur)[0].toFixed(1)}" cy="${P(cur)[1].toFixed(1)}" r="4.5" fill="#fff" stroke="${INK}"/>`;
+        [[0, 0], [W, 0], [W, H], [0, H]].forEach(([x, y]) => {
+          html += `<text x="${(P([x, y])[0] + (x ? 6 : -14)).toFixed(1)}" y="${(P([x, y])[1] + (y ? -4 : 14)).toFixed(1)}" font-size="13">${corner(x, y)}</text>`;
+        });
+      } else {
+        // 展开视图：把桌子一次次翻折过去，路线变成一条直线
+        const nx = L / W, ny = L / H;
+        const k = Math.min((sw - 40) / (nx * W), (sh - 30) / (ny * H));
+        const ox = (sw - nx * W * k) / 2, oy = (sh - ny * H * k) / 2;
+        const P = ([x, y]) => [ox + x * k, oy + (ny * H - y) * k];
+        for (let i = 0; i < nx; i++) {
+          for (let j = 0; j < ny; j++) {
+            html += `<rect x="${P([i * W, (j + 1) * H])[0].toFixed(1)}" y="${P([i * W, (j + 1) * H])[1].toFixed(1)}" width="${(W * k).toFixed(1)}" height="${(H * k).toFixed(1)}" fill="${(i + j) % 2 ? '#d7ebd7' : '#e3f1e3'}" stroke="${MUTED}" stroke-width="1"/>`;
+          }
+        }
+        const end = [g2 * L, g2 * L];
+        html += `<line x1="${P([0, 0])[0]}" y1="${P([0, 0])[1]}" x2="${P(end)[0].toFixed(1)}" y2="${P(end)[1].toFixed(1)}" stroke="${RED}" stroke-width="2"/>`;
+        html += `<text x="${P([0, 0])[0] - 12}" y="${P([0, 0])[1] + 14}" font-size="13">A</text>`;
+        if (g2 >= 1) {
+          const fx = nx % 2 ? W : 0, fy = ny % 2 ? H : 0;
+          html += `<text x="${P([L, L])[0] + 4}" y="${P([L, L])[1] - 4}" font-size="13" fill="${RED}" font-weight="bold">${corner(fx, fy)}</text>`;
+        }
+      }
+      s.svg.innerHTML = html;
+    }
+    const phases = [{ kind: 'roll', dur: 3600 }, { kind: 'wait', dur: 500 }, { kind: 'unfold', dur: 2000 }];
+    s.frame = ms => {
+      let f = 0, g2 = 0;
+      walk(phases, ms, (p, t) => {
+        if (p.kind === 'roll') f = t;
+        if (p.kind === 'unfold') g2 = Math.max(t, 0.001);
+      });
+      draw(f, g2);
+      const L = (W * H) / gcd(W, H);
+      s.caption.textContent = g2 > 0
+        ? `展开：横向 ${L / W} 张、竖向 ${L / H} 张桌子，路线是一条直线，横、竖都走了 ${L}（${W} 和 ${H} 的最小公倍数）`
+        : '球碰到桌边就像照镜子一样反弹';
+    };
+    s.duration = () => totalOf(phases);
+    s.reset();
+    draw(0, 0);
+    s.caption.textContent = '点「播放」，先看反弹，再看展开';
+    return s;
+  }
+
+  const TYPES = { foldCut, numberLineFold, angleFold, ropeCut, motion, sweep, rotOverlap, billiard };
 
   function mount(container, demo) {
     const make = TYPES[demo.type];
