@@ -142,17 +142,17 @@ Content.catalog = {
                   sections: [
                     { no: '13.1', title: '分式及其性质', ready: true },
                     { no: '13.2', title: '分式的运算', ready: true },
-                    { no: '13.3', title: '分式方程', ready: false },
+                    { no: '13.3', title: '分式方程', ready: true },
                   ],
                 },
                 {
                   no: 14,
                   title: '图形的运动',
                   sections: [
-                    { no: '14.1', title: '平移', ready: false },
-                    { no: '14.2', title: '旋转', ready: false },
-                    { no: '14.3', title: '轴对称', ready: false },
-                    { no: '14.4', title: '中心对称', ready: false },
+                    { no: '14.1', title: '平移', ready: true },
+                    { no: '14.2', title: '旋转', ready: true },
+                    { no: '14.3', title: '轴对称', ready: true },
+                    { no: '14.4', title: '中心对称', ready: true },
                   ],
                 },
               ],
