@@ -543,6 +543,72 @@
     return { ok: false, error: '结果正确，但还不是最简分式' };
   }
 
+  // ---------- 不等式的解集 ----------
+  // 解集写成 x>2、x≤-3/2、-3<x≤5、5≥x>-3、2<x（数在左边也行）、x=2，没有解写“无解”
+  // 结果 { none } 或 { lo, loInc, hi, hiInc }，lo、hi 为 null 表示没有这一侧的界
+  function parseSolutionSet(s, letter = 'x') {
+    s = normalize(s).replace(/≥/g, '>=').replace(/≤/g, '<=').replace(/=>/g, '>=').replace(/=</g, '<=').replace(/\s+/g, '');
+    if (/^(无解|空集)$/.test(s)) return { none: true };
+    const parts = s.split(/(<=|>=|<|>|=)/);
+    const value = t => {
+      if (!t) throw new Error('不等号旁边缺了数');
+      const v = parseNumber(t);
+      if (v) return v;
+      const node = parseExpr(t);
+      if (variables(node).size) throw new Error(`“${t}”应该是一个数`);
+      return evaluate(node, {});
+    };
+    const terms = parts.filter((_, i) => i % 2 === 0);
+    const ops = parts.filter((_, i) => i % 2 === 1);
+    if (ops.length < 1 || ops.length > 2) throw new Error('请写成 x>2、−1<x≤3 这样的形式');
+    const at = terms.findIndex(t => t === letter);
+    if (at < 0) {
+      const other = terms.find(t => /^[a-zA-Z]$/.test(t));
+      throw new Error(other ? `未知数是 ${letter}，不是 ${other}` : `解集里要写出未知数 ${letter}`);
+    }
+    if (terms.filter(t => t === letter).length > 1) throw new Error('请写成 x>2、−1<x≤3 这样的形式');
+    const set = { lo: null, loInc: false, hi: null, hiInc: false };
+    // 把“数 op x”或“x op 数”记到上下界里
+    const bound = (op, v, letterOnLeft) => {
+      if (op === '=') { set.lo = set.hi = v; set.loInc = set.hiInc = true; return; }
+      const greater = op[0] === '>' ? letterOnLeft : !letterOnLeft;  // x 大于这个数
+      const inc = op.length === 2;
+      if (greater) {
+        if (set.lo) throw new Error('请写成 x>2、−1<x≤3 这样的形式');
+        set.lo = v; set.loInc = inc;
+      } else {
+        if (set.hi) throw new Error('请写成 x>2、−1<x≤3 这样的形式');
+        set.hi = v; set.hiInc = inc;
+      }
+    };
+    if (ops.length === 1) {
+      bound(ops[0], value(terms[at === 0 ? 1 : 0]), at === 0);
+    } else {
+      if (at !== 1 || ops.includes('=')) throw new Error('连写时把 x 写在中间，比如 −1<x≤3');
+      if ((ops[0][0] === '<') !== (ops[1][0] === '<')) throw new Error('连写的两个不等号方向要一致');
+      bound(ops[0], value(terms[0]), false);
+      bound(ops[1], value(terms[2]), true);
+      const c = set.lo.cmp(set.hi);
+      if (c > 0 || (c === 0 && !(set.loInc && set.hiInc))) throw new Error('这样连写不成立，没有解要填“无解”');
+    }
+    return set;
+  }
+
+  function sameSolutionSet(a, b) {
+    if (a.none || b.none) return !!a.none && !!b.none;
+    const side = (x, xi, y, yi) => (x === null ? y === null : y !== null && x.eq(y) && xi === yi);
+    return side(a.lo, a.loInc, b.lo, b.loInc) && side(a.hi, a.hiInc, b.hi, b.hiInc);
+  }
+
+  function solutionSetTeX(set, letter = 'x') {
+    if (set.none) return '无解';
+    const op = inc => (inc ? '\\leq ' : '<');
+    if (set.lo && set.hi && set.lo.eq(set.hi)) return `$${letter}=${set.lo.toTeX()}$`;
+    if (set.lo && set.hi) return `$${set.lo.toTeX()}${op(set.loInc)}${letter}${op(set.hiInc)}${set.hi.toTeX()}$`;
+    if (set.lo) return `$${letter}${set.loInc ? '\\geq ' : '>'}${set.lo.toTeX()}$`;
+    return `$${letter}${op(set.hiInc)}${set.hi.toTeX()}$`;
+  }
+
   // ---------- 判分 ----------
   // 返回 { ok, error? }：error 表示输入看不懂，提示学生改写，不算答错
   function checkBlank(blank, input) {
@@ -612,6 +678,11 @@
         const answers = Array.isArray(blank.answer) ? blank.answer : [blank.answer];
         return { ok: answers.some(a => normalize(a) === s) };
       }
+      case 'ineq': {
+        let got;
+        try { got = parseSolutionSet(s, blank.var || 'x'); } catch (e) { return { ok: false, error: e.message + '；没有解就填“无解”' }; }
+        return { ok: sameSolutionSet(got, parseSolutionSet(blank.answer, blank.var || 'x')) };
+      }
     }
     throw new Error('未知填空类型 ' + blank.kind);
   }
@@ -645,6 +716,7 @@
       case 'angle': return normalize(blank.answer).replace(/'/g, '′').replace(/"/g, '″');
       case 'ratio': return `$${normalize(blank.answer)}$`;
       case 'text': return Array.isArray(blank.answer) ? blank.answer[0] : blank.answer;
+      case 'ineq': return solutionSetTeX(parseSolutionSet(blank.answer, blank.var || 'x'), blank.var || 'x');
     }
     return String(blank.answer);
   }
@@ -652,7 +724,7 @@
   const Answer = {
     Frac, normalize, parseNumber, parseNumberList, parseExpr, evaluate, equivalent,
     isSimplified, parseAngle, parseReal, evalReal, realValue, realEqual, texReal,
-    checkBlank, checkQuestion, answerText,
+    checkBlank, checkQuestion, answerText, parseSolutionSet, sameSolutionSet,
   };
   if (typeof module !== 'undefined') module.exports = Answer;
   else root.Answer = Answer;

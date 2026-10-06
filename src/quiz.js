@@ -43,6 +43,7 @@
       if (b.kind === 'real' || b.kind === 'reals') ['√', '∛', 'π', '−', '/', '(', ')', '^'].forEach(k => keys.add(k));
       if (b.kind === 'reals') keys.add(',');
       if (b.kind === 'angle') ['°', '′', '″'].forEach(k => keys.add(k));
+      if (b.kind === 'ineq') [b.var || 'x', '<', '>', '≤', '≥', '−', '/', '.', '无解'].forEach(k => keys.add(k));
     }
     return [...keys];
   }
@@ -145,7 +146,7 @@
           input.setAttribute('autocapitalize', 'off');
           input.spellcheck = false;
           input.inputMode = blank.kind === 'num' || blank.kind === 'nums' || blank.kind === 'ratio' ? 'decimal' : 'text';
-          input.placeholder = blank.kind === 'nums' ? '多个答案用逗号隔开' : blank.kind === 'ratio' ? '比如 3:4' : '';
+          input.placeholder = blank.kind === 'nums' ? '多个答案用逗号隔开' : blank.kind === 'ratio' ? '比如 3:4' : blank.kind === 'ineq' ? '比如 x≥2 或 −1<x<3' : '';
           input.addEventListener('focus', () => (lastInput = input));
           input.addEventListener('input', () => {
             if (locked) return;

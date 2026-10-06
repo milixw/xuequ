@@ -147,3 +147,23 @@ test('最简分式：相等并且约分到最简', () => {
   for (const s of ['-2x/(3y^2)', '2x/(-3y^2)', '-(2x)/(3y^2)']) assert(ok(m, s), `应判对：${s}`);
   assert(!ok(m, '-4x^2/(6x*y^2)'), '单项式没约完');
 });
+
+test('不等式的解集', () => {
+  const b = blank('ineq', 'x>=2');
+  for (const s of ['x≥2', 'x>=2', 'x＞=2', '2≤x', 'x≥4/2', 'x ≥ 2']) assert(ok(b, s), `应判对：${s}`);
+  assert(!ok(b, 'x>2'), '端点不含');
+  assert(!ok(b, 'x≤2'), '方向反了');
+  assert(/未知数/.test(A.checkBlank(b, 'y≥2').error), '字母写错要提示');
+  const two = blank('ineq', '-3<x<=5');
+  for (const s of ['-3<x≤5', '−3<x≤5', '5≥x>-3']) assert(ok(two, s), `应判对：${s}`);
+  assert(!ok(two, '-3≤x≤5'), '左端点不含');
+  assert(A.checkBlank(two, '-3<x>5').error, '连写方向不一致要提示');
+  assert(A.checkBlank(two, '5<x<-3').error, '连写不成立要提示');
+  const none = blank('ineq', '无解');
+  assert(ok(none, '无解') && !ok(none, 'x>1'), '无解');
+  assert(!ok(b, '无解'), '有解却填无解');
+  assert(ok(blank('ineq', 'x=2'), '2≤x≤2') && ok(blank('ineq', 'x<-3/2'), 'x<-1.5'), '单点、分数');
+  assert(ok(blank('ineq', 'y<1', { var: 'y' }), '1>y'), '指定字母');
+  assert(A.answerText(two) === '$-3<x\\leq 5$', 'answerText 连写');
+  assert(A.answerText(b) === '$x\\geq 2$', 'answerText');
+});

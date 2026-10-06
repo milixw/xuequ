@@ -864,7 +864,153 @@
     return s;
   }
 
-  const TYPES = { foldCut, numberLineFold, angleFold, ropeCut, motion, sweep, rotOverlap, billiard };
+  // ---------- 数轴的公共画法（第 15 章） ----------
+  // 数轴 [lo, hi] 画在 y 处；返回 { sx, html }
+  function axis(w, y, lo, hi) {
+    const unit = (w - 36) / (hi - lo);
+    const sx = x => 16 + (x - lo) * unit;
+    const every = hi - lo > 14 ? 2 : 1;
+    let html = `<line x1="8" y1="${y}" x2="${w - 10}" y2="${y}" stroke="${INK}" stroke-width="1.6"/>` +
+      `<path d="M${w - 12},${y - 4} l6,4 l-6,4" fill="none" stroke="${INK}" stroke-width="1.6"/>`;
+    for (let x = Math.ceil(lo); x <= hi; x++) {
+      html += `<line x1="${sx(x).toFixed(1)}" y1="${y}" x2="${sx(x).toFixed(1)}" y2="${y - 4}" stroke="${INK}"/>`;
+      if (x % every === 0) {
+        html += `<text x="${sx(x).toFixed(1)}" y="${y + 15}" font-size="10" text-anchor="middle" fill="${INK}">${minus(x)}</text>`;
+      }
+    }
+    return { sx, html };
+  }
+  const fmtNum = v => minus(Number.isInteger(v) ? v : +v.toFixed(2));
+
+  // 不等式两边同乘一个数（15.1 性质 4、5）：opts { a, b, ks }，a>b；先按 |k| 伸缩，k<0 时再绕原点翻到另一侧
+  function scaleOrder(container, opts) {
+    const { a, b, ks } = opts;
+    let k = ks[0];
+    const W = 320, H = 130, Y = 92;
+    const s = shell(container, {
+      w: W, h: H, aria: '不等式两边同乘一个数，两点位置变化的演示',
+      controls: ks.length > 1 ? '<span class="demo-row"><span>乘</span><span class="seg"></span></span>' : '',
+    });
+    if (ks.length > 1) segButtons(s.box.querySelector('.seg'), ks.map(minus), minus(k), (v, i) => { k = ks[i]; s.reset(); draw(1, 0); s.caption.textContent = `点「播放」，看两边同乘 ${minus(k)} 后谁大`; });
+    const span = Math.max(...ks.map(m => Math.max(Math.abs(a * m), Math.abs(b * m))), Math.abs(a), Math.abs(b));
+    const lim = Math.ceil(span) + 1;
+    const phases = () => [{ kind: 'wait', dur: 300 }, { kind: 'stretch', dur: 1200 }, ...(k < 0 ? [{ kind: 'wait', dur: 250 }, { kind: 'flip', dur: 1500 }] : []), { kind: 'wait', dur: 200 }];
+    function draw(scale, flip) {
+      const ax = axis(W, Y, -lim, lim);
+      let html = ax.html;
+      html += `<line x1="${ax.sx(0)}" y1="${Y - 58}" x2="${ax.sx(0)}" y2="${Y + 4}" stroke="${MUTED}" stroke-dasharray="3 3"/>`;
+      const th = Math.PI * flip;
+      // 翻转时沿半圆弧走到原点另一侧（弧高按距原点的远近压扁，免得出画面）
+      const at = v => {
+        const x = v * scale;
+        return [ax.sx(x * Math.cos(th)), Y - Math.sin(th) * Math.min(62, Math.abs(ax.sx(x) - ax.sx(0)) * 0.6)];
+      };
+      const done = scale === Math.abs(k) && (k > 0 || flip === 1);
+      const tag = (v, name) => (scale === 1 && !flip ? name : done ? `${minus(k)}${name}` : name);
+      const [xa, ya] = at(a), [xb, yb] = at(b);
+      html += dot(xa, ya, RED, tag(a, 'a'), 1) + dot(xb, yb, BLUE, tag(b, 'b'), 1);
+      s.svg.innerHTML = html;
+    }
+    s.frame = ms => {
+      let scale = 1, flip = 0, end = false;
+      walk(phases(), ms, (p, f) => {
+        if (p.kind === 'stretch') scale = lerp(1, Math.abs(k), ease(f));
+        if (p.kind === 'flip') flip = ease(f);
+      });
+      end = ms >= totalOf(phases());
+      draw(scale, flip);
+      const ka = a * k, kb = b * k;
+      s.caption.textContent = end
+        ? `a=${fmtNum(a)} 在 b=${fmtNum(b)} 右边；乘 ${minus(k)} 后 ${fmtNum(ka)} 在 ${fmtNum(kb)} 的${ka > kb ? '右边，方向不变' : '左边，方向改变'}：${minus(k)}a ${ka > kb ? '>' : '<'} ${minus(k)}b`
+        : flip ? '乘负数：再绕原点翻到另一侧，左右顺序颠倒' : `先按 ${Math.abs(k)} 倍伸缩，左右顺序不变`;
+    };
+    s.duration = () => totalOf(phases());
+    s.reset();
+    draw(1, 0);
+    s.caption.textContent = `a>b：a 在 b 的右边。点「播放」，看两边同乘 ${minus(k)} 后谁大`;
+    return s;
+  }
+
+  // 在数轴上找几个不等式解集的公共部分（15.2、15.3）
+  // opts { sets: [[op, v, 标签?], ...], lo, hi, ints }；op 为 '>' '>=' '<' '<='，ints 为 true 时最后标出公共部分里的整数
+  function solutionSet(container, opts) {
+    const { sets, lo, hi, ints } = opts;
+    const W = 320, n = sets.length, Y = 40 + 18 * n, H = Y + 40;
+    const s = shell(container, { w: W, h: H, aria: '在数轴上表示不等式的解集并找公共部分的演示' });
+    const colors = [RED, BLUE, GREEN, '#8a5cc2'];
+    // 公共部分：下界取最大的，上界取最小的；同一个数时“不含”优先
+    const lows = sets.filter(([op]) => op[0] === '>'), highs = sets.filter(([op]) => op[0] === '<');
+    const L = lows.length ? Math.max(...lows.map(([, v]) => v)) : null;
+    const R = highs.length ? Math.min(...highs.map(([, v]) => v)) : null;
+    const Li = lows.filter(([, v]) => v === L).every(([op]) => op.length === 2);
+    const Ri = highs.filter(([, v]) => v === R).every(([op]) => op.length === 2);
+    const empty = L !== null && R !== null && (L > R || (L === R && !(Li && Ri)));
+    const intList = [];
+    if (ints && !empty) {
+      for (let x = Math.ceil(L === null ? lo : L); x <= (R === null ? hi : R); x++) {
+        if ((L === null || x > L || (x === L && Li)) && (R === null || x < R || (x === R && Ri))) intList.push(x);
+      }
+    }
+    const phases = [
+      ...sets.map((_, i) => ({ kind: 'ray', i, dur: 900 })),
+      ...(n > 1 ? [{ kind: 'wait', dur: 250 }, { kind: 'common', dur: 800 }] : []),
+      ...(ints && !empty ? [{ kind: 'ints', dur: 700 }] : []),
+    ];
+    function draw(grow, common, intF) {
+      const ax = axis(W, Y, lo, hi);
+      let html = '';
+      // 公共部分画在数轴上，先画在底下
+      if (common > 0 && !empty) {
+        const x1 = ax.sx(L === null ? lo : L), x2 = ax.sx(R === null ? hi : R);
+        html += `<rect x="${Math.min(x1, x2).toFixed(1)}" y="${Y - 7}" width="${Math.abs(x2 - x1).toFixed(1)}" height="14" fill="#f2d44c" opacity="${(0.65 * common).toFixed(2)}"/>`;
+      }
+      html += ax.html;
+      sets.forEach(([op, v, label], i) => {
+        const f = grow[i];
+        if (!f) return;
+        const c = colors[i % colors.length], x0 = ax.sx(v), yy = Y - 16 - 16 * i;
+        const end = op[0] === '>' ? W - 14 : 10;
+        const x1 = lerp(x0, end, ease(f));
+        html += `<line x1="${x0.toFixed(1)}" y1="${Y}" x2="${x0.toFixed(1)}" y2="${yy}" stroke="${c}" stroke-width="1.6"/>`;
+        html += `<line x1="${x0.toFixed(1)}" y1="${yy}" x2="${x1.toFixed(1)}" y2="${yy}" stroke="${c}" stroke-width="1.6"/>`;
+        if (f === 1) html += `<path d="M${end + (op[0] === '>' ? -5 : 5)},${yy - 4} l${op[0] === '>' ? 5 : -5},4 l${op[0] === '>' ? -5 : 5},4" fill="none" stroke="${c}" stroke-width="1.6"/>`;
+        html += `<circle cx="${x0.toFixed(1)}" cy="${Y}" r="4" fill="${op.length === 2 ? c : '#fff'}" stroke="${c}" stroke-width="1.6"/>`;
+        if (!Number.isInteger(v)) html += `<text x="${x0.toFixed(1)}" y="${Y + 29}" font-size="10" text-anchor="middle" fill="${c}">${label || fmtNum(v)}</text>`;
+        const tx = op[0] === '>' ? Math.min(x0 + 18, W - 30) : Math.max(x0 - 18, 24);
+        if (n > 1) html += `<text x="${tx.toFixed(1)}" y="${yy - 4}" font-size="11" text-anchor="middle" fill="${c}">${['①', '②', '③', '④'][i]}</text>`;
+      });
+      if (intF > 0) intList.forEach(x => { html += `<circle cx="${ax.sx(x).toFixed(1)}" cy="${Y}" r="3" fill="${INK}" opacity="${intF.toFixed(2)}"/>`; });
+      s.svg.innerHTML = html;
+    }
+    const opText = op => ({ '>': '>', '>=': '≥', '<': '<', '<=': '≤' })[op];
+    const commonText = () => {
+      if (empty) return '没有公共部分，不等式组无解';
+      const lt = L === null ? '' : `${fmtNum(L)}${Li ? '≤' : '<'}`;
+      const rt = R === null ? '' : `${Ri ? '≤' : '<'}${fmtNum(R)}`;
+      if (L !== null && R !== null && L === R) return `公共部分只有一个数：x=${fmtNum(L)}`;
+      if (L === null) return `公共部分：x${rt}`;
+      if (R === null) return `公共部分：x${Li ? '≥' : '>'}${fmtNum(L)}`;
+      return `公共部分：${lt}x${rt}`;
+    };
+    s.frame = ms => {
+      const grow = sets.map(() => 0);
+      let common = 0, intF = 0, cap = '';
+      walk(phases, ms, (p, f) => {
+        if (p.kind === 'ray') { grow[p.i] = f; cap = `${n > 1 ? ['①', '②', '③', '④'][p.i] + ' ' : ''}x${opText(sets[p.i][0])}${sets[p.i][2] || fmtNum(sets[p.i][1])}：${sets[p.i][0].length === 2 ? '实心点，含这个数' : '空心圈，不含这个数'}`; }
+        if (p.kind === 'common') { common = f; cap = commonText(); }
+        if (p.kind === 'ints') { intF = f; cap = `${n > 1 ? commonText() : '解集'}，其中的整数：${intList.map(minus).join('，')}，共 ${intList.length} 个`; }
+      });
+      draw(grow, common, intF);
+      s.caption.textContent = cap;
+    };
+    s.duration = () => totalOf(phases);
+    s.reset();
+    draw(sets.map(() => 0), 0, 0);
+    s.caption.textContent = n > 1 ? '点「播放」，把每个解集画在数轴上，再找公共部分' : '点「播放」，把解集画在数轴上';
+    return s;
+  }
+
+  const TYPES = { foldCut, numberLineFold, angleFold, ropeCut, motion, sweep, rotOverlap, billiard, scaleOrder, solutionSet };
 
   function mount(container, demo) {
     const make = TYPES[demo.type];

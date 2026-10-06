@@ -16,8 +16,8 @@ require('../content/catalog.js');
 
 const ROOT = path.join(__dirname, '..');
 const LEVELS = { b: 'basic', e: 'extended', c: 'challenge' };
-const KINDS = ['num', 'nums', 'expr', 'factor', 'frac', 'real', 'reals', 'angle', 'ratio', 'text'];
-const DEMOS = ['foldCut', 'numberLineFold', 'angleFold', 'ropeCut', 'motion', 'sweep', 'rotOverlap', 'billiard'];  // src/demos.js 里的演示类型
+const KINDS = ['num', 'nums', 'expr', 'factor', 'frac', 'real', 'reals', 'angle', 'ratio', 'text', 'ineq'];
+const DEMOS = ['foldCut', 'numberLineFold', 'angleFold', 'ropeCut', 'motion', 'sweep', 'rotOverlap', 'billiard', 'scaleOrder', 'solutionSet'];  // src/demos.js 里的演示类型
 
 // 取出文本里所有 $...$ / $$...$$ 公式，逐个用 KaTeX 编译
 function checkMath(text, where) {
@@ -62,6 +62,7 @@ function verifyBlank(blank, v) {
       const want = blank.answer.split(':').map(A.Frac.of);
       return Array.isArray(v) && v.length === want.length && v.every((x, i) => A.Frac.of(x).eq(want[i]));
     }
+    case 'ineq': return A.checkBlank(blank, String(v)).ok;
     case 'text': return (Array.isArray(blank.answer) ? blank.answer : [blank.answer]).includes(v);
   }
   return false;

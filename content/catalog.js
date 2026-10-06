@@ -165,9 +165,9 @@ Content.catalog = {
                   no: 15,
                   title: '一元一次不等式',
                   sections: [
-                    { no: '15.1', title: '不等式及其性质', ready: false },
-                    { no: '15.2', title: '一元一次不等式', ready: false },
-                    { no: '15.3', title: '一元一次不等式组', ready: false },
+                    { no: '15.1', title: '不等式及其性质', ready: true },
+                    { no: '15.2', title: '一元一次不等式', ready: true },
+                    { no: '15.3', title: '一元一次不等式组', ready: true },
                   ],
                 },
                 {
