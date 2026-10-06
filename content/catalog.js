@@ -174,9 +174,9 @@ Content.catalog = {
                   no: 16,
                   title: '相交线与平行线',
                   sections: [
-                    { no: '16.1', title: '相交线', ready: false },
-                    { no: '16.2', title: '平行线', ready: false },
-                    { no: '16.3', title: '命题与证明', ready: false },
+                    { no: '16.1', title: '相交线', ready: true },
+                    { no: '16.2', title: '平行线', ready: true },
+                    { no: '16.3', title: '命题与证明', ready: true },
                   ],
                 },
                 {

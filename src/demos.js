@@ -1010,7 +1010,128 @@
     return s;
   }
 
-  const TYPES = { foldCut, numberLineFold, angleFold, ropeCut, motion, sweep, rotOverlap, billiard, scaleOrder, solutionSet };
+  // ---------- 相交线（第 16 章） ----------
+  // 角度 deg（数学方向，逆时针为正）在半径 r 处的屏幕坐标
+  const polar = (ox, oy, deg, r) => [ox + r * Math.cos(deg * Math.PI / 180), oy - r * Math.sin(deg * Math.PI / 180)];
+  // 从 d1 逆时针转到 d2 的扇形（d2>d1）
+  function wedge(ox, oy, d1, d2, r, color, op = 0.25) {
+    const [x1, y1] = polar(ox, oy, d1, r), [x2, y2] = polar(ox, oy, d2, r);
+    const large = d2 - d1 > 180 ? 1 : 0;
+    return `<path d="M${ox},${oy} L${x1.toFixed(1)},${y1.toFixed(1)} A${r},${r} 0 ${large} 0 ${x2.toFixed(1)},${y2.toFixed(1)} Z" fill="${color}" fill-opacity="${op}" stroke="${color}" stroke-width="1"/>`;
+  }
+  function label(ox, oy, deg, r, text, color = INK, size = 12) {
+    const [x, y] = polar(ox, oy, deg, r);
+    return `<text x="${x.toFixed(1)}" y="${(y + 4).toFixed(1)}" font-size="${size}" text-anchor="middle" fill="${color}" font-weight="bold">${text}</text>`;
+  }
+  // 直角记号：在 d 与 d+90 两条射线之间画小正方形
+  function rightMark(ox, oy, d, s = 11) {
+    const [x1, y1] = polar(ox, oy, d, s), [x2, y2] = polar(ox, oy, d + 90, s), [x3, y3] = polar(ox, oy, d + 45, s * Math.SQRT2);
+    return `<polyline points="${x1.toFixed(1)},${y1.toFixed(1)} ${x3.toFixed(1)},${y3.toFixed(1)} ${x2.toFixed(1)},${y2.toFixed(1)}" fill="none" stroke="${INK}" stroke-width="1.3"/>`;
+  }
+
+  // 对顶角相等（16.1）：直线 AB 不动，直线 CD 绕交点 O 转动；拖滑块或点播放
+  function vertAngles(container, opts) {
+    const W = 320, H = 210, OX = 160, OY = 105, R = 82;
+    let ang = opts.start || 40;
+    const s = shell(container, {
+      w: W, h: H, aria: '两条直线相交时对顶角的演示',
+      controls: '<label class="demo-row"><span>∠AOC</span><input type="range" min="10" max="170" step="1"><b class="demo-val"></b></label>',
+    });
+    const range = s.box.querySelector('input'), val = s.box.querySelector('.demo-val');
+    range.value = ang;
+    range.addEventListener('input', () => { s.reset(); ang = Number(range.value); draw(ang); });
+    function draw(a) {
+      a = Math.round(a);
+      const c = 180 - a;   // OC 的方向（OA 指向 180°）
+      let html = '';
+      html += wedge(OX, OY, c, 180, 30, RED) + wedge(OX, OY, 360 - a, 360, 30, RED);       // ∠AOC 与 ∠BOD
+      html += wedge(OX, OY, 0, c, 22, BLUE, 0.18) + wedge(OX, OY, 180, 360 - a, 22, BLUE, 0.18);  // ∠BOC 与 ∠AOD
+      const line = (d1, d2, n1, n2) => {
+        const [x1, y1] = polar(OX, OY, d1, R), [x2, y2] = polar(OX, OY, d2, R);
+        return `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${INK}" stroke-width="2"/>` +
+          label(OX, OY, d1, R + 11, n1) + label(OX, OY, d2, R + 11, n2);
+      };
+      html += line(180, 0, 'A', 'B') + line(c, c + 180, 'C', 'D');
+      html += label(OX, OY, (c + 180) / 2, 46, `${a}°`, RED, 11) + label(OX, OY, 360 - a / 2, 46, `${a}°`, RED, 11);
+      if (a !== 90) html += label(OX, OY, c / 2, 40, `${180 - a}°`, BLUE, 11) + label(OX, OY, 180 + (180 - a) / 2, 40, `${180 - a}°`, BLUE, 11);
+      else html += rightMark(OX, OY, 0) + rightMark(OX, OY, 90) + rightMark(OX, OY, 180) + rightMark(OX, OY, 270);
+      html += `<circle cx="${OX}" cy="${OY}" r="2.5" fill="${INK}"/><text x="${OX + 5}" y="${OY + 14}" font-size="12" fill="${INK}" stroke="#fff" stroke-width="3" paint-order="stroke">O</text>`;
+      s.svg.innerHTML = html;
+      val.textContent = `${a}°`;
+      s.caption.textContent = a === 90
+        ? '四个角都是 90°：AB⊥CD，垂直是相交的特殊情况'
+        : `∠AOC=∠BOD=${a}°（对顶角相等），它们都等于 180°−∠BOC；两直线的夹角是 ${Math.min(a, 180 - a)}°`;
+    }
+    // 播放：从当前角度转到 150°、再转回 30°，经过 90° 时停一下
+    const phases = () => [{ kind: 'go', from: ang, to: 90, dur: Math.abs(90 - ang) * 18 + 1 }, { kind: 'hold', dur: 900 }, { kind: 'go', from: 90, to: 150, dur: 1100 }, { kind: 'go', from: 150, to: 30, dur: 2200 }];
+    s.frame = ms => {
+      let a = ang;
+      walk(phases(), ms, (p, f) => { if (p.kind === 'go') a = lerp(p.from, p.to, ease(f)); });
+      draw(a);
+      range.value = Math.round(a);
+    };
+    s.duration = () => totalOf(phases());
+    s.reset();
+    draw(ang);
+    return s;
+  }
+
+  // 三线八角与平行（16.2）：直线 a、b 被直线 l 所截。a 固定水平，b 绕它与 l 的交点转动（β 为 b 的倾斜角）
+  // opts.kinds 可选 ['same', 'alt', 'inner']：同位角、内错角、同旁内角
+  function parallelAngles(container, opts) {
+    const W = 320, H = 230, L = 70;            // l 的方向
+    const P1 = [170, 72], P2 = polar(170, 72, L + 180, 100);
+    const kinds = opts.kinds || ['same', 'alt', 'inner'];
+    const NAMES = { same: '同位角', alt: '内错角', inner: '同旁内角' };
+    let kind = kinds[0], beta = opts.start != null ? opts.start : 20;
+    const s = shell(container, {
+      w: W, h: H, aria: '两条直线被第三条直线所截，同位角、内错角、同旁内角与平行的演示',
+      controls: `<span class="demo-row"><span class="seg"></span></span><label class="demo-row"><span>转动 b</span><input type="range" min="-30" max="30" step="1"></label>`,
+    });
+    const range = s.box.querySelector('input');
+    range.value = beta;
+    range.addEventListener('input', () => { s.reset(); beta = Number(range.value); draw(beta); });
+    segButtons(s.box.querySelector('.seg'), kinds.map(k => NAMES[k]), NAMES[kind], (v, i) => { kind = kinds[i]; s.reset(); draw(beta); });
+    // 每种角在 P1、P2 处的两条边方向 [起, 止]（逆时针）和度数
+    const pair = b => ({
+      same: [[0, L], [b, L], L, L - b],
+      alt: [[180, L + 180], [b, L], L, L - b],
+      inner: [[L + 180, 360], [b, L], 180 - L, L - b],
+    })[kind];
+    function draw(b) {
+      b = Math.round(b);
+      const line = (p, d, r, name) => {
+        const [x1, y1] = polar(p[0], p[1], d, r), [x2, y2] = polar(p[0], p[1], d + 180, r);
+        const [lx, ly] = polar(p[0], p[1], d, r - 8);
+        return `<line x1="${x1.toFixed(1)}" y1="${y1.toFixed(1)}" x2="${x2.toFixed(1)}" y2="${y2.toFixed(1)}" stroke="${INK}" stroke-width="2"/>` +
+          `<text x="${(lx + (name === 'l' ? 10 : 0)).toFixed(1)}" y="${(ly - 7).toFixed(1)}" font-size="13" font-style="italic" fill="${INK}">${name}</text>`;
+      };
+      const [[a1, a2], [b1, b2], v1, v2] = pair(b);
+      let html = '';
+      html += wedge(P1[0], P1[1], a1, a2, 26, RED, 0.3) + wedge(P2[0], P2[1], b1, b2, 26, BLUE, 0.3);
+      html += line(P1, 0, 140, 'a') + line(P2, b, 140, 'b') + line(P1, L, 70, '') + line(P2, L + 180, 50, 'l');
+      html += label(P1[0], P1[1], (a1 + a2) / 2, 40, `${v1}°`, RED, 11) + label(P2[0], P2[1], (b1 + b2) / 2, 40, `${v2}°`, BLUE, 11);
+      s.svg.innerHTML = html;
+      const par = b === 0;
+      const rel = kind === 'inner' ? `和为 ${v1 + v2}°` : v1 === v2 ? '相等' : '不相等';
+      s.caption.textContent = `${NAMES[kind]}：红 ${v1}°，蓝 ${v2}°，${rel}` +
+        (par ? `。a∥b！${kind === 'inner' ? '同旁内角互补' : `${NAMES[kind]}相等`}，两直线平行` : '；拖动或点「播放」转动 b');
+    }
+    const phases = () => [{ kind: 'go', from: beta, to: 0, dur: Math.abs(beta) * 70 + 300 }, { kind: 'hold', dur: 600 }];
+    s.frame = ms => {
+      let b = beta;
+      walk(phases(), ms, (p, f) => { if (p.kind === 'go') b = lerp(p.from, p.to, ease(f)); });
+      draw(b);
+      range.value = Math.round(b);
+      if (ms >= s.duration()) beta = 0;
+    };
+    s.duration = () => totalOf(phases());
+    s.reset();
+    draw(beta);
+    return s;
+  }
+
+  const TYPES = { foldCut, numberLineFold, angleFold, ropeCut, motion, sweep, rotOverlap, billiard, scaleOrder, solutionSet, vertAngles, parallelAngles };
 
   function mount(container, demo) {
     const make = TYPES[demo.type];

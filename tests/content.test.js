@@ -17,7 +17,7 @@ require('../content/catalog.js');
 const ROOT = path.join(__dirname, '..');
 const LEVELS = { b: 'basic', e: 'extended', c: 'challenge' };
 const KINDS = ['num', 'nums', 'expr', 'factor', 'frac', 'real', 'reals', 'angle', 'ratio', 'text', 'ineq'];
-const DEMOS = ['foldCut', 'numberLineFold', 'angleFold', 'ropeCut', 'motion', 'sweep', 'rotOverlap', 'billiard', 'scaleOrder', 'solutionSet'];  // src/demos.js 里的演示类型
+const DEMOS = ['foldCut', 'numberLineFold', 'angleFold', 'ropeCut', 'motion', 'sweep', 'rotOverlap', 'billiard', 'scaleOrder', 'solutionSet', 'vertAngles', 'parallelAngles'];  // src/demos.js 里的演示类型
 
 // 取出文本里所有 $...$ / $$...$$ 公式，逐个用 KaTeX 编译
 function checkMath(text, where) {
