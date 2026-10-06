@@ -426,6 +426,74 @@
     return Math.abs(x - y) <= 1e-12 * Math.max(1, Math.abs(x), Math.abs(y));
   }
 
+  // ---------- 最简二次根式（第 20 章） ----------
+  // 数值对了还要看写法：根号里是不含平方因数的正整数，分母里没有根号，
+  // 根式之间已经相乘、同一个根号的项已经合并、整个分数已经约分
+  function squareFree(n) {
+    for (let k = 2; k * k <= n; k++) if (n % (k * k) === 0) return false;
+    return true;
+  }
+
+  function isSimplestReal(node) {
+    const strip = n => (n.t === 'paren' ? strip(n.a) : n);
+    const isSum = n => ['add', 'sub'].includes(strip(n).t);
+    // 一项 = 有理系数 × 至多一个根号（或 π）；写法不合要求返回 null
+    function term(n) {
+      switch (n.t) {
+        case 'num': return { coef: Frac.of(n.v), key: '' };
+        case 'paren': return isSum(n.a) ? null : term(n.a);
+        case 'neg': { const t = term(n.a); return t && { coef: t.coef.neg(), key: t.key }; }
+        case 'pi': return { coef: Frac.of(1), key: 'π' };
+        case 'sqrt': {
+          const r = strip(n.a);
+          if (r.t !== 'num' || !Number.isInteger(r.v) || r.v < 2 || !squareFree(r.v)) return null;
+          return { coef: Frac.of(1), key: '√' + r.v };
+        }
+        case 'cbrt': {
+          const r = strip(n.a);
+          return r.t === 'num' && Number.isInteger(r.v) ? { coef: Frac.of(1), key: '∛' + r.v } : null;
+        }
+        case 'pow': return n.a.t === 'num' ? { coef: Frac.of(n.a.v).pow(n.k), key: '' } : null;
+        case 'mul': {
+          const a = term(n.a), b = term(n.b);
+          if (!a || !b || (a.key && b.key)) return null;
+          return { coef: a.coef.mul(b.coef), key: a.key || b.key };
+        }
+        case 'div': {
+          const a = term(n.a), b = term(n.b);
+          if (!a || !b || b.key || b.coef.isZero()) return null;
+          return { coef: a.coef.div(b.coef), key: a.key };
+        }
+      }
+      return null;
+    }
+    // 把加减拆成一项一项；(2+√3)/2 这样整体除以整数的，分子要和分母约分到底
+    function terms(n, out) {
+      n = strip(n);
+      if (n.t === 'neg') return terms(n.a, out);
+      if (n.t === 'add' || n.t === 'sub') return terms(n.a, out) && terms(n.b, out);  // 只看写法，项的正负不影响
+      if (n.t === 'div' && isSum(n.a.t === 'neg' ? n.a.a : n.a)) {
+        const d = term(n.b);
+        if (!d || d.key || d.coef.d !== 1n || d.coef.isZero()) return false;
+        const inner = [];
+        if (!terms(n.a, inner) || !inner.every(t => t.coef.d === 1n)) return false;
+        if (inner.reduce((g, t) => gcd(g, t.coef.n), d.coef.n) !== 1n) return false;
+        out.push(...inner.map(t => ({ coef: t.coef.div(d.coef), key: t.key })));
+        return true;
+      }
+      const t = term(n);
+      if (!t) return false;
+      out.push(t);
+      return true;
+    }
+    const list = [];
+    if (!terms(node, list)) return false;
+    if (list.length > 1 && list.some(t => t.coef.isZero())) return false;
+    return new Set(list.map(t => t.key)).size === list.length;
+  }
+
+  const SIMPLEST_HINT = '结果正确，但还要化成最简形式：根号里不留能开得尽的因数，分母里不留根号，同一个根号的项要合并';
+
   function texReal(node) {
     const wrap = n => (['add', 'sub', 'neg'].includes(n.t) ? `(${texReal(n)})` : texReal(n));
     const bare = n => texReal(n.t === 'paren' ? n.a : n);  // 根号里、分数线上下不用再套括号
@@ -647,7 +715,9 @@
       case 'real': {
         let v;
         try { v = realValue(s); } catch (e) { return { ok: false, error: e.message + '。可以填 2√3、−√5、3+√2 这样的式子' }; }
-        return { ok: realEqual(v, realValue(blank.answer)) };
+        if (!realEqual(v, realValue(blank.answer))) return { ok: false };
+        if (blank.simplest && !isSimplestReal(parseReal(s))) return { ok: false, error: SIMPLEST_HINT };
+        return { ok: true };
       }
       case 'reals': {
         const parts = s.split(',').map(t => t.trim()).filter(Boolean);
@@ -656,7 +726,9 @@
         try { vs = parts.map(realValue); } catch (e) { return { ok: false, error: e.message + '。可以填 2√3、−√5 这样的式子' }; }
         const want = blank.answer.map(realValue);
         const got = vs.filter((v, i) => vs.findIndex(w => realEqual(w, v)) === i);
-        return { ok: got.length === want.length && want.every(w => got.some(g => realEqual(g, w))) };
+        if (!(got.length === want.length && want.every(w => got.some(g => realEqual(g, w))))) return { ok: false };
+        if (blank.simplest && !parts.every(p => isSimplestReal(parseReal(p)))) return { ok: false, error: SIMPLEST_HINT };
+        return { ok: true };
       }
       case 'angle': {
         const v = parseAngle(s);
@@ -723,7 +795,7 @@
 
   const Answer = {
     Frac, normalize, parseNumber, parseNumberList, parseExpr, evaluate, equivalent,
-    isSimplified, parseAngle, parseReal, evalReal, realValue, realEqual, texReal,
+    isSimplified, parseAngle, parseReal, evalReal, realValue, realEqual, texReal, isSimplestReal,
     checkBlank, checkQuestion, answerText, parseSolutionSet, sameSolutionSet,
   };
   if (typeof module !== 'undefined') module.exports = Answer;

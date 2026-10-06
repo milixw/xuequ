@@ -101,6 +101,31 @@ test('实数填空：根号、立方根、圆周率', () => {
   assert(A.checkBlank(blank('real', '√2'), 'x+1').error, '看不懂的输入要提示');
 });
 
+test('实数填空：最简二次根式（simplest）', () => {
+  const S = (ans, opts) => blank('real', ans, { simplest: true, ...opts });
+  const err = (b, s) => A.checkBlank(b, s).error;
+  for (const s of ['2√3', '√3*2', '2×√3']) assert(ok(S('2√3'), s), `应判对：${s}`);
+  for (const s of ['√12', '√3+√3', '√2*√6', '(√3)^2*2/√3']) {
+    assert(!ok(S('2√3'), s), `没化简应判错：${s}`);
+    assert(err(S('2√3'), s), `没化简要提示：${s}`);
+  }
+  assert(!err(S('2√3'), '3√2'), '数值不对就是错，不提示化简');
+  assert(ok(S('√6/2'), '√6/2') && ok(S('√6/2'), '1/2√6'), '分母不含根号');
+  for (const s of ['√3/√2', '√(3/2)', '3/√6', '√1.5']) assert(err(S('√6/2'), s), `分母或根号里有分数：${s}`);
+  assert(ok(S('(4√3-3√2)/30'), '(4√3−3√2)/30'), '整体除以整数');
+  assert(ok(S('(4√3-3√2)/30'), '2√3/15-√2/10'), '拆成两项也行');
+  assert(err(S('(1+√3)/2'), '(2+2√3)/4'), '分数没约分');
+  assert(ok(S('-(1+√5)/2'), '-(1+√5)/2'), '负号在前');
+  assert(err(S('5√2'), '2√2+3√2'), '同一个根号要合并');
+  assert(err(S('2+√2'), '(√2+1)*√2'), '括号要乘开');
+  assert(ok(S('3-2√2'), '3-2√2') && ok(S('5'), '5') && ok(S('π-3'), 'π-3'), '整数、π');
+  assert(err(S('1'), '√1'), '√1 要写成 1');
+  const R = blank('reals', ['√2', '-√2'], { simplest: true });
+  assert(ok(R, '√2,-√2'), '多值');
+  assert(A.checkBlank(R, '√2,-√8/2').error, '多值里有没化简的');
+  assert(ok(blank('real', '2√3'), '√12'), '不要求最简时照旧按数值判');
+});
+
 test('整题判分', () => {
   assert(A.checkQuestion({ type: 'choice', answer: 2 }, 2).ok, '单选');
   assert(!A.checkQuestion({ type: 'choice', answer: 2 }, 1).ok, '单选错');

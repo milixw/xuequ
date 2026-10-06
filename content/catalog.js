@@ -291,8 +291,8 @@ Content.catalog = {
                   no: 20,
                   title: '二次根式',
                   sections: [
-                    { no: '20.1', title: '二次根式及其性质', ready: false },
-                    { no: '20.2', title: '二次根式的运算', ready: false },
+                    { no: '20.1', title: '二次根式及其性质', ready: true },
+                    { no: '20.2', title: '二次根式的运算', ready: true },
                   ],
                 },
                 {
