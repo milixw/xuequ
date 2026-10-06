@@ -9,8 +9,8 @@
 // 本节约定：分母里有根号的式子一律不出（那是 20.2 的分母有理化）；被开方数含分母时只用性质 4 和“分子分母同乘一个数使分母成为完全平方”
 //   化去分母；同一个根号的项相加减用 19.2 已有的分配律（如 2√3+3√3=5√3），不提“同类二次根式”；数值结果的填空要求最简（simplest）
 
-const S = Math.sqrt;
-const near = (x, y) => Math.abs(x - y) < 1e-9;
+const S201 = Math.sqrt;
+const near201 = (x, y) => Math.abs(x - y) < 1e-9;
 const R9 = v => Math.round(v * 1e9) / 1e9;
 // 根号里的数是否不含大于 1 的平方因数（最简二次根式的判定）
 const squareFree201 = n => { for (let k = 2; k * k <= n; k++) if (n % (k * k) === 0) return false; return true; };
@@ -137,7 +137,7 @@ Content.section({
         '(2) $(-2\\sqrt5)^2=(-2)^2\\times(\\sqrt5)^2=4\\times5=20$。坑：只把 $\\sqrt5$ 平方得 $-10$ 或 $10$，漏了系数 $-2$ 也要平方。',
         '(3) $\\pi\\approx3.14$，$3-\\pi<0$，$\\pi-4<0$。原式 $=\\lvert3-\\pi\\rvert+\\lvert\\pi-4\\rvert=(\\pi-3)+(4-\\pi)=1$。',
       ],
-      verify: () => [S((S(3) - 2) ** 2), Math.round((-2 * S(5)) ** 2), Math.round(S((3 - Math.PI) ** 2) + S((Math.PI - 4) ** 2))],
+      verify: () => [S201((S201(3) - 2) ** 2), Math.round((-2 * S201(5)) ** 2), Math.round(S201((3 - Math.PI) ** 2) + S201((Math.PI - 4) ** 2))],
     },
     {
       id: '20.1-b04',
@@ -156,7 +156,7 @@ Content.section({
         '(3) 带分数先化成假分数：$2\\frac29=\\frac{20}{9}$，$\\sqrt{\\frac{20}{9}}=\\frac{\\sqrt{20}}{3}=\\frac{2\\sqrt5}{3}$。坑：写成 $2\\sqrt{\\frac29}$，带分数的“$2$”是加上去的，不是乘。',
         '(4) 不必先算出 $294$，分解素因数更快：$14\\times21=2\\times7\\times3\\times7=7^2\\times6$，所以 $\\sqrt{14\\times21}=7\\sqrt6$。',
       ],
-      verify: () => [S(108), S(0.18), S(2 + 2 / 9), S(14 * 21)],
+      verify: () => [S201(108), S201(0.18), S201(2 + 2 / 9), S201(14 * 21)],
     },
     {
       id: '20.1-b05',
@@ -195,8 +195,8 @@ Content.section({
       verify: () => {
         // 在一串点上检验：两边都有意义且相等的 x 恰好满足答案
         const xs = [-4, -3, -2, -1, 0, 1.5, 2, 3, 5];
-        const ok1 = xs.filter(x => x + 1 >= 0 && x - 2 >= 0 && near(S((x + 1) * (x - 2)), S(x + 1) * S(x - 2)));
-        const ok2 = xs.filter(x => x + 3 >= 0 && 2 - x > 0 && near(S((x + 3) / (2 - x)), S(x + 3) / S(2 - x)));
+        const ok1 = xs.filter(x => x + 1 >= 0 && x - 2 >= 0 && near201(S201((x + 1) * (x - 2)), S201(x + 1) * S201(x - 2)));
+        const ok2 = xs.filter(x => x + 3 >= 0 && 2 - x > 0 && near201(S201((x + 3) / (2 - x)), S201(x + 3) / S201(2 - x)));
         return [`x>=${Math.min(...ok1)}`, `${Math.min(...ok2)}<=x<2`];
       },
     },
@@ -213,9 +213,9 @@ Content.section({
         '因为 $x<0$，$\\lvert2x\\rvert=-2x$，所以结果是 $-2x\\sqrt{3y}$，选 B。坑：选 A，把 $x$ 直接移出根号，结果成了负数。',
       ],
       verify: () => {
-        const x = -1.7, y = 0.8, v = S(12 * x * x * y);
-        const opts = [2 * x * S(3 * y), -2 * x * S(3 * y), NaN, NaN];
-        return opts.findIndex(o => near(o, v));
+        const x = -1.7, y = 0.8, v = S201(12 * x * x * y);
+        const opts = [2 * x * S201(3 * y), -2 * x * S201(3 * y), NaN, NaN];
+        return opts.findIndex(o => near201(o, v));
       },
     },
     {
@@ -231,8 +231,8 @@ Content.section({
         '坑：第二个绝对值去掉后是 $5-x$，前面还有减号，写成 $-(5-x)$ 再去括号，别算成 $x-2-5-x$。',
       ],
       verify: () => {
-        const f = x => S(x * x - 4 * x + 4) - S(x * x - 10 * x + 25);
-        return [2.5, 3, 4.2].every(x => near(f(x), 2 * x - 7)) ? '2x-7' : '';
+        const f = x => S201(x * x - 4 * x + 4) - S201(x * x - 10 * x + 25);
+        return [2.5, 3, 4.2].every(x => near201(f(x), 2 * x - 7)) ? '2x-7' : '';
       },
     },
     {
@@ -248,7 +248,7 @@ Content.section({
         '(1) 正方体有 $6$ 个面，每个面的面积是 $72\\div6=12$，棱长 $=\\sqrt{12}=\\sqrt{2^2\\times3}=2\\sqrt3$。坑：直接用 $\\sqrt{72}$，那是把表面积当成了一个面。',
         '(2) 体积 $=(2\\sqrt3)^3=2^3\\times(\\sqrt3)^2\\times\\sqrt3=8\\times3\\times\\sqrt3=24\\sqrt3$。',
       ],
-      verify: () => { const a = S(72 / 6); return [a, a ** 3]; },
+      verify: () => { const a = S201(72 / 6); return [a, a ** 3]; },
     },
 
     // ---------- 扩展 ----------
@@ -267,8 +267,8 @@ Content.section({
         '原式 $=(-a)-(b-a)+(c-b)+(-a-c)=-a-b+a+c-b-a-c=-a-2b$。',
       ],
       verify: () => {
-        const f = (a, b, c) => S(a * a) - S((a - b) ** 2) + S((b - c) ** 2) + S((a + c) ** 2);
-        return [[-2.45, 0.45, 1.6], [-2.9, 0.1, 1.95], [-2.05, 0.9, 1.1]].every(([a, b, c]) => near(f(a, b, c), -a - 2 * b)) ? '-a-2b' : '';
+        const f = (a, b, c) => S201(a * a) - S201((a - b) ** 2) + S201((b - c) ** 2) + S201((a + c) ** 2);
+        return [[-2.45, 0.45, 1.6], [-2.9, 0.1, 1.95], [-2.05, 0.9, 1.1]].every(([a, b, c]) => near201(f(a, b, c), -a - 2 * b)) ? '-a-2b' : '';
       },
     },
     {
@@ -295,11 +295,11 @@ Content.section({
       verify: () => {
         const a = -1.3, x = -0.7, b = 0.4, m = -2.2, n = 1.9, y = -0.6;
         const ok = [
-          near(a * S(-2 / a), -S(-2 * a)),
-          near(S(-8 * x ** 3), 2 * x * S(-2 * x)),
-          near((b - 1) * S(1 / (1 - b)), -S(1 - b)),
-          near(S(m * m * n), m * S(n)),
-          near(-y * S(-1 / y), S(-y)),
+          near201(a * S201(-2 / a), -S201(-2 * a)),
+          near201(S201(-8 * x ** 3), 2 * x * S201(-2 * x)),
+          near201((b - 1) * S201(1 / (1 - b)), -S201(1 - b)),
+          near201(S201(m * m * n), m * S201(n)),
+          near201(-y * S201(-1 / y), S201(-y)),
         ];
         return ok.map((t, i) => (t ? i : -1)).filter(i => i >= 0);
       },
@@ -322,7 +322,7 @@ Content.section({
       verify: () => {
         const xs = [];
         for (let x = -10; x <= 10; x++) if (4 - x >= 0 && 2 * x + 3 > 0) xs.push(x);
-        const good = xs.filter(x => Number.isInteger(S((4 - x) * (2 * x + 3))));
+        const good = xs.filter(x => Number.isInteger(S201((4 - x) * (2 * x + 3))));
         return [xs.length, good.length];
       },
     },
@@ -345,8 +345,8 @@ Content.section({
       verify: () => {
         // 由和与积求出 x、y（只在测试里用一元二次方程求根公式），再直接代入原式
         const calc = (s, p) => {
-          const d = S(s * s - 4 * p), x = (s + d) / 2, y = (s - d) / 2;
-          return x * S(y / x) + y * S(x / y);
+          const d = S201(s * s - 4 * p), x = (s + d) / 2, y = (s - d) / 2;
+          return x * S201(y / x) + y * S201(x / y);
         };
         return [calc(-7, 8), calc(7, 8)];
       },
@@ -377,8 +377,8 @@ Content.section({
       verify: () => {
         const allOrders = a => (a.length < 2 ? [a] : a.flatMap((x, i) => allOrders([...a.slice(0, i), ...a.slice(i + 1)]).map(q => [x, ...q])));
         const per4 = o => 2 * o.reduce((t, v) => t + v, 0) + o[0] + o[o.length - 1] + o.slice(1).reduce((t, v, i) => t + Math.abs(v - o[i]), 0);
-        const four = allOrders([12, 27, 48, 75].map(S)).map(per4).filter((v, i, arr) => arr.findIndex(w => near(w, v)) === i);
-        const sides = [12, 27, 48].map(S);
+        const four = allOrders([12, 27, 48, 75].map(S201)).map(per4).filter((v, i, arr) => arr.findIndex(w => near201(w, v)) === i);
+        const sides = [12, 27, 48].map(S201);
         const per = o => {
           const h = o.map(i => sides[i]);
           return 2 * (h[0] + h[1] + h[2]) + h[0] + h[2] + Math.abs(h[0] - h[1]) + Math.abs(h[1] - h[2]);
@@ -410,7 +410,7 @@ Content.section({
           const c = -a - b;
           if (!a || !b || !c) continue;
           vals1.add(sg(a) + sg(b) + sg(c));
-          if (a * b * c > 0) vals2.add(S((a + b) ** 2) / c + S((b + c) ** 2) / a + S((c + a) ** 2) / b);
+          if (a * b * c > 0) vals2.add(S201((a + b) ** 2) / c + S201((b + c) ** 2) / a + S201((c + a) ** 2) / b);
         }
         return [[...vals1], vals2.size === 1 ? [...vals2][0] : NaN];
       },
@@ -439,14 +439,14 @@ Content.section({
       verify: () => {
         const pairs = n => {
           let k = 0;
-          for (let a = 1; a <= n; a++) for (let b = a; b <= n; b++) if (Math.abs(S(a) + S(b) - S(n)) < 1e-9) k++;
+          for (let a = 1; a <= n; a++) for (let b = a; b <= n; b++) if (Math.abs(S201(a) + S201(b) - S201(n)) < 1e-9) k++;
           return k;
         };
         let first = 0, firstIrr = 0;
         for (let n = 1; n <= 120 && !(first && firstIrr); n++) {
           if (pairs(n) !== 3) continue;
           if (!first) first = n;
-          if (!firstIrr && !Number.isInteger(S(n))) firstIrr = n;
+          if (!firstIrr && !Number.isInteger(S201(n))) firstIrr = n;
         }
         return [pairs(180), first, firstIrr];
       },
@@ -473,12 +473,12 @@ Content.section({
         '$8<x\\leq100$，$4<x-4\\leq96$，完全平方数有 $9,16,25,36,49,64,81$ 共 $7$ 个。合计 $5+7=12$ 个。',
       ],
       verify: () => {
-        const E = x => S(x + 4 * S(x - 4)) + S(Math.max(0, x - 4 * S(x - 4)));
+        const E = x => S201(x + 4 * S201(x - 4)) + S201(Math.max(0, x - 4 * S201(x - 4)));
         let cnt = 0, x10 = 0;
         for (let x = 4; x <= 100; x++) {
           const e = E(x);
-          if (near(e, Math.round(e))) cnt++;
-          if (near(e, 10)) x10 = x;
+          if (near201(e, Math.round(e))) cnt++;
+          if (near201(e, 10)) x10 = x;
         }
         return [Math.round(E(6) * 1e9) / 1e9, Math.round(E(13) * 1e9) / 1e9, x10, cnt];
       },
@@ -571,8 +571,8 @@ Content.section({
         const r1 = x => x ** 3 + 6 * x * x + 9 * x, r2 = x => x ** 3 - 4 * x * x + 4 * x;
         const ok1 = [-3, -2, -1, 0, 1].filter(x => r1(x) >= 0);   // 应为 −3、0、1
         const ok2 = [-3, -1, 0, 1, 2, 3].filter(x => r1(x) >= 0 && r2(x) >= 0);  // 应为 0、1、2、3
-        const E = x => S(r1(x)) - S(r2(x));
-        const simp = [0, 0.3, 1.2, 2].every(x => near(E(x), (2 * x + 1) * S(x)));
+        const E = x => S201(r1(x)) - S201(r2(x));
+        const simp = [0, 0.3, 1.2, 2].every(x => near201(E(x), (2 * x + 1) * S201(x)));
         // 二分法在 [0,2] 上解 E=3，再确认 x>2 时 E>3
         let lo = 0, hi = 2;
         for (let i = 0; i < 80; i++) { const m = (lo + hi) / 2; if (E(m) < 3) lo = m; else hi = m; }

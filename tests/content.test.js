@@ -213,3 +213,21 @@ for (const meta of Content.sectionMetas()) {
     }
   });
 }
+
+// 浏览器里所有内容文件用 <script> 加载，共用一个全局作用域：两个文件在顶层用 const/let 声明同名变量，
+// 后加载的文件会报语法错误、整个不执行，页面上这一节就显示“制作中”。require 各有作用域测不出来，这里放进同一个上下文依次运行
+test('内容文件放在同一个全局作用域里加载不冲突', () => {
+  const vm = require('vm');
+  const ctx = vm.createContext({ Content: { section() {}, exam() {} }, console });
+  const files = [
+    ...Content.sectionMetas().filter(m => m.section.ready).map(m => Content.path(m.id)),
+    ...Content.examMetas().filter(e => e.exam.ready).map(e => Content.examPath(e.id)),
+  ].filter(f => fs.existsSync(path.join(ROOT, f)));
+  for (const f of files) {
+    try {
+      vm.runInContext(fs.readFileSync(path.join(ROOT, f), 'utf8'), ctx, { filename: f });
+    } catch (e) {
+      assert(false, `${f} 和前面加载的文件冲突：${e.message}（顶层变量名请加小节号后缀，如 S201）`);
+    }
+  }
+});

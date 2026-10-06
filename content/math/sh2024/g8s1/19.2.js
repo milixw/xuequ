@@ -7,10 +7,10 @@
 // 本节约定：根式化简只用 (√a)²=a、√(a²) 取非负值、乘法公式和分配律合并同一个根号的项，绝不写 √2×√3=√6；循环小数化分数是课本的选学内容，只作为阅读材料给出方法后再用
 
 // 给 verify 用：把含根号的式子按数值算出来（只在测试里跑）
-const S = Math.sqrt;
-const near = (x, y) => Math.abs(x - y) < 1e-9;
+const S192 = Math.sqrt;
+const near192 = (x, y) => Math.abs(x - y) < 1e-9;
 // 双精度算根式会留下 1e-16 量级的尾巴，填有理数的空要先抹掉它再和标准答案核对
-const R = v => Math.round(v * 1e9) / 1e9;
+const R192 = v => Math.round(v * 1e9) / 1e9;
 
 Content.section({
   id: 'math/sh2024/g8s1/19.2',
@@ -84,9 +84,9 @@ Content.section({
       ],
       verify: () => {
         const out = [];
-        if (!Number.isInteger(S(16)) || !Number.isInteger(Math.cbrt(-27))) out.push(0);   // 这两个开得尽，不该选
+        if (!Number.isInteger(S192(16)) || !Number.isInteger(Math.cbrt(-27))) out.push(0);   // 这两个开得尽，不该选
         if (!Number.isInteger(Math.cbrt(5))) out.push(4);
-        if (!Number.isInteger(S(11))) out.push(5);
+        if (!Number.isInteger(S192(11))) out.push(5);
         return [...out, 6].sort((x, y) => x - y);
       },
     },
@@ -108,7 +108,7 @@ Content.section({
         '直接写成 $\\sqrt7-3$ 是这一类题最常见的错误——绝对值的结果不会是负数。',
         '(4) $\\pi\\approx 3.14>2$，所以 $2-\\pi<0$，$\\lvert 2-\\pi\\rvert=\\pi-2$。',
       ],
-      verify: () => [S(5), Math.cbrt(10), Math.abs(S(7) - 3), Math.abs(2 - Math.PI)],
+      verify: () => [S192(5), Math.cbrt(10), Math.abs(S192(7) - 3), Math.abs(2 - Math.PI)],
     },
     {
       id: '19.2-b03',
@@ -129,7 +129,7 @@ Content.section({
         '(4) 用乘法对加法的分配律：$(\\sqrt5+2)\\times\\sqrt5=(\\sqrt5)^2+2\\times\\sqrt5=5+2\\sqrt5$。',
         '$5+2\\sqrt5$ 已经是最简的形式了，$5$ 和 $2\\sqrt5$ 不是同类的项，不能再加起来。',
       ],
-      verify: () => [5 * S(2) - (S(2) + 3 * S(2)), R(2 * S(3) * S(3)), R(S((-4) ** 2) + S(6) ** 2), (S(5) + 2) * S(5)],
+      verify: () => [5 * S192(2) - (S192(2) + 3 * S192(2)), R192(2 * S192(3) * S192(3)), R192(S192((-4) ** 2) + S192(6) ** 2), (S192(5) + 2) * S192(5)],
     },
     {
       id: '19.2-b04',
@@ -149,7 +149,7 @@ Content.section({
         '(3) $A$、$C$ 分别在原点两侧，$AC=\\sqrt5+\\sqrt2$。',
         '(4) 比较三个绝对值 $\\sqrt2$、$\\frac13$、$\\sqrt5$。因为 $5>2$，所以 $\\sqrt5>\\sqrt2$；又 $\\sqrt2>1>\\frac13$。所以最远的是点 $C$。',
       ],
-      verify: () => [S(2), Math.abs(-S(2) - 1 / 3), Math.abs(-S(2) - S(5)), '点 $C$'],
+      verify: () => [S192(2), Math.abs(-S192(2) - 1 / 3), Math.abs(-S192(2) - S192(5)), '点 $C$'],
     },
     {
       id: '19.2-b05',
@@ -171,10 +171,10 @@ Content.section({
         '$k=16$ 时 $\\sqrt{16}=4$，等于左端而不是大于，不符合题目的严格不等号。',
       ],
       verify: () => [
-        Math.floor(S(13)),
-        Math.floor(-S(30)),
+        Math.floor(S192(13)),
+        Math.floor(-S192(30)),
         Math.floor(Math.cbrt(20)),
-        (() => { for (let k = 1; k < 100; k++) if (S(k) > 4 && S(k) < 5) return k; })(),
+        (() => { for (let k = 1; k < 100; k++) if (S192(k) > 4 && S192(k) < 5) return k; })(),
       ],
     },
     {
@@ -272,14 +272,14 @@ Content.section({
         '所以选 B、D、E、F。',
       ],
       verify: () => {
-        const xs = [-3, -1.5, -S(2), 0, 1, S(5), Math.PI];
+        const xs = [-3, -1.5, -S192(2), 0, 1, S192(5), Math.PI];
         const out = [];
-        if (near(S(2) ** 2, 2)) { /* A 有反例，错 */ }
+        if (near192(S192(2) ** 2, 2)) { /* A 有反例，错 */ }
         out.push(1);                                             // B 用有理数乘法封闭性推出，靠解析
-        if (near(S(3) / S(3), 1)) { /* C 有反例，错 */ }
-        if (xs.every(x => near(S(x * x), Math.abs(x)))) out.push(3);
-        if (xs.every(x => near(Math.abs(x), Math.abs(-x)))) out.push(4);
-        if (xs.every(x => near(Math.cbrt(x) ** 3, x))) out.push(5);
+        if (near192(S192(3) / S192(3), 1)) { /* C 有反例，错 */ }
+        if (xs.every(x => near192(S192(x * x), Math.abs(x)))) out.push(3);
+        if (xs.every(x => near192(Math.abs(x), Math.abs(-x)))) out.push(4);
+        if (xs.every(x => near192(Math.cbrt(x) ** 3, x))) out.push(5);
         return out;
       },
     },
@@ -307,11 +307,11 @@ Content.section({
       ],
       verify: () => {
         let cnt = 0;
-        for (let n = 1; n <= 100; n++) if (S(n) > 2.4 && S(n) < 2.5) cnt++;
+        for (let n = 1; n <= 100; n++) if (S192(n) > 2.4 && S192(n) < 2.5) cnt++;
         return [
-          S(17) < 4.2 ? '<' : '>',
-          -S(10) > -3.2 ? '>' : '<',
-          S(5) - 1 < 1.3 ? '<' : '>',
+          S192(17) < 4.2 ? '<' : '>',
+          -S192(10) > -3.2 ? '>' : '<',
+          S192(5) - 1 < 1.3 ? '<' : '>',
           Math.PI < 22 / 7 ? '<' : '>',
           cnt,
         ];
@@ -336,7 +336,7 @@ Content.section({
         '(4) 把 $x-\\sqrt2$ 看成整体，它的绝对值是 $\\sqrt2$，所以 $x-\\sqrt2=\\sqrt2$ 或 $x-\\sqrt2=-\\sqrt2$。',
         '前一种得 $x=\\sqrt2+\\sqrt2=2\\sqrt2$；后一种得 $x=0$。两个都要写。',
       ],
-      verify: () => [[S(5), -S(5)], S(3) - 2, -(S(3) - 1) - S(3), [0, 2 * S(2)]],
+      verify: () => [[S192(5), -S192(5)], S192(3) - 2, -(S192(3) - 1) - S192(3), [0, 2 * S192(2)]],
     },
     {
       id: '19.2-e05',
@@ -357,7 +357,7 @@ Content.section({
         '前一个得 $x=\\sqrt7+\\sqrt7=2\\sqrt7$（两项根号里相同，用分配律合并）；后一个得 $x=0$。',
         '也可以直接在数轴上看：从 $Q$ 向右走 $\\sqrt7$ 到 $2\\sqrt7$，向左走 $\\sqrt7$ 正好回到原点。两个都要写。',
       ],
-      verify: () => [S(7) + S(3), (-S(3) + S(7)) / 2, (-S(3) + S(7)) / 2 > 0 ? '右边' : '左边', [0, 2 * S(7)]],
+      verify: () => [S192(7) + S192(3), (-S192(3) + S192(7)) / 2, (-S192(3) + S192(7)) / 2 > 0 ? '右边' : '左边', [0, 2 * S192(7)]],
     },
     {
       id: '19.2-e07',
@@ -379,7 +379,7 @@ Content.section({
         '最后一组被 $50$ 截断了，不能直接套 $2k+1$，这是这道题的陷阱。',
       ],
       verify: () => {
-        const cnt = k => { let c = 0; for (let n = 1; n <= 50; n++) if (Math.floor(S(n)) === k) c++; return c; };
+        const cnt = k => { let c = 0; for (let n = 1; n <= 50; n++) if (Math.floor(S192(n)) === k) c++; return c; };
         return [cnt(1), cnt(3), cnt(6), cnt(7)];
       },
     },
@@ -433,14 +433,14 @@ Content.section({
         '$p$ 是正整数，所以最小取 $p=4$，$m=4^2+7=23$。验算：$16<23<25$，$\\sqrt{23}$ 的整数部分确实是 $4$，小数部分 $q=\\sqrt{23}-4$，$q(q+8)=23-16=7$，符合。',
       ],
       verify: () => {
-        const a = Math.floor(S(11)), c = Math.floor(-S(11));
+        const a = Math.floor(S192(11)), c = Math.floor(-S192(11));
         let m = null;
         for (let k = 1; k <= 1000 && m === null; k++) {
-          const p = Math.floor(S(k));
-          const q = S(k) - p;
-          if (near(q * (q + 2 * p), 7)) m = k;
+          const p = Math.floor(S192(k));
+          const q = S192(k) - p;
+          if (near192(q * (q + 2 * p), 7)) m = k;
         }
-        return [a, S(11) - a, c, -S(11) - c, R((S(11) - a + a) + (-S(11) - c + c)), m];
+        return [a, S192(11) - a, c, -S192(11) - c, R192((S192(11) - a + a) + (-S192(11) - c + c)), m];
       },
     },
     {
@@ -467,14 +467,14 @@ Content.section({
         '两边都是正数，比较它们的平方：$\\left(\\frac94\\right)^2=\\frac{81}{16}=5.062\\,5>5$，所以 $\\frac94>\\sqrt5$，从而 $x<\\frac14$。',
       ],
       verify: () => {
-        const x = S(5) - 2;
+        const x = S192(5) - 2;
         const frac = v => v - Math.floor(v);                    // 小数部分
         let n = null, m = null;
         for (let k = 1; k <= 500; k++) {
-          if (n === null && near(frac(S(k)), x)) n = k;
-          if (m === null && near(frac(S(k)), 2 * x)) m = k;
+          if (n === null && near192(frac(S192(k)), x)) n = k;
+          if (m === null && near192(frac(S192(k)), 2 * x)) m = k;
         }
-        return [R(x * x + 4 * x), 1 / x, n, m, x < 0.25 ? '<' : '>'];
+        return [R192(x * x + 4 * x), 1 / x, n, m, x < 0.25 ? '<' : '>'];
       },
     },
     {
@@ -512,7 +512,7 @@ Content.section({
           for (let p = 1; p <= 5 * d; p++) {
             if (gcd(p, d) !== 1) continue;
             const v = p / d;
-            if (v > S(2) && v < S(3)) cnt++;
+            if (v > S192(2) && v < S192(3)) cnt++;
           }
         }
         return ['无理数', '不一定', 5, 2, 0, cnt];
@@ -545,13 +545,13 @@ Content.section({
         '$P$ 经过的整数点是 $-1,0,1,\\cdots,8$，共 $8-(-1)+1=10$ 个。起点 $-\\sqrt2$ 不是整数，不影响计数。',
       ],
       verify: () => {
-        const pos = t => t - S(2);
+        const pos = t => t - S192(2);
         const solve = () => {
           const out = [];
           for (let i = 1; i <= 200000; i++) {                    // 按 0.0001 的步长找根，再用公式对齐
             const t = i / 10000;
-            const f = t - 2 * Math.abs(pos(t) - S(7));
-            const g = (i + 1) / 10000 - 2 * Math.abs(pos((i + 1) / 10000) - S(7));
+            const f = t - 2 * Math.abs(pos(t) - S192(7));
+            const g = (i + 1) / 10000 - 2 * Math.abs(pos((i + 1) / 10000) - S192(7));
             if (f === 0 || f * g < 0) out.push(t);
           }
           return out;
@@ -559,7 +559,7 @@ Content.section({
         const roots = solve();
         const ints = [];
         for (let k = -20; k <= 20; k++) if (k > pos(0) && k < pos(10)) ints.push(k);
-        return [pos(3), S(7) + S(2), [(2 * S(7) + 2 * S(2)) / 3, 2 * S(7) + 2 * S(2)].map(v => (roots.some(r => Math.abs(r - v) < 1e-3) ? v : NaN)), 2 * S(2), ints.length];
+        return [pos(3), S192(7) + S192(2), [(2 * S192(7) + 2 * S192(2)) / 3, 2 * S192(7) + 2 * S192(2)].map(v => (roots.some(r => Math.abs(r - v) < 1e-3) ? v : NaN)), 2 * S192(2), ints.length];
       },
     },
     {

@@ -7,9 +7,9 @@
 // 还没学：一元二次方程及其解法、求根公式（第 21 章，本节不出要解二次方程的题，整数范围内逐个检验的除外）；勾股定理（第 22 章）；函数与坐标系
 // 本节约定：数值结果的填空要求最简形式（simplest：分母不含根号、同类二次根式已合并）；解集含无理数时用按钮选项
 
-const S = Math.sqrt;
-const near = (x, y) => Math.abs(x - y) < 1e-9;
-const R = v => Math.round(v * 1e9) / 1e9;
+const S202 = Math.sqrt;
+const near202 = (x, y) => Math.abs(x - y) < 1e-9;
+const R202 = v => Math.round(v * 1e9) / 1e9;
 
 Content.section({
   id: 'math/sh2024/g8s1/20.2',
@@ -82,7 +82,7 @@ Content.section({
         '(2) $\\sqrt{48}=4\\sqrt3$；$9\\sqrt{\\frac13}=9\\times\\frac{\\sqrt3}{3}=3\\sqrt3$；$\\sqrt{0.12}=\\sqrt{\\frac{12}{100}}=\\frac{2\\sqrt3}{10}=\\frac{\\sqrt3}{5}$。',
         '原式 $=4\\sqrt3-3\\sqrt3+\\frac15\\sqrt3=\\frac65\\sqrt3=\\frac{6\\sqrt3}{5}$。坑：把 $\\sqrt{\\frac13}$ 写成 $\\frac13$ 或 $\\sqrt3$，或者没化简 $\\sqrt{0.12}$ 就以为它和 $\\sqrt3$ 不是同类。',
       ],
-      verify: () => [S(18) - S(8) + S(1 / 2), S(48) - 9 * S(1 / 3) + S(0.12)],
+      verify: () => [S202(18) - S202(8) + S202(1 / 2), S202(48) - 9 * S202(1 / 3) + S202(0.12)],
     },
     {
       id: '20.2-b03',
@@ -99,7 +99,7 @@ Content.section({
         '(2) $\\sqrt{\\frac23}\\div\\sqrt{\\frac8{27}}=\\sqrt{\\frac23\\times\\frac{27}{8}}=\\sqrt{\\frac94}=\\frac32$。坑：除法变乘法时忘了把除数颠倒。',
         '(3) 系数和系数相乘，根号和根号相乘：$(-3\\times2)\\sqrt{6\\times15}=-6\\sqrt{90}=-6\\times3\\sqrt{10}=-18\\sqrt{10}$。坑：$\\sqrt{90}$ 化简后还要和前面的 $-6$ 相乘。',
       ],
-      verify: () => [S(14) * S(35), R(S(2 / 3) / S(8 / 27)), -3 * S(6) * 2 * S(15)],
+      verify: () => [S202(14) * S202(35), R202(S202(2 / 3) / S202(8 / 27)), -3 * S202(6) * 2 * S202(15)],
     },
     {
       id: '20.2-b04',
@@ -116,7 +116,7 @@ Content.section({
         '(2) $\\sqrt7-\\sqrt3$ 的有理化因式是 $\\sqrt7+\\sqrt3$：$\\frac{4(\\sqrt7+\\sqrt3)}{(\\sqrt7)^2-(\\sqrt3)^2}=\\frac{4(\\sqrt7+\\sqrt3)}{4}=\\sqrt7+\\sqrt3$。',
         '(3) 分子分母同乘 $\\sqrt5-2$：分母 $(\\sqrt5)^2-2^2=1$，分子 $\\sqrt5(\\sqrt5-2)=5-2\\sqrt5$，结果是 $5-2\\sqrt5$。坑：分子 $\\sqrt5\\times\\sqrt5$ 写成 $\\sqrt5$。',
       ],
-      verify: () => [3 / S(6), 4 / (S(7) - S(3)), S(5) / (S(5) + 2)],
+      verify: () => [3 / S202(6), 4 / (S202(7) - S202(3)), S202(5) / (S202(5) + 2)],
     },
     {
       id: '20.2-b05',
@@ -152,7 +152,7 @@ Content.section({
         '两边同除以 $\\sqrt3-1$：$x=\\frac{2}{\\sqrt3-1}=\\frac{2(\\sqrt3+1)}{(\\sqrt3-1)(\\sqrt3+1)}=\\frac{2(\\sqrt3+1)}{2}=\\sqrt3+1$。',
         '坑：合并时把 $\\sqrt3x-x$ 写成 $\\sqrt2x$（根号不能这样减），或者停在 $\\frac{2}{\\sqrt3-1}$ 没有分母有理化。',
       ],
-      verify: () => 2 / (S(3) - 1),
+      verify: () => 2 / (S202(3) - 1),
     },
     {
       id: '20.2-b07',
@@ -168,7 +168,7 @@ Content.section({
       ],
       verify: () => {
         // 取边界两侧的点检验
-        const b = 2 + S(3), ok = x => S(3) * x + 1 > 2 * x;
+        const b = 2 + S202(3), ok = x => S202(3) * x + 1 > 2 * x;
         return ok(b - 0.01) && !ok(b + 0.01) ? 1 : -1;
       },
     },
@@ -185,7 +185,7 @@ Content.section({
         '(1) 完全平方公式：$(\\sqrt6-\\sqrt2)^2=6-2\\sqrt6\\cdot\\sqrt2+2=8-2\\sqrt{12}=8-4\\sqrt3$。又 $\\sqrt{48}=4\\sqrt3$，所以原式 $=8$。坑：漏了中间项，算成 $6+2=8$ 再加 $4\\sqrt3$。',
         '(2) 平方差公式：$(3\\sqrt2)^2-(2\\sqrt3)^2=18-12=6$。坑：$(3\\sqrt2)^2$ 算成 $3\\times2=6$，系数也要平方。',
       ],
-      verify: () => [R((S(6) - S(2)) ** 2 + S(48)), R((3 * S(2) + 2 * S(3)) * (3 * S(2) - 2 * S(3)))],
+      verify: () => [R202((S202(6) - S202(2)) ** 2 + S202(48)), R202((3 * S202(2) + 2 * S202(3)) * (3 * S202(2) - 2 * S202(3)))],
     },
     {
       id: '20.2-b09',
@@ -200,7 +200,7 @@ Content.section({
         '(1) 宽 $=6\\sqrt{10}\\div2\\sqrt{15}=3\\sqrt{\\frac{10}{15}}=3\\sqrt{\\frac23}=3\\times\\frac{\\sqrt6}{3}=\\sqrt6$。',
         '(2) 周长 $=2\\times(2\\sqrt{15}+\\sqrt6)=4\\sqrt{15}+2\\sqrt6$。$\\sqrt{15}$ 和 $\\sqrt6$ 不是同类二次根式，不能再合并。坑：写成 $6\\sqrt{21}$。',
       ],
-      verify: () => { const w = 6 * S(10) / (2 * S(15)); return [w, 2 * (2 * S(15) + w)]; },
+      verify: () => { const w = 6 * S202(10) / (2 * S202(15)); return [w, 2 * (2 * S202(15) + w)]; },
     },
 
     // ---------- 扩展 ----------
@@ -239,7 +239,7 @@ Content.section({
         '(1) $x^2-xy+y^2=(x+y)^2-3xy=20-3=17$。',
         '(2) $\\frac xy-\\frac yx=\\frac{x^2-y^2}{xy}=\\frac{(x+y)(x-y)}{xy}=\\frac{2\\sqrt5\\times4}{1}=8\\sqrt5$。坑：把 $x$、$y$ 直接平方再代入，计算量大还容易错。',
       ],
-      verify: () => { const x = 1 / (S(5) - 2), y = 1 / (S(5) + 2); return [R(x * x - x * y + y * y), x / y - y / x]; },
+      verify: () => { const x = 1 / (S202(5) - 2), y = 1 / (S202(5) + 2); return [R202(x * x - x * y + y * y), x / y - y / x]; },
     },
     {
       id: '20.2-e03',
@@ -258,8 +258,8 @@ Content.section({
         '(3) 分母有理化：$\\frac{(\\sqrt3-\\sqrt2)^2}{(\\sqrt3+\\sqrt2)(\\sqrt3-\\sqrt2)}=\\frac{5-2\\sqrt6}{1}=5-2\\sqrt6$，两者相等。',
       ],
       verify: () => {
-        const cmp = (a, b) => (near(a, b) ? '=' : a > b ? '>' : '<');
-        return [cmp(S(7) - S(6), S(6) - S(5)), cmp(S(11) + S(3), 2 + S(10)), cmp((S(3) - S(2)) / (S(3) + S(2)), 5 - 2 * S(6))];
+        const cmp = (a, b) => (near202(a, b) ? '=' : a > b ? '>' : '<');
+        return [cmp(S202(7) - S202(6), S202(6) - S202(5)), cmp(S202(11) + S202(3), 2 + S202(10)), cmp((S202(3) - S202(2)) / (S202(3) + S202(2)), 5 - 2 * S202(6))];
       },
     },
     {
@@ -281,10 +281,10 @@ Content.section({
       ],
       verify: () => {
         // 按系数正负分类得到解集，返回描述
-        const sol = a => { const k = a - S(5), c = a * a - 5; if (Math.abs(k) < 1e-12) return c < 0 ? '任意' : '无解'; return [k > 0 ? '>' : '<', c / k]; };
-        const s1 = sol(2), s2 = sol(S(5)), s3 = sol(3);
+        const sol = a => { const k = a - S202(5), c = a * a - 5; if (Math.abs(k) < 1e-12) return c < 0 ? '任意' : '无解'; return [k > 0 ? '>' : '<', c / k]; };
+        const s1 = sol(2), s2 = sol(S202(5)), s3 = sol(3);
         return [
-          s1[0] === '<' && near(s1[1], 2 + S(5)) ? '$x<2+\\sqrt5$' : '',
+          s1[0] === '<' && near202(s1[1], 2 + S202(5)) ? '$x<2+\\sqrt5$' : '',
           s2 === '无解' ? '无解' : '',
           s3[0] === '>' ? '不存在' : '',  // a=3 是唯一使边界吻合的值，此时解集方向是 >
         ];
@@ -307,7 +307,7 @@ Content.section({
         '再同乘 $\\sqrt6$：$\\frac{\\sqrt{12}+\\sqrt{18}-\\sqrt{30}}{6}=\\frac{2\\sqrt3+3\\sqrt2-\\sqrt{30}}{6}$。',
         '整体的选法不唯一，比如 (1) 也可以把 $\\sqrt2+\\sqrt3$ 看成整体，第一步分母变成 $1-(5+2\\sqrt6)=-4-2\\sqrt6$，后面更麻烦。挑“平方后常数正好抵消”的组合最省事。',
       ],
-      verify: () => [1 / (1 + S(2) + S(3)), 2 / (S(2) + S(3) + S(5))],
+      verify: () => [1 / (1 + S202(2) + S202(3)), 2 / (S202(2) + S202(3) + S202(5))],
     },
     {
       id: '20.2-e06',
@@ -328,7 +328,7 @@ Content.section({
         '也可以直接分母有理化验证：$\\frac{3}{\\sqrt7-2}=\\frac{3(\\sqrt7+2)}{7-4}=\\sqrt7+2$，$x-\\frac3x=(\\sqrt7-2)-(\\sqrt7+2)=-4$。',
         '(4) 由 (3) 的 $\\frac3x=x+4$，两边平方：$\\frac9{x^2}=x^2+8x+16$，所以 $x^2+\\frac9{x^2}=2x^2+8x+16=2(x^2+4x)+16=22$。坑：用 $\\left(x-\\frac3x\\right)^2+6$ 也可以，但要记得中间项是 $-2\\times x\\times\\frac3x=-6$，所以是 $+6$：$16+6=22$。',
       ],
-      verify: () => { const x = S(7) - 2; return [R(x * x + 4 * x), R(x ** 4 + 8 * x ** 3 + 13 * x * x - 12 * x + 5), R(x - 3 / x), R(x * x + 9 / (x * x))]; },
+      verify: () => { const x = S202(7) - 2; return [R202(x * x + 4 * x), R202(x ** 4 + 8 * x ** 3 + 13 * x * x - 12 * x + 5), R202(x - 3 / x), R202(x * x + 9 / (x * x))]; },
     },
 
     // ---------- 挑战 ----------
@@ -358,10 +358,10 @@ Content.section({
         '$100=0+100=36+64=64+36=100+0$，$p=0,6,8,10$，$x=0$、$72$、$128$、$200$（值是 $10\\sqrt2$ 或 $14\\sqrt2$）。坑：漏掉 $x=0$ 和 $200$——这时有一个根号是 $0$，值 $\\sqrt{200}=10\\sqrt2$ 也符合。',
       ],
       verify: () => {
-        const f = x => S(x) + S(200 - x);
-        const vals = [[2, 15], [5, 12], [8, 9], [1, 16]].map(([a, b]) => S(a) + S(b));
+        const f = x => S202(x) + S202(200 - x);
+        const vals = [[2, 15], [5, 12], [8, 9], [1, 16]].map(([a, b]) => S202(a) + S202(b));
         const names = ['$\\sqrt2+\\sqrt{15}$', '$\\sqrt5+\\sqrt{12}$', '$\\sqrt8+\\sqrt9$', '$\\sqrt1+\\sqrt{16}$'];
-        const sq = n => Number.isInteger(S(n));
+        const sq = n => Number.isInteger(S202(n));
         const xs = [...Array(201).keys()];
         return [
           names[vals.indexOf(Math.max(...vals))],
@@ -391,10 +391,10 @@ Content.section({
         '$n=4$：$\\sqrt9+\\sqrt4=5$，正好等于 $5$，$d=1$，不满足“$>1$”；$n$ 再大和更大。所以 $n=1,2,3$，共 $3$ 个。坑：把 $n=4$ 也算进去。',
       ],
       verify: () => {
-        const d = n => S(n + 5) - S(n);
+        const d = n => S202(n + 5) - S202(n);
         let first = 0, cnt = 0;
         for (let n = 1; n <= 200; n++) { if (!first && d(n) < 0.5) first = n; if (d(n) > 1 + 1e-12) cnt++; }
-        return [S(11) - S(10) < S(10) - 3 ? '<' : '>', first, cnt];
+        return [S202(11) - S202(10) < S202(10) - 3 ? '<' : '>', first, cnt];
       },
     },
     {
@@ -424,9 +424,9 @@ Content.section({
         const sq = ([a, b]) => [a * a + 30 * b * b, 2 * a * b];
         const p = sq([11, 2]), q = sq([11, -2]);
         const sum = p[0] + q[0];
-        const small = q[0] + q[1] * S(30);  // (11−2√30)²，应在 0 与 1 之间
+        const small = q[0] + q[1] * S202(30);  // (11−2√30)²，应在 0 与 1 之间
         const sum8 = sq(p)[0] + sq(q)[0];  // A²+B² 的有理部分（无理部分抵消）
-        return [sum, small > 0 && small < 1 ? sum - 1 : NaN, p[0] + p[1] * S(30) - (sum - 1), small ** 2 < 1 ? sum8 - 1 : NaN];
+        return [sum, small > 0 && small < 1 ? sum - 1 : NaN, p[0] + p[1] * S202(30) - (sum - 1), small ** 2 < 1 ? sum8 - 1 : NaN];
       },
     },
     {
@@ -448,13 +448,13 @@ Content.section({
         '(3) 若 $n$ 不是完全平方数，结果含 $\\frac{2}{n-1}\\sqrt n\\neq0$，是无理数，不可能是整数。所以 $n=k^2$（$k\\geq2$），原式 $=\\frac{k+1}{k-1}=1+\\frac{2}{k-1}$，要 $k-1=1$ 或 $2$，$k=2$ 或 $3$，$n=4$ 或 $9$（值分别是 $3$ 和 $2$）。',
       ],
       verify: () => {
-        const v = n => (S(n) + 1) / (S(n) - 1);
+        const v = n => (S202(n) + 1) / (S202(n) - 1);
         const ok2 = [], ok3 = [];
         for (let n = 2; n <= 400; n++) {
-          const sq = Number.isInteger(S(n));
+          const sq = Number.isInteger(S202(n));
           // 非完全平方数：a=(n+1)/(n−1)、b=2/(n−1) 要都是整数
           if (!sq && (n + 1) % (n - 1) === 0 && 2 % (n - 1) === 0) ok2.push(n);
-          if (near(v(n), Math.round(v(n)))) ok3.push(n);
+          if (near202(v(n), Math.round(v(n)))) ok3.push(n);
         }
         return [v(2), ok2, ok3];
       },
@@ -481,7 +481,7 @@ Content.section({
       ],
       verify: () => {
         // 用 (a+b√3)/c 的精确形式迭代，避免浮点在整数部分附近出错
-        const s3 = S(3);
+        const s3 = S202(3);
         let [a, b, c] = [0, 1, 1];  // r = (a + b√3)/c
         const ratios = [], counts = [];
         for (let i = 0; i < 10; i++) {
@@ -493,7 +493,7 @@ Content.section({
           if (c < 0) [a, b, c] = [-a, -b, -c];
           ratios.push((a + b * s3) / c);
         }
-        return [1 / (S(2) - 1), ratios[0], ratios[1], counts.reduce((x, y) => x + y, 0)];
+        return [1 / (S202(2) - 1), ratios[0], ratios[1], counts.reduce((x, y) => x + y, 0)];
       },
     },
   ],
