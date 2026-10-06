@@ -299,11 +299,11 @@ Content.catalog = {
                   no: 21,
                   title: '一元二次方程',
                   sections: [
-                    { no: '21.1', title: '一元二次方程的概念', ready: false },
-                    { no: '21.2', title: '一元二次方程的解法', ready: false },
-                    { no: '21.3', title: '一元二次方程的判别式', ready: false },
-                    { no: '21.4', title: '一元二次方程的根与系数的关系', ready: false },
-                    { no: '21.5', title: '一元二次方程的应用', ready: false },
+                    { no: '21.1', title: '一元二次方程的概念', ready: true },
+                    { no: '21.2', title: '一元二次方程的解法', ready: true },
+                    { no: '21.3', title: '一元二次方程的判别式', ready: true },
+                    { no: '21.4', title: '一元二次方程的根与系数的关系', ready: true },
+                    { no: '21.5', title: '一元二次方程的应用', ready: true },
                   ],
                 },
                 {
