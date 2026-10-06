@@ -203,13 +203,14 @@ test('同篇文章只显示一次，漏答整题不提交，统一判分并逐�
   assert(!page.context.Progress.get('english-exam:2000', 'group-0'));
 });
 
-test('首页和英语试题库均有中考入口，离线依赖按顺序加载', () => {
+test('首页和英语试题库均有中考入口，真题数据按需加载', () => {
   const html = read('index.html'), app = read('src/app.js');
   assert(app.indexOf("title: '英语中考真题'") > app.indexOf("title: '英语试题库'"));
-  assert(app.includes("if (parts[0] === 'english-exams') return englishExamsPage(parts[1], parts[2], parts[3]);"));
+  assert(app.includes("() => englishExamsPage(parts[1], parts[2], parts[3])"));
   assert(read('src/english-bank.js').includes("exams.href = '#/english-exams'"));
-  assert(html.indexOf('content/english/past-papers/catalog.js') < html.indexOf('src/english-exams.js'));
-  assert(html.indexOf('content/english/past-papers/jiangsu.js') < html.indexOf('src/english-exams.js'));
+  // 真题数据体积大，不在首屏加载，进入页面时由 app.js 按需加载
+  assert(!html.includes('content/english/past-papers/catalog.js') && !html.includes('content/english/past-papers/jiangsu.js'));
+  assert(app.includes("'content/english/past-papers/catalog.js?v=") && app.includes("'content/english/past-papers/jiangsu.js?v="));
   assert(html.indexOf('src/english-exams.js') < html.indexOf('src/app.js'));
   assert(app.includes('EnglishExams.stopMedia()'));
   const css = read('src/app.css');

@@ -217,9 +217,9 @@ test('上海语数存储失败不会显示保存成功，原题HTML转义且筛�
   assert(malicious.main.textContent.includes('&lt;script&gt;') && !malicious.main.textContent.includes('<script>'));
 });
 
-test('上海语数离线脚本在路由前加载，首页数学语文入口及手机控件接入', () => {
+test('上海语数真题数据按需加载，首页数学语文入口及手机控件接入', () => {
   const index = read('index.html'), app = read('src/app.js'), css = read('src/app.css');
-  assert(index.indexOf('content/past-papers/shanghai.js') < index.indexOf('src/subject-papers.js'));
+  assert(!index.includes('content/past-papers/shanghai.js') && app.includes("'content/past-papers/shanghai.js?v="));
   assert(index.indexOf('src/subject-papers.js') < index.indexOf('src/app.js'));
   assert(app.includes('#/shanghai-papers/math') && app.includes('#/shanghai-papers/chinese'));
   assert(app.includes("parts[0] === 'shanghai-papers'"));

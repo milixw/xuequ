@@ -501,6 +501,44 @@
     }
   }
 
+  // 真题数据体积大（江苏英语约 3MB），首屏不加载，进入对应页面时再用 <script> 加载（file:// 下不能用 fetch）
+  const DATA_SCRIPTS = {
+    EnglishPastPapers: 'content/english/past-papers/catalog.js?v=20261003-shanghai-answers',
+    JiangsuEnglishPastPapers: 'content/english/past-papers/jiangsu.js?v=20261003-jiangsu-answers',
+    ShanghaiSubjectPapers: 'content/past-papers/shanghai.js?v=20261004-images',
+  };
+  const dataLoading = {};
+
+  function loadData(name) {
+    if (window[name]) return Promise.resolve(window[name]);
+    if (!dataLoading[name]) {
+      dataLoading[name] = new Promise((resolve, reject) => {
+        const el = document.createElement('script');
+        el.src = DATA_SCRIPTS[name];
+        el.onload = () => (window[name] ? resolve(window[name]) : reject(new Error('数据文件没有注册 ' + name)));
+        el.onerror = () => {
+          delete dataLoading[name];
+          reject(new Error('数据加载失败：' + name));
+        };
+        document.head.appendChild(el);
+      });
+    }
+    return dataLoading[name];
+  }
+
+  // 数据齐了再渲染页面；没加载过时先显示“加载中”，加载期间切走了页面就不再渲染
+  async function withData(names, title, backHref, render) {
+    const hash = location.hash;
+    if (names.some(n => !window[n])) page(title, backHref).innerHTML = '<p class="notice">真题数据加载中……</p>';
+    try {
+      await Promise.all(names.map(loadData));
+    } catch (error) {
+      if (location.hash === hash) showError(page(title, backHref), '真题数据暂时无法加载，请检查网络后刷新重试。');
+      return;
+    }
+    if (location.hash === hash) render();
+  }
+
   function englishExamsPage(region, city, year) {
     if (!region) {
       const main = page('英语中考真题', '#/', '按地区、城市和年份查看');
@@ -559,8 +597,14 @@
     prevParts = parts;
     window.scrollTo(0, 0);
     if (parts[0] === 'english-bank') return englishBankPage(parts[1]);
-    if (parts[0] === 'english-exams') return englishExamsPage(parts[1], parts[2], parts[3]);
-    if (parts[0] === 'shanghai-papers') return subjectPapersPage(parts[1], parts[2]);
+    if (parts[0] === 'english-exams') {
+      const names = !parts[1] ? ['EnglishPastPapers', 'JiangsuEnglishPastPapers']
+        : parts[1] === 'jiangsu' ? ['JiangsuEnglishPastPapers'] : ['EnglishPastPapers'];
+      return withData(names, '英语中考真题', parts[1] ? '#/english-exams' : '#/', () => englishExamsPage(parts[1], parts[2], parts[3]));
+    }
+    if (parts[0] === 'shanghai-papers') {
+      return withData(['ShanghaiSubjectPapers'], '上海中考真题', '#/', () => subjectPapersPage(parts[1], parts[2]));
+    }
     if (parts[0] === 'english-plan') return englishPlanPage(parts[1], parts[2], parts[3]);
     if (parts[0] === 'v') return volumePage(parts.slice(1).join('/'));
     if (parts[0] === 's') return sectionPage(parts.slice(1).join('/'));
