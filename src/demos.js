@@ -1245,7 +1245,52 @@
     return s;
   }
 
-  const TYPES = { foldCut, numberLineFold, angleFold, ropeCut, motion, sweep, rotOverlap, billiard, scaleOrder, solutionSet, vertAngles, parallelAngles, angleSum, ssaSwing };
+  // ---------- 线段的垂直平分线（18.4） ----------
+  // 线段 AB 水平，点 P 由两个滑块控制：沿垂直平分线的位置、离开垂直平分线的距离；实时显示 PA、PB（以格为单位）
+  function perpBisector(container) {
+    const W = 300, H = 230, u = 24, M = [150, 170];
+    const A = [M[0] - 3 * u, M[1]], B = [M[0] + 3 * u, M[1]];
+    let pos = 4, off = 0;
+    const s = shell(container, {
+      w: W, h: H, aria: '线段垂直平分线上的点到两端距离相等的演示',
+      controls: '<label class="demo-row"><span>上下</span><input type="range" min="-1" max="6" step="0.5" data-k="pos"></label>' +
+        '<label class="demo-row"><span>离开</span><input type="range" min="-3" max="3" step="0.5" data-k="off"></label>',
+    });
+    const [rPos, rOff] = s.box.querySelectorAll('input');
+    rPos.value = pos; rOff.value = off;
+    rPos.addEventListener('input', () => { s.reset(); pos = Number(rPos.value); draw(); });
+    rOff.addEventListener('input', () => { s.reset(); off = Number(rOff.value); draw(); });
+    function draw() {
+      const P = [M[0] + off * u, M[1] - pos * u];
+      const pa = Math.hypot(P[0] - A[0], P[1] - A[1]) / u, pb = Math.hypot(P[0] - B[0], P[1] - B[1]) / u;
+      const on = Math.abs(off) < 1e-9;
+      let html = `<line x1="${M[0]}" y1="${M[1] + 40}" x2="${M[0]}" y2="10" stroke="${GREEN}" stroke-width="1.6" stroke-dasharray="6 4"/>`;
+      html += `<polyline points="${M[0] + 9},${M[1]} ${M[0] + 9},${M[1] - 9} ${M[0]},${M[1] - 9}" fill="none" stroke="${GREEN}"/>`;
+      html += `<line x1="${A[0]}" y1="${A[1]}" x2="${B[0]}" y2="${B[1]}" stroke="${INK}" stroke-width="2.2"/>`;
+      html += `<line x1="${P[0].toFixed(1)}" y1="${P[1].toFixed(1)}" x2="${A[0]}" y2="${A[1]}" stroke="${on ? BLUE : RED}" stroke-width="1.6"/>`;
+      html += `<line x1="${P[0].toFixed(1)}" y1="${P[1].toFixed(1)}" x2="${B[0]}" y2="${B[1]}" stroke="${on ? BLUE : RED}" stroke-width="1.6"/>`;
+      html += dot(A[0], A[1], INK, '', 1) + dot(B[0], B[1], INK, '', 1) + dot(P[0], P[1], on ? BLUE : RED, 'P', 1);
+      html += `<text x="${A[0] - 12}" y="${A[1] + 5}" font-size="13" font-weight="bold">A</text><text x="${B[0] + 5}" y="${B[1] + 5}" font-size="13" font-weight="bold">B</text>`;
+      html += `<text x="${M[0] - 4}" y="${M[1] + 16}" font-size="12">M</text><text x="${M[0] + 6}" y="22" font-size="12" fill="${GREEN}">l</text>`;
+      s.svg.innerHTML = html;
+      s.caption.textContent = on
+        ? `P 在 AB 的垂直平分线 l 上：PA=${pa.toFixed(2)}，PB=${pb.toFixed(2)}，总是相等`
+        : `P 离开了 l：PA=${pa.toFixed(2)}，PB=${pb.toFixed(2)}，不相等（P 靠近哪个端点，到哪个端点就近）`;
+    }
+    // 播放：P 沿 l 上下走一趟，再向右偏离又回来
+    const phases = [{ k: 'pos', from: 4, to: -0.5, dur: 1600 }, { k: 'pos', from: -0.5, to: 5, dur: 1800 }, { k: 'off', from: 0, to: 2, dur: 900 }, { k: 'off', from: 2, to: 0, dur: 900 }];
+    s.frame = ms => {
+      walk(phases, ms, (p, f) => { const v = lerp(p.from, p.to, ease(f)); if (p.k === 'pos') pos = v; else off = Math.round(v * 100) / 100; });
+      rPos.value = pos; rOff.value = off;
+      draw();
+    };
+    s.duration = () => totalOf(phases);
+    s.reset();
+    draw();
+    return s;
+  }
+
+  const TYPES = { foldCut, numberLineFold, angleFold, ropeCut, motion, sweep, rotOverlap, billiard, scaleOrder, solutionSet, vertAngles, parallelAngles, angleSum, ssaSwing, perpBisector };
 
   function mount(container, demo) {
     const make = TYPES[demo.type];
