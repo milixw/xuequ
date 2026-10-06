@@ -183,10 +183,10 @@ Content.catalog = {
                   no: 17,
                   title: '三角形',
                   sections: [
-                    { no: '17.1', title: '三角形的有关概念', ready: false },
-                    { no: '17.2', title: '三角形的内角和', ready: false },
-                    { no: '17.3', title: '全等三角形及其性质', ready: false },
-                    { no: '17.4', title: '三角形全等的判定', ready: false },
+                    { no: '17.1', title: '三角形的有关概念', ready: true },
+                    { no: '17.2', title: '三角形的内角和', ready: true },
+                    { no: '17.3', title: '全等三角形及其性质', ready: true },
+                    { no: '17.4', title: '三角形全等的判定', ready: true },
                   ],
                 },
                 {

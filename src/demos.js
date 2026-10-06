@@ -1131,7 +1131,121 @@
     return s;
   }
 
-  const TYPES = { foldCut, numberLineFold, angleFold, ropeCut, motion, sweep, rotOverlap, billiard, scaleOrder, solutionSet, vertAngles, parallelAngles };
+  // ---------- 三角形（第 17 章） ----------
+  // 屏幕坐标下点 p 处、从射线 p→q1 转到 p→q2（取小于平角的一侧）的扇形顶点列表
+  function wedgePts(p, q1, q2, r) {
+    let a1 = Math.atan2(q1[1] - p[1], q1[0] - p[0]), a2 = Math.atan2(q2[1] - p[1], q2[0] - p[0]);
+    let d = a2 - a1;
+    while (d > Math.PI) d -= 2 * Math.PI;
+    while (d < -Math.PI) d += 2 * Math.PI;
+    const pts = [p];
+    for (let i = 0; i <= 16; i++) pts.push([p[0] + r * Math.cos(a1 + (d * i) / 16), p[1] + r * Math.sin(a1 + (d * i) / 16)]);
+    return pts;
+  }
+  const polyAttr = pts => pts.map(p => p.map(v => v.toFixed(1)).join(',')).join(' ');
+  const angDeg = (p, q1, q2) => {
+    const a = Math.atan2(q1[1] - p[1], q1[0] - p[0]) - Math.atan2(q2[1] - p[1], q2[0] - p[0]);
+    let d = Math.abs((a * 180) / Math.PI) % 360;
+    return d > 180 ? 360 - d : d;
+  };
+
+  // 三角形内角和（17.2）：∠A 绕 AC 中点转 180°（内错角），∠B 沿 BC 平移（同位角），都拼到点 C，与 ∠ACB 组成平角
+  function angleSum(container, opts) {
+    const W = 300, H = 200;
+    const shapes = opts.shapes || [
+      { name: '锐角三角形', A: [110, 40] },
+      { name: '直角三角形', A: [95, 78] },
+      { name: '钝角三角形', A: [175, 118] },
+    ];
+    const B = [40, 170], C = [250, 170];
+    let A = shapes[0].A;
+    const s = shell(container, { w: W, h: H, aria: '三角形三个内角拼成平角的演示', controls: '<span class="demo-row"><span class="seg"></span></span>' });
+    segButtons(s.box.querySelector('.seg'), shapes.map(x => x.name), shapes[0].name, (v, i) => { A = shapes[i].A; s.reset(); draw(0, 0); s.caption.textContent = '点「播放」，把 ∠A、∠B 搬到点 C'; });
+    const phases = [{ kind: 'wait', dur: 300 }, { kind: 'a', dur: 1500 }, { kind: 'wait', dur: 200 }, { kind: 'b', dur: 1500 }, { kind: 'line', dur: 600 }];
+    function draw(fa, fb, fl = 0) {
+      const M = [(A[0] + C[0]) / 2, (A[1] + C[1]) / 2];
+      const r = 26;
+      const wa = wedgePts(A, B, C, r).map(p => rotPt(p, M, 180 * ease(fa)));
+      const wb = wedgePts(B, A, C, r).map(p => [p[0] + (C[0] - B[0]) * ease(fb), p[1] + (C[1] - B[1]) * ease(fb)]);
+      const wc = wedgePts(C, A, B, r);
+      let html = '';
+      if (fl > 0) {
+        // 过 C 且平行于 AB 的直线，以及 BC 的延长线
+        const dx = A[0] - B[0], dy = A[1] - B[1], k = 0.3;
+        html += `<g opacity="${fl.toFixed(2)}"><line x1="${(C[0] - dx * k).toFixed(1)}" y1="${(C[1] - dy * k).toFixed(1)}" x2="${(C[0] + dx * 0.7).toFixed(1)}" y2="${(C[1] + dy * 0.7).toFixed(1)}" stroke="${MUTED}" stroke-dasharray="5 4"/>` +
+          `<line x1="${C[0]}" y1="${C[1]}" x2="${W - 4}" y2="${C[1]}" stroke="${MUTED}" stroke-dasharray="5 4"/></g>`;
+      }
+      html += `<polygon points="${polyAttr([A, B, C])}" fill="#fbf8f1" stroke="${INK}" stroke-width="1.8"/>`;
+      html += `<polygon points="${polyAttr(wc)}" fill="${GREEN}" fill-opacity="0.35" stroke="${GREEN}"/>`;
+      html += `<polygon points="${polyAttr(wa)}" fill="${RED}" fill-opacity="0.35" stroke="${RED}"/>`;
+      html += `<polygon points="${polyAttr(wb)}" fill="${BLUE}" fill-opacity="0.35" stroke="${BLUE}"/>`;
+      const lab = (p, t, dx, dy) => `<text x="${p[0] + dx}" y="${p[1] + dy}" font-size="13" font-weight="bold" fill="${INK}">${t}</text>`;
+      html += lab(A, 'A', -4, -8) + lab(B, 'B', -14, 4) + lab(C, 'C', 4, 16);
+      s.svg.innerHTML = html;
+    }
+    s.frame = ms => {
+      let fa = 0, fb = 0, fl = 0;
+      walk(phases, ms, (p, f) => {
+        if (p.kind === 'a') fa = f;
+        if (p.kind === 'b') fb = f;
+        if (p.kind === 'line') fl = f;
+      });
+      draw(fa, fb, fl);
+      const a = Math.round(angDeg(A, B, C)), b = Math.round(angDeg(B, A, C)), c = 180 - a - b;
+      s.caption.textContent = fl > 0
+        ? `∠A=${a}°，∠B=${b}°，∠C=${c}°，三个角在点 C 拼成一个平角：${a}°+${b}°+${c}°=180°。虚线平行于 AB，这正是证明里添的辅助线`
+        : fb > 0 ? '∠B 沿 BC 方向平移到点 C（同位角相等）' : fa > 0 ? '∠A 绕 AC 的中点转 180°，落到点 C 旁边（内错角相等）' : '点「播放」，把 ∠A、∠B 搬到点 C';
+    };
+    s.duration = () => totalOf(phases);
+    s.reset();
+    draw(0, 0);
+    s.caption.textContent = '点「播放」，把 ∠A、∠B 搬到点 C';
+    return s;
+  }
+
+  // “边边角”不能判定全等（17.4）：∠A 和 AB 固定，BC 绕 B 摆动，以 B 为圆心的圆与射线交于两点
+  function ssaSwing(container, opts) {
+    const W = 270, H = 200, u = 28;
+    const angA = opts.angle || 40, c = opts.c || 6, a = opts.a || 4.5;
+    const A = [30, 175], B = [30 + c * u, 175];
+    const dir = [Math.cos((angA * Math.PI) / 180), -Math.sin((angA * Math.PI) / 180)];
+    const m = c * Math.cos((angA * Math.PI) / 180), disc = Math.sqrt(m * m - c * c + a * a);
+    const at = t => [A[0] + dir[0] * t * u, A[1] + dir[1] * t * u];
+    const C1 = at(m - disc), C2 = at(m + disc);
+    const s = shell(container, { w: W, h: H, aria: '两边及其中一边的对角对应相等时三角形不唯一的演示' });
+    const a1 = Math.atan2(C1[1] - B[1], C1[0] - B[0]), a2 = Math.atan2(C2[1] - B[1], C2[0] - B[0]);
+    const phases = [{ kind: 'wait', dur: 300 }, { kind: 'show1', dur: 700 }, { kind: 'hold', dur: 700 }, { kind: 'swing', dur: 1600 }, { kind: 'both', dur: 700 }];
+    function draw(f, both, cap) {
+      const ang = a1 + (a2 - a1) * ease(f);
+      const Cp = [B[0] + a * u * Math.cos(ang), B[1] + a * u * Math.sin(ang)];
+      let html = `<circle cx="${B[0]}" cy="${B[1]}" r="${a * u}" fill="none" stroke="${MUTED}" stroke-dasharray="4 4"/>`;
+      const far = at(9);
+      html += `<line x1="${A[0]}" y1="${A[1]}" x2="${far[0].toFixed(1)}" y2="${far[1].toFixed(1)}" stroke="${INK}" stroke-width="1.4"/>`;
+      if (both) html += `<polygon points="${polyAttr([A, B, C1])}" fill="${BLUE}" fill-opacity="0.2" stroke="${BLUE}" stroke-width="1.6"/>`;
+      html += `<polygon points="${polyAttr([A, B, Cp])}" fill="${RED}" fill-opacity="0.2" stroke="${RED}" stroke-width="1.8"/>`;
+      html += `<line x1="${A[0]}" y1="${A[1]}" x2="${B[0]}" y2="${B[1]}" stroke="${INK}" stroke-width="2.2"/>`;
+      html += `<text x="${A[0] - 12}" y="${A[1] + 4}" font-size="13" font-weight="bold">A</text><text x="${B[0] + 4}" y="${B[1] + 14}" font-size="13" font-weight="bold">B</text>`;
+      html += `<text x="${(Cp[0] - 4).toFixed(1)}" y="${(Cp[1] - 8).toFixed(1)}" font-size="13" font-weight="bold" fill="${RED}">C</text>`;
+      if (both) html += `<text x="${(C1[0] - 16).toFixed(1)}" y="${(C1[1] + 2).toFixed(1)}" font-size="13" font-weight="bold" fill="${BLUE}">C′</text>`;
+      html += `<text x="${A[0] + 22}" y="${A[1] - 5}" font-size="11" fill="${INK}">${angA}°</text>`;
+      s.svg.innerHTML = html;
+      s.caption.textContent = cap;
+    }
+    s.frame = ms => {
+      let f = 0, both = false, cap = `∠A=${angA}°，AB=${c}，BC=${a}：以 B 为圆心、${a} 为半径画弧，与射线交于两点`;
+      walk(phases, ms, (p, t) => {
+        if (p.kind === 'swing') { f = t; cap = 'BC 绕点 B 摆过去，长度不变，又碰到了射线'; }
+        if (p.kind === 'both') { f = 1; both = true; cap = `两个三角形都满足 ∠A=${angA}°、AB=${c}、BC=${a}，却不全等：“边边角”不能判定全等`; }
+      });
+      draw(f, both, cap);
+    };
+    s.duration = () => totalOf(phases);
+    s.reset();
+    draw(0, false, `已知 ∠A=${angA}°、AB=${c}、BC=${a}（BC 是 ∠A 的对边），点「播放」看能画出几个三角形`);
+    return s;
+  }
+
+  const TYPES = { foldCut, numberLineFold, angleFold, ropeCut, motion, sweep, rotOverlap, billiard, scaleOrder, solutionSet, vertAngles, parallelAngles, angleSum, ssaSwing };
 
   function mount(container, demo) {
     const make = TYPES[demo.type];

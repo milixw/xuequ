@@ -35,7 +35,7 @@ src/
   progress.js                     做题进度（小节和真题卷共用）、独立累计答错次数及按提交事件去重
   learning-store.js               学习数据账号归属、旧共享数据备份与指定账号迁移；未登录访客独立，不回退至他人数据
   content.js                      内容注册表：目录查询、学期列表、按需加载小节文件和真题卷文件
-  demos.js                        演示动画：题目的 demo 字段放在解析里，知识点卡片的 demo 字段放在卡片末尾；第 14 章用 motion（平移、旋转、翻折、旋转 180° 的过程）、sweep、rotOverlap、billiard；第 15 章用 scaleOrder（两边同乘一个数，数轴伸缩、翻转）、solutionSet（数轴上画解集、找公共部分和整数解）；第 16 章用 vertAngles（拖动直线看对顶角与垂直）、parallelAngles（三线八角与平行），依赖 DOM
+  demos.js                        演示动画：题目的 demo 字段放在解析里，知识点卡片的 demo 字段放在卡片末尾；第 14 章用 motion（平移、旋转、翻折、旋转 180° 的过程）、sweep、rotOverlap、billiard；第 15 章用 scaleOrder（两边同乘一个数，数轴伸缩、翻转）、solutionSet（数轴上画解集、找公共部分和整数解）；第 16 章用 vertAngles（拖动直线看对顶角与垂直）、parallelAngles（三线八角与平行）；第 17 章用 angleSum（内角拼成平角）、ssaSwing（边边角摆出两个三角形），依赖 DOM
   quiz.js                         做题引擎：题目渲染、作答、判分反馈、解析、快捷输入栏、renderText 排版
   exam.js                         限时测试：会话状态机、计时、交卷判分、结果页
   english-bank.js                 独立英语错题库：知识点介绍、题型筛选、作答与重置
@@ -61,7 +61,7 @@ content/
         1.1.js ... 4.2.js         每个小节一个文件：知识点 + 题目
       g6s2/                       册：六年级下册（5.1～9.4，全册完成）
       g7s1/                       册：七年级上册（10.1～14.4，全册完成）
-      g7s2/                       册：七年级下册（目前 15.1～16.3）
+      g7s2/                       册：七年级下册（目前 15.1～17.4）
       g8s1/                       册：八年级上册（目前 19.1、19.2）
     bridge/g6s1/                  六年级衔接：旧版沪教版六年级第一学期的数的整除、分数两章（1.1～2.9），难度按月考真卷定
   exams/
