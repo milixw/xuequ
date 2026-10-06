@@ -1,0 +1,429 @@
+{
+  "review": {
+    "status": "pending"
+  },
+  "updates": [
+    {
+      "id": "xdf-5f0f4fca9e7e2301",
+      "originalAnswer": "C",
+      "answer": "(1) C (2) B (3) D (4) A (5) C",
+      "source": {
+        "file": "错题_05_20260922_215416.pdf",
+        "number": 2,
+        "page": 1,
+        "sha256": "1a45a734304c4a7ffd2004b1f04321720da115e00efe95fcc1327501774ad476"
+      }
+    },
+    {
+      "id": "xdf-6f4bbab652524923",
+      "originalAnswer": "A",
+      "answer": "(1) A (2) C (3) C (4) B (5) D",
+      "source": {
+        "file": "错题_06_20260922_215426.pdf",
+        "number": 1,
+        "page": 1,
+        "sha256": "9a1a864d95a2dc5c1b9881cc64b22da79c5fe858dd60a4916aec0a6e02f8b379"
+      }
+    },
+    {
+      "id": "xdf-6ba4eee091032424",
+      "originalAnswer": "B",
+      "answer": "(1) B (2) C (3) B (4) B (5) C",
+      "source": {
+        "file": "错题_06_20260922_215426.pdf",
+        "number": 2,
+        "page": 2,
+        "sha256": "9a1a864d95a2dc5c1b9881cc64b22da79c5fe858dd60a4916aec0a6e02f8b379"
+      }
+    },
+    {
+      "id": "xdf-b052612b727dc0c4",
+      "originalAnswer": "B",
+      "answer": "(1) B (2) C (3) A (4) B (5) C (6) D",
+      "source": {
+        "file": "错题_08_20260922_215442.pdf",
+        "number": 7,
+        "page": 5,
+        "sha256": "62f446ebd060c952f438b459102b8b6b6bc640776e5602811ca8e927c8941dfb"
+      }
+    },
+    {
+      "id": "xdf-03cbb9d690511229",
+      "originalAnswer": "A",
+      "answer": "(1) A (2) D (3) C (4) B (5) D (6) A",
+      "source": {
+        "file": "错题_08_20260922_215442.pdf",
+        "number": 8,
+        "page": 6,
+        "sha256": "62f446ebd060c952f438b459102b8b6b6bc640776e5602811ca8e927c8941dfb"
+      }
+    },
+    {
+      "id": "xdf-2dbc3ff79590b703",
+      "originalAnswer": "D",
+      "answer": "(1) D (2) C (3) A (4) C",
+      "source": {
+        "file": "错题_09_20260922_215452.pdf",
+        "number": 4,
+        "page": 1,
+        "sha256": "d868372180bd5ba4d3ba2faadf1234368e76ad4bd8b444a9a24a39db1ef16c95"
+      }
+    },
+    {
+      "id": "xdf-eb91afc630947b77",
+      "originalAnswer": "D",
+      "answer": "(1) D (2) B (3) A (4) C (5) C",
+      "source": {
+        "file": "错题_09_20260922_215452.pdf",
+        "number": 5,
+        "page": 2,
+        "sha256": "d868372180bd5ba4d3ba2faadf1234368e76ad4bd8b444a9a24a39db1ef16c95"
+      }
+    },
+    {
+      "id": "xdf-85e9a4ddf6b6d3d2",
+      "originalAnswer": "D",
+      "answer": "(1) D (2) C (3) D (4) B (5) A",
+      "source": {
+        "file": "错题_10_20260922_215503.pdf",
+        "number": 5,
+        "page": 1,
+        "sha256": "afc0ecf4006ad24938097cc8490461b53cc2076c69b1c5d733547cda537926e4"
+      }
+    },
+    {
+      "id": "xdf-fdc36ba175ee1366",
+      "originalAnswer": "B",
+      "answer": "(1) B (2) A (3) C (4) A (5) C",
+      "source": {
+        "file": "错题_10_20260922_215503.pdf",
+        "number": 6,
+        "page": 2,
+        "sha256": "afc0ecf4006ad24938097cc8490461b53cc2076c69b1c5d733547cda537926e4"
+      }
+    },
+    {
+      "id": "xdf-25a52828e771db0e",
+      "originalAnswer": "B",
+      "answer": "(1) B (2) C (3) A (4) D (5) B",
+      "source": {
+        "file": "错题_10_20260922_215503.pdf",
+        "number": 7,
+        "page": 4,
+        "sha256": "afc0ecf4006ad24938097cc8490461b53cc2076c69b1c5d733547cda537926e4"
+      }
+    },
+    {
+      "id": "xdf-9db4a3b780495805",
+      "originalAnswer": "B",
+      "answer": "(1) B (2) A (3) D (4) B (5) D",
+      "source": {
+        "file": "错题_17_20260922_215546.pdf",
+        "number": 4,
+        "page": 1,
+        "sha256": "04453365dc65ae79b4cd50ba4d982fa37296c3aecc294148d08acc17fe19bad1"
+      }
+    },
+    {
+      "id": "xdf-34b229509c9a7033",
+      "originalAnswer": "A",
+      "answer": "(1) A (2) A (3) B",
+      "source": {
+        "file": "错题_19_20260922_215557.pdf",
+        "number": 5,
+        "page": 1,
+        "sha256": "d39ff263935ac877c69af6d6c2d660f3c61b828d1d101a68705caa9afa9bcdc9"
+      }
+    },
+    {
+      "id": "xdf-bdb4876ffd5725ca",
+      "originalAnswer": "A",
+      "answer": "(1) A (2) C (3) B",
+      "source": {
+        "file": "错题_20_20260922_215603.pdf",
+        "number": 3,
+        "page": 2,
+        "sha256": "22f642a01e6f6e90713558bcb4b108f2f231d3527d46f26edc751adf4bb49403"
+      }
+    },
+    {
+      "id": "xdf-f6d655651afd7388",
+      "originalAnswer": "B",
+      "answer": "(1) B (2) A (3) D (4) C (5) A (6) A",
+      "source": {
+        "file": "错题_21_20260922_215610.pdf",
+        "number": 20,
+        "page": 5,
+        "sha256": "2cd33258f1d98424905e82960471405ca04a1890a30bdaefa91f6a3c42048652"
+      }
+    },
+    {
+      "id": "xdf-1a881b7f39530531",
+      "originalAnswer": "C",
+      "answer": "(1) C (2) C (3) D (4) B (5) A",
+      "source": {
+        "file": "错题_22_20260922_215615.pdf",
+        "number": 19,
+        "page": 3,
+        "sha256": "8b8ba99f761faf5d535c377cf48d0a272986eceb31276b5460938925d114f2ae"
+      }
+    },
+    {
+      "id": "xdf-a0977b50ad716e52",
+      "originalAnswer": "D",
+      "answer": "(1) D (2) C (3) A (4) B (5) C",
+      "source": {
+        "file": "错题_26_20260922_215637.pdf",
+        "number": 5,
+        "page": 1,
+        "sha256": "625f89babf80c14e5613c08dff03b8f986ddcaef9ddf14d0de17c8d3444c5015"
+      }
+    },
+    {
+      "id": "xdf-de39684bafd5f70a",
+      "originalAnswer": "A",
+      "answer": "(1) A (2) B (3) D (4) C",
+      "source": {
+        "file": "错题_27_20260922_215644.pdf",
+        "number": 12,
+        "page": 2,
+        "sha256": "0afb6dfa8574a91b6788b15b3db227c2cf1bd1cc37d43ca90d37cab952db2de2"
+      }
+    },
+    {
+      "id": "xdf-563432a12b2a4632",
+      "originalAnswer": "B",
+      "answer": "(1) B (2) D (3) C (4) D (5) B",
+      "source": {
+        "file": "错题_27_20260922_215644.pdf",
+        "number": 14,
+        "page": 3,
+        "sha256": "0afb6dfa8574a91b6788b15b3db227c2cf1bd1cc37d43ca90d37cab952db2de2"
+      }
+    },
+    {
+      "id": "xdf-91c78b8b6b175331",
+      "originalAnswer": "A",
+      "answer": "(1) A (2) A (3) C (4) B (5) C",
+      "source": {
+        "file": "错题_28_20260922_215651.pdf",
+        "number": 14,
+        "page": 4,
+        "sha256": "9a330b6decf505318c36bdea59b3eccffec011acc0239a81275437dcf4b9edbc"
+      }
+    },
+    {
+      "id": "xdf-a0e44dcc9c5ab1c2",
+      "originalAnswer": "D",
+      "answer": "(1) D (2) C (3) B (4) D (5) A",
+      "source": {
+        "file": "错题_28_20260922_215651.pdf",
+        "number": 15,
+        "page": 5,
+        "sha256": "9a330b6decf505318c36bdea59b3eccffec011acc0239a81275437dcf4b9edbc"
+      }
+    },
+    {
+      "id": "xdf-77f4bd104441d024",
+      "originalAnswer": "C",
+      "answer": "(1) C (2) B (3) C (4) B",
+      "source": {
+        "file": "错题_30_20260922_215707.pdf",
+        "number": 5,
+        "page": 2,
+        "sha256": "080bfae97b4092f049d9513a2fce4d672a3428cc465566602a223ef0bb7bf2db"
+      }
+    },
+    {
+      "id": "xdf-baf6af4d65419a5a",
+      "originalAnswer": "A",
+      "answer": "(1) A (2) A (3) C (4) C (5) A (6) C (7) B (8) A",
+      "source": {
+        "file": "错题_30_20260922_215707.pdf",
+        "number": 11,
+        "page": 3,
+        "sha256": "080bfae97b4092f049d9513a2fce4d672a3428cc465566602a223ef0bb7bf2db"
+      }
+    },
+    {
+      "id": "xdf-7ca145313b1fc11e",
+      "originalAnswer": "D",
+      "answer": "(1) D (2) B (3) B (4) C (5) D (6) B",
+      "source": {
+        "file": "错题_30_20260922_215707.pdf",
+        "number": 12,
+        "page": 5,
+        "sha256": "080bfae97b4092f049d9513a2fce4d672a3428cc465566602a223ef0bb7bf2db"
+      }
+    },
+    {
+      "id": "xdf-ffbb9976ed6b58ad",
+      "originalAnswer": "C",
+      "answer": "(1) C (2) B (3) C (4) D (5) A (6) D",
+      "source": {
+        "file": "错题_33_20260922_215725.pdf",
+        "number": 16,
+        "page": 4,
+        "sha256": "27bf95241789cc908f29be74f52ce4d0bd89394724ee48a1a171df23809f9b9a"
+      }
+    },
+    {
+      "id": "xdf-9ac9d719371b869a",
+      "originalAnswer": "D",
+      "answer": "(1) D (2) C (3) D (4) A (5) D",
+      "source": {
+        "file": "错题_41_20260922_215818.pdf",
+        "number": 3,
+        "page": 3,
+        "sha256": "cc9ef35003287ffd8c1713a48b46a44601b76bc3c553cc09b51b7889b784ae6f"
+      }
+    },
+    {
+      "id": "xdf-e1bab525d31767d8",
+      "originalAnswer": "A",
+      "answer": "(1) A (2) B (3) A (4) C (5) D",
+      "source": {
+        "file": "错题_41_20260922_215818.pdf",
+        "number": 4,
+        "page": 4,
+        "sha256": "cc9ef35003287ffd8c1713a48b46a44601b76bc3c553cc09b51b7889b784ae6f"
+      }
+    },
+    {
+      "id": "xdf-8ade4b08f22692e8",
+      "originalAnswer": "C",
+      "answer": "(1) C (2) A (3) B (4) D (5) C (6) A",
+      "source": {
+        "file": "错题_41_20260922_215818.pdf",
+        "number": 17,
+        "page": 7,
+        "sha256": "cc9ef35003287ffd8c1713a48b46a44601b76bc3c553cc09b51b7889b784ae6f"
+      }
+    },
+    {
+      "id": "xdf-c507850f2d51c885",
+      "originalAnswer": "B",
+      "answer": "(1) B (2) C (3) A (4) B (5) D",
+      "source": {
+        "file": "错题_43_20260922_215828.pdf",
+        "number": 2,
+        "page": 1,
+        "sha256": "12074892e6178218f424e63ab36eb5710ae23a70ed8d60a7d419cc16ce6c0a50"
+      }
+    },
+    {
+      "id": "xdf-3d6329ce23fc8f5d",
+      "originalAnswer": "C",
+      "answer": "(1) C (2) B (3) B (4) C (5) A",
+      "source": {
+        "file": "错题_43_20260922_215828.pdf",
+        "number": 3,
+        "page": 2,
+        "sha256": "12074892e6178218f424e63ab36eb5710ae23a70ed8d60a7d419cc16ce6c0a50"
+      }
+    },
+    {
+      "id": "xdf-28c4c54d8214a136",
+      "originalAnswer": "B",
+      "answer": "(1) B (2) D (3) B (4) C",
+      "source": {
+        "file": "错题_43_20260922_215828.pdf",
+        "number": 8,
+        "page": 4,
+        "sha256": "12074892e6178218f424e63ab36eb5710ae23a70ed8d60a7d419cc16ce6c0a50"
+      }
+    },
+    {
+      "id": "xdf-a9826f82f42b3d28",
+      "originalAnswer": "A",
+      "answer": "(1) A (2) D (3) C (4) B",
+      "source": {
+        "file": "错题_44_20260922_215835.pdf",
+        "number": 12,
+        "page": 2,
+        "sha256": "8877338acee8a4fd1b6abcf9d870d0ed72ca663f45a566f93792ebab847efc83"
+      }
+    },
+    {
+      "id": "xdf-bcd4d8927e0d242b",
+      "originalAnswer": "D",
+      "answer": "(1) D (2) B (3) A (4) B (5) C",
+      "source": {
+        "file": "错题_44_20260922_215835.pdf",
+        "number": 19,
+        "page": 4,
+        "sha256": "8877338acee8a4fd1b6abcf9d870d0ed72ca663f45a566f93792ebab847efc83"
+      }
+    },
+    {
+      "id": "xdf-2a6e9c56407cffe9",
+      "originalAnswer": "C",
+      "answer": "(1) C (2) B (3) C (4) B (5) A (6) B (7) C (8) A (9) C (10) B",
+      "source": {
+        "file": "错题_20_20260922_215603.pdf",
+        "number": 1,
+        "page": 1,
+        "sha256": "22f642a01e6f6e90713558bcb4b108f2f231d3527d46f26edc751adf4bb49403"
+      }
+    },
+    {
+      "id": "xdf-a7f50071d4d12aa2",
+      "originalAnswer": "C",
+      "answer": "(1) C (2) A (3) A (4) C (5) B (6) B (7) A (8) A (9) C (10) B",
+      "source": {
+        "file": "错题_21_20260922_215610.pdf",
+        "number": 17,
+        "page": 3,
+        "sha256": "2cd33258f1d98424905e82960471405ca04a1890a30bdaefa91f6a3c42048652"
+      }
+    },
+    {
+      "id": "xdf-174514d71a33f174",
+      "originalAnswer": null,
+      "answer": "(1) C (2) B (3) D (4) A (5) C",
+      "source": {
+        "file": "错题_05_20260922_215416.pdf",
+        "number": 2,
+        "page": 1,
+        "sha256": "1a45a734304c4a7ffd2004b1f04321720da115e00efe95fcc1327501774ad476"
+      },
+      "samePaperQuestion": "xdf-5f0f4fca9e7e2301"
+    },
+    {
+      "id": "xdf-eb7c5953f169a6b9",
+      "originalAnswer": null,
+      "answer": "(1) B (2) C (3) B (4) B (5) C",
+      "source": {
+        "file": "错题_06_20260922_215426.pdf",
+        "number": 2,
+        "page": 2,
+        "sha256": "9a1a864d95a2dc5c1b9881cc64b22da79c5fe858dd60a4916aec0a6e02f8b379"
+      },
+      "samePaperQuestion": "xdf-6ba4eee091032424"
+    },
+    {
+      "id": "xdf-b52f20ae6ca31f0b",
+      "originalAnswer": null,
+      "answer": "(1) A (2) C (3) C (4) B (5) D",
+      "source": {
+        "file": "错题_06_20260922_215426.pdf",
+        "number": 1,
+        "page": 1,
+        "sha256": "9a1a864d95a2dc5c1b9881cc64b22da79c5fe858dd60a4916aec0a6e02f8b379"
+      },
+      "samePaperQuestion": "xdf-6f4bbab652524923"
+    },
+    {
+      "id": "xdf-aec340312b9fcc38",
+      "originalAnswer": null,
+      "answer": "(1) C (2) A (3) B (4) D (5) C (6) A",
+      "ai": true
+    },
+    {
+      "id": "xdf-38f89d8d6919cf33",
+      "originalAnswer": null,
+      "answer": "B",
+      "ai": true
+    }
+  ]
+}

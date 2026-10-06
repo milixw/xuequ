@@ -22,6 +22,22 @@
     : root.EnglishExplanationSupplements;
   let loading;
 
+  function appendMarkedText(container, text, doc = document) {
+    const parts = String(text).split(/(\[\[u\]\][\s\S]*?\[\[\/u\]\])/g);
+    for (const part of parts) {
+      if (!part) continue;
+      const marked = part.startsWith('[[u]]') && part.endsWith('[[/u]]');
+      const node = doc.createElement(marked ? 'u' : 'span');
+      node.textContent = marked ? part.slice(5, -6) : part;
+      container.appendChild(node);
+    }
+  }
+
+  function restoredText(snapshot, q) {
+    const plain = s => String(s).replace(/\[\[\/?u\]\]|_|\s+/g, '');
+    return q && plain(snapshot) === plain(q.text) ? q.text : snapshot;
+  }
+
   function explanationFor(q) {
     if (q && q.explanation) return { title: '原题解析（待核对）', text: q.explanation };
     const supplement = q && SUPPLEMENTS && SUPPLEMENTS[q.id];
@@ -96,17 +112,23 @@
     return { passage: text.slice(0, matches[0].index).trim(), items };
   }
 
-  function parseClozeAnswers(answer, count) {
+  function parseClozeAnswers(answer, count, letters = 'ABCD') {
     if (!answer) return null;
     const values = new Array(count).fill(null);
-    for (const match of answer.matchAll(/\((\d{1,2})\)\s*([A-D])/g)) {
-      values[Number(match[1]) - 1] = match[2];
+    function put(number, letter) {
+      if (number < 1 || number > count || (values[number - 1] && values[number - 1] !== letter)) return false;
+      values[number - 1] = letter;
+      return true;
     }
-    for (const match of answer.matchAll(/(\d{1,2})\s*[-–]\s*(\d{1,2})\s*([A-D]+)/g)) {
+    if (!/^[A-F]+$/.test(letters)) return null;
+    for (const match of answer.matchAll(new RegExp(`\\((\\d{1,2})\\)\\s*([${letters}])\\b`, 'g'))) {
+      if (!put(Number(match[1]), match[2])) return null;
+    }
+    for (const match of answer.matchAll(new RegExp(`(\\d{1,2})\\s*[-–]\\s*(\\d{1,2})\\s*([${letters}]+)\\b`, 'g'))) {
       const first = Number(match[1]);
       const last = Number(match[2]);
       if (match[3].length !== last - first + 1) return null;
-      [...match[3]].forEach((letter, i) => { values[first + i - 1] = letter; });
+      for (const [i, letter] of [...match[3]].entries()) if (!put(first + i, letter)) return null;
     }
     return values.every(Boolean) ? values : null;
   }
@@ -120,7 +142,7 @@
     if (!loading) {
       loading = new Promise((resolve, reject) => {
         const script = document.createElement('script');
-        script.src = 'content/english/question-bank.js?v=20261001-explanations';
+        script.src = 'content/english/question-bank.js?v=20261006-days5-7';
         script.onload = () => root.EnglishBankQuestions
           ? resolve(root.EnglishBankQuestions)
           : reject(new Error('英语题库数据未注册'));
@@ -371,7 +393,7 @@
     const body = document.createElement('div');
     body.className = 'english-question-text';
     const cloze = q.type === 'cloze' ? parseCloze(q.text) : null;
-    body.textContent = cloze ? cloze.passage : q.text;
+    appendMarkedText(body, cloze ? cloze.passage : q.text);
     article.append(heading, body);
     if (cloze) {
       const note = document.createElement('p');
@@ -480,7 +502,7 @@
       reveal.addEventListener('click', () => {
         if (!unchangedAccount()) return;
         Progress.reveal(PROGRESS_ID, q.id);
-        feedback.textContent = `PDF 参考答案（待核对）：${q.answer}`;
+        feedback.textContent = `${q.answerSource?.kind === 'ai-supplement' ? 'AI 补充参考答案（待教师审核）' : 'PDF 参考答案（待核对）'}：${q.answer}`;
         feedback.className = 'english-feedback';
         explanation.hidden = false;
       });
@@ -509,7 +531,7 @@
   }
 
   const EnglishBank = { load, listPage, detailPage, knowledgeIntro, filterQuestions, categoryCounts, knowledgeCounts, optionLetters,
-    parseCloze, parseClozeAnswers, explanationFor, explanationNode, TYPES };
+    parseCloze, parseClozeAnswers, explanationFor, explanationNode, appendMarkedText, restoredText, TYPES };
   if (typeof module !== 'undefined') module.exports = EnglishBank;
   else root.EnglishBank = EnglishBank;
 })(this);

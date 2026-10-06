@@ -31,7 +31,8 @@
     "id": "xdf-38f89d8d6919cf33",
     "type": "choice",
     "text": "Through the years, Jolin made much in becoming an excellent dancer and\nperformer.\nA. advantage\nB. progress\nC. opinion\nD. conclusion",
-    "answer": null,
+    "answer": "B",
+    "answerSource": {"kind":"ai-supplement","originalAnswer":null,"checkedAt":"2026-10-06","review":{"status":"pending"}},
     "sources": [
       {
         "file": "错题_01_20260922_214806.pdf",
@@ -176,7 +177,8 @@
     "id": "xdf-174514d71a33f174",
     "type": "reading",
     "text": "根据短文内容，选择正确答案。\nThis was the first real task I received in my new school. It seemed simple: go on the Internet\nand find information about a man named George Washington. As I searched the name, I found\nthat there were two famous people having the same name who looked completely different! One\ninvented hundreds of uses for peanuts, while the other led some sort of army across America. I\nstared at the screen, wondering which one my teacher meant. I called my grandfather for a\ngolden piece of advice; let the coin decide. I flipped (掷) a coin and Ah! Tails (背面)! My report\nwould be about the great main who invented peanut butter, George Washington Carver.\nWeeks later, I stood in front of the classroom and proudly read my homework. But things\nstarted to get strange. I looked around the room, only to find my classmates with big smiles on\ntheir faces and tears in their eyes and my stone–faced teacher. I was completely lost. \"What\ncould be causing everyone to act this way?'\nOh well, I dropped the paper and sat down at my desk, burning to find out what I had done\nwrong. As a classmate began his report, it all became clear, \"My report is on George Washington,\nthe man who started the American War of Independence.\" The whole world became quiet! How\ncould I know that my teacher meant that George Washington?\nOf course, my subject result was awful. Sad but fearless, I decided to turn this around. I\ntalked to the headmaster Miss Lancelot, but she said firmly: No re–dos; no new score. I felt that it\nwas not fair, and I believed I deserved a second chance. So I threw myself heartily into my work\nfor the rest of the school year. Ten months later, I sat in the headmaster's office again, but this\ntime a completely different conversation. I smiled and flashed back to the terrible moment at the\nbeginning of the year as the headmaster told me I was good enough to skip (跳过) the 6th grade\nand started the 7th grade next term.\n(1)单选题 The task I received was to find information about .\nA. my headmaster Miss Lancelot\nB. American War of Independence\nC. George Washington\nD. uses for peanuts\n(2)单选题 helped me decide what my report would be about.\nA. The Internet\nB. A coin\nC. My grandpa\nD. My classmates\n(3)单选题 People in the class acted strangely because .\nA. I was too proud of my homework\nB. the teacher's face turned to a stone\nC. the whole world suddenly became quiet\nD. I mistook what the homework was about\n(4)单选题 I after I failed the subject.\nA. worked harder to prove my ability\nB. started to study from the 7th grade\nC. was so frightened at the awful result\nD. was given a second chance to redo the work\n(5)单选题 We can infer (推断) from the passage that .\nA. the headmaster didn't like the writer at all\nB. the writer's classmates felt sad at his mistake\nC. the writer knew little about American history\nD. the writer's grandpa was a very wise man",
-    "answer": null,
+    "answer": "(1) C (2) B (3) D (4) A (5) C",
+    "answerSource": {"kind":"local-original","originalAnswer":null,"checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_05_20260922_215416.pdf","number":2,"page":1,"sha256":"1a45a734304c4a7ffd2004b1f04321720da115e00efe95fcc1327501774ad476","samePaperQuestion":"xdf-5f0f4fca9e7e2301"},
     "sources": [
       {
         "file": "错题_01_20260922_214806.pdf",
@@ -251,7 +253,8 @@
     "id": "xdf-87772dea64f62aae",
     "type": "choice",
     "text": "In the past 10 years, the life of ordinary people________dramatically.\nA. changed\nB. has changed\nC. have changed\nD. had changed",
-    "answer": null,
+    "answer": "B",
+    "answerSource": {"kind":"ai-supplement","originalAnswer":null,"checkedAt":"2026-10-06","review":{"status":"pending"}},
     "sources": [
       {
         "file": "错题_01_20260922_214806.pdf",
@@ -291,7 +294,8 @@
     "id": "xdf-035ded739f46e89f",
     "type": "choice",
     "text": "Gork opened the cave door a little and told his kangaroos to go out one after________.\nA. another\nB. other\nC. the others\nD. the other",
-    "answer": null,
+    "answer": "A",
+    "answerSource": { "kind": "ai-supplement", "originalAnswer": null, "checkedAt": "2026-10-06", "review": { "status": "pending" } },
     "sources": [
       {
         "file": "错题_01_20260922_214806.pdf",
@@ -311,7 +315,8 @@
     "id": "xdf-68b4a75015e805bb",
     "type": "choice",
     "text": "Will you please tell him to stop playing computer games? Your words carry more weight\nthan ______.\nA. anybody’s\nB. anybody's else\nC. anybody else’s\nD. anybody elses’",
-    "answer": null,
+    "answer": "C",
+    "answerSource": { "kind": "ai-supplement", "originalAnswer": null, "checkedAt": "2026-10-06", "review": { "status": "pending" } },
     "sources": [
       {
         "file": "错题_01_20260922_214806.pdf",
@@ -331,7 +336,8 @@
     "id": "xdf-df644f0adf5ea0d7",
     "type": "choice",
     "text": "He is a man of ________ words and he seldom goes out with his friends, either.\nA. a little\nB. little\nC. few\nD. a few",
-    "answer": null,
+    "answer": "C",
+    "answerSource": { "kind": "ai-supplement", "originalAnswer": null, "checkedAt": "2026-10-06", "review": { "status": "pending" } },
     "sources": [
       {
         "file": "错题_01_20260922_214806.pdf",
@@ -351,7 +357,8 @@
     "id": "xdf-70fcc7b611825989",
     "type": "choice",
     "text": "Liu Xiang runs faster than _________ in America.\nA. any other athlete\nB. any other athletes\nC. any athlete\nD. any athletes",
-    "answer": null,
+    "answer": "C",
+    "answerSource": { "kind": "ai-supplement", "originalAnswer": null, "checkedAt": "2026-10-06", "review": { "status": "pending" } },
     "sources": [
       {
         "file": "错题_01_20260922_214806.pdf",
@@ -371,7 +378,8 @@
     "id": "xdf-52ff904271b0c8f9",
     "type": "choice",
     "text": "There are three books on the shelf. One is an English book, ________ are French books.\nA. others\nB. the other\nC. another\nD. the others",
-    "answer": null,
+    "answer": "D",
+    "answerSource": { "kind": "ai-supplement", "originalAnswer": null, "checkedAt": "2026-10-06", "review": { "status": "pending" } },
     "sources": [
       {
         "file": "错题_01_20260922_214806.pdf",
@@ -391,7 +399,8 @@
     "id": "xdf-e20636e50a5e4d34",
     "type": "choice",
     "text": "Boy students are interested in sports. Some like running, or swimming, and ____like ball\ngames.\nA. the others\nB. others\nC. the other\nD. other",
-    "answer": null,
+    "answer": "B",
+    "answerSource": { "kind": "ai-supplement", "originalAnswer": null, "checkedAt": "2026-10-06", "review": { "status": "pending" } },
     "sources": [
       {
         "file": "错题_01_20260922_214806.pdf",
@@ -411,7 +420,8 @@
     "id": "xdf-9023b30e443ef0b6",
     "type": "choice",
     "text": "We didn't reach an agreement yesterday because neither side would give way to_______.\nA. another\nB. any other\nC. other\nD. the other",
-    "answer": null,
+    "answer": "D",
+    "answerSource": { "kind": "ai-supplement", "originalAnswer": null, "checkedAt": "2026-10-06", "review": { "status": "pending" } },
     "sources": [
       {
         "file": "错题_01_20260922_214806.pdf",
@@ -501,7 +511,8 @@
     "id": "xdf-eb7c5953f169a6b9",
     "type": "reading",
     "text": "The Great Wall is one of the greatest wonders of the world. It has a long history of\nover 2,000 years. It was built to protect the country from enemies.\nThe Great Wall is very long. It runs from the east to the west of China. It is about 21,196\nkilometers long. The walls are usually about 7–8 meters high and 6–5 meters wide.\nBuilding the Great Wall was a difficult task. In ancient times, there were no modern\nmachines. Workers had to carry heavy stones and bricks by hand. Many people lost their lives\nduring the construction. But their hard work finally created this great wonder.\nToday, the Great Wall is a famous tourist attraction. Millions of people from all over the world\ncome to visit it every year. They climb the Great Wall, take photos and learn about its history.\nThe Great Wall is not only a symbol of China’s ancient civilization, but also a symbol of the\nwisdom and perseverance of the Chinese people. We should protect it and pass on its culture to\nfuture generations.\n(1)单选题 What was the Great Wall built for?\nA. To attract tourists.\nB. To protect the country from enemies.\nC. To show the wisdom of the Chinese people.\nD. To carry heavy stones.\n(2)单选题 How long is the Great Wall?\nA. About 7–8 kilometers.\nB. About 6–5 kilometers.\nC. About 21,196 kilometers.\nD. About 2,000 kilometers.\n(3)单选题 How did workers build the Great Wall in ancient times?\nA. With modern machines.\nB. By carrying heavy stones and bricks by hand.\nC. By using advanced technology.\nD. By asking for help from other countries.\n(4)单选题 What is the Great Wall now?\nA. A symbol of China’s ancient civilization.\nB. A famous tourist attraction.\nC. A place for workers to rest.\nD. A symbol of perseverance.\n(5)单选题 What should we do according to the passage?\nA. Visit the Great Wall every year.\nB. Build more walls.\nC. Protect the Great Wall and pass on its culture.\nD. Learn about the history of other countries.",
-    "answer": null,
+    "answer": "(1) B (2) C (3) B (4) B (5) C",
+    "answerSource": {"kind":"local-original","originalAnswer":null,"checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_06_20260922_215426.pdf","number":2,"page":2,"sha256":"9a1a864d95a2dc5c1b9881cc64b22da79c5fe858dd60a4916aec0a6e02f8b379","samePaperQuestion":"xdf-6ba4eee091032424"},
     "sources": [
       {
         "file": "错题_01_20260922_214806.pdf",
@@ -521,7 +532,8 @@
     "id": "xdf-b52f20ae6ca31f0b",
     "type": "reading",
     "text": "There is a town near Suzhou. It is very interesting and\nbeautiful. This is Luxiang, an old town. Luxiang was built in\nthe Southern Song dynasty(1127~1279). There were many\nfamous people living in the town at that time.\nThere are around 30 old buildings of Ming and\nQing(1368~1912) dynasties now. People live a simple life. Six\nlanes(巷) in the town go to Taihu Lake.\nLuxiang looks more beautiful in spring, with many tea\ntrees and orchards(果园). This place is famous for the tea\ncalled Biluocun.\nThe Egyptian pyramids were built around 2560 B.C. The\nlargest one of them is the Great Pyramid of Khufu. The King\nKhufu built it as his tomb.\nThe Great Pyramid was considered a unique(独特的)\nbuilding in the 19th century A.D. At that time, it was still the\ntallest construction( 建 筑 物 ) in the world. According to\nscientific research, Khufu ordered his men to build it stone\nby stone. The biggest stone was over 15 tons, and each\nstone was fixed so well.\nThe Great Pyramid has four sides and each side is\nabout 230–4 metres long and 146–59 metres high. At that\ntime, there were no modern machines or equipment, so\nhow did the ancient Egyptians build? To this day, it is still a\nmystery.\n(1)单选题 Many famous people lived in Luxiang ________.\nA. from 1127 to 1279\nB. from 1368 to 1912\nC. from 1127 to 1368\nD. from 1279 to 1912\n(2)单选题 Luxiang is famous for ________.\nA. orchards\nB. tea trees\nC. Biluochun\nD. six lanes\n(3)单选题 In order to build his tomb, the King Khufu built ________.\nA. the ancient pyramids\nB. the Egyptian pyramids\nC. the Great pyramid\nD. the mysterious pyramids\n(4)单选题 Building the Great Pyramid is still a mystery now, because ________.\nA. each stone was fixed well\nB. there were no modern machines or equipment then\nC. it was made of stone\nD. it was the tallest construction in the world\n(5)单选题 Which of the following is TRUE?\nA. Each stone of the Great Pyramid is about 230–4 metres long and 146–59 metres wide.\nB. Luxiang is far away from Suzhou.\nC. Luxiang looks more beautiful except spring.\nD. In the 19thcentury A.D. , the Great pyramid was special and unusual.",
-    "answer": null,
+    "answer": "(1) A (2) C (3) C (4) B (5) D",
+    "answerSource": {"kind":"local-original","originalAnswer":null,"checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_06_20260922_215426.pdf","number":1,"page":1,"sha256":"9a1a864d95a2dc5c1b9881cc64b22da79c5fe858dd60a4916aec0a6e02f8b379","samePaperQuestion":"xdf-6f4bbab652524923"},
     "sources": [
       {
         "file": "错题_01_20260922_214806.pdf",
@@ -750,7 +762,7 @@
   {
     "id": "xdf-be099713659a9a82",
     "type": "choice",
-    "text": "一Do you get bored to stay at home?\n—Yes, I look forward to back to school.\nA. going\nB. went\nC. go\nD. goes",
+    "text": "一Do you get bored to stay at home?\n—Yes, I look forward to ____ back to school.\nA. going\nB. went\nC. go\nD. goes",
     "answer": "A",
     "sources": [
       {
@@ -1310,8 +1322,9 @@
   {
     "id": "xdf-470051960705e642",
     "type": "choice",
-    "text": "I got up late this morning, but I ran to the bus stop just _______ to catch the\nearly bus.\ny\nA. in time\nB. in the time\nC. on time\nD. on the time",
-    "answer": null,
+    "text": "I got up late this morning, but I ran to the bus stop just _______ to catch the\nearly bus.\nA. in time\nB. in the time\nC. on time\nD. on the time",
+    "answer": "A",
+    "answerSource": { "kind": "ai-supplement", "originalAnswer": null, "checkedAt": "2026-10-06", "review": { "status": "pending" } },
     "sources": [
       {
         "file": "错题_03_20260922_215342.pdf",
@@ -1680,8 +1693,9 @@
   {
     "id": "xdf-c550f29bd72d5dce",
     "type": "choice",
-    "text": "There are some ways for them to get to side of the mountain.\nA. another; another\nB. others; other\nC. other; other\nD. other; the other",
-    "answer": null,
+    "text": "There are some ____ ways for them to get to ____ side of the mountain.\nA. another; another\nB. others; other\nC. other; other\nD. other; the other",
+    "answer": "D",
+    "answerSource": { "kind": "ai-supplement", "originalAnswer": null, "checkedAt": "2026-10-06", "review": { "status": "pending" } },
     "sources": [
       {
         "file": "错题_03_20260922_215342.pdf",
@@ -1695,8 +1709,9 @@
   {
     "id": "xdf-c68a76aa4cf169a6",
     "type": "choice",
-    "text": "—Does of the two buses go to Hankou Railway Station?\n—Oh! You can't get there by of them.\nA. both; none\nB. both; both\nC. either; either\nD. either; none",
-    "answer": null,
+    "text": "—Does ____ of the two buses go to Hankou Railway Station?\n—Oh! You can't get there by ____ of them.\nA. both; none\nB. both; both\nC. either; either\nD. either; none",
+    "answer": "C",
+    "answerSource": { "kind": "ai-supplement", "originalAnswer": null, "checkedAt": "2026-10-06", "review": { "status": "pending" } },
     "sources": [
       {
         "file": "错题_03_20260922_215342.pdf",
@@ -1851,7 +1866,8 @@
     "id": "xdf-5f0f4fca9e7e2301",
     "type": "reading",
     "text": "根据短文内容，选择正确答案。\nThis was the first real task I received in my new school. It seemed simple: go on the Internet\nand find information about a man named George Washington. As I searched the name, I found\nthat there were two famous people having the same name who looked completely different! One\ninvented hundreds of uses for peanuts, while the other led some sort of army across America. I\nstared at the screen, wondering which one my teacher meant. I called my grandfather for a\ngolden piece of advice; let the coin decide. I flipped (掷) a coin and Ah! Tails (背面)! My report\nwould be about the great main who invented peanut butter, George Washington Carver.\nWeeks later, I stood in front of the classroom and proudly read my homework. But things\nstarted to get strange. I looked around the room, only to find my classmates with big smiles on\ntheir faces and tears in their eyes and my stone-faced teacher. I was completely lost. \"What could\nbe causing everyone to act this way?'\nOh well, I dropped the paper and sat down at my desk, burning to find out what I had done\nwrong. As a classmate began his report, it all became clear, \"My report is on George Washington,\nthe man who started the American War of Independence.\" The whole world became quiet! How\ncould I know that my teacher meant that George Washington?\nOf course, my subject result was awful. Sad but fearless, I decided to turn this around. I\ntalked to the headmaster Miss Lancelot, but she said firmly: No re-dos; no new score. I felt that it\nwas not fair, and I believed I deserved a second chance. So I threw myself heartily into my work\nfor the rest of the school year. Ten months later, I sat in the headmaster's office again, but this\ntime a completely different conversation. I smiled and flashed back to the terrible moment at the\nbeginning of the year as the headmaster told me I was good enough to skip (跳过) the 6th grade\nand started the 7th grade next term.\n1.单选题\n1\nThe task I received was to find information about .\nA. my headmaster Miss Lancelot\nB. American War of Independence\nC. George Washington\nD. uses for peanuts\n2.单选题\n1\nhelped me decide what my report would be about.\nA. The Internet\nB. A coin\nC. My grandpa\nD. My classmates\n3单选题\n3.单选题\nPeople in the class acted strangely because .\nA. I was too proud of my homework\nB. the teacher's face turned to a stone\nC. the whole world suddenly became quiet\nD. I mistook what the homework was about\n4.单选题\nI 1 after I failed the subject.\nA. worked harder to prove my ability\nB. started to study from the 7th grade\nC. was so frightened at the awful result\nD. was given a second chance to redo the work\n5.单选题\nWe can infer (推断) from the passage that 1 .\nA. the headmaster didn't like the writer at all\nB. the writer's classmates felt sad at his mistake\nC. the writer knew little about American history\nD. the writer's grandpa was a very wise man",
-    "answer": "C",
+    "answer": "(1) C (2) B (3) D (4) A (5) C",
+    "answerSource": {"kind":"local-original","originalAnswer":"C","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_05_20260922_215416.pdf","number":2,"page":1,"sha256":"1a45a734304c4a7ffd2004b1f04321720da115e00efe95fcc1327501774ad476"},
     "sources": [
       {
         "file": "错题_05_20260922_215416.pdf",
@@ -1865,8 +1881,9 @@
   {
     "id": "xdf-6f4bbab652524923",
     "type": "reading",
-    "text": "There is a town near Suzhou. It is very interesting\nand beautiful. This is Luxiang, an old town. Luxiang was\nbuilt in the Southern Song dynasty(1127~1279). There\nwere many famous people living in the town at that time.\nThere are around 30 old buildings of Ming and\nQing(1368~1912) dynasties now. People live a simple\nlife. Six lanes(巷) in the town go to Taihu Lake.\nLuxiang looks more beautiful in spring, with many\ntea trees and orchards(果园). This place is famous for\nthe tea called Biluocun.\nThe Egyptian pyramids were built around 2560 B.C.\nThe largest one of them is the Great Pyramid of Khufu.\nThe King Khufu built it as his tomb.\nThe Great Pyramid was considered a unique(独特的)\nbuilding in the 19th century A.D. At that time, it was\nstill the tallest construction(建筑物) in the world.\nAccording to scientific research, Khufu ordered his men\nto build it stone by stone. The biggest stone was over\n15 tons, and each stone was fixed so well.\nThe Great Pyramid has four sides and each side is\nabout 230.4 metres long and 146.59 metres high. At that\ntime, there were no modern machines or equipment, so how\ndid the ancient Egyptians build? To this day, it is\nstill a mystery.\n1.单选题\nMany famous people lived in Luxiang ________.\nA. from 1127 to 1279\nB. from 1368 to 1912\nC. from 1127 to 1368\nD. from 1279 to 1912\n2.单选题\nLuxiang is famous for ________.\nA. orchards\nB. tea trees\nC. Biluochun\nD. six lanes\n3.单选题\nIn order to build his tomb, the King Khufu built ________.\nA. the ancient pyramids\nB. the Egyptian pyramids\nC. the Great pyramid\nD. the mysterious pyramids\n4.单选题\nBuilding the Great Pyramid is still a mystery now, because ________.\nA. each stone was fixed well\nB. there were no modern machines or equipment then\nC. it was made of stone\nD. it was the tallest construction in the world\n5.单选题\nWhich of the following is TRUE?\nEach stone of the Great Pyramid is about 230.4 metres long and 146.59 metres wid\nA.\ne.\nB. Luxiang is far away from Suzhou.\nC. Luxiang looks more beautiful except spring.\nD. In the 19th century A.D. , the Great pyramid was special and unusual.",
-    "answer": "A",
+    "text": "There is a town near Suzhou. It is very interesting\nand beautiful. This is Luxiang, an old town. Luxiang was\nbuilt in the Southern Song dynasty(1127~1279). There\nwere many famous people living in the town at that time.\nThere are around 30 old buildings of Ming and\nQing(1368~1912) dynasties now. People live a simple\nlife. Six lanes(巷) in the town go to Taihu Lake.\nLuxiang looks more beautiful in spring, with many\ntea trees and orchards(果园). This place is famous for\nthe tea called Biluocun.\nThe Egyptian pyramids were built around 2560 B.C.\nThe largest one of them is the Great Pyramid of Khufu.\nThe King Khufu built it as his tomb.\nThe Great Pyramid was considered a unique(独特的)\nbuilding in the 19th century A.D. At that time, it was\nstill the tallest construction(建筑物) in the world.\nAccording to scientific research, Khufu ordered his men\nto build it stone by stone. The biggest stone was over\n15 tons, and each stone was fixed so well.\nThe Great Pyramid has four sides and each side is\nabout 230.4 metres long and 146.59 metres high. At that\ntime, there were no modern machines or equipment, so how\ndid the ancient Egyptians build? To this day, it is\nstill a mystery.\n1.单选题\nMany famous people lived in Luxiang ________.\nA. from 1127 to 1279\nB. from 1368 to 1912\nC. from 1127 to 1368\nD. from 1279 to 1912\n2.单选题\nLuxiang is famous for ________.\nA. orchards\nB. tea trees\nC. Biluochun\nD. six lanes\n3.单选题\nIn order to build his tomb, the King Khufu built ________.\nA. the ancient pyramids\nB. the Egyptian pyramids\nC. the Great pyramid\nD. the mysterious pyramids\n4.单选题\nBuilding the Great Pyramid is still a mystery now, because ________.\nA. each stone was fixed well\nB. there were no modern machines or equipment then\nC. it was made of stone\nD. it was the tallest construction in the world\n5.单选题\nWhich of the following is TRUE?\nA. Each stone of the Great Pyramid is about 230.4 metres long and 146.59 metres wide.\nB. Luxiang is far away from Suzhou.\nC. Luxiang looks more beautiful except spring.\nD. In the 19th century A.D. , the Great pyramid was special and unusual.",
+    "answer": "(1) A (2) C (3) C (4) B (5) D",
+    "answerSource": {"kind":"local-original","originalAnswer":"A","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_06_20260922_215426.pdf","number":1,"page":1,"sha256":"9a1a864d95a2dc5c1b9881cc64b22da79c5fe858dd60a4916aec0a6e02f8b379"},
     "sources": [
       {
         "file": "错题_06_20260922_215426.pdf",
@@ -1881,7 +1898,8 @@
     "id": "xdf-6ba4eee091032424",
     "type": "reading",
     "text": "The Great Wall is one of the greatest wonders of the world. It has a long\nhistory of over 2,000 years. It was built to protect the country from enemies.\nThe Great Wall is very long. It runs from the east to the west of China. It is about\n21,196 kilometers long. The walls are usually about 7.8 meters high and 6.5 meters wide.\nBuilding the Great Wall was a difficult task. In ancient times, there were no modern\nmachines. Workers had to carry heavy stones and bricks by hand. Many people lost their\nlives during the construction. But their hard work finally created this great wonder.\nToday, the Great Wall is a famous tourist attraction. Millions of people from all over\nthe world come to visit it every year. They climb the Great Wall, take photos and learn\nabout its history.\nThe Great Wall is not only a symbol of China’s ancient civilization, but also a\nsymbol of the wisdom and perseverance of the Chinese people. We should protect it and pass\non its culture to future generations.\n1.单选题\nWhat was the Great Wall built for?\nA. To attract tourists.\nB. To protect the country from enemies.\nC. To show the wisdom of the Chinese people.\nD. To carry heavy stones.\n2.单选题\nHow long is the Great Wall?\nA. About 7.8 kilometers.\nB. About 6.5 kilometers.\nC. About 21,196 kilometers.\nD. About 2,000 kilometers.\n3.单选题\nHow did workers build the Great Wall in ancient times?\nA. With modern machines.\nB. By carrying heavy stones and bricks by hand.\nC. By using advanced technology.\nD. By asking for help from other countries.\n4.单选题\nWhat is the Great Wall now?\nA. A symbol of China’s ancient civilization.\nB. A famous tourist attraction.\nC. A place for workers to rest.\nD. A symbol of perseverance.\n5.单选题\nWhat should we do according to the passage?\nA. Visit the Great Wall every year.\nB. Build more walls.\nC. Protect the Great Wall and pass on its culture.\nD. Learn about the history of other countries.",
-    "answer": "B",
+    "answer": "(1) B (2) C (3) B (4) B (5) C",
+    "answerSource": {"kind":"local-original","originalAnswer":"B","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_06_20260922_215426.pdf","number":2,"page":2,"sha256":"9a1a864d95a2dc5c1b9881cc64b22da79c5fe858dd60a4916aec0a6e02f8b379"},
     "sources": [
       {
         "file": "错题_06_20260922_215426.pdf",
@@ -1985,7 +2003,7 @@
   {
     "id": "xdf-32dd69be051c22fb",
     "type": "completion",
-    "text": "Lily: Hi Tom! Our teacher asked us to prepare a speech about volunteers. I think it’s a big\ntopic — where should we start?\nTom: I totally agree! Talking about all volunteers is too broad. (1) Many of us want to\nvolunteer but don’t know how.\nLily: (2) Teen volunteers have special needs, like safety and time for homework. Let’s\nnarrow it down to “what teens should note when volunteering.”\nTom: I couldn’t agree more. (3) My cousin got lost alone at a clean–up.\nLily: Hmm. Safety should always be first. What’s more, teens shouldn’t spend too much time —\nmy friend skipped class and failed a test.\nLily: Right! (4)\nTom: (5) I’m sure that will be very useful.\nLily: Perfect! Let’s act at once.\nA. That’s a great idea!\nB. Balance is better than cutting time.\nC. Maybe we can focus on teenagers?\nD. It might inspire more students to take action.\nE. Add our stories as examples — classmates will get it easily.\nF. Teens must choose safe activities.",
+    "text": "Lily: Hi Tom! Our teacher asked us to prepare a speech about volunteers. I think it’s a big\ntopic — where should we start?\nTom: I totally agree! Talking about all volunteers is too broad. (1) ____ Many of us want to\nvolunteer but don’t know how.\nLily: (2) ____ Teen volunteers have special needs, like safety and time for homework. Let’s\nnarrow it down to “what teens should note when volunteering.”\nTom: I couldn’t agree more. (3) ____ My cousin got lost alone at a clean–up.\nLily: Hmm. Safety should always be first. What’s more, teens shouldn’t spend too much time —\nmy friend skipped class and failed a test.\nLily: Right! (4) ____\nTom: (5) ____ I’m sure that will be very useful.\nLily: Perfect! Let’s act at once.\nA. That’s a great idea!\nB. Balance is better than cutting time.\nC. Maybe we can focus on teenagers?\nD. It might inspire more students to take action.\nE. Add our stories as examples — classmates will get it easily.\nF. Teens must choose safe activities.",
     "answer": "(1) C (2) A (3) F (4) B (5) E",
     "sources": [
       {
@@ -2090,7 +2108,7 @@
   {
     "id": "xdf-4ceb4d0a761b6e21",
     "type": "completion",
-    "text": "Lily: Hi Tom! Our teacher asked us to prepare a speech about volunteers. I think\nit’s a big topic — where should we start?\n1\nTom: I totally agree! Talking about all volunteers is too broad. (1) Many of\nus want to volunteer but don’t know how.\n2\nLily: (2) Teen volunteers have special needs, like safety and time for\nhomework. Let’s narrow it down to “what teens should note when volunteering.”\n3\nTom: I couldn’t agree more. (3) My cousin got lost alone at a clean-up.\nLily: Hmm. Safety should always be first. What’s more, teens shouldn’t spend too much\ntime — my friend skipped class and failed a test.\n4\nLily: Right! (4)\n5\nTom: (5) I’m sure that will be very useful.\nLily: Perfect! Let’s act at once.\nA. That’s a great idea!\nB. Balance is better than cutting time.\nC. Maybe we can focus on teenagers?\nD. It might inspire more students to take action.\nE. Add our stories as examples — classmates will get it easily.\nF. Teens must choose safe activities.",
+    "text": "Lily: Hi Tom! Our teacher asked us to prepare a speech about volunteers. I think\nit’s a big topic — where should we start?\n1\nTom: I totally agree! Talking about all volunteers is too broad. (1) ____ Many of\nus want to volunteer but don’t know how.\n2\nLily: (2) ____ Teen volunteers have special needs, like safety and time for\nhomework. Let’s narrow it down to “what teens should note when volunteering.”\n3\nTom: I couldn’t agree more. (3) ____ My cousin got lost alone at a clean-up.\nLily: Hmm. Safety should always be first. What’s more, teens shouldn’t spend too much\ntime — my friend skipped class and failed a test.\n4\nLily: Right! (4) ____\n5\nTom: (5) ____ I’m sure that will be very useful.\nLily: Perfect! Let’s act at once.\nA. That’s a great idea!\nB. Balance is better than cutting time.\nC. Maybe we can focus on teenagers?\nD. It might inspire more students to take action.\nE. Add our stories as examples — classmates will get it easily.\nF. Teens must choose safe activities.",
     "answer": "1-5 CAFBE",
     "sources": [
       {
@@ -2106,7 +2124,8 @@
     "id": "xdf-b052612b727dc0c4",
     "type": "reading",
     "text": "Digital technology is changing our lives in many good ways. It makes daily\ntasks easier and helps us connect with the world better.\nFirst, it helps with learning. Before, students could only learn from books and\nteachers at school. Now, with apps like online classes and educational videos, we can\nstudy at home or anywhere. If we don’t understand a math problem, we can watch a video to\nlearn it again. This makes learning more flexible.\nSecond, it improves communication. Long ago, people sent letters which took weeks to\narrive. Now, we use Wechat, WhatsApp or video calls. We can talk to grandparents who live\nfar away and even see their faces. It feels like they are right beside us.\nThird, it makes our life more convenient. We don’t need to carry much cash. We can\npay for food or books with our phones. When we want to go somewhere, apps like maps help\nus find the best way. They even tell us when the bus will come.\nLastly, it helps with health. Some apps can track our steps or sleep. Doctors can also\nuse technology to check patients’ health better. For example they can look at test\nresults online quickly.\nDigital technology is really a great helper. It makes our lives happier and easier. We\nshould learn to use it well to make our future better.\n1.单选题\nWhere did students mainly learn before digital technology?\nA. Online classes.\nB. Books and school teachers.\nC. Educational videos.\nD. Learning apps.\n2.单选题\nHow long did it take for letters to arrive long ago?\nA. A few minutes.\nB. A few hours.\nC. A few weeks.\nD. A few days.\n3.单选题\nWhich app is NOT mentioned for communication?\nA. Map apps.\nB. WhatsApp.\nC. Wechat.\nD. Video call apps.\n4.单选题\nWhat can we use our phones to do for convenience according to the passage?\nA. Track sleep.\nB. Pay for things.\nC. Watch educational videos.\nD. Talk to grandparents.\n5.单选题\nWhat can some health apps track?\nA. Test results.\nB. Bus arrival time.\nC. Steps or sleep.\nD. Math problems.\n6.单选题\nWhat does the passage mainly tell us?\nA. How to use digital technology well.\nB. The history of digital technology.\nC. The problems of digital technology.\nD. How digital technology improves our lives.",
-    "answer": "B",
+    "answer": "(1) B (2) C (3) A (4) B (5) C (6) D",
+    "answerSource": {"kind":"local-original","originalAnswer":"B","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_08_20260922_215442.pdf","number":7,"page":5,"sha256":"62f446ebd060c952f438b459102b8b6b6bc640776e5602811ca8e927c8941dfb"},
     "sources": [
       {
         "file": "错题_08_20260922_215442.pdf",
@@ -2121,7 +2140,8 @@
     "id": "xdf-03cbb9d690511229",
     "type": "reading",
     "text": "COLORFUL CREATURES CLUB\nCalling all curious kids & students!\nDiscover nature’s living rainbows!\nJoin our Colorful Creatures Club to explore the amazing world of animals that light up the\nwild with their brilliant colors!\nMeet the masters of disguise (伪装) & display!\n●Chameleons: Watch them shift colors like magic!\n●Red rock crabs: These colorful climbers stick to rocks like superheroes!\n●Red-eyed tree frogs: See how their bright red eyes scare predators (捕食者) away!\n●Rainbow lorikeets: These birds carry real rainbows on their wings!\n●Siamese fighting fish: Beautiful but fierce (凶残的)—see their flowing fins in action!\nFun club activities:\n√Interactive (交互式的) animal talks Where: VR lab, New Star School\n√Nature art & coloring When: Friday afternoons from 3:30 to 5:00\n√Outdoor exploration When: in December.\n√Science experiments minds! Who: Students aged 6-14 with curious\n√Creative storytelling minds!\nSign up today and let your curiosity take flight!\nFor more information ...\nCall 800****1234.\nTalk to Mr. Lee at the Students’ Club Office.\nScan the QR code on the right.\n1.单选题\nBy making this poster, the author mainly wanted to ________.\nA. call on students to join the Colorful Creatures Club\nB. make students vote for their favorite colorful creature\nC. collect video clips of colorful creatures from students\nD. invite students to join a painting contest about colorful creatures\n2.单选题\nThe outdoor exploration of the club will be organized in the month of ________.\nA. May\nB. September\nC. November\nD. December\n3.单选题\nAll of the following kinds of animals are introduced in the poster EXCEPT________.\nA. frogs\nB. crabs\nC. dinosaurs\nD. birds\n4.单选题\nStudents with ________ are most welcome to join the club.\nA. a strong body\nB. curious minds\nC. effective leadership\nD. good scores at school\n5.单选题\nAmong the creatures introduced, ________ are likely to fight one another.\nA. chameleons\nB. red rock crabs\nC. red-eyed tree frogs\nD. Siamese fighting fish\n6.单选题\nA common feature of the creatures in the poster is ________.\nA. beautiful colors\nB. living on land\nC. good hunting skills\nD. the ability to change their colors",
-    "answer": "A",
+    "answer": "(1) A (2) D (3) C (4) B (5) D (6) A",
+    "answerSource": {"kind":"local-original","originalAnswer":"A","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_08_20260922_215442.pdf","number":8,"page":6,"sha256":"62f446ebd060c952f438b459102b8b6b6bc640776e5602811ca8e927c8941dfb"},
     "sources": [
       {
         "file": "错题_08_20260922_215442.pdf",
@@ -2181,7 +2201,8 @@
     "id": "xdf-2dbc3ff79590b703",
     "type": "reading",
     "text": "Can you believe everything you see? Not always! Sometimes our minds and our\neyes make mistakes and get confused (困惑的). This may be because we are looking at an\noptical illusion. Here optical means “related to sight”—the way we see things. An\nillusion is something that looks different from the way it really is. In short, an optical\nillusion is a trick that our eyes play on us.\nLook at these optical illusions and compare what you see with what your classmates\nsee. The way we see things is often personal, so not everyone will see things the same\nway.\n1. Are the lines straight?\nAt a first look, most people say “No”. But if you compare the lines against object\nwith a ruler, you’ll see otherwise. The small circles in the square help create the\nillusion.\n2. Is it white?\nSquare 1 is clearly gray. But what about Square 2? Is it white? Is it light gray? You\nmay not believe it, but Squares 1 and 2 are exactly the same color. Your eyes see the\ncolors. but your brain notices the shadow (阴影) made by the apple. It therefore decides\nthat the square in the shadow is a lighter color than it really is.\n3. Are the circles moving?\nIf you look closely at this picture, the circles may appear to move. Of course, this\nis impossible. How can a picture move? When we see circle-in-circle shapes, like in car\nwheels, they are usually moving. Our brains are used to seeing these shapes move. When our\neyes see this shape, our mind decides that the image is moving. Other scientists believe\nthe illusion of movement is caused by the movements of our eyes as we look at the\ndifferent colors and patterns of the picture.\n1.单选题\nWhat is the main purpose of the reading?\nA. To describe how human eyes work.\nB. to give examples of everyday optical illusions.\nC. to tell us there are optical illusions in our daily life.\nD. to explain what optical illusions are and give some examples.\n2.单选题\nWhat causes optical illusion 1?\nA. The size of the squares.\nB. The color of the lines.\nC. The circles inside the squares.\nD. The lines against object with a straight line.\n3.单选题\nWhat causes optical illusion 2?\nA. The shadow in the image.\nB. The color of the apple.\nC. The position of the square.\nD. The number of squares in the picture.\n4.单选题\nWhich of these is an optical illusion?\nA. Thinking of a picture in your mind.\nB. Hearing a voice in your head that isn’t there.\nC. Seeing water on a road when it’s not really there.\nD. Looking up at a strange cloud and noticing its shape.",
-    "answer": "D",
+    "answer": "(1) D (2) C (3) A (4) C",
+    "answerSource": {"kind":"local-original","originalAnswer":"D","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_09_20260922_215452.pdf","number":4,"page":1,"sha256":"d868372180bd5ba4d3ba2faadf1234368e76ad4bd8b444a9a24a39db1ef16c95"},
     "sources": [
       {
         "file": "错题_09_20260922_215452.pdf",
@@ -2196,7 +2217,8 @@
     "id": "xdf-eb91afc630947b77",
     "type": "reading",
     "text": "Many students think repeating (重复) something again and again is the\nbest way to learn. But a study shows this: ★\nOur brains (大脑) like learning fun and new things. Just reading the same thing many\ntimes may not be the best way. But if we study in different ways and from different\nexamples (例子), we can remember more.\nIn a study, students learn Finnish words in sentences (句子). Some read the same\nsentence many times. Others see the words in different sentences. The students seeing the\nwords in different sentences can remember more, even after one day!\nBut many students think learning from the same sentence is easier. This is called a\n“metacognitive illusion”. It means we may think a way works, even if it doesn’t.\nTo learn better, choose different parts of a day to study. Don’t look at your notes\nwhen you recall the details (回忆细节)，and use different ways to test yourselves. It may\nfeel harder, but it works better in the long run.\n1.单选题\nWhat can we put back into the blank “ ★ ” ?\nA. It’s important to study different subjects.\nB. Reading the same thing over three times is the best.\nC. Thinking too much about a problem is bad for our brains.\nD. Learning in different ways can help you remember things better.\n2.单选题\nWhat’s the function (功能) of Paragraph 3 ?\nA. To share something funny with us.\nB. To show the idea in Paragraph 1 is true.\nC. To tell us what ways of learning are right.\nD. To ask us for our ideas on learning ways.\n3.单选题\nWhat may the underlined phrase “metacognitive illusion” in Paragraph 4 mean in Chinese ?\nA. 元认知错觉\nB. 运动错觉\nC. 时间错觉\nD. 方位错觉\n4.单选题\nWhat may the writer say to Tim if he only reads words again and again?\nA. You are using the best way. Keep going.\nB. You should only remember words right before the exam.\nC. It’s not good to just read words. You should also try other ways.\nD. Reading words is not useful; you should always make word cards.\n5.单选题\nWhat’s the best title of the text?\nA. Why We Shouldn’t Repeat Things in Learning\nB. Ways of Remembering Finnish Words Fast\nC. Variety (多样性): the Key to Learning Well\nD. The Science Behind the Metacognitive Illusion",
-    "answer": "D",
+    "answer": "(1) D (2) B (3) A (4) C (5) C",
+    "answerSource": {"kind":"local-original","originalAnswer":"D","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_09_20260922_215452.pdf","number":5,"page":2,"sha256":"d868372180bd5ba4d3ba2faadf1234368e76ad4bd8b444a9a24a39db1ef16c95"},
     "sources": [
       {
         "file": "错题_09_20260922_215452.pdf",
@@ -2241,7 +2263,8 @@
     "id": "xdf-85e9a4ddf6b6d3d2",
     "type": "reading",
     "text": "Gene was from a small town in India.He had to do homework by the light of a\nkerosene lamp（煤油灯）.Gene's eyes hurt and this made studying difficult.It was also\nother children's problem in his town.\nAlthough studying was difficult，Gene was an excellent student and went to a\nuniversity.He still worried about the kerosene lamp.By this time，he realized it was not\njust bad for school children but for the whole family.First，it can make them ill.Also，\nthe light can hurt people's eyes.Besides，it can lead to fires.Lastly，kerosene is\nexpensive.It was difficult to come up with a different kind of lamp that was cheap and\ngood for the environment.Yet Gene did not give up.\nOne day，he had an idea.He could use a small solar（太阳能的） light.Sunlight is free\nand solar power is good for the environment.Gene built his first solar lamp，and it\nworked.He began to build more lamps.\nEach lamp only cost ＄20.However，this was a lot of money to many villagers，who only\ngot around ＄34 a week，so Gene made sure he kept the cost down.First，Gene used the\nrecycled materials（可再生材料）.Next，volunteers built the lamps for free.Finally，people\nfrom many countries gave away money to his team，so the lamps were usually free.\nThousands of people had safe light.Julia，a mother of three，said， \"Thanks to Gene，\nmy children have light to read，and I have my own light to cook.\"The solar lamps made a\nbig difference.\n根据材料内容选择最佳答案。\n1.单选题\nWhat's Gene and other children's problem in the town？ ________\nA. Getting ill.\nB. Leaving school.\nC. Doing homework.\nD. Having eye problems.\n2.单选题\nWhat wasn't the reason that Gene worried about the kerosene lamp？ ________\nA. It was very expensive.\nB. It can make people ill.\nC. It can make more families poor.\nD. It is not good for people's eyes.\n3.单选题\nWhat do you think of the boy？ ________\nA. Kind and friendly.\nB. Smart and careful.\nC. Humorous and clever.\nD. Creative and warm-hearted.\n4.单选题\nWhat did Julia's words mean in the last paragraph？ ________\nA. To share Julia's experience.\nB. To show Gene's influence.\nC. To describe Gene's feeling.\nD. To introduce Gene's invention.\n5.单选题\nWhat's the best title of this passage？ ________\nA. A bright idea.\nB. A small town in India.\nC. How solar light is found.\nD. Kerosene lamp is bad for kids.",
-    "answer": "D",
+    "answer": "(1) D (2) C (3) D (4) B (5) A",
+    "answerSource": {"kind":"local-original","originalAnswer":"D","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_10_20260922_215503.pdf","number":5,"page":1,"sha256":"afc0ecf4006ad24938097cc8490461b53cc2076c69b1c5d733547cda537926e4"},
     "sources": [
       {
         "file": "错题_10_20260922_215503.pdf",
@@ -2256,7 +2279,8 @@
     "id": "xdf-fdc36ba175ee1366",
     "type": "reading",
     "text": "SEEING DOUBLE\nA\nMany scientists once believed that physical similarities between identical twins are\ngenetic, while their personalities, intelligence, and other differences between them are\nan effect of their environment. But scientists are now discovering that the\nboundaries between genetics and environment are not so clear after all.\nThe Jim Twins\nB\nIdentical twins Jim Springer and Jim Lewis were adopted as babies and raised by\ndifferent couples. When the two Jims finally met at age 39, they discovered they had\nplenty in common. Both were 182 centimeters tall and weighed 82 kilograms. They had the\nsame smile and the same voice. When psychologist Thomas Bouchard Jr. invited the Jim twins\nto his lab, his colleagues found it very hard to tell them apart.\nC\nBut the similarities didn't stop at the physical. They had both had dogs named Toy,\nThey had both married women named Linda, and then divorced them. They had both been\nsheriff, 1enjoyed making things with wood, suffered severe headaches, and admitted to\nleaving love notes around the house for their wives. They had so much in common that it\nseemed unlikely these were just coincidences.\nGenetics and Intelligence\nD\nThe Jim twins were just one of 137 sets of separated twins Bouchard tested. When they\ncompared the twins' IQ scores, Bouchard and his team reached a surprising conclusion. They\nconcluded that intelligence was mostly connected to genetics rather than to training or\neducation. It seemed the differences in family and environment had little effect.\nE\nHowever, genes can't control everything, argues geneticist Danielle Reed, who also\nstudies twins. Reed's research shows that, though nothing can truly change our DNA,\nenvironmental differences that a child experiences before birth and in their first year\ncan sometimes affect the way the DNA behaves. This can make even identical twins into\nvastly different people. \"What I like to say is that Mother Nature2 writes some things in\npencil and some things in pen,\" she explains. \"'Things written in pen you can't change.\nThat's DNA. But things written in pencil you can.\"\n1 A sheriff is a kind of police officer.\n2 Mother Nature is sometimes used to refer to nature, especially when it is being\nconsidered as a force that affects human beings.\n1.单选题\nWhat is the reading mainly about?\nA. how identical twins are formed\nB. the effects genes have on personality\nC. the differences between identical twins\n2.单选题\nIn the past, scientists believed that _______.\nA. genetics only controlled our appearance\nB. genetics controlled everything about who we are\nC. our genes are affected by the environment around us\n3.单选题\nWho does the word they refer to in the second sentence of paragraph D?\nA. the Jim Twins\nB. sets of twins\nC. Bouchard and his team\n4.单选题\nAccording to Bouchard and his team, what is intelligence mostly related to?\nA. genetics\nB. education\nC. parenting\n5.单选题\nIn paragraph E, the word vastly is closest in meaning to _______.\nA. unfortunately\nB. interestingly\nC. extremely",
-    "answer": "B",
+    "answer": "(1) B (2) A (3) C (4) A (5) C",
+    "answerSource": {"kind":"local-original","originalAnswer":"B","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_10_20260922_215503.pdf","number":6,"page":2,"sha256":"afc0ecf4006ad24938097cc8490461b53cc2076c69b1c5d733547cda537926e4"},
     "sources": [
       {
         "file": "错题_10_20260922_215503.pdf",
@@ -2271,7 +2295,8 @@
     "id": "xdf-25a52828e771db0e",
     "type": "reading",
     "text": "I have two friends. They are Gina and Jenny, and they are twin sisters. They\ncome from Singapore. They are 12 years old. They can speak English and Chinese.\nNow the twins are in China. Their family are in China, too. They live in Shanghai.\nThere are 5 people in their family. They are their parents, their brother and them. Their\nmother is a doctor (医生). Their father is a teacher. Their brother Alan is only four\nyears old. He can’t go to school. Gina, Jenny and I are in the same class. Every day, we\nwalk to school and talk a lot together. They say China is a very good place and they like\nChina.\n根据短文内容，选择正确答案。\n1.单选题\nThe twins come from ________.\nA. China\nB. Singapore\nC. America\nD. Canada\n2.单选题\nThere are ________ people in the twins’ family.\nA. three\nB. four\nC. five\nD. six\n3.单选题\nThe twins’ mother is a ________.\nA. doctor\nB. nurse (护士)\nC. teacher\nD. worker\n4.单选题\nAlan is ________ years old.\nA. 12\nB. 10\nC. 6\nD. 4\n5.单选题\nWhich of the following is NOT TRUE (不符合事实)?\nA. Gina, Jenny and the writer (作者) walk to school every day.\nB. The writer and the twins are not classmates.\nC. Gina and Jenny like China.\nD. The twins’ family live in Shanghai now.",
-    "answer": "B",
+    "answer": "(1) B (2) C (3) A (4) D (5) B",
+    "answerSource": {"kind":"local-original","originalAnswer":"B","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_10_20260922_215503.pdf","number":7,"page":4,"sha256":"afc0ecf4006ad24938097cc8490461b53cc2076c69b1c5d733547cda537926e4"},
     "sources": [
       {
         "file": "错题_10_20260922_215503.pdf",
@@ -3045,7 +3070,7 @@
   {
     "id": "xdf-957c048edef15b60",
     "type": "choice",
-    "text": "判断下列句子空格处是谓语还是非谓语。\nThey went to the park, . (sing and talk)\nA. 谓语\nB. 非谓语",
+    "text": "判断下列句子空格处是谓语还是非谓语。\nThey went to the park, ____ . (sing and talk)\nA. 谓语\nB. 非谓语",
     "answer": "B",
     "sources": [
       {
@@ -3060,7 +3085,7 @@
   {
     "id": "xdf-ce60dfca0699ee10",
     "type": "reading",
-    "text": "单选选择\n(1)单选题 在短语：prefer A B中，空格所填介词为：\nA. to\nB. in\nC. for\n(2)单选题 在短语：prefer doing to (do), 空格所需非谓语形式为：\nA. doing\nB. do\nC. done\n(3)单选题 在短语：prefer to do rather than (do), 空格所需非谓语形式为：\nA. doing\nB. do\nC. to do",
+    "text": "单选选择\n(1)单选题 在短语：prefer A ____ B中，空格所填介词为：\nA. to\nB. in\nC. for\n(2)单选题 在短语：prefer doing to ____ (do), 空格所需非谓语形式为：\nA. doing\nB. do\nC. done\n(3)单选题 在短语：prefer to do rather than ____ (do), 空格所需非谓语形式为：\nA. doing\nB. do\nC. to do",
     "answer": "(1) A (2) A (3) B",
     "sources": [
       {
@@ -3095,7 +3120,7 @@
   {
     "id": "xdf-5366007c9539e7b6",
     "type": "reading",
-    "text": "判断下列句中划线部分是否为非谓语。\n(1)单选题 The present situation is inspiring.\nA. 是\nB. 否\n(2)单选题 He kept the car waiting at the gate.\nA. 是\nB. 否\n(3)单选题 Being a League member, he is always helping others.\nA. 是\nB. 否\n(4)单选题 He dropped the glass.\nA. 是\nB. 否\n(5)单选题 判断以下句子中划线部分是谓语动词还是非谓语动词。\nKeep practicing reading English regularly, and your reading skills will be improved\nquickly.\nA. 谓语\nB. 非谓语\n(6)单选题 判断下列句子空格处是谓语还是非谓语。\n(keep) practicing reading English regularly.\nA. 谓语\nB. 非谓语\n(7)单选题 The spider man always (do) his job to save the world.\nA. 谓语\nB. 非谓语\n(8)单选题 Your reading skills will be improved quickly (follow) these steps.\nA. 谓语\nB. 非谓语\n(9)单选题 (finish）the work in ten minutes is very hard.\nA. 谓语\nB. 非谓语",
+    "text": "判断下列句中划线部分是否为非谓语。\n(1)单选题 The present situation is [[u]]inspiring[[/u]].\nA. 是\nB. 否\n(2)单选题 He kept the car [[u]]waiting[[/u]] at the gate.\nA. 是\nB. 否\n(3)单选题 [[u]]Being[[/u]] a League member, he is always helping others.\nA. 是\nB. 否\n(4)单选题 He [[u]]dropped[[/u]] the glass.\nA. 是\nB. 否\n(5)单选题 判断以下句子中划线部分是谓语动词还是非谓语动词。\n[[u]]Keep[[/u]] practicing reading English regularly, and your reading skills will be improved\nquickly.\nA. 谓语\nB. 非谓语\n(6)单选题 判断下列句子空格处是谓语还是非谓语。\n____ (keep) practicing reading English regularly.\nA. 谓语\nB. 非谓语\n(7)单选题 The spider man always ____ (do) his job to save the world.\nA. 谓语\nB. 非谓语\n(8)单选题 Your reading skills will be improved quickly ____ (follow) these steps.\nA. 谓语\nB. 非谓语\n(9)单选题 ____ (finish）the work in ten minutes is very hard.\nA. 谓语\nB. 非谓语",
     "answer": "(1) A (2) A (3) A (4) B (5) A (6) A (7) A (8) B (9) B",
     "sources": [
       {
@@ -3125,7 +3150,7 @@
   {
     "id": "xdf-e776c1aa86f87668",
     "type": "choice",
-    "text": "判断下列划线部分非谓语属于主动还是被动\nWhen completed,the museum will soon be open to the public.\nA. 主动\nB. 被动",
+    "text": "判断下列划线部分非谓语属于主动还是被动\nWhen [[u]]completed[[/u]],the museum will soon be open to the public.\nA. 主动\nB. 被动",
     "answer": "B",
     "sources": [
       {
@@ -3140,7 +3165,7 @@
   {
     "id": "xdf-82f03daa62ec2d04",
     "type": "choice",
-    "text": "判断下列划线部分非谓语属于主动还是被动\nHe raised his voice to make himself heard more clearly.\nA. 主动\nB. 被动",
+    "text": "判断下列划线部分非谓语属于主动还是被动\nHe raised his voice to make himself [[u]]heard[[/u]] more clearly.\nA. 主动\nB. 被动",
     "answer": "B",
     "sources": [
       {
@@ -3155,7 +3180,7 @@
   {
     "id": "xdf-717cb760e1a4a15a",
     "type": "choice",
-    "text": "请判断下列句子中的非谓语形式是否正确。\nI haven't decided when doing it.\nA. 正确\nB. 错误",
+    "text": "请判断下列句子中的非谓语形式是否正确。\nI haven't decided [[u]]when doing[[/u]] it.\nA. 正确\nB. 错误",
     "answer": "B",
     "sources": [
       {
@@ -3205,7 +3230,7 @@
   {
     "id": "xdf-d72358d2ab3026a5",
     "type": "choice",
-    "text": "I bought two pens last week, ________ writes easily.\nA. both of which\nB. neither of which\nC. both of them\nD. neither of them\n第15题 1 he 2 she likes running, but I do.\nA. Both; and\nB. Either; or\nC. Neither; nor\nD. Not only; but also",
+    "text": "I bought two pens last week, ________ writes easily.\nA. both of which\nB. neither of which\nC. both of them\nD. neither of them",
     "answer": "B",
     "sources": [
       {
@@ -3251,7 +3276,8 @@
     "id": "xdf-9db4a3b780495805",
     "type": "reading",
     "text": "Iceland lies in the North Atlantic Ocean. It lies between 63°24’ and\n66°33’ N and between 13°30’ and 24°2’ W. It is the second largest island in Europe.\nIt is close to the Arctic Circle (北极圈) yet in fact only one of its northerly islands\nlies inside. The country has a total area of 103,000 square kilometers and a coastline of\nabout 6,600 km. The island is 300 km wide from north to south, and 500 km across from west\nto east.\nFrom 1262 to 1944 Iceland was ruled first by Norway and then by Denmark. Centuries of\nforeign rule, and such things as volcanoes ( 火 山 ) and the weather, made life very\ndifficult at times for the Icelanders, there was lots of hard work and little change. The\nsituation began to improve during the nineteenth century. Then in 1944 Iceland became an\nindependent republic (独立国家); since that time it has become a quite rich country where\nthe people enjoy having cars, modern houses and lots of electrical equipment. If you look\nat the kind of products that Iceland sells to other countries today—fish, meat, wool and\nso on—it’s easy to see that both the sea and the land are important to Icelanders. This\nhas been true in fact since the time of the first Icelanders—Vikings from Norway who\narrived in AD 874.\nSome things in the lives of the Icelanders have hardly changed—the Icelandic\nlanguage, for example, 700 years ago the stories called Sagas were first written down,\nthese can still be read in the old language without much difficulty by Icelandic speakers\ntoday.\n1.单选题\nWhat is the purpose of the passage?\nA. To invite people to come and visit Iceland.\nB. To introduce something about Iceland.\nC. To show the culture of Iceland.\nD. To show the long history of Iceland.\n2.单选题\nWhat’s the main idea of Paragraph 2?\nA. There’re great changes in Icelanders’ living conditions.\nB. Icelanders sell different kinds of local products abroad.\nC. The living conditions in Iceland are unsuitable for people to live.\nD. The Icelanders work hard to sell their products.\n3.单选题\nWhich of the following sentences is NOT true?\nA. Iceland is not the largest island in the world.\nB. Iceland is a country of many small islands.\nC. Iceland is quite a modern country now.\nD. Iceland has been an independent republic since Vikings began to live there.\n4.单选题\nWhat can we infer (推断) from the passage?\nA. It is the second largest island in Europe.\nB. Great changes have taken place in Iceland since the nineteenth century.\nC. The Icelandic language changed a lot over the years.\nD. The sea and the land are important to Icelanders.\n5.单选题\nIn what type of book we can read the passage?\nA. Novel.\nB. Science.\nC. History.\nD. Travel.",
-    "answer": "B",
+    "answer": "(1) B (2) A (3) D (4) B (5) D",
+    "answerSource": {"kind":"local-original","originalAnswer":"B","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_17_20260922_215546.pdf","number":4,"page":1,"sha256":"04453365dc65ae79b4cd50ba4d982fa37296c3aecc294148d08acc17fe19bad1"},
     "sources": [
       {
         "file": "错题_17_20260922_215546.pdf",
@@ -3295,7 +3321,7 @@
   {
     "id": "xdf-c50a88a18b14a5ed",
     "type": "choice",
-    "text": "请判断下列句子中的非谓语形式是否正确。\n1\nI haven't decided when doing it.\nA. 正确\nB. 错误",
+    "text": "请判断下列句子中的非谓语形式是否正确。\n1\nI haven't decided [[u]]when doing[[/u]] it.\nA. 正确\nB. 错误",
     "answer": "B",
     "sources": [
       {
@@ -3310,7 +3336,7 @@
   {
     "id": "xdf-a8bc15510b37afbe",
     "type": "choice",
-    "text": "判断下列划线部分非谓语属于主动还是被动\n1\nHe raised his voice to make himself heard more clearly.\nA. 主动\nB. 被动",
+    "text": "判断下列划线部分非谓语属于主动还是被动\n1\nHe raised his voice to make himself [[u]]heard[[/u]] more clearly.\nA. 主动\nB. 被动",
     "answer": "B",
     "sources": [
       {
@@ -3325,7 +3351,7 @@
   {
     "id": "xdf-c90580efa2ea71e4",
     "type": "choice",
-    "text": "判断下列划线部分非谓语属于主动还是被动\nWhen completed,the museum will soon be open to the public. 1\nA. 主动\nB. 被动",
+    "text": "判断下列划线部分非谓语属于主动还是被动\nWhen [[u]]completed[[/u]],the museum will soon be open to the public. 1\nA. 主动\nB. 被动",
     "answer": "B",
     "sources": [
       {
@@ -3341,7 +3367,8 @@
     "id": "xdf-34b229509c9a7033",
     "type": "reading",
     "text": "判断划线词的用法\n1.单选题\na swimming pool 1\nA. 作定语\nB. 作状语\n2.单选题\na falling leaf 1\nA. 作定语\nB. 作状语\n3.单选题\nThey haven't finished building the dam 1\nA. 作定语\nB. 作宾语",
-    "answer": "A",
+    "answer": "(1) A (2) A (3) B",
+    "answerSource": {"kind":"local-original","originalAnswer":"A","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_19_20260922_215557.pdf","number":5,"page":1,"sha256":"d39ff263935ac877c69af6d6c2d660f3c61b828d1d101a68705caa9afa9bcdc9"},
     "sources": [
       {
         "file": "错题_19_20260922_215557.pdf",
@@ -3355,8 +3382,9 @@
   {
     "id": "xdf-1642f7431764bee5",
     "type": "reading",
-    "text": "判断下列句中划线部分是否为非谓语。\n1.单选题\nThe present situation is inspiring. 1\nA. 是\nB. 否\n2 单选题\n2.单选题\nHe kept the car waiting at the gate. 1\nA. 是\nB. 否\n3.单选题\nBeing a League member, he is always helping others. 1\nA. 是\nB. 否\n4.单选题\nHe dropped the glass. 1\nA. 是\nB. 否\n5.单选题\n判断以下句子中划线部分是谓语动词还是非谓语动词。\nKeep practicing reading English regularly, and your reading skills will be improved\nquickly. 1\nA. 谓语\nB. 非谓语\n6.单选题\n判断下列句子空格处是谓语还是非谓语。\n1 (keep) practicing reading English regularly.\nA. 谓语\nB. 非谓语\n7.单选题\nThe spider man always 1 (do) his job to save the world.\nA. 谓语\nB. 非谓语\n8.单选题\nYour reading skills will be improved quickly 1 (follow) these steps.\nA. 谓语\nB. 非谓语\n9.单选题\n1 (finish）the work in ten minutes is very hard.\nA. 谓语\nB. 非谓语",
-    "answer": "A",
+    "text": "判断下列句中划线部分是否为非谓语。\n1.单选题\nThe present situation is [[u]]inspiring[[/u]]. 1\nA. 是\nB. 否\n2 单选题\n2.单选题\nHe kept the car [[u]]waiting[[/u]] at the gate. 1\nA. 是\nB. 否\n3.单选题\n[[u]]Being[[/u]] a League member, he is always helping others. 1\nA. 是\nB. 否\n4.单选题\nHe [[u]]dropped[[/u]] the glass. 1\nA. 是\nB. 否\n5.单选题\n判断以下句子中划线部分是谓语动词还是非谓语动词。\n[[u]]Keep[[/u]] practicing reading English regularly, and your reading skills will be improved\nquickly. 1\nA. 谓语\nB. 非谓语\n6.单选题\n判断下列句子空格处是谓语还是非谓语。\n1 ____ (keep) practicing reading English regularly.\nA. 谓语\nB. 非谓语\n7.单选题\nThe spider man always 1 ____ (do) his job to save the world.\nA. 谓语\nB. 非谓语\n8.单选题\nYour reading skills will be improved quickly 1 ____ (follow) these steps.\nA. 谓语\nB. 非谓语\n9.单选题\n1 ____ (finish）the work in ten minutes is very hard.\nA. 谓语\nB. 非谓语",
+    "answer": "(1) A (2) A (3) A (4) B (5) A (6) A (7) A (8) B (9) B",
+    "answerSource": {"kind":"local-original","originalAnswer":"A","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_19_20260922_215557.pdf","page":6,"sha256":"d39ff263935ac877c69af6d6c2d660f3c61b828d1d101a68705caa9afa9bcdc9"},
     "sources": [
       {
         "file": "错题_19_20260922_215557.pdf",
@@ -3370,8 +3398,9 @@
   {
     "id": "xdf-5a7a5af879a2aa0f",
     "type": "reading",
-    "text": "单选选择\n1.单选题\n1\n在短语：prefer A B中，空格所填介词为：\nA. to\nB. in\nC. for\n2.单选题\n在短语：prefer doing to 1 (do), 空格所需非谓语形式为：\nA. doing\nB. do\nC. done\n3.单选题\n在短语：prefer to do rather than 1 (do), 空格所需非谓语形式为：\nA. doing\nB. do\nC. to do",
-    "answer": "A",
+    "text": "单选选择\n1.单选题\n1\n在短语：prefer A ____ B中，空格所填介词为：\nA. to\nB. in\nC. for\n2.单选题\n在短语：prefer doing to 1 ____ (do), 空格所需非谓语形式为：\nA. doing\nB. do\nC. done\n3.单选题\n在短语：prefer to do rather than 1 ____ (do), 空格所需非谓语形式为：\nA. doing\nB. do\nC. to do",
+    "answer": "(1) A (2) A (3) B",
+    "answerSource": {"kind":"local-original","originalAnswer":"A","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_19_20260922_215557.pdf","page":7,"sha256":"d39ff263935ac877c69af6d6c2d660f3c61b828d1d101a68705caa9afa9bcdc9"},
     "sources": [
       {
         "file": "错题_19_20260922_215557.pdf",
@@ -3385,7 +3414,7 @@
   {
     "id": "xdf-2b854669faf1fd1f",
     "type": "choice",
-    "text": "判断下列句子空格处是谓语还是非谓语。\n1\nThey went to the park, . (sing and talk)\nA. 谓语\nB. 非谓语",
+    "text": "判断下列句子空格处是谓语还是非谓语。\n1\nThey went to the park, ____ . (sing and talk)\nA. 谓语\nB. 非谓语",
     "answer": "B",
     "sources": [
       {
@@ -3416,7 +3445,8 @@
     "id": "xdf-2a6e9c56407cffe9",
     "type": "reading",
     "text": "It is an usual school day.During the lunch break，（1） ________ of the class are playing\noutside，but John stays in the classroom.He borrowed a book（2） ________ famous people in\nhistory for a project several weeks ago.The book was filled with interesting stories and there\nwere only three copies in the library，Last week，John met an old friend when he（3） ________ a\npicnic in a park.They chatted happily and poor John left the book somewhere on the grass.All the\nstudents must return the books in a month and it's time for John to give the book back\ntoday.\"What can I do？What can I say to Mrs.Lee …\"John keeps asking（4） ________ .\nIn fact，he has suffered（5） ________ worry for the whole morning.\nHe remembers his father's words， \"The only way to solve a problem is（6） ________ it.\" The\nlibrarian may be angry with him，（7） ________ John still decides to tell her the truth.\nWhen Mrs.Lee knows everything，she smiles and tells John he needs to find\n（8） ________ copy or pay for the book. \"You may mind（9） ________ so but I'm afraid you have\nto，because it can make you avoid the same mistake，\" says Mrs.Lee.\n\"I understand，Mrs.Lee.I will try to find one，\"John feels thankful.The librarian smiles\n（10） ________ than before， \"Thank you for your honesty，John.I'm proud of you.\"\nEven though it is hard，being honest is always the best choice.\n1.单选题\nA. two three\nB. two third\nC. two thirds\n2.单选题\nA. at\nB. on\nC. with\n3.单选题\nA. has\nB. had\nC. was having\n4.单选题\nA. him\nB. himself\nC. he\n5.单选题\nA. from\nB. for\nC. with\n6.单选题\nA. face\nB. to face\nC. to facing\n7.单选题\nA. so\nB. and\nC. but\n8.单选题\nA. another\nB. other\nC. the other\n9.单选题\nA. do\nB. to do\nC. doing\n10.单选题\nA. happily\nB. more happily\nC. most happily",
-    "answer": "C",
+    "answer": "(1) C (2) B (3) C (4) B (5) A (6) B (7) C (8) A (9) C (10) B",
+    "answerSource": {"kind":"local-original","originalAnswer":"C","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_20_20260922_215603.pdf","number":1,"page":1,"sha256":"22f642a01e6f6e90713558bcb4b108f2f231d3527d46f26edc751adf4bb49403"},
     "sources": [
       {
         "file": "错题_20_20260922_215603.pdf",
@@ -3446,7 +3476,8 @@
     "id": "xdf-bdb4876ffd5725ca",
     "type": "reading",
     "text": "Most people agree that honesty is a good thing.But does Mother Nature agree？\nAnimals can't talk，but can they lie with their bodies and behaviour？People who study animals\nmay not call it lying，but they do agree that many animals behave dishonestly to fool other\nanimals.Dishonesty often helps them survive （生存）.\nMany kinds of birds are very successful in fooling other animals.A bird called the plover\n（鸻） sometimes pretends （假装） to be hurt in order to protect its young.When an enemy\ngets close to its nest，the plover pretends to have a broken wing.The enemy follows the \"hurt\"\nadult，leaving the baby birds safe.\nAnother kind of bird，the scrub jay （灌丛鸦），buries （埋） its food so it always has\nsomething to eat.Scrub jays also steal food.They watch where others bury their food and steal\nit.But the clever scrub jays seem to know when others are watching them.So they get back later，\nunbury （挖掘） the food，and bury it again somewhere else.\n1.单选题\nAccording to the passage，do animals lie with their bodies and behaviour？ ________\nA. Yes，they do.\nB. No，they don't.\nC. Yes，they lie.\nD. Not mentioned.\n2.单选题\nWhy does the plover pretend to be hurt？ ________\nA. To protect its nest.\nB. To show its friendliness.\nC. To save its young.\nD. To catch the enemy.\n3.单选题\nWhat do clever scrub jays do with their food？ ________\nA. They bury the food deep.\nB. They bury the food twice.\nC. They watch the food.\nD. They eat up all the food.",
-    "answer": "A",
+    "answer": "(1) A (2) C (3) B",
+    "answerSource": {"kind":"local-original","originalAnswer":"A","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_20_20260922_215603.pdf","number":3,"page":2,"sha256":"22f642a01e6f6e90713558bcb4b108f2f231d3527d46f26edc751adf4bb49403"},
     "sources": [
       {
         "file": "错题_20_20260922_215603.pdf",
@@ -3721,7 +3752,8 @@
     "id": "xdf-a7f50071d4d12aa2",
     "type": "reading",
     "text": "Harry，a 12-year-old boy，came to China with his parents two years ago.He\ndecided to learn Chinese well.He knew that（1） ________ listening and speaking were\nimportant.According（2） ________ his Chinese teacher，he listened to Chinese songs and\nrepeated the lyrics.（3） ________ it was difficult at first，he kept trying.\nHarry found that learning Chinese required him（4） ________ a lot of exercises.He\nhad to remember new words and understand grammar rules.But he didn't give up.He told\n（5） ________ that he could do it.Later，Tom realized that he needed to learn\n（6） ________ than before.So he changed his learning ways.He joined a Chinese club and\ntalked with other learners.\nNow，（7） ________ in Harry's class can speak Chinese better than him.And he can\nalso write Chinese emails and reports.These days he has（8） ________ goal to become the\nchampion in the coming Chinese speaking competition.At 8：00 last night，when Harry\n（9） ________ the speech in front of the mirror，his mum came back and advised him\n（10） ________ some gestures.Harry thought it was a good idea and he believed he would\nhave a good performance in the competition.\n1.单选题\nA. neither\nB. either\nC. both\n2.单选题\nA. to\nB. on\nC. as\n3.单选题\nA. Even though\nB. Since\nC. If\n4.单选题\nA. do\nB. doing\nC. to do\n5.单选题\nA. him\nB. himself\nC. his\n6.单选题\nA. effectively\nB. more effectively\nC. most effectively\n7.单选题\nA. nobody\nB. anybody\nC. somebody\n8.单选题\nA. another\nB. other\nC. the other\n9.单选题\nA. practices\nB. practiced\nC. was practicing\n10.单选题\nA. add\nB. to add\nC. adding",
-    "answer": "C",
+    "answer": "(1) C (2) A (3) A (4) C (5) B (6) B (7) A (8) A (9) C (10) B",
+    "answerSource": {"kind":"local-original","originalAnswer":"C","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_21_20260922_215610.pdf","number":17,"page":3,"sha256":"2cd33258f1d98424905e82960471405ca04a1890a30bdaefa91f6a3c42048652"},
     "sources": [
       {
         "file": "错题_21_20260922_215610.pdf",
@@ -3735,7 +3767,7 @@
   {
     "id": "xdf-61d6242ab2068692",
     "type": "fill",
-    "text": "1 A.Music's Hidden Stories：\n（1） Mary，a nurse and a\nHow Melodies Change Lives\nmother，wants to teach her daughter how\nB.Rescue and Protect：\nto help others.She's looking for a book\nFirst Aid for Wild Animals\nwith real-life first aid cases and\nC.When Honesty Matters：\nimpressive volunteer stories.\nSmart Choices in School\n2\n（2） Amy notices many damaged\nLife\ntrees in her neighbourhood.She hopes to\nD.One-step Greener：50\nfind a book offering creative ideas to\nCreative Ideas for Trees\nprotect trees.\nE.Let's Talk Globally：\n3\n（3） Lucy wants to organize\nUnderstanding Cultural\na charity concert for disabled\nDifferences F.Speak with\nchildren.She needs to learn how music can\nConfidence：A Teen's Guide\ncheer people and pass on joy.\nto Communication\n4\n（4） Jack feels nervous when\nG.Young Heroes Around Us：\nmeeting new people and finds it hard to\nmake friends.He hopes to find tips on First Aid and Volunteer\nimproving communication skills. Skills\n（5） Linda found a wounded\n（受伤的） bird on her way to school.She\nwants to know how to take care of it\nsafely.\n6\n（6） Jack saw his friend\ncopying homework but isn't sure whether\nto report it to the teacher.He needs a\nbook discussing such dilemmas（困境） and\ngiving suggestions.",
+    "text": "(1) ____ Mary, a nurse and a mother, wants to teach her daughter how to help others. She's looking for a book with real-life first aid cases and impressive volunteer stories.\n(2) ____ Amy notices many damaged trees in her neighbourhood. She hopes to find a book offering creative ideas to protect trees.\n(3) ____ Lucy wants to organize a charity concert for disabled children. She needs to learn how music can cheer people and pass on joy.\n(4) ____ Jack feels nervous when meeting new people and finds it hard to make friends. He hopes to find tips on improving communication skills.\n(5) ____ Linda found a wounded (受伤的) bird on her way to school. She wants to know how to take care of it safely.\n(6) ____ Jack saw his friend copying homework but isn't sure whether to report it to the teacher. He needs a book discussing such dilemmas (困境) and giving suggestions.\nA. Music's Hidden Stories: How Melodies Change Lives\nB. Rescue and Protect: First Aid for Wild Animals\nC. When Honesty Matters: Smart Choices in School Life\nD. One-step Greener: 50 Creative Ideas for Trees\nE. Let's Talk Globally: Understanding Cultural Differences\nF. Speak with Confidence: A Teen's Guide to Communication\nG. Young Heroes Around Us: First Aid and Volunteer Skills",
     "answer": "1 G 2 D 3 A 4 F 5 B 6 C",
     "sources": [
       {
@@ -3766,7 +3798,8 @@
     "id": "xdf-f6d655651afd7388",
     "type": "reading",
     "text": "We need you!\nTeach Music Clean People's Park Help Old People\nAre you good at We need five people We need four people to\nsinging or dancing？Do who are strong and can help at Xinxin Nursing\nyou have a loving help clean up People's Home.You should be\nheart？We need three Park.We need you to good at talking with\npeople to work as help pick up，collect old people.Your job is\nmusic teachers in SOS and sort rubbish. to wash clothes for\nChildren's Villages. If you are free for them.\nIf you are free for four hours this If you can take out\nthree hours every weekend，come and join two hours on May 6，\nweekend，join us. us! come and join us!\nTel：0398-8858518 Tel：0398-8651518 Tel：0398-8656869\nE-mail： E-mail： E-mail：\nlovekids@mail.com cleanpark@mail.com homelove@mail.com\n1.单选题\nThe SOS Children's Villages want ________ teachers.\nA. Dance\nB. Music\nC. Maths\nD. English\n2.单选题\nIf you want to help make People's Park clean，you have to work ________ .\nA. this weekend\nB. every weekend\nC. every weekday\nD. on May 6\n3.单选题\nThe underlined word \"sort\" most probably means ________ .\nA. 乱扔\nB. 捡起\nC. 收集\nD. 分类\n4.单选题\nTo work at Xinxin Nursing Home，you need to do well in ________ .\nA. washing dishes\nB. collecting rubbish\nC. talking with the old\nD. singing and dancing\n5.单选题\nAccording to the passage，which of the following is NOT true？ ________\nA. Eleven people are needed altogether.\nB. It may be tiring to do the cleaning work in People's Park.\nC. Of the three jobs，the work of helping old people takes the shortest time.\nD. If you want to do the teaching job，you can call the number 0398-8858518.\n6.单选题\nWhere can you most probably find this passage？ ________\nA. In a newspaper.\nB. In a Music magazine.\nC. In a storybook.\nD. In a sports magazine.",
-    "answer": "B",
+    "answer": "(1) B (2) A (3) D (4) C (5) A (6) A",
+    "answerSource": {"kind":"local-original","originalAnswer":"B","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_21_20260922_215610.pdf","number":20,"page":5,"sha256":"2cd33258f1d98424905e82960471405ca04a1890a30bdaefa91f6a3c42048652"},
     "sources": [
       {
         "file": "错题_21_20260922_215610.pdf",
@@ -4046,7 +4079,8 @@
     "id": "xdf-1a881b7f39530531",
     "type": "reading",
     "text": "On March 14, math and science lovers around the world celebrated a special day: Pi\nDay. Pi is equal to about 3.14, but the number goes on endlessly. It is sometimes written in\nGreek, π. With the help of computers, mathematicians have been able to calculate pi out to over\na trillion decimal (小数) places, but there is still no end to the number. This makes pi puzzling,\neven for the most famous scientists and mathematicians. Pi Day is celebrated around the world\non March 14, since how we write this date, 3/14, looks just like the number pi.\nFor some people, the appeal (吸引力) of Pi Day goes far beyond math and science. Pi shows\nup throughout popular culture. You can see it in movies, comics, music and more. “In modern\nmovies, any time the filmmaker wants to evoke (唤起) a sense of mystery, often the symbol pi is\nused,” said David Blatner, a Jewish-American writer of The Joy of Pi.\n★ and competing against others to see who can remember the most. Most teachers\nhold class contests to see how many numbers their students can memorize. The Guinness World\nRecord for reciting the most digits of pi is held by Lyu Chao of China, who successfully recited pi\nout to nearly 67,890 decimal places.\nAbove all, Pi Day is about having fun with the number. People celebrate Pi Day by eating or\nthrowing pic and with fun pi-related games and activities. In 2016, Princeton, New Jersey, held a\nbirthday party for Albert Einstein whose birthday also falls on March 14. There was also a “Walk\na Pi Event” where people walked 3.14 miles together. Just like the number itself, the possibilities\nfor Pi Day are truly endless.\n1.单选题\nWhich description of pi is NOT correct?\nA. The number of pi is endless.\nB. Pi Day falls on March 14.\nC. Pi was first found in Greece.\nD. People usually write pi as π.\n2.单选题\nWhich of the following can be put in ________?\nA. There is no point memorizing decimal places of pi\nB. People like using pi in mathematical operations\nC. People also love trying to memorize the digits of pi\nD. Students think reciting pi out is interesting\n3.单选题\nIn modern movies, the symbol pi is often used to ________.\nA. remind us of movies and comics\nB. stand for maths and science\nC. show great understanding of the world\nD. show something mysterious\n4.单选题\nPeople show interest in pi by ________.\na. calculating it out to over a trillion decimal places\nb. reciting as many digits of pi as possible\nc. naming many inventions after pi\nd. including pi in many forms of creative work\nA. abc\nB. abd\nC. acd\nD. bcd\n5.单选题\nWhat is the last paragraph mainly about?\nA. Fun activities to celebrate Pi Day.\nB. The importance of pi to math.\nC. People’s expectation of pi.\nD. The story between Albert Einstein and pi.",
-    "answer": "C",
+    "answer": "(1) C (2) C (3) D (4) B (5) A",
+    "answerSource": {"kind":"local-original","originalAnswer":"C","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_22_20260922_215615.pdf","number":19,"page":3,"sha256":"8b8ba99f761faf5d535c377cf48d0a272986eceb31276b5460938925d114f2ae"},
     "sources": [
       {
         "file": "错题_22_20260922_215615.pdf",
@@ -4270,7 +4304,7 @@
   {
     "id": "xdf-e8f9001177196b4b",
     "type": "choice",
-    "text": "Listen!One of my classmates in the music room.（ ）\nA. sing\nB. sings\nC. is singing\nD. are singing",
+    "text": "Listen!One of my classmates ____ in the music room.（ ）\nA. sing\nB. sings\nC. is singing\nD. are singing",
     "answer": "C",
     "sources": [
       {
@@ -4496,7 +4530,8 @@
     "id": "xdf-a0977b50ad716e52",
     "type": "reading",
     "text": "Every summer, thousands of swamp sparrows (沼泽麻雀) sing songs in the North\nAmerica’s wetlands. These special brown birds only know a few songs, but they sing them\nvery well. In fact, their song list hasn’t changed much for hundreds of years.\nLike humans, baby swamp sparrows learn songs from their elders. “Swamp sparrows just\nmake few mistakes when they learn their songs,” says Robert Lachlan. Actually, they copy\nthe music so well that it stays the same from the elder to the young.\n“Just like children, the sparrows don’t remember every song they hear,” Lachlan\nsays. “They just pick up the songs they hear most often. It’s an example of what\nscientists call ‘conformist bias’.” Until recently, this learning ability was thought\nto be special only to humans.\nBetween 2008 and 2009, Lachlan’s team recorded the songs of 615 swamp sparrows. The\nstudy found that only 2% of these sparrows sang a different song. “The song-types (歌曲类\n型) that you hear in the wetland of North America today may have been there 1, 000 years\nago,” says Lachlan.\nHowever, another team found that a few sparrows had changed their song list in recent\nyears. Now scientists are exploring the influence of losing habitat (栖息地). Cities,\nroads and farms can separate a bird population into a number of different groups. It stops\nbirds from sharing their songs with each other.\n________ The future research will start from these studies. For example, scientists\nmight learn how other animals keep their cultural traditions alive.\n1.单选题\nWhat is special about swamp sparrows?\nA. They can sing many songs.\nB. They learn songs from humans.\nC. They help elders make new songs.\nD. They keep the same song list for years.\n2.单选题\nWhat do the underlined words “conformist bias” probably mean in Paragraph 3?\nA. A song list.\nB. A science team.\nC. A learning ability.\nD. A human tradition.\n3.单选题\nWhy did a few sparrows change their song list?\nA. Man-made buildings separated the birds.\nB. The weather changed in North America.\nC. People hunted a large number of swamp sparrows.\nD. Swamp sparrows stayed in the wetland all the year.\n4.单选题\nWhich of the following can be put in “________” in the last paragraph?\nA. Humans should protect these birds.\nB. The findings are really exciting.\nC. Scientists disagree with the results.\nD. The studies are meaningless.\n5.单选题\nWhat can be the best title of the text?\nA. Copy Music From Birds\nB. Protect Traditional Songs\nC. The 1000-year Bird Songs\nD. The Home-losing Animals",
-    "answer": "D",
+    "answer": "(1) D (2) C (3) A (4) B (5) C",
+    "answerSource": {"kind":"local-original","originalAnswer":"D","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_26_20260922_215637.pdf","number":5,"page":1,"sha256":"625f89babf80c14e5613c08dff03b8f986ddcaef9ddf14d0de17c8d3444c5015"},
     "sources": [
       {
         "file": "错题_26_20260922_215637.pdf",
@@ -4981,7 +5016,8 @@
     "id": "xdf-de39684bafd5f70a",
     "type": "reading",
     "text": "①________ But many people don’t know the ways to read a difficult book. The\nfollowing steps will help you feel relaxed by the book you read.\n②________ Pay attention to what you can catch, and leave behind what you can not. You\nmay understand something important through reading. However, there are some ideas that you\nmay not follow. But remember to move on and you will get the main idea of the book.\nCatch the main point. You may find that each section of the book needs special\nattention. However, it’s not good to keep your eyes on every word. It is better to get a\ngeneral idea of the book rather than reading the whole book carefully. The faster you\nread, the better you are at reading.\n③________ This time you’d better read more slowly and more carefully. You should\ncatch more details of the book. When you read the book for the second time, you would\nunderstand much that you did not understand earlier.\nReading books is not a difficult task any longer if you know how to read a difficult\nbook. It all depends on how you enjoy it. Difficulty lies in the mind, but not in the\nbook. Therefore, don’t be afraid of a difficult book. Try to keep the above reading\nskills in mind, and you’ll get unexpected results!\n1.单选题\nMatch the title with each paragraph.\na.Give it a first read. b. Reading a book is helpful.\nc.Give it a second read. d.Read more difficult books.\nA. ①-b,②-a,③-c\nB. ①-b,②-d,③-c\nC. ①-d,②-c,③-a\nD. ①-d,②-b,③-c\n2.单选题\nWe’d better ________ if we can’t understand some ideas.\nA. stop reading the book\nB. go on reading the book\nC. keep our eyes on every word\nD. ask someone for help\n3.单选题\nWhich of the following is TRUE according to the passage?\nA. Always read the whole book carefully.\nB. Keep your reading speed fast.\nC. Keep your eyes on every word to get the main idea.\nD. Get details of the book in the second time.\n4.单选题\nThe passage is probably a(n) ________.\nA. folk story\nB. science fiction novel\nC. exposition (说明文)\nD. science report",
-    "answer": "A",
+    "answer": "(1) A (2) B (3) D (4) C",
+    "answerSource": {"kind":"local-original","originalAnswer":"A","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_27_20260922_215644.pdf","number":12,"page":2,"sha256":"0afb6dfa8574a91b6788b15b3db227c2cf1bd1cc37d43ca90d37cab952db2de2"},
     "sources": [
       {
         "file": "错题_27_20260922_215644.pdf",
@@ -5011,7 +5047,8 @@
     "id": "xdf-563432a12b2a4632",
     "type": "reading",
     "text": "Gibbons (长臂猿) singers\nScientists have discovered\nthat a male and a female gibbons\nsing songs together. The two\ngibbons make their sounds at the\nsame time and make noises at\ncertain breaks. This duet\nsuggests that, unlike most other\nanimals, they have rhythm and it\nis the basic need for most\nmusic.\nAccording to scientists, a\nduet seems to make the gibbons\nget closer to each other. They\nhope this can give them more\ninformation about how living\nthings change over time to get\nalong with nature.\nSalt Lake drying up\nScientists think\nUtah’s Great Salt\nLake will disappear\nwithin just five\n3\nyears. The lake is\nEvery year, between 40 and 60 lynxes (山\ndrying up because\n猫) die from cars in Spain. Local people\npeople use too much\nare hoping to create a kind of tracking\nwater. It has now\ncollars (追踪项圈) to save lynxes. When\nlost 73% of its\na lynx with a collar goes towards a road,\nwater. Scientists\nthe system inside will start a road sign\nworry that the lake\nto warn drivers that a lynx is nearby.\nwill give out\nsomething bad into\nthe air when drying\nup. And that will\ndamage the nature.\n1.单选题\nAccording to scientists, the most important part for most music is ________.\nA. voice\nB. rhythm\nC. theme\nD. melody\n2.单选题\nThe underlined word “duet” probably means ________.\nA. playing music alone\nB. dancing with rhythm\nC. acting in groups\nD. singing in pairs\n3.单选题\nThe proper title to fill in the blank should be ________.\nA. Worried Drivers\nB. Strange Road Signs\nC. Lynxes in Danger\nD. Tracking Collars in Use\n4.单选题\nScientists think the Utah’s Great Salt Lake will disappear because ________.\nA. the world temperature is going up\nB. the ground of the earth is moving\nC. factories are polluting it\nD. people are overusing it\n5.单选题\nYou can probably find these passages in the ________ section of a magazine.\nA. Fun facts of animals\nB. Animals and the environment\nC. News of the world\nD. Advice from readers",
-    "answer": "B",
+    "answer": "(1) B (2) D (3) C (4) D (5) B",
+    "answerSource": {"kind":"local-original","originalAnswer":"B","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_27_20260922_215644.pdf","number":14,"page":3,"sha256":"0afb6dfa8574a91b6788b15b3db227c2cf1bd1cc37d43ca90d37cab952db2de2"},
     "sources": [
       {
         "file": "错题_27_20260922_215644.pdf",
@@ -5221,7 +5258,8 @@
     "id": "xdf-91c78b8b6b175331",
     "type": "reading",
     "text": "Most children are taught the virtue (美德) of honesty from stories. The well-known\nstory of Pinocchio teaches the importance of telling the truth. Every time Pinocchio lies,\nhis nose grows longer and longer. Another story is about the boy who “cried wolf”. In\nthe end, he loses all his sheep and the trust of his fellow villagers because he tells\nlies many times. These types of stories show children that “honesty is the best policy”.\nStill, if this is the case, then why do so many people lie? The fact is that people lie\nfor many reasons.\nOne reason people lie is to minimize (减少) a mistake. While it is true that everyone\ndoes something wrong from time to time, some people do not have the courage to admit their\nmistakes because they are afraid they will be blamed (指责). For example, students might\nlie to their teachers about unfinished homework. They might say that they left the work at\nhome when, in fact, they did not do the work at all. These students do not want to get in\ntrouble or seem irresponsible, so they make up an excuse—a lie— to save face.\nAnother reason for lying has to do with self-protection. Parents, particularly those\nwith young children, may teach their children to use this type of “protective” lie in\ncertain circumstances (状况). What should children do if a stranger calls while the\nparents are out? Many parents teach their children to explain that their mother and father\nare too busy to come to the phone at that time. In this situation, protective lying can\nmean greater safety.\nPeople lie for many reasons, both good and bad. Lying to keep the peace or to stay\nsafe can have positive results. However, lying to stay out of trouble can lead to more\ntrouble in the end. Understanding the motives (动机) behind the impulse (冲动) to lie\nmight minimize this habit of lying.\n1.单选题\nWhat happens to Pinocchio when he tells lies?\nA. His nose grows longer and longer.\nB. He turns into a rabbit.\nC. He breaks his nose.\nD. He forgets his parents.\n2.单选题\nWhat does the underlined word “this” refer to in the passage?\nA. Honesty is the best policy.\nB. The well-known story of Pinocchio.\nC. The story of the boy who “cried wolf”.\nD. Your nose will grow longer and longer if you tell a lie.\n3.单选题\nWhy do some children lie to their teachers?\nA. Because they like making up an excuse.\nB. Because they have left the homework at home.\nC. Because they are afraid to be blamed at school.\nD. Because they have bad personalities.\n4.单选题\nHow does the writer explain why people tell lies?\nA. By asking questions.\nB. By giving examples.\nC. By showing the results.\nD. By drawing a chart.\n5.单选题\nWhat’s the best title for the passage?\nA. The Types of Lies\nB. The Habit of Lying\nC. The Truth behind Lying\nD. The Result of Lying",
-    "answer": "A",
+    "answer": "(1) A (2) A (3) C (4) B (5) C",
+    "answerSource": {"kind":"local-original","originalAnswer":"A","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_28_20260922_215651.pdf","number":14,"page":4,"sha256":"9a330b6decf505318c36bdea59b3eccffec011acc0239a81275437dcf4b9edbc"},
     "sources": [
       {
         "file": "错题_28_20260922_215651.pdf",
@@ -5236,7 +5274,8 @@
     "id": "xdf-a0e44dcc9c5ab1c2",
     "type": "reading",
     "text": "Bob’s father has a big farm. On New Year’s Day, he asked Bob, “Could you\nwork on the farm when you’re free this year?”\n“Farming is not my work, Dad. I have much schoolwork to do.” Bob wasn’t glad about\nit.\n“If you help me work on the farm, I will give you anything you want.”\n“OK.” Bob agreed happily.\nSo Bob gets up early and works hard on the farm in his free time this year, just like\nother farmers. His wheat (小麦) grows very well.\nTime flies. Today is December 31st, the last day of the year. The father is talking\nwith his son. “I’m happy to see you work hard on the farm, Bob. Now tell me what you\nwant as the gift (礼物). Bob shows his father a big piece of bread. He makes it with the\nwheat on his farm. “I have already gotten (已经得到) your gift, Dad. You are trying to\ngive me a lesson—no pain, no gain. Right?”\n1.单选题\nBob is a(n) ________.\nA. actor\nB. singer\nC. farmer\nD. student\n2.单选题\nWhat does the underlined word “it” refer to? (带下划线的单词“it”指代的是什么？)\nA. Staying at home.\nB. Getting a new job.\nC. Working on the farm.\nD. Having a New Year party.\n3.单选题\nThe underlined word “agreed” means ________ in Chinese.\nA. 承认\nB. 同意\nC. 拒绝\nD. 考虑\n4.单选题\nBob gets ________ from his father.\nA. some bread\nB. a small farm\nC. much money\nD. an important lesson\n5.单选题\nWhich of the following is TRUE?\nA. Bob grows wheat hard on the farm.\nB. Bob is not a good boy.\nC. Bob doesn’t learn from other farmers.\nD. Bob doesn’t study hard at school.",
-    "answer": "D",
+    "answer": "(1) D (2) C (3) B (4) D (5) A",
+    "answerSource": {"kind":"local-original","originalAnswer":"D","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_28_20260922_215651.pdf","number":15,"page":5,"sha256":"9a330b6decf505318c36bdea59b3eccffec011acc0239a81275437dcf4b9edbc"},
     "sources": [
       {
         "file": "错题_28_20260922_215651.pdf",
@@ -5566,7 +5605,8 @@
     "id": "xdf-77f4bd104441d024",
     "type": "reading",
     "text": "Telemedicine: Doctor Visits Online\nDuring the pandemic, many people started seeing doctors online through video calls. This\nis called \"telemedicine.\" A 2023 study found that 76% of U.S. hospitals now offer online\nvisits, while only 35% did so in 2015.\nTelemedicine helps patients in remote areas. For example, an Australian farmer with a skin\nproblem got advice from a skin doctor in London within minutes. But some doctors worry\nthey can't see small signs of illness through a screen. Older people or those with slow\ninternet may also find it hard to use.\nMost experts think the future will mix online and in-person visits. \"Online visits help\ndoctors decide which patients need urgent care,\" explains Dr. Lee from the WHO. However,\nabout 23% of users still fear hackers might access their private health information.\n1.单选题\nWhat percentage of U.S. hospitals had telemedicine in 2015?\nA. 0%\nB. 76%\nC. 35%\n2.单选题\nWhere was the doctor who helped the Australian farmer?\nA. U.S.\nB. U.K.\nC. Australia\n3.单选题\nWhy might online visits be difficult for elderly patients?\nA. They may not be comfortable with technology.\nB. Their internet might be too slow\nC. They may not be comfortable with technology AND their internet might be too slow.\n4.单选题\nWhat does Dr. Lee mean by \"decide which patients need urgent care\"?\nA. Doctors will stop seeing patients in person completely.\nB. Doctors can prioritize the most serious cases first.\nC. All patients will have to wait longer for treatment.",
-    "answer": "C",
+    "answer": "(1) C (2) B (3) C (4) B",
+    "answerSource": {"kind":"local-original","originalAnswer":"C","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_30_20260922_215707.pdf","number":5,"page":2,"sha256":"080bfae97b4092f049d9513a2fce4d672a3428cc465566602a223ef0bb7bf2db"},
     "sources": [
       {
         "file": "错题_30_20260922_215707.pdf",
@@ -5641,7 +5681,8 @@
     "id": "xdf-baf6af4d65419a5a",
     "type": "reading",
     "text": "Dear Miss Manners，\nMy friend Jack just got back from vacation.He gave me a vase in the shape of a silly\ncat and said，\"I（1） ________ you like it.\"（2） ________ ，I don't like vases or cats.I\ndon't want to tell him a white lie.How can I respond（3） ________ while still being\npolite？\nSam\nDear Sam，\nHonesty is a virtue（美德），but（4） ________ about people's feelings is also an\nimportant virtue.Yes，you should still report a criminal（举报罪犯），（5） ________ it\nhurts that person's feelings.But in everyday life，we need（6） ________ these two\nvirtues.If you tell your friend that you hate his gift，then you are not practicing\nhonesty as a virtue，but using it as a weapon（武器）.You should understand that your\nnegative（负面的）opinions are not great truths，but just your opinions.There is no need\nto say them if they may offend（冒犯）someone.You may simply say，\"The shape of the vase\nis interesting.\"（7） ________ you don't find it interesting and can't think of\n（8） ________ nice to say，you can change the topic.For example，you could say，\"Where\ndid you find the vase？Did you have a good vacation？\"\nMiss Manners\n1.单选题\nA. hope\nB. hoped\nC. will hope\n2.单选题\nA. However\nB. Instead\nC. Therefore\n3.单选题\nA. honesty\nB. honest\nC. honestly\n4.单选题\nA. care\nB. cared\nC. caring\n5.单选题\nA. even if\nB. in case\nC. so that\n6.单选题\nA. balance\nB. balancing\nC. to balance\n7.单选题\nA. Because\nB. If\nC. Though\n8.单选题\nA. anything\nB. everything\nC. nothing",
-    "answer": "A",
+    "answer": "(1) A (2) A (3) C (4) C (5) A (6) C (7) B (8) A",
+    "answerSource": {"kind":"local-original","originalAnswer":"A","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_30_20260922_215707.pdf","number":11,"page":3,"sha256":"080bfae97b4092f049d9513a2fce4d672a3428cc465566602a223ef0bb7bf2db"},
     "sources": [
       {
         "file": "错题_30_20260922_215707.pdf",
@@ -5656,7 +5697,8 @@
     "id": "xdf-7ca145313b1fc11e",
     "type": "reading",
     "text": "Choose the best answer (选择最恰当的答案)\nSTUDENT TIMES\nHome Metro Sports Opinions Arts Photos Videos Search\nEmbarrassing experiences By Jack Preston\nLast week, Student Times reporter Jack Preston asked students, “What’s\nthe most embarrassing experience you’ve ever had?” Here are the three of\nhis favourite responses.\n□—Susan\nI like singing very much. Once, I was singing in the shower when my sister\ncame into the bathroom and recorded me! Later, we were driving and my\nsister put on some music. It was me! I was really embarrassed and turned\nbright red.\n□—Alex\nI fell asleep in math class once. I closed my eyes for a moment, and the\nnext thing I remember is my teacher’s voice. He was asking me a question.\nWhen I didn’t answer, he walked over to my desk. He asked it again.\n□—Evan\nMy friend’s parents had a birthday party for her at their new house last\nsummer. They had these glass doors that went out to the garden. We were in\nthe garden and I had to use the restroom. So I was running to the house and\nthen—BAM! I hit the glass doors. I was really confused for a minute. I\nthought they were open, but they were closed! My friend’s parents felt\n________ about it.\n1.单选题\nWhat kind of article is it?\nA. A story.\nB. A poster.\nC. A diary.\nD. A website report.\n2.单选题\nWhere were Susan and her sister when the recording was played?\nA. In the bathroom.\nB. In the car.\nC. In school.\nD. In the garden.\n3.单选题\nWhat did Alex do in a math class?\nA. He answered a question.\nB. He fell asleep.\nC. He put on some music.\nD. He ran in the classroom.\n4.单选题\nThe word “it” in paragraph 3 refers to (指的是) “________”。\nA. the math class\nB. the teacher’s voice\nC. the question\nD. the desk\n5.单选题\nWhich of the following words can be used to fill in the blank in paragraph 4?\nA. happy\nB. grateful\nC. confident\nD. sorry\n6.单选题\nWhat is the main purpose of the article?\nA. To tell the readers about the Student Times newspaper.\nB. To share students’ embarrassing experiences.\nC. To introduce the reporter Jack Preston.\nD. To discuss the importance of being honest.",
-    "answer": "D",
+    "answer": "(1) D (2) B (3) B (4) C (5) D (6) B",
+    "answerSource": {"kind":"local-original","originalAnswer":"D","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_30_20260922_215707.pdf","number":12,"page":5,"sha256":"080bfae97b4092f049d9513a2fce4d672a3428cc465566602a223ef0bb7bf2db"},
     "sources": [
       {
         "file": "错题_30_20260922_215707.pdf",
@@ -5975,7 +6017,7 @@
   {
     "id": "xdf-373148eddbd0ac48",
     "type": "completion",
-    "text": "阅读短文及文后选项, 选出可以填入空白处的最佳选项。\nTwenty–six years ago, David went deep into the rainforest and got lost for three weeks. But\nhe got out of the forest successfully (1)\nDavid always wanted to travel in a rainforest. Later, he and his friend Ken, started out\ntogether.\n(2) So they built a boat and started. When they went near a waterfall, they fell\ninto the water. (3) David then spent four days trying to find his friend but he couldn’t.\nDuring this time, some fishermen saved Ken. He quickly went to the town and asked for help\nfrom the people there.\nDeep in the forest. David was lost and alone. Also he found some dangerous animals around.\nAs the days passed, David had no food and became ill. (4)\nOne day, David heard the sound of a boat engine. He tried his best to get to the river bank\n（河岸）. (5) Together, they finally saved David.\nA. Ken swam to the bank but David was rushed down the river.\nB. Their plan was to travel on a boat down a big river.\nC. The question is——how did he do that?\nD. It was Ken and the rescue group on the boat.\nE. He wanted to give up many times.",
+    "text": "阅读短文及文后选项, 选出可以填入空白处的最佳选项。\nTwenty–six years ago, David went deep into the rainforest and got lost for three weeks. But\nhe got out of the forest successfully (1) ____\nDavid always wanted to travel in a rainforest. Later, he and his friend Ken, started out\ntogether.\n(2) ____ So they built a boat and started. When they went near a waterfall, they fell\ninto the water. (3) ____ David then spent four days trying to find his friend but he couldn’t.\nDuring this time, some fishermen saved Ken. He quickly went to the town and asked for help\nfrom the people there.\nDeep in the forest. David was lost and alone. Also he found some dangerous animals around.\nAs the days passed, David had no food and became ill. (4) ____\nOne day, David heard the sound of a boat engine. He tried his best to get to the river bank\n（河岸）. (5) ____ Together, they finally saved David.\nA. Ken swam to the bank but David was rushed down the river.\nB. Their plan was to travel on a boat down a big river.\nC. The question is——how did he do that?\nD. It was Ken and the rescue group on the boat.\nE. He wanted to give up many times.",
     "answer": "(1) C (2) B (3) A (4) E (5) D",
     "sources": [
       {
@@ -6096,7 +6138,8 @@
     "id": "xdf-ffbb9976ed6b58ad",
     "type": "reading",
     "text": "Ever wonder why your friends from another country might not look you in the\neye，or why they greet you in a different way？Around the world，body language speaks as\nloudly as words.\nIn the USA，strong eye contact In China，avoiding too much eye\nshows you're confident and contact is a sign of respect，\ninterested. especially with older people.\nItalians often use lively arm British people usually do not\ngestures to emphasize （强调） move their hands much when they\npoints. talk.\nIn some Asian countries，like\nIn the USA，it's common to use\nChina and Japan，using both hands\none hand for giving or\nshows greater respect and\nreceiving things.\npoliteness.\nIn some Middle Eastern\nA thumbs-up means \"good job\" in\ncountries，like Egypt，it can be\nmany countries.\nrude.\nIn most countries，nodding\nmeans \"yes\" and shaking your In Bulgaria，it's the opposite.\nhead means \"no\".\n1.单选题\nItalians often ________ to make their points clear.\nA. use facial expressions\nB. use lively hand gestures\nC. use lively arm gestures\nD. speak in a loud voice\n2.单选题\nIn China and Japan，when giving or receiving things，it's more respectful to ________ .\nA. use one hand\nB. use both hands\nC. use the left hand\nD. use the right hand\n3.单选题\nIn some Middle Eastern countries like Egypt，a thumbs-up is considered ________ .\nA. a sign of agreement\nB. a friendly gesture\nC. an impolite gesture\nD. a lovely gesture\n4.单选题\nWhich of the following is true about British people？ ________\nA. They use a lot of hand gestures when talking.\nB. They move their hands a lot when talking.\nC. They only point things out with hand gestures.\nD. They don't move their hands much while talking.\n5.单选题\nWhich behavior is proper when traveling in Bulgaria？ ________\nA. Shaking your head to say \"yes\".\nB. Shaking your head to say \"no\".\nC. Shaking your hand to say \"yes\".\nD. Nodding your head to say \"yes\".\n6.单选题\nWhat is the main idea of the passage？ ________\nA. Different ways of greeting around the world.\nB. Hand-gesture customs in various countries.\nC. The importance of eye contact in communication.\nD. How body language varies across different cultures.",
-    "answer": "C",
+    "answer": "(1) C (2) B (3) C (4) D (5) A (6) D",
+    "answerSource": {"kind":"local-original","originalAnswer":"C","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_33_20260922_215725.pdf","number":16,"page":4,"sha256":"27bf95241789cc908f29be74f52ce4d0bd89394724ee48a1a171df23809f9b9a"},
     "sources": [
       {
         "file": "错题_33_20260922_215725.pdf",
@@ -6110,7 +6153,7 @@
   {
     "id": "xdf-8069e853b4d60032",
     "type": "completion",
-    "text": "阅读短文及文后选项, 选出可以填入空白处的最佳选项。\nTwenty-six years ago, David went deep into the rainforest and got lost for three\n1\nweeks. But he got out of the forest successfully (1)\nDavid always wanted to travel in a rainforest. Later, he and his friend Ken, started\nout together.\n2\n(2) So they built a boat and started. When they went near a waterfall,\n3\nthey fell into the water. (3) David then spent four days trying to find his\nfriend but he couldn’t. During this time, some fishermen saved Ken. He quickly went to\nthe town and asked for help from the people there.\nDeep in the forest. David was lost and alone. Also he found some dangerous animals\naround. As the days passed, David had no food and became ill. (4) 4\nOne day, David heard the sound of a boat engine. He tried his best to get to the river\nbank（河岸）. (5) 5 Together, they finally saved David.\nA. Ken swam to the bank but David was rushed down the river.\nB. Their plan was to travel on a boat down a big river.\nC. The question is——how did he do that?\nD. It was Ken and the rescue group on the boat.\nE. He wanted to give up many times.",
+    "text": "阅读短文及文后选项, 选出可以填入空白处的最佳选项。\nTwenty-six years ago, David went deep into the rainforest and got lost for three\n1\nweeks. But he got out of the forest successfully (1) ____\nDavid always wanted to travel in a rainforest. Later, he and his friend Ken, started\nout together.\n2\n(2) ____ So they built a boat and started. When they went near a waterfall,\n3\nthey fell into the water. (3) ____ David then spent four days trying to find his\nfriend but he couldn’t. During this time, some fishermen saved Ken. He quickly went to\nthe town and asked for help from the people there.\nDeep in the forest. David was lost and alone. Also he found some dangerous animals\naround. As the days passed, David had no food and became ill. (4) ____ 4\nOne day, David heard the sound of a boat engine. He tried his best to get to the river\nbank（河岸）. (5) ____ 5 Together, they finally saved David.\nA. Ken swam to the bank but David was rushed down the river.\nB. Their plan was to travel on a boat down a big river.\nC. The question is——how did he do that?\nD. It was Ken and the rescue group on the boat.\nE. He wanted to give up many times.",
     "answer": "1-5 CBAED",
     "sources": [
       {
@@ -6365,7 +6408,7 @@
   {
     "id": "xdf-3de59abf22f4e491",
     "type": "completion",
-    "text": "A: Hey, Jake, did I do something wrong earlier?\nB: No, not at all! (1)\nA: Well, you had your arms crossed and didn’t really look at me when I was talking.\nB: Oh, I’m so sorry, Emma. (2) I was just tired.\nA: (3) It doesn’t matter.\nB: But I should pay more attention. I didn’t mean to make you feel bad.\nA: (4) I’m glad you explained.\nB: Thanks for understanding. Next time, I won’t cross my arms and I will look at you in your eyes\nwhen you talk.\nA: Haha, that’s a good idea. (5)\nB: Exactly. If I ever seem off (看起来不对劲) again, just ask me what’s wrong.\nA: Okay. (6)\nB: Agreed.\nA. I see.\nB. Don’t worry about it.\nC. I didn’t mean to do that.\nD. Why do you say so?\nE. Communication solves many problems.\nF. Body language can say a lot of things when we talk.",
+    "text": "A: Hey, Jake, did I do something wrong earlier?\nB: No, not at all! (1) ____\nA: Well, you had your arms crossed and didn’t really look at me when I was talking.\nB: Oh, I’m so sorry, Emma. (2) ____ I was just tired.\nA: (3) ____ It doesn’t matter.\nB: But I should pay more attention. I didn’t mean to make you feel bad.\nA: (4) ____ I’m glad you explained.\nB: Thanks for understanding. Next time, I won’t cross my arms and I will look at you in your eyes\nwhen you talk.\nA: Haha, that’s a good idea. (5) ____\nB: Exactly. If I ever seem off (看起来不对劲) again, just ask me what’s wrong.\nA: Okay. (6) ____\nB: Agreed.\nA. I see.\nB. Don’t worry about it.\nC. I didn’t mean to do that.\nD. Why do you say so?\nE. Communication solves many problems.\nF. Body language can say a lot of things when we talk.",
     "answer": "(1) D (2) C (3) A (4) B (5) F (6) E",
     "sources": [
       {
@@ -6751,7 +6794,8 @@
     "id": "xdf-aec340312b9fcc38",
     "type": "reading",
     "text": "Although making food is fun, it’s (1) ________ to know how to be safe. This means\nknowing when to get help from a grown–up, (2) ________ to keep things clean, and how to use\nthe kitchen safely.\nIf you have ever seen a cooking show on TV, you’ll know that all the best cooks have an\nassistant to help them. If you’re a kid, a grown–up assistant can help you to make cooking\n(3) ________ and keep you safer. Some things in the kitchen may seem simple to do, but once\nyou use them yourself, you might be surprised to know how difficult they are. By having your\nassistant around, you can stay safe and have fun while you (4) ________ .\nWearing an apron (围裙) will keep your clothes clean. If you don’t have an apron, an old shirt\nwill be OK. But don’t wear big clothes. They are easy to catch fire. (5) ________ wash your hands\nwith soap and water before you begin to cook. The idea is to keep germs (病菌) out of your food.\nThey can make you sick.\nIt’s also a good idea to learn (6) ________ in the kitchen. It’s easy to get hurt in the kitchen if\nyou’re not careful, and a cut or burn will end your fun cooking.\n(1)单选题\nA. importance\nB. unimportant\nC. important\nD. unimportance\n(2)单选题\nA. how\nB. what\nC. when\nD. who\n(3)单选题\nA. easily\nB. easier\nC. easy\nD. more easily\n(4)单选题\nA. cooked\nB. had cooked\nC. cooks\nD. cook\n(5)单选题\nA. Sometimes\nB. Never\nC. Always\nD. Hardly\n(6)单选题\nA. something\nB. anything\nC. everything\nD. nothing",
-    "answer": null,
+    "answer": "(1) C (2) A (3) B (4) D (5) C (6) A",
+    "answerSource": {"kind":"ai-supplement","originalAnswer":null,"checkedAt":"2026-10-06","review":{"status":"pending"}},
     "sources": [
       {
         "file": "错题_36_20260922_215743.pdf",
@@ -7480,7 +7524,7 @@
   {
     "id": "xdf-3f17659475784532",
     "type": "choice",
-    "text": "—What a change !Molly used to be shy and quiet.\n—Yeah!But now she is used to in front of the class.（ ）\nA. surprised；speaking\nB. surprised；speak\nC. surprising；speaking\nD. surprising；speak",
+    "text": "—What a ____change !Molly used to be shy and quiet.\n—Yeah!But now she is used to ____in front of the class.（ ）\nA. surprised；speaking\nB. surprised；speak\nC. surprising；speaking\nD. surprising；speak",
     "answer": "C",
     "sources": [
       {
@@ -7615,7 +7659,7 @@
   {
     "id": "xdf-4cd72ef294962018",
     "type": "fill",
-    "text": "I see so many butterflies in the garden. They are flying around colorful flowers.（合并为\n一句）\nI so many butterflies in the garden around colorful flowers.",
+    "text": "I see so many butterflies in the garden. They are flying around colorful flowers.（合并为\n一句）\nI ____ so many butterflies in the garden ____ around colorful flowers.",
     "answer": "see； flying",
     "sources": [
       {
@@ -7630,7 +7674,7 @@
   {
     "id": "xdf-4d553515f4b65973",
     "type": "fill",
-    "text": "You mustn’t leave rubbish here. (保持句意基本不变)\nrubbish is not here.",
+    "text": "You mustn’t leave rubbish here. (保持句意基本不变)\n____ rubbish is not ____ here.",
     "answer": "Leaving； allowed",
     "sources": [
       {
@@ -7785,7 +7829,7 @@
   {
     "id": "xdf-40f9748ca442c66a",
     "type": "completion",
-    "text": "A: Hey, Jake, did I do something wrong earlier?\n1\nB: No, not at all! (1)\nA: Well, you had your arms crossed and didn’t really look at me when I was talking.\n2\nB: Oh, I’m so sorry, Emma. (2) I was just tired.\n3\nA: (3) It doesn’t matter.\nB: But I should pay more attention. I didn’t mean to make you feel bad.\n4\nA: (4) I’m glad you explained.\nB: Thanks for understanding. Next time, I won’t cross my arms and I will look at you in your eyes\nwhen you talk.\n5\nA: Haha, that’s a good idea. (5)\nB: Exactly. If I ever seem off (看起来不对劲) again, just ask me what’s wrong.\n6\nA: Okay. (6)\nB: Agreed.\nA. I see.\nB. Don’t worry about it.\nC. I didn’t mean to do that.\nD. Why do you say so?\nE. Communication solves many problems.\nF. Body language can say a lot of things when we talk.",
+    "text": "A: Hey, Jake, did I do something wrong earlier?\n1\nB: No, not at all! (1) ____\nA: Well, you had your arms crossed and didn’t really look at me when I was talking.\n2\nB: Oh, I’m so sorry, Emma. (2) ____ I was just tired.\n3\nA: (3) ____ It doesn’t matter.\nB: But I should pay more attention. I didn’t mean to make you feel bad.\n4\nA: (4) ____ I’m glad you explained.\nB: Thanks for understanding. Next time, I won’t cross my arms and I will look at you in your eyes\nwhen you talk.\n5\nA: Haha, that’s a good idea. (5) ____\nB: Exactly. If I ever seem off (看起来不对劲) again, just ask me what’s wrong.\n6\nA: Okay. (6) ____\nB: Agreed.\nA. I see.\nB. Don’t worry about it.\nC. I didn’t mean to do that.\nD. Why do you say so?\nE. Communication solves many problems.\nF. Body language can say a lot of things when we talk.",
     "answer": "1-5 DCABF 6-6 E",
     "sources": [
       {
@@ -7846,7 +7890,8 @@
     "id": "xdf-9ac9d719371b869a",
     "type": "reading",
     "text": "\"Now, it is the time to witness the miracle!\" The magician, Liu Qian,\ndiscovered a diamond ring in an egg in front of millions of people at CCTV's Spring\nFestival Gala (春晚) in 2009. Liu's magic tricks have made the old art of magic\nfashionable once again, and made him the hottest magician in China.\nAs a skillful young magician from Taiwan, Liu is popular worldwide for his magic\nshows. He has performed in countries, including the United States, Japan, South Korea and\nthe U.K.\nMaking something impossible happen right before your eyes is the reason why people\nlove magic.\nLiu has a special understanding of magic shows, \"To get a magic shoe successful,\nthinking is more important than skills. We think a lot about how to make the shows\ncreative and more interesting.\" Liu said. So during his performance, audiences (观众) are\noften invited to be in his shows, making people believe he really has magic power.\nLiu Qian's success dated back to his childhood. Born in 1976 in Taiwan, he found\nhimself attracted to a magic toy in a shop when he was seven years old. At the age of 12,\nhe won Taiwan's Youth Magic Contest, which was judged by the great American magician,\nDavid Copperfield. \"It encouraged me to carry on my magic shoe dream.\" But Liu planned on\nbecoming a professional magician at the beginning. He studied Japanese literature at\nUniversity and only hoped to be a part-time magician. However, his failure to find a good\njob after graduation pushed him towards magic as a career. To improve his skills, he has\nperformed on streets for passers-by. \"Street shows are the biggest challenge for us\nmagician.\" Liu said.\nIn 2001, Liu started a TV show called \"Magic Star\", which quickly became one of the\nmost popular shows. He successfully keeps this traditional art form alive.\n1.单选题\nWhy do people love to watch magic? 1\nA. Because magic is an old art.\nB. Because magic attracts their eyes.\nC. Because they cannot find out the secret of magic.\nD. Because they love watching magicians make the impossible happen.\n2.单选题\nWhat can we learn from the story? 1\nA. Liu Qian wanted to be a professional magician at first.\nB. Liu Qian took part in many magic competitions.\nC. Liu Qian often invites audiences to be in his magic show.\nD. Liu Qian performs on streets in order to make himself famous.\n3.单选题\nWhat made Liu Qian decide to make magic his career? 1\nA. He played magic on streets in his free time.\nB. He had won Taiwan's Youth Magic Contest.\nC. He was interested in magic when he was little.\nD. He could not find a good job after graduation.\n4.单选题\nIn what order did Liu Qian do the following? 1\n①He became a magician.\n②He fell in love with magic.\n③He began to perform magic on TV.\n④He won Taiwan's Youth Magic Contest.\n⑤He was invited to CCYV's Spring Festival Gala\nA. ②④①③⑤\nB. ②④①⑤③\nC. ①②④③⑤\nD. ①④②⑤③\n5.单选题\nThe story is about 1 .\nA. how Liu began to have magic power.\nB. why people love watching magic shows.\nC. what tricks are used in Liu's magic shows.\nD. how Liu became China's hottest magician.",
-    "answer": "D",
+    "answer": "(1) D (2) C (3) D (4) A (5) D",
+    "answerSource": {"kind":"local-original","originalAnswer":"D","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_41_20260922_215818.pdf","number":3,"page":3,"sha256":"cc9ef35003287ffd8c1713a48b46a44601b76bc3c553cc09b51b7889b784ae6f"},
     "sources": [
       {
         "file": "错题_41_20260922_215818.pdf",
@@ -7861,7 +7906,8 @@
     "id": "xdf-e1bab525d31767d8",
     "type": "reading",
     "text": "Heman Bekele was born in Africa. He saw people there working under the hot sun\nwithout protection for their skin. That made them vulnerable to skin cancer (癌症), an\nillness caused by too much exposure (暴露) to the sun. Treating cancer usually costs a\nlot. Heman wondered if there was a cheaper way to deal with that. He came up with an idea:\nadding medicines for skin cancer to soaps. “What is something that everyone can use?”\nHeman thought. “Everyone uses soap and water for cleaning. So soap may be the best\nchoice.”\nHeman needed help to bring his idea to life. In 2023, he joined the 3M Young Scientist\nChallenge. He sent a video, explaining what he wanted to do. Finally, he won the game and\ngot the prize of $25, 000.\nSince then, Heman has been working on his idea. Adult experts from 3M offer him help.\n“I got really lucky,” one of the experts, Deborah Isabelle, said. “Last year I worked\nwith Heman. He’s an amazing, active, very inspiring young man.”\nIt can take years before the soap is available for people to buy. But Heman is still\nhopeful. Over the summer, he spent every weekday in the lab. “It’s absolutely wonderful\nto think that one day, my bar of soap will be able to have a direct influence on somebody\nelse’s life.”\n1.单选题\nWhat does the underlined word “vulnerable” mean?\nA. Weak.\nB. Safe.\nC. Normal.\nD. Brave.\n2.单选题\nWhat did Heman think of the idea of using soap?\nA. It’s an expensive way.\nB. It’s a cheap way.\nC. It’s a clean way.\nD. It’s a successful way.\n3.单选题\nWhat did the 3M challenge bring to Heman?\nA. Support.\nB. Medicines.\nC. An idea.\nD. A position.\n4.单选题\nWhich words can best describe Heman?\nA. Humorous and funny.\nB. Outgoing and friendly.\nC. Hard-working and kind.\nD. Interesting and active.\n5.单选题\nWhat is Heman’s attitude towards the future of the soap?\nA. Worried.\nB. Uncaring.\nC. Doubtful.\nD. Hopeful.",
-    "answer": "A",
+    "answer": "(1) A (2) B (3) A (4) C (5) D",
+    "answerSource": {"kind":"local-original","originalAnswer":"A","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_41_20260922_215818.pdf","number":4,"page":4,"sha256":"cc9ef35003287ffd8c1713a48b46a44601b76bc3c553cc09b51b7889b784ae6f"},
     "sources": [
       {
         "file": "错题_41_20260922_215818.pdf",
@@ -7891,7 +7937,8 @@
     "id": "xdf-8ade4b08f22692e8",
     "type": "reading",
     "text": "Although making food is fun, it’s (1) ________ to know how to be safe. This\nmeans knowing when to get help from a grown-up, (2) ________ to keep things clean, and\nhow to use the kitchen safely.\nIf you have ever seen a cooking show on TV, you’ll know that all the best cooks\nhave an assistant to help them. If you’re a kid, a grown-up assistant can help you to\nmake cooking (3) ________ and keep you safer. Some things in the kitchen may seem simple\nto do, but once you use them yourself, you might be surprised to know how difficult they\nare. By having your assistant around, you can stay safe and have fun while you\n(4) ________ .\nWearing an apron (围裙) will keep your clothes clean. If you don’t have an apron,\nan old shirt will be OK. But don’t wear big clothes. They are easy to catch fire.\n(5) ________ wash your hands with soap and water before you begin to cook. The idea is\nto keep germs (病菌) out of your food. They can make you sick.\nIt’s also a good idea to learn (6) ________ in the kitchen. It’s easy to get\nhurt in the kitchen if you’re not careful, and a cut or burn will end your fun cooking.\n1.单选题\nA. importance\nB. unimportant\nC. important\nD. unimportance\n2.单选题\nA. how\nB. what\nC. when\nD. who\n3.单选题\nA. easily\nB. easier\nC. easy\nD. more easily\n4.单选题\nA. cooked\nB. had cooked\nC. cooks\nD. cook\n5.单选题\nA. Sometimes\nB. Never\nC. Always\nD. Hardly\n6.单选题\nA. something\nB. anything\nC. everything\nD. nothing",
-    "answer": "C",
+    "answer": "(1) C (2) A (3) B (4) D (5) C (6) A",
+    "answerSource": {"kind":"local-original","originalAnswer":"C","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_41_20260922_215818.pdf","number":17,"page":7,"sha256":"cc9ef35003287ffd8c1713a48b46a44601b76bc3c553cc09b51b7889b784ae6f"},
     "sources": [
       {
         "file": "错题_41_20260922_215818.pdf",
@@ -7936,7 +7983,8 @@
     "id": "xdf-c507850f2d51c885",
     "type": "reading",
     "text": "C\nOnce there was a famous painter. Lots of people came to see his paintings. They never\ngot tired of praising (赞美) his paintings. One day, the painter thought, \"I often hear\npeople praise my paintings, but will they talk about the problems in my paintings behind\nmy back?\" Thinking about this, he got up early one morning and put one of his paintings on\na busy street with a note (便条): \"If anyone finds any problem in this painting, please\nput a mark (标记) on it.\"\nIn the evening, when he went to get his painting back, he found hundreds of marks on\nit. Seeing this, he was very disappointed. He took his painting quietly and went home.\nFrom then on, the painter stopped painting. One of his friends heard about this and\nwent to visit him. He said to the painter, \"Put the same painting on the same street once\nagain, but this time with the different note — 'If anyone finds any problem in this\npainting, fix it please.'\"\nThe next morning, the painter did as his friend said. In the evening, when he and his\nfriend went to get the painting, they found there was nothing on it. The painter was\nsurprised. His friend laughed and said, \"Anyone can find problems, but very few people can\nfix them. Some people only want to find problems of others. So, your problem was not in\nyour painting but in asking for advice from such people.\"\n1.单选题\n1\nFrom Paragraph 1, we know .\nA. what the painter thought of his paintings\nB. why the painter put his painting on a busy street\nC. who gave the painter some advice on his paintings\nD. how people found problems in the painter's paintings\n2.单选题\nWhat does the underlined word \"disappointed\" in Paragraph 2 mean in Chinese?\nA. 兴奋的\nB. 残忍的\nC. 失望的\nD. 放松的\n3.单选题\nThe painter's friend asked him to 1 .\nA. put the same painting on the same street with a different note\nB. put a different painting on the same street with the same note\nC. put the same painting on a different street with a different note\nD. put a different painting on a different street with the same note\n4.单选题\nWhat is the right order of the following events?\n① The painter stopped painting.\n② The painter found hundreds of marks on his painting.\n③ The painter was surprised to find nothing on his painting.\nA. ①③②\nB. ②①③\nC. ②③①\nD. ③①②\n5.单选题\nWhat can we learn from the passage?\nA. We should keep on doing things to the end.\nB. We should care less about others' problems.\nC. We should ask for help when we are in trouble.\nD. We should ask for advice in a right way.",
-    "answer": "B",
+    "answer": "(1) B (2) C (3) A (4) B (5) D",
+    "answerSource": {"kind":"local-original","originalAnswer":"B","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_43_20260922_215828.pdf","number":2,"page":1,"sha256":"12074892e6178218f424e63ab36eb5710ae23a70ed8d60a7d419cc16ce6c0a50"},
     "sources": [
       {
         "file": "错题_43_20260922_215828.pdf",
@@ -7951,7 +7999,8 @@
     "id": "xdf-3d6329ce23fc8f5d",
     "type": "reading",
     "text": "During the summer holiday, I was lucky enough to go to Chile in South America\nalong with some of my schoolmates. We stayed with Chilean families there. We first met\nthem when they visited our school before. While we were there, we visited many parts of\nthe country, including the Atacama Desert and Chile's capital city of Santiago.\nAt first, it was a bit difficult to live in a house with a new family. But I fit in\nwell and my Spanish improved quickly. My trip to the Atacama Desert was an unforgettable\nexperience. Not only did I see some amazing scenery, but I was able to experience some\nunique things there. For example, I swam in Cejar Lagoon, an oasis (绿洲). Also I saw wild\nflamingos. We watched them in a distance so that they would not fly away. Then we ate in a\ncafe at a height of 3300 meters and climbed a mountain to see cave (洞穴) paintings that\nwere created over 4000 years ago. I don't think I will ever forget the view that I got\nwhen I watched the sunset on top of the Purple Mountains.\nI also went on a trip to Santiago. The president's house, called La Moneda, was very\nbeautiful. Santiago is surrounded by mountains. I took a cable car (缆车) to the top and\ngot a great view of the whole city.\n1.单选题\nThe writer lived in 1 while in Chile.\nA. a city hotel\nB. a mountain\nC. a local family\nD. a desert\n2.单选题\nThe underlined word \"flamingos\" in Paragraph 2 refers to a kind of 1 .\nA. fish\nB. bird\nC. snake\nD. whale\n3.单选题\nWhich of the following is TRUE according to the text? 1\nA. The writer went to Chile's capital city alone.\nB. In Chile, the president's house is open to visitors.\nC. The writer ate in a cafe on top of the Purple Mountains.\nD. Chilean people speak English as their official language.\n4.单选题\nPut the following in the right order according to the passage. 1\n①watched the sunset\n②went to Atacama Desert\n③met Chilean families\n④visited the city of Santiago\nA. ③①②④\nB. ②④③①\nC. ③②①④\nD. ②④①③\n5.单选题\nWhat would be the best title for the text? 1\nA. A journey to Chile\nB. An introduction to Chile\nC. A history of Chile\nD. A guide to Chile",
-    "answer": "C",
+    "answer": "(1) C (2) B (3) B (4) C (5) A",
+    "answerSource": {"kind":"local-original","originalAnswer":"C","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_43_20260922_215828.pdf","number":3,"page":2,"sha256":"12074892e6178218f424e63ab36eb5710ae23a70ed8d60a7d419cc16ce6c0a50"},
     "sources": [
       {
         "file": "错题_43_20260922_215828.pdf",
@@ -7965,7 +8014,7 @@
   {
     "id": "xdf-96bcc65264268438",
     "type": "fill",
-    "text": "1 (library) are professionals who are there to help you find and make\nsense of information.\n第5题 1\n[填空题]The artist’s use of colour made a strong (impress) on the viewers.\n第6题 1\n[填空题]Teachers always tell students that they should show to classmates.\n(kind).",
+    "text": "1 (library) are professionals who are there to help you find and make\nsense of information.",
     "answer": "1 Librarians",
     "sources": [
       {
@@ -7996,7 +8045,8 @@
     "id": "xdf-28c4c54d8214a136",
     "type": "reading",
     "text": "When I was thirteen years old, I became very interested in shopping. After a\nwhile being just a buyer, I wanted to sell something. I had many things around the house\nfrom my childhood that I no longer needed. I knew, with the help of my father, I could\nmake money. So for months and months I enjoyed myself by selling things on my dad’s\naccount (账户).\nOn December 9, 2017, I opened my own account and began to start my own business.\nThings were going great and then I realized that selling things around the house wasn’t\nmaking me the kind of money that I wanted to make, so I decided to turn my business into a\nresale shop. I went around to the garage sale (旧货出售处) and bought items at low prices\nand sold them at higher prices later.\nLast November, I went to a garage sale that was a little bit different. A single lady\nhad many nice items that I knew I would sell quickly. I went up to her and started a\nconversation with her. Through the conversation, I knew she was jobless at the moment and\nneeded money to support her family. I decided to sell any of her things for her to help\nher out. She looked at me for a moment and then broke into tears. I took away some of her\nthings and over the next month I made over $1,500 for her. She was so thankful for all of\nmy help. I have never felt so happy to help someone in my life. I felt as if I had made a\ndifference in this world and that my skills could be used to help someone who would really\nneed it.\n1.单选题\nAt first, __________ helped the writer make money by selling things.\nA. the writer’s bank\nB. the writer’s father\nC. the writer’s teacher\nD. a single lady\n2.单选题\nThe writer went to the garage sale to __________.\nA. meet single ladies\nB. sell things she no longer needed\nC. help others\nD. buy things for her resale shop\n3.单选题\nThe writer decided to help the lady sell her things because __________.\nA. the lady’s items were nice\nB. the lady lived a hard life\nC. she liked the lady very much\nD. the lady asked the writer for help\n4.单选题\nWhich of the following might be the best title for this passage?\nA. A Whiz Kid\nB. A Good Way to Make Money\nC. A Helpful Skill\nD. How to Sell Things",
-    "answer": "B",
+    "answer": "(1) B (2) D (3) B (4) C",
+    "answerSource": {"kind":"local-original","originalAnswer":"B","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_43_20260922_215828.pdf","number":8,"page":4,"sha256":"12074892e6178218f424e63ab36eb5710ae23a70ed8d60a7d419cc16ce6c0a50"},
     "sources": [
       {
         "file": "错题_43_20260922_215828.pdf",
@@ -8010,7 +8060,7 @@
   {
     "id": "xdf-ec28af7e62ca35ed",
     "type": "fill",
-    "text": "You mustn’t leave rubbish here. (保持句意基本不变)\n1 2\nrubbish is not here.",
+    "text": "You mustn’t leave rubbish here. (保持句意基本不变)\n1 2\n____ rubbish is not ____ here.",
     "answer": "1 Leaving 2 allowed",
     "sources": [
       {
@@ -8025,7 +8075,7 @@
   {
     "id": "xdf-dfea50b465b491e0",
     "type": "fill",
-    "text": "I see so many butterflies in the garden. They are flying around colorful flowers.\n（合并为一句）\n1 2\nI so many butterflies in the garden around colorful flowers.",
+    "text": "I see so many butterflies in the garden. They are flying around colorful flowers.\n（合并为一句）\n1 2\nI ____ so many butterflies in the garden ____ around colorful flowers.",
     "answer": "1 see 2 flying",
     "sources": [
       {
@@ -8041,7 +8091,8 @@
     "id": "xdf-a9826f82f42b3d28",
     "type": "reading",
     "text": "When I was growing up in America, I was ashamed of my mother’s Chinese\nEnglish. Because of her Chinese English, she was often treated unfairly. People in\ndepartment stores, at banks, and at restaurants did not take her seriously, did not give\nher good service, pretended not to understand her, or even acted as if they did not hear\nher.\nMy mother realized that she was poor at English. When I was fifteen, she used to have\nme call people on phone to pretend I was she. I was made to ask for information or even to\nshout at people who had been rude to her. One time I had to call her stockbroker(股票经纪\n人). I said in an adolescent(青少年的) voice that was not very certain, “This is Mrs.\nTan.” My mother was standing beside me saying, “Why he doesn’t send me check, already\ntwo weeks late.” And then, in perfect English I said: “I’m getting rather worried. You\nagreed to send the check two weeks ago, but it hasn’t arrived.”\nMy mother then talked more loudly. “What he wants? I come to New York to tell him in\nfront of his boss.” And so I turned to the stockbroker again, “I can’t accept any more\nexcuse. If I don’t receive the check immediately, I am going to have to speak to your\nmanager when I am in New York next week.”\nThe next week we ended up in New York. While I was sitting there red-faced, my mother,\nthe real Mrs. Tan, was shouting to his boss in her broken English.\nWhen I was a teenager, my mother’s broken English embarrassed me. But now, I see it\ndifferently. To me, my mother’s English is perfectly clear, perfectly natural. It is my\nmother tongue. Her language, as I hear it, is vivid, direct, and full of observation and\nwisdom. It was the language that helped me see things, express ideas, and make sense of\nthe world.\n1.单选题\nWhy was the writer’s mother poorly served?\nA. She was unable to speak good English.\nB. She was often treated unfairly.\nC. She was not clearly heard.\nD. She was not very polite.\n2.单选题\nFrom Paragraph 2, we know that the writer was ________.\nA. good at pretending\nB. rude to the stockbroker\nC. ready to help her mother\nD. not willing to phone for her mother\n3.单选题\nTo the writer now, her mother’s English ________.\nA. makes her embarrassed\nB. is broken and different\nC. is helpful for her\nD. the nature of language\n4.单选题\nThe best title of the passage might be ________.\nA. Great Mother\nB. Mother’s Chinese English\nC. Natural English\nD. Perfect English",
-    "answer": "A",
+    "answer": "(1) A (2) D (3) C (4) B",
+    "answerSource": {"kind":"local-original","originalAnswer":"A","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_44_20260922_215835.pdf","number":12,"page":2,"sha256":"8877338acee8a4fd1b6abcf9d870d0ed72ca663f45a566f93792ebab847efc83"},
     "sources": [
       {
         "file": "错题_44_20260922_215835.pdf",
@@ -8071,7 +8122,8 @@
     "id": "xdf-bcd4d8927e0d242b",
     "type": "reading",
     "text": "Ricardo Semler became boss of his father’s company in Brazil at the age of\n21. The name of the company is Semco. It sold parts for ships. Semler worked like a mad\nman, from 7:30 am to midnight every day. One afternoon, while he was visiting a factory in\nNew York, he fell down. The doctor said, “There’s nothing wrong with you. But if you\ncontinue like this, you’ll find a new home in our hospital.” Semler got the message. He\nchanged the way he worked. In fact, he changed the ways his workers worked, too.\nHe let his workers take more responsibility so that they would be the ones worrying\nwhen things went wrong. He allowed them to set their own salaries, and he cut all the jobs\nhe thought were unnecessary, like receptionists and secretaries.\nHe changed the office: instead of walls, they have plants at Semco, so bosses can’t\nshut themselves away from everyone else. And the workers are free to decorate their\nworkplace as they want. As for uniforms, some people wear suits and others wear T-shirts.\nSemco has flexible (弹性的) working hours: the workers decide when they need to arrive\nat work. Also, Semco lets its workers use the company’s machines for their own projects,\nand makes them take holidays for at least thirty days a year.\nIt sounds perfect, but does it work? The answer is in the numbers: in the last six\nyears, Semco’s revenues (收益) have gone from 212 million. The company has\ngrown from 800 workers to 3,000. Why?\nSemler says it’s because of “peer pressure (同辈压力)”. Peer pressure makes workers\nwork hard for everyone else. If someone isn’t doing his job well, the other workers will\nnot allow the situation to continue. In other words, Ricardo Semler treats his workers\nlike adults rather than children, and expects them to act like responsible adults. And\nthey do.\n1.单选题\nWhy did Semler change the ways he and his workers worked? Because ________.\nA. he became mad\nB. he had to stay in hospital\nC. his father asked him to do so\nD. he realized the danger of overwork\n2.单选题\nSemler makes a lot of changes in his company EXCEPT ________.\nA. the workers decide when they need to arrive at work\nB. the workers have fewer holidays than before\nC. the workers can decorate their workplace as they like\nD. the workers can use the company’s machines to do their own projects\n3.单选题\nWhat’s the main idea of Paragraph 5?\nA. Ricardo Semler’s method of running the company was successful.\nB. Ricardo Semler’s idea sounded perfect but not practical (实用).\nC. The company earned a lot of money.\nD. The reason for Ricardo Semler’s success.\n4.单选题\nThe underlined word “they” in the last paragraph refers to ________.\nA. adults\nB. Semler’s workers\nC. flexible working hours\nD. Semco’s revenues\n5.单选题\n________ is the most important thing in Semler’s company.\nA. Money\nB. Rule\nC. Responsibility\nD. Hard work",
-    "answer": "D",
+    "answer": "(1) D (2) B (3) A (4) B (5) C",
+    "answerSource": {"kind":"local-original","originalAnswer":"D","checkedAt":"2026-10-06","review":{"status":"pending"},"file":"错题_44_20260922_215835.pdf","number":19,"page":4,"sha256":"8877338acee8a4fd1b6abcf9d870d0ed72ca663f45a566f93792ebab847efc83"},
     "sources": [
       {
         "file": "错题_44_20260922_215835.pdf",

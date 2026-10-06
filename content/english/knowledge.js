@@ -304,6 +304,7 @@
   }
 
   function classify(q) {
+    q = { ...q, text: q.text.replace(/\[\[\/?u\]\]/g, '') };
     if (q.type === 'cloze') return 'cloze';
     if (q.type === 'fill') return 'context-fill';
     if (q.type === 'completion') return 'dialogue';

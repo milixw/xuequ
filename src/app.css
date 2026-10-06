@@ -198,7 +198,7 @@ main > audio { max-width: 100%; }
 .english-plan-cloze { display: grid; gap: 8px; margin-top: 12px; }
 .english-plan-cloze label { display: flex; align-items: center; gap: 8px; font-size: 13px; }
 .english-plan-cloze label span { flex: 0 0 48px; }
-.english-plan-cloze select {
+.english-plan-cloze select, .english-plan-cloze input, .english-plan-cloze textarea {
   min-width: 0; flex: 1; min-height: 40px; padding: 7px;
   border: 1px solid var(--line); border-radius: 8px;
   background: var(--card); color: var(--text); font: inherit;
@@ -288,6 +288,8 @@ main > audio { max-width: 100%; }
   .english-plan-review .english-plan-correct-answer { display: none !important; }
   .english-plan-review { box-shadow: none; border: 1px solid #aaa; padding: 10px; break-inside: avoid; }
   .english-plan-review .english-plan-question { font-size: 10pt; line-height: 1.5; }
+  .english-plan-submit, .english-plan-form input, .english-plan-form select,
+  .english-plan-form textarea { display: none !important; }
 }
 
 /* === 学期切换器 === */

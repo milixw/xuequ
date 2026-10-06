@@ -10,7 +10,7 @@ const fs = require('fs');
 const path = require('path');
 const url = require('url');
 
-const PORT = Number(process.env.PORT) || 8080;
+const PORT = Number(process.env.PORT) || 6476;
 const HOST = process.env.HOST || '0.0.0.0';
 const ROOT = path.resolve(__dirname);
 

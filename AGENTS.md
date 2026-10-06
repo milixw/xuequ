@@ -66,7 +66,13 @@ content/
   exams/
     math/sh2024/g8s1/*.js         真题卷，一份试卷一个文件，路径 = 真题卷 ID
   english/question-bank.js        从本地错题 PDF 提取的英语试题，explanation 保存原题解析，缺失为 null（待核对）
-  english/explanation-supplements.js  原 PDF 没有解析但答案明确的题目补充讲解，按题目 ID 索引，review.status 为 pending；不改变原题或答案
+  第 3 天及时赶车题 xdf-470051960705e642 按原 PDF 第 2～3 页核对题干与选项并去掉孤立 y，补 AI 参考答案 A（in time）及待审核解析；原答案缺失保存在 answerSource.originalAnswer: null。第 3 天 77 题均可自动判分，原 ID 和存档不变
+  第 4 天 43 题均可自动判分：补全对话每空选择 A～F，保留原答案与整题提交统计，支持编号/范围答案和快照重做；复合题支持 (1)单选题 / 1.单选题。scripts/supplement-day4-answers.js 按错题_19 原 PDF 第 6、7 页补齐两组原答案（answerSource.kind: local-original，绑定 SHA-256），时态题 xdf-87772dea64f62aae 补 AI 答案 B 待审核；保留原题、ID、解析与存储格式。见 docs/superpowers/specs/2026-10-06-day4-grading.md
+  english/reading-answer-transcripts.json  第 5～7 天 39 组客观题参考答案核对清单，原答案绑定文件、题号、SHA-256；两道缺原答案题另标 AI 待审核。scripts/supplement-days5-7.js 定向应用，不覆盖人工修改
+  english/question-format-transcripts.json  第 5～6 天七道原题排版核对：跨行选项标签、误拼后题、书目配对表按原列恢复及句型转换填空横线；保留 ID、答案与来源，scripts/apply-english-formats.js 定向应用并可校验源 SHA-256
+  english/grading-supplements.js  第 5～7 天 29 组词语配对、词形、首字母、句型转换、简答和翻译的原资料作答映射（pending），在 english-plan.js 前以 script 加载；每空输入或选择 A～G，整题提交，快照重做保留原答案。自由简答仅自动确认参考答案匹配，未匹配不直接计错，最新结果可查看当前草稿与参考答案供人工核对；不改存储键、快照格式或历史评分。第 5、6、7 天分别 51、60、54 题均有作答入口，见 docs/superpowers/specs/2026-10-06-days5-7-grading.md
+  english/underline-transcripts.json  第 4 天 21 道题及第 2 天第 19、20 题按原 PDF 核对的填空横线与词组下划线，绑定来源 SHA-256、题号、页号及修复前后文本；scripts/apply-english-underlines.js 定向应用，不改 ID、答案或来源。词组用 [[u]]...[[/u]]，填空用 ____；英语题库与计划页安全渲染，旧快照只在正文一致时显示补回，不改存储；见 docs/superpowers/specs/2026-10-06-day4-underlines.md
+  english/explanation-supplements.js  原 PDF 没有解析的题目补充讲解，按题目 ID 索引，review.status 为 pending；第 2 天九题经用户授权按语法补答案（含补回填空位置的第 19、20 题），question-bank.js 的 answerSource.kind 为 ai-supplement，originalAnswer 为 null、review.status 为 pending，界面标 AI 补充待教师审核；第 34 题钢笔题已按原 PDF 去掉误拼的下一题，保留发布 ID 和原答案 B、原解析，第 2 天 78 题均可判分。定向脚本 scripts/supplement-day2-answers.js 不覆盖已有答案或原解析
   english/knowledge.js            英语知识点讲解、steps 判断步骤、例子、commonErrors 带错因反例、连词分类例句与各题型 confusables 易混辨析、自动归类规则（待人工审核）；复习时先讲再练
   english/shanghai-junior-outline.html  由用户提供的上海初中英语学习大纲改成的离线页面；手机端目录可收起、宽表格可单独横向滑动
   english/shanghai-exam-vocabulary.html  用户提供的上海中考英语词汇总表，独立离线页面，首页英语单词入口打开；每条带 🔊 朗读（优先用设备英文语音，缺少时用有道在线读音）；单词行按词条加载例句，未覆盖的标记待补充

@@ -36,6 +36,69 @@ test('英语题库不包含 PDF 页眉及学生标识', () => {
   assert(!/学号|SH\d{6,}|新东方智慧学习机|英语错题|梁恩铭/.test(text), '疑似包含源 PDF 学生信息');
 });
 
+test('第 2 天九题补充 AI 答案，钢笔题恢复原四选项及原答案', () => {
+  const plan = require('../src/english-plan.js');
+  const expected = {
+    'xdf-035ded739f46e89f': 'A', 'xdf-68b4a75015e805bb': 'C',
+    'xdf-df644f0adf5ea0d7': 'C', 'xdf-70fcc7b611825989': 'C',
+    'xdf-52ff904271b0c8f9': 'D', 'xdf-e20636e50a5e4d34': 'B',
+    'xdf-9023b30e443ef0b6': 'D',
+    'xdf-c550f29bd72d5dce': 'D', 'xdf-c68a76aa4cf169a6': 'C',
+  };
+  for (const [id, answer] of Object.entries(expected)) {
+    const q = questions.find(q => q.id === id);
+    assert(q.answer === answer && plan.questionMode(q).answer === answer);
+    assert(q.answerSource.kind === 'ai-supplement' && q.answerSource.originalAnswer === null);
+    assert(q.answerSource.review.status === 'pending' && q.explanation === null);
+    const day = { groups: [{ questions: [q] }] };
+    assert(plan.gradeDay(day, { [id]: answer }).correct === 1);
+    assert(plan.gradeDay(day, { [id]: answer === 'A' ? 'B' : 'A' }).wrong.length === 1);
+  }
+  for (const id of ['xdf-d72358d2ab3026a5']) {
+    const q = questions.find(q => q.id === id);
+    assert(!q.answerSource && plan.questionMode(q).answer === 'B');
+    assert(plan.questionMode(q).options.length === 4 && !q.text.includes('第15题'));
+    const day = { groups: [{ questions: [q] }] };
+    assert(plan.gradeDay(day, { [id]: 'B' }).correct === 1);
+    assert(plan.gradeDay(day, { [id]: 'A' }).wrong.length === 1);
+  }
+  const day = plan.buildPlan(questions)[1];
+  assert(day.total === 78 && day.answerable === 78);
+});
+
+test('第 3 天全部原题可判分，及时赶车题按补充答案计分', () => {
+  const plan = require('../src/english-plan.js');
+  const day = plan.buildPlan(questions)[2];
+  assert(day.total === 77 && day.answerable === 77);
+  const q = day.groups.flatMap(g => g.questions).find(q => q.id === 'xdf-470051960705e642');
+  assert(q && q.answer === 'A' && q.answerSource.kind === 'ai-supplement');
+  assert(q.answerSource.review.status === 'pending' && q.answerSource.originalAnswer === null);
+  assert(q.explanation === null && !q.text.includes('\ny\n'));
+  const single = { groups: [{ questions: [q] }] };
+  assert(plan.gradeDay(single, { [q.id]: 'A' }).correct === 1);
+  assert(plan.gradeDay(single, { [q.id]: 'C' }).wrong.length === 1);
+  assert(plan.gradeDay(single, {}).unanswered === 1);
+});
+
+test('第 4 天横线转录保留正文和来源，历史快照恢复不替换其他题干', () => {
+  const entries = require('../content/english/underline-transcripts.json').entries;
+  const plain = s => s.replace(/\[\[\/?u\]\]|_|\s+/g, '');
+  assert(entries.length === 23);
+  for (const item of entries) {
+    const q = questions.find(q => q.id === item.id);
+    assert(q && q.text === item.text && plain(item.text) === plain(item.originalText));
+    assert(/^[a-f0-9]{64}$/.test(item.source.sha256) && item.review.status === 'pending');
+    assert(q.sources.some(s => s.file === item.source.file && s.number === item.source.number));
+    assert(bank.restoredText(item.originalText, q) === item.text);
+    assert(bank.restoredText('不一样的历史原题', q) === '不一样的历史原题');
+  }
+  const children = [];
+  bank.appendMarkedText({ appendChild: node => children.push(node) },
+    '<img src=x> [[u]]heard[[/u]] ____', { createElement: tag => ({ tag }) });
+  assert(children.find(n => n.tag === 'u').textContent === 'heard');
+  assert(children[0].textContent === '<img src=x> ' && children[2].textContent === ' ____');
+});
+
 test('英语原题解析补回并与 AI 待审核讲解区分', () => {
   const supplements = require('../content/english/explanation-supplements.js');
   assert(questions.filter(q => q.explanation).length === 430, '原文解析覆盖数量异常');
@@ -47,7 +110,7 @@ test('英语原题解析补回并与 AI 待审核讲解区分', () => {
     }
     if (q.answer) assert(q.explanation || supplements[q.id], `${q.id} 有答案但缺少解析`);
   }
-  assert(Object.keys(supplements).length === 10);
+  assert(Object.keys(supplements).length === 26);
   for (const [id, entry] of Object.entries(supplements)) {
     const q = questions.find(q => q.id === id);
     assert(q && q.answer && !q.explanation, `${id} 不应覆盖原文解析`);
@@ -210,7 +273,7 @@ test('知识点筛选保留原题，代表题归类正确', () => {
     [/Storytelling is one of humanity/, 'cloze'],
   ];
   for (const [pattern, id] of examples) {
-    const q = questions.find(item => pattern.test(item.text));
+    const q = questions.find(item => pattern.test(item.text.replace(/\[\[\/?u\]\]/g, '')));
     assert(q && knowledge.classify(q) === id, `${pattern} 归类错误`);
     assert(bank.filterQuestions(questions, 'all', '', id).some(item => item.id === q.id));
   }

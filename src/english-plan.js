@@ -14,6 +14,7 @@
   const PRINT_KEY = 'xq.english-plan-prints.v2';
   const RETRY_KEY = 'xq.english-plan-retry.v2';
   const PROGRESS_ID = 'english-bank';
+  const GRADING = typeof module !== 'undefined' ? require('../content/english/grading-supplements.js') : root.EnglishGradingSupplements;
   const DAYS = [
     { title: '连接句意', points: ['connectors'], target: '15 道',
       learn: '辨认时间、条件、原因、让步；再检查主句与从句的时态。',
@@ -79,12 +80,15 @@
   function retryQuestions(report, questions = []) {
     const byId = new Map(questions.map(q => [q.id, q]));
     return report.wrong.map(wrong => {
-      const text = wrong.text || byId.get(wrong.id)?.text || '此题原文暂不可用，请根据题号查看原题。';
+      const text = BANK.restoredText(wrong.text || byId.get(wrong.id)?.text || '此题原文暂不可用，请根据题号查看原题。', byId.get(wrong.id));
       return { id: wrong.id, text,
-      type: Array.isArray(wrong.answer) ? (BANK.parseCloze(text) ? 'cloze' : 'reading') : 'choice',
+      type: Array.isArray(wrong.answer) ? (BANK.parseCloze(text) ? 'cloze'
+        : /(?:\(\d+\)|^\d+[.．])\s*单选题/m.test(text) ? 'reading' : 'completion') : 'choice',
       answer: Array.isArray(wrong.answer)
         ? wrong.answer.map((letter, index) => `(${index + 1}) ${letter}`).join(' ') : wrong.answer,
-      sources: [], review: 'pending' };
+      sources: [], review: 'pending',
+      ...(Array.isArray(wrong.answer) && GRADING?.[wrong.id] ? { snapshotAnswers: wrong.answer.slice() } : {}),
+      ...(byId.get(wrong.id)?.answerSource ? { answerSource: byId.get(wrong.id).answerSource } : {}) };
     });
   }
 
@@ -186,12 +190,35 @@
   }
 
   function questionMode(q) {
+    const extra = GRADING?.[q.id];
+    if (extra) {
+      const answers = q.snapshotAnswers || extra.answers;
+      if (extra.mode === 'fill-choice') {
+        const options = [...extra.letters].map(letter => ({ letter }));
+        return { kind: 'fill-choice', items: answers.map((answer, index) => ({ number: index + 1, options })), answer: answers };
+      }
+      return { kind: 'text', manual: !!extra.manual, answer: answers,
+        items: answers.map((answer, index) => ({ number: index + 1, answer,
+          alternatives: q.snapshotAnswers ? [answer] : extra.alternatives?.[index] || [answer] })) };
+    }
+    if (q.type === 'completion') {
+      const markers = [...q.text.matchAll(/^\s*([A-F])[.．、]\s*/gm)];
+      const blanks = [...q.text.slice(0, markers[0]?.index).matchAll(/\((\d+)\)/g)];
+      if (markers.length >= 2 && new Set(markers.map(m => m[1])).size === markers.length &&
+          blanks.length && blanks.every((m, i) => Number(m[1]) === i + 1)) {
+        const options = markers.map((m, i) => ({ letter: m[1], text: q.text.slice(m.index + m[0].length,
+          markers[i + 1]?.index).trim() }));
+        const answer = BANK.parseClozeAnswers(q.answer, blanks.length, 'ABCDEF');
+        return { kind: 'completion', items: blanks.map((m, i) => ({ number: i + 1, options })),
+          answer: answer && answer.every(letter => options.some(o => o.letter === letter)) ? answer : null };
+      }
+    }
     if (q.type === 'reading' && typeof q.answer === 'string') {
       const matches = [...q.answer.matchAll(/\((\d+)\)\s*([A-D])/g)];
-      const headings = [...q.text.matchAll(/\((\d+)\)\s*单选题/g)];
+      const headings = [...q.text.matchAll(/(?:\((\d+)\)|^(\d+)[.．])\s*单选题/gm)];
       if (matches.length >= 2 && headings.length === matches.length &&
           matches.every((match, index) => Number(match[1]) === index + 1) &&
-          headings.every((match, index) => Number(match[1]) === index + 1)) {
+          headings.every((match, index) => Number(match[1] || match[2]) === index + 1)) {
         const items = matches.map((match, index) => ({
           number: index + 1, options: [...new Set(
             (q.text.slice(headings[index].index,
@@ -234,12 +261,21 @@
       const selected = responses[q.id];
       const complete = mode.kind === 'choice'
         ? typeof selected === 'string' && mode.options.some(option => option.letter === selected)
+        : mode.kind === 'text' ? Array.isArray(selected) && selected.length === mode.items.length &&
+          selected.every(value => typeof value === 'string' && value.trim())
         : Array.isArray(selected) && selected.length === mode.items.length &&
           selected.every((letter, index) => mode.items[index].options.some(option => option.letter === letter));
       if (!complete) { result.unanswered++; continue; }
       result.attempted++;
-      const correct = mode.kind === 'choice' ? selected === mode.answer :
+      const correct = mode.kind === 'text' ? mode.items.every((item, i) => item.alternatives.some(answer => textMatches(selected[i], answer)))
+        : mode.kind === 'choice' ? selected === mode.answer :
         selected.every((letter, index) => letter === mode.answer[index]);
+      if (mode.manual && !correct) {
+        result.gradable--;
+        result.ungradable++;
+        result.attempted--;
+        continue;
+      }
       result.graded.push({ id: q.id, correct });
       if (correct) result.correct++;
       else result.wrong.push({ id: q.id, selected, answer: mode.answer });
@@ -255,8 +291,16 @@
       }));
       const assigned = groups.flatMap(group => group.questions);
       return { ...day, number: index + 1, groups, total: assigned.length,
+        referenceOnly: assigned.filter(q => questionMode(q).manual).length,
         answerable: assigned.filter(q => questionMode(q).answer != null).length };
     });
+  }
+
+  function textMatches(value, answer) {
+    const normalize = text => String(text).normalize('NFKC').toLowerCase().replace(/[’‘]/g, "'")
+      .replace(/\bdidn't\b/g, 'did not').replace(/\bcan't\b/g, 'cannot').replace(/\byou're\b/g, 'you are')
+      .replace(/[\u0000–—]/g, '-').replace(/[.,!?;:，。？！；：“”"-]/g, ' ').replace(/\s+/g, ' ').trim();
+    return normalize(value) === normalize(answer);
   }
 
   function element(tag, className, value) {
@@ -280,7 +324,7 @@
   function appendQuestion(card, ordinal, text) {
     const line = element('p', 'english-plan-question');
     line.appendChild(element('strong', 'english-plan-number', `第 ${ordinal} 题 · `));
-    line.appendChild(document.createTextNode(String(text).trimStart()));
+    BANK.appendMarkedText(line, String(text).trimStart(), document);
     card.appendChild(line);
   }
 
@@ -308,7 +352,8 @@
       const heading = element('h2', null, `第 ${day.number} 天 · ${day.title}`);
       const topics = element('p', 'english-plan-topics',
         day.groups.map(group => `${group.point.title} ${group.questions.length} 题`).join(' · '));
-      const target = element('p', null, `今日先做：${day.target}；所属原题 ${day.total} 道（可自动判分 ${day.answerable} 道）`);
+      const target = element('p', null, `今日先做：${day.target}；所属原题 ${day.total} 道（可自动判分 ${day.answerable - day.referenceOnly} 道` +
+        (day.referenceOnly ? `，另有 ${day.referenceOnly} 道开放题按参考答案核对` : '') + '）');
       const learn = element('p', null, `学习：${day.learn}`);
       const check = element('p', null, `自检：${day.check}`);
       const record = element('p', 'english-plan-record', '□ 已学知识点　□ 已完成练习　□ 已记录错因　　复测：____ / ____');
@@ -435,6 +480,8 @@
         ordinal++;
         const mode = questionMode(q);
         const card = element('article', `card english-plan-item ${root.Progress.status(PROGRESS_ID, q.id)}`);
+        if (q.answerSource?.kind === 'ai-supplement') card.appendChild(element('p', 'english-plan-answer-note',
+          '本题按 AI 补充参考答案计分，待教师审核。'));
         if (mode.kind === 'choice') {
           appendQuestion(card, ordinal, mode.stem);
           const choices = element('div', 'english-plan-choices');
@@ -456,14 +503,38 @@
           card.appendChild(choices);
           if (!mode.answer) card.appendChild(element('p', 'english-plan-ungraded',
             '这道题的参考答案尚不能可靠核对；选择会保存，但暂不计分。'));
-        } else if (mode.kind === 'cloze' || mode.kind === 'reading-multi') {
+        } else if (mode.kind === 'text') {
+          appendQuestion(card, ordinal, q.text);
+          card.appendChild(element('p', 'english-plan-answer-note', mode.manual
+            ? '按原参考答案自动核对；不同的合理表述不直接计错，提交后请人工核对。'
+            : '按原资料参考答案核对，忽略大小写及标点差异；首字母题可填完整单词。'));
+          const rows = element('div', 'english-plan-cloze');
+          mode.items.forEach((item, index) => {
+            const label = element('label');
+            label.appendChild(element('span', null, `第 ${item.number} ${mode.manual && q.type === 'reading' ? '小题' : '空'}`));
+            const input = element(mode.manual ? 'textarea' : 'input');
+            if (!mode.manual) input.type = 'text';
+            input.setAttribute('aria-label', `第 ${ordinal} 题第 ${item.number} 空`);
+            input.value = Array.isArray(draft[q.id]) ? draft[q.id][index] || '' : '';
+            input.addEventListener('input', () => {
+              if (!unchangedAccount()) return;
+              const values = Array.isArray(draft[q.id]) ? draft[q.id].slice() : new Array(mode.items.length).fill('');
+              values[index] = input.value;
+              onSelect(q.id, values);
+              refreshCount();
+            });
+            label.appendChild(input);
+            rows.appendChild(label);
+          });
+          card.appendChild(rows);
+        } else if (mode.kind === 'cloze' || mode.kind === 'reading-multi' || mode.kind === 'completion' || mode.kind === 'fill-choice') {
           appendQuestion(card, ordinal, mode.kind === 'cloze' ? mode.passage : q.text);
           const rows = element('div', 'english-plan-cloze');
           for (let index = 0; index < mode.items.length; index++) {
             const item = mode.items[index];
             const label = element('label');
             label.appendChild(element('span', null,
-              mode.kind === 'cloze' ? `第 ${item.number} 空` : `第 ${item.number} 小题`));
+              mode.kind === 'reading-multi' ? `第 ${item.number} 小题` : `第 ${item.number} 空`));
             const select = element('select');
             select.setAttribute('aria-label', `第 ${ordinal} 题第 ${item.number} 空`);
             const placeholder = element('option', null, '请选择');
@@ -587,6 +658,22 @@
       for (const [index, wrong] of result.wrong.entries()) {
         appendReview(wrong, index);
       }
+      if (current?.id === result.id) {
+        for (const q of day.groups.flatMap(group => group.questions)) {
+          const mode = questionMode(q), values = state.drafts[day.number]?.[q.id];
+          if (!mode.manual || !Array.isArray(values) || values.length !== mode.items.length ||
+              !values.every(value => typeof value === 'string' && value.trim()) ||
+              mode.items.every((item, i) => item.alternatives.some(answer => textMatches(values[i], answer)))) continue;
+          const card = element('article', 'card english-plan-answer-note');
+          card.appendChild(element('h2', 'group', '需人工核对的简答 · 当前草稿（不计为错题）'));
+          appendQuestion(card, '', q.text);
+          mode.items.forEach((item, i) => {
+            card.appendChild(element('p', 'english-plan-your-answer', `第 ${i + 1} 空，你的作答：${values[i]}`));
+            card.appendChild(element('p', 'english-plan-correct-answer', `原资料参考答案：${item.answer}`));
+          });
+          output.appendChild(card);
+        }
+      }
       const submission = retries.submissions[result.id];
       if (submission) {
         const source = reports.find(report => report.id === submission.sourceId);
@@ -603,7 +690,10 @@
     }
     function appendReview(wrong, index, correct = false) {
         const card = element('article', `card english-plan-review${correct ? ' english-plan-retry-correct' : ''}`);
-        appendQuestion(card, index + 1, wrong.text || byId.get(wrong.id)?.text || '此题原文暂不可用，请根据题号查看原题。');
+        if ((wrong.answerSource || byId.get(wrong.id)?.answerSource)?.kind === 'ai-supplement') {
+          card.appendChild(element('p', 'english-plan-answer-note', 'AI 补充参考答案（待教师审核）'));
+        }
+        appendQuestion(card, index + 1, BANK.restoredText(wrong.text || byId.get(wrong.id)?.text || '此题原文暂不可用，请根据题号查看原题。', byId.get(wrong.id)));
         card.appendChild(element('p', 'english-error-count',
           `累计答错 ${root.Progress.errorCount(PROGRESS_ID, wrong.id)} 次`));
         if (Array.isArray(wrong.answer)) {

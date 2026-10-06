@@ -42,6 +42,7 @@ function setup() {
   function open(view, id = report.id, live = fixtures) {
     class FixedDate extends NativeDate { static now() { return 1000; } }
     const context = { localStorage: storage, EnglishKnowledge: knowledge,
+      EnglishGradingSupplements: require('../content/english/grading-supplements.js'),
       EnglishBank: { ...bank, knowledgeIntro: () => new Node('section') }, Date: FixedDate,
       document: { createElement: tag => new Node(tag), createTextNode: text => {
         const node = new Node('#text'); node.textContent = text; return node;
@@ -71,6 +72,120 @@ function setup() {
   function submit(page) { page.nodes.find(node => node.tag === 'form').events.submit({ preventDefault() {} }); }
   return { fixtures, report, values, storage, daily, open, answer, submit };
 }
+
+test('第 4 天全部可判分，补全对话支持 A～F、范围答案及不完整答案拒绝', () => {
+  const day = plan.buildPlan(questions)[3];
+  assert(day.total === 43 && day.answerable === 43);
+  const completion = day.groups.flatMap(g => g.questions).filter(q => q.type === 'completion');
+  assert(completion.length === 6);
+  for (const q of completion) {
+    const mode = plan.questionMode(q);
+    assert(mode.kind === 'completion' && mode.answer && mode.items.length === mode.answer.length);
+    const one = { groups: [{ questions: [q] }] };
+    assert(plan.gradeDay(one, { [q.id]: mode.answer }).correct === 1);
+    const changed = mode.answer.map((letter, i) => i ? letter : letter === 'A' ? 'B' : 'A');
+    assert(plan.gradeDay(one, { [q.id]: changed }).wrong.length === 1);
+    assert(plan.gradeDay(one, { [q.id]: mode.answer.slice(1) }).unanswered === 1);
+    assert(plan.questionMode({ ...q, answer: '(1) C' }).answer === null);
+  }
+  assert(bank.parseClozeAnswers('1-5 DCABF 6-6 E', 6, 'ABCDEF').join('') === 'DCABFE');
+  assert(bank.parseClozeAnswers('(1) A (1) B (2) C', 2, 'ABCDEF') === null);
+  assert(bank.parseClozeAnswers('(1) A (2) B (3) C', 2, 'ABCDEF') === null);
+  assert(bank.parseClozeAnswers('1-2 A', 2, 'ABCDEF') === null);
+  for (const id of ['xdf-1642f7431764bee5', 'xdf-5a7a5af879a2aa0f']) {
+    const q = questions.find(q => q.id === id);
+    assert(q.answerSource.kind === 'local-original' && q.answerSource.review.status === 'pending');
+    assert(plan.questionMode(q).kind === 'reading-multi');
+  }
+});
+
+test('补全对话旧错题快照可完整重做、提交全对记录，不丢 E/F 选项', () => {
+  const s = setup();
+  const q = questions.find(q => q.id === 'xdf-40f9748ca442c66a');
+  const mode = plan.questionMode(q);
+  const wrong = mode.answer.map(letter => letter === 'A' ? 'B' : 'A');
+  const report = plan.createReport(6, { submittedAt: 500, attempted: 1, correct: 0,
+    unanswered: 0, ungradable: 0, wrong: [{ id: q.id, selected: wrong, answer: mode.answer }] }, [q]);
+  s.values.set('xq.english-plan-prints.v2.guest', JSON.stringify([report]));
+  const page = s.open('retry', report.id, []);
+  const selects = page.nodes.filter(node => node.tag === 'select');
+  assert(selects.length === 6);
+  assert(selects.every(node => node.children.some(option => option.value === 'F')));
+  selects.forEach((node, i) => { node.value = mode.answer[i]; node.events.change(); });
+  s.submit(page);
+  const saved = JSON.parse(s.values.get('xq.english-plan-prints.v2.guest'));
+  assert(saved.length === 2 && saved[1].correct === 1 && saved[1].wrong.length === 0);
+  assert(JSON.stringify(saved[0]) === JSON.stringify(report));
+});
+
+test('第 5～7 天全部有作答入口和参考答案，词形、首字母及配对按整题判分', () => {
+  const all = plan.buildPlan(questions);
+  for (const [i, count] of [[4,51],[5,60],[6,54]]) assert(all[i].total === count && all[i].answerable === count);
+  const config = require('../content/english/grading-supplements.js');
+  for (const [id, entry] of Object.entries(config)) {
+    const q = questions.find(q => q.id === id);
+    const mode = plan.questionMode(q);
+    assert(entry.review.status === 'pending' && /^[a-f0-9]{64}$/.test(entry.source.sha256));
+    const day = { groups: [{ questions: [q] }] };
+    assert(plan.gradeDay(day, { [id]: mode.answer }).correct === 1, id);
+    assert(plan.gradeDay(day, { [id]: [] }).unanswered === 1, id);
+    if (!mode.manual) {
+      const wrong = mode.answer.map((value, i) => i ? value : mode.kind === 'fill-choice' ? value === 'A' ? 'B' : 'A' : 'wrong');
+      assert(plan.gradeDay(day, { [id]: wrong }).wrong.length === 1, id);
+    }
+  }
+  const q = questions.find(q => q.id === 'xdf-55bfdf38d8fc86e1');
+  assert(plan.gradeDay({groups:[{questions:[q]}]}, { [q.id]: ['atural','onnects','onest','ogether','xpect','omething','rotect'] }).correct === 1);
+  const written = questions.find(q => q.id === 'xdf-f5bc76dc94587d1c');
+  assert(plan.gradeDay({groups:[{questions:[written]}]}, { [written.id]: ['if we respect cultural differences, we can communicate more effectively!'] }).correct === 1);
+  const unmatched = plan.gradeDay({groups:[{questions:[written]}]}, { [written.id]: ['An alternative sentence.'] });
+  assert(unmatched.wrong.length === 0 && unmatched.ungradable === 1 && unmatched.graded.length === 0);
+  const formats = require('../content/english/question-format-transcripts.json').entries;
+  for (const entry of formats) {
+    const q = questions.find(q => q.id === entry.id);
+    assert(q.text === entry.text && entry.review.status === 'pending');
+    assert(/^[a-f0-9]{64}$/.test(entry.source.sha256));
+  }
+  const table = questions.find(q => q.id === 'xdf-61d6242ab2068692');
+  assert(plan.questionMode(table).items.length === 6 && table.text.includes('G. Young Heroes'));
+  assert(plan.questionMode(table).items[0].options.some(o => o.letter === 'G'));
+  const index = fs.readFileSync(path.join(__dirname, '../index.html'), 'utf8');
+  assert(index.indexOf('content/english/grading-supplements.js') < index.indexOf('src/english-plan.js'));
+});
+
+test('词形填空错题快照重做保留全部输入与原答案，提交追加新记录', () => {
+  const s = setup();
+  const q = questions.find(q => q.id === 'xdf-ea944a991fc6725a');
+  const answer = plan.questionMode(q).answer;
+  const report = plan.createReport(6, { submittedAt: 500, attempted: 1, correct: 0,
+    unanswered: 0, ungradable: 0, wrong: [{ id: q.id, selected: answer.map(() => 'wrong'), answer }] }, [q]);
+  s.values.set('xq.english-plan-prints.v2.guest', JSON.stringify([report]));
+  const page = s.open('retry', report.id, []);
+  const inputs = page.nodes.filter(node => node.tag === 'input' && node.type === 'text');
+  assert(inputs.length === 6 && inputs.every(node => !node.value));
+  inputs.forEach((node, i) => { node.value = answer[i].toUpperCase(); node.events.input(); });
+  s.submit(page);
+  const saved = JSON.parse(s.values.get('xq.english-plan-prints.v2.guest'));
+  assert(saved.length === 2 && saved[1].correct === 1 && saved[1].wrong.length === 0);
+  assert(JSON.stringify(saved[0]) === JSON.stringify(report));
+  const restored = page.context.EnglishPlan.retryQuestions(report, [q]);
+  assert(page.context.EnglishPlan.questionMode(restored[0]).answer.join('|') === answer.join('|'));
+});
+
+test('开放对话不同表述不误计错，最近结果显示当前草稿和参考答案并在打印时隐藏', () => {
+  const s = setup();
+  const q = questions.find(q => q.id === 'xdf-0bd1c3497fa6a10c');
+  const mode = plan.questionMode(q);
+  const values = mode.answer.map((value, i) => i ? value : 'A different valid expression');
+  const score = plan.gradeDay({groups:[{questions:[q]}]}, { [q.id]: values });
+  assert(score.wrong.length === 0 && score.ungradable === 1 && score.graded.length === 0);
+  s.values.set('xq.english-plan.v2.guest', JSON.stringify({ drafts: {6:{[q.id]:values}}, results:{6:{...score,submittedAt:800}} }));
+  const result = s.open('result', '6-800', questions);
+  assert(result.main.textContent.includes('需人工核对') && result.main.textContent.includes(values[0]));
+  assert(result.main.textContent.includes(mode.answer[0]));
+  const panel = result.nodes.find(n => n.tag === 'article' && n.className === 'card english-plan-answer-note');
+  assert(panel && !panel.className.includes('english-plan-review'));
+});
 
 test('提交记录重做按原快照还原单选、完形、阅读，不预选或泄露答案', () => {
   const s = setup();
