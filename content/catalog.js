@@ -325,10 +325,10 @@ Content.catalog = {
                   no: 23,
                   title: '四边形',
                   sections: [
-                    { no: '23.1', title: '多边形', ready: false },
-                    { no: '23.2', title: '平行四边形', ready: false },
-                    { no: '23.3', title: '矩形、菱形与正方形', ready: false },
-                    { no: '23.4', title: '三角形的中位线与重心', ready: false },
+                    { no: '23.1', title: '多边形', ready: true },
+                    { no: '23.2', title: '平行四边形', ready: true },
+                    { no: '23.3', title: '矩形、菱形与正方形', ready: true },
+                    { no: '23.4', title: '三角形的中位线与重心', ready: true },
                   ],
                 },
                 {

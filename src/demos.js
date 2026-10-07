@@ -1784,7 +1784,508 @@
     return s;
   }
 
-  const TYPES = { foldCut, numberLineFold, angleFold, ropeCut, motion, sweep, rotOverlap, billiard, scaleOrder, solutionSet, vertAngles, parallelAngles, angleSum, ssaSwing, perpBisector, rtMedian, hlCongruent, ladderSlide, bisectorDist, incenter, pythagorasProof, perpShortest };
+  // ---------- 四边形（第 23 章） ----------
+  const PURPLE23 = '#8a5cc2', ORANGE23 = '#d08a1e';
+  const fmt23 = v => num22(Math.round(v * 100) / 100);
+  const rad23 = d => (d * Math.PI) / 180;
+  // 屏幕方向角（度，y 向下）规范到 (−180, 180]
+  const norm23 = d => { while (d > 180) d -= 360; while (d <= -180) d += 360; return d; };
+  const head23 = (p, q) => (Math.atan2(q[1] - p[1], q[0] - p[0]) * 180) / Math.PI;
+  // 角 ∠PVQ 的扇形（取小于平角的一侧）
+  const wedge23 = (V, P, Q, r, color, op = 0.28) => `<polygon points="${polyAttr(wedgePts(V, P, Q, r))}" fill="${color}" fill-opacity="${op}" stroke="${color}" stroke-width="0.8"/>`;
+  // 角 ∠PVQ 的平分线方向（单位向量）
+  const bis23 = (V, P, Q) => unit22([0, 0], add22(unit22(V, P), unit22(V, Q)));
+  // 平行四边形 ABCD：AB 水平，∠A=ang，整体（外接矩形）中心在 (cx, cy)
+  function pg23(ab, ad, ang, u, cx, cy) {
+    const c = Math.cos(rad23(ang)), sn = Math.sin(rad23(ang));
+    const xmin = Math.min(0, ad * c), xmax = Math.max(ab, ab + ad * c);
+    const A = [cx - ((xmin + xmax) / 2) * u, cy + (ad * sn * u) / 2];
+    const B = [A[0] + ab * u, A[1]], D = [A[0] + ad * c * u, A[1] - ad * sn * u];
+    const C = [B[0] + D[0] - A[0], B[1] + D[1] - A[1]];
+    return { A, B, C, D, O: mid22(A, C) };
+  }
+  // 顶点名字标在远离中心 O 的方向
+  const vlab23 = (V, O, t, k = 13, color = INK) => { const d = unit22(O, V); return tx22(V, t, d[0] * k, d[1] * k + 4, color); };
+  // 线段长度标在远离中心 O 的一侧
+  const slab23 = (P, Q, O, t, color = INK, k = 12) => {
+    const m = mid22(P, Q), d = unit22(P, Q);
+    let nv = [-d[1], d[0]];
+    if (nv[0] * (m[0] - O[0]) + nv[1] * (m[1] - O[1]) < 0) nv = [-nv[0], -nv[1]];
+    return tx22(m, t, nv[0] * k, nv[1] * k + 4, color, 12);
+  };
+
+  // 多边形的外角和（23.1）：小箭头沿边走一圈，每到一个顶点转过一个外角，一共转 360°；再把多边形缩成一点，外角拼成周角
+  // opts.sides 默认边数（3～6）
+  function exteriorWalk(container, opts) {
+    const W = 300, H = 220;
+    const shapes = [
+      { name: '三角形', pts: [[55, 185], [245, 168], [120, 42]] },
+      { name: '四边形', pts: [[50, 172], [228, 192], [258, 78], [108, 42]] },
+      { name: '五边形', pts: [[75, 192], [214, 194], [264, 112], [166, 30], [46, 96]] },
+      { name: '六边形', pts: [[86, 194], [200, 198], [264, 140], [238, 58], [128, 30], [42, 112]] },
+    ];
+    let sh = shapes[Math.max(0, Math.min(3, (opts.sides || 3) - 3))];
+    const COLORS = [RED, BLUE, GREEN, PURPLE23, ORANGE23, ROPE];
+    const s = shell(container, { w: W, h: H, aria: '多边形外角和等于 360° 的演示', controls: '<span class="demo-row"><span class="seg"></span></span>' });
+    // 每个顶点：进来的方向、出去的方向、转过的角（带符号）和外角的度数（取整后凑足 360）
+    const info = () => {
+      const P = sh.pts, n = P.length;
+      const v = P.map((V, i) => {
+        const hin = head23(P[(i + n - 1) % n], V), hout = head23(V, P[(i + 1) % n]);
+        return { V, hin, hout, turn: norm23(hout - hin) };
+      });
+      const r = v.map(x => Math.round(Math.abs(x.turn)));
+      let big = 0;
+      r.forEach((x, i) => { if (x > r[big]) big = i; });
+      r[big] += 360 - r.reduce((a, b) => a + b, 0);
+      v.forEach((x, i) => { x.deg = r[i]; });
+      return v;
+    };
+    const START = () => {
+      const v = info();
+      return `${sh.name}的外角：${v.map(x => `${x.deg}°`).join('+')}=360°。点「播放」，沿着边走一圈`;
+    };
+    segButtons(s.box.querySelector('.seg'), shapes.map(x => x.name), sh.name, (v, i) => { sh = shapes[i]; s.reset(); draw(FULL(), START()); });
+    const FULL = () => ({ edge: sh.pts.map(() => 1), turn: sh.pts.map(() => 1), pos: null, heading: 0, shrink: 0 });
+    const phases = () => {
+      const n = sh.pts.length, ph = [{ k: 'wait', dur: 300 }];
+      for (let i = 0; i < n; i++) ph.push({ k: 'm', i, dur: 750 }, { k: 't', i: (i + 1) % n, dur: 700 });
+      ph.push({ k: 'hold', dur: 900 }, { k: 'shrink', dur: 1800 }, { k: 'end', dur: 400 });
+      return ph;
+    };
+    function draw(st, cap) {
+      const v = info(), P = sh.pts, n = P.length;
+      const G = [P.reduce((a, p) => a + p[0], 0) / n, P.reduce((a, p) => a + p[1], 0) / n];
+      const e = ease(st.shrink), k = 1 - e;
+      const Q = P.map(p => [G[0] + (p[0] - G[0]) * k, G[1] + (p[1] - G[1]) * k]);
+      let html = '';
+      if (k > 0.02) {
+        html += poly22(Q, INK, 0.05, 0) + `<polygon points="${polyAttr(Q)}" fill="none" stroke="${MUTED}" stroke-width="1.2"/>`;
+        if (st.shrink === 0) st.edge.forEach((f, i) => { if (f > 0) html += ln22(P[i], [lerp(P[i][0], P[(i + 1) % n][0], f), lerp(P[i][1], P[(i + 1) % n][1], f)], INK, 2.4); });
+      }
+      const r = 24 + 34 * e;
+      v.forEach((x, i) => {
+        const f = st.turn[i];
+        if (f <= 0) return;
+        const V = Q[i], din = [Math.cos(rad23(x.hin)), Math.sin(rad23(x.hin))];
+        const hd = x.hin + x.turn * f, dcur = [Math.cos(rad23(hd)), Math.sin(rad23(hd))];
+        if (e < 1) html += `<g opacity="${(1 - e).toFixed(2)}">${ln22(V, add22(V, din, 34), MUTED, 1.2, '4 3')}</g>`;
+        if (Math.abs(x.turn * f) > 0.5) html += wedge23(V, add22(V, din, 10), add22(V, dcur, 10), r, COLORS[i], 0.35);
+        if (f >= 1) {
+          const b = bis23(V, add22(V, din, 10), add22(V, dcur, 10));
+          html += tx22(V, `${x.deg}°`, b[0] * lerp(r + 12, r * 0.62, e), b[1] * lerp(r + 12, r * 0.62, e) + 4, COLORS[i], 11);
+        }
+      });
+      if (st.pos) {
+        const d = [Math.cos(rad23(st.heading)), Math.sin(rad23(st.heading))], nv = [-d[1], d[0]];
+        const tip = add22(st.pos, d, 10), b = add22(st.pos, d, -5);
+        html += `<polygon points="${polyAttr([tip, add22(b, nv, 6), add22(b, nv, -6)])}" fill="${RED}" stroke="#fff" stroke-width="1"/>`;
+      }
+      if (k > 0.3) {
+        const names = 'ABCDEF';
+        Q.forEach((V, i) => { html += `<g opacity="${clamp01((k - 0.3) / 0.7).toFixed(2)}">${vlab23(V, G, names[i], 12, MUTED)}</g>`; });
+      }
+      if (e >= 1) html += dot22(G);
+      s.svg.innerHTML = html;
+      s.caption.textContent = cap;
+    }
+    s.frame = ms => {
+      const v = info(), n = sh.pts.length;
+      const st = { edge: sh.pts.map(() => 0), turn: sh.pts.map(() => 0), pos: sh.pts[0], heading: v[0].hout, shrink: 0 };
+      let cap = '箭头从 A 出发，沿着边往前走';
+      walk(phases(), ms, (p, f) => {
+        if (p.k === 'm') {
+          const A = sh.pts[p.i], B = sh.pts[(p.i + 1) % n];
+          st.edge[p.i] = ease(f);
+          st.pos = [lerp(A[0], B[0], ease(f)), lerp(A[1], B[1], ease(f))];
+          st.heading = v[p.i].hout;
+        }
+        if (p.k === 't') {
+          st.turn[p.i] = ease(f);
+          st.pos = sh.pts[p.i];
+          st.heading = v[p.i].hin + v[p.i].turn * ease(f);
+        }
+        if (p.k === 'm' || p.k === 't') {
+          let sum = 0;
+          v.forEach((x, i) => { sum += st.turn[i] >= 1 ? x.deg : Math.round(x.deg * st.turn[i]); });
+          cap = `每到一个顶点就转向，转过的就是这个顶点处的外角：已转 ${sum}°`;
+        }
+        if (p.k === 'hold') cap = `回到 A，方向和出发时一样，正好转了一整圈：${v.map(x => `${x.deg}°`).join('+')}=360°`;
+        if (p.k === 'shrink' || p.k === 'end') { st.pos = null; st.shrink = f; cap = `把${sh.name}缩小到一点：${n} 个外角正好拼成一个周角，外角和是 360°，和边数无关`; }
+      });
+      draw(st, cap);
+    };
+    s.duration = () => totalOf(phases());
+    s.reset();
+    draw(FULL(), START());
+    return s;
+  }
+
+  // 平行四边形的性质（23.2）：滑块控制 AB、AD 和 ∠A，实时显示对边、对角、对角线被交点分成的两段
+  // opts.ab、opts.ad（格）、opts.angle 初始值
+  function parallelogramDrag(container, opts) {
+    const W = 300, H = 176;
+    let ab = opts.ab || 5, ad = opts.ad || 3, ang = opts.angle || 60;
+    const s = shell(container, {
+      w: W, h: H, aria: '平行四边形对边相等、对角相等、对角线互相平分的演示',
+      controls: '<label class="demo-row"><span>AB</span><input type="range" min="3" max="7" step="0.5"><b class="demo-val"></b></label>' +
+        '<label class="demo-row"><span>AD</span><input type="range" min="2" max="5" step="0.5"><b class="demo-val"></b></label>' +
+        '<label class="demo-row"><span>∠A</span><input type="range" min="30" max="150" step="1"><b class="demo-val"></b></label>',
+    });
+    const [rAB, rAD, rAng] = s.box.querySelectorAll('input');
+    const [vAB, vAD, vAng] = s.box.querySelectorAll('.demo-val');
+    rAB.value = ab; rAD.value = ad; rAng.value = ang;
+    rAB.addEventListener('input', () => { s.reset(); ab = Number(rAB.value); draw(ab, ad, ang); });
+    rAD.addEventListener('input', () => { s.reset(); ad = Number(rAD.value); draw(ab, ad, ang); });
+    rAng.addEventListener('input', () => { s.reset(); ang = Number(rAng.value); draw(ab, ad, ang); });
+    function draw(x, y, a) {
+      x = Math.round(x * 100) / 100; y = Math.round(y * 100) / 100; a = Math.round(a);
+      // 图形尽量画大：按外接矩形的宽、高定比例（长度都用格数显示，不受缩放影响）
+      const cs = Math.cos(rad23(a)), sn = Math.sin(rad23(a));
+      const u = Math.min(34, 256 / (Math.max(x, x + y * cs) - Math.min(0, y * cs)), 132 / (y * sn));
+      const { A, B, C, D, O } = pg23(x, y, a, u, W / 2, H / 2 + 2);
+      let html = poly22([A, B, C, D], INK, 0.05, 0);
+      html += wedge23(A, B, D, 17, RED) + wedge23(C, D, B, 17, RED) + wedge23(B, C, A, 17, BLUE) + wedge23(D, A, C, 17, BLUE);
+      html += ln22(A, C, GREEN, 1.6, '5 3') + ln22(B, D, PURPLE23, 1.6, '5 3');
+      html += tick22(A, O, GREEN) + tick22(O, C, GREEN) + tick22(B, O, PURPLE23, 2) + tick22(O, D, PURPLE23, 2);
+      html += `<polygon points="${polyAttr([A, B, C, D])}" fill="none" stroke="${INK}" stroke-width="2.2" stroke-linejoin="round"/>`;
+      html += dot22(O) + tx22(O, 'O', 0, -7, INK, 12);
+      const angLab = (V, P, Q, t, color) => { const b = bis23(V, P, Q); return tx22(V, t, b[0] * 31, b[1] * 31 + 4, color, 11); };
+      html += angLab(A, B, D, `${a}°`, RED) + angLab(C, D, B, `${a}°`, RED) + angLab(B, C, A, `${180 - a}°`, BLUE) + angLab(D, A, C, `${180 - a}°`, BLUE);
+      html += slab23(A, B, O, num22(x)) + slab23(D, C, O, num22(x)) + slab23(A, D, O, num22(y)) + slab23(B, C, O, num22(y));
+      html += vlab23(A, O, 'A') + vlab23(B, O, 'B') + vlab23(C, O, 'C') + vlab23(D, O, 'D');
+      s.svg.innerHTML = html;
+      vAB.textContent = num22(x); vAD.textContent = num22(y); vAng.textContent = `${a}°`;
+      const oa = dist22(A, O) / u, ob = dist22(B, O) / u;
+      const note = a === 90 && x === y ? '（这时是正方形）' : a === 90 ? '（这时是矩形）' : x === y ? '（这时是菱形）' : '';
+      s.caption.textContent = `AB=CD=${num22(x)}，AD=BC=${num22(y)}；∠A=∠C=${a}°，∠B=∠D=${180 - a}°；OA=OC=${fmt23(oa)}，OB=OD=${fmt23(ob)}${note}`;
+    }
+    // 播放：依次改变 AB、AD、∠A，各自变大、变小再回到原来的值
+    const phases = () => [
+      { k: 'ab', from: ab, to: 7, dur: 900 }, { k: 'ab', from: 7, to: 3, dur: 1300 }, { k: 'ab', from: 3, to: ab, dur: 800 },
+      { k: 'ad', from: ad, to: 5, dur: 900 }, { k: 'ad', from: 5, to: 2, dur: 1200 }, { k: 'ad', from: 2, to: ad, dur: 800 },
+      { k: 'ang', from: ang, to: 150, dur: 1300 }, { k: 'ang', from: 150, to: 30, dur: 2000 }, { k: 'ang', from: 30, to: ang, dur: 1100 },
+    ];
+    s.frame = ms => {
+      const cur = { ab, ad, ang };
+      walk(phases(), ms, (p, f) => { cur[p.k] = lerp(p.from, p.to, ease(f)); });
+      draw(cur.ab, cur.ad, cur.ang);
+      rAB.value = cur.ab; rAD.value = cur.ad; rAng.value = Math.round(cur.ang);
+    };
+    s.duration = () => totalOf(phases());
+    s.reset();
+    draw(ab, ad, ang);
+    return s;
+  }
+
+  // 平行四边形 → 矩形、菱形、正方形（23.3）：按钮切换时夹角变到 90°、邻边变相等；画对角线，显示长度和夹角
+  function quadFamily(container) {
+    const W = 300, H = 200, u = 30;
+    const T = [
+      { name: '平行四边形', ab: 5, ad: 3, ang: 60 },
+      { name: '有一个角是直角（矩形）', ab: 5, ad: 3, ang: 90 },
+      { name: '邻边相等（菱形）', ab: 4, ad: 4, ang: 60 },
+      { name: '两者都有（正方形）', ab: 4, ad: 4, ang: 90 },
+    ];
+    let cur = { ab: 5, ad: 3, ang: 60 }, rest = { ...cur }, tw = 0;
+    const s = shell(container, { w: W, h: H, aria: '平行四边形、矩形、菱形、正方形的对角线性质演示', controls: '<span class="demo-row"><span class="seg"></span></span>' });
+    const seg = s.box.querySelector('.seg');
+    const markSeg = i => seg.querySelectorAll('button').forEach((b, j) => b.classList.toggle('selected', i === j));
+    const mixState = (a, b, f) => ({ ab: lerp(a.ab, b.ab, f), ad: lerp(a.ad, b.ad, f), ang: lerp(a.ang, b.ang, f) });
+    segButtons(seg, T.map(x => x.name), T[0].name, (v, i) => {
+      s.reset();
+      cancelAnimationFrame(tw);
+      const from = { ...cur }, t0 = performance.now();
+      rest = { ...T[i] };
+      const step = now => {
+        const f = clamp01((now - t0) / 900);
+        cur = mixState(from, T[i], ease(f));
+        draw();
+        if (f < 1) tw = requestAnimationFrame(step);
+      };
+      tw = requestAnimationFrame(step);
+    });
+    function draw() {
+      const right = Math.abs(cur.ang - 90) < 0.5, eq = Math.abs(cur.ab - cur.ad) < 0.02;
+      const { A, B, C, D, O } = pg23(cur.ab, cur.ad, cur.ang, u, W / 2, 114);
+      const ac = dist22(A, C) / u, bd = dist22(B, D) / u;
+      const aob = angDeg(O, A, B), perp = Math.abs(aob - 90) < 0.5;
+      let html = poly22([A, B, C, D], INK, 0.05, 0);
+      if (eq) {
+        html += wedge23(A, B, C, 20, RED, 0.25) + wedge23(A, C, D, 20, RED, 0.25) + wedge23(C, A, B, 20, RED, 0.25) + wedge23(C, D, A, 20, RED, 0.25);
+        if (!right) html += wedge23(B, C, D, 16, BLUE, 0.25) + wedge23(B, D, A, 16, BLUE, 0.25) + wedge23(D, A, B, 16, BLUE, 0.25) + wedge23(D, B, C, 16, BLUE, 0.25);
+        html += tick22(A, B) + tick22(B, C) + tick22(C, D) + tick22(D, A);
+      }
+      html += ln22(A, C, RED, 2) + ln22(B, D, BLUE, 2);
+      html += `<polygon points="${polyAttr([A, B, C, D])}" fill="none" stroke="${INK}" stroke-width="2.2" stroke-linejoin="round"/>`;
+      if (right) [[A, B, D], [B, C, A], [C, D, B], [D, A, C]].forEach(([V, P, Q]) => { html += rt22(V, unit22(V, P), unit22(V, Q), 9); });
+      else html += tx22(A, `${Math.round(cur.ang)}°`, bis23(A, B, D)[0] * 34, bis23(A, B, D)[1] * 34 + 4, INK, 11);
+      if (perp) html += rt22(O, unit22(O, A), unit22(O, B), 8);
+      else html += wedge23(O, A, B, 13, GREEN, 0.35);
+      html += dot22(O) + vlab23(A, O, 'A') + vlab23(B, O, 'B') + vlab23(C, O, 'C') + vlab23(D, O, 'D');
+      html += `<text x="${W / 2}" y="17" font-size="13" text-anchor="middle" font-weight="bold"><tspan fill="${RED}">AC=${fmt23(ac)}</tspan>　<tspan fill="${BLUE}">BD=${fmt23(bd)}</tspan>　<tspan fill="${GREEN}">∠AOB=${Math.round(aob)}°</tspan></text>`;
+      s.svg.innerHTML = html;
+      s.caption.textContent = right && eq
+        ? '正方形：既是矩形又是菱形，对角线相等、互相垂直平分，每条对角线平分一组对角'
+        : right
+          ? `矩形：四个角都是直角，对角线相等（AC=BD=${fmt23(ac)}），并且互相平分`
+          : eq
+            ? '菱形：四条边相等，对角线互相垂直平分，每条对角线平分一组对角（同色的两个角相等）'
+            : `平行四边形：对角线互相平分，但 AC=${fmt23(ac)}、BD=${fmt23(bd)} 不相等，也不垂直`;
+    }
+    // 播放：平行四边形 → 矩形 → 正方形 → 菱形 → 平行四边形，每种停一下
+    const order = [1, 3, 2, 0];
+    const phases = () => {
+      const ph = [];
+      let from = rest;
+      for (const i of order) { ph.push({ k: 'go', from, to: T[i], i, dur: 1100 }, { k: 'hold', i, dur: 1300 }); from = T[i]; }
+      return ph;
+    };
+    s.frame = ms => {
+      cancelAnimationFrame(tw);
+      let st = rest, sel = -1;
+      walk(phases(), ms, (p, f) => {
+        if (p.k === 'go') st = mixState(p.from, p.to, ease(f));
+        if (p.k === 'hold') sel = p.i;
+      });
+      cur = st;
+      if (sel >= 0) markSeg(sel);
+      if (ms >= s.duration()) rest = { ...T[0] };
+      draw();
+    };
+    s.duration = () => totalOf(phases());
+    s.reset();
+    draw();
+    return s;
+  }
+
+  // 三角形中位线定理（23.4）：△ADE 绕 E 旋转 180° 到 △CFE，DBCF 是平行四边形，于是 DE∥BC、DE=½BC
+  function midlineRotate(container) {
+    const W = 310, H = 240, u = 28;
+    const A = [80, 30], B = [36, 190], C = [260, 190];
+    const D = mid22(A, B), E = mid22(A, C), F = [2 * E[0] - D[0], 2 * E[1] - D[1]];
+    const de = dist22(D, E) / u, bc = dist22(B, C) / u;
+    const s = shell(container, { w: W, h: H, aria: '用旋转证明三角形中位线定理的演示' });
+    const START = `D、E 是 AB、AC 的中点：DE=${fmt23(de)}，BC=${fmt23(bc)}，DE∥BC。为什么？点「播放」看课本的证法`;
+    const CAP = {
+      de: 'D、E 分别是 AB、AC 的中点，连接 DE',
+      rot: '把 △ADE 绕点 E 旋转 180°：EA=EC，A 落到 C；D 落到 F，D、E、F 在一条直线上，EF=DE',
+      cf: 'CF=AD=DB，∠ECF=∠A，所以 CF∥AB：CF 和 DB 平行且相等',
+      pg: '一组对边平行且相等的四边形是平行四边形：四边形 DBCF 是平行四边形',
+      end: `所以 DF∥BC、DF=BC；DE 是 DF 的一半，于是 DE∥BC，DE=½BC=${fmt23(de)}`,
+    };
+    const phases = [{ k: 'wait', dur: 300 }, { k: 'de', dur: 900 }, { k: 'rot', dur: 2000 }, { k: 'hold', dur: 500 }, { k: 'cf', dur: 1400 }, { k: 'pg', dur: 1400 }, { k: 'end', dur: 1600 }];
+    function draw(fr, cap) {
+      let html = '';
+      if (fr.pg > 0) html += `<g opacity="${ease(fr.pg).toFixed(2)}">${poly22([D, B, C, F], GREEN, 0.18, 0)}</g>`;
+      html += poly22([A, D, E], RED, fr.rot > 0 ? 0.1 : 0.04, 0);
+      if (fr.rot > 0) {
+        const e = ease(fr.rot);
+        const R = [A, D, E].map(p => rotPt(p, E, -180 * e));
+        html += poly22(R, RED, 0.28, 1.4);
+      }
+      html += `<polygon points="${polyAttr([A, B, C])}" fill="none" stroke="${INK}" stroke-width="2" stroke-linejoin="round"/>`;
+      if (fr.cf > 0) {
+        const o = ease(fr.cf).toFixed(2);
+        html += `<g opacity="${o}">${ln22(D, B, BLUE, 3.2)}${ln22(C, F, BLUE, 3.2)}${tick22(A, D)}${tick22(D, B, BLUE)}${tick22(C, F, BLUE)}` +
+          `${wedge23(A, B, C, 20, ORANGE23, 0.4)}${wedge23(C, A, F, 20, ORANGE23, 0.4)}</g>`;
+      }
+      if (fr.rot >= 1) html += ln22(E, F, GREEN, 2.2, '6 4') + dot22(F) + tx22(F, 'F', 10, 4);
+      if (fr.pg > 0) html += `<g opacity="${ease(fr.pg).toFixed(2)}">${ln22(D, F, GREEN, 2.6)}${ln22(B, C, GREEN, 2.6)}</g>`;
+      if (fr.de > 0) {
+        html += ln22(D, add22(D, unit22(D, E), dist22(D, E) * ease(fr.de)), GREEN, 2.6);
+        html += dot22(D) + dot22(E) + tx22(D, 'D', -11, 4) + tx22(E, 'E', 2, -9);
+      }
+      if (fr.lab) html += tx22(mid22(D, E), `DE=${fmt23(de)}`, 0, 17, GREEN, 12) + tx22(mid22(B, C), `BC=${fmt23(bc)}`, 0, 18, GREEN, 12);
+      html += tx22(A, 'A', 0, -8) + tx22(B, 'B', -10, 5) + tx22(C, 'C', 10, 5);
+      s.svg.innerHTML = html;
+      s.caption.textContent = cap;
+    }
+    s.frame = ms => {
+      const fr = { de: 0, rot: 0, cf: 0, pg: 0, lab: false };
+      let cap = START;
+      walk(phases, ms, (p, f) => {
+        if (p.k in fr) fr[p.k] = f;
+        if (CAP[p.k]) cap = CAP[p.k];
+        if (p.k === 'end') fr.lab = true;
+      });
+      draw(fr, cap);
+    };
+    s.duration = () => totalOf(phases);
+    s.reset();
+    draw({ de: 1, rot: 0, cf: 0, pg: 0, lab: true }, START);
+    return s;
+  }
+
+  // 中点四边形（23.4 中位线的应用）：拖动任意四边形 ABCD 的顶点，四边中点 E、F、G、H 连成平行四边形；
+  // 对角线相等时是菱形，互相垂直时是矩形，两者都有时是正方形。播放时顶点按预设路径走，经过这些特殊情况并停一下
+  function varignon(container) {
+    const W = 300, H = 244;
+    const KEYS = [
+      { A: [70, 52], B: [40, 182], C: [262, 204], D: [214, 40] },   // 一般
+      { A: [60, 60], B: [50, 170], C: [240, 190], D: [237, 50] },   // 对角线相等 → 菱形
+      { A: [44, 110], B: [130, 222], C: [244, 130], D: [150, 22] }, // 相等且垂直 → 正方形
+      { A: [60, 112], B: [150, 205], C: [250, 112], D: [150, 35] }, // 垂直 → 矩形
+    ];
+    const NAMES = ['A', 'B', 'C', 'D'];
+    const copy = k => ({ A: [...k.A], B: [...k.B], C: [...k.C], D: [...k.D] });
+    let base = copy(KEYS[0]), cur = copy(base), drag = null;
+    const s = shell(container, { w: W, h: H, aria: '任意四边形各边中点连成平行四边形的演示，可以拖动顶点' });
+    s.svg.style.touchAction = 'none';
+    s.svg.style.userSelect = 'none';
+    const at = e => {
+      const m = s.svg.getScreenCTM();
+      if (!m) return [0, 0];
+      const pt = s.svg.createSVGPoint();
+      pt.x = e.clientX; pt.y = e.clientY;
+      const r = pt.matrixTransform(m.inverse());
+      return [r.x, r.y];
+    };
+    s.svg.addEventListener('pointerdown', e => {
+      const p = at(e);
+      let best = null, bd = 26;
+      for (const k of NAMES) { const d = dist22(p, cur[k]); if (d < bd) { bd = d; best = k; } }
+      if (!best) return;
+      s.reset();
+      base = copy(cur);
+      drag = best;
+      e.preventDefault();
+      try { s.svg.setPointerCapture(e.pointerId); } catch (err) { /* 忽略 */ }
+    });
+    s.svg.addEventListener('pointermove', e => {
+      if (!drag) return;
+      const p = at(e);
+      base[drag] = [Math.max(10, Math.min(W - 10, p[0])), Math.max(10, Math.min(H - 10, p[1]))];
+      cur = copy(base);
+      draw();
+    });
+    const up = () => { drag = null; };
+    s.svg.addEventListener('pointerup', up);
+    s.svg.addEventListener('pointercancel', up);
+    function draw() {
+      const { A, B, C, D } = cur;
+      const E = mid22(A, B), F = mid22(B, C), G = mid22(C, D), Hm = mid22(D, A);
+      const Ct = mid22(mid22(A, C), mid22(B, D));
+      const ac = dist22(A, C) / 20, bd = dist22(B, D) / 20;
+      const ang = angDeg([0, 0], [C[0] - A[0], C[1] - A[1]], [D[0] - B[0], D[1] - B[1]]);
+      const eq = Math.abs(ac - bd) / Math.max(ac, bd) < 0.012, perp = Math.abs(ang - 90) < 1.5;
+      const kind = eq && perp ? '正方形' : eq ? '菱形' : perp ? '矩形' : '平行四边形';
+      let html = poly22([E, F, G, Hm], GREEN, eq || perp ? 0.3 : 0.18, 0);
+      html += ln22(A, C, RED, 1.5, '5 4') + ln22(B, D, BLUE, 1.5, '5 4');
+      html += `<polygon points="${polyAttr([A, B, C, D])}" fill="none" stroke="${INK}" stroke-width="2" stroke-linejoin="round"/>`;
+      html += ln22(E, F, RED, 2.2) + ln22(Hm, G, RED, 2.2) + ln22(E, Hm, BLUE, 2.2) + ln22(F, G, BLUE, 2.2);
+      html += tick22(E, F, RED) + tick22(Hm, G, RED) + tick22(E, Hm, BLUE, 2) + tick22(F, G, BLUE, 2);
+      if (perp) html += rt22(E, unit22(E, F), unit22(E, Hm), 8);
+      [[E, 'E'], [F, 'F'], [G, 'G'], [Hm, 'H']].forEach(([p, t]) => { html += dot22(p, GREEN) + vlab23(p, Ct, t, 12, GREEN); });
+      NAMES.forEach(k => {
+        html += `<circle cx="${f22(cur[k][0])}" cy="${f22(cur[k][1])}" r="9" fill="${ORANGE23}" fill-opacity="0.22"/>` + dot22(cur[k], INK);
+        html += vlab23(cur[k], Ct, k, 15);
+      });
+      s.svg.innerHTML = html;
+      const head = `EF∥AC∥HG，EF=HG=½AC=${fmt23(ac / 2)}；EH∥BD∥FG，EH=FG=½BD=${fmt23(bd / 2)}：EFGH 是平行四边形`;
+      s.caption.textContent = kind === '正方形'
+        ? `${head}。对角线 AC=BD 且 AC⊥BD，EFGH 是正方形`
+        : kind === '菱形'
+          ? `${head}。对角线 AC=BD=${fmt23(ac)}，所以 EF=EH，EFGH 是菱形`
+          : kind === '矩形'
+            ? `${head}。对角线 AC⊥BD，所以 EF⊥EH，EFGH 是矩形`
+            : `${head}。拖动 A、B、C、D 试试`;
+    }
+    const mixQ = (p, q, f) => { const r = {}; for (const k of NAMES) r[k] = [lerp(p[k][0], q[k][0], f), lerp(p[k][1], q[k][1], f)]; return r; };
+    // 播放：回到一般位置 → 菱形 → 正方形 → 矩形 → 一般位置
+    const phases = () => {
+      const ph = [], seq = [0, 1, 2, 3, 0];
+      let from = base;
+      seq.forEach((i, j) => { ph.push({ k: 'go', from, to: KEYS[i], dur: j === 0 ? 800 : 1500 }, { k: 'hold', dur: j === 0 ? 400 : 1500 }); from = KEYS[i]; });
+      return ph;
+    };
+    s.frame = ms => {
+      let st = base;
+      walk(phases(), ms, (p, f) => { if (p.k === 'go') st = mixQ(p.from, p.to, ease(f)); });
+      cur = copy(st);
+      if (ms >= s.duration()) base = copy(KEYS[0]);
+      draw();
+    };
+    s.duration = () => totalOf(phases());
+    s.reset();
+    draw();
+    return s;
+  }
+
+  // 三角形的重心（23.4 中位线的应用）：依次画三条中线，交于 G，AG∶GD=BG∶GE=CG∶GF=2∶1
+  // opts.shapes 可选：[{ name, A, B, C }]
+  function centroid(container, opts) {
+    const W = 310, H = 215, u = 25;
+    const shapes = opts.shapes || [
+      { name: '锐角三角形', A: [120, 26], B: [28, 192], C: [286, 192] },
+      { name: '直角三角形', A: [44, 32], B: [44, 192], C: [284, 192] },
+      { name: '钝角三角形', A: [22, 34], B: [100, 192], C: [292, 192] },
+    ];
+    let sh = shapes[0];
+    const s = shell(container, { w: W, h: H, aria: '三角形三条中线交于一点并把中线分成 2∶1 的演示', controls: '<span class="demo-row"><span class="seg"></span></span>' });
+    const START = '点「播放」，依次画出三条中线';
+    segButtons(s.box.querySelector('.seg'), shapes.map(x => x.name), sh.name, (v, i) => { sh = shapes[i]; s.reset(); draw(FULL, START); });
+    const FULL = { mA: 1, mB: 1, mC: 1, G: 1, len: 1 };
+    const phases = [{ k: 'wait', dur: 300 }, { k: 'mA', dur: 1000 }, { k: 'mB', dur: 1000 }, { k: 'mC', dur: 1000 }, { k: 'G', dur: 700 }, { k: 'len', dur: 1200 }, { k: 'done', dur: 400 }];
+    function draw(fr, cap) {
+      const { A, B, C } = sh;
+      const G = [(A[0] + B[0] + C[0]) / 3, (A[1] + B[1] + C[1]) / 3];
+      const meds = [[A, mid22(B, C), 'A', 'D', RED, fr.mA, [B, C]], [B, mid22(C, A), 'B', 'E', BLUE, fr.mB, [C, A]], [C, mid22(A, B), 'C', 'F', GREEN, fr.mC, [A, B]]];
+      let html = poly22([A, B, C], INK, 0.04, 2);
+      for (const [V, M, , mn, color, f, [P, Q]] of meds) {
+        if (f <= 0) continue;
+        const o = Math.min(1, f * 3).toFixed(2);
+        html += `<g opacity="${o}">${tick22(P, M, color)}${tick22(M, Q, color)}${dot22(M, color)}${vlab23(M, G, mn, 12, color)}</g>`;
+        html += ln22(V, add22(V, unit22(V, M), dist22(V, M) * ease(f)), color, 2);
+      }
+      if (fr.G > 0) html += `<g opacity="${ease(fr.G).toFixed(2)}">${dot22(G, PURPLE23)}<circle cx="${f22(G[0])}" cy="${f22(G[1])}" r="6" fill="none" stroke="${PURPLE23}"/></g>`;
+      if (fr.len > 0) {
+        html += `<g opacity="${ease(fr.len).toFixed(2)}">`;
+        for (const [V, M, , , color] of meds) {
+          const d = unit22(V, M), nv = [-d[1], d[0]];
+          const lab = (p, q, t) => tx22(mid22(p, q), t, nv[0] * 11, nv[1] * 11 + 4, color, 11);
+          html += lab(V, G, fmt23(dist22(V, G) / u)) + lab(G, M, fmt23(dist22(G, M) / u));
+        }
+        html += '</g>';
+      }
+      if (fr.G > 0) html += `<g opacity="${ease(fr.G).toFixed(2)}">${tx22(G, 'G', -9, -7, PURPLE23)}</g>`;
+      html += vlab23(A, G, 'A') + vlab23(B, G, 'B') + vlab23(C, G, 'C');
+      s.svg.innerHTML = html;
+      const len = (p, q) => fmt23(dist22(p, q) / u);
+      const [ma, mb, mc] = meds.map(m => m[1]);
+      s.caption.textContent = typeof cap === 'function'
+        ? cap()
+        : cap === START && fr.len >= 1
+          ? `AG=${len(A, G)}，GD=${len(G, ma)}；BG=${len(B, G)}，GE=${len(G, mb)}；CG=${len(C, G)}，GF=${len(G, mc)}：都是 2∶1。${START}`
+          : cap;
+    }
+    const CAP = {
+      mA: '连接 A 和 BC 的中点 D：AD 是一条中线',
+      mB: '再画中线 BE，和 AD 交于一点',
+      mC: '第三条中线 CF 也经过这一点',
+      G: '三条中线交于同一点 G，G 叫做三角形的重心',
+      len: () => {
+        const { A, B, C } = sh, G = [(A[0] + B[0] + C[0]) / 3, (A[1] + B[1] + C[1]) / 3];
+        const l = (p, q) => fmt23(dist22(p, q) / u);
+        return `AG∶GD=${l(A, G)}∶${l(G, mid22(B, C))}=2∶1，BG∶GE=${l(B, G)}∶${l(G, mid22(C, A))}=2∶1，CG∶GF=${l(C, G)}∶${l(G, mid22(A, B))}=2∶1：重心把每条中线分成 2∶1`;
+      },
+    };
+    s.frame = ms => {
+      const fr = { mA: 0, mB: 0, mC: 0, G: 0, len: 0 };
+      let cap = START;
+      walk(phases, ms, (p, f) => {
+        if (p.k in fr) fr[p.k] = f;
+        if (CAP[p.k]) cap = CAP[p.k];
+      });
+      draw(fr, cap);
+    };
+    s.duration = () => totalOf(phases);
+    s.reset();
+    draw(FULL, START);
+    return s;
+  }
+
+  const TYPES = { foldCut, numberLineFold, angleFold, ropeCut, motion, sweep, rotOverlap, billiard, scaleOrder, solutionSet, vertAngles, parallelAngles, angleSum, ssaSwing, perpBisector, rtMedian, hlCongruent, ladderSlide, bisectorDist, incenter, pythagorasProof, perpShortest, exteriorWalk, parallelogramDrag, quadFamily, midlineRotate, varignon, centroid };
 
   function mount(container, demo) {
     const make = TYPES[demo.type];
