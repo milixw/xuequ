@@ -310,9 +310,9 @@ Content.catalog = {
                   no: 22,
                   title: '直角三角形',
                   sections: [
-                    { no: '22.1', title: '直角三角形', ready: false },
-                    { no: '22.2', title: '角平分线', ready: false },
-                    { no: '22.3', title: '勾股定理', ready: false },
+                    { no: '22.1', title: '直角三角形', ready: true },
+                    { no: '22.2', title: '角平分线', ready: true },
+                    { no: '22.3', title: '勾股定理', ready: true },
                   ],
                 },
               ],

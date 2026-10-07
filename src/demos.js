@@ -1290,7 +1290,501 @@
     return s;
   }
 
-  const TYPES = { foldCut, numberLineFold, angleFold, ropeCut, motion, sweep, rotOverlap, billiard, scaleOrder, solutionSet, vertAngles, parallelAngles, angleSum, ssaSwing, perpBisector };
+  // ---------- 直角三角形（第 22 章） ----------
+  // 屏幕坐标的小工具：p、q 为 [x, y]
+  const f22 = v => v.toFixed(1);
+  const num22 = v => (Math.abs(v - Math.round(v)) < 1e-9 ? String(Math.round(v)) : v.toFixed(2));
+  const unit22 = (p, q) => { const d = Math.hypot(q[0] - p[0], q[1] - p[1]) || 1; return [(q[0] - p[0]) / d, (q[1] - p[1]) / d]; };
+  const dist22 = (p, q) => Math.hypot(q[0] - p[0], q[1] - p[1]);
+  const mid22 = (p, q) => [(p[0] + q[0]) / 2, (p[1] + q[1]) / 2];
+  const dir22 = deg => [Math.cos((deg * Math.PI) / 180), -Math.sin((deg * Math.PI) / 180)];
+  const add22 = (p, v, k = 1) => [p[0] + v[0] * k, p[1] + v[1] * k];
+  // 点 p 在直线 PQ 上的垂足
+  const foot22 = (p, P, Q) => {
+    const d = unit22(P, Q), t = (p[0] - P[0]) * d[0] + (p[1] - P[1]) * d[1];
+    return add22(P, d, t);
+  };
+  function ln22(p, q, color = INK, w = 2, dash = '') {
+    return `<line x1="${f22(p[0])}" y1="${f22(p[1])}" x2="${f22(q[0])}" y2="${f22(q[1])}" stroke="${color}" stroke-width="${w}"${dash ? ` stroke-dasharray="${dash}"` : ''} stroke-linecap="round"/>`;
+  }
+  function tx22(p, t, dx = 0, dy = 0, color = INK, size = 13, weight = 'bold') {
+    return `<text x="${f22(p[0] + dx)}" y="${f22(p[1] + dy)}" font-size="${size}" text-anchor="middle" fill="${color}" font-weight="${weight}" stroke="#fff" stroke-width="3" paint-order="stroke">${t}</text>`;
+  }
+  // 直角记号：顶点 V，两条边的单位方向 u1、u2
+  function rt22(V, u1, u2, s = 9) {
+    const p1 = add22(V, u1, s), p3 = add22(V, u2, s), p2 = add22(p1, u2, s);
+    return `<polyline points="${polyAttr([p1, p2, p3])}" fill="none" stroke="${INK}" stroke-width="1.2"/>`;
+  }
+  // 线段中点处的等长短划记号
+  function tick22(p, q, color = INK, n = 1) {
+    const m = mid22(p, q), d = unit22(p, q), nv = [-d[1], d[0]];
+    let html = '';
+    for (let i = 0; i < n; i++) {
+      const c = add22(m, d, (i - (n - 1) / 2) * 4);
+      html += ln22(add22(c, nv, -5), add22(c, nv, 5), color, 1.4);
+    }
+    return html;
+  }
+  const poly22 = (pts, color, op, sw = 1.4) => `<polygon points="${polyAttr(pts)}" fill="${color}" fill-opacity="${op}" stroke="${color}" stroke-width="${sw}" stroke-linejoin="round"/>`;
+  const dot22 = (p, color = INK) => `<circle cx="${f22(p[0])}" cy="${f22(p[1])}" r="3" fill="${color}"/>`;
+
+  // 直角三角形斜边上的中线等于斜边的一半（22.1）：AB 固定，C 在以 AB 为直径的半圆上，滑块控制 ∠A
+  // opts.ab 斜边长（格，默认 6）
+  function rtMedian(container, opts) {
+    const W = 300, H = 192, ab = opts.ab || 6, R = 120, u = (2 * R) / ab;
+    const D = [150, 165], A = [D[0] - R, D[1]], B = [D[0] + R, D[1]];
+    let ang = opts.start || 45;
+    const s = shell(container, {
+      w: W, h: H, aria: '直角三角形斜边上的中线等于斜边一半的演示',
+      controls: '<label class="demo-row"><span>∠A</span><input type="range" min="10" max="80" step="1"><b class="demo-val"></b></label>',
+    });
+    const range = s.box.querySelector('input'), val = s.box.querySelector('.demo-val');
+    range.value = ang;
+    range.addEventListener('input', () => { s.reset(); ang = Number(range.value); draw(ang); });
+    function draw(a) {
+      a = Math.round(a);
+      const C = add22(D, dir22(2 * a), R);
+      const half = num22(ab / 2);
+      let html = `<path d="M${A[0]},${A[1]} A${R},${R} 0 0 1 ${B[0]},${B[1]}" fill="none" stroke="${MUTED}" stroke-dasharray="4 4"/>`;
+      html += poly22([A, C, D], BLUE, a === 60 ? 0.32 : 0.13, 0) + poly22([B, C, D], RED, a === 30 ? 0.32 : 0.13, 0);
+      html += `<polygon points="${polyAttr(wedgePts(A, B, C, 26))}" fill="${INK}" fill-opacity="0.12" stroke="${INK}" stroke-width="0.8"/>`;
+      html += ln22(A, B, INK, 2.2) + ln22(A, C, INK, 2.2) + ln22(B, C, INK, 2.2) + ln22(C, D, GREEN, 2);
+      html += rt22(C, unit22(C, A), unit22(C, B), 10);
+      html += tick22(A, D) + tick22(D, B) + tick22(C, D, GREEN);
+      html += dot22(D) + dot22(C);
+      const lm = dir22(a + 4);
+      html += tx22(A, `${a}°`, lm[0] * 40 + 4, lm[1] * 40 + 4, INK, 11);
+      html += tx22(mid22(A, D), half, 0, 18, BLUE, 12) + tx22(mid22(D, B), half, 0, 18, RED, 12);
+      const cm = mid22(C, D), cn = dir22(2 * a + 90);
+      html += tx22(cm, half, cn[0] * 17, cn[1] * 17 + 4, GREEN, 12);
+      html += tx22(A, 'A', -10, 5) + tx22(B, 'B', 10, 5) + tx22(D, 'D', 0, 18);
+      const cd = dir22(2 * a);
+      html += tx22(C, 'C', cd[0] * 13, cd[1] * 13 + 4);
+      s.svg.innerHTML = html;
+      val.textContent = `${a}°`;
+      s.caption.textContent = a === 30
+        ? `∠A=30°，∠B=60°，DB=DC，所以 △BCD 是等边三角形：BC=CD=AB 的一半=${half}`
+        : a === 60
+          ? `∠A=60°，DA=DC，所以 △ACD 是等边三角形：AC=CD=AB 的一半=${half}`
+          : `∠ACB=90°，D 是斜边 AB 的中点：CD=AD=BD=${half}，△ACD、△BCD 都是等腰三角形（∠ACD=∠A=${a}°）`;
+    }
+    // 播放：扫到 80°，再扫到 30° 停一下，最后扫到 10° 再回到 45°
+    const phases = () => [{ kind: 'go', from: ang, to: 80, dur: 1300 }, { kind: 'go', from: 80, to: 30, dur: 2000 }, { kind: 'hold', dur: 1600 }, { kind: 'go', from: 30, to: 10, dur: 900 }, { kind: 'go', from: 10, to: 45, dur: 1400 }];
+    s.frame = ms => {
+      let a = ang;
+      walk(phases(), ms, (p, f) => { if (p.kind === 'go') a = lerp(p.from, p.to, ease(f)); });
+      draw(a);
+      range.value = Math.round(a);
+      if (ms >= s.duration()) ang = 45;
+    };
+    s.duration = () => totalOf(phases());
+    s.reset();
+    draw(ang);
+    return s;
+  }
+
+  // 斜边、直角边判定直角三角形全等（22.2）：画 AC → 过 C 作垂线 MN → 以 A 为圆心、斜边长为半径画弧交 MN 于 B、B′ → 翻折重合
+  // opts.b 直角边（默认 3），opts.c 斜边（默认 5）
+  function hlCongruent(container, opts) {
+    const W = 300, H = 230;
+    const b = opts.b || 3, c = opts.c > b ? opts.c : Math.max(5, b + 2), a = Math.sqrt(c * c - b * b);
+    const u = Math.min(26, 196 / (2 * a + 1.8), 190 / b);
+    const A = [60, H / 2], C = [60 + b * u, H / 2];
+    const B = [C[0], C[1] - a * u], B2 = [C[0], C[1] + a * u];
+    const M = [C[0], C[1] - (a + 0.9) * u], N = [C[0], C[1] + (a + 0.9) * u];
+    const phi = (Math.atan2(a, b) * 180) / Math.PI;
+    const s = shell(container, { w: W, h: H, aria: '斜边和一条直角边对应相等的两个直角三角形全等的演示' });
+    const phases = [{ k: 'wait', dur: 300 }, { k: 'ac', dur: 800 }, { k: 'mn', dur: 800 }, { k: 'arc', dur: 1300 }, { k: 'tri', dur: 900 }, { k: 'wait', dur: 500 }, { k: 'fold', dur: 1600 }, { k: 'done', dur: 400 }];
+    const CAP = {
+      start: `直角边 AC=${b}，斜边 ${c}：点「播放」看看能画出几个直角三角形`,
+      ac: `先画直角边 AC=${b}`,
+      mn: '过点 C 作 AC 的垂线 MN，∠ACM=90°',
+      arc: `以 A 为圆心、${c} 为半径画弧，交 MN 于 B、B′ 两点`,
+      tri: `连接 AB、AB′：Rt△ABC 和 Rt△AB′C 的斜边都是 ${c}，直角边 AC 公用`,
+      fold: '把 △AB′C 沿 AC 翻折上去……',
+      done: '完全重合！斜边和一条直角边对应相等的两个直角三角形全等',
+    };
+    function draw(fr, cap) {
+      let html = '';
+      const fold = ease(fr.fold);
+      const Bf = [B2[0], C[1] + (B2[1] - C[1]) * Math.cos(Math.PI * fold)];
+      if (fr.mn > 0) {
+        const e = ease(fr.mn);
+        html += ln22(add22(C, [0, -1], (C[1] - M[1]) * e), add22(C, [0, 1], (N[1] - C[1]) * e), MUTED, 1.4);
+        if (fr.mn >= 1) html += tx22(M, 'M', -11, 8, MUTED, 12) + tx22(N, 'N', -11, 4, MUTED, 12) + rt22(C, [-1, 0], [0, -1], 9);
+      }
+      if (fr.arc > 0) {
+        const pts = [], from = -(phi + 14), to = phi + 14;
+        for (let i = 0; i <= 40; i++) pts.push(add22(A, dir22(lerp(from, lerp(from, to, ease(fr.arc)), i / 40)), c * u));
+        html += `<polyline points="${polyAttr(pts)}" fill="none" stroke="${GREEN}" stroke-width="1.4" stroke-dasharray="5 4"/>`;
+      }
+      if (fr.tri > 0) {
+        const op = ease(fr.tri);
+        html += `<g opacity="${op.toFixed(2)}">` + poly22([A, B, C], BLUE, 0.18, 1.8) + poly22([A, Bf, C], RED, 0.18, 1.8);
+        html += tx22(mid22(A, B), num22(c), -8, -6, BLUE, 12);
+        if (fold < 0.05) html += tx22(mid22(A, B2), num22(c), -8, 16, RED, 12);
+        html += '</g>';
+      }
+      if (fr.ac > 0) {
+        html += ln22(A, add22(A, [1, 0], b * u * ease(fr.ac)), INK, 2.4);
+        html += tx22(A, 'A', -11, 5);
+        if (fr.ac >= 1) html += tx22(C, 'C', 11, 15) + tx22(mid22(A, C), num22(b), 0, fr.tri > 0 && fold < 0.5 ? -6 : 16, INK, 12);
+      }
+      if (fr.arc >= 1) {
+        html += dot22(B, BLUE) + tx22(B, 'B', 12, 0, BLUE);
+        html += dot22(Bf, RED) + tx22(Bf, 'B′', 13, fold > 0.5 ? 16 : 8, RED);
+      }
+      s.svg.innerHTML = html;
+      s.caption.textContent = cap;
+    }
+    s.frame = ms => {
+      const fr = { ac: 0, mn: 0, arc: 0, tri: 0, fold: 0 };
+      let cap = CAP.start;
+      walk(phases, ms, (p, f) => {
+        if (p.k in fr) fr[p.k] = f;
+        if (CAP[p.k]) cap = CAP[p.k];
+      });
+      draw(fr, cap);
+    };
+    s.duration = () => totalOf(phases);
+    s.reset();
+    draw({ ac: 1, mn: 1, arc: 1, tri: 1, fold: 0 }, CAP.start);
+    return s;
+  }
+
+  // 梯子下滑（22.1 斜边中线的应用）：墙角 O，梯子 AB 下滑，中点 M 到 O 的距离始终是梯长的一半
+  // opts.len 梯长（默认 10），opts.start 底端到墙的初始距离（默认梯长的 0.6）
+  function ladderSlide(container, opts) {
+    const W = 300, H = 232, len = opts.len || 10, O = [52, 208], u = 172 / len;
+    const x0 = opts.start || len * 0.6, lo0 = len * 0.1, hi0 = len * 0.95;
+    const top = x => Math.sqrt(Math.max(0, len * len - x * x));
+    let x = x0, lo = x0, hi = x0;
+    const s = shell(container, {
+      w: W, h: H, aria: '梯子下滑时中点到墙角距离不变的演示',
+      controls: `<label class="demo-row"><span>底端到墙</span><input type="range" min="${lo0}" max="${hi0}" step="${len / 200}"><b class="demo-val"></b></label>`,
+    });
+    const range = s.box.querySelector('input'), val = s.box.querySelector('.demo-val');
+    range.value = x;
+    range.addEventListener('input', () => { s.reset(); x = Number(range.value); draw(x); });
+    const mAt = v => [O[0] + (v / 2) * u, O[1] - (top(v) / 2) * u];
+    function draw(v) {
+      lo = Math.min(lo, v); hi = Math.max(hi, v);
+      const A = [O[0], O[1] - top(v) * u], B = [O[0] + v * u, O[1]], M = mid22(A, B);
+      const A0 = [O[0], O[1] - top(x0) * u], B0 = [O[0] + x0 * u, O[1]];
+      const r = (len / 2) * u;
+      let html = '';
+      for (let y = O[1] - 4; y > 14; y -= 14) html += ln22([O[0], y], [O[0] - 8, y + 8], MUTED, 1);
+      for (let xx = O[0] + 10; xx < W - 4; xx += 14) html += ln22([xx, O[1]], [xx - 8, O[1] + 8], MUTED, 1);
+      html += ln22([O[0], O[1]], [O[0], 10], INK, 2.4) + ln22(O, [W - 6, O[1]], INK, 2.4);
+      html += `<path d="M${f22(O[0] + r)},${O[1]} A${f22(r)},${f22(r)} 0 0 0 ${O[0]},${f22(O[1] - r)}" fill="none" stroke="${MUTED}" stroke-dasharray="3 4"/>`;
+      const trace = [];
+      for (let i = 0; i <= 40; i++) trace.push(mAt(lerp(lo, hi, i / 40)));
+      html += `<polyline points="${polyAttr(trace)}" fill="none" stroke="${RED}" stroke-width="2" stroke-opacity="0.6"/>`;
+      if (Math.abs(v - x0) > 1e-6) html += ln22(A0, B0, MUTED, 2, '6 4');
+      html += ln22(O, M, GREEN, 2) + tick22(O, M, GREEN);
+      html += ln22(A, B, ROPE, 5) + tick22(A, M) + tick22(M, B);
+      html += dot22(M, RED) + dot22(A) + dot22(B);
+      html += tx22(A, 'A', -11, 5) + tx22(B, 'B', 0, 20) + tx22(O, 'O', -11, 16) + tx22(M, 'M', 11, -6, RED);
+      html += tx22(mid22(O, M), num22(len / 2), -9, -2, GREEN, 12);
+      html += tx22(mid22(A, M), num22(len / 2), 10, 2, ROPE, 11);
+      html += tx22(mid22(M, B), num22(len / 2), 10, 2, ROPE, 11);
+      s.svg.innerHTML = html;
+      val.textContent = v.toFixed(2);
+      const drop = top(x0) - top(v), out = v - x0;
+      const head = `OM=${num22(len / 2)}，始终是梯长 ${num22(len)} 的一半（斜边上的中线），M 在以 O 为圆心的圆弧上`;
+      s.caption.textContent = Math.abs(out) < 1e-6
+        ? `${head}。拖动滑块或点「播放」，让梯子滑动`
+        : out > 0
+          ? `${head}。与开始相比：顶端下降 ${drop.toFixed(2)}，底端滑出 ${out.toFixed(2)}`
+          : `${head}。与开始相比：顶端升高 ${(-drop).toFixed(2)}，底端向墙移近 ${(-out).toFixed(2)}`;
+    }
+    // 播放：从初始位置滑到底，停一下，再推回竖直附近，最后回到初始位置
+    const phases = () => [{ kind: 'go', from: x, to: hi0, dur: 2200 }, { kind: 'hold', dur: 600 }, { kind: 'go', from: hi0, to: lo0, dur: 2600 }, { kind: 'go', from: lo0, to: x0, dur: 1400 }];
+    s.frame = ms => {
+      let v = x;
+      walk(phases(), ms, (p, f) => { if (p.kind === 'go') v = lerp(p.from, p.to, ease(f)); });
+      draw(v);
+      range.value = v;
+      if (ms >= s.duration()) x = x0;
+    };
+    s.duration = () => totalOf(phases());
+    s.reset();
+    draw(x);
+    return s;
+  }
+
+  // 角平分线上的点到角两边距离相等（22.3）：点 P 由两个滑块控制（沿平分线、离开平分线），PD⊥OA、PE⊥OB
+  // opts.angle 初始角度（默认 60），按钮可换 40°、60°、100°、150°
+  function bisectorDist(container, opts) {
+    const W = 320, H = 230;
+    const angles = [40, 60, 100, 150];
+    let alpha = opts.angle || 60, pos = 4.5, off = 0;
+    if (!angles.includes(alpha)) angles.push(alpha), angles.sort((p, q) => p - q);
+    const s = shell(container, {
+      w: W, h: H, aria: '角平分线上的点到角两边距离相等的演示',
+      controls: '<span class="demo-row"><span class="seg"></span></span>' +
+        '<label class="demo-row"><span>沿平分线</span><input type="range" min="1" max="7" step="0.25"></label>' +
+        '<label class="demo-row"><span>离开</span><input type="range" min="-2" max="2" step="0.25"></label>',
+    });
+    const [rPos, rOff] = s.box.querySelectorAll('input');
+    rPos.value = pos; rOff.value = off;
+    rPos.addEventListener('input', () => { s.reset(); pos = Number(rPos.value); draw(); });
+    rOff.addEventListener('input', () => { s.reset(); off = Number(rOff.value); draw(); });
+    segButtons(s.box.querySelector('.seg'), angles.map(v => `${v}°`), `${alpha}°`, (v, i) => { alpha = angles[i]; s.reset(); draw(); });
+    // 从 O 沿方向 d 走多远会碰到画面边缘
+    const reach = (O, d) => {
+      let t = 400;
+      if (d[0] > 1e-9) t = Math.min(t, (W - 10 - O[0]) / d[0]);
+      if (d[0] < -1e-9) t = Math.min(t, (O[0] - 10) / -d[0]);
+      if (d[1] < -1e-9) t = Math.min(t, (O[1] - 12) / -d[1]);
+      return t;
+    };
+    function draw() {
+      const O = alpha > 120 ? [196, 198] : alpha > 90 ? [178, 198] : [42, 198];
+      const u = alpha <= 45 ? 33 : 24;   // 角小时放大，免得 P、D、E 挤在一起
+      const ua = dir22(0), ub = dir22(alpha), ubis = dir22(alpha / 2), n = dir22(alpha / 2 + 90);
+      const P = add22(add22(O, ubis, pos * u), n, off * u);
+      const proj = d => ((P[0] - O[0]) * d[0] + (P[1] - O[1]) * d[1]) / u;
+      const sA = proj(ua), sB = proj(ub);
+      const Dp = add22(O, ua, sA * u), Ep = add22(O, ub, sB * u);
+      const pd = dist22(P, Dp) / u, pe = dist22(P, Ep) / u;
+      const on = Math.abs(off) < 1e-9;
+      const th = (Math.atan2(-(P[1] - O[1]), P[0] - O[0]) * 180) / Math.PI;
+      const inside = th > 0 && th < alpha;
+      const LA = reach(O, ua), LB = reach(O, ub), LBis = reach(O, ubis);
+      let html = wedge(O[0], O[1], 0, alpha / 2, 24, GREEN, 0.2) + wedge(O[0], O[1], alpha / 2, alpha, 24, GREEN, 0.2);
+      html += ln22(O, add22(O, ubis, LBis), GREEN, 1.6, '6 4');
+      if (sA < 0) html += ln22(O, add22(O, ua, (sA - 0.6) * u), MUTED, 1.4, '4 4');
+      if (sB < 0) html += ln22(O, add22(O, ub, (sB - 0.6) * u), MUTED, 1.4, '4 4');
+      html += ln22(O, add22(O, ua, LA), INK, 2.2) + ln22(O, add22(O, ub, LB), INK, 2.2);
+      const cD = on ? BLUE : RED, cE = on ? BLUE : '#8a5cc2';
+      if (pd > 0.05) html += rt22(Dp, sA < 0 ? [-1, 0] : [1, 0], unit22(Dp, P), 8);
+      if (pe > 0.05) html += rt22(Ep, sB < 0 ? [-ub[0], -ub[1]] : ub, unit22(Ep, P), 8);
+      html += ln22(P, Dp, cD, 2) + ln22(P, Ep, cE, 2);
+      html += dot22(P, on ? BLUE : RED) + dot22(Dp) + dot22(Ep);
+      // 长度标在线段远离 O 的一侧
+      const lab = (p, q, t, color) => {
+        const m = mid22(p, q), d = unit22(p, q);
+        let nv = [-d[1], d[0]];
+        if (nv[0] * (m[0] - O[0]) + nv[1] * (m[1] - O[1]) < 0) nv = [-nv[0], -nv[1]];
+        return tx22(m, t, nv[0] * 16, nv[1] * 16 + 4, color, 12);
+      };
+      if (pd > 0.3) html += lab(P, Dp, pd.toFixed(2), cD);
+      if (pe > 0.3) html += lab(Ep, P, pe.toFixed(2), cE);
+      html += tx22(P, 'P', 0, -9, on ? BLUE : RED) + tx22(Dp, 'D', 0, 17) + tx22(Ep, 'E', -ub[1] * -12 - 8, 4);
+      html += tx22(O, 'O', -9, 17) + tx22(add22(O, ua, LA), 'A', -6, 18) + tx22(add22(O, ub, LB), 'B', ub[0] < -0.5 ? 4 : 12, ub[0] < -0.5 ? -9 : 6);
+      s.svg.innerHTML = html;
+      s.caption.textContent = on
+        ? `P 在 ∠AOB 的平分线上：PD=${pd.toFixed(2)}，PE=${pe.toFixed(2)}，到角两边的距离相等`
+        : inside
+          ? `P 离开了平分线：PD=${pd.toFixed(2)}，PE=${pe.toFixed(2)}，不相等（P 靠近哪条边，到哪条边就近）`
+          : `P 跑到角的外面了：PD=${pd.toFixed(2)}，PE=${pe.toFixed(2)}，也不相等`;
+    }
+    // 播放：P 沿平分线走一趟，再向两侧偏离又回来
+    const phases = [{ k: 'pos', from: 1.5, to: 6.5, dur: 2000 }, { k: 'pos', from: 6.5, to: 4.5, dur: 900 }, { k: 'off', from: 0, to: 1, dur: 800 }, { k: 'off', from: 1, to: -1, dur: 1400 }, { k: 'off', from: -1, to: 0, dur: 800 }];
+    s.frame = ms => {
+      walk(phases, ms, (p, f) => { const v = lerp(p.from, p.to, ease(f)); if (p.k === 'pos') pos = v; else off = Math.round(v * 100) / 100; });
+      rPos.value = pos; rOff.value = off;
+      draw();
+    };
+    s.duration = () => totalOf(phases);
+    s.reset();
+    draw();
+    return s;
+  }
+
+  // 三角形三条角平分线交于一点，这点到三边距离相等（22.3）。不画内切圆
+  // opts.shapes 可选：[{ name, A, B, C }]
+  function incenter(container, opts) {
+    const W = 310, H = 215, u = 25;
+    const shapes = opts.shapes || [
+      { name: '锐角三角形', A: [130, 28], B: [30, 195], C: [285, 195] },
+      { name: '直角三角形', A: [48, 40], B: [48, 195], C: [280, 195] },
+      { name: '钝角三角形', A: [85, 108], B: [25, 195], C: [290, 195] },
+    ];
+    let sh = shapes[0];
+    const s = shell(container, { w: W, h: H, aria: '三角形三条角平分线交于一点、到三边距离相等的演示', controls: '<span class="demo-row"><span class="seg"></span></span>' });
+    const START = '点「播放」，依次画出三条角平分线';
+    segButtons(s.box.querySelector('.seg'), shapes.map(x => x.name), sh.name, (v, i) => { sh = shapes[i]; s.reset(); draw(FULL, START); });
+    const phases = [{ k: 'wait', dur: 300 }, { k: 'bA', dur: 1000 }, { k: 'bB', dur: 1000 }, { k: 'bC', dur: 1000 }, { k: 'I', dur: 700 }, { k: 'perp', dur: 1300 }, { k: 'done', dur: 400 }];
+    const FULL = { bA: 1, bB: 1, bC: 1, I: 1, perp: 1 };
+    function draw(fr, cap) {
+      const { A, B, C } = sh;
+      const a = dist22(B, C), b = dist22(C, A), c = dist22(A, B), sum = a + b + c;
+      const I = [(a * A[0] + b * B[0] + c * C[0]) / sum, (a * A[1] + b * B[1] + c * C[1]) / sum];
+      // 每个顶点：角平分线与对边的交点
+      const bis = (V, P, Q) => add22(P, unit22(P, Q), (dist22(P, Q) * dist22(V, P)) / (dist22(V, P) + dist22(V, Q)));
+      const verts = [[A, B, C, RED, fr.bA], [B, C, A, BLUE, fr.bB], [C, A, B, GREEN, fr.bC]];
+      let html = poly22([A, B, C], INK, 0.04, 2);
+      for (const [V, P, Q, color, f] of verts) {
+        if (f <= 0) continue;
+        const F = bis(V, P, Q);
+        const op = Math.min(1, f * 2).toFixed(2);
+        html += `<g opacity="${op}">`;
+        html += `<polygon points="${polyAttr(wedgePts(V, P, F, 20))}" fill="${color}" fill-opacity="0.3" stroke="${color}" stroke-width="0.8"/>`;
+        html += `<polygon points="${polyAttr(wedgePts(V, F, Q, 20))}" fill="${color}" fill-opacity="0.3" stroke="${color}" stroke-width="0.8"/>`;
+        html += '</g>';
+        html += ln22(V, add22(V, unit22(V, F), dist22(V, F) * ease(f)), color, 1.5, '6 3');
+      }
+      const sides = [[B, C, 'D'], [C, A, 'E'], [A, B, 'F']];
+      const r = dist22(I, foot22(I, B, C)) / u;
+      if (fr.perp > 0) {
+        for (const [P, Q, name] of sides) {
+          const F = foot22(I, P, Q), e = ease(fr.perp);
+          html += ln22(I, add22(I, unit22(I, F), dist22(I, F) * e), '#8a5cc2', 2.2);
+          if (fr.perp >= 1) {
+            html += rt22(F, unit22(F, Q), unit22(F, I), 7) + dot22(F);
+            const out = unit22(I, F);
+            html += tx22(F, name, out[0] * 12, out[1] * 12 + 4, INK, 12);
+          }
+        }
+      }
+      if (fr.I > 0) html += `<g opacity="${ease(fr.I).toFixed(2)}">${dot22(I, '#8a5cc2')}${tx22(I, 'I', 12, 16, '#8a5cc2')}</g>`;
+      html += tx22(A, 'A', 0, -7) + tx22(B, 'B', -10, 5) + tx22(C, 'C', 10, 5);
+      s.svg.innerHTML = html;
+      s.caption.textContent = typeof cap === 'function' ? cap(r) : cap;
+    }
+    const CAP = {
+      bA: '画 ∠A 的平分线：两个小角相等',
+      bB: '再画 ∠B 的平分线，和 ∠A 的平分线交于一点',
+      bC: '第三条：∠C 的平分线也经过这一点',
+      I: '三条角平分线交于同一点，记作 I',
+      perp: '从 I 向三边作垂线段 ID、IE、IF',
+      done: r => `ID=IE=IF≈${r.toFixed(2)}：I 在 ∠A、∠B 的平分线上，所以到三边的距离都相等，因此也在 ∠C 的平分线上`,
+    };
+    s.frame = ms => {
+      const fr = { bA: 0, bB: 0, bC: 0, I: 0, perp: 0 };
+      let cap = START;
+      walk(phases, ms, (p, f) => {
+        if (p.k in fr) fr[p.k] = f;
+        if (CAP[p.k]) cap = CAP[p.k];
+      });
+      draw(fr, cap);
+    };
+    s.duration = () => totalOf(phases);
+    s.reset();
+    draw(FULL, START);
+    return s;
+  }
+
+  // 勾股定理的拼图证明（22.4 / 勾股定理）：两个边长 a+b 的正方形，左边四个直角三角形围出 c²，
+  // 右边把三角形平移成两个长方形，剩下 a²、b²
+  // opts.ratios：[[a, b], ...]，默认 3:4、1:2、2:3
+  function pythagorasProof(container, opts) {
+    const W = 310, H = 184, S = 128, L0 = [18, 26], R0 = [164, 26];
+    const ratios = opts.ratios || [[3, 4], [1, 2], [2, 3]];
+    let [a, b] = ratios[0];
+    const s = shell(container, { w: W, h: H, aria: '用四个全等直角三角形拼图证明勾股定理的演示', controls: '<span class="demo-row"><span>a∶b</span><span class="seg"></span></span>' });
+    segButtons(s.box.querySelector('.seg'), ratios.map(r => `${r[0]}:${r[1]}`), `${a}:${b}`, (v, i) => { [a, b] = ratios[i]; s.reset(); draw(DONE, endCap()); });
+    const phases = [{ k: 'wait', dur: 500 }, { k: 'm1', dur: 1100 }, { k: 'm2', dur: 1100 }, { k: 'm3', dur: 1100 }, { k: 'show', dur: 800 }];
+    const DONE = { m1: 1, m2: 1, m3: 1, show: 1 };
+    const endCap = () => `两边都是大正方形去掉四个同样的直角三角形：左边剩 c²=${a * a + b * b}，右边剩 a²+b²=${a * a}+${b * b}，所以 a²+b²=c²`;
+    const START = () => `两个大正方形边长都是 a+b=${a + b}；左边四个全等的直角三角形围出边长为 c 的正方形。点「播放」把右边的三角形挪一挪`;
+    function draw(fr, cap) {
+      const sz = a + b, k = S / sz;
+      const at = (o, p) => [o[0] + p[0] * k, o[1] + p[1] * k];
+      // 第一种摆法：四个角各一个三角形；平移量把它们挪成第二种摆法（T2 不动）
+      const tris = [
+        { pts: [[0, 0], [a, 0], [0, b]], mv: [0, a], f: 'm2' },
+        { pts: [[sz, 0], [a, 0], [sz, a]], mv: [0, 0], f: null },
+        { pts: [[sz, sz], [sz, a], [b, sz]], mv: [-b, 0], f: 'm3' },
+        { pts: [[0, sz], [b, sz], [0, b]], mv: [a, -b], f: 'm1' },
+      ];
+      const sq = o => `<rect x="${o[0]}" y="${o[1]}" width="${S}" height="${S}" fill="#fff" stroke="${INK}" stroke-width="2"/>`;
+      let html = sq(L0) + sq(R0);
+      const inner = [[a, 0], [sz, a], [b, sz], [0, b]];
+      html += poly22(inner.map(p => at(L0, p)), GREEN, 0.25, 0);
+      const ctrL = at(L0, [sz / 2, sz / 2]);
+      html += tx22(ctrL, `c²=${a * a + b * b}`, 0, 4, GREEN, 12);
+      const green = 1 - ease(fr.m1);
+      if (green > 0) html += `<g opacity="${green.toFixed(2)}">${poly22(inner.map(p => at(R0, p)), GREEN, 0.25, 0)}</g>`;
+      if (fr.show > 0) {
+        const e = ease(fr.show).toFixed(2);
+        html += `<g opacity="${e}"><rect x="${f22(R0[0])}" y="${f22(R0[1])}" width="${f22(a * k)}" height="${f22(a * k)}" fill="${RED}" fill-opacity="0.25"/>` +
+          `<rect x="${f22(R0[0] + a * k)}" y="${f22(R0[1] + a * k)}" width="${f22(b * k)}" height="${f22(b * k)}" fill="${BLUE}" fill-opacity="0.25"/>` +
+          tx22(at(R0, [a / 2, a / 2]), `a²=${a * a}`, 0, 4, RED, a * k < 50 ? 10 : 12) + tx22(at(R0, [a + b / 2, a + b / 2]), `b²=${b * b}`, 0, 4, BLUE, 12) + '</g>';
+      }
+      for (const t of tris) {
+        html += poly22(t.pts.map(p => at(L0, p)), ROPE, 0.3, 1.2).replace(`stroke="${ROPE}"`, `stroke="${INK}"`);
+        const e = t.f ? ease(fr[t.f]) : 0;
+        html += poly22(t.pts.map(p => at(R0, [p[0] + t.mv[0] * e, p[1] + t.mv[1] * e])), ROPE, 0.3, 1.2).replace(`stroke="${ROPE}"`, `stroke="${INK}"`);
+      }
+      // 左边标 a、b、c
+      html += tx22(at(L0, [a / 2, 0]), 'a', 0, -5, RED, 12) + tx22(at(L0, [a + b / 2, 0]), 'b', 0, -5, BLUE, 12);
+      html += tx22(at(L0, [0, b / 2]), 'b', -9, 4, BLUE, 12) + tx22(at(L0, [0, b + a / 2]), 'a', -9, 4, RED, 12);
+      const hc = at(L0, [a / 2, b / 2]), nv = unit22(at(L0, [0, 0]), hc);
+      html += tx22(hc, 'c', nv[0] * 9, nv[1] * 9 + 4, GREEN, 12);
+      if (fr.show > 0) {
+        html += `<g opacity="${ease(fr.show).toFixed(2)}">` + tx22(at(R0, [a / 2, 0]), 'a', 0, -5, RED, 12) + tx22(at(R0, [a + b / 2, 0]), 'b', 0, -5, BLUE, 12) +
+          tx22(at(R0, [sz, a / 2]), 'a', 9, 4, RED, 12) + tx22(at(R0, [sz, a + b / 2]), 'b', 9, 4, BLUE, 12) + '</g>';
+      }
+      html += tx22([L0[0] + S / 2, L0[1] + S], '拼法一', 0, 18, MUTED, 12, 'normal') + tx22([R0[0] + S / 2, R0[1] + S], '拼法二', 0, 18, MUTED, 12, 'normal');
+      s.svg.innerHTML = html;
+      s.caption.textContent = cap;
+    }
+    s.frame = ms => {
+      const fr = { m1: 0, m2: 0, m3: 0, show: 0 };
+      let cap = START();
+      walk(phases, ms, (p, f) => {
+        if (p.k in fr) fr[p.k] = f;
+        if (p.k[0] === 'm') cap = '把右边的三角形平移：两个两个拼成长方形';
+        if (p.k === 'show') cap = endCap();
+      });
+      draw(fr, cap);
+    };
+    s.duration = () => totalOf(phases);
+    s.reset();
+    draw(DONE, endCap());
+    return s;
+  }
+
+  // 垂线段最短（直角三角形中斜边大于直角边）：P 在直线 l 外，Q 在 l 上移动，PH⊥l
+  // opts.h 点 P 到 l 的距离（默认 4），opts.start Q 的初始位置（相对 H，默认 3）
+  function perpShortest(container, opts) {
+    const W = 300, H = 182, h = opts.h || 4, u = Math.min(28, 130 / h);
+    const Hp = [150, 156], P = [150, 156 - h * u];
+    let q = opts.start != null ? opts.start : 3;
+    const s = shell(container, {
+      w: W, h: H, aria: '直线外一点与直线上各点的连线中垂线段最短的演示',
+      controls: '<label class="demo-row"><span>移动 Q</span><input type="range" min="-4.5" max="4.5" step="0.25"><b class="demo-val"></b></label>',
+    });
+    const range = s.box.querySelector('input'), val = s.box.querySelector('.demo-val');
+    range.value = q;
+    range.addEventListener('input', () => { s.reset(); q = Number(range.value); draw(q); });
+    function draw(v) {
+      v = Math.round(v * 100) / 100;
+      const Q = [Hp[0] + v * u, Hp[1]];
+      const pq = Math.hypot(v, h), at = Math.abs(v) < 1e-9;
+      let html = ln22([8, Hp[1]], [W - 8, Hp[1]], INK, 2) + tx22([W - 12, Hp[1]], 'l', 0, -7, INK, 13, 'normal');
+      if (!at) html += poly22([P, Hp, Q], RED, 0.12, 0);
+      html += ln22(P, Hp, at ? BLUE : GREEN, 2, at ? '' : '6 4') + rt22(Hp, [1, 0], [0, -1], 9);
+      if (!at) html += ln22(P, Q, RED, 2.2);
+      html += dot22(P) + dot22(Hp) + dot22(Q, at ? BLUE : RED);
+      html += tx22(P, 'P', 0, -9) + tx22(Hp, 'H', at ? -10 : (v > 0 ? -9 : 9), 18) + tx22(Q, 'Q', at ? 10 : 0, 18, at ? BLUE : RED);
+      html += tx22(mid22(P, Hp), num22(h), v > 0 ? -12 : 12, 4, at ? BLUE : GREEN, 12);
+      if (!at) { const m = mid22(P, Q), d = unit22(P, Q); html += tx22(m, num22(pq), d[1] * 14 * Math.sign(v), -d[0] * 14 * Math.sign(v) + 4, RED, 12); }
+      s.svg.innerHTML = html;
+      val.textContent = minus(num22(v));
+      s.caption.textContent = at
+        ? `Q 和垂足 H 重合：PQ=PH=${num22(h)}，这时最短（垂线段最短）`
+        : `PQ=${num22(pq)} > PH=${num22(h)}：在 Rt△PHQ 中 ∠PHQ=90°，斜边 PQ 大于直角边 PH`;
+    }
+    // 播放：Q 从左走到右，最后停在 H
+    const phases = [{ kind: 'go', from: null, to: -4, dur: 1300 }, { kind: 'go', from: -4, to: 4, dur: 2600 }, { kind: 'go', from: 4, to: 0, dur: 1400 }, { kind: 'hold', dur: 500 }];
+    s.frame = ms => {
+      let v = q;
+      walk(phases, ms, (p, f) => { if (p.kind === 'go') v = lerp(p.from == null ? q : p.from, p.to, ease(f)); });
+      draw(v);
+      range.value = v;
+      if (ms >= s.duration()) q = 0;
+    };
+    s.duration = () => totalOf(phases);
+    s.reset();
+    draw(q);
+    return s;
+  }
+
+  const TYPES = { foldCut, numberLineFold, angleFold, ropeCut, motion, sweep, rotOverlap, billiard, scaleOrder, solutionSet, vertAngles, parallelAngles, angleSum, ssaSwing, perpBisector, rtMedian, hlCongruent, ladderSlide, bisectorDist, incenter, pythagorasProof, perpShortest };
 
   function mount(container, demo) {
     const make = TYPES[demo.type];
