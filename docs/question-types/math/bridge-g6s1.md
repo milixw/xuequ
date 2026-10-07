@@ -1,6 +1,6 @@
 # 题型台账 · 六年级衔接（bridge/g6s1）
 
-规则见 [../question-types.md](../question-types.md)。
+规则见 [../../question-types.md](../../question-types.md)。
 
 ## 六年级衔接（`bridge/g6s1`，难度按月考真卷，见 `docs/superpowers/specs/2026-09-27-g6-bridge-design.md`）
 

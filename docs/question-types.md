@@ -6,7 +6,7 @@
 - **收工后**：把新用的套路补进总表和明细，标注定位和来源；核心题型的复现记在原来那一行的“用在”里
 - 跨会话也靠这些文件传递：新会话读本册和前置册的文件，就知道前面用过什么
 
-## 一、套路总表（按册分文件）
+## 一、套路总表（按学科、按册分文件）
 
 "用在"列里 `1.2-c03` 表示 1.2 节挑战第 3 题。
 
@@ -23,19 +23,19 @@
 
 定位列 2026-10-05 按关键词初判，没有经过教师确认，有不合适的直接改。
 
-套路总表和按小节明细按册拆在 `docs/question-types/` 下，**出题时只读本册和相关前置册的文件**，不要通读全部：
+套路总表和按小节明细按学科、按册拆在 `docs/question-types/<学科>/<册ID>.md`（目前只有数学），**出题时只读本册和相关前置册的文件**，不要通读全部：
 
 | 册 | 文件 |
 |---|---|
-| 六年级上册 | [g6s1.md](question-types/g6s1.md) |
-| 六年级下册 | [g6s2.md](question-types/g6s2.md) |
-| 七年级上册 | [g7s1.md](question-types/g7s1.md) |
-| 七年级下册 | [g7s2.md](question-types/g7s2.md) |
-| 八年级上册 | [g8s1.md](question-types/g8s1.md) |
-| 八年级下册 | [g8s2.md](question-types/g8s2.md) |
-| 六年级衔接 | [bridge-g6s1.md](question-types/bridge-g6s1.md) |
+| 六年级上册 | [g6s1.md](question-types/math/g6s1.md) |
+| 六年级下册 | [g6s2.md](question-types/math/g6s2.md) |
+| 七年级上册 | [g7s1.md](question-types/math/g7s1.md) |
+| 七年级下册 | [g7s2.md](question-types/math/g7s2.md) |
+| 八年级上册 | [g8s1.md](question-types/math/g8s1.md) |
+| 八年级下册 | [g8s2.md](question-types/math/g8s2.md) |
+| 六年级衔接 | [bridge-g6s1.md](question-types/math/bridge-g6s1.md) |
 
-跨册查某个套路有没有用过，用 grep，例如 `grep -n "垂直平分线" docs/question-types/*.md`。
+跨册查某个套路有没有用过，用 grep，例如 `grep -rn "垂直平分线" docs/question-types/`。
 
 ## 二、还没用过的套路池
 

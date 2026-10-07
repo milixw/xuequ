@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "deny": [
+      "Read(./content/english/past-papers/jiangsu.js)",
+      "Read(./content/english/past-papers/catalog.js)",
+      "Read(./content/english/question-bank.js)",
+      "Read(./content/english/shanghai-exam-vocabulary.html)",
+      "Read(./content/past-papers/shanghai.js)",
+      "Read(./content/past-papers/images/**)",
+      "Read(./content/english/past-papers/*/**)",
+      "Read(./vendor/**)",
+      "Read(./dist/**)",
+      "Read(./refs/**)",
+      "Read(./pic/**)"
+    ]
+  }
+}

@@ -1,346 +1,94 @@
 # AGENTS.md
 
-面向初中生的学习闯关手机网页应用：按课本章节提供**通俗的知识点介绍 + 分级题目**（六年级另有换教材造成的"衔接"内容），另有按册收录的**真题卷**、按小节的**限时测试**（需要登录本地账号），以后可能扩展到其他学科。另有"趣味玩法"：一个"函数轨道"解谜小游戏，留给函数章节使用；一个"立体图形实验室"，用可旋转的 3D 图形讲展开图、最短路径和截面；一个"24 点"，练有理数的四则混合运算；一个"取石子"（尼姆游戏），从倒推表出发自己找必胜策略。和课本联系紧的"动手玩"游戏挂在对应小节上（目前有 2.3 的"数学魔术揭秘"、3.2 的"天平解方程"、七下 18.4 的"费马点"），也可以同时放进首页宫格。
+面向初中生的学习闯关手机网页应用：按课本章节提供**通俗的知识点介绍 + 分级题目**，另有真题卷、限时测试、英语错题库与中考题、上海中考原题，以及帮助理解课本的“趣味玩法”。目前有数学（6 上～8 下第 23 章）和英语，以后会加更多学科和练习模式。
 
-本文件是项目约定的唯一正文，各家 AI 工具通用；`CLAUDE.md` 只是把它导入，改约定请改这里。
+本文件是**所有 AI 工具都会读到的根约定**，只放全局规则和“做什么事读什么文件”的路由。各目录还有自己的 `AGENTS.md`（同目录的 `CLAUDE.md` 只是导入它），在那个目录干活时必须先读。
+
+## 怎么读文档（省 token）
+
+1. **先看下面的任务路由表**，只读与当前任务有关的文件；不要通读 `docs/`、不要为了“了解项目”把整个目录读一遍
+2. **大文件先 grep 再读片段**：超过 100KB 的文件一律不整体读取（见下面的禁读清单），代码大文件按段落读（比如 `src/demos.js` 按 `// ---------- ` 分段）
+3. **课本原文按节导出**：`python3 scripts/textbook-text.py <册ID> <小节号>`，不要导出整章、整本
+4. **多代理 / 多会话**：同时最多 2～3 个；给子代理写短简报（任务、知识范围、要读的几个文件），不要让它自己通读；复核意见只涉及几道题时开新的小会话定点修改。细则见 `docs/sop-section.md` 的“用 AI 子代理批量做多节时”
+5. 规则冲突时，离要改的文件最近的 `AGENTS.md` 优先；但下面的“全局硬规则”任何目录都不能放宽
+
+### 禁读清单（数据量大，读了会耗掉大量 token）
+
+| 路径 | 怎么查 |
+|---|---|
+| `content/english/past-papers/jiangsu.js`（约 3MB）、`content/english/past-papers/catalog.js`、`content/english/question-bank.js`、`content/english/shanghai-exam-vocabulary.html` | `grep -n "<题目ID或关键词>"`，或 `node -e` 加载后按 ID 取出 |
+| `content/past-papers/shanghai.js`、`content/past-papers/images/`、`content/english/past-papers/<年份>/`（音视频） | 同上；图片只看文件名和题目里的元数据 |
+| `vendor/`、`dist/`、`refs/`、`pic/` | 第三方库、打包产物、版权资料原件；课本文字用上面的导出脚本 |
+
+Claude Code（`.claude/settings.json`）、Cursor（`.cursorignore`）、Gemini CLI（`.geminiignore`）已配置禁读这些路径；确实需要直接读写时，临时注释掉对应条目，用完恢复。其他工具请自觉遵守。
+
+## 任务路由表
+
+| 要做的事 | 先读 |
+|---|---|
+| 出数学题（新小节、改题、复核） | `content/AGENTS.md` → `content/math/AGENTS.md` → `docs/sop-section.md`；课本 `docs/textbooks/math-sh2024-<册ID>.md`；台账 `docs/question-types.md` + `docs/question-types/math/<册ID>.md` |
+| 收录数学真题卷 | `content/AGENTS.md` 的“真题卷格式” |
+| 英语单元、英语错题库、七天计划、英语中考题 | `content/AGENTS.md` → `content/english/AGENTS.md` |
+| 上海语数物化中考原题（导入、补图、补答案） | `content/past-papers/AGENTS.md` |
+| 加新学科 | `docs/templates/subject-AGENTS.md`，再按 `content/AGENTS.md` 建目录和目录条目 |
+| 加新练习模式 / 新页面 | `docs/templates/new-mode-checklist.md`、`src/AGENTS.md`、`docs/storage-and-routes.md` |
+| 改应用代码、演示动画 | `src/AGENTS.md`；涉及路由或存储键再读 `docs/storage-and-routes.md` |
+| 趣味玩法、动手玩游戏 | `src/games/AGENTS.md`、`docs/games-backlog.md` |
+| 改测试 | `tests/AGENTS.md` |
+| 限时测试、账号 | `docs/exam.md`、`docs/storage-and-routes.md` |
+| 部署、打包 | `docs/deploy.md` |
+| 改这些约定文档本身 | 本文件的“维护约定文档” |
+
+## 全局硬规则
+
+- **零构建、不引入框架**；第三方库只放 `vendor/` 本地加载，不走 CDN（国内访问不稳定）
+- 直接双击 `index.html`（`file://`）也要能用，所以**不要用 `fetch` 加载本地文件**，内容文件用 `<script>` 加载
+- 本地存储键名统一 `xq.` 前缀，读写都包在 try/catch 里；改结构升版本号并写迁移，不改旧键格式；新键、新路由登记在 `docs/storage-and-routes.md`
+- AI 写的学习内容 `review.status` 一律是 `pending`，等相应学科教师审核后才能改成 `approved`
+- 学习内容全部原创：可以参照课本的章节结构和知识范围，**不能照搬课本、教辅的原文、例题、习题和插图**；真题原题单独收录并注明来源
+- 不要凭记忆写课本内容，知识范围以 `docs/textbooks/` 为准，资料不够先问维护者
+- **题目 ID、小节 ID 一经发布不要改动**，学生进度靠它关联
+- 界面文字用中文，面向初中生，表述通俗；移动端优先（320px 宽可用，可点击控件不小于 36px）
 
 ## 协作约定
 
-- 多人协作，**不限制协作方式**：直接推 main、开分支、fork 后提 PR 都可以，按改动大小自己选
-- 直接推 main 之前先 `git pull --rebase`，避免在别人的提交上多出一次 merge
-- 不管用哪种方式，提交前都必须 `node tests/run.js` 全绿
-- 提交信息用中文一句话说清改了什么
-- 改了目录结构、内容格式、本地存储的键名或页面路由，要在**同一个提交里**更新本文件对应的部分（英语与中考真题的细节在 docs/english-and-papers.md，游戏实现细节在 docs/games.md，同样要同步），别让下一个人（或 AI）照着过时的说明干活
+- 多人、多种 AI 工具协作，**不限制协作方式**：直接推 main、开分支、fork 后提 PR 都可以
+- 直接推 main 之前先 `git pull --rebase`；提交前 `node tests/run.js` 必须全绿；提交信息用中文一句话说清改了什么
+- 改了目录结构、内容格式、存储键或路由，**同一个提交里**更新对应的约定文档（根 / 目录级 `AGENTS.md`、`docs/storage-and-routes.md`），别让下一个人（或 AI）照着过时的说明干活
 - 较大的功能先写设计文档，放在 `docs/superpowers/specs/`
-- AI 写的内容 `review.status` 一律是 `pending`，等相应学科教师审核后才能改成 `approved`
 
 ## 常用命令
 
 ```bash
-node tests/run.js                     # 全部校验（改了内容或代码都要跑）
+node tests/run.js                     # 全部校验（改了内容、代码或约定文档都要跑）
 ./scripts/start.sh [端口]             # 后台启动本地服务器（默认 8000），打印电脑和手机的访问地址
 ./scripts/stop.sh                     # 关闭服务器
 ./scripts/build.sh                    # 打包成部署用的压缩包（先跑校验），部署说明见 docs/deploy.md
+python3 scripts/textbook-text.py g8s1 22.1   # 导出某一节的课本文字
 ```
 
-不需要构建。直接用浏览器打开 `index.html` 也要能用，所以**不要用 `fetch` 加载本地文件**（`file://` 下会被拦截），内容文件用 `<script>` 加载。
-
-## 目录结构
+## 目录结构（顶层）
 
 ```
-index.html                        应用入口（按顺序加载下面的脚本）
-src/
-  answer.js                       判分纯函数：精确分数 Frac、数值/多值/代数式/实数（根号、π；simplest 时还要求化成最简二次根式：根号里无平方因数、分母无根号、同类已合并）/角度/比（ratio，要求最简整数比）的解析与比较、“已化简”检查、因式分解（factor，要求写成积并分解彻底，因式只允许差正负号）、最简分式（frac，分子分母和标准答案只允许差正负号）、不等式的解集（ineq，可写 x≥2、2<x、−1<x≤3、无解，var 指定未知数字母）
-  accounts.js                     本地账号（无密码）、按账号保存的考试历史、学期偏好
-  progress.js                     做题进度（小节和真题卷共用）、独立累计答错次数及按提交事件去重
-  learning-store.js               学习数据账号归属、旧共享数据备份与指定账号迁移；未登录访客独立，不回退至他人数据
-  content.js                      内容注册表：目录查询、学期列表、按需加载小节文件和真题卷文件
-  demos.js                        演示动画：题目的 demo 字段放在解析里，知识点卡片的 demo 字段放在卡片末尾；第 14 章用 motion（平移、旋转、翻折、旋转 180° 的过程）、sweep、rotOverlap、billiard；第 15 章用 scaleOrder（两边同乘一个数，数轴伸缩、翻转）、solutionSet（数轴上画解集、找公共部分和整数解）；第 16 章用 vertAngles（拖动直线看对顶角与垂直）、parallelAngles（三线八角与平行）；第 17 章用 angleSum（内角拼成平角）、ssaSwing（边边角摆出两个三角形）；第 18 章用 perpBisector（拖动点看到线段两端的距离是否相等）；第 22 章用 rtMedian、hlCongruent、ladderSlide、bisectorDist、incenter、pythagorasProof、perpShortest；第 23 章用 exteriorWalk（沿边走一圈看外角和）、parallelogramDrag（滑块改平行四边形看性质）、quadFamily（平行四边形到矩形、菱形、正方形的对角线）、midlineRotate（旋转 180° 证中位线定理）、varignon（拖动顶点看中点四边形）、centroid（三条中线交于重心、分成 2∶1），依赖 DOM
-  quiz.js                         做题引擎：题目渲染、作答、判分反馈、解析、快捷输入栏、renderText 排版
-  exam.js                         限时测试：会话状态机、计时、交卷判分、结果页
-  english-bank.js                 独立英语错题库：知识点介绍、题型筛选、作答与重置
-  english-plan.js                 英语七天复习计划：每日全部原题直接作答、保存草稿、提交后保存错题打印记录，可切换历史记录及 A4 打印
-  english-exams.js                上海及江苏英语中考文字题：地区 → 城市 → 年份目录，阅读/完形合并作答、原答案与解析、按账号累计错误；不展示图片或 Word
-  subject-papers.js               上海语数物化真题：文字与本地题图混合，题图可放大，答案图只在订正区；按账号保存，打印不含答案
-  account-ui.js                   右上角账号区和登录弹窗
-  app.js                          hash 路由和页面：首页（教材、试卷、趣味玩法，另有英语大纲和试题库入口）→ 册 → 小节 / 真题卷 → 做题
-  app.css                         全部样式
-  games/function-track/           函数轨道小游戏（独立页面，首页“趣味玩法”进入）
-  games/solids/                   立体图形实验室（独立页面）：geo3d.js 纯几何，game.js 关卡、控件和 Canvas 渲染
-  games/24/                       24 点（独立页面）：solver.js 求解、排版、发牌，game.js 关卡和交互
-  games/nim/                      取石子（独立页面）：solver.js 必胜判断、电脑走法、倒推表理由，game.js 关卡和交互
-  games/balance/                  天平解方程（应用内页面，挂在 3.2）：solver.js 变形和最少步数，game.js 关卡和交互
-  games/magic/                    数学魔术揭秘（应用内页面，挂在 2.3）：logic.js 补数、撕牌、约瑟夫、一次式、1089，game.js 关卡和交互
-  games/fermat/                   费马点（应用内页面，挂在七下 18.4）：logic.js 距离、旋转、作图求费马点、数值最小点、路网，game.js 关卡和 SVG 拖动
-vendor/katex/                     KaTeX 0.18.7 本地副本（只保留 woff2 字体）
-content/
-  catalog.js                      学科 → 教材 → 册 → 章 → 节 的目录，册下可挂 exams（真题卷）；ready: true 表示已上线。sh2024 登记了 6 上～9 上七册（8 下按试读片段的目录；8 下完整版、9 下还没出）
-  math/
-    sh2024/                       教材：上海教育出版社 2024 版（五·四学制）
-      g6s1/                       册：六年级上册（g=年级，s1=上册，s2=下册）
-        1.1.js ... 4.2.js         每个小节一个文件：知识点 + 题目
-      g6s2/                       册：六年级下册（5.1～9.4，全册完成）
-      g7s1/                       册：七年级上册（10.1～14.4，全册完成）
-      g7s2/                       册：七年级下册（15.1～18.4，全册完成）
-      g8s1/                       册：八年级上册（19.1～22.3，全册完成）
-      g8s2/                       册：八年级下册（23.1～23.4，按试读片段出题；完整版出版后要核对）
-    bridge/g6s1/                  六年级衔接：旧版沪教版六年级第一学期的数的整除、分数两章（1.1～2.9），难度按月考真卷定
-  exams/
-    math/sh2024/g8s1/*.js         真题卷，一份试卷一个文件，路径 = 真题卷 ID
-  english/                        英语：错题库 question-bank.js 及各类补充数据、知识点、大纲与词汇页、中考原题 past-papers/（上海、江苏）；逐个文件的说明见 docs/english-and-papers.md
-  past-papers/                    上海语数物化中考原题文字、转录、来源清单与本地题图；说明见 docs/english-and-papers.md
-  english/sh2022/g8s1/            沪教版五四制英语八上，六个 Unit 各一节综合入门（目录标题先英文原题再中文主题；原创阅读 + 重点词标注 + 知识卡 + 分级选择题，待教师审核）
-  <其他学科>/                     预留，比如 physics/，结构相同
-tests/
-  run.js                          测试入口
-  harness.js                      极简测试工具（test / warn / assert）
-  answer.test.js                  判分逻辑单元测试
-  progress.test.js                累计错误次数、历史提交回填、事件去重、刷新和重置校验
-  content.test.js                 内容校验：目录与文件一致、题量配比、字段、公式渲染、答案自检、verify
-  english-course.test.js          英语八上六个 Unit 的目录、内容、待审核状态与入口校验
-  accounts.test.js                账号、考试历史、学期偏好
-  account-ui.test.js              账号区和登录弹窗
-  （英语题库、七天计划、中考真题相关的十几个测试，含单独用 Python 运行的导入回归，列表见 docs/english-and-papers.md）
-  learning-accounts.test.js       账号/访客隔离、同页切换、旧页面拒绝写入、旧共享数据迁移与备份校验
-  home-subjects.test.js           首页原布局、英语三个入口与词汇例句的离线接入校验
-  exam.test.js                    限时测试的计时、判分、会话存取
-  function-track.test.js          函数轨道关卡校验
-  solids.test.js                  立体图形实验室：展开图、圆柱圆锥展开、最短路径、截面、关卡数据
-  24.test.js                      24 点：求解器、括号化简、发牌分档、关卡条件
-  nim.test.js                     取石子：各规则的规律和穷举核对、关卡开局和唯一走法、电脑走法
-  balance.test.js                 天平解方程：变形规则、关卡和题面一致、最少步数穷举核对；动手玩的目录挂载
-  magic.test.js                   数学魔术揭秘：撕牌所有选法、约瑟夫规律、口令字数、关卡答案由逻辑核对
-  fermat.test.js                  费马点：作图法和数值最小点对照、120°、三线共点、旋转后共线、路网最优、关卡数据和答案
-  export-blind.js                 导出不含答案的盲解题单（给复核子代理用）
-  poly.js                         给 verify 用的整式运算（展开、加减、代入、次数），测试时挂成全局 Poly
-docs/
-  sop-section.md                  制作一个小节的完整流程（出题前必读）
-  question-types.md               题型台账的规则、待用套路池、教辅资料使用规则；各册的套路总表和按小节明细在 question-types/<册ID>.md（出题时只读本册和前置册）
-  english-and-papers.md           英语错题库、七天计划、英语中考题、上海语数物化原题的文件、测试、导入脚本和约定
-  games.md                        各趣味玩法的实现细节
-  difficulty-history.md           难度标准的变更记录（旧标准）
-  games-backlog.md                趣味玩法待完成清单
-  exam.md                         限时测试和账号的使用说明、开发说明
-  deploy.md                       打包和服务器部署
-  plan-*.md                       早期开发计划（已完成，仅供参考）
-  superpowers/specs/              功能设计文档
-  superpowers/plans/              功能实施计划（开发过程记录，已完成的以代码为准）
-  textbooks/                      教材目录与各章知识范围（出题前必读），每册一个文件，按完整课本整理（8 下只有第 23 章）
-  references/                     外部参考资料的笔记（原件放 refs/，不入库）
-.github/ISSUE_TEMPLATE/           Issue 模板：题目纠错、功能建议
-scripts/                          start.sh / stop.sh：本地开发服务器；build.sh：打包；serve.js / run.sh：部署到服务器上运行；pdf-page.sh：教材 PDF 渲染；textbook-text.py：按小节导出课本文字；import-english-bank.py：导入本地英语错题 PDF
-dist/                             打包产物，不入库
-pic/                              用户拍的教材照片，不入库
-refs/                             教材 PDF、教辅等参考资料原件，不入库；完整课本在 refs/沪教版五四制初中数学/（6 上～9 上，2022 课标修订版，可以用 pypdf 直接提取文字）
+index.html          应用入口（按顺序加载 src/ 下的脚本）
+src/                应用代码；games/ 是趣味玩法                    → src/AGENTS.md、src/games/AGENTS.md
+content/            学习内容：catalog.js 目录，<学科>/ 各学科内容，exams/ 真题卷，past-papers/ 上海中考原题 → content/AGENTS.md
+tests/              自动校验（run.js 入口）                         → tests/AGENTS.md
+scripts/            本地服务器、打包部署、课本文字导出、各类导入脚本
+docs/               SOP、题型台账、课本知识范围、存储与路由、模板、设计文档
+vendor/katex/       KaTeX 本地副本
+.github/            Issue 模板
+dist/ refs/ pic/    打包产物、参考资料原件、教材照片（都不入库）
 ```
 
-### 页面路由
+## 维护约定文档
 
-| hash | 页面 |
-|---|---|
-| `#/` | 首页：右上角切换学期，展示该学期教材、独立试卷入口和趣味玩法；额外保留英语学习大纲、英语单词、英语试题库、英语中考真题四个入口（依次排列） |
-| `#/shanghai-papers/<学科>` / `#/shanghai-papers/<学科>/<年份>` | 首页“上海中考真题”进入 math、chinese、physics、chemistry 的年份目录；原题文字与本地图片混合、题图点击放大，答案图在订正区、打印隐藏答案与作答控件；单选判分，其余人工订正；跨页小问不拆题，未能定位的资料待补 |
-| `#/english-exams` / `#/english-exams/shanghai` | 中考地区目录 / 上海年份目录；旧 `#/english-exams/<年份>` 与 `#/english-exams/shanghai/<年份>` 均可作答上海题目 |
-| `#/english-exams/jiangsu` / `#/english-exams/jiangsu/<城市ID>` / `#/english-exams/jiangsu/<城市ID>/<年份>` | 江苏城市目录 → 年份目录 → 原题作答；按城市隔离试卷，同篇阅读/完形合为一道大题、文章显示一次、全部小题统一提交，原小题 ID 和逐题错误统计不变；无答案不评分，无法提取的年份标待补充 |
-| `#/english-plan` / `#/english-plan/<天数>` / `#/english-plan/<天数>/result` / `#/english-plan/<天数>/result/<记录ID>` | 英语七天计划、每日作答及按提交时间查看错题；屏幕显示订正答案和解析（旧记录按 ID 补取当前解析），A4 打印只保留原题和题号，不打印答案或解析；不改题目 ID 或原题文本 |
-| `#/english-plan/<天数>/retry/<记录ID>` | 独立重做该提交记录中的错题；按快照恢复原题及答案，草稿不影响每日练习；提交追加新时间点记录（含全对），原记录不变；新错题可继续重做，重做答对题的答案和解析只在屏幕展示、不打印 |
-| `#/v/<册ID>` | 册：章节列表 + 本册的真题卷 |
-| `#/s/<小节ID>` | 小节：知识点 + 题目列表 |
-| `#/q/<小节ID>/<题目ID>` | 做题 |
-| `#/e/<真题卷ID>`、`#/eq/<真题卷ID>/<题目ID>` | 真题卷（按教材小节归类）、做真题 |
-| `#/exam`、`#/exam/...` | 限时测试：列表、答题、结果（未登录会先要求登录） |
-| `#/english-bank`、`#/english-bank/<题目ID>` | 英语试题库：先学知识点，再按题型浏览和作答；作答或查看答案后展示解析，重置隐藏解析，原题解析与 AI 补充解析分别标待核对 / 待审核 |
-| `#/g/<游戏ID>`、`#/g/<游戏ID>/<关卡ID>` | 挂在小节上的动手玩游戏，返回键回到小节 |
-
-### 本地存储
-
-所有键名都以 `xq.` 开头，读写都包在 try/catch 里。改结构时升版本号（`v1` → `v2`）并写迁移，不要直接改旧键的格式。
-
-| 键 | 位置 | 内容 |
-|---|---|---|
-| `xq.progress.v2` | localStorage | 数学小节和真题卷的共享进度，真题卷用 `exam:<真题卷ID>` 作分组 ID；旧英语分组仅作为迁移备份，不再写入 |
-| `xq.english-progress.v1.<归属>` | localStorage | 英语题库及中考文字题练习进度，结构同旧英语分组，按账号隔离；上海中考分组保持 `english-exam:<年份>`，江苏分组为 `english-exam:js-<城市ID>-<年份>`；英语题库可单题重置，重置不清除累计错误 |
-| `xq.errors.v2.<归属>` | localStorage | `{ counts: { [分组ID]: { [题目ID]: 次数 } }, events: { [提交事件ID]: true } }`；按账号记录累计错答次数及事件去重，从本账号七天记录补回明确事件；`Progress.errorCount` 查询单题，`errorStats` 返回次数降序统计；重置不清除，打印隐藏次数；旧 v1 保留备份 |
-| `xq.vocab.ipa.v1` / `xq.vocab.src.v1` | localStorage | 独立英语单词页的音标与词表来源偏好；读取时兼容原页面的 `shvocab.ipa` / `shvocab.src` |
-| `xq.english-plan.v2.<归属>` | localStorage | 本账号七天复习每日草稿及最近提交结果，切换账号重新加载；未登录独立 |
-| `xq.english-plan-prints.v2.<归属>` | localStorage | 本账号错题打印记录数组；按提交 ID 去重，保留原题、知识点、选择和答案；含零错题记录，每条有时间入口，打印隐藏选择、答案和解析 |
-| `xq.english-plan-retry.v2.<归属>` | localStorage | `{ drafts: { [源记录ID]: 作答 }, submissions: { [新记录ID]: { sourceId, review: [题干、ID、知识点、选择、答案快照] } } }`；本账号独立重做草稿和订正结果，不覆盖每日最近结果；提交清空本轮草稿 |
-| `xq.learning-migration.v1` | localStorage | 旧共享学习数据迁移完成标记。用户指定归入“我是臭恩铭”，首次加载合并并保留旧 v1 键及 `.legacy` 副本；完整写入成功才标记，失败下次加载重试，不给其他账号自动导入 |
-| `xq.account.v1` | localStorage | 当前登录的账号 `{ name }` |
-| `xq.subject-papers.v1.<归属>` | localStorage | 上海语数物化 `{ [试卷ID]: { [题目ID]: { response, attempts, wrongCount, revealed, solved } } }`；通过 LearningStore 按账号/访客隔离，只累计单选题错误，主观题不标答对；查看答案不增加提交次数，切换账号后旧表单拒绝写入 |
-| `xq.history.v1.<账号>` | localStorage | 该账号的考试历史，退出登录也保留 |
-| `xq.grade.v1.<账号>` / `xq.grade.v1` | localStorage | 首页选的学期（登录 / 未登录），默认 `g6s1` |
-| `xq.exam.v1` | sessionStorage | 进行中的限时测试（含截止时间） |
-| `fg-solved.v2` | localStorage | 函数轨道通关记录（早于 `xq.` 约定，保持不动） |
-| `xq.solids.v1` | localStorage | 立体图形实验室：`{ done: [关卡ID], nets: [1-3 拼出的展开图标准形] }` |
-| `xq.24.v1` | localStorage | 24 点：`{ done: [关卡ID], input: 'expr' \| 'merge' }`，input 是选的操作方式；自由练习不存档 |
-| `xq.nim.v1` | localStorage | 取石子：`{ done: [关卡ID], tables: [填完倒推表的关卡ID] }`；自由对局不存档 |
-| `xq.balance.v1` | localStorage | 天平解方程：`{ best: { 关卡ID: 最少用了几步 } }` |
-| `xq.magic.v1` | localStorage | 数学魔术揭秘：`{ done: [关卡ID] }` |
-| `xq.fermat.v1` | localStorage | 费马点：`{ done: [关卡ID] }` |
-
-### 编号规则
-
-英语和中考真题的导入脚本、补答案命令、试卷与题目编号规则见 docs/english-and-papers.md。
-
-学习数据的 `<归属>` 为 `user:<encodeURIComponent(账号名)>`，未登录为 `guest`；`.legacy` 是旧共享数据备份，不参与账号或访客读取。七天草稿、提交、重做、英语进度和累计错误均由 `LearningStore` 按当前账号定位，不能回退读取其他人的数据。登录/退出触发路由重绘，模块检测归属变化后重新加载；旧表单检测账号变化后拒绝写入。迁移实现及约定见 `docs/superpowers/specs/2026-10-01-account-learning-data.md`。
-
-- 学科：`math`、以后可能有 `physics`、`chinese` 等
-- 学科：`english` 已接入八年级上册单元内容；英语错题库仍是独立入口
-- 教材：数学 `sh2024`、英语 `sh2022`（沪教新版，对应 2022 版课程标准）；`bridge` 是六年级衔接（旧版教材补课内容），册 ID 同样用 `g6s1`，首页选六年级上册时和新教材并列
-- 册：`g6s1` 表示六年级上册，`g7s2` 表示七年级下册
-- 小节 ID：`math/sh2024/g6s1/1.1`
-- 英语八上按 Unit 1～6 建章，每章当前一节（`english/sh2022/g8s1/1.1` 至 `6.1`）；首页选择八年级上册时与数学并列显示。教材范围见 `docs/textbooks/english-sh2022-g8s1.md`
-- 题目 ID：`<小节号>-<档位首字母><序号>`，比如 `1.1-b01`（基础）、`1.1-e03`（扩展）、`1.1-c05`（挑战）。**题目 ID 一经发布不要改动**，进度记录靠它关联
-
-## 小节内容格式
-
-```js
-Content.section({
-  id: 'math/sh2024/g6s1/1.1',
-  title: '有理数的引入',
-  review: { status: 'pending' },          // pending 待审核 / approved 已审核（附审核人、日期）
-  audit: { blind: '2026-09-19', rounds: 2, note: '...' },  // 盲解复核记录，没有它测试会提醒
-  intro: [                                // 知识点卡片，3～6 张
-    { title: '正数和负数', body: '...', example: '...', pitfall: '...' },  // pitfall 为易错提醒，可选；demo 为卡片里的演示动画，可选，格式同题目的 demo
-  ],
-  questions: [
-    {
-      id: '1.1-b01',
-      level: 'basic',                     // basic 基础 / extended 扩展 / challenge 挑战
-      type: 'choice',                     // choice / multi / fill
-      stem: '...',                        // 题干，数学式子用 $...$（KaTeX）
-      options: ['...'],                   // choice、multi 用
-      answer: 1,                          // 形式取决于题型，见 src/answer.js
-      explain: ['第一步...', '第二步...'],  // 分步解析
-      verify: () => ...,                  // 可选：独立计算答案，测试时和 answer 核对；可用全局 F(x)（=Frac.of）和 Poly（整式运算，见 tests/poly.js）
-      figure: '<svg>...</svg>',           // 可选：配图
-      demo: { type: 'foldCut', folds: 2 }, // 可选：解析里的演示动画，type 见 src/demos.js 的 TYPES
-    },
-  ],
-});
-```
-
-英语八上单元小节另有 `reading`（原创短文、逐句译文、重点词）和 `bankExamples`，格式与约定见 docs/english-and-papers.md 的“英语八上单元内容格式”。
-
-## 真题卷格式
-
-真题卷是网上收集的公开试卷，**保留原卷的题干、数据、选项和题号**，按教材小节归类后供学生练习。和原创小节的区别：
-
-- 放在 `content/exams/<册ID>/<试卷名>.js`，在 `catalog.js` 对应册的 `exams` 里登记（`id`、`title`、`ready`、`questionCount`）
-- 不受"20 道题、三档配比"的限制；难度用 1～5 标注（1 易 … 5 压轴），和原创题的三档不是一套标准
-- 必须写 `source` 注明来源；分析笔记放 `docs/references/`，比如 `2025-chongming-midterm-analysis.md`
-- 题目 ID 用 `<试卷缩写>-q<原题号>`，比如 `cm2025-q05`，发布后同样不要改动
-
-```js
-Content.exam({
-  id: 'math/sh2024/g8s1/2025-chongming-midterm',
-  volumeId: 'math/sh2024/g8s1',
-  title: '...',
-  source: { kind: 'exam-original', name: '...', note: '...' },
-  questions: [
-    {
-      id: 'cm2025-q05', originalNo: 5,
-      section: '19.2', sectionTitle: '实数',   // 归到哪个教材小节
-      topic: '数轴上的无理数',
-      difficulty: 2, difficultyReason: '...',
-      type: 'choice', stem: '...', options: [...], answer: 0, explain: [...],  // 同小节题目
-    },
-  ],
-});
-```
-
-## 内容写作规范
-
-### 题量和难度
-
-原创小节统一用真卷标尺（下面的旧标准只作记录），测试只检查题量范围：**基础 5～10 道、扩展 5～10 道、挑战 5 道，总数 15～20 道**。
-
-英语八上综合入门小节例外：每个 Unit 有 16 道原创选择题（基础 5、扩展 6、挑战 5），其中最初的 6 道 ID 保持不变，新增 10 道接着编号。另以 `bankExamples` 引用现有错题库的 2 道原题作为知识点例题，**不复制或改写题库原文**；其讲解为 AI 原创。英语难度不硬套数学真卷压轴标尺。英语语法题由英语教师审核，不用数学的数值 `verify` 或盲解记录冒充语言复核；后续扩题保留已发布题目 ID。
-
-英语八上原创练习的题干和选项以英文为主；较难词汇可直接在题干词后用括号写简短中文释义，例如 `evidence (证据)`。中文的分步解析保留，帮助学生订正。题库原题保持原样，不受这一原创题语言规则影响。
-
-**真卷标尺（2026-09-29 起，6 上 13 节、7 上 10.1～10.3、8 上 19.1～19.2 已全部改用（8 上 20.1～21.5 按它新做），6 下 5.1～9.4 按它新做，样板是 6 上 1.2）**：按上海真实学校考试卷定档。真卷按 1～5 标难度时，1～2 级约占六成，所以基础、扩展两档的比例向真卷靠拢，整节为**基础 9 + 扩展 6 + 挑战 5 = 20 道**。
-
-| 档位 | 标准 |
-|---|---|
-| 基础 | 真卷常规题（1～2 级）：1～3 步，概念辨析和常见易错点，**每道都要有一个“坑”**（符号、漏解、忘了负数、移项丢符号等）。可以出“说法正确的有几个”、改错题 |
-| 扩展 | 真卷中档难题到压轴题（3～5 级），3、4、5 级大约 3∶2∶1：要有转弯（分类讨论、找规律、动点、含绝对值条件筛选等） |
-| 挑战 | 比真卷压轴再难一些：一个关键转化之后还要再推广或分类，或者两个环节叠加，5～7 步；**不要求竞赛水平，明显偏竞赛的换掉**；直接套一个方法就能做完的不合格 |
-
-旧的“上移标准”（基础 5 + 扩展 10 + 挑战 5）和改用真卷标尺的经过见 docs/difficulty-history.md，已不再使用。
-
-**六年级衔接（`bridge`）** 同样以真卷（9 月月考卷）为标尺，题量沿用 5 + 10 + 5，见 `docs/superpowers/specs/2026-09-27-g6-bridge-design.md`。
-
-**所有题目的知识点都不能超出本小节及之前所学**。挑战题难在思维，不能难在超纲。
-
-### 知识点介绍
-
-- 每张卡片说清一个知识点：标题 + 1～3 句通俗解释 + 一个具体例子，每张控制在 100 字左右
-- 先讲"为什么需要它"，再讲规则，最后给例子
-- 术语和记号以课本为准，不引入高中术语
-
-### 题目
-
-- 每道题都要有分步解析，挑战题的解析要讲清思路是怎么想到的
-- 选择题的干扰项要对应真实的常见错误（比如符号错、漏掉一种情况），不要随便凑
-- 能计算验证的题目必须写 `verify`：用 `F()` 做精确分数运算，或者穷举、模拟，**不要直接返回写死的答案**
-- TeX 命令在 JS 字符串里要写双反斜杠（`'\\frac'`）；文本里不要出现换行符，测试会拦截控制字符
-- 有配图的题用内联 SVG，图里的数据必须和题干一致
-- **知识点卡片的例子不能和任何题目撞车**，包括例子的中间步骤：比如卡片写 $(-\frac34)\div(-\frac98)=\frac34\times\frac89$，就等于泄露了题目 $(-\frac34)\times(-\frac89)$ 的答案。写完卡片后要逐题对照
-- 公式里只用 KaTeX 认识的符号（测试开了严格模式），比如新运算符号用 `\\bigstar`，不要直接写 ★；中文和单位写在 `$` 外面
-- 解析里只能用**已学过的方法**：比如第 1 章用"数格子、距离、行程问题"推理，不要列方程（方程在第 3 章）；1.1 还没学有理数运算，不要写成加减算式
-
-### 版权和审核
-
-- 可以参照课本的章节结构和知识范围，但**不能照搬课本原文、例题、习题和插图**，小节里的知识点和题目全部原创
-- 真题卷是例外：收录网上公开的试卷原题，要注明来源（见"真题卷格式"），不计入原创内容。原作者要求撤下时照办
-- 教辅资料仍然只能提炼成笔记（`docs/references/`），不能整题搬进小节
-- AI 写的内容 `review.status` 一律是 `pending`，界面上标注"待审核"，**正式用于教学前必须由相应学科教师审核**
-- 不要凭记忆写课本内容。各小节的知识范围以 `docs/textbooks/` 里的课本资料为准，资料不够时先问项目维护者，不要自己补
-
-### 每个小节的出题流程
-
-**完整步骤、自查清单和复核提示词模板见 `docs/sop-section.md`，做新小节时照着执行。** 简要流程：
-
-1. 查 `docs/textbooks/` 确认知识范围，查 `docs/question-types.md` 的规则和本册、前置册的 `docs/question-types/<册ID>.md`（不要通读全部）：核心题型有计划地复现（换情境、换坑或多叠一步），一次性的巧题不重出，再从套路池挑新套路
-2. 先列三档提纲（挑战题先写下"叠加哪两个环节"），再写题
-3. `node tests/run.js` 通过 → 对照 SOP 的自查清单
-4. `node tests/export-blind.js` 导出无答案题单，交一个干净的 AI 会话盲解复核（Claude Code 用子代理，其他工具另开一个新会话）
-5. 处理意见后再送一轮，直到复核明确写"整节通过"（第 1 章每节用了 3 轮）
-6. 更新题型台账、写入 `audit`、标记 `ready`、截图抽查、提交
-
-### 经验（1.1～1.5）
-
-- 复核方对挑战题的难度要求很严格：常规的"两层分类讨论""折叠数轴""找规律求第 n 项"只被评为期中、期末压轴水平。要达到"难一档"，需要叠加多个思维环节，比如动点加分段讨论加重合的情况，或者端点取舍加反证
-- 小节越靠前，可用的知识越少，挑战题的难度上限越低，这一点要如实告诉用户，不要为了凑难度而超纲
-- 知识点卡片要避免循环定义（比如相反数和绝对值互相解释），同一个词在同一张卡片里要保持同一个含义
-- 难度以复核方的判断为准：复核方认为某道挑战题"没有达到比中考压轴更难一档"时，要修改或换题，直到通过
-- 挑战题要做到"方法有门槛"：直接硬算、取特殊值、套单一模板就能解出来的都不合格
-- 解析不能用还没学的方法：第 1 章不能"设 S"（字母表示数在第 2 章），不能用幂的运算法则，要从乘方的意义出发说明
-- 复核每节开一个新会话；同一节的第二轮复核发回给原来的会话（它记得上下文），只导出改过的题（`export-blind.js` 后面列题目 ID）
-- 第 1 章按上移后的标准，每节都做了 3 轮复核才通过。常见被打回的原因，按出现频率排序：
-  1. 挑战题和本节扩展题是同一个模板（只换了数据），要换思路，不能只加难
-  2. 只有一个思维环节：一次分类、一次裂项、一次找规律都不够
-  3. 硬算、取特殊值、套现成模板就能做出来（比如项数太少、数集正负对称、选项二选一）
-  4. 卡片例子（含中间步骤）泄露某道题的答案或第一步
-  5. 解析用了还没学的方法：设字母、解方程、幂的运算法则
-- 出题时先想"这道题要叠加哪两个环节"，再选数据；数据要避开对称、避开能一眼看出的特殊值
-
-## 代码约定
-
-- 首屏只加载首页和常用页面要用的脚本；大体积数据（真题文字数据）不写进 `index.html`，在 `app.js` 的 `DATA_SCRIPTS` 里登记，进入对应页面时用 `<script>` 按需加载
-- 零构建、不引入框架。第三方库只能放在 `vendor/` 里本地加载，不走 CDN（国内访问 CDN 不稳定）
-- 内容文件（小节、真题卷）在浏览器里共用一个全局作用域，顶层的 `const`、`let`、`function` 名字要加小节号后缀（如 `S201`、`roots212`），否则后加载的文件报错不执行、页面显示“制作中”；`tests/content.test.js` 会把所有内容文件放进同一个上下文检查
-- 判分、分数运算等纯逻辑放在不依赖 DOM 的文件里，文件末尾用 `module.exports` 导出给测试使用
-- 界面文字用中文，面向初中生，表述要通俗；负号显示用 `−`（U+2212），但判分时 `-` 和 `−` 都要接受
-- 移动端优先：页面在 320px 宽度下也要能正常使用，可点击控件不小于 36px
-- localStorage 的读写都要包在 try/catch 里，键名统一加 `xq.` 前缀
-- 新增学科时，只需要加 `content/<学科>/` 和 `catalog.js` 条目；如果需要新题型，再扩展 `quiz.js` 和 `answer.js`
-
-## 趣味玩法的立意
-
-数学方向的立意：**用技术帮学生看见课本上难以想象的东西**。几何、图形的变换、连续变化、逐步逼近，还有和直觉相反的结论，静态插图讲不清楚，做成能动手的页面讲得更生动，让学生在学习中发现一点乐趣。发掘新点子时按下面三条筛选：
-
-1. **静态图讲不清**：概念本身是动的（变换、运动、逼近），或者结论和直觉相反（比如任意四边形的中点四边形总是平行四边形）
-2. **学生自己动手发现**：拖动、旋转、调滑块，先自己得出猜想，再揭秘为什么成立（参照数学魔术的"先表演、再揭秘"），不做只能看的动画
-3. **挂得上课本、测得了**：能挂上某个小节或课本里的阅读材料、综合与实践；关卡答案由求解器或几何计算得出，写测试核对
-
-候选点子和进度记在 `docs/games-backlog.md`，新想到的点子也补进去。
-
-各游戏（函数轨道、立体图形实验室、24 点、取石子、天平解方程、数学魔术揭秘、费马点）的实现细节见 docs/games.md，改游戏前先读对应一节。
-
-## 动手玩（挂在小节上的游戏）
-
-首页"趣味玩法"是宫格，列表在 `app.js` 的 `FUN_GAMES`（名字、一句“练什么”、课本位置、图标，按课本顺序排），详细玩法进了游戏再看。和课本联系紧的游戏主要挂在小节上，也可以同时放进宫格（数学魔术、天平解方程、费马点都放了），从首页进去时返回键回首页：`catalog.js` 小节条目写 `games: ['<ID>']`，小节页显示“动手玩”卡片，册页在该节下面多一行“玩”。游戏脚本在 `index.html` 里加载，注册 `window.Games[ID] = { id, title, section, desc, mount(main, levelId), progress() }`，由 `app.js` 的 `#/g/<ID>` 路由渲染。样式写在 `app.css`，用游戏专属前缀。game.js 整个包在立即执行函数里，否则几个游戏的顶层常量会冲突。候选玩法见 `docs/games-backlog.md`。
-
-## 英语与中考真题
-
-英语错题库、七天计划、上海及江苏英语中考文字题、上海语数物化原题（含图片补题）的文件说明、导入命令和约定都在 docs/english-and-papers.md。做这些功能时先读它，改了同步更新。
+- 根 `AGENTS.md` 只放全局规则和路由；只和某个目录有关的约定写进那个目录的 `AGENTS.md`，专题资料放 `docs/`。`tests/agents-docs.test.js` 限制大小：根文件 16KB、目录级 14KB，超了就拆
+- 新建目录级 `AGENTS.md` 时，同目录放一个只含导入的 `CLAUDE.md`（照抄 `content/CLAUDE.md`），并在上面的路由表加一行
+- 文档里写的仓库路径要真实存在（测试会检查）；写占位路径用 `<册ID>` 这样的尖括号
+- 各学科的经验、打回原因写进本学科的 `AGENTS.md` 或 `docs/sop-section.md`，不要写回根文件
 
 ## 已知问题
 
-- 函数轨道：星星在 y 轴上时，会和 y 轴的刻度数字重叠
-- 函数轨道：第 2 关用了"斜率"一词，接入八年级教材时要按课本统一用语
 - 用无头 Chrome 截图时，requestAnimationFrame 动画跑不完，所以动画要在真机或普通浏览器里验证
-- 立体图形实验室：画家算法在面互相穿插时会画错（比如 2-3 围圆锥时半径偏小、扇形重叠的部分），不影响理解，暂不处理
+- 游戏相关的已知问题见 `src/games/AGENTS.md`

@@ -1,0 +1,12 @@
+# AI 不要整体读取的大文件和资料原件（见 AGENTS.md 的禁读清单）；确实需要时临时注释掉对应行
+content/english/past-papers/jiangsu.js
+content/english/past-papers/catalog.js
+content/english/question-bank.js
+content/english/shanghai-exam-vocabulary.html
+content/past-papers/shanghai.js
+content/past-papers/images/
+content/english/past-papers/*/
+vendor/
+dist/
+refs/
+pic/

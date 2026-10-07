@@ -20,32 +20,19 @@ review: { status: 'approved', by: '审核人', date: '2026-10-01' },
 
 ## 出题（新增或修改小节）
 
-1. 先读 [AGENTS.md](AGENTS.md) 的“内容写作规范”和 [docs/sop-section.md](docs/sop-section.md) 的完整流程
-2. 知识范围以 [docs/textbooks/](docs/textbooks/) 为准，不能超纲；查 [docs/question-types.md](docs/question-types.md) 避开已经用过的套路
-3. **全部原创**：小节里的内容不能照搬教材、教辅、真题卷的原文、例题、习题和插图（真题卷原题单独收录，见下一节）
-4. 能计算的题目必须写 `verify`，用独立计算核对答案，不能直接返回写死的答案
-5. **题目 ID 一经发布不要改动**，学生的做题进度靠它关联
-6. 提交前运行 `node tests/run.js`，必须全部通过
+规则都写在约定文档里，人和 AI 工具读的是同一套：先读 [AGENTS.md](AGENTS.md)（全局规则和“做什么读什么”的路由表），再读 [content/AGENTS.md](content/AGENTS.md)（内容格式）和本学科的 `content/<学科>/AGENTS.md`（出题标准），数学的完整流程见 [docs/sop-section.md](docs/sop-section.md)。最要紧的几条：
+
+1. 知识范围以 [docs/textbooks/](docs/textbooks/) 为准，不能超纲；**全部原创**，不照搬教材、教辅的原文、例题、习题和插图
+2. 能计算的题目写 `verify`，用独立计算核对答案
+3. **题目 ID 一经发布不要改动**，学生的做题进度靠它关联
 
 ## 收录真题卷
 
-真题卷收集自网上公开的试卷，保留原题，格式见 [AGENTS.md](AGENTS.md) 的“真题卷格式”：
-
-1. 在 `source` 里写清试卷名称和来源
-2. 每题归到对应的教材小节，标 1～5 级难度并写出判断依据
-3. 在 `docs/references/` 写一份分析笔记，在 `content/catalog.js` 对应册的 `exams` 里登记
-4. 答案和解析要逐题核对，提交前运行 `node tests/run.js`
+格式和要求见 [content/AGENTS.md](content/AGENTS.md) 的“真题卷格式”：写清来源、每题归到教材小节并标 1～5 级难度、在 `docs/references/` 写分析笔记、在 `content/catalog.js` 登记。
 
 ## 写代码
 
-- 零构建、不引入框架；第三方库放在 `vendor/` 本地加载，不走 CDN
-- 直接双击 `index.html`（`file://`）也要能用，所以不要用 `fetch` 加载本地文件
-- 移动端优先：320px 宽度下能正常使用，可点击控件不小于 36px
-- 界面文字用中文，表述要让初中生看得懂
-- 判分等纯逻辑放在不依赖 DOM 的文件里，并补上测试
-
-- 改了目录结构、内容格式、本地存储键名或页面路由，同一个提交里更新 [AGENTS.md](AGENTS.md)
-- 较大的功能先写设计文档，放在 `docs/superpowers/specs/`
+先读 [AGENTS.md](AGENTS.md) 的“全局硬规则”和 [src/AGENTS.md](src/AGENTS.md)；加新学科、新练习模式时照 [docs/templates/](docs/templates/) 里的模板和清单做。改了目录结构、内容格式、存储键或路由，同一个提交里更新对应的约定文档（测试会检查一部分）。
 
 **交互式几何、立体图形**是接下来最想做的方向（见 README 的路线图）。动手之前请先开一个 Issue 讨论方案。
 
