@@ -997,3 +997,64 @@ main > audio { max-width: 100%; }
   .subject-papers-image { break-inside: avoid; }
   .subject-papers-image img { max-width: 100%; max-height: 250mm; object-fit: contain; }
 }
+
+/* 英语单词：今日任务、单元词表、一题一屏练习（src/words-ui.js）。320px 可用，按钮不小于 36px。 */
+.words-today h2 { font-size: 18px; }
+.words-source { margin-top: 6px !important; }
+.words-actions { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+.words-actions button, .words-actions a, .words-type button, .words-feedback button {
+  min-height: 40px; padding: 6px 16px; border: 1px solid var(--line); border-radius: 8px;
+  background: var(--card); color: var(--primary); font: inherit; display: inline-flex; align-items: center;
+}
+.words-type button { flex: none; white-space: nowrap; }
+.words-actions .primary, .words-type .primary, .words-feedback .primary {
+  background: var(--primary); border-color: var(--primary); color: #fff;
+}
+.words-actions button:disabled { opacity: .5; }
+.words-setting { display: flex; align-items: center; gap: 8px; margin: 0 0 12px; font-size: 14px; color: var(--muted); }
+.words-setting select { min-height: 36px; padding: 4px 8px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); font: inherit; }
+.words-progress { font-size: 13px; color: var(--muted); margin: 8px 0; }
+.words-head { font-size: 26px !important; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; overflow-wrap: anywhere; }
+.words-ipa { font-family: "Lucida Sans Unicode", "Arial Unicode MS", sans-serif; }
+.words-meaning { color: var(--text) !important; font-size: 17px !important; margin: 6px 0 !important; }
+.words-meaning .pos { color: var(--muted); font-size: 14px; }
+.words-forms { margin-top: 4px !important; }
+.words-ex { color: var(--text) !important; margin-top: 10px !important; border-left: 3px solid var(--line); padding-left: 10px; }
+.words-ex span { color: var(--muted); font-size: 13px; }
+.words-ask { margin: 8px 0 !important; }
+.words-options { display: grid; gap: 8px; margin-top: 10px; }
+.words-options button {
+  min-height: 44px; padding: 8px 12px; text-align: left; border: 1px solid var(--line); border-radius: 8px;
+  background: var(--card); color: var(--text); font: inherit; overflow-wrap: anywhere;
+}
+.words-options button.right { border-color: var(--ok); background: var(--ok-bg); }
+.words-options button.wrong { border-color: var(--fail); background: var(--fail-bg); }
+.words-type { display: flex; gap: 8px; margin-top: 10px; }
+.words-type input {
+  flex: 1 1 auto; min-width: 0; min-height: 44px; padding: 8px 10px; font: inherit; font-size: 18px;
+  border: 1px solid var(--line); border-radius: 8px; background: #fff;
+}
+.words-cloze { color: var(--text) !important; font-size: 17px !important; overflow-wrap: anywhere; }
+.words-cloze .words-gap { color: var(--primary); font-weight: 600; letter-spacing: 1px; }
+.words-feedback { margin-top: 12px; font-size: 15px; overflow-wrap: anywhere; }
+.words-feedback:empty { display: none; }
+.words-feedback.ok { color: var(--ok); }
+.words-feedback.fail { color: var(--fail); }
+.words-feedback mark { background: var(--fail-bg); color: var(--fail); font-weight: 700; }
+.words-feedback button { margin-top: 10px; display: flex; }
+.words-listen { display: flex; justify-content: center; margin: 8px 0; }
+button.say {
+  min-width: 36px; min-height: 36px; border: 1px solid var(--line); border-radius: 18px;
+  background: var(--card); font-size: 16px; cursor: pointer; vertical-align: middle;
+}
+button.say:disabled { opacity: .4; cursor: not-allowed; }
+button.say-big { min-width: 72px; min-height: 72px; border-radius: 36px; font-size: 30px; }
+.words-summary { color: var(--muted); font-size: 14px; margin: 12px 0 0; }
+.words-list { list-style: none; padding: 0; margin: 16px 0 0; }
+.words-list li {
+  display: grid; grid-template-columns: auto 36px 1fr auto; align-items: center; gap: 4px 8px;
+  background: var(--card); padding: 6px 12px; margin-bottom: 6px; border-radius: 8px;
+}
+.words-list .w { font-weight: 600; overflow-wrap: anywhere; }
+.words-list .zh { font-size: 13px; color: var(--muted); min-width: 0; overflow-wrap: anywhere; }
+.words-list .box { font-size: 12px; color: var(--primary); white-space: nowrap; }

@@ -19,6 +19,7 @@ require('./english-plan.test.js');
 require('./english-plan-retry.test.js');
 require('./learning-accounts.test.js');
 require('./home-subjects.test.js');
+require('./english-words.test.js');
 require('./english-exams.test.js');
 require('./subject-papers.test.js');
 require('./agents-docs.test.js');

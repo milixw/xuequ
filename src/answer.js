@@ -677,6 +677,26 @@
     return `$${letter}${op(set.hiInc)}${set.hi.toTeX()}$`;
   }
 
+  // ---------- 英语 ----------
+  // 英语拼写与整句：不分大小写、空格合一、弯撇号转直撇号、忽略结尾句末标点；连字符和空格不互换
+  function normalizeEn(s) {
+    return normalize(s).toLowerCase()
+      .replace(/\s+/g, ' ')
+      .replace(/\s+([,.!?;:])/g, '$1')
+      .replace(/[.!?]+$/, '')
+      .trim();
+  }
+
+  // 第一处不同的位置（按规范化后的文字），相同返回 -1；拼写反馈用来标出错在哪一位
+  function firstDiff(input, answer) {
+    const a = normalizeEn(input);
+    const b = normalizeEn(answer);
+    if (a === b) return -1;
+    let i = 0;
+    while (i < a.length && i < b.length && a[i] === b[i]) i++;
+    return i;
+  }
+
   // ---------- 判分 ----------
   // 返回 { ok, error? }：error 表示输入看不懂，提示学生改写，不算答错
   function checkBlank(blank, input) {
@@ -750,6 +770,10 @@
         const answers = Array.isArray(blank.answer) ? blank.answer : [blank.answer];
         return { ok: answers.some(a => normalize(a) === s) };
       }
+      case 'en': {
+        const answers = Array.isArray(blank.answer) ? blank.answer : [blank.answer];
+        return { ok: answers.some(a => normalizeEn(a) === normalizeEn(s)) };
+      }
       case 'ineq': {
         let got;
         try { got = parseSolutionSet(s, blank.var || 'x'); } catch (e) { return { ok: false, error: e.message + '；没有解就填“无解”' }; }
@@ -788,6 +812,7 @@
       case 'angle': return normalize(blank.answer).replace(/'/g, '′').replace(/"/g, '″');
       case 'ratio': return `$${normalize(blank.answer)}$`;
       case 'text': return Array.isArray(blank.answer) ? blank.answer[0] : blank.answer;
+      case 'en': return Array.isArray(blank.answer) ? blank.answer[0] : blank.answer;
       case 'ineq': return solutionSetTeX(parseSolutionSet(blank.answer, blank.var || 'x'), blank.var || 'x');
     }
     return String(blank.answer);
@@ -796,7 +821,7 @@
   const Answer = {
     Frac, normalize, parseNumber, parseNumberList, parseExpr, evaluate, equivalent,
     isSimplified, parseAngle, parseReal, evalReal, realValue, realEqual, texReal, isSimplestReal,
-    checkBlank, checkQuestion, answerText, parseSolutionSet, sameSolutionSet,
+    checkBlank, checkQuestion, answerText, parseSolutionSet, sameSolutionSet, normalizeEn, firstDiff,
   };
   if (typeof module !== 'undefined') module.exports = Answer;
   else root.Answer = Answer;

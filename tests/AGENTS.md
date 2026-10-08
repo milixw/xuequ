@@ -13,6 +13,7 @@
   account-ui.test.js              账号区和登录弹窗
   （英语题库、七天计划、中考真题相关的十几个测试，含单独用 Python 运行的导入回归，列表见 content/english/AGENTS.md 和 content/past-papers/AGENTS.md）
   learning-accounts.test.js       账号/访客隔离、同页切换、旧页面拒绝写入、旧共享数据迁移与备份校验
+  english-words.test.js           英语单词：词表格式、分盒升降与到期、认读词不拼写、“我认识”只进第 2 盒、每日队列上限、跨册共用进度、7 天模拟、kind en 判分、存储异常、页面接入
   home-subjects.test.js           首页原布局、英语三个入口与词汇例句的离线接入校验
   exam.test.js                    限时测试的计时、判分、会话存取
   function-track.test.js          函数轨道关卡校验

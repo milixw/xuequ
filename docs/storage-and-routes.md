@@ -12,7 +12,8 @@
 | `#/english-exams/jiangsu` / `#/english-exams/jiangsu/<城市ID>` / `#/english-exams/jiangsu/<城市ID>/<年份>` | 江苏城市目录 → 年份目录 → 原题作答；按城市隔离试卷，同篇阅读/完形合为一道大题、文章显示一次、全部小题统一提交，原小题 ID 和逐题错误统计不变；无答案不评分，无法提取的年份标待补充 |
 | `#/english-plan` / `#/english-plan/<天数>` / `#/english-plan/<天数>/result` / `#/english-plan/<天数>/result/<记录ID>` | 英语七天计划、每日作答及按提交时间查看错题；屏幕显示订正答案和解析（旧记录按 ID 补取当前解析），A4 打印只保留原题和题号，不打印答案或解析；不改题目 ID 或原题文本 |
 | `#/english-plan/<天数>/retry/<记录ID>` | 独立重做该提交记录中的错题；按快照恢复原题及答案，草稿不影响每日练习；提交追加新时间点记录（含全对），原记录不变；新错题可继续重做，重做答对题的答案和解析只在屏幕展示、不打印 |
-| `#/v/<册ID>` | 册：章节列表 + 本册的真题卷 |
+| `#/words` / `#/words/<册ID>` / `#/words/<册ID>/<单元号>` | 英语单词：今日任务（到期复习 + 新词，一题一屏）/ 本册各单元掌握情况 / 单元词表（学这一单元、只练本单元）；首页“英语单词”入口进 `#/words`，中考词汇表从这里链出。设计见 `docs/superpowers/specs/2026-10-08-english-unit-structure.md` |
+| `#/v/<册ID>` | 册：章节列表 + 本册的真题卷；英语册有词表时每个 Unit 多一行“单词 · 已掌握 n / 共 m” |
 | `#/s/<小节ID>` | 小节：知识点 + 题目列表 |
 | `#/q/<小节ID>/<题目ID>` | 做题 |
 | `#/e/<真题卷ID>`、`#/eq/<真题卷ID>/<题目ID>` | 真题卷（按教材小节归类）、做真题 |
@@ -29,6 +30,7 @@
 | `xq.progress.v2` | localStorage | 数学小节和真题卷的共享进度，真题卷用 `exam:<真题卷ID>` 作分组 ID；旧英语分组仅作为迁移备份，不再写入 |
 | `xq.english-progress.v1.<归属>` | localStorage | 英语题库及中考文字题练习进度，结构同旧英语分组，按账号隔离；上海中考分组保持 `english-exam:<年份>`，江苏分组为 `english-exam:js-<城市ID>-<年份>`；英语题库可单题重置，重置不清除累计错误 |
 | `xq.errors.v2.<归属>` | localStorage | `{ counts: { [分组ID]: { [题目ID]: 次数 } }, events: { [提交事件ID]: true } }`；按账号记录累计错答次数及事件去重，从本账号七天记录补回明确事件；`Progress.errorCount` 查询单题，`errorStats` 返回次数降序统计；重置不清除，打印隐藏次数；旧 v1 保留备份 |
+| `xq.words.v1.<归属>` | localStorage | 英语单词记忆进度 `{ words: { [词头小写]: { box: 1～5 \| 'M' 掌握 \| 'R' 认读, due: 'YYYY-MM-DD', seen, wrong, last } }, days: { [日期]: { reviewed, learned, wrong, ms } }（保留 90 天）, settings: { newPerDay: 5\|10\|15, unit: '<册ID>/<单元号>' } }`；按词头跨册共用，按账号隔离，“只练本单元”不写入 |
 | `xq.vocab.ipa.v1` / `xq.vocab.src.v1` | localStorage | 独立英语单词页的音标与词表来源偏好；读取时兼容原页面的 `shvocab.ipa` / `shvocab.src` |
 | `xq.english-plan.v2.<归属>` | localStorage | 本账号七天复习每日草稿及最近提交结果，切换账号重新加载；未登录独立 |
 | `xq.english-plan-prints.v2.<归属>` | localStorage | 本账号错题打印记录数组；按提交 ID 去重，保留原题、知识点、选择和答案；含零错题记录，每条有时间入口，打印隐藏选择、答案和解析 |

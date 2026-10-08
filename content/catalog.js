@@ -457,6 +457,18 @@ Content.catalog = {
         id: 'sh2022',
         name: '上海教育出版社新版（五·四学制，2022 版课标）',
         volumes: [{
+          id: 'g6s1',
+          name: '六年级上册',
+          words: 'content/english/words/sh2022-g6s1.js',  // 单元词表（src/words.js），目前有 Unit 1
+          chapters: [
+            { no: 1, title: 'School life（学校生活）', sections: [] },
+            { no: 2, title: 'Family ties（家庭纽带）', sections: [] },
+            { no: 3, title: 'Food（食物）', sections: [] },
+            { no: 4, title: 'Sports（体育运动）', sections: [] },
+            { no: 5, title: 'Animals and us（动物与我们）', sections: [] },
+            { no: 6, title: 'Travelling around China（游中国）', sections: [] },
+          ],
+        }, {
           id: 'g8s1',
           name: '八年级上册',
           chapters: [

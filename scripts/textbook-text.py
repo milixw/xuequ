@@ -7,8 +7,9 @@
   python3 scripts/textbook-text.py g8s1 22.1            # 按 docs/textbooks 目录表里的页码，导出 22.1 一节
   python3 scripts/textbook-text.py g8s1 109 116         # 导出课本第 109～116 页
   python3 scripts/textbook-text.py g8s1 22.1 > /tmp/x.txt
+  python3 scripts/textbook-text.py en:g6s1 U1            # 英语：册 ID 前加 en:，按 docs/textbooks/english-sh2022-<册ID>.md 的编号导出
 
-PDF 路径和“课本页码 = 文件页码 − N”取自 docs/textbooks/math-sh2024-<册ID>.md 开头的说明。
+PDF 路径和“课本页码 = 文件页码 − N”取自 docs/textbooks/math-sh2024-<册ID>.md（英语为 english-sh2022-<册ID>.md）开头的说明。
 依赖 pypdf。课本原件在 refs/，不入库。
 """
 import re
@@ -22,7 +23,7 @@ JUNK = {'N', 'mweY²QúrHy>', '书书书'}
 
 
 def volume_info(vol):
-    doc = ROOT / 'docs' / 'textbooks' / f'math-sh2024-{vol}.md'
+    doc = ROOT / 'docs' / 'textbooks' / (f'english-sh2022-{vol[3:]}.md' if vol.startswith('en:') else f'math-sh2024-{vol}.md')
     text = doc.read_text(encoding='utf-8')
     head = '\n'.join(text.split('\n')[:12])
     pdf = re.search(r'`(refs/[^`]+\.pdf)`', head)
@@ -49,7 +50,7 @@ def main():
     pdf, off, rows = volume_info(vol)
     if len(sys.argv) > 3:
         start, end = int(a), int(sys.argv[3])
-    elif '.' in a:
+    elif not a.isdigit():
         start, end = section_pages(rows, a)
     else:
         start = end = int(a)

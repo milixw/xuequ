@@ -11,6 +11,7 @@
 //   #/g/<游戏ID>[/<关卡ID>] 挂在小节上的动手玩游戏（window.Games 里注册）
 //   #/english-bank[/<题目ID>] 英语错题库
 //   #/english-plan[/<天数>[/(result|retry)/<记录ID>]] 英语七天复习计划、每日作答、错题记录与重做
+//   #/words[/<册ID>[/<单元号>]] 英语单词：今日任务、本册各单元、单元词表（src/words-ui.js）
 
 (function () {
   const app = document.getElementById('app');
@@ -155,7 +156,8 @@
       `<span class="tag">${escapeHtml(v.subject.name)}</span>` +
       `<h2>${escapeHtml(v.volume.name)}</h2>` +
       `<p>${escapeHtml(v.edition.name)}</p>` +
-      `<p class="meta">已上线 ${ready} / ${metas.length} 节 · 已答对 ${solved} 题</p>`;
+      `<p class="meta">${metas.length ? `已上线 ${ready} / ${metas.length} 节 · 已答对 ${solved} 题` : ''}` +
+      `${v.volume.words ? `${metas.length ? ' · ' : ''}有课本单元词表` : ''}</p>`;
     main.appendChild(card);
   }
 
@@ -212,7 +214,7 @@
     english.innerHTML = '<h3 class="group">英语</h3>';
     for (const entry of [
       { title: '英语学习大纲', desc: '查看上海初中英语知识点梳理', href: 'content/english/shanghai-junior-outline.html' },
-      { title: '英语单词', desc: '查询上海中考英语单词和短语', href: 'content/english/shanghai-exam-vocabulary.html' },
+      { title: '英语单词', desc: '每天 10 分钟背课本单词，按记忆规律复习', href: '#/words' },
       { title: '英语试题库', desc: '按知识点和题型练习错题', href: '#/english-bank' },
       { title: '英语中考真题', desc: '按年份直接作答上海英语中考文字题', href: '#/english-exams' },
     ]) {
@@ -250,6 +252,7 @@
       box.className = 'chapter';
       const chapterLabel = v.subject.id === 'english' ? `Unit ${chapter.no}` : `第 ${chapter.no} 章`;
       box.innerHTML = `<h3 class="group">${chapterLabel}　${escapeHtml(chapter.title)}</h3>`;
+      if (v.volume.words) box.insertAdjacentHTML('beforeend', await WordsUI.chapterRow(id, chapter.no));
       for (const s of metas.filter(m => m.chapter === chapter)) {
         const content = Content.sections[s.id];
         const row = document.createElement(content ? 'a' : 'div');
@@ -590,6 +593,17 @@
     }
   }
 
+  // #/words、#/words/<册ID>、#/words/<册ID>/<单元号>；册 ID 本身含两个斜杠，如 english/sh2022/g6s1
+  function wordsPage(rest) {
+    if (!rest.length) return WordsUI.todayPage(page('英语单词', '#/', '每天约 10 分钟，按记忆规律复习'));
+    const volumeId = rest.slice(0, 3).join('/');
+    const v = Content.volume(volumeId);
+    if (rest.length > 3) {
+      return WordsUI.unitPage(page(`Unit ${rest[3]} 单词`, `#/words/${volumeId}`, v ? v.volume.name : ''), volumeId, rest[3]);
+    }
+    return WordsUI.volumePage(page(v ? `${v.volume.name}单词` : '英语单词', '#/words', '按单元查看掌握情况'), volumeId);
+  }
+
   function route() {
     EnglishExams.stopMedia();
     const parts = (location.hash.slice(1) || '/').split('/').filter(Boolean);
@@ -606,6 +620,7 @@
       return withData(['ShanghaiSubjectPapers'], '上海中考真题', '#/', () => subjectPapersPage(parts[1], parts[2]));
     }
     if (parts[0] === 'english-plan') return englishPlanPage(parts[1], parts[2], parts[3]);
+    if (parts[0] === 'words') return wordsPage(parts.slice(1));
     if (parts[0] === 'v') return volumePage(parts.slice(1).join('/'));
     if (parts[0] === 's') return sectionPage(parts.slice(1).join('/'));
     if (parts[0] === 'q') return questionPage(parts.slice(1, -1).join('/'), parts[parts.length - 1]);

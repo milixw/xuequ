@@ -20,14 +20,16 @@ test('首页保留原有教材、试卷和趣味玩法布局', () => {
   assert(!app.includes("if (parts[0] === 'subject')"));
 });
 
-test('首页英语学习大纲、单词和试题库三个入口依次显示', () => {
+test('首页英语学习大纲、单词和试题库三个入口依次显示，单词入口进每日任务', () => {
   const home = app.slice(app.indexOf('function home()'), app.indexOf('// ---------- 册 ----------'));
   const outlineIndex = home.indexOf("title: '英语学习大纲'");
   const vocabIndex = home.indexOf("title: '英语单词'");
   const bankIndex = home.indexOf("title: '英语试题库'");
   assert(outlineIndex >= 0 && vocabIndex > outlineIndex && bankIndex > vocabIndex);
   assert(home.includes("href: 'content/english/shanghai-junior-outline.html'"));
-  assert(home.includes("href: 'content/english/shanghai-exam-vocabulary.html'"));
+  assert(home.includes("href: '#/words'"), '首页英语单词入口应进每日单词任务');
+  const wordsUi = fs.readFileSync(path.join(root, 'src', 'words-ui.js'), 'utf8');
+  assert(wordsUi.includes("'content/english/shanghai-exam-vocabulary.html'"), '中考词汇表要从单词页链出去');
   assert(home.includes("href: '#/english-bank'"));
   assert(fs.existsSync(path.join(root, 'content/english/shanghai-junior-outline.html')));
   const vocab = fs.readFileSync(path.join(root, 'content/english/shanghai-exam-vocabulary.html'), 'utf8');

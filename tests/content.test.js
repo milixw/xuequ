@@ -16,7 +16,7 @@ require('../content/catalog.js');
 
 const ROOT = path.join(__dirname, '..');
 const LEVELS = { b: 'basic', e: 'extended', c: 'challenge' };
-const KINDS = ['num', 'nums', 'expr', 'factor', 'frac', 'real', 'reals', 'angle', 'ratio', 'text', 'ineq'];
+const KINDS = ['num', 'nums', 'expr', 'factor', 'frac', 'real', 'reals', 'angle', 'ratio', 'text', 'en', 'ineq'];
 const DEMOS = ['foldCut', 'numberLineFold', 'angleFold', 'ropeCut', 'motion', 'sweep', 'rotOverlap', 'billiard', 'scaleOrder', 'solutionSet', 'vertAngles', 'parallelAngles', 'angleSum', 'ssaSwing', 'perpBisector', 'rtMedian', 'hlCongruent', 'ladderSlide', 'bisectorDist', 'incenter', 'pythagorasProof', 'perpShortest', 'exteriorWalk', 'parallelogramDrag', 'quadFamily', 'midlineRotate', 'varignon', 'centroid', 'parabolaShape', 'parabolaShift', 'parabolaRoots', 'fenceArea'];  // src/demos.js 里的演示类型
 
 // 取出文本里所有 $...$ / $$...$$ 公式，逐个用 KaTeX 编译
