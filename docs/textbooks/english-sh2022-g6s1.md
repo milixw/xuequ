@@ -32,5 +32,5 @@
 
 - 按单元词表在课本第 134～139 页，每条为“词头 音标 词性 释义 首次出现页码”。
 - 词表页脚注：**粗体词为课标三级词汇表中收录的初中阶段基本词汇**。PDF 中粗体词头用 MyriadPro-Semibold 字体，非粗体用 MyriadPro-Regular，导入脚本据此生成 `basic` 字段；`core` 默认取 `basic`，非粗体词只认读、不考拼写。
-- 音标用 TimesKKPhoneticNewRoman 字体编码，导入脚本按下表转成国际音标：`I→ɪ`、`9`/`'`→`ˈ`、`0→ˌ`、`R→ə`、`B→ɒ`、`V→ʌ`、`O→ɔ`、`S→ʃ`、`Z→ʒ`、`P→θ`、`N→ŋ`、`G→ɡ`、`W→ʊ`、`F→ɜ`、`A→ɑ`、`:→ː`。
+- 音标用 TimesKKPhoneticNewRoman 字体编码，导入脚本按下表转成国际音标：`I→ɪ`、`9`/`'`→`ˈ`、`0→ˌ`、`R→ə`、`B→ɒ`、`V→ʌ`、`O→ɔ`、`S→ʃ`、`Z→ʒ`、`P→θ`、`N→ŋ`、`G→ɡ`、`W→ʊ`、`F→ɜ`、`A→ɑ`、`C→æ`、`:→ː`。
 - 导入：`python3 scripts/import-english-words.py g6s1 --units 1`，生成 `content/english/words/sh2022-g6s1.js`。

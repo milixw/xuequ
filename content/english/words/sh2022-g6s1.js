@@ -1685,6 +1685,996 @@ Words.volume({
           ]
         }
       ]
+    },
+    {
+      "no": 3,
+      "title": "Food",
+      "words": [
+        {
+          "w": "something",
+          "ipa": "/ˈsʌmθɪŋ/",
+          "pos": "pron.",
+          "zh": "某事；某物",
+          "page": 42,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "ex": [
+            {
+              "en": "I want [[something]] to drink.",
+              "zh": "我想喝点东西。"
+            }
+          ]
+        },
+        {
+          "w": "beef",
+          "ipa": "/biːf/",
+          "pos": "n.",
+          "zh": "牛肉",
+          "page": 42,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "ex": [
+            {
+              "en": "My dad cooks [[beef]] with potatoes on Sundays.",
+              "zh": "爸爸每周日做土豆炖牛肉。"
+            }
+          ]
+        },
+        {
+          "w": "tofu",
+          "ipa": "/ˈtəʊfuː/",
+          "pos": "n.",
+          "zh": "豆腐",
+          "page": 42,
+          "basic": true,
+          "core": true,
+          "exam": false,
+          "ex": [
+            {
+              "en": "We often have [[tofu]] soup for dinner.",
+              "zh": "我们晚饭常喝豆腐汤。"
+            }
+          ]
+        },
+        {
+          "w": "pepper",
+          "ipa": "/ˈpepə(r)/",
+          "pos": "n.",
+          "zh": "甜椒",
+          "page": 42,
+          "basic": true,
+          "core": true,
+          "exam": false,
+          "forms": [
+            "peppers"
+          ],
+          "ex": [
+            {
+              "en": "Please cut the green [[pepper]] for me.",
+              "zh": "请帮我把青椒切好。"
+            },
+            {
+              "en": "Red and yellow [[peppers]] look bright on the plate.",
+              "zh": "红色和黄色的甜椒在盘子里看起来很鲜艳。"
+            }
+          ]
+        },
+        {
+          "w": "cabbage",
+          "ipa": "/ˈkæbɪdʒ/",
+          "pos": "n.",
+          "zh": "卷心菜",
+          "page": 42,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "cabbages"
+          ],
+          "ex": [
+            {
+              "en": "Grandma grows [[cabbage]] in her garden.",
+              "zh": "奶奶在菜园里种卷心菜。"
+            },
+            {
+              "en": "There are three [[cabbages]] in the basket.",
+              "zh": "篮子里有三棵卷心菜。"
+            }
+          ]
+        },
+        {
+          "w": "onion",
+          "ipa": "/ˈʌnjən/",
+          "pos": "n.",
+          "zh": "洋葱",
+          "page": 42,
+          "basic": true,
+          "core": true,
+          "exam": false,
+          "forms": [
+            "onions"
+          ],
+          "ex": [
+            {
+              "en": "Cutting an [[onion]] makes me cry.",
+              "zh": "切洋葱会让我流泪。"
+            },
+            {
+              "en": "We need two [[onions]] for the soup.",
+              "zh": "这道汤需要两个洋葱。"
+            }
+          ]
+        },
+        {
+          "w": "carrot",
+          "ipa": "/ˈkærət/",
+          "pos": "n.",
+          "zh": "胡萝卜",
+          "page": 42,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "carrots"
+          ],
+          "ex": [
+            {
+              "en": "Give me a [[carrot]], please.",
+              "zh": "请给我一根胡萝卜。"
+            },
+            {
+              "en": "[[Carrots]] are good for your eyes.",
+              "zh": "胡萝卜对眼睛有好处。"
+            }
+          ]
+        },
+        {
+          "w": "watermelon",
+          "ipa": "/ˈwɔːtəmelən/",
+          "pos": "n.",
+          "zh": "西瓜",
+          "page": 42,
+          "basic": true,
+          "core": true,
+          "exam": false,
+          "ex": [
+            {
+              "en": "We eat cold [[watermelon]] in summer.",
+              "zh": "夏天我们吃冰镇西瓜。"
+            }
+          ]
+        },
+        {
+          "w": "cucumber",
+          "ipa": "/ˈkjuːkʌmbə(r)/",
+          "pos": "n.",
+          "zh": "黄瓜",
+          "page": 42,
+          "basic": true,
+          "core": true,
+          "exam": false,
+          "forms": [
+            "cucumbers"
+          ],
+          "ex": [
+            {
+              "en": "I put some [[cucumber]] in my salad.",
+              "zh": "我在沙拉里放了些黄瓜。"
+            },
+            {
+              "en": "Mum buys three [[cucumbers]] at the market.",
+              "zh": "妈妈在市场买了三根黄瓜。"
+            }
+          ]
+        },
+        {
+          "w": "strawberry",
+          "ipa": "/ˈstrɔːbəri/",
+          "pos": "n.",
+          "zh": "草莓",
+          "page": 42,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "strawberries"
+          ],
+          "ex": [
+            {
+              "en": "This [[strawberry]] is very sweet.",
+              "zh": "这颗草莓很甜。"
+            },
+            {
+              "en": "Let's pick some [[strawberries]] on the farm.",
+              "zh": "我们去农场摘些草莓吧。"
+            }
+          ]
+        },
+        {
+          "w": "pear",
+          "ipa": "/peə(r)/",
+          "pos": "n.",
+          "zh": "梨",
+          "page": 42,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "pears"
+          ],
+          "ex": [
+            {
+              "en": "Would you like a [[pear]] or an apple?",
+              "zh": "你想要一个梨还是一个苹果？"
+            },
+            {
+              "en": "There are five [[pears]] on the plate.",
+              "zh": "盘子里有五个梨。"
+            }
+          ]
+        },
+        {
+          "w": "yogurt",
+          "ipa": "/ˈjɒɡət/",
+          "pos": "n.",
+          "zh": "酸奶；一份酸奶",
+          "page": 42,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "ex": [
+            {
+              "en": "I have a cup of [[yogurt]] after breakfast.",
+              "zh": "我早饭后喝一杯酸奶。"
+            }
+          ]
+        },
+        {
+          "w": "cheese",
+          "ipa": "/tʃiːz/",
+          "pos": "n.",
+          "zh": "干酪；奶酪",
+          "page": 42,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "ex": [
+            {
+              "en": "In cartoons, mice love [[cheese]].",
+              "zh": "动画片里的老鼠都爱吃奶酪。"
+            }
+          ]
+        },
+        {
+          "w": "corn",
+          "ipa": "/kɔːn/",
+          "pos": "n.",
+          "zh": "玉米；（小麦等）谷物",
+          "page": 42,
+          "basic": true,
+          "core": true,
+          "exam": false,
+          "ex": [
+            {
+              "en": "The farmers grow [[corn]] in this field.",
+              "zh": "农民在这块地里种玉米。"
+            }
+          ]
+        },
+        {
+          "w": "butter",
+          "ipa": "/ˈbʌtə(r)/",
+          "pos": "n.",
+          "zh": "黄油",
+          "page": 42,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "ex": [
+            {
+              "en": "Put some [[butter]] on your bread.",
+              "zh": "在面包上抹点黄油。"
+            }
+          ]
+        },
+        {
+          "w": "oil",
+          "ipa": "/ɔɪl/",
+          "pos": "n.",
+          "zh": "食用油",
+          "page": 42,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "ex": [
+            {
+              "en": "Don't use too much [[oil]] when you cook.",
+              "zh": "做饭时别放太多油。"
+            }
+          ]
+        },
+        {
+          "w": "salt",
+          "ipa": "/sɔːlt/",
+          "pos": "n.",
+          "zh": "盐；食盐",
+          "page": 42,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "ex": [
+            {
+              "en": "This soup needs a little more [[salt]].",
+              "zh": "这汤还需要再放一点盐。"
+            }
+          ]
+        },
+        {
+          "w": "bean",
+          "ipa": "/biːn/",
+          "pos": "n.",
+          "zh": "豆；豆科植物",
+          "page": 42,
+          "basic": true,
+          "core": true,
+          "exam": false,
+          "forms": [
+            "beans"
+          ],
+          "ex": [
+            {
+              "en": "A [[bean]] is a small seed.",
+              "zh": "豆子是一种小小的种子。"
+            },
+            {
+              "en": "Mum cooks green [[beans]] with pork.",
+              "zh": "妈妈用猪肉炒四季豆。"
+            }
+          ]
+        },
+        {
+          "w": "product",
+          "ipa": "/ˈprɒdʌkt/",
+          "pos": "n.",
+          "zh": "产品；制品",
+          "page": 42,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "products"
+          ],
+          "ex": [
+            {
+              "en": "Paper is a [[product]] made from trees.",
+              "zh": "纸是用树木做成的产品。"
+            },
+            {
+              "en": "This shop sells milk [[products]] like cheese and yogurt.",
+              "zh": "这家店卖奶酪、酸奶这样的奶制品。"
+            }
+          ]
+        },
+        {
+          "w": "grain",
+          "ipa": "/ɡreɪn/",
+          "pos": "n.",
+          "zh": "谷物；谷粒",
+          "page": 42,
+          "basic": false,
+          "core": false,
+          "exam": false,
+          "ex": [
+            {
+              "en": "Rice is a kind of [[grain]].",
+              "zh": "大米是一种谷物。"
+            }
+          ]
+        },
+        {
+          "w": "rainbow",
+          "ipa": "/ˈreɪnbəʊ/",
+          "pos": "n.",
+          "zh": "虹；彩虹",
+          "page": 43,
+          "basic": true,
+          "core": true,
+          "exam": false,
+          "forms": [
+            "rainbows"
+          ],
+          "ex": [
+            {
+              "en": "Look! There is a [[rainbow]] after the rain.",
+              "zh": "看！雨后有一道彩虹。"
+            },
+            {
+              "en": "We sometimes see [[rainbows]] in summer.",
+              "zh": "我们夏天有时能看到彩虹。"
+            }
+          ]
+        },
+        {
+          "w": "balanced",
+          "ipa": "/ˈbælənst/",
+          "pos": "adj.",
+          "zh": "保持（或显示）平衡的",
+          "page": 43,
+          "basic": false,
+          "core": false,
+          "exam": false,
+          "ex": [
+            {
+              "en": "A [[balanced]] diet keeps us healthy.",
+              "zh": "均衡的饮食让我们保持健康。"
+            }
+          ]
+        },
+        {
+          "w": "diet",
+          "ipa": "/ˈdaɪət/",
+          "pos": "n.",
+          "zh": "日常饮食；日常食物",
+          "page": 43,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "ex": [
+            {
+              "en": "Eating fruit every day is part of a healthy [[diet]].",
+              "zh": "每天吃水果是健康饮食的一部分。"
+            }
+          ]
+        },
+        {
+          "w": "each",
+          "ipa": "/iːtʃ/",
+          "pos": "det. & pron.",
+          "zh": "（两个或以上的人或物中）各自，各个，每个",
+          "page": 43,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "ex": [
+            {
+              "en": "[[Each]] student has a lunch box.",
+              "zh": "每个学生都有一个饭盒。"
+            }
+          ]
+        },
+        {
+          "w": "plenty",
+          "ipa": "/ˈplenti/",
+          "pos": "pron.",
+          "zh": "大量",
+          "page": 43,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "ex": [
+            {
+              "en": "Don't worry about the food. We have [[plenty]].",
+              "zh": "别担心食物，我们有很多。"
+            }
+          ]
+        },
+        {
+          "w": "plenty of",
+          "ipa": "",
+          "pos": "",
+          "zh": "大量；很多的",
+          "page": 43,
+          "basic": false,
+          "core": false,
+          "exam": true,
+          "ex": [
+            {
+              "en": "Drink [[plenty of]] water every day.",
+              "zh": "每天要多喝水。"
+            }
+          ]
+        },
+        {
+          "w": "choice",
+          "ipa": "/tʃɔɪs/",
+          "pos": "n.",
+          "zh": "选择；挑选；抉择",
+          "page": 44,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "choices"
+          ],
+          "ex": [
+            {
+              "en": "Fruit is a good [[choice]] for a snack.",
+              "zh": "水果是零食的好选择。"
+            },
+            {
+              "en": "There are many [[choices]] on the menu.",
+              "zh": "菜单上有很多选择。"
+            }
+          ]
+        },
+        {
+          "w": "list",
+          "ipa": "/lɪst/",
+          "pos": "n.",
+          "zh": "一览表；清单",
+          "page": 44,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "lists"
+          ],
+          "ex": [
+            {
+              "en": "Let's make a shopping [[list]] first.",
+              "zh": "我们先列个购物清单吧。"
+            },
+            {
+              "en": "Mum keeps her [[lists]] on the fridge.",
+              "zh": "妈妈把她的清单贴在冰箱上。"
+            }
+          ]
+        },
+        {
+          "w": "few",
+          "ipa": "/fjuː/",
+          "pos": "det. & adj.",
+          "zh": "不多；很少",
+          "page": 44,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "ex": [
+            {
+              "en": "Very [[few]] people know the answer.",
+              "zh": "很少有人知道答案。"
+            }
+          ]
+        },
+        {
+          "w": "a few",
+          "ipa": "",
+          "pos": "",
+          "zh": "有些；几个（用于可数名词之前）",
+          "page": 44,
+          "basic": false,
+          "core": false,
+          "exam": false,
+          "ex": [
+            {
+              "en": "I have [[a few]] questions about the recipe.",
+              "zh": "我对这个食谱有几个问题。"
+            }
+          ]
+        },
+        {
+          "w": "pleasure",
+          "ipa": "/ˈpleʒə(r)/",
+          "pos": "n.",
+          "zh": "高兴；快乐；愉快",
+          "page": 44,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "ex": [
+            {
+              "en": "— Thanks for your help. — My [[pleasure]].",
+              "zh": "——谢谢你的帮助。——不客气。"
+            }
+          ]
+        },
+        {
+          "w": "ingredient",
+          "ipa": "/ɪnˈɡriːdiənt/",
+          "pos": "n.",
+          "zh": "（尤指烹饪）材料；成分",
+          "page": 44,
+          "basic": false,
+          "core": false,
+          "exam": false,
+          "ex": [
+            {
+              "en": "Eggs are the main [[ingredient]] of this cake.",
+              "zh": "鸡蛋是这个蛋糕的主要材料。"
+            }
+          ]
+        },
+        {
+          "w": "tasty",
+          "ipa": "/ˈteɪsti/",
+          "pos": "adj.",
+          "zh": "美味的；可口的",
+          "page": 45,
+          "basic": false,
+          "core": false,
+          "exam": false,
+          "ex": [
+            {
+              "en": "The noodles are hot and [[tasty]].",
+              "zh": "面条又热又好吃。"
+            }
+          ]
+        },
+        {
+          "w": "need",
+          "ipa": "/niːd/",
+          "pos": "v.",
+          "zh": "需要",
+          "page": 45,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "needs"
+          ],
+          "ex": [
+            {
+              "en": "We [[need]] some milk for breakfast.",
+              "zh": "我们早餐需要一些牛奶。"
+            },
+            {
+              "en": "The plant [[needs]] water and sunlight.",
+              "zh": "这株植物需要水和阳光。"
+            }
+          ]
+        },
+        {
+          "w": "fridge",
+          "ipa": "/frɪdʒ/",
+          "pos": "n.",
+          "zh": "冰箱",
+          "page": 45,
+          "basic": true,
+          "note": "(= refrigerator)",
+          "core": true,
+          "exam": true,
+          "forms": [
+            "fridges"
+          ],
+          "ex": [
+            {
+              "en": "Put the meat in the [[fridge]].",
+              "zh": "把肉放进冰箱里。"
+            },
+            {
+              "en": "The shop sells big and small [[fridges]].",
+              "zh": "这家店卖大大小小的冰箱。"
+            }
+          ]
+        },
+        {
+          "w": "surprise",
+          "ipa": "/səˈpraɪz/",
+          "pos": "n.",
+          "zh": "意想不到（或突然）的事",
+          "page": 46,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "surprises"
+          ],
+          "ex": [
+            {
+              "en": "The party is a [[surprise]] for Dad.",
+              "zh": "这个聚会是给爸爸的惊喜。"
+            },
+            {
+              "en": "Life is full of [[surprises]].",
+              "zh": "生活充满了惊喜。"
+            }
+          ]
+        },
+        {
+          "w": "blog",
+          "ipa": "/blɒɡ/",
+          "pos": "n.",
+          "zh": "博客；网志",
+          "page": 46,
+          "basic": false,
+          "note": "(= weblog)",
+          "core": false,
+          "exam": false,
+          "ex": [
+            {
+              "en": "My cousin writes a food [[blog]].",
+              "zh": "我表姐写美食博客。"
+            }
+          ]
+        },
+        {
+          "w": "as",
+          "ipa": "/æz; əz/",
+          "pos": "prep.",
+          "zh": "作为；当作",
+          "page": 46,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "ex": [
+            {
+              "en": "She works [[as]] a cook in a hotel.",
+              "zh": "她在一家酒店当厨师。"
+            }
+          ]
+        },
+        {
+          "w": "soy sauce",
+          "ipa": "/ˌsɔɪ ˈsɔːs/",
+          "pos": "n.",
+          "zh": "酱油",
+          "page": 46,
+          "basic": false,
+          "note": "(= soya sauce)",
+          "core": false,
+          "exam": false,
+          "ex": [
+            {
+              "en": "Add some [[soy sauce]] to the noodles.",
+              "zh": "往面条里加点酱油。"
+            }
+          ]
+        },
+        {
+          "w": "into",
+          "ipa": "/ˈɪntuː; ˈɪntə/",
+          "pos": "prep.",
+          "zh": "进入；变成（表示状态的变化）",
+          "page": 46,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "manual": true,
+          "ex": [
+            {
+              "en": "Put the noodles [[into]] the hot water.",
+              "zh": "把面条放进热水里。"
+            }
+          ]
+        },
+        {
+          "w": "piece",
+          "ipa": "/piːs/",
+          "pos": "n.",
+          "zh": "碎片；碎块",
+          "page": 46,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "pieces"
+          ],
+          "ex": [
+            {
+              "en": "Can I have a [[piece]] of cake?",
+              "zh": "我能吃一块蛋糕吗？"
+            },
+            {
+              "en": "Cut the apple into four [[pieces]].",
+              "zh": "把苹果切成四块。"
+            }
+          ]
+        },
+        {
+          "w": "fry",
+          "ipa": "/fraɪ/",
+          "pos": "v.",
+          "zh": "油炒；油煎",
+          "page": 46,
+          "basic": false,
+          "core": false,
+          "exam": true,
+          "ex": [
+            {
+              "en": "Grandma likes to [[fry]] fish for us.",
+              "zh": "奶奶喜欢给我们煎鱼。"
+            }
+          ]
+        },
+        {
+          "w": "finally",
+          "ipa": "/ˈfaɪnəli/",
+          "pos": "adv.",
+          "zh": "最后",
+          "page": 46,
+          "basic": false,
+          "core": false,
+          "exam": true,
+          "ex": [
+            {
+              "en": "[[Finally]], put the cake in the oven.",
+              "zh": "最后，把蛋糕放进烤箱。"
+            }
+          ]
+        },
+        {
+          "w": "boil",
+          "ipa": "/bɔɪl/",
+          "pos": "v.",
+          "zh": "用沸水煮；烧开",
+          "page": 46,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "boils"
+          ],
+          "ex": [
+            {
+              "en": "Please [[boil]] some water for tea.",
+              "zh": "请烧点开水泡茶。"
+            },
+            {
+              "en": "Water [[boils]] at 100 degrees.",
+              "zh": "水在 100 度沸腾。"
+            }
+          ]
+        },
+        {
+          "w": "side",
+          "ipa": "/saɪd/",
+          "pos": "n.",
+          "zh": "一边；侧面",
+          "page": 46,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "sides"
+          ],
+          "ex": [
+            {
+              "en": "There is a shop on each [[side]] of the road.",
+              "zh": "路的两边各有一家商店。"
+            },
+            {
+              "en": "A box has six [[sides]].",
+              "zh": "一个盒子有六个面。"
+            }
+          ]
+        },
+        {
+          "w": "side dish",
+          "ipa": "",
+          "pos": "",
+          "zh": "（随同主菜一起上的）配菜",
+          "page": 46,
+          "basic": false,
+          "core": false,
+          "exam": false,
+          "ex": [
+            {
+              "en": "We have rice with a [[side dish]] of vegetables.",
+              "zh": "我们吃米饭配一份蔬菜配菜。"
+            }
+          ]
+        },
+        {
+          "w": "mutton",
+          "ipa": "/ˈmʌtn/",
+          "pos": "n.",
+          "zh": "羊肉",
+          "page": 46,
+          "basic": true,
+          "core": true,
+          "exam": false,
+          "ex": [
+            {
+              "en": "People in the north often eat [[mutton]] in winter.",
+              "zh": "北方人冬天常吃羊肉。"
+            }
+          ]
+        },
+        {
+          "w": "recipe",
+          "ipa": "/ˈresəpi/",
+          "pos": "n.",
+          "zh": "食谱；烹饪法",
+          "page": 47,
+          "basic": false,
+          "core": false,
+          "exam": false,
+          "ex": [
+            {
+              "en": "This [[recipe]] is easy to follow.",
+              "zh": "这个食谱很容易照着做。"
+            }
+          ]
+        },
+        {
+          "w": "beat",
+          "ipa": "/biːt/",
+          "pos": "v.",
+          "zh": "（用叉等）快速搅拌；打",
+          "page": 50,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "beats"
+          ],
+          "ex": [
+            {
+              "en": "[[Beat]] two eggs before you cook them.",
+              "zh": "做之前先把两个鸡蛋打散。"
+            },
+            {
+              "en": "My brother [[beats]] the cream with a fork.",
+              "zh": "我弟弟用叉子打奶油。"
+            }
+          ]
+        },
+        {
+          "w": "chopsticks",
+          "ipa": "/ˈtʃɒpstɪks/",
+          "pos": "n.",
+          "zh": "筷子",
+          "page": 50,
+          "basic": true,
+          "note": "(pl.)",
+          "core": true,
+          "exam": false,
+          "ex": [
+            {
+              "en": "Can you use [[chopsticks]]?",
+              "zh": "你会用筷子吗？"
+            }
+          ]
+        },
+        {
+          "w": "bowl",
+          "ipa": "/bəʊl/",
+          "pos": "n.",
+          "zh": "碗",
+          "page": 50,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "bowls"
+          ],
+          "ex": [
+            {
+              "en": "I have a [[bowl]] of rice for lunch.",
+              "zh": "我午饭吃一碗米饭。"
+            },
+            {
+              "en": "Please put the [[bowls]] on the table.",
+              "zh": "请把碗放到桌上。"
+            }
+          ]
+        },
+        {
+          "w": "menu",
+          "ipa": "/ˈmenjuː/",
+          "pos": "n.",
+          "zh": "菜单",
+          "page": 53,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "menus"
+          ],
+          "ex": [
+            {
+              "en": "Let me see the [[menu]], please.",
+              "zh": "请让我看看菜单。"
+            },
+            {
+              "en": "The waiter brings us two [[menus]].",
+              "zh": "服务员给我们拿来两份菜单。"
+            }
+          ]
+        }
+      ]
     }
   ],
   "source": {

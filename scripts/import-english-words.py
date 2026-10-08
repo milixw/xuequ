@@ -24,7 +24,7 @@ import pypdf
 ROOT = Path(__file__).resolve().parent.parent
 VOCAB_HTML = ROOT / 'content' / 'english' / 'shanghai-exam-vocabulary.html'
 PHONETIC = str.maketrans({'I': 'ɪ', '9': 'ˈ', "'": 'ˈ', '0': 'ˌ', 'R': 'ə', 'B': 'ɒ', 'V': 'ʌ', 'O': 'ɔ',
-                          'S': 'ʃ', 'Z': 'ʒ', 'P': 'θ', 'N': 'ŋ', 'G': 'ɡ', 'W': 'ʊ', 'F': 'ɜ', 'A': 'ɑ', ':': 'ː'})
+                          'S': 'ʃ', 'Z': 'ʒ', 'P': 'θ', 'N': 'ŋ', 'G': 'ɡ', 'W': 'ʊ', 'F': 'ɜ', 'A': 'ɑ', 'C': 'æ', ':': 'ː'})
 PAGE_REF = re.compile(r'^p\.\s*(\d+)$')
 UNIT = re.compile(r'^Unit\s+(\d+)$')
 TITLE = re.compile(r'^\| *U(\d+) *\| *Unit \d+ ([^|]+?) *\| *(\d+) *\|', re.M)

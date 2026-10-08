@@ -471,7 +471,11 @@ Content.catalog = {
               { no: '2.2', title: 'Family ties — 语法练习 ----- 现在进行时与人称代词', ready: true },
               { no: '2.3', title: 'Family ties — 语音与听力 ----- 字母 a、e 的读音、听家庭关系', ready: true },
             ] },
-            { no: 3, title: 'Food（食物）', sections: [] },
+            { no: 3, title: 'Food（食物）', sections: [
+              { no: '3.1', title: 'Food — 食物 ----- 可数名词与不可数名词', ready: true },
+              { no: '3.2', title: 'Food — 语法练习 ----- 可数名词与不可数名词', ready: true },
+              { no: '3.3', title: 'Food — 语音与听力 ----- 字母 o、u 的读音、听数量', ready: true },
+            ] },
             { no: 4, title: 'Sports（体育运动）', sections: [] },
             { no: 5, title: 'Animals and us（动物与我们）', sections: [] },
             { no: 6, title: 'Travelling around China（游中国）', sections: [] },
