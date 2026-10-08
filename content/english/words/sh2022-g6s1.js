@@ -756,6 +756,935 @@ Words.volume({
           ]
         }
       ]
+    },
+    {
+      "no": 2,
+      "title": "Family ties",
+      "words": [
+        {
+          "w": "tie",
+          "ipa": "/taɪ/",
+          "pos": "n.",
+          "zh": "联系；关系；纽带",
+          "page": 26,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "ties"
+          ],
+          "ex": [
+            {
+              "en": "There is a strong [[tie]] between the two brothers.",
+              "zh": "兄弟俩之间有很深的感情纽带。"
+            },
+            {
+              "en": "Family [[ties]] are very important to my grandma.",
+              "zh": "家庭纽带对我奶奶来说非常重要。"
+            }
+          ]
+        },
+        {
+          "w": "relation",
+          "ipa": "/rɪˈleɪʃn/",
+          "pos": "n.",
+          "zh": "关系；联系",
+          "page": 28,
+          "basic": false,
+          "core": false,
+          "exam": false,
+          "ex": [
+            {
+              "en": "What is your [[relation]] to that girl? — She is my cousin.",
+              "zh": "你和那个女孩是什么关系？——她是我表妹。"
+            }
+          ]
+        },
+        {
+          "w": "introduce",
+          "ipa": "/ˌɪntrəˈdjuːs/",
+          "pos": "v.",
+          "zh": "介绍",
+          "page": 28,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "introducing"
+          ],
+          "ex": [
+            {
+              "en": "Let me [[introduce]] my new friend to you.",
+              "zh": "让我把我的新朋友介绍给你。"
+            },
+            {
+              "en": "The teacher is [[introducing]] a new student to the class.",
+              "zh": "老师正在向全班介绍一位新同学。"
+            }
+          ]
+        },
+        {
+          "w": "classmate",
+          "ipa": "/ˈklɑːsmeɪt/",
+          "pos": "n.",
+          "zh": "同班同学",
+          "page": 28,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "classmates"
+          ],
+          "ex": [
+            {
+              "en": "Wang Fei is my [[classmate]] and my neighbour.",
+              "zh": "王菲是我的同班同学，也是我的邻居。"
+            },
+            {
+              "en": "I have forty [[classmates]].",
+              "zh": "我有四十个同班同学。"
+            }
+          ]
+        },
+        {
+          "w": "relative",
+          "ipa": "/ˈrelətɪv/",
+          "pos": "n.",
+          "zh": "亲戚；亲属",
+          "page": 28,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "relatives"
+          ],
+          "ex": [
+            {
+              "en": "A [[relative]] from Canada is visiting us this week.",
+              "zh": "一位来自加拿大的亲戚这周来看我们。"
+            },
+            {
+              "en": "We visit our [[relatives]] during the Spring Festival.",
+              "zh": "春节期间我们去走亲戚。"
+            }
+          ]
+        },
+        {
+          "w": "only",
+          "ipa": "/ˈəʊnli/",
+          "pos": "adj.",
+          "zh": "仅有的；唯一的",
+          "page": 28,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "ex": [
+            {
+              "en": "This is the [[only]] photo of my great-grandpa.",
+              "zh": "这是我曾祖父唯一的一张照片。"
+            }
+          ]
+        },
+        {
+          "w": "only child",
+          "ipa": "",
+          "pos": "",
+          "zh": "独生子（或女）",
+          "page": 28,
+          "basic": false,
+          "core": false,
+          "exam": false,
+          "ex": [
+            {
+              "en": "My cousin is an [[only child]], so she often plays with me.",
+              "zh": "我表妹是独生女，所以她常和我一起玩。"
+            }
+          ]
+        },
+        {
+          "w": "twin",
+          "ipa": "/twɪn/",
+          "pos": "n.",
+          "zh": "双胞胎之一",
+          "page": 28,
+          "basic": false,
+          "core": false,
+          "exam": true,
+          "ex": [
+            {
+              "en": "Amy is my [[twin]], and we have the same birthday.",
+              "zh": "艾米是我的双胞胎姐妹，我们同一天生日。"
+            }
+          ]
+        },
+        {
+          "w": "husband",
+          "ipa": "/ˈhʌzbənd/",
+          "pos": "n.",
+          "zh": "丈夫",
+          "page": 28,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "husbands"
+          ],
+          "ex": [
+            {
+              "en": "Aunt Mei's [[husband]] is my uncle.",
+              "zh": "梅姨的丈夫是我的姨父。"
+            },
+            {
+              "en": "The two [[husbands]] are cooking in the kitchen.",
+              "zh": "两位丈夫正在厨房里做饭。"
+            }
+          ]
+        },
+        {
+          "w": "wife",
+          "ipa": "/waɪf/",
+          "pos": "n.",
+          "zh": "妻子",
+          "page": 28,
+          "basic": true,
+          "note": "(pl. wives)",
+          "core": true,
+          "exam": true,
+          "forms": [
+            "wives"
+          ],
+          "ex": [
+            {
+              "en": "My uncle's [[wife]] is a nurse.",
+              "zh": "我叔叔的妻子是一名护士。"
+            },
+            {
+              "en": "The farmers and their [[wives]] are dancing together.",
+              "zh": "农民们和他们的妻子正在一起跳舞。"
+            }
+          ]
+        },
+        {
+          "w": "son",
+          "ipa": "/sʌn/",
+          "pos": "n.",
+          "zh": "儿子",
+          "page": 28,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "sons"
+          ],
+          "ex": [
+            {
+              "en": "Mr Li has a [[son]] and a daughter.",
+              "zh": "李先生有一个儿子和一个女儿。"
+            },
+            {
+              "en": "Their two [[sons]] are both in Grade 6.",
+              "zh": "他们的两个儿子都在六年级。"
+            }
+          ]
+        },
+        {
+          "w": "daughter",
+          "ipa": "/ˈdɔːtə(r)/",
+          "pos": "n.",
+          "zh": "女儿",
+          "page": 28,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "daughters"
+          ],
+          "ex": [
+            {
+              "en": "My aunt's [[daughter]] is my cousin.",
+              "zh": "我姑姑的女儿是我的表姐。"
+            },
+            {
+              "en": "Mrs Green has three [[daughters]].",
+              "zh": "格林太太有三个女儿。"
+            }
+          ]
+        },
+        {
+          "w": "other",
+          "ipa": "/ˈʌðə(r)/",
+          "pos": "adj. & pron.",
+          "zh": "adj. 另外；其他；pron. 另外的人（或物）",
+          "page": 29,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "others"
+          ],
+          "ex": [
+            {
+              "en": "Do you have any [[other]] questions?",
+              "zh": "你还有其他问题吗？"
+            },
+            {
+              "en": "Some students are reading, and [[others]] are drawing.",
+              "zh": "一些学生在读书，另一些在画画。"
+            }
+          ]
+        },
+        {
+          "w": "member",
+          "ipa": "/ˈmembə(r)/",
+          "pos": "n.",
+          "zh": "成员；分子",
+          "page": 30,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "members"
+          ],
+          "ex": [
+            {
+              "en": "Our cat is a [[member]] of our family too.",
+              "zh": "我们的猫也是家里的一员。"
+            },
+            {
+              "en": "There are five [[members]] in my family.",
+              "zh": "我家有五口人。"
+            }
+          ]
+        },
+        {
+          "w": "add",
+          "ipa": "/æd/",
+          "pos": "v.",
+          "zh": "添加；增加",
+          "page": 30,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "adding"
+          ],
+          "ex": [
+            {
+              "en": "Please [[add]] some salt to the soup.",
+              "zh": "请往汤里加点盐。"
+            },
+            {
+              "en": "Grandma is [[adding]] sugar to her tea.",
+              "zh": "奶奶正在往她的茶里加糖。"
+            }
+          ]
+        },
+        {
+          "w": "note",
+          "ipa": "/nəʊt/",
+          "pos": "n.",
+          "zh": "笔记；记录；音符",
+          "page": 30,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "notes"
+          ],
+          "ex": [
+            {
+              "en": "Write a short [[note]] under each photo.",
+              "zh": "在每张照片下面写一条简短的记录。"
+            },
+            {
+              "en": "I always take [[notes]] in class.",
+              "zh": "我上课总是记笔记。"
+            }
+          ]
+        },
+        {
+          "w": "album",
+          "ipa": "/ˈælbəm/",
+          "pos": "n.",
+          "zh": "相册；影集",
+          "page": 30,
+          "basic": false,
+          "core": false,
+          "exam": false,
+          "ex": [
+            {
+              "en": "We keep our holiday photos in a big [[album]].",
+              "zh": "我们把假期照片放在一本大相册里。"
+            }
+          ]
+        },
+        {
+          "w": "teach",
+          "ipa": "/tiːtʃ/",
+          "pos": "v.",
+          "zh": "教（某人）；使（某人）明白或会做某事",
+          "page": 30,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "teaching"
+          ],
+          "ex": [
+            {
+              "en": "Can you [[teach]] me how to swim?",
+              "zh": "你能教我游泳吗？"
+            },
+            {
+              "en": "Grandpa is [[teaching]] my brother to ride a bike.",
+              "zh": "爷爷正在教我弟弟骑自行车。"
+            }
+          ]
+        },
+        {
+          "w": "homework",
+          "ipa": "/ˈhəʊmwɜːk/",
+          "pos": "n.",
+          "zh": "（学生的）家庭作业",
+          "page": 30,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "ex": [
+            {
+              "en": "I finish my [[homework]] before dinner.",
+              "zh": "我在晚饭前完成作业。"
+            }
+          ]
+        },
+        {
+          "w": "guitar",
+          "ipa": "/ɡɪˈtɑː(r)/",
+          "pos": "n.",
+          "zh": "吉他",
+          "page": 31,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "guitars"
+          ],
+          "ex": [
+            {
+              "en": "My cousin is playing the [[guitar]] in his room.",
+              "zh": "我表哥正在他的房间里弹吉他。"
+            },
+            {
+              "en": "The music club has six [[guitars]].",
+              "zh": "音乐社有六把吉他。"
+            }
+          ]
+        },
+        {
+          "w": "elder",
+          "ipa": "/ˈeldə(r)/",
+          "pos": "adj.",
+          "zh": "年长的；年龄较大的",
+          "page": 31,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "ex": [
+            {
+              "en": "My [[elder]] brother is fifteen years old.",
+              "zh": "我哥哥十五岁。"
+            }
+          ]
+        },
+        {
+          "w": "sofa",
+          "ipa": "/ˈsəʊfə/",
+          "pos": "n.",
+          "zh": "长沙发",
+          "page": 31,
+          "basic": true,
+          "core": true,
+          "exam": false,
+          "forms": [
+            "sofas"
+          ],
+          "ex": [
+            {
+              "en": "Grandpa is sleeping on the [[sofa]].",
+              "zh": "爷爷正在沙发上睡觉。"
+            },
+            {
+              "en": "There are two [[sofas]] in our living room.",
+              "zh": "我们的客厅里有两张沙发。"
+            }
+          ]
+        },
+        {
+          "w": "round",
+          "ipa": "/raʊnd/",
+          "pos": "adj.",
+          "zh": "圆形的",
+          "page": 31,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "ex": [
+            {
+              "en": "My little sister has a [[round]] face.",
+              "zh": "我妹妹有一张圆脸。"
+            }
+          ]
+        },
+        {
+          "w": "dark",
+          "ipa": "/dɑːk/",
+          "pos": "adj.",
+          "zh": "乌黑的；深色的；黑暗的",
+          "page": 31,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "ex": [
+            {
+              "en": "Uncle Tom has [[dark]] eyes and a big smile.",
+              "zh": "汤姆叔叔有一双深色的眼睛和灿烂的笑容。"
+            }
+          ]
+        },
+        {
+          "w": "chess",
+          "ipa": "/tʃes/",
+          "pos": "n.",
+          "zh": "国际象棋",
+          "page": 31,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "ex": [
+            {
+              "en": "My grandpa and I play [[chess]] every Sunday.",
+              "zh": "我和爷爷每周日下国际象棋。"
+            }
+          ]
+        },
+        {
+          "w": "duty",
+          "ipa": "/ˈdjuːti/",
+          "pos": "n.",
+          "zh": "责任；义务；本分",
+          "page": 32,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "duties"
+          ],
+          "ex": [
+            {
+              "en": "It is my [[duty]] to feed the fish.",
+              "zh": "喂鱼是我的责任。"
+            },
+            {
+              "en": "Everyone in my family has some [[duties]] at home.",
+              "zh": "我家每个人在家里都有一些分内的事。"
+            }
+          ]
+        },
+        {
+          "w": "born",
+          "ipa": "/bɔːn/",
+          "pos": "v.",
+          "zh": "（仅用于被动语态 be born）出生；出世",
+          "page": 32,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "manual": true,
+          "ex": [
+            {
+              "en": "My little brother was [[born]] in 2020.",
+              "zh": "我弟弟出生于 2020 年。"
+            }
+          ]
+        },
+        {
+          "w": "weekend",
+          "ipa": "/ˌwiːkˈend/",
+          "pos": "n.",
+          "zh": "星期六和星期日；周末",
+          "page": 32,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "weekends"
+          ],
+          "ex": [
+            {
+              "en": "What do you usually do at the [[weekend]]?",
+              "zh": "你周末通常做什么？"
+            },
+            {
+              "en": "We often visit Grandma at [[weekends]].",
+              "zh": "我们经常在周末去看奶奶。"
+            }
+          ]
+        },
+        {
+          "w": "thing",
+          "ipa": "/θɪŋ/",
+          "pos": "n.",
+          "zh": "事情；事件",
+          "page": 32,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "things"
+          ],
+          "ex": [
+            {
+              "en": "Being kind is an important [[thing]].",
+              "zh": "善良是一件重要的事。"
+            },
+            {
+              "en": "I have many [[things]] to do today.",
+              "zh": "我今天有很多事要做。"
+            }
+          ]
+        },
+        {
+          "w": "enough",
+          "ipa": "/ɪˈnʌf/",
+          "pos": "adv.",
+          "zh": "足够地；充分地",
+          "page": 32,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "ex": [
+            {
+              "en": "Is the box big [[enough]] for the cat?",
+              "zh": "这个盒子对猫来说够大吗？"
+            }
+          ]
+        },
+        {
+          "w": "Well done!",
+          "ipa": "",
+          "pos": "",
+          "zh": "做得好！干得好！",
+          "page": 32,
+          "basic": false,
+          "core": false,
+          "exam": false,
+          "ex": [
+            {
+              "en": "[[Well done!]] You cleaned the whole room.",
+              "zh": "干得好！你把整个房间都打扫干净了。"
+            }
+          ]
+        },
+        {
+          "w": "dish",
+          "ipa": "/dɪʃ/",
+          "pos": "n.",
+          "zh": "碟子；盘子；一道菜；菜肴",
+          "page": 32,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "dishes"
+          ],
+          "ex": [
+            {
+              "en": "Fish with tomato is my mum's best [[dish]].",
+              "zh": "番茄鱼是我妈妈最拿手的菜。"
+            },
+            {
+              "en": "After dinner, I help wash the [[dishes]].",
+              "zh": "晚饭后我帮忙洗碗。"
+            }
+          ]
+        },
+        {
+          "w": "usually",
+          "ipa": "/ˈjuːʒuəli/",
+          "pos": "adv.",
+          "zh": "通常地；经常地",
+          "page": 32,
+          "basic": false,
+          "core": false,
+          "exam": true,
+          "ex": [
+            {
+              "en": "I [[usually]] get up at half past six.",
+              "zh": "我通常六点半起床。"
+            }
+          ]
+        },
+        {
+          "w": "quick",
+          "ipa": "/kwɪk/",
+          "pos": "adj.",
+          "zh": "快的；迅速的",
+          "page": 32,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "quicker"
+          ],
+          "ex": [
+            {
+              "en": "Let's have a [[quick]] lunch and go to the park.",
+              "zh": "我们快点吃个午饭，然后去公园吧。"
+            },
+            {
+              "en": "Riding a bike is [[quicker]] than walking.",
+              "zh": "骑自行车比走路快。"
+            }
+          ]
+        },
+        {
+          "w": "together",
+          "ipa": "/təˈɡeðə(r)/",
+          "pos": "adv.",
+          "zh": "在一起；共同",
+          "page": 32,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "ex": [
+            {
+              "en": "My family has dinner [[together]] every evening.",
+              "zh": "我们全家每天晚上一起吃晚饭。"
+            }
+          ]
+        },
+        {
+          "w": "flat",
+          "ipa": "/flæt/",
+          "pos": "n.",
+          "zh": "公寓；一套房间",
+          "page": 32,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "flats"
+          ],
+          "ex": [
+            {
+              "en": "We live in a small [[flat]] near the river.",
+              "zh": "我们住在河边的一套小公寓里。"
+            },
+            {
+              "en": "There are twenty [[flats]] in this building.",
+              "zh": "这栋楼里有二十套公寓。"
+            }
+          ]
+        },
+        {
+          "w": "fun",
+          "ipa": "/fʌn/",
+          "pos": "n.",
+          "zh": "乐趣；快乐",
+          "page": 32,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "ex": [
+            {
+              "en": "We have a lot of [[fun]] at the family party.",
+              "zh": "我们在家庭聚会上玩得很开心。"
+            }
+          ]
+        },
+        {
+          "w": "celebration",
+          "ipa": "/ˌselɪˈbreɪʃn/",
+          "pos": "n.",
+          "zh": "庆典；庆祝活动",
+          "page": 36,
+          "basic": false,
+          "core": false,
+          "exam": false,
+          "ex": [
+            {
+              "en": "The New Year [[celebration]] starts at eight.",
+              "zh": "新年庆祝活动八点开始。"
+            }
+          ]
+        },
+        {
+          "w": "prepare",
+          "ipa": "/prɪˈpeə(r)/",
+          "pos": "v.",
+          "zh": "使做好准备；把……预备好",
+          "page": 36,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "preparing"
+          ],
+          "ex": [
+            {
+              "en": "We [[prepare]] the food together before the party.",
+              "zh": "聚会前我们一起准备食物。"
+            },
+            {
+              "en": "Mum is [[preparing]] a big dinner for Grandpa's birthday.",
+              "zh": "妈妈正在为爷爷的生日准备一顿丰盛的晚餐。"
+            }
+          ]
+        },
+        {
+          "w": "decorate",
+          "ipa": "/ˈdekəreɪt/",
+          "pos": "v.",
+          "zh": "装饰",
+          "page": 36,
+          "basic": false,
+          "core": false,
+          "exam": true,
+          "ex": [
+            {
+              "en": "Let's [[decorate]] the classroom with paper flowers.",
+              "zh": "我们用纸花装饰教室吧。"
+            }
+          ]
+        },
+        {
+          "w": "living room",
+          "ipa": "/ˈlɪvɪŋ ruːm/",
+          "pos": "n.",
+          "zh": "客厅；起居室",
+          "page": 36,
+          "basic": false,
+          "note": "(= sitting room)",
+          "core": false,
+          "exam": false,
+          "ex": [
+            {
+              "en": "The TV is in the [[living room]].",
+              "zh": "电视在客厅里。"
+            }
+          ]
+        },
+        {
+          "w": "balloon",
+          "ipa": "/bəˈluːn/",
+          "pos": "n.",
+          "zh": "气球",
+          "page": 36,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "balloons"
+          ],
+          "ex": [
+            {
+              "en": "The little boy is holding a red [[balloon]].",
+              "zh": "小男孩正拿着一个红气球。"
+            },
+            {
+              "en": "We put twenty [[balloons]] on the wall.",
+              "zh": "我们在墙上挂了二十个气球。"
+            }
+          ]
+        },
+        {
+          "w": "set",
+          "ipa": "/set/",
+          "pos": "v.",
+          "zh": "放置；摆放餐具",
+          "page": 36,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "setting"
+          ],
+          "ex": [
+            {
+              "en": "Can you help me [[set]] the table for dinner?",
+              "zh": "你能帮我摆好餐具准备吃晚饭吗？"
+            },
+            {
+              "en": "My sister is [[setting]] the bowls and chopsticks on the table.",
+              "zh": "我姐姐正在桌上摆碗筷。"
+            }
+          ]
+        },
+        {
+          "w": "surprised",
+          "ipa": "/səˈpraɪzd/",
+          "pos": "adj.",
+          "zh": "惊奇的；惊讶的；感觉意外的",
+          "page": 37,
+          "basic": false,
+          "core": false,
+          "exam": true,
+          "ex": [
+            {
+              "en": "Dad looks [[surprised]] when he opens the gift.",
+              "zh": "爸爸打开礼物时看起来很惊讶。"
+            }
+          ]
+        },
+        {
+          "w": "super-excited",
+          "ipa": "/ˌsuːpə(r) ɪkˈsaɪtɪd/",
+          "pos": "adj.",
+          "zh": "超级激动的；格外兴奋的",
+          "page": 37,
+          "basic": false,
+          "core": false,
+          "exam": false,
+          "ex": [
+            {
+              "en": "The kids are [[super-excited]] about the trip.",
+              "zh": "孩子们对这次旅行格外兴奋。"
+            }
+          ]
+        },
+        {
+          "w": "joy",
+          "ipa": "/dʒɔɪ/",
+          "pos": "n.",
+          "zh": "高兴；愉快；喜悦",
+          "page": 37,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "ex": [
+            {
+              "en": "Grandma's face is full of [[joy]].",
+              "zh": "奶奶满脸喜悦。"
+            }
+          ]
+        },
+        {
+          "w": "jump for joy",
+          "ipa": "",
+          "pos": "",
+          "zh": "欢呼雀跃",
+          "page": 37,
+          "basic": false,
+          "core": false,
+          "exam": false,
+          "ex": [
+            {
+              "en": "The children [[jump for joy]] when they see the snow.",
+              "zh": "孩子们看到雪时欢呼雀跃。"
+            }
+          ]
+        }
+      ]
     }
   ],
   "source": {
