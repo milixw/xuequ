@@ -46,7 +46,7 @@
 
 ## 英语单元三节（六上起）
 
-每个 Unit 分三节，`tests/content.test.js` 按小节号末位校验：`<单元>.1` 阅读与语法入门（同八上：原创短文 + 知识卡 + 16 道选择题 5/6/5，`bankExamples` 可选）；`<单元>.2` 语法练习（无 `reading`，`levelNames: { basic: '辨认', extended: '运用', challenge: '产出' }`，辨认 5 道选择、运用 6～8 道 `fill` + `kind: 'en'`、产出 2～4 道 `open`，`knowledgeRefs` 指向 `knowledge.js` 的知识点 ID）；`<单元>.3` 语音与听力（8～12 题，至少 4 道带 `audio: { text }`，范围取自本单元 Sound 栏目和 Sound file）。`open` 题写 `reference`（至少 2 个参考答案）和 `checks`（至少 2 条自查要点），学生自评“符合要求”记为完成，不计答错，也不进限时测试。整句 `kind: 'en'` 答案至少列 2 种写法。写完用 6 词连续重合检查对照课本导出文字（`textbook-text.py en:<册ID>`），不能有重合。六上 Unit 1 为首个样板。
+每个 Unit 分三节，`tests/content.test.js` 按小节号末位校验：`<单元>.1` 阅读与语法入门（同八上：原创短文 + 知识卡 + 16 道选择题 5/6/5，`bankExamples` 可选）；`<单元>.2` 语法练习（无 `reading`，`levelNames: { basic: '辨认', extended: '运用', challenge: '产出' }`，辨认 5 道选择、运用 6～8 道 `fill` + `kind: 'en'`、产出 2～4 道 `open`，`knowledgeRefs` 指向 `knowledge.js` 的知识点 ID）；`<单元>.3` 语音与听力（8～12 题，至少 4 道带 `audio: { text }`，范围取自本单元 Sound 栏目和 Sound file）。`open` 题写 `reference`（至少 2 个参考答案）和 `checks`（至少 2 条自查要点），学生自评“符合要求”记为完成，不计答错，也不进限时测试。整句 `kind: 'en'` 答案至少列 2 种写法。写完用 `scripts/english-overlap-check.js` 对照课本导出文字，不能有连续 6 词重合。完整流程见 `docs/sop-english-unit.md`，六上 Unit 1～3 为样板。
 
 ## 英语八上单元内容格式
 

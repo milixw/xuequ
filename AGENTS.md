@@ -28,7 +28,8 @@ Claude Code（`.claude/settings.json`）、Cursor（`.cursorignore`）、Gemini 
 |---|---|
 | 出数学题（新小节、改题、复核） | `content/AGENTS.md` → `content/math/AGENTS.md` → `docs/sop-section.md`；课本 `docs/textbooks/math-sh2024-<册ID>.md`；台账 `docs/question-types.md` + `docs/question-types/math/<册ID>.md` |
 | 收录数学真题卷 | `content/AGENTS.md` 的“真题卷格式” |
-| 英语单元、英语错题库、七天计划、英语中考题 | `content/AGENTS.md` → `content/english/AGENTS.md` |
+| 做英语单元（“做英语 <册> Unit n”：单词 + 三节） | `docs/sop-english-unit.md` → `content/english/AGENTS.md` |
+| 英语错题库、七天计划、英语中考题 | `content/AGENTS.md` → `content/english/AGENTS.md` |
 | 上海语数物化中考原题（导入、补图、补答案） | `content/past-papers/AGENTS.md` |
 | 加新学科 | `docs/templates/subject-AGENTS.md`，再按 `content/AGENTS.md` 建目录和目录条目 |
 | 加新练习模式 / 新页面 | `docs/templates/new-mode-checklist.md`、`src/AGENTS.md`、`docs/storage-and-routes.md` |
