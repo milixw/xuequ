@@ -380,10 +380,10 @@ Content.catalog = {
                   no: 28,
                   title: '相似三角形',
                   sections: [
-                    { no: '28.1', title: '成比例的线段', ready: false },
-                    { no: '28.2', title: '相似三角形', ready: false },
-                    { no: '28.3', title: '相似多边形', ready: false },
-                    { no: '28.4', title: '位似多边形', ready: false },
+                    { no: '28.1', title: '成比例的线段', ready: true },
+                    { no: '28.2', title: '相似三角形', ready: true },
+                    { no: '28.3', title: '相似多边形', ready: true },
+                    { no: '28.4', title: '位似多边形', ready: true },
                   ],
                 },
                 {
