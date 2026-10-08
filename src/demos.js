@@ -2285,7 +2285,314 @@
     return s;
   }
 
-  const TYPES = { foldCut, numberLineFold, angleFold, ropeCut, motion, sweep, rotOverlap, billiard, scaleOrder, solutionSet, vertAngles, parallelAngles, angleSum, ssaSwing, perpBisector, rtMedian, hlCongruent, ladderSlide, bisectorDist, incenter, pythagorasProof, perpShortest, exteriorWalk, parallelogramDrag, quadFamily, midlineRotate, varignon, centroid };
+  // ---------- 二次函数（第 27 章） ----------
+  // 课本顶点式记作 y=a(x+m)²+h：对称轴 x=−m，顶点 (−m,h)
+  const fmt27 = v => { const r = Math.round(v * 100) / 100; return minus(String(r === 0 ? 0 : r)); };
+  const paren27 = v => (v < 0 ? `(${fmt27(v)})` : fmt27(v));
+  // 系数写在字母前：1 省略、−1 只写负号
+  const co27 = a => (a === 1 ? '' : a === -1 ? '−' : fmt27(a));
+  const sgn27 = (v, s = '') => (v > 0 ? '+' : '−') + (Math.abs(v) === 1 && s ? '' : fmt27(Math.abs(v))) + s;
+  const poly27 = (a, b, c) => `y=${co27(a)}x²${b ? sgn27(b, 'x') : ''}${c ? sgn27(c) : ''}`;
+  const vform27 = (a, m, h) => `y=${co27(a)}${m ? `(x${sgn27(m)})²` : 'x²'}${h ? sgn27(h) : ''}`;
+  // 有理数写成整数或最简分数（分母不超过 12），否则返回 null
+  const frac27 = v => {
+    for (let q = 1; q <= 12; q++) {
+      const n = Math.round(v * q);
+      if (Math.abs(v * q - n) < 1e-7) return q === 1 ? fmt27(n) : `${n < 0 ? '−' : ''}${Math.abs(n)}/${q}`;
+    }
+    return null;
+  };
+  function text27(x, y, t, color = INK, size = 12, anchor = 'middle', weight = 'bold') {
+    return `<text x="${f22(x)}" y="${f22(y)}" font-size="${size}" text-anchor="${anchor}" fill="${color}" font-weight="${weight}" stroke="#fff" stroke-width="3" paint-order="stroke">${t}</text>`;
+  }
+  function arrow27(p, q, color, w = 2) {
+    const d = unit22(p, q), nv = [-d[1], d[0]], b = add22(q, d, -7);
+    return ln22(p, b, color, w) + `<polygon points="${polyAttr([q, add22(b, nv, 4), add22(b, nv, -4)])}" fill="${color}"/>`;
+  }
+  // 坐标平面：view = [xmin, xmax, ymin, ymax]，横纵单位长度可以不同；top 是画在画布里的起始高度
+  // 返回 P(x, y) 屏幕坐标、html（网格、坐标轴、刻度数字）、curve(f, color, w, dash, [lo, hi]) 画函数图像（裁在网格内）
+  let seq27 = 0;
+  function plane27(W, H, view, { top = 0, xName = 'x', yName = 'y' } = {}) {
+    const [x0, x1, y0, y1] = view;
+    const L = 8, R = 16, T = top + 14, B = 8;
+    const ux = (W - L - R) / (x1 - x0), uy = (H - T - B) / (y1 - y0);
+    const X = x => L + (x - x0) * ux, Y = y => T + (y1 - y) * uy;
+    const P = (x, y) => [X(x), Y(y)];
+    const nice = (u, px, base = 1) => { for (const k of [1, 2, 5, 10, 20, 50, 100, 200, 500]) if (k % base === 0 && k * u >= px) return k; return 1000; };
+    const gx = nice(ux, 9), gy = nice(uy, 9), lx = nice(ux, 22, gx), ly = nice(uy, 18, gy);
+    const id = `clip27-${++seq27}`;
+    let html = `<defs><clipPath id="${id}"><rect x="${f22(X(x0))}" y="${f22(Y(y1))}" width="${f22((x1 - x0) * ux)}" height="${f22((y1 - y0) * uy)}"/></clipPath></defs>`;
+    for (let x = Math.ceil(x0 / gx) * gx; x <= x1 + 1e-9; x += gx) html += ln22(P(x, y0), P(x, y1), '#e4ddd0', 1);
+    for (let y = Math.ceil(y0 / gy) * gy; y <= y1 + 1e-9; y += gy) html += ln22(P(x0, y), P(x1, y), '#e4ddd0', 1);
+    const ay = Y(Math.max(y0, Math.min(y1, 0))), ax = X(Math.max(x0, Math.min(x1, 0)));
+    html += arrow27([X(x0), ay], [X(x1) + 12, ay], INK, 1.3) + arrow27([ax, Y(y0)], [ax, Y(y1) - 12], INK, 1.3);
+    html += text27(X(x1) + 12, ay + 15, xName, INK, 12, 'end', 'normal') + text27(ax + 7, Y(y1) - 3, yName, INK, 12, 'start', 'normal');
+    for (let x = Math.ceil(x0 / lx) * lx; x <= x1 + 1e-9; x += lx) {
+      if (x === 0 || X(x) > X(x1) - 4) continue;
+      html += text27(X(x), ay + 13, minus(x), MUTED, 10, 'middle', 'normal');
+    }
+    const left = ax > 22;
+    for (let y = Math.ceil(y0 / ly) * ly; y <= y1 + 1e-9; y += ly) {
+      if (y === 0 || Y(y) < Y(y1) + 4) continue;
+      html += text27(left ? ax - 4 : ax + 4, Y(y) + 3.5, minus(y), MUTED, 10, left ? 'end' : 'start', 'normal');
+    }
+    if (x0 <= 0 && x1 >= 0 && y0 <= 0 && y1 >= 0) html += text27(ax - 4, ay + 12, 'O', INK, 11, 'end', 'normal');
+    const span = y1 - y0;
+    const curve = (f, color = BLUE, w = 2.4, dash = '', [lo, hi] = [x0, x1]) => {
+      const pts = [];
+      for (let i = 0; i <= 160; i++) {
+        const x = lo + ((hi - lo) * i) / 160;
+        pts.push(P(x, Math.max(y0 - span, Math.min(y1 + span, f(x)))));
+      }
+      return `<polyline clip-path="url(#${id})" points="${polyAttr(pts)}" fill="none" stroke="${color}" stroke-width="${w}"${dash ? ` stroke-dasharray="${dash}"` : ''} stroke-linejoin="round"/>`;
+    };
+    return { P, X, Y, html, curve, view };
+  }
+  const range27 = (name, min, max, step) => `<label class="demo-row"><span>${name}</span><input type="range" min="${min}" max="${max}" step="${step}"><b class="demo-val"></b></label>`;
+  const clampTo27 = (v, lo, hi) => Math.max(lo, Math.min(hi, v));
+
+  // y=ax² 的图像（27.2）：滑块改 a，看开口方向和大小；浅色虚线是 y=x² 作参照
+  // opts.a 初值（−3～3，默认 1）
+  function parabolaShape(container, opts) {
+    const W = 300, H = 250;
+    const pl = plane27(W, H, [-3.5, 3.5, -8, 8]);
+    let a0 = clampTo27(opts.a ?? 1, -3, 3);
+    const s = shell(container, { w: W, h: H, aria: '二次函数 y=ax² 的图像随 a 变化的演示', controls: range27('a', -3, 3, 0.1) });
+    const rA = s.box.querySelector('input'), vA = s.box.querySelector('.demo-val');
+    rA.value = a0;
+    rA.addEventListener('input', () => { s.reset(); a0 = Number(rA.value); draw(a0); });
+    function draw(a) {
+      a = Math.round(a * 10) / 10;
+      let html = pl.html + pl.curve(x => x * x, MUTED, 1.4, '5 4');
+      html += text27(12, 22, 'y=x²（虚线）', MUTED, 11, 'start', 'normal');
+      if (a === 0) {
+        html += ln22(pl.P(-3.5, 0), pl.P(3.5, 0), RED, 2.6);
+        s.caption.textContent = 'a=0 时 y=0，不是二次函数（图像变成了 x 轴这条直线）';
+      } else {
+        html += ln22(pl.P(0, -8), pl.P(0, 8), RED, 1.3, '6 4');
+        html += pl.curve(x => a * x * x, BLUE, 2.6);
+        html += dot22(pl.P(0, 0), RED) + text27(12, 40, `y=${co27(a)}x²`, BLUE, 13, 'start');
+        const abs = Math.abs(a);
+        const cmp = abs > 1 ? '比 y=x² 的开口小' : abs < 1 ? '比 y=x² 的开口大' : '和 y=x² 的开口一样大';
+        s.caption.textContent = `y=${co27(a)}x²：a${a > 0 ? '>' : '<'}0，开口向${a > 0 ? '上' : '下'}；|a|=${fmt27(abs)}，${cmp}（|a| 越大开口越小）；` +
+          `顶点 (0,0) 是最${a > 0 ? '低' : '高'}点，对称轴是 y 轴`;
+      }
+      s.svg.innerHTML = html;
+      vA.textContent = fmt27(a);
+    }
+    // 播放：a 从 1 变到 3，再变到 −3，回到初值
+    const phases = () => [
+      { from: a0, to: 1, dur: 300 + Math.abs(a0 - 1) * 300 }, { from: 1, to: 3, dur: 1400 },
+      { from: 3, to: -3, dur: 4200 }, { from: -3, to: a0, dur: 400 + Math.abs(a0 + 3) * 300 },
+    ];
+    s.frame = ms => {
+      let a = a0;
+      walk(phases(), ms, (p, f) => { a = lerp(p.from, p.to, ease(f)); });
+      draw(a);
+      rA.value = Math.round(a * 10) / 10;
+    };
+    s.duration = () => totalOf(phases());
+    s.reset();
+    draw(a0);
+    return s;
+  }
+
+  // y=a(x+m)²+h 的图像（27.2）：由 y=ax² 左右平移、上下平移得到；标出顶点和对称轴
+  // opts.a（−3～3，默认 1）、opts.m、opts.h（−4～4，默认 −2、1）
+  function parabolaShift(container, opts) {
+    const W = 300, H = 300;
+    const pl = plane27(W, H, [-7, 7, -7, 7]);
+    let a0 = clampTo27(opts.a ?? 1, -3, 3), m0 = clampTo27(opts.m ?? -2, -4, 4), h0 = clampTo27(opts.h ?? 1, -4, 4);
+    const s = shell(container, {
+      w: W, h: H, aria: '抛物线 y=a(x+m)²+h 由 y=ax² 平移得到的演示',
+      controls: range27('a', -3, 3, 0.5) + range27('m', -4, 4, 0.5) + range27('h', -4, 4, 0.5),
+    });
+    const [rA, rM, rH] = s.box.querySelectorAll('input');
+    const [vA, vM, vH] = s.box.querySelectorAll('.demo-val');
+    rA.value = a0; rM.value = m0; rH.value = h0;
+    rA.addEventListener('input', () => { s.reset(); a0 = Number(rA.value); draw(a0, m0, h0); });
+    rM.addEventListener('input', () => { s.reset(); m0 = Number(rM.value); draw(a0, m0, h0); });
+    rH.addEventListener('input', () => { s.reset(); h0 = Number(rH.value); draw(a0, m0, h0); });
+    function draw(a, m, h) {
+      m = Math.round(m * 100) / 100; h = Math.round(h * 100) / 100;
+      const vx = m === 0 ? 0 : -m;
+      let html = pl.html;
+      vA.textContent = fmt27(a); vM.textContent = fmt27(m); vH.textContent = fmt27(h);
+      if (a === 0) {
+        html += ln22(pl.P(-7, h), pl.P(7, h), RED, 2.6);
+        s.svg.innerHTML = html;
+        s.caption.textContent = `a=0 时 y=${fmt27(h)}，不是二次函数（图像是一条水平直线）`;
+        return;
+      }
+      html += pl.curve(x => a * x * x, MUTED, 1.4, '5 4');
+      html += ln22(pl.P(vx, -7), pl.P(vx, 7), RED, 1.3, '6 4');
+      if (m !== 0) html += arrow27(pl.P(0, 0), pl.P(vx, 0), ORANGE23, 2.2);
+      if (h !== 0) html += arrow27(pl.P(vx, 0), pl.P(vx, h), GREEN, 2.2);
+      html += pl.curve(x => a * (x + m) ** 2 + h, BLUE, 2.6);
+      const V = pl.P(vx, h);
+      html += dot22(V, RED) + text27(V[0] + 7, V[1] + (a > 0 ? 17 : -9), `(${fmt27(vx)},${fmt27(h)})`, RED, 12, 'start');
+      html += text27(pl.X(vx) + 4, pl.Y(6.2), `x=${fmt27(vx)}`, RED, 11, 'start');
+      html += text27(12, 22, `y=${co27(a)}x²（虚线）`, MUTED, 11, 'start', 'normal') + text27(12, 40, vform27(a, m, h), BLUE, 13, 'start');
+      s.svg.innerHTML = html;
+      const lr = m > 0 ? `向左平移 ${fmt27(m)} 个单位` : m < 0 ? `向右平移 ${fmt27(-m)} 个单位` : '不左右平移';
+      const ud = h > 0 ? `向上平移 ${fmt27(h)} 个单位` : h < 0 ? `向下平移 ${fmt27(-h)} 个单位` : '不上下平移';
+      s.caption.textContent = `${vform27(a, m, h)} 由 y=${co27(a)}x² ${lr}、${ud}得到；顶点 (${fmt27(vx)},${fmt27(h)})，对称轴是直线 x=${fmt27(vx)}；` +
+        `a${a > 0 ? '>' : '<'}0，当 x=${fmt27(vx)} 时 y 有最${a > 0 ? '小' : '大'}值 ${fmt27(h)}`;
+    }
+    // 播放：从 y=ax² 出发，先上下平移（h 变化），再左右平移（m 变化）
+    const phases = () => [
+      { k: null, dur: 700 },
+      ...(h0 !== 0 ? [{ k: 'h', from: 0, to: h0, dur: 400 + Math.abs(h0) * 300 }] : [{ k: 'h', from: 0, to: 3, dur: 1100 }, { k: 'h', from: 3, to: 0, dur: 1100 }]),
+      { k: null, dur: 500 },
+      ...(m0 !== 0 ? [{ k: 'm', from: 0, to: m0, dur: 400 + Math.abs(m0) * 300 }] : [{ k: 'm', from: 0, to: -3, dur: 1100 }, { k: 'm', from: -3, to: 0, dur: 1100 }]),
+    ];
+    s.frame = ms => {
+      const cur = { m: 0, h: 0 };
+      walk(phases(), ms, (p, f) => { if (p.k) cur[p.k] = lerp(p.from, p.to, ease(f)); });
+      draw(a0, cur.m, cur.h);
+      rM.value = cur.m; rH.value = cur.h;
+    };
+    s.duration = () => totalOf(phases());
+    s.reset();
+    draw(a0, m0, h0);
+    return s;
+  }
+
+  // 抛物线与 x 轴的交点（27.3）：a、b 固定，滑块改 c，看 Δ=b²−4ac 的正负和交点个数
+  // opts.a、opts.b（默认 1、−2，a≠0），opts.c 初值（默认 −3），opts.cMin、opts.cMax（默认 −6、6）
+  function parabolaRoots(container, opts) {
+    const a = opts.a || 1, b = opts.b ?? -2;
+    const cMin = opts.cMin ?? -6, cMax = opts.cMax ?? 6;
+    let c0 = clampTo27(opts.c ?? -3, cMin, cMax);
+    const W = 300, H = 270;
+    const xc = -b / (2 * a), k = (b * b) / (4 * a);
+    const vyLo = Math.min(cMin - k, cMax - k), vyHi = Math.max(cMin - k, cMax - k);
+    const yLo = a > 0 ? Math.floor(Math.min(0, vyLo) - 1) : Math.floor(Math.min(0, vyLo) - 4);
+    const yHi = a > 0 ? Math.ceil(Math.max(0, vyHi) + 4) : Math.ceil(Math.max(0, vyHi) + 1);
+    const pl = plane27(W, H, [Math.floor(xc - 5), Math.ceil(xc + 5), yLo, yHi]);
+    const s = shell(container, { w: W, h: H, aria: '抛物线与 x 轴交点个数和判别式的演示', controls: range27('c', cMin, cMax, 0.5) });
+    const rC = s.box.querySelector('input'), vC = s.box.querySelector('.demo-val');
+    rC.value = c0;
+    rC.addEventListener('input', () => { s.reset(); c0 = Number(rC.value); draw(c0); });
+    function draw(c) {
+      c = Math.abs(c - k) < 0.026 ? k : Math.round(c * 20) / 20;   // 播放时靠近 Δ=0 就停在那里
+      const cS = Math.abs(c * 100 - Math.round(c * 100)) > 1e-9 ? frac27(c) ?? fmt27(c) : fmt27(c), cTxt = c < 0 ? `(${cS})` : cS;
+      let D = b * b - 4 * a * c;
+      if (Math.abs(D) < 1e-9) D = 0;
+      const [x0, x1] = pl.view;
+      let html = pl.html + ln22(pl.P(xc, yLo), pl.P(xc, yHi), MUTED, 1, '4 4');
+      html += pl.curve(x => a * x * x + b * x + c, BLUE, 2.6);
+      html += text27(12, 22, poly27(a, b, c), BLUE, 13, 'start');
+      const dTxt = `Δ=b²−4ac=${paren27(b)}²−4×${paren27(a)}×${cTxt}=${fmt27(D)}`;
+      let cap;
+      if (D > 0) {
+        const sq = Math.sqrt(D), exact = frac27(sq) !== null;
+        const r = [(-b - sq) / (2 * a), (-b + sq) / (2 * a)].sort((p, q) => p - q);
+        r.forEach(x => { if (x >= x0 && x <= x1) html += `<circle cx="${f22(pl.X(x))}" cy="${f22(pl.Y(0))}" r="4.5" fill="${RED}"/>`; });
+        const t = x => (exact ? frac27(x) : minus(x.toFixed(2)));
+        cap = `${dTxt}>0，抛物线与 x 轴有两个交点，横坐标${exact ? '' : '约为'} x₁=${t(r[0])}，x₂=${t(r[1])}`;
+      } else if (D === 0) {
+        html += `<circle cx="${f22(pl.X(xc))}" cy="${f22(pl.Y(0))}" r="5" fill="${RED}"/>`;
+        cap = `${dTxt}，抛物线与 x 轴只有一个交点（顶点在 x 轴上），横坐标 x=${frac27(xc) ?? `${minus(xc.toFixed(2))}（约）`}`;
+      } else {
+        cap = `${dTxt}<0，抛物线与 x 轴没有交点（方程 ${poly27(a, b, c).slice(2)}=0 没有实数根）`;
+      }
+      s.svg.innerHTML = html;
+      s.caption.textContent = cap;
+      vC.textContent = fmt27(c);
+    }
+    // 播放：c 从小变到大，在 Δ=0 处停一下，再回到初值
+    const phases = () => {
+      const list = [{ from: c0, to: cMin, dur: 300 + Math.abs(c0 - cMin) * 120 }];
+      if (k > cMin && k < cMax) list.push({ from: cMin, to: k, dur: 300 + (k - cMin) * 300 }, { from: k, to: k, dur: 1000 }, { from: k, to: cMax, dur: 300 + (cMax - k) * 300 });
+      else list.push({ from: cMin, to: cMax, dur: 300 + (cMax - cMin) * 300 });
+      list.push({ from: cMax, to: c0, dur: 300 + Math.abs(cMax - c0) * 120 });
+      return list;
+    };
+    s.frame = ms => {
+      let c = c0;
+      walk(phases(), ms, (p, f) => { c = lerp(p.from, p.to, ease(f)); });
+      draw(c);
+      rC.value = c;
+    };
+    s.duration = () => totalOf(phases());
+    s.reset();
+    draw(c0);
+    return s;
+  }
+
+  // 围栏面积的最大值（27.4）：总长 L 的篱笆围成矩形（wall 为 true 时一边靠墙，只围三边），滑块改边长 x，看面积 S 的抛物线
+  // opts.L 篱笆总长（默认 20），opts.wall（默认 false），opts.x 初值
+  function fenceArea(container, opts) {
+    const L = opts.L || 20, wall = !!opts.wall;
+    const W = 300, TOP = 132, H = 340;
+    const half = L / 2, step = L <= 40 ? 0.5 : 1;
+    const xMin = step, xMax = half - step;
+    let x0 = clampTo27(opts.x ?? step * Math.round(L / 8 / step), xMin, xMax);
+    const other = x => (wall ? L - 2 * x : half - x);
+    const S = x => x * other(x);
+    const xBest = L / 4, sMax = S(xBest);
+    const pl = plane27(W, H, [-half * 0.06, half * 1.04, -sMax * 0.1, sMax * 1.2], { top: TOP, yName: 'S' });
+    const s = shell(container, {
+      w: W, h: H, aria: '用定长篱笆围矩形，面积随边长变化的演示',
+      controls: range27('x', xMin, xMax, step),
+    });
+    const rX = s.box.querySelector('input'), vX = s.box.querySelector('.demo-val');
+    rX.value = x0;
+    rX.addEventListener('input', () => { s.reset(); x0 = Number(rX.value); draw(x0); });
+    const otherTxt = wall ? `${fmt27(L)}−2x` : `${fmt27(half)}−x`;
+    const expr = wall ? `S=x(${otherTxt})=−2x²+${fmt27(L)}x` : `S=x(${otherTxt})=−x²+${fmt27(half)}x`;
+    function draw(x) {
+      x = Math.round(x * 100) / 100;
+      const y = other(x), area = S(x);
+      let html = '';
+      // 上面：矩形（靠墙时墙在上方，x 是垂直于墙的边）
+      if (wall) {
+        const k = Math.min(240 / L, 96 / half), w = y * k, hgt = x * k, top = 18, left = W / 2 - w / 2;
+        html += ln22([W / 2 - (L * k) / 2 - 8, top], [W / 2 + (L * k) / 2 + 8, top], MUTED, 4);
+        for (let i = W / 2 - (L * k) / 2 - 4; i < W / 2 + (L * k) / 2 + 8; i += 10) html += ln22([i, top - 2], [i + 6, top - 9], MUTED, 1);
+        html += text27(W / 2 + (L * k) / 2 + 12, top + 4, '墙', MUTED, 12, 'start');
+        html += `<rect x="${f22(left)}" y="${top}" width="${f22(w)}" height="${f22(hgt)}" fill="${GREEN}" fill-opacity="0.15"/>`;
+        html += `<polyline points="${polyAttr([[left, top], [left, top + hgt], [left + w, top + hgt], [left + w, top]])}" fill="none" stroke="${ORANGE23}" stroke-width="3" stroke-linejoin="round"/>`;
+        html += text27(left - 5, top + hgt / 2 + 4, `x=${fmt27(x)}`, INK, 12, 'end');
+        html += text27(W / 2, top + hgt + 16, `${otherTxt}=${fmt27(y)}`, INK, 12);
+        if (hgt > 22 && w > 50) html += text27(W / 2, top + hgt / 2 + 4, `S=${fmt27(area)}`, GREEN, 12);
+      } else {
+        const k = 100 / half, w = x * k, hgt = y * k, left = W / 2 - w / 2, top = 12 + (100 - hgt) / 2;
+        html += `<rect x="${f22(left)}" y="${f22(top)}" width="${f22(w)}" height="${f22(hgt)}" fill="${GREEN}" fill-opacity="0.15" stroke="${ORANGE23}" stroke-width="3"/>`;
+        html += text27(W / 2, top + hgt + 16, `x=${fmt27(x)}`, INK, 12);
+        html += text27(left + w + 6, top + hgt / 2 + 4, `${otherTxt}=${fmt27(y)}`, INK, 12, 'start');
+        if (hgt > 22 && w > 50) html += text27(W / 2, top + hgt / 2 + 4, `S=${fmt27(area)}`, GREEN, 12);
+      }
+      // 下面：S 关于 x 的图像
+      html += pl.html + pl.curve(S, BLUE, 2.4, '', [0, half]);
+      const M = pl.P(xBest, sMax), C = pl.P(x, area);
+      html += dot22(M, GREEN) + text27(M[0], M[1] - 8, `最大 ${fmt27(sMax)}`, GREEN, 11);
+      html += ln22(C, pl.P(x, 0), RED, 1.2, '4 3') + ln22(C, pl.P(0, area), RED, 1.2, '4 3');
+      html += `<circle cx="${f22(C[0])}" cy="${f22(C[1])}" r="4.5" fill="${RED}"/>`;
+      s.svg.innerHTML = html;
+      vX.textContent = fmt27(x);
+      s.caption.textContent = `${expr}（0<x<${fmt27(half)}）；x=${fmt27(x)} 时 S=${fmt27(area)}；当 x=${fmt27(xBest)} 时 S 最大，最大值是 ${fmt27(sMax)}`;
+    }
+    // 播放：x 从小扫到大，再回到初值
+    const phases = () => [
+      { from: x0, to: xMin, dur: 300 + ((x0 - xMin) / half) * 1200 },
+      { from: xMin, to: xMax, dur: 4500 },
+      { from: xMax, to: x0, dur: 300 + ((xMax - x0) / half) * 1500 },
+    ];
+    s.frame = ms => {
+      let x = x0;
+      walk(phases(), ms, (p, f) => { x = lerp(p.from, p.to, p.dur > 1500 ? f : ease(f)); });
+      draw(x);
+      rX.value = x;
+    };
+    s.duration = () => totalOf(phases());
+    s.reset();
+    draw(x0);
+    return s;
+  }
+
+  const TYPES = { foldCut, numberLineFold, angleFold, ropeCut, motion, sweep, rotOverlap, billiard, scaleOrder, solutionSet, vertAngles, parallelAngles, angleSum, ssaSwing, perpBisector, rtMedian, hlCongruent, ladderSlide, bisectorDist, incenter, pythagorasProof, perpShortest, exteriorWalk, parallelogramDrag, quadFamily, midlineRotate, varignon, centroid, parabolaShape, parabolaShift, parabolaRoots, fenceArea };
 
   function mount(container, demo) {
     const make = TYPES[demo.type];

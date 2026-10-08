@@ -369,11 +369,11 @@ Content.catalog = {
                   no: 27,
                   title: '二次函数',
                   sections: [
-                    { no: '27.1', title: '二次函数的概念', ready: false },
-                    { no: '27.2', title: '二次函数的图像与性质', ready: false },
-                    { no: '27.3', title: '确定二次函数的表达式', ready: false },
-                    { no: '27.4', title: '二次函数与一元二次方程', ready: false },
-                    { no: '27.5', title: '二次函数的简单应用', ready: false },
+                    { no: '27.1', title: '二次函数的概念', ready: true },
+                    { no: '27.2', title: '二次函数的图像与性质', ready: true },
+                    { no: '27.3', title: '确定二次函数的表达式', ready: true },
+                    { no: '27.4', title: '二次函数与一元二次方程', ready: true },
+                    { no: '27.5', title: '二次函数的简单应用', ready: true },
                   ],
                 },
                 {
