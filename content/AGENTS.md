@@ -10,7 +10,7 @@
 ## 编号
 
 - 学科：`math`、以后可能有 `physics`、`chinese` 等
-- 学科：`english` 已接入八年级上册单元内容、六年级上册单元词表（只有单词、暂无小节，册条目 `words` 字段指向词表文件）；英语错题库仍是独立入口
+- 学科：`english` 已接入八年级上册单元内容、六年级上册 Unit 1（单词 + 1.1～1.3 三节，册条目 `words` 字段指向词表文件）；英语错题库仍是独立入口
 - 教材：数学 `sh2024`、英语 `sh2022`（沪教新版，对应 2022 版课程标准）；`bridge` 是六年级衔接（旧版教材补课内容），册 ID 同样用 `g6s1`，首页选六年级上册时和新教材并列
 - 册：`g6s1` 表示六年级上册，`g7s2` 表示七年级下册
 - 小节 ID：`math/sh2024/g6s1/1.1`
@@ -45,7 +45,7 @@ Content.section({
 });
 ```
 
-英语八上单元小节另有 `reading` 和 `bankExamples`，格式见 `content/english/AGENTS.md`。
+英语单元小节另有 `reading`、`bankExamples`、`levelNames`、`knowledgeRefs`，题型另有 `open`（自评产出题）和题目的 `audio` 字段，格式见 `content/english/AGENTS.md`。
 
 ## 真题卷格式
 

@@ -13,6 +13,7 @@ globalThis.Frac = A.Frac;
 globalThis.F = A.Frac.of;
 globalThis.Poly = require('./poly.js');  // 第 10 章起的整式运算，见 tests/poly.js
 require('../content/catalog.js');
+const EnglishKnowledge = require('../content/english/knowledge.js');
 
 const ROOT = path.join(__dirname, '..');
 const LEVELS = { b: 'basic', e: 'extended', c: 'challenge' };
@@ -89,6 +90,11 @@ function checkQuestion(q, sectionNo, where) {
       assert(Number.isInteger(a) && a >= 0 && a < q.options.length, `${where}：答案下标 ${a} 超出选项范围`);
     }
     if (q.type === 'multi') assert(new Set(q.answer).size === q.answer.length, `${where}：多选答案有重复`);
+  } else if (q.type === 'open') {
+    // 英语产出题：学生自己写，对照参考答案和自查要点自评
+    assert(Array.isArray(q.reference) && q.reference.length >= 2, `${where}：产出题至少给 2 个参考答案`);
+    assert(Array.isArray(q.checks) && q.checks.length >= 2, `${where}：产出题至少给 2 条自查要点`);
+    q.reference.forEach(x => assert(!/[\u4e00-\u9fff]/.test(x), `${where}：参考答案应为英文`));
   } else if (q.type === 'fill') {
     assert(Array.isArray(q.blanks) && q.blanks.length, `${where}：填空题缺少 blanks`);
     q.blanks.forEach((b, i) => {
@@ -102,12 +108,17 @@ function checkQuestion(q, sectionNo, where) {
       }
       // 标准答案本身必须能被判分器判对（顺带检查了“已化简”等要求）
       const input = b.kind === 'nums' || b.kind === 'reals' ? b.answer.join(',') : Array.isArray(b.answer) ? b.answer[0] : String(b.answer);
+      if (b.kind === 'en' && /\S+ \S+ \S+ \S+/.test(Array.isArray(b.answer) ? b.answer[0] : b.answer)) {
+        assert(Array.isArray(b.answer) && b.answer.length >= 2, `${w}：整句答案至少列出 2 种可接受写法`);
+      }
       const r = A.checkBlank(b, input);
       assert(r.ok, `${w}：标准答案 ${input} 不能被判分器判对${r.error ? '（' + r.error + '）' : ''}`);
     });
   } else {
     throw new Error(`${where}：未知题型 ${q.type}`);
   }
+
+  if (q.audio) assert(q.audio.text && !/[\u4e00-\u9fff]/.test(q.audio.text), `${where}：audio.text 应为英文听力原文`);
 
   if (q.verify) {
     let v;
@@ -155,7 +166,9 @@ for (const meta of Content.sectionMetas()) {
       if (card.demo) assert(DEMOS.includes(card.demo.type), `知识点 ${i + 1}：未知演示类型 ${card.demo.type}`);
     });
 
-    if (meta.subject.id === 'english') {
+    // 英语每个 Unit：<单元>.1 阅读与语法入门、.2 语法练习、.3 语音与听力，规则各不相同
+    const englishKind = meta.subject.id === 'english' ? meta.section.no.split('.')[1] : null;
+    if (englishKind === '1') {
       const reading = s.reading;
       assert(reading && typeof reading === 'object', '英语小节缺少单元阅读 reading');
       checkMath(reading.title, `${meta.id} 阅读标题`);
@@ -186,10 +199,24 @@ for (const meta of Content.sectionMetas()) {
 
     const qs = s.questions;
     const count = level => qs.filter(q => q.level === level).length;
-    if (meta.subject.id === 'english') {
+    if (englishKind === '1') {
       assert(count('basic') === 5 && count('extended') === 6 && count('challenge') === 5,
-        `英语八上小节应有 5 基础、6 扩展、5 挑战，现在是 ${count('basic')}/${count('extended')}/${count('challenge')}`);
-      assert(qs.length === 16, `英语八上小节应有 16 道原创练习，现在 ${qs.length} 道`);
+        `英语阅读与语法入门应有 5 基础、6 扩展、5 挑战，现在是 ${count('basic')}/${count('extended')}/${count('challenge')}`);
+      assert(qs.length === 16, `英语阅读与语法入门应有 16 道原创练习，现在 ${qs.length} 道`);
+    } else if (englishKind === '2') {
+      assert(count('basic') === 5 && count('extended') >= 6 && count('extended') <= 8 && count('challenge') >= 2 && count('challenge') <= 4,
+        `英语语法练习应为辨认 5、运用 6～8、产出 2～4，现在是 ${count('basic')}/${count('extended')}/${count('challenge')}`);
+      assert(qs.filter(q => q.level === 'challenge').every(q => q.type === 'open'), '英语语法练习的产出题应为 open 题型');
+      assert(qs.some(q => q.type === 'fill'), '英语语法练习要有填写题，不能只有选择题');
+      assert(Array.isArray(s.knowledgeRefs) && s.knowledgeRefs.length && s.knowledgeRefs.every(id => EnglishKnowledge.get(id)),
+        '英语语法练习的 knowledgeRefs 应指向 content/english/knowledge.js 里存在的知识点');
+      assert(s.levelNames && s.levelNames.basic === '辨认' && s.levelNames.extended === '运用' && s.levelNames.challenge === '产出',
+        '英语语法练习的档位名应为 辨认 / 运用 / 产出');
+    } else if (englishKind === '3') {
+      assert(qs.length >= 8 && qs.length <= 12, `英语语音与听力应有 8～12 题，现在 ${qs.length} 道`);
+      assert(qs.filter(q => q.audio).length >= 4, '英语语音与听力至少 4 道听力题（audio）');
+    } else if (englishKind) {
+      assert(false, `英语小节号应为 <单元>.1～.3，现在是 ${meta.section.no}`);
     } else {
       assert(count('basic') >= 5 && count('basic') <= 10, `基础题应为 5～10 道，现在 ${count('basic')} 道`);
       assert(count('challenge') === 5, `挑战题应为 5 道，现在 ${count('challenge')} 道`);
@@ -202,7 +229,7 @@ for (const meta of Content.sectionMetas()) {
       qs.forEach(q => {
         const stemWithoutNotes = q.stem.replace(/\([^()]*[\u4e00-\u9fff][^()]*\)/g, '');
         assert(!/[\u4e00-\u9fff]/.test(stemWithoutNotes), `${q.id} 原创题干应以英文为主，中文只作括号词汇备注`);
-        assert(q.options.every(option => !/[\u4e00-\u9fff]/.test(option)), `${q.id} 原创选项应使用英文`);
+        assert((q.options || []).every(option => !/[\u4e00-\u9fff]/.test(option)), `${q.id} 原创选项应使用英文`);
       });
     }
     qs.forEach(q => checkQuestion(q, meta.section.no, `题目 ${q.id || '(无 ID)'}`));

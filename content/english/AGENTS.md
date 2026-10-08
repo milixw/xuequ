@@ -44,6 +44,10 @@
 
 英语八上原创练习的题干和选项以英文为主；较难词汇可直接在题干词后用括号写简短中文释义，例如 `evidence (证据)`。中文的分步解析保留，帮助学生订正。题库原题保持原样，不受这一原创题语言规则影响。
 
+## 英语单元三节（六上起）
+
+每个 Unit 分三节，`tests/content.test.js` 按小节号末位校验：`<单元>.1` 阅读与语法入门（同八上：原创短文 + 知识卡 + 16 道选择题 5/6/5，`bankExamples` 可选）；`<单元>.2` 语法练习（无 `reading`，`levelNames: { basic: '辨认', extended: '运用', challenge: '产出' }`，辨认 5 道选择、运用 6～8 道 `fill` + `kind: 'en'`、产出 2～4 道 `open`，`knowledgeRefs` 指向 `knowledge.js` 的知识点 ID）；`<单元>.3` 语音与听力（8～12 题，至少 4 道带 `audio: { text }`，范围取自本单元 Sound 栏目和 Sound file）。`open` 题写 `reference`（至少 2 个参考答案）和 `checks`（至少 2 条自查要点），学生自评“符合要求”记为完成，不计答错，也不进限时测试。整句 `kind: 'en'` 答案至少列 2 种写法。写完用 6 词连续重合检查对照课本导出文字（`textbook-text.py en:<册ID>`），不能有重合。六上 Unit 1 为首个样板。
+
 ## 英语八上单元内容格式
 
 英语八上 `content/english/sh2022/g8s1/<小节号>.js` 的 `Content.section` 在 `intro` 和 `questions` 之外还有 `reading`，页面按“原创文章 → 重点词与短语 → 知识点 → 练习”的顺序显示：

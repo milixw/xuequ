@@ -359,6 +359,13 @@
       if (card.demo && window.Demos) Demos.mount(main.lastElementChild, card.demo);
     }
 
+    // 英语语法练习：链到错题库的同类知识点（content/english/knowledge.js），讲解不在两处各写一套
+    if (section.knowledgeRefs && section.knowledgeRefs.length && window.EnglishKnowledge) {
+      main.insertAdjacentHTML('beforeend', '<h3 class="group">错题库里的相关知识点</h3>' +
+        section.knowledgeRefs.map(id => EnglishKnowledge.get(id)).filter(Boolean).map(p =>
+          `<a class="card" href="#/english-bank"><h2>${escapeHtml(p.title)}</h2><p>${escapeHtml(p.intro)}</p></a>`).join(''));
+    }
+
     if (section.bankExamples && section.bankExamples.length) {
       main.insertAdjacentHTML('beforeend', '<h3 class="group">题库原题 · 知识点例题</h3>');
       main.insertAdjacentHTML('beforeend', '<p class="notice">例题和参考答案来自已导入题库，尚待人工逐题核对；原题文本未改动。</p>');
@@ -402,7 +409,7 @@
       if (!group.length) continue;
       main.insertAdjacentHTML(
         'beforeend',
-        `<div class="level-group"><h4><span class="lv lv-${lv}">${LEVEL_NAMES[lv]}</span> ${group.length} 题</h4>` +
+        `<div class="level-group"><h4><span class="lv lv-${lv}">${(section.levelNames || LEVEL_NAMES)[lv]}</span> ${group.length} 题</h4>` +
           `<div class="tiles">${group
             .map(({ q, i }) => `<a class="tile ${Progress.status(id, q.id)}" href="#/q/${id}/${q.id}">${i + 1}</a>`)
             .join('')}</div></div>`
@@ -424,6 +431,7 @@
       q: qs[index],
       index,
       total: qs.length,
+      levelNames: section.levelNames,
       prevHref: href(qs[index - 1]),
       nextHref: href(qs[index + 1]),
     });

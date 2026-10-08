@@ -1058,3 +1058,18 @@ button.say-big { min-width: 72px; min-height: 72px; border-radius: 36px; font-si
 .words-list .w { font-weight: 600; overflow-wrap: anywhere; }
 .words-list .zh { font-size: 13px; color: var(--muted); min-width: 0; overflow-wrap: anywhere; }
 .words-list .box { font-size: 12px; color: var(--primary); white-space: nowrap; }
+
+/* 英语题：听力（audio）与产出题（open，自评）。 */
+.q-audio { display: flex; align-items: center; gap: 12px; margin: 12px 0 4px; color: var(--muted); font-size: 14px; }
+.q-audio .notice { margin: 0; }
+.q-script { margin: 6px 0 0; padding: 10px 12px; background: var(--card); border-radius: 10px; color: var(--text); font-size: 16px; }
+.open-answer {
+  display: block; width: 100%; min-height: 96px; padding: 10px 12px; resize: vertical;
+  font: inherit; font-size: 17px; border: 2px solid var(--line); border-radius: 10px; background: var(--card); color: var(--text);
+}
+.open-answer:focus { outline: none; border-color: var(--primary); }
+.feedback.open-check { padding: 12px 14px; color: var(--text); }
+.open-check ul, .open-check ol { margin: 6px 0; padding-left: 20px; }
+.open-actions { display: flex; gap: 10px; margin-top: 10px; }
+.open-actions button { flex: 1; min-height: 44px; font: inherit; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--text); }
+.open-actions .primary { background: var(--ok); border-color: var(--ok); color: #fff; }

@@ -1,6 +1,8 @@
 'use strict';
 
-// 做题引擎：渲染一道题，处理作答、判分、解析和快捷输入栏。依赖全局 Answer、Progress、katex。
+// 做题引擎：渲染一道题，处理作答、判分、解析和快捷输入栏。依赖全局 Answer、Progress、katex；英语听力题用 Speech（可选）。
+// 题型：choice / multi / fill，以及英语的 open（自己写句子，提交后对照参考答案和自查要点自评，不计入对错）。
+// 英语题可带 audio: { text }：题干下显示朗读按钮；设备不能朗读时改为显示听力原文。
 
 (function (root) {
   const LEVEL_NAMES = { basic: '基础', extended: '扩展', challenge: '挑战' };
@@ -65,7 +67,7 @@
     const head = el('div', 'q-head');
     const badge = q.difficulty
       ? `<span class="lv lv-score-${q.difficulty}" title="${escapeHtml(q.difficultyReason || '')}">难度 ${q.difficulty}/5 · ${DIFFICULTY_NAMES[q.difficulty]}</span>`
-      : `<span class="lv lv-${q.level}">${LEVEL_NAMES[q.level]}</span>`;
+      : `<span class="lv lv-${q.level}">${(opts.levelNames || LEVEL_NAMES)[q.level]}</span>`;
     head.innerHTML =
       badge +
       `<span class="q-no">${escapeHtml(opts.numberLabel || `第 ${opts.index + 1} / ${opts.total} 题`)}</span>` +
@@ -75,6 +77,7 @@
 
     container.appendChild(el('div', 'q-stem', renderText(q.stem)));
     if (q.figure) container.appendChild(el('div', 'q-figure', q.figure));
+    if (q.audio) container.appendChild(audioBox(q.audio));
 
     const answerBox = el('div', 'q-answer');
     container.appendChild(answerBox);
@@ -86,7 +89,7 @@
 
     function lock(state) {
       locked = state;
-      answerBox.querySelectorAll('input, button.option, .seg button').forEach(x => {
+      answerBox.querySelectorAll('input, textarea, button.option, .seg button').forEach(x => {
         x.disabled = state;
       });
     }
@@ -94,11 +97,22 @@
     function fire() {
       if (locked) return;
       if (q.type === 'choice') notify(selected);
+      else if (q.type === 'open') notify(inputs[0].get());
       else if (q.type === 'multi') notify([...selected]);
       else notify(inputs.map(x => x.get()));
     }
 
-    if (q.type === 'choice' || q.type === 'multi') {
+    if (q.type === 'open') {
+      const area = el('textarea', 'open-answer');
+      area.rows = 3;
+      area.lang = 'en';
+      area.spellcheck = false;
+      area.setAttribute('autocapitalize', 'sentences');
+      area.placeholder = 'Write your sentence here.';
+      area.addEventListener('input', () => { if (!locked) fire(); });
+      answerBox.appendChild(area);
+      inputs.push({ get: () => area.value, input: area });
+    } else if (q.type === 'choice' || q.type === 'multi') {
       if (q.type === 'multi') answerBox.appendChild(el('p', 'hint', '多选题：选出所有正确的选项'));
       q.options.forEach((opt, i) => {
         const b = el('button', 'option', `<span class="letter">${LETTERS[i]}</span><span class="text">${renderText(opt)}</span>`);
@@ -195,6 +209,8 @@
         } else if (q.type === 'multi') {
           selected = new Set(response || []);
           answerBox.querySelectorAll('.option').forEach((o, j) => o.classList.toggle('selected', selected.has(j)));
+        } else if (q.type === 'open') {
+          inputs[0].input.value = response == null ? '' : String(response);
         } else {
           (response || []).forEach((v, i) => {
             const it = inputs[i];
@@ -213,6 +229,7 @@
       getResponse() {
         if (q.type === 'choice') return selected;
         if (q.type === 'multi') return [...selected];
+        if (q.type === 'open') return inputs[0].get();
         return inputs.map(x => x.get());
       },
       mark(result) {
@@ -231,7 +248,19 @@
     };
   }
 
-  // opts: { sectionId, q, index, total, prevHref, nextHref }
+  // 听力：朗读按钮；不能朗读时直接给原文，保证题目还能做
+  function audioBox(audio) {
+    const box = el('div', 'q-audio');
+    const speech = root.Speech;
+    const can = !!(speech && speech.available());
+    box.innerHTML = can
+      ? `<button type="button" class="say say-big" aria-label="播放听力">🔊</button><span>点喇叭听，可以多听几遍</span>`
+      : `<p class="notice">这台设备暂时不能朗读，请直接读听力原文：</p><p class="q-script" lang="en">${escapeHtml(audio.text)}</p>`;
+    if (can) box.querySelector('button').addEventListener('click', () => speech.say(audio.text));
+    return box;
+  }
+
+  // opts: { sectionId, q, index, total, prevHref, nextHref, levelNames? }
   function mount(container, opts) {
     const { sectionId, q } = opts;
     container.innerHTML = '';
@@ -239,6 +268,7 @@
     const handle = renderQuestion(container, q, {
       index: opts.index,
       total: opts.total,
+      levelNames: opts.levelNames,
       onChange: clearFeedback,
       onSubmit: submit,
     });
@@ -272,7 +302,30 @@
       feedback.textContent = text;
     }
 
+    // 产出题：先写，再对照参考答案和自查要点自评；“符合要求”记为完成，不计答错次数
+    function submitOpen() {
+      const text = String(handle.getResponse() || '').trim();
+      if (!text) return setFeedback('info', '先写一句英文');
+      feedback.className = 'feedback info open-check';
+      feedback.innerHTML =
+        `<b>对照参考答案和要点，检查你写的句子：</b>` +
+        `<ul class="open-refs">${q.reference.map(x => `<li lang="en">${escapeHtml(x)}</li>`).join('')}</ul>` +
+        `<ol class="open-points">${q.checks.map(x => `<li>${renderText(x)}</li>`).join('')}</ol>` +
+        `<div class="open-actions"><button type="button" class="primary" data-ok="1">符合要求</button>` +
+        `<button type="button" class="secondary" data-ok="0">还要改改</button></div>`;
+      feedback.querySelectorAll('[data-ok]').forEach(btn => btn.addEventListener('click', () => {
+        if (btn.dataset.ok === '1') {
+          Progress.record(sectionId, q.id, true);
+          setFeedback('ok', '✓ 完成！这类题是自己检查，不算对错，写得越多越熟练。');
+        } else {
+          setFeedback('info', '对照要点改一改，再点“提交”检查一次。');
+        }
+        showState();
+      }));
+    }
+
     function submit() {
+      if (q.type === 'open') return submitOpen();
       const response = handle.getResponse();
       if (q.type === 'choice' && response === null) return setFeedback('info', '先选一个答案');
       if (q.type === 'multi' && !response.length) return setFeedback('info', '先选出答案');
@@ -300,6 +353,7 @@
     function answerSummary() {
       if (q.type === 'choice') return `${LETTERS[q.answer]}. ${renderText(q.options[q.answer])}`;
       if (q.type === 'multi') return [...q.answer].sort().map(i => LETTERS[i]).join('、');
+      if (q.type === 'open') return q.reference.map(escapeHtml).join(' / ') + '（参考答案，意思和语法对即可）';
       return q.blanks
         .map(b => (b.label ? renderText(b.label) + ' ' : '') + renderText(Answer.answerText(b)) + (b.suffix ? ' ' + renderText(b.suffix) : ''))
         .join('；');
@@ -309,11 +363,12 @@
       if (explain.hidden) {
         explain.innerHTML =
           `<div class="answer-line"><b>答案：</b>${answerSummary()}</div>` +
+          (q.audio ? `<div class="answer-line"><b>听力原文：</b><span lang="en">${escapeHtml(q.audio.text)}</span></div>` : '') +
           `<ol>${q.explain.map(s => `<li>${renderText(s)}</li>`).join('')}</ol>`;
         // 演示动画放在解析里：它会直接演示出答案
         if (q.demo) {
           const slot = el('div');
-          explain.querySelector('.answer-line').after(slot);
+          explain.querySelector('.answer-line:last-of-type').after(slot);
           Demos.mount(slot, q.demo);
         }
         explain.hidden = false;

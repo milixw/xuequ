@@ -461,7 +461,11 @@ Content.catalog = {
           name: '六年级上册',
           words: 'content/english/words/sh2022-g6s1.js',  // 单元词表（src/words.js），目前有 Unit 1
           chapters: [
-            { no: 1, title: 'School life（学校生活）', sections: [] },
+            { no: 1, title: 'School life（学校生活）', sections: [
+              { no: '1.1', title: 'School life — 学校生活 ----- 一般现在时', ready: true },
+              { no: '1.2', title: 'School life — 语法练习 ----- 一般现在时', ready: true },
+              { no: '1.3', title: 'School life — 语音与听力 ----- 字母 i 的读音、听关键词', ready: true },
+            ] },
             { no: 2, title: 'Family ties（家庭纽带）', sections: [] },
             { no: 3, title: 'Food（食物）', sections: [] },
             { no: 4, title: 'Sports（体育运动）', sections: [] },

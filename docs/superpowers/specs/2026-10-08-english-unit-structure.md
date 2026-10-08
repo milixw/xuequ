@@ -199,6 +199,8 @@ Words.volume({
 | 二 | 语法练习小节 `1.2`～`6.2`、`open` 题型、`knowledgeRefs` 与 `knowledge.js` 打通 | 每节约 15 题，教师审核清单 |
 | 三 | 语音与听力小节 `1.3`～`6.3`、题目 `audio` 字段 | 离线、无英文语音时有提示且能完成 |
 
+进度：2026-10-08 六上 Unit 1 先于分期把单词、1.1、1.2、1.3 全部做完，作为各册的样板；`.2` 的知识卡保留本节简短回顾，同时用 `knowledgeRefs` 链到错题库同类知识点（`knowledge.js` 只有 tense 这类大类，暂不细分）。
+
 每期完成后同步更新 `content/english/AGENTS.md`（新文件、格式、出题标准）、`docs/storage-and-routes.md`、`src/AGENTS.md`。
 
 ## 已确认事项（2026-10-08）

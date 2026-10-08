@@ -38,13 +38,18 @@
     return questions.reduce((n, q) => n + (PER_LEVEL[q.level] || 0), 0);
   }
 
+  // 英语产出题（open）靠自评，不放进限时测试
+  function gradable(section) {
+    return section.questions.filter(q => q.type !== 'open');
+  }
+
   function buildSession(sectionId, username, section) {
-    const total = totalSeconds(section.questions);
+    const total = totalSeconds(gradable(section));
     const now = Date.now();
     return {
       username,
       sectionId,
-      questions: section.questions.map(q => ({ qid: q.id, level: q.level })),
+      questions: gradable(section).map(q => ({ qid: q.id, level: q.level })),
       totalSeconds: total,
       startedAt: now,
       deadlineAt: now + total * 1000,
