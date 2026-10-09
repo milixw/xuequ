@@ -209,6 +209,13 @@
       shanghai.appendChild(link);
     }
     main.appendChild(shanghai);
+    const chinese = document.createElement('section');
+    chinese.innerHTML = '<h3 class="group">语文</h3>' +
+      '<a class="card" href="content/chinese/shanghai-junior-outline.html"><h2>语文考纲</h2>' +
+      '<p>查看上海初中语文考试范围、考点清单与复习方向</p></a>' +
+      '<a class="card" href="content/chinese/classical-words.html"><h2>语文实词虚词</h2>' +
+      '<p>阅读 180 个文言实词，查找词义和例句 · 虚词资料待补充</p></a>';
+    main.appendChild(chinese);
     const english = document.createElement('section');
     english.className = 'home-english';
     english.innerHTML = '<h3 class="group">英语</h3>';

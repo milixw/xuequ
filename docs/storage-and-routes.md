@@ -23,6 +23,10 @@
 
 ## 本地存储
 
+首页“语文考纲”链接到 `content/chinese/shanghai-junior-outline.html`，展示用户提供的归纳资料，可返回首页；不新增 hash 路由或存储键。
+
+首页“语文实词虚词”链接到独立离线页面 `content/chinese/classical-words.html`，实词展示资料正文并支持查找，虚词待补充；不展示 PDF 打开、下载入口和来源、页码、页数信息。原 PDF 为同目录 `classical-words.pdf`，供维护核对。不新增 hash 路由或存储键。
+
 所有键名都以 `xq.` 开头，读写都包在 try/catch 里。改结构时升版本号（`v1` → `v2`）并写迁移，不要直接改旧键的格式。
 
 | 键 | 位置 | 内容 |

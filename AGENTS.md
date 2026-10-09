@@ -32,6 +32,7 @@ Claude Code（`.claude/settings.json`）、Cursor（`.cursorignore`）、Gemini 
 | 英语错题库、七天计划、英语中考题 | `content/AGENTS.md` → `content/english/AGENTS.md` |
 | 上海语数物化中考原题（导入、补图、补答案） | `content/past-papers/AGENTS.md` |
 | 加新学科 | `docs/templates/subject-AGENTS.md`，再按 `content/AGENTS.md` 建目录和目录条目 |
+| 语文实词虚词资料入口 | `content/AGENTS.md` → `content/chinese/AGENTS.md`；首页代码另读 `src/AGENTS.md` |
 | 加新练习模式 / 新页面 | `docs/templates/new-mode-checklist.md`、`src/AGENTS.md`、`docs/storage-and-routes.md` |
 | 改应用代码、演示动画 | `src/AGENTS.md`；涉及路由或存储键再读 `docs/storage-and-routes.md` |
 | 趣味玩法、动手玩游戏 | `src/games/AGENTS.md`、`docs/games-backlog.md` |

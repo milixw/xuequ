@@ -15,6 +15,7 @@
   learning-accounts.test.js       账号/访客隔离、同页切换、旧页面拒绝写入、旧共享数据迁移与备份校验
   english-words.test.js           英语单词：词表格式、分盒升降与到期、认读词不拼写、“我认识”只进第 2 盒、每日队列上限、跨册共用进度、7 天模拟、kind en 判分、存储异常、页面接入
   home-subjects.test.js           首页原布局、英语三个入口与词汇例句的离线接入校验
+  chinese-reference.test.js       语文实词 180 条编号连续与完整性、原 PDF、离线搜索与脚本校验
   exam.test.js                    限时测试的计时、判分、会话存取
   function-track.test.js          函数轨道关卡校验
   solids.test.js                  立体图形实验室：展开图、圆柱圆锥展开、最短路径、截面、关卡数据

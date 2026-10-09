@@ -31,6 +31,9 @@
 
 ## 代码约定
 
+首页语文实词虚词入口链接到 `content/chinese/classical-words.html`，资料与原 PDF 放在 `content/chinese/`，无需首屏加载全文。
+首页语文考纲入口链接到 `content/chinese/shanghai-junior-outline.html`，为独立离线参考页。
+
 - 首屏只加载首页和常用页面要用的脚本；大体积数据（真题文字数据）不写进 `index.html`，在 `app.js` 的 `DATA_SCRIPTS` 里登记，进入对应页面时用 `<script>` 按需加载
 - 零构建、不引入框架。第三方库只能放在 `vendor/` 里本地加载，不走 CDN（国内访问 CDN 不稳定）
 - 内容文件（小节、真题卷）在浏览器里共用一个全局作用域，顶层的 `const`、`let`、`function` 名字要加小节号后缀（如 `S201`、`roots212`），否则后加载的文件报错不执行、页面显示“制作中”；`tests/content.test.js` 会把所有内容文件放进同一个上下文检查
