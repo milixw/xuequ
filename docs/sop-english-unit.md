@@ -1,6 +1,6 @@
 # 做一个英语单元的流程（SOP）
 
-维护者说“做英语 <册> Unit n”时，按本流程做完**单词 + `<n>.1` + `<n>.2` + `<n>.3`**，跑完检查后先报告、等审核，审核通过再提交。设计依据见 `docs/superpowers/specs/2026-10-08-english-unit-structure.md`，格式和出题标准见 `content/english/AGENTS.md`。六上 Unit 1～3 是样板（`content/english/sh2022/g6s1/`），写之前先看一个同类小节。
+维护者说“做英语 <册> Unit n”时，按本流程做完**单词 + `<n>.1` + `<n>.2` + `<n>.3`**，跑完检查后先报告、等审核，审核通过再提交。设计依据见 `docs/superpowers/specs/2026-10-08-english-unit-structure.md`，格式和出题标准见 `content/english/AGENTS.md`。六上 Unit 1～4 是样板（`content/english/sh2022/g6s1/`），写之前先看一个同类小节。
 
 ## 0. 准备课本资料（每册只做一次）
 
@@ -21,6 +21,7 @@ python3 scripts/textbook-text.py en:<册ID> <Sound file 起页> <Grammar file �
 
 1. `python3 scripts/import-english-words.py <册ID> --units <n> --dry` 先看导出结果：音标有没有没转换的字母（字体编码表在脚本的 PHONETIC 里，缺了就补上并同步课本资料文档）、释义是否通顺
 2. 去掉 `--dry` 写入；导出得不通顺的释义手动改，并加 `manual: true`（复导不覆盖）
+   - 同一册词头不能重复（记忆进度按词头共用）：前面单元已有的词，脚本会提示“跳过”，把新义手动并进前面那条的释义（如 `n. 联系；纽带；v. 打成平局`），加 `manual: true`
 3. `core` 默认取 `basic`：课本粗体词要会拼写，非粗体只认读
 4. 写 `forms` 和原创例句：`core` 且有常用变形的词 2 条（一条考原形、一条考变形），其余 1 条；变形优先选和本单元语法对应的形式（一般现在时选三单、进行时选 -ing、名词选复数）；例句贴近初中生生活，`[[...]]` 标挖空
 5. 再跑一次导入确认“缺例句 0”，`node tests/run.js` 通过

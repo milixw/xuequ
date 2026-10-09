@@ -195,8 +195,13 @@ def main():
             sys.exit(f'词表里没有 Unit {no}')
         prev = next((u for u in data['units'] if u['no'] == no), None)
         kept = {key(w['w']): w for w in (prev or {}).get('words', [])}
+        # 同一册词头不重复（记忆进度按词头共用）：前面单元已有的词跳过，新义手动并进原词条的释义
+        others = {key(w['w']): u['no'] for u in data['units'] if u['no'] < no for w in u['words']}
         words = []
         for w in units[no]:
+            if key(w['w']) in others:
+                print(f'跳过 {w["w"]}（{w["pos"]} {w["zh"]}）：Unit {others[key(w["w"])]} 已有，新义请手动并进那条释义')
+                continue
             old_w = kept.get(key(w['w']), {})
             merged = {**w, 'core': old_w.get('core', w['basic']), 'exam': key(w['w']) in exam}
             if old_w.get('manual'):

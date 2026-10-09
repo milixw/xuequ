@@ -19,7 +19,7 @@
   english/shanghai-junior-outline.html  由用户提供的上海初中英语学习大纲改成的离线页面；手机端目录可收起、宽表格可单独横向滑动
   english/shanghai-exam-vocabulary.html  用户提供的上海中考英语词汇总表，独立离线页面，首页英语单词入口打开；每条带 🔊 朗读（优先用设备英文语音，缺少时用有道在线读音）；单词行按词条加载例句，未覆盖的标记待补充
   english/vocabulary-examples.js   首批常用单词的原创双语例句，review.status 为 pending；不修改原词表与释义
-  english/words/<教材>-<册ID>.js    课本单元词表（Words.volume），目前六上 Unit 1；用 python3 scripts/import-english-words.py <册ID> --units <单元号> 从课本导出，在 catalog.js 对应册写 words 字段登记；词头、音标、词性、释义取自课本词汇表，例句 AI 原创（pending）。格式与例句条数规则见 docs/superpowers/specs/2026-10-08-english-unit-structure.md，tests/english-words.test.js 校验
+  english/words/<教材>-<册ID>.js    课本单元词表（Words.volume），目前六上 Unit 1～4；用 python3 scripts/import-english-words.py <册ID> --units <单元号> 从课本导出，在 catalog.js 对应册写 words 字段登记；词头、音标、词性、释义取自课本词汇表，例句 AI 原创（pending）。格式与例句条数规则见 docs/superpowers/specs/2026-10-08-english-unit-structure.md，tests/english-words.test.js 校验
   english/past-papers/catalog.js   上海历年中考原题文字数据，保留原资料题号、题干、选项、答案、解析及来源 SHA-256；目前部分导入，回忆版和缺失内容明确标注，review.status 为 pending
   english/past-papers/answer-supplements.json  上海原文件缺答案时经公开资料核对的补充表，仅供导入脚本使用；关联原文件 SHA-256，答案来源网址与核对日期写入 answerSource，待教师审核
   english/past-papers/jiangsu.js   江苏 13 城市原题文字数据，按 city / year 定位；资料无法可靠提取的年份标待补充，同篇阅读/完形在界面合并，原小题 ID 保持稳定
@@ -46,7 +46,7 @@
 
 ## 英语单元三节（六上起）
 
-每个 Unit 分三节，`tests/content.test.js` 按小节号末位校验：`<单元>.1` 阅读与语法入门（同八上：原创短文 + 知识卡 + 16 道选择题 5/6/5，`bankExamples` 可选）；`<单元>.2` 语法练习（无 `reading`，`levelNames: { basic: '辨认', extended: '运用', challenge: '产出' }`，辨认 5 道选择、运用 6～8 道 `fill` + `kind: 'en'`、产出 2～4 道 `open`，`knowledgeRefs` 指向 `knowledge.js` 的知识点 ID）；`<单元>.3` 语音与听力（8～12 题，至少 4 道带 `audio: { text }`，范围取自本单元 Sound 栏目和 Sound file）。`open` 题写 `reference`（至少 2 个参考答案）和 `checks`（至少 2 条自查要点），学生自评“符合要求”记为完成，不计答错，也不进限时测试。整句 `kind: 'en'` 答案至少列 2 种写法。写完用 `scripts/english-overlap-check.js` 对照课本导出文字，不能有连续 6 词重合。完整流程见 `docs/sop-english-unit.md`，六上 Unit 1～3 为样板。
+每个 Unit 分三节，`tests/content.test.js` 按小节号末位校验：`<单元>.1` 阅读与语法入门（同八上：原创短文 + 知识卡 + 16 道选择题 5/6/5，`bankExamples` 可选）；`<单元>.2` 语法练习（无 `reading`，`levelNames: { basic: '辨认', extended: '运用', challenge: '产出' }`，辨认 5 道选择、运用 6～8 道 `fill` + `kind: 'en'`、产出 2～4 道 `open`，`knowledgeRefs` 指向 `knowledge.js` 的知识点 ID）；`<单元>.3` 语音与听力（8～12 题，至少 4 道带 `audio: { text }`，范围取自本单元 Sound 栏目和 Sound file）。`open` 题写 `reference`（至少 2 个参考答案）和 `checks`（至少 2 条自查要点），学生自评“符合要求”记为完成，不计答错，也不进限时测试。整句 `kind: 'en'` 答案至少列 2 种写法。写完用 `scripts/english-overlap-check.js` 对照课本导出文字，不能有连续 6 词重合。完整流程见 `docs/sop-english-unit.md`，六上 Unit 1～4 为样板。
 
 ## 英语八上单元内容格式
 

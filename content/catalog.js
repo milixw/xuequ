@@ -459,7 +459,7 @@ Content.catalog = {
         volumes: [{
           id: 'g6s1',
           name: '六年级上册',
-          words: 'content/english/words/sh2022-g6s1.js',  // 单元词表（src/words.js），目前有 Unit 1
+          words: 'content/english/words/sh2022-g6s1.js',  // 单元词表（src/words.js），目前有 Unit 1～4
           chapters: [
             { no: 1, title: 'School life（学校生活）', sections: [
               { no: '1.1', title: 'School life — 学校生活 ----- 一般现在时', ready: true },
@@ -476,7 +476,11 @@ Content.catalog = {
               { no: '3.2', title: 'Food — 语法练习 ----- 可数名词与不可数名词', ready: true },
               { no: '3.3', title: 'Food — 语音与听力 ----- 字母 o、u 的读音、听数量', ready: true },
             ] },
-            { no: 4, title: 'Sports（体育运动）', sections: [] },
+            { no: 4, title: 'Sports（体育运动）', sections: [
+              { no: '4.1', title: 'Sports — 体育运动 ----- 疑问词 what、who', ready: true },
+              { no: '4.2', title: 'Sports — 语法练习 ----- 疑问词 what、who 与频度副词', ready: true },
+              { no: '4.3', title: 'Sports — 语音与听力 ----- 字母组合 ei、ea、ee 的读音、听运动与频率', ready: true },
+            ] },
             { no: 5, title: 'Animals and us（动物与我们）', sections: [] },
             { no: 6, title: 'Travelling around China（游中国）', sections: [] },
           ],

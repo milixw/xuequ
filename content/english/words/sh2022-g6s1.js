@@ -765,11 +765,12 @@ Words.volume({
           "w": "tie",
           "ipa": "/taɪ/",
           "pos": "n.",
-          "zh": "联系；关系；纽带",
+          "zh": "n. 联系；关系；纽带；v.（比赛或竞争中）得分相同",
           "page": 26,
           "basic": true,
           "core": true,
           "exam": true,
+          "manual": true,
           "forms": [
             "ties"
           ],
@@ -2671,6 +2672,1136 @@ Words.volume({
             {
               "en": "The waiter brings us two [[menus]].",
               "zh": "服务员给我们拿来两份菜单。"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "no": 4,
+      "title": "Sports",
+      "words": [
+        {
+          "w": "date",
+          "ipa": "/deɪt/",
+          "pos": "n.",
+          "zh": "日期；日子",
+          "page": 56,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "dates"
+          ],
+          "ex": [
+            {
+              "en": "What is the [[date]] today?",
+              "zh": "今天几月几号？"
+            },
+            {
+              "en": "Please write down the [[dates]] of the two matches.",
+              "zh": "请记下这两场比赛的日期。"
+            }
+          ]
+        },
+        {
+          "w": "ground",
+          "ipa": "/ɡraʊnd/",
+          "pos": "n.",
+          "zh": "（特定用途的）场地；地面",
+          "page": 56,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "ex": [
+            {
+              "en": "My little brother sits on the [[ground]] and plays with sand.",
+              "zh": "我弟弟坐在地上玩沙子。"
+            }
+          ]
+        },
+        {
+          "w": "sports ground",
+          "ipa": "",
+          "pos": "",
+          "zh": "运动场；操场",
+          "page": 56,
+          "basic": false,
+          "core": false,
+          "exam": false,
+          "ex": [
+            {
+              "en": "Our [[sports ground]] is big enough for a football match.",
+              "zh": "我们的运动场足够大，可以踢一场足球赛。"
+            }
+          ]
+        },
+        {
+          "w": "gym",
+          "ipa": "/dʒɪm/",
+          "pos": "n.",
+          "zh": "健身房；体育馆",
+          "page": 56,
+          "basic": true,
+          "note": "(= gymnasium)",
+          "core": true,
+          "exam": false,
+          "forms": [
+            "gyms"
+          ],
+          "ex": [
+            {
+              "en": "We play badminton in the [[gym]] on rainy days.",
+              "zh": "下雨天我们在体育馆里打羽毛球。"
+            },
+            {
+              "en": "Both [[gyms]] in our town open at seven in the morning.",
+              "zh": "我们镇上的两家健身房都在早上七点开门。"
+            }
+          ]
+        },
+        {
+          "w": "team",
+          "ipa": "/tiːm/",
+          "pos": "n.",
+          "zh": "（游戏或运动的）队",
+          "page": 56,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "teams"
+          ],
+          "ex": [
+            {
+              "en": "Tom is in the school basketball [[team]].",
+              "zh": "汤姆是校篮球队的队员。"
+            },
+            {
+              "en": "Eight [[teams]] are in the volleyball match this year.",
+              "zh": "今年有八支队伍参加排球比赛。"
+            }
+          ]
+        },
+        {
+          "w": "high",
+          "ipa": "/haɪ/",
+          "pos": "adj.",
+          "zh": "高的",
+          "page": 56,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "ex": [
+            {
+              "en": "The wall is too [[high]] for the little cat.",
+              "zh": "这堵墙对小猫来说太高了。"
+            }
+          ]
+        },
+        {
+          "w": "rope",
+          "ipa": "/rəʊp/",
+          "pos": "n.",
+          "zh": "绳",
+          "page": 56,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "ropes"
+          ],
+          "ex": [
+            {
+              "en": "Can you skip [[rope]] for one minute without stopping?",
+              "zh": "你能不停地跳绳一分钟吗？"
+            },
+            {
+              "en": "We need two long [[ropes]] for tug of war.",
+              "zh": "拔河比赛我们需要两根长绳。"
+            }
+          ]
+        },
+        {
+          "w": "kick",
+          "ipa": "/kɪk/",
+          "pos": "v.",
+          "zh": "踢",
+          "page": 56,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "kicks"
+          ],
+          "ex": [
+            {
+              "en": "Don't [[kick]] the ball near the windows!",
+              "zh": "别在窗户附近踢球！"
+            },
+            {
+              "en": "My sister [[kicks]] the shuttlecock very well.",
+              "zh": "我妹妹踢毽子踢得很好。"
+            }
+          ]
+        },
+        {
+          "w": "rock",
+          "ipa": "/rɒk/",
+          "pos": "n.",
+          "zh": "岩石",
+          "page": 56,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "rocks"
+          ],
+          "ex": [
+            {
+              "en": "The boy sits on a big [[rock]] by the river.",
+              "zh": "男孩坐在河边的一块大石头上。"
+            },
+            {
+              "en": "There are many small [[rocks]] on the beach.",
+              "zh": "海滩上有许多小石头。"
+            }
+          ]
+        },
+        {
+          "w": "climb",
+          "ipa": "/klaɪm/",
+          "pos": "v.",
+          "zh": "攀登；爬",
+          "page": 56,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "climbs"
+          ],
+          "ex": [
+            {
+              "en": "Let's [[climb]] the hill this Sunday.",
+              "zh": "这个星期天我们去爬山吧。"
+            },
+            {
+              "en": "My cat often [[climbs]] up the tree in our garden.",
+              "zh": "我的猫经常爬上我们花园里的那棵树。"
+            }
+          ]
+        },
+        {
+          "w": "rock climbing",
+          "ipa": "",
+          "pos": "",
+          "zh": "攀岩",
+          "page": 56,
+          "basic": false,
+          "core": false,
+          "exam": false,
+          "ex": [
+            {
+              "en": "My uncle goes [[rock climbing]] every summer.",
+              "zh": "我叔叔每年夏天都去攀岩。"
+            }
+          ]
+        },
+        {
+          "w": "kung fu",
+          "ipa": "/ˌkʌŋ ˈfuː/",
+          "pos": "n.",
+          "zh": "功夫（中国拳术）",
+          "page": 56,
+          "basic": true,
+          "core": true,
+          "exam": false,
+          "ex": [
+            {
+              "en": "Grandpa practises [[kung fu]] in the park every morning.",
+              "zh": "爷爷每天早上在公园里练功夫。"
+            }
+          ]
+        },
+        {
+          "w": "active",
+          "ipa": "/ˈæktɪv/",
+          "pos": "adj.",
+          "zh": "活跃的；充满活力的；积极的",
+          "page": 56,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "ex": [
+            {
+              "en": "Little kids are very [[active]] and never sit still.",
+              "zh": "小孩子很活跃，从来坐不住。"
+            }
+          ]
+        },
+        {
+          "w": "part",
+          "ipa": "/pɑːt/",
+          "pos": "n.",
+          "zh": "部分",
+          "page": 57,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "parts"
+          ],
+          "ex": [
+            {
+              "en": "Sports are an important [[part]] of my life.",
+              "zh": "运动是我生活中重要的一部分。"
+            },
+            {
+              "en": "The story has three [[parts]].",
+              "zh": "这个故事分三部分。"
+            }
+          ]
+        },
+        {
+          "w": "take part in",
+          "ipa": "",
+          "pos": "",
+          "zh": "参加",
+          "page": 57,
+          "basic": false,
+          "core": false,
+          "exam": true,
+          "ex": [
+            {
+              "en": "Who wants to [[take part in]] the singing contest?",
+              "zh": "谁想参加歌唱比赛？"
+            }
+          ]
+        },
+        {
+          "w": "baseball",
+          "ipa": "/ˈbeɪsbɔːl/",
+          "pos": "n.",
+          "zh": "棒球运动",
+          "page": 57,
+          "basic": true,
+          "core": true,
+          "exam": false,
+          "ex": [
+            {
+              "en": "[[Baseball]] is very popular in Japan.",
+              "zh": "棒球在日本很受欢迎。"
+            }
+          ]
+        },
+        {
+          "w": "volleyball",
+          "ipa": "/ˈvɒlibɔːl/",
+          "pos": "n.",
+          "zh": "排球；排球运动",
+          "page": 57,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "ex": [
+            {
+              "en": "The girls play [[volleyball]] on the beach.",
+              "zh": "女孩们在沙滩上打排球。"
+            }
+          ]
+        },
+        {
+          "w": "badminton",
+          "ipa": "/ˈbædmɪntən/",
+          "pos": "n.",
+          "zh": "羽毛球运动",
+          "page": 57,
+          "basic": true,
+          "core": true,
+          "exam": false,
+          "ex": [
+            {
+              "en": "Let's play [[badminton]] after school.",
+              "zh": "放学后我们去打羽毛球吧。"
+            }
+          ]
+        },
+        {
+          "w": "tennis",
+          "ipa": "/ˈtenɪs/",
+          "pos": "n.",
+          "zh": "网球",
+          "page": 57,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "ex": [
+            {
+              "en": "You need a racket and a ball to play [[tennis]].",
+              "zh": "打网球需要一个球拍和一个球。"
+            }
+          ]
+        },
+        {
+          "w": "pull",
+          "ipa": "/pʊl/",
+          "pos": "v.",
+          "zh": "拉；拔出",
+          "page": 57,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "pulls"
+          ],
+          "ex": [
+            {
+              "en": "[[Pull]] the door. Don't push it.",
+              "zh": "拉门，别推。"
+            },
+            {
+              "en": "Our dog always [[pulls]] me along the street.",
+              "zh": "我们的狗总是拉着我在街上走。"
+            }
+          ]
+        },
+        {
+          "w": "jog",
+          "ipa": "/dʒɒɡ/",
+          "pos": "v.",
+          "zh": "慢跑",
+          "page": 57,
+          "basic": true,
+          "core": true,
+          "exam": false,
+          "forms": [
+            "jogs"
+          ],
+          "ex": [
+            {
+              "en": "I [[jog]] around the lake with my mum.",
+              "zh": "我和妈妈绕着湖慢跑。"
+            },
+            {
+              "en": "Grandpa [[jogs]] for half an hour every morning.",
+              "zh": "爷爷每天早上慢跑半小时。"
+            }
+          ]
+        },
+        {
+          "w": "safety",
+          "ipa": "/ˈseɪfti/",
+          "pos": "n.",
+          "zh": "安全；平安",
+          "page": 58,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "ex": [
+            {
+              "en": "[[Safety]] comes first when we swim.",
+              "zh": "游泳时安全第一。"
+            }
+          ]
+        },
+        {
+          "w": "ankle",
+          "ipa": "/ˈæŋkl/",
+          "pos": "n.",
+          "zh": "踝；踝关节",
+          "page": 58,
+          "basic": false,
+          "core": false,
+          "exam": false,
+          "ex": [
+            {
+              "en": "Be careful, or you may hurt your [[ankle]].",
+              "zh": "小心点，不然你可能会伤到脚踝。"
+            }
+          ]
+        },
+        {
+          "w": "match",
+          "ipa": "/mætʃ/",
+          "pos": "n.",
+          "zh": "比赛",
+          "page": 58,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "matches"
+          ],
+          "ex": [
+            {
+              "en": "Our class wins the football [[match]].",
+              "zh": "我们班赢了足球比赛。"
+            },
+            {
+              "en": "Dad watches basketball [[matches]] on TV at weekends.",
+              "zh": "爸爸周末在电视上看篮球比赛。"
+            }
+          ]
+        },
+        {
+          "w": "gear",
+          "ipa": "/ɡɪə(r)/",
+          "pos": "n.",
+          "zh": "（某种活动的）设备，用具，衣服",
+          "page": 58,
+          "basic": false,
+          "core": false,
+          "exam": false,
+          "manual": true,
+          "ex": [
+            {
+              "en": "Don't forget your swimming [[gear]].",
+              "zh": "别忘了带你的游泳用具。"
+            }
+          ]
+        },
+        {
+          "w": "example",
+          "ipa": "/ɪɡˈzɑːmpl/",
+          "pos": "n.",
+          "zh": "例子；实例",
+          "page": 58,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "examples"
+          ],
+          "ex": [
+            {
+              "en": "Can you give me an [[example]]?",
+              "zh": "你能给我举个例子吗？"
+            },
+            {
+              "en": "The teacher writes three [[examples]] on the blackboard.",
+              "zh": "老师在黑板上写了三个例子。"
+            }
+          ]
+        },
+        {
+          "w": "for example",
+          "ipa": "",
+          "pos": "",
+          "zh": "例如",
+          "page": 58,
+          "basic": false,
+          "core": false,
+          "exam": true,
+          "ex": [
+            {
+              "en": "I like many sports, [[for example]], swimming and running.",
+              "zh": "我喜欢很多运动，例如游泳和跑步。"
+            }
+          ]
+        },
+        {
+          "w": "warm up",
+          "ipa": "",
+          "pos": "",
+          "zh": "（为体育活动或表演）做适应性练习，做准备活动；热身",
+          "page": 58,
+          "basic": false,
+          "core": false,
+          "exam": false,
+          "ex": [
+            {
+              "en": "Let's [[warm up]] before we run.",
+              "zh": "我们跑步前先热热身吧。"
+            }
+          ]
+        },
+        {
+          "w": "watch out",
+          "ipa": "",
+          "pos": "",
+          "zh": "小心；留神；注意",
+          "page": 58,
+          "basic": false,
+          "core": false,
+          "exam": false,
+          "ex": [
+            {
+              "en": "[[Watch out]]! A bike is coming.",
+              "zh": "小心！有辆自行车过来了。"
+            }
+          ]
+        },
+        {
+          "w": "matter",
+          "ipa": "/ˈmætə(r)/",
+          "pos": "n.",
+          "zh": "问题；事情",
+          "page": 59,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "ex": [
+            {
+              "en": "Is something the [[matter]]? You look sad.",
+              "zh": "出什么事了吗？你看起来很难过。"
+            }
+          ]
+        },
+        {
+          "w": "What’s the matter?",
+          "ipa": "",
+          "pos": "",
+          "zh": "怎么了？",
+          "page": 59,
+          "basic": false,
+          "core": false,
+          "exam": false,
+          "ex": [
+            {
+              "en": "— [[What’s the matter?]] — I have a headache.",
+              "zh": "——怎么了？——我头疼。"
+            }
+          ]
+        },
+        {
+          "w": "happen",
+          "ipa": "/ˈhæpən/",
+          "pos": "v.",
+          "zh": "发生",
+          "page": 59,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "happens"
+          ],
+          "ex": [
+            {
+              "en": "Accidents can [[happen]] if you don't warm up.",
+              "zh": "如果不热身，就可能发生意外。"
+            },
+            {
+              "en": "What [[happens]] if it rains on Sports Day?",
+              "zh": "如果运动会那天下雨，会怎么样？"
+            }
+          ]
+        },
+        {
+          "w": "just",
+          "ipa": "/dʒʌst/",
+          "pos": "adv.",
+          "zh": "仅仅是；只是",
+          "page": 59,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "ex": [
+            {
+              "en": "It's [[just]] a game. Don't be sad.",
+              "zh": "这只是一场比赛，别难过。"
+            }
+          ]
+        },
+        {
+          "w": "fall",
+          "ipa": "/fɔːl/",
+          "pos": "v.",
+          "zh": "突然倒下；跌倒",
+          "page": 59,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "falls"
+          ],
+          "ex": [
+            {
+              "en": "Hold the rope, or you may [[fall]].",
+              "zh": "抓住绳子，不然你可能会摔倒。"
+            },
+            {
+              "en": "My little brother often [[falls]] when he runs too fast.",
+              "zh": "我弟弟跑得太快时经常摔跤。"
+            }
+          ]
+        },
+        {
+          "w": "guess",
+          "ipa": "/ɡes/",
+          "pos": "v.",
+          "zh": "猜测；估计",
+          "page": 59,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "guesses"
+          ],
+          "ex": [
+            {
+              "en": "Can you [[guess]] who the winner is?",
+              "zh": "你能猜出谁是获胜者吗？"
+            },
+            {
+              "en": "Mia always [[guesses]] the answers right.",
+              "zh": "米娅总是能猜对答案。"
+            }
+          ]
+        },
+        {
+          "w": "knee",
+          "ipa": "/niː/",
+          "pos": "n.",
+          "zh": "膝盖",
+          "page": 59,
+          "basic": true,
+          "core": true,
+          "exam": false,
+          "forms": [
+            "knees"
+          ],
+          "ex": [
+            {
+              "en": "I hurt my [[knee]] in the race.",
+              "zh": "我在赛跑中伤了膝盖。"
+            },
+            {
+              "en": "Bend your [[knees]] when you jump.",
+              "zh": "跳的时候要弯曲膝盖。"
+            }
+          ]
+        },
+        {
+          "w": "How come?",
+          "ipa": "",
+          "pos": "",
+          "zh": "怎么回事？怎么发生的？",
+          "page": 59,
+          "basic": false,
+          "core": false,
+          "exam": false,
+          "ex": [
+            {
+              "en": "— I can't come to the match. — [[How come?]]",
+              "zh": "——我来不了比赛了。——怎么回事？"
+            }
+          ]
+        },
+        {
+          "w": "seem",
+          "ipa": "/siːm/",
+          "pos": "v.",
+          "zh": "好像；似乎；看来",
+          "page": 59,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "seems"
+          ],
+          "ex": [
+            {
+              "en": "You [[seem]] tired today.",
+              "zh": "你今天好像很累。"
+            },
+            {
+              "en": "The new coach [[seems]] very kind.",
+              "zh": "新教练似乎很和善。"
+            }
+          ]
+        },
+        {
+          "w": "problem",
+          "ipa": "/ˈprɒbləm/",
+          "pos": "n.",
+          "zh": "棘手的问题；难题；困难",
+          "page": 59,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "problems"
+          ],
+          "ex": [
+            {
+              "en": "What's the [[problem]] with your bike?",
+              "zh": "你的自行车出什么问题了？"
+            },
+            {
+              "en": "We can solve these [[problems]] together.",
+              "zh": "我们可以一起解决这些难题。"
+            }
+          ]
+        },
+        {
+          "w": "score",
+          "ipa": "/skɔː(r)/",
+          "pos": "v.",
+          "zh": "得（分）；进（球）",
+          "page": 60,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "scores"
+          ],
+          "ex": [
+            {
+              "en": "Who can [[score]] the first goal?",
+              "zh": "谁能踢进第一个球？"
+            },
+            {
+              "en": "Lily often [[scores]] for our team.",
+              "zh": "莉莉经常为我们队得分。"
+            }
+          ]
+        },
+        {
+          "w": "goal",
+          "ipa": "/ɡəʊl/",
+          "pos": "n.",
+          "zh": "进球得的分；球门；目标",
+          "page": 60,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "goals"
+          ],
+          "ex": [
+            {
+              "en": "Our team needs one more [[goal]] to win.",
+              "zh": "我们队再进一个球就能赢。"
+            },
+            {
+              "en": "We win the match by two [[goals]].",
+              "zh": "我们以两球的优势赢得比赛。"
+            }
+          ]
+        },
+        {
+          "w": "goalkeeper",
+          "ipa": "/ˈɡəʊlkiːpə(r)/",
+          "pos": "n.",
+          "zh": "守门员",
+          "page": 60,
+          "basic": false,
+          "core": false,
+          "exam": false,
+          "ex": [
+            {
+              "en": "The [[goalkeeper]] catches the ball with both hands.",
+              "zh": "守门员用双手接住了球。"
+            }
+          ]
+        },
+        {
+          "w": "hold",
+          "ipa": "/həʊld/",
+          "pos": "v.",
+          "zh": "使……保持在某位置；拿着；抓住",
+          "page": 60,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "holds"
+          ],
+          "ex": [
+            {
+              "en": "Please [[hold]] my bag for a minute.",
+              "zh": "请帮我拿一会儿包。"
+            },
+            {
+              "en": "Dad [[holds]] the baby in his arms.",
+              "zh": "爸爸把婴儿抱在怀里。"
+            }
+          ]
+        },
+        {
+          "w": "throw",
+          "ipa": "/θrəʊ/",
+          "pos": "v.",
+          "zh": "投；抛；掷",
+          "page": 60,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "throws"
+          ],
+          "ex": [
+            {
+              "en": "[[Throw]] the ball to me!",
+              "zh": "把球扔给我！"
+            },
+            {
+              "en": "Sam [[throws]] the ball over the wall.",
+              "zh": "萨姆把球扔过了墙。"
+            }
+          ]
+        },
+        {
+          "w": "point",
+          "ipa": "/pɔɪnt/",
+          "pos": "n.",
+          "zh": "得分；点",
+          "page": 60,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "points"
+          ],
+          "ex": [
+            {
+              "en": "Each right answer gets one [[point]].",
+              "zh": "每答对一题得一分。"
+            },
+            {
+              "en": "Our team gets ten [[points]] in the first half.",
+              "zh": "我们队上半场得了十分。"
+            }
+          ]
+        },
+        {
+          "w": "control",
+          "ipa": "/kənˈtrəʊl/",
+          "pos": "v. & n.",
+          "zh": "控制；管理",
+          "page": 60,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "controls"
+          ],
+          "ex": [
+            {
+              "en": "You need to [[control]] the ball with your feet.",
+              "zh": "你得用脚控制住球。"
+            },
+            {
+              "en": "This button [[controls]] the light.",
+              "zh": "这个按钮控制电灯。"
+            }
+          ]
+        },
+        {
+          "w": "mind",
+          "ipa": "/maɪnd/",
+          "pos": "n. & v.",
+          "zh": "n. 头脑；心智；v. 当心；注意",
+          "page": 60,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "ex": [
+            {
+              "en": "Reading is good for the [[mind]].",
+              "zh": "阅读对头脑有好处。"
+            }
+          ]
+        },
+        {
+          "w": "powerful",
+          "ipa": "/ˈpaʊəfl/",
+          "pos": "adj.",
+          "zh": "强有力的",
+          "page": 60,
+          "basic": false,
+          "core": false,
+          "exam": true,
+          "ex": [
+            {
+              "en": "The tiger is a [[powerful]] animal.",
+              "zh": "老虎是一种强壮有力的动物。"
+            }
+          ]
+        },
+        {
+          "w": "style",
+          "ipa": "/staɪl/",
+          "pos": "n.",
+          "zh": "风格；样式",
+          "page": 60,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "styles"
+          ],
+          "ex": [
+            {
+              "en": "I like the [[style]] of your new sports shoes.",
+              "zh": "我喜欢你新运动鞋的样式。"
+            },
+            {
+              "en": "My cousin can swim in three different [[styles]].",
+              "zh": "我表哥会三种不同的泳姿。"
+            }
+          ]
+        },
+        {
+          "w": "moment",
+          "ipa": "/ˈməʊmənt/",
+          "pos": "n.",
+          "zh": "片刻；瞬间",
+          "page": 64,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "moments"
+          ],
+          "ex": [
+            {
+              "en": "Wait a [[moment]], please.",
+              "zh": "请稍等一会儿。"
+            },
+            {
+              "en": "These photos show our happy [[moments]] at school.",
+              "zh": "这些照片记录了我们在学校的快乐时刻。"
+            }
+          ]
+        },
+        {
+          "w": "report",
+          "ipa": "/rɪˈpɔːt/",
+          "pos": "v. & n.",
+          "zh": "汇报；报告；报道",
+          "page": 64,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "reports"
+          ],
+          "ex": [
+            {
+              "en": "Who wants to [[report]] the class news?",
+              "zh": "谁想报道班级新闻？"
+            },
+            {
+              "en": "Lucy often [[reports]] on football games for our class.",
+              "zh": "露西经常为我们班报道足球比赛。"
+            }
+          ]
+        },
+        {
+          "w": "newspaper",
+          "ipa": "/ˈnjuːzpeɪpə(r)/",
+          "pos": "n.",
+          "zh": "报纸",
+          "page": 64,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "newspapers"
+          ],
+          "ex": [
+            {
+              "en": "Grandpa reads the [[newspaper]] after breakfast.",
+              "zh": "爷爷早饭后看报纸。"
+            },
+            {
+              "en": "The little shop sells [[newspapers]] and magazines.",
+              "zh": "那家小店卖报纸和杂志。"
+            }
+          ]
+        },
+        {
+          "w": "court",
+          "ipa": "/kɔːt/",
+          "pos": "n.",
+          "zh": "球场",
+          "page": 64,
+          "basic": false,
+          "core": false,
+          "exam": false,
+          "ex": [
+            {
+              "en": "The children are playing on the tennis [[court]].",
+              "zh": "孩子们正在网球场上玩。"
+            }
+          ]
+        },
+        {
+          "w": "against",
+          "ipa": "/əˈɡenst/",
+          "pos": "prep.",
+          "zh": "与……对阵；与……相反；反对",
+          "page": 64,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "ex": [
+            {
+              "en": "Our class plays [[against]] Class 2 on Friday.",
+              "zh": "星期五我们班对阵二班。"
+            }
+          ]
+        },
+        {
+          "w": "shoot",
+          "ipa": "/ʃuːt/",
+          "pos": "v.",
+          "zh": "射门；投篮",
+          "page": 64,
+          "basic": true,
+          "core": true,
+          "exam": false,
+          "forms": [
+            "shoots"
+          ],
+          "ex": [
+            {
+              "en": "[[Shoot]] the ball now!",
+              "zh": "现在投篮！"
+            },
+            {
+              "en": "He [[shoots]] from far away and scores!",
+              "zh": "他远距离投篮，得分了！"
+            }
+          ]
+        },
+        {
+          "w": "basket",
+          "ipa": "/ˈbɑːskɪt/",
+          "pos": "n.",
+          "zh": "（篮球运动的）篮；筐",
+          "page": 64,
+          "basic": true,
+          "core": true,
+          "exam": true,
+          "forms": [
+            "baskets"
+          ],
+          "ex": [
+            {
+              "en": "The ball goes right into the [[basket]].",
+              "zh": "球正好进了篮筐。"
+            },
+            {
+              "en": "Grandma carries two [[baskets]] of eggs.",
+              "zh": "奶奶提着两筐鸡蛋。"
+            }
+          ]
+        },
+        {
+          "w": "track",
+          "ipa": "/træk/",
+          "pos": "n.",
+          "zh": "（赛跑、赛车等的）跑道",
+          "page": 65,
+          "basic": false,
+          "core": false,
+          "exam": false,
+          "ex": [
+            {
+              "en": "We run on the [[track]] in PE class.",
+              "zh": "我们体育课在跑道上跑步。"
             }
           ]
         }
