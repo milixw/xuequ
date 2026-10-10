@@ -30,24 +30,25 @@ function setup(year, data = catalog, city) {
   return { main, context, values, nodes: main.all() };
 }
 
-test('中考题按年份保存文字原题，不用图片和 Word 链接代替题目', () => {
+test('上海原题优先文字，仅必要原图保留且不以原件链接代替题目', () => {
   const years = exams.papers(catalog).map(p => p.year);
   assert(JSON.stringify(years) === JSON.stringify([2026, 2025, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013]));
-  assert(catalog.papers.reduce((n, p) => n + p.questions.length, 0) === 253);
+  assert(catalog.papers.reduce((n, p) => n + p.questions.length, 0) === 715);
   const ids = new Set();
   for (const paper of catalog.papers) {
     assert(paper.review.status === 'pending');
     assert(!paper.resources, '不再展示原文件资源包');
     if (paper.source) assert(/^[a-f0-9]{64}$/.test(paper.source.sha256));
     for (const q of paper.questions) {
-      assert(q.id === `sh${paper.year}-q${String(q.originalNo).padStart(2, '0')}`);
+      const prefix = paper.year === 2019 && q.part === 'listening' ? 'sh2019-listening' : `sh${paper.year}`;
+      assert(q.id === `${prefix}-q${String(q.originalNo).padStart(2, '0')}`);
       assert(!ids.has(q.id)); ids.add(q.id);
       assert((q.stem.trim() || q.category === '完形填空' && q.passage) && q.review.status === 'pending');
       assert(!q.stem.includes('【答案】') && !q.stem.includes('[[image]]'));
       assert(!/[\x00-\x08\x0b\x0c\x0e-\x1f\ufffd]/.test(q.stem));
       if (q.type === 'choice') {
-        assert(q.options.length === 4 && q.options.every(o => o.trim()));
-        assert(q.answer === null || /^[A-D]$/.test(q.answer));
+        assert(q.options.length === (q.optionLabels === 'TF' ? 2 : 4) && q.options.every(o => o.trim()));
+        assert(q.answer === null || (q.optionLabels === 'TF' ? /^[TF]$/ : /^[A-D]$/).test(q.answer));
         assert(q.options.every(o => !o.includes('【答案】') && !o.includes('[[image]]')));
       }
       if (q.category === '阅读理解' || q.category === '完形填空') assert(q.passage && !q.passage.includes('[[image]]'));
@@ -55,18 +56,71 @@ test('中考题按年份保存文字原题，不用图片和 Word 链接代替�
     if (paper.audio) assert(fs.existsSync(path.join(root, paper.audio)));
   }
   const renderer = read('src/english-exams.js');
-  assert(!renderer.includes("node('img')") && !renderer.includes("node('object')"));
+  assert(!renderer.includes("node('object')"));
   assert(!renderer.includes('fetch(') && !renderer.includes('innerHTML'));
 });
 
 test('缺失年份和回忆版如实标注，不根据答案造原题', () => {
   assert(catalog.missingYears.join(',') === '2021,2022,2023,2024');
-  assert(exams.find(catalog, 2025).questions.length === 0);
+  assert(exams.find(catalog, 2025).questions.every(q => q.part === 'listening'));
   assert(exams.find(catalog, 2026).version.includes('非官方'));
-  assert(exams.find(catalog, 2018).questions.every(q => q.answerSource.kind === 'public-supplement'));
+  assert(exams.find(catalog, 2018).questions.filter(q => !q.completionSource).every(q => q.answerSource.kind === 'public-supplement'));
   const page = setup(2025);
-  assert(page.main.textContent.includes('题干资料待补充'));
-  assert(!page.nodes.some(n => n.tag === 'form'));
+  assert(page.main.textContent.includes('缺选项图片、笔试题干'));
+  assert(page.nodes.filter(n => n.tag === 'form').length === 5);
+});
+
+test('历史笔试69项连续覆盖，253个原有题目及答案逐字保持', () => {
+  const crypto = require('crypto');
+  const originals = catalog.papers.flatMap(p => p.questions).filter(q => !q.completionSource).sort((a, b) => a.id.localeCompare(b.id));
+  assert(crypto.createHash('sha256').update(JSON.stringify(originals)).digest('hex') === 'db7fcd985d7443200c29664c5c1742e05f010ad4c566d3f4bdcba095f79afdd6');
+  for (let year = 2013; year <= 2020; year++) {
+    const paper = exams.find(catalog, year), written = paper.questions.filter(q => q.part !== 'listening');
+    const start = year === 2013 ? 31 : year === 2019 ? 1 : 26;
+    assert(written.length === 69 && paper.coverage.writtenIncluded === 69);
+    assert(written.every((q, i) => q.originalNo === start + i), String(year));
+    for (const category of ['语法与词汇', '选词填空', '词性转换', '句型转换', '阅读理解', '完形填空', '首字母填空', '阅读简答', '作文']) {
+      assert(written.some(q => q.category === category), year + category);
+    }
+  }
+});
+
+test('462条补充与来源清单一致，配图绑定本地文件及哈希且无答案污染', () => {
+  const crypto = require('crypto'), records = JSON.parse(read('content/english/past-papers/completion-transcripts.json'));
+  let total = 0; const images = new Set();
+  for (const entry of records.papers) {
+    const paper = exams.find(catalog, entry.year);
+    for (const source of entry.sources) assert(/^[a-f0-9]{64}$/.test(source.sha256));
+    for (const item of entry.questions) {
+      const q = paper.questions.find(q => q.id === item.id); total++;
+      assert(q && q.completionSource.sourceSha256 === entry.sources[0].sha256);
+      const { completionSource, ...body } = q;
+      assert(JSON.stringify(body) === JSON.stringify(item), q.id);
+      assert(!/【(?:答案|分析|解答|解析)】|HYPERLINK|\[\[image\]\]/.test(q.stem + (q.passage || '')), q.id);
+      for (const field of ['stemImages', 'passageImages', 'answerImages']) for (const fig of q[field] || []) {
+        assert(/^content\/english\/past-papers\/\d{4}\/[\w.-]+\.png$/.test(fig.src));
+        assert(crypto.createHash('sha256').update(fs.readFileSync(path.join(root, fig.src))).digest('hex') === fig.sha256);
+        images.add(fig.src);
+      }
+    }
+  }
+  assert(total === 462 && images.size === 8);
+  assert(!exams.find(catalog, 2026).questions.some(q => q.originalNo >= 21 && q.originalNo <= 35));
+  assert(exams.find(catalog, 2026).coverage.gaps.some(g => g.includes('重组推测')));
+});
+
+test('主观题支持长作答并人工核对，不按参考措辞计错，原图可离线放大', () => {
+  const q = { id: 'open-test', originalNo: 1, type: 'open', category: '阅读简答', stem: 'Explain.', answer: 'One possible answer.',
+    stemImages: [{ src: 'content/english/past-papers/2013/image3.png', label: '选项图' }], listeningText: 'Hidden source transcript.' };
+  const page = setup(2000, { papers: [{ year: 2000, questions: [q], note: '', version: '测试' }] });
+  const form = page.nodes.find(n => n.tag === 'form'), input = page.nodes.find(n => n.tag === 'textarea');
+  input.value = 'Another reasonable answer.'; input.events.input(); form.events.submit({ preventDefault() {} });
+  assert(exams.check(q, input.value) === null);
+  assert(!page.context.Progress.get('english-exam:2000', q.id));
+  assert(page.main.textContent.includes('请对照参考答案核对'));
+  const img = page.nodes.find(n => n.tag === 'img');
+  assert(img.alt === '选项图' && page.nodes.some(n => n.tag === 'a' && n.href === img.src));
+  assert(page.nodes.some(n => n.tag === 'details' && n.textContent.includes('Hidden source transcript.')));
 });
 
 test('单词填空兼容原答案大小写、可选复数与备选，不判缺答案', () => {
@@ -98,7 +152,7 @@ test('中考页面先答题后显示原解析，未答不能提交，错误次�
 });
 
 test('中考无答案题不记错误，账号切换后旧表单拒绝写入且进度隔离', () => {
-  const q = { ...exams.find(catalog, 2018).questions[0], answer: null, answerSource: undefined };
+  const q = { ...exams.find(catalog, 2018).questions.find(q => q.type === 'choice'), answer: null, answerSource: undefined };
   const page = setup(2018, { papers: [{ year: 2018, questions: [q], version: '测试', note: '' }] });
   let form = page.nodes.find(n => n.tag === 'form');
   form.all().find(n => n.tag === 'input').events.change();
@@ -120,26 +174,27 @@ test('中考无答案题不记错误，账号切换后旧表单拒绝写入且�
 });
 
 test('上海已导入的253小题均有答案，公开补充与原答案分开标注', () => {
-  const questions = catalog.papers.flatMap(p => p.questions);
+  const questions = catalog.papers.flatMap(p => p.questions).filter(q => !q.completionSource);
   assert(questions.length === 253 && questions.every(q => q.answer));
   assert(questions.filter(q => q.answerSource).length === 35);
   const supplements = JSON.parse(read('content/english/past-papers/answer-supplements.json'));
   const paper = exams.find(catalog, 2018);
-  assert(paper.questions.length === 35 && paper.note.includes('非官方发布'));
-  for (const q of paper.questions) {
+  assert(paper.questions.filter(q => !q.completionSource).length === 35);
+  for (const q of paper.questions.filter(q => !q.completionSource)) {
     assert(q.answer === supplements['2018'].answers[q.originalNo]);
     assert(q.answerSource.review.status === 'pending');
     assert(q.answerSource.urls.length === 2 && q.answerSource.urls.every(url => url.startsWith('https://')));
   }
   assert(exams.find(catalog, 2017).questions.find(q => q.originalNo === 37).answer === 'B');
   assert(exams.find(catalog, 2017).questions.find(q => q.originalNo === 59).answer === 'politely');
-  const page = setup(2018), form = page.nodes.find(n => n.tag === 'form');
+  const original = paper.questions.find(q => !q.completionSource);
+  const page = setup(2018, { papers: [{ ...paper, questions: [original] }] }), form = page.nodes.find(n => n.tag === 'form');
   form.all().find(n => n.tag === 'input' && n.value === 'A').events.change();
   form.events.submit({ preventDefault() {} });
   const explanation = form.all().find(n => n.className === 'english-explanation');
   assert(!explanation.hidden && explanation.textContent.includes('补充参考答案（公开资料核对·待审核）：A'));
   assert(!explanation.textContent.includes('原资料参考答案'));
-  assert(page.context.Progress.status('english-exam:2018', paper.questions[0].id) === 'solved');
+  assert(page.context.Progress.status('english-exam:2018', original.id) === 'solved');
 });
 
 test('中考纯文本保持下划线，题型筛选和错误年份可正常显示', () => {

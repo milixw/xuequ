@@ -527,7 +527,7 @@
 
   // 真题数据体积大（江苏英语约 3MB），首屏不加载，进入对应页面时再用 <script> 加载（file:// 下不能用 fetch）
   const DATA_SCRIPTS = {
-    EnglishPastPapers: 'content/english/past-papers/catalog.js?v=20261003-shanghai-answers',
+    EnglishPastPapers: 'content/english/past-papers/catalog.js?v=20261010-completion',
     JiangsuEnglishPastPapers: 'content/english/past-papers/jiangsu.js?v=20261003-jiangsu-answers',
     ShanghaiSubjectPapers: 'content/past-papers/shanghai.js?v=20261010-chinese-complete',
   };

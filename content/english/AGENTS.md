@@ -23,7 +23,8 @@
   english/past-papers/catalog.js   上海历年中考原题文字数据，保留原资料题号、题干、选项、答案、解析及来源 SHA-256；目前部分导入，回忆版和缺失内容明确标注，review.status 为 pending
   english/past-papers/answer-supplements.json  上海原文件缺答案时经公开资料核对的补充表，仅供导入脚本使用；关联原文件 SHA-256，答案来源网址与核对日期写入 answerSource，待教师审核
   english/past-papers/jiangsu.js   江苏 13 城市原题文字数据，按 city / year 定位；资料无法可靠提取的年份标待补充，同篇阅读/完形在界面合并，原小题 ID 保持稳定
-  english/past-papers/<年份>/      仅存听力媒体，不用 PDF、图片、Word 链接代替网页题目；原件本地参考放 refs/english-past-papers/
+  english/past-papers/completion-transcripts.json  上海原卷补全清单：来源 SHA-256、462个新增作答项、必要图哈希及缺口；scripts/complete-shanghai-english.py 校验原件后定向追加，不覆盖已发布题目或人工修改
+  english/past-papers/<年份>/      听力媒体及必要原图；题目优先文本，必要图片可放大，不用 PDF、Word 链接代替网页题目；原件本地参考放 refs/english-past-papers/
 ```
 
 ## 测试
@@ -74,10 +75,10 @@ reading: {
 
 ## 中考题导入与编号
 
-上海英语中考文字题提取使用 `python scripts/import-english-past-papers.py <中考真题目录> <网盘下载目录>`，依赖 pdfplumber 环境中的 pypdf 和 python-docx；旧 .doc 由 `scripts/word-binary-text.py` 读取主文字流。不得凭答案生成缺失题干，不可靠识别的下划线、图片依赖题或选项先跳过。私用字体的英文撇号恢复成可见撇号，源下划线保留为 `[[u]]...[[/u]]`，界面纯文本转义，只解释下划线标记。来源文件不作为运行时链接。新增导入保留已发布 ID `sh<年份>-q<原资料题号>`，不要全量覆盖人工订正，设计见 `docs/superpowers/specs/2026-10-03-english-past-papers.md`。
+上海英语中考文字题提取使用 `python scripts/import-english-past-papers.py <中考真题目录> <网盘下载目录>`，依赖 pdfplumber 环境中的 pypdf 和 python-docx；旧 .doc 由 `scripts/word-binary-text.py` 读取主文字流。不得凭答案生成缺失题干，不可靠识别的内容记录缺口；必要原图经来源核对后保留。私用字体的英文撇号恢复成可见撇号，源下划线保留为 `[[u]]...[[/u]]`，界面纯文本转义，只解释下划线标记。来源文件不作为运行时链接。新增导入保留已发布 ID `sh<年份>-q<原资料题号>`，不要全量覆盖人工订正，设计见 `docs/superpowers/specs/2026-10-03-english-past-papers.md`。
 
 江苏使用 `python scripts/import-jiangsu-english.py <中考真题目录> <网盘下载目录>`，额外用本地 7-Zip 读取压缩包内文档，临时提取目录限在工作区 `tmp/pdfs/jiangsu/` 并校验成员路径，不执行压缩包内容；源文件 SHA-256 去重，优先可读文字与原解析，重复小题号导致答案关联不清时跳过。试卷 ID 为 `js-<城市ID>-<年份>`、题目 ID 为 `<试卷ID>-q<原资料题号>`，复导保留原 ID 和人工修改，来源变动拒绝静默替换。13 城市 ID 为 nanjing、wuxi、xuzhou、changzhou、suzhou、nantong、lianyungang、huaian、yancheng、zhenjiang、yangzhou、taizhou、suqian。设计与导入限制见 `docs/superpowers/specs/2026-10-03-jiangsu-english-exams.md`。
 
-補齐上海答案使用 `python scripts/import-english-past-papers.py <中考真题目录> <网盘下载目录> --supplement-answers`，验证来源 SHA-256 后仅补 `answer: null`，不改题干、选项、ID、已有答案、解析或审核状态。2017 年两题取本地原答案表；2018 年 35 题取 `answer-supplements.json` 中两份公开资料核对的答案，`answerSource: { kind: 'public-supplement', urls: [...], checkedAt, review: { status: 'pending' } }` 保存来源，屏幕与本地原答案分别标注，不冒充官方答案；复导保留补充字段与说明。当前上海已导入 253 小题均有参考答案，不代表完整试卷或教师已审核。
+補齐上海答案使用 `python scripts/import-english-past-papers.py <中考真题目录> <网盘下载目录> --supplement-answers`，验证来源 SHA-256 后仅补 `answer: null`，不改题干、选项、ID、已有答案、解析或审核状态。2017 年两题取本地原答案表；2018 年 35 题取 `answer-supplements.json` 中两份公开资料核对的答案，`answerSource: { kind: 'public-supplement', urls: [...], checkedAt, review: { status: 'pending' } }` 保存来源，屏幕与本地原答案分别标注，不冒充官方答案；复导保留补充字段与说明。原有253小题及参考答案保留。补全后共715作答项（新增462），8张必要原图；2013–2020笔试每年69项齐全，2016–2020听力题各25项。2025有5个听力问题，2026有33个回忆题；缺原题与推理版本不冒充真题。新增简答及作文为open，人工核对；2019听力ID为sh2019-listening-q<题号>，避免与重新编号的笔试冲突。completionSource由独立清单管理，旧答案补充脚本跳过这些记录。详见docs/superpowers/specs/2026-10-10-shanghai-english-completion.md。
 
 补齐已导入江苏题目的原答案使用同一命令加 `--supplement-answers`，仅补 `answer: null` 及相应缺失原解析，先验证来源 SHA-256；支持紧凑答案表、题号范围与原解析中的明确“故选”，冲突不猜。保留题干、选项、题号、ID、已有答案和人工订正。当前 1,493 个已导入江苏作答项均有原资料参考答案，仍待教师审核，不代表整卷导入。

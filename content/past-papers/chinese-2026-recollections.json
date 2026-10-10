@@ -77,5 +77,106 @@
       "sha256": "23e0b8bd1a19b25e16e96d6aafab004b378e8aa303c19e1410863f2f37fbdea6",
       "kind": "local-recollection"
     }
-  ]
+  ],
+  "verification": {
+    "checkedAt": "2026-10-10",
+    "scope": "原文件哈希、Word正文和内嵌题/答案图片交叉核验",
+    "sources": [
+      {
+        "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/2026上海中考语文回忆版真题及解析.pdf",
+        "sha256": "71ba391a1787f08a1133546072afee49b51a3554e7d161bd2e175014c72ad45e",
+        "matched": true
+      },
+      {
+        "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/上海市初中语文中考真题（考生回忆版）.pdf",
+        "sha256": "be20c34e56a795cae8dd1f0c0c25bb492c5a9e10d7336e7ae0f2163fb607dafe",
+        "matched": true
+      },
+      {
+        "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/2026年上海中考语文真题（完整版）.docx",
+        "sha256": "b21a053c323a43ba649aa0336b4cb54c89975c7be35a30e459f2a61962cba0b4",
+        "matched": true,
+        "embeddedImages": [
+          {
+            "file": "word/media/image1.png",
+            "sha256": "c2d9949613f08dbc9096774c5bcd525a88e1a2f5ef356bb846f379bc1b8c22fc"
+          },
+          {
+            "file": "word/media/image2.png",
+            "sha256": "6ccea13f0afbe5f20e24d684fd0a9882c942a999b8e79f282facd9d9195dbd06"
+          },
+          {
+            "file": "word/media/image3.png",
+            "sha256": "f9349ae16368a36f8329b129fa7a9a02a557e02bcd07d42581399904f70eee99"
+          },
+          {
+            "file": "word/media/image4.png",
+            "sha256": "fb991b0cfd724c0966931560b035f0daea248251387264000d915c6d7d55ffc3"
+          },
+          {
+            "file": "word/media/image5.png",
+            "sha256": "b73ba0a280b978e0e188f9bee1e01b63f3e05d3c167e3b4f7488748c113f5c57"
+          }
+        ]
+      },
+      {
+        "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/2026年上海中考语文真题答案（最全估分版）.docx",
+        "sha256": "23e0b8bd1a19b25e16e96d6aafab004b378e8aa303c19e1410863f2f37fbdea6",
+        "matched": true,
+        "embeddedImages": [
+          {
+            "file": "word/media/image1.png",
+            "sha256": "a0a19dfd6e6f82127c32a45f396d97e3ea28a180eb226c31de64027621c145a1"
+          },
+          {
+            "file": "word/media/image10.png",
+            "sha256": "81ad251a5b9307d138715d1893a8fb6d352c31160f7dcf88a3cc9503ea1b2190"
+          },
+          {
+            "file": "word/media/image11.png",
+            "sha256": "7e1e03e5a53398af91e153176d519a996072da932a3219af8c6331f26df2f8ac"
+          },
+          {
+            "file": "word/media/image2.png",
+            "sha256": "29044bf7f30b03fab21d4de5e2929abdffbbe3081a04007e334f0dd1cb888245"
+          },
+          {
+            "file": "word/media/image3.png",
+            "sha256": "c611be71b9ac436bc2d94d2e87b31d08f1fd38a7f9e9f83a89572eb4ab5d9560"
+          },
+          {
+            "file": "word/media/image4.png",
+            "sha256": "eaf56258bfefab1e0224e40a709adc4d94c789fc23d558770ccf82f37578e866"
+          },
+          {
+            "file": "word/media/image5.png",
+            "sha256": "cee8340412c0f387184cc6253e436010a90135f30e8cd79980139116d19261f1"
+          },
+          {
+            "file": "word/media/image6.png",
+            "sha256": "2ff2102882f985b4e93edafa06784622385823b58536c5dc923922d340265d4c"
+          },
+          {
+            "file": "word/media/image7.png",
+            "sha256": "d27c15b3f205878b5b64daebf9670a46a976b0e23f1735beacac90835f1e05db"
+          },
+          {
+            "file": "word/media/image8.png",
+            "sha256": "fea0422e872ede91e65322ae5301134d2c26dd735046b4d3bea4dacc74d95cce"
+          },
+          {
+            "file": "word/media/image9.png",
+            "sha256": "cf8147078f6477919278053f2768f4594c5fb045cdaf02e8f71a28ed5a068d4d"
+          }
+        ]
+      }
+    ],
+    "findings": [
+      "四份文件与原已登记来源哈希一致，没有新增可靠官方原卷。",
+      "最全估分版内嵌第5页明确标小说文字来源于网络搜索，非试卷完整原文；第6页的飞行设定、第7段词义题所需原文仍不在该复述中。",
+      "估分版第5页所列青少年活动采访三问与红字解析所用狗獾管护三问并不一致，不合并成一套确定原题。",
+      "估分版第7页甲同学意见为空、排序仅列序号；不从红字参考答案反造缺失选项和导语。"
+    ],
+    "result": "保留现有六组回忆文字及缺失声明，不将文件名中的完整版视为已核实完整原卷。"
+  }
 }

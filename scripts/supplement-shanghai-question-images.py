@@ -105,6 +105,7 @@ def supplement(paper,path,refresh_images=False):
         for index,start in enumerate(starts):
             no=start['no']
             previous=next((q for q in paper['questions'] if q['originalNo']==no),None)
+            if previous and previous.get('textSource'):continue
             if no in published and not (refresh_images and previous.get('stemImages')):continue
             end=(starts[index+1]['page'],starts[index+1]['top']) if index+1<len(starts) else boundary
             apart=answers[index]

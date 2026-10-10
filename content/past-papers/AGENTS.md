@@ -16,6 +16,7 @@
   past-papers/image-supplement-inventory.json  图片补题清单与不能自动定位的资料说明，绑定原文件 SHA-256
   past-papers/chinese-completion-crops.json  2013—2020、2023/2024语文缺题按页核对的题/答案裁切坐标，一基页号、PDF点
   past-papers/chinese-2026-recollections.json  四份本地2026回忆资料核对后的六组整理稿、版本差异与来源哈希，不冒充官方原卷
+  past-papers/chinese-text-transcripts.json  46组原图片题的核对文字、标注与必要局部配图，绑定源哈希，不改原ID
 ```
 
 ## 测试
@@ -49,6 +50,14 @@
 随后用 `scripts/complete-shanghai-chinese-papers.py <下载根目录> <临时转换PDF目录>` 追加其他年份43组，语文总计80组；2013—2020、2023—2025共11份已覆盖当前本地资料全部题号及作文。旧Word仅在临时目录用LibreOffice导出 `<年份>.pdf`，原资料不修改；2018/2019答案穿插正文，逐组裁切并排除答案，不能用整卷统一答案界线。新题 `imageSource` 记录原文件 `sourceSha256`、转换PDF的 `renderedSha256`、本组题图区结束界线 `answerBoundary`；检验题图在界线之前、答案图之后，转换不改变原资料来源。原文/图表及已发布题不替换。2016原资料将第10题误印为第9题，按阅读组标题及答案编号核对，图片保留误印并说明。2016/2020作文无原范文，`answerSource.kind: no-unique-answer`，不伪造标准答案、无答案图片，作文全部人工评阅。2026“完整版”实际是回忆整合提纲，正文、选项、材料均有缺失，仍待可靠原卷，不标完整。2021/2022目前没有本地资料入口。
 
 2026随后经用户明确同意按多份回忆资料整理：用 `scripts/apply-shanghai-chinese-recollections.py <下载根目录>` 验证两PDF、两Word原哈希，追加六组文字作答，语文现共86组。组号1—6为整理资料编号，不是官方小题号；`recollectionSources`在试卷及题目上保存四份来源的相对路径、SHA-256及`kind: local-recollection`，原文件不作为运行时链接。默写、文言、作文按相互支持的版本整理；现代文材料明确为复述，小说明确非完整原文，只保留节选能支持的小问；名著选项按估分稿排列并标争议。甲同学意见、排序导语、小说发笑与第7段原文仍缺，`skipped`保留原因；不从答案反造内容，不宣称2026完整。六组均主观作答、原资料参考答案人工核对、pending，复导不覆盖已发布题。
+
+## 上海语文文字优先（2026-10-10）
+
+用户授权全部语文题转为文字，原11份整理卷的46组截图题已转录；现有12个年份86组均为文字题干和文字参考答案，仅7组保留雕像、邮票、手机材料、调查图、跳石照片、面具活动单和歌谱局部配图。原图仍留作来源核对，不再整页展示。2026四份资料及Word内嵌图片再次核验，仍有“非试卷完整原文”、采访版本冲突和缺失选项，不根据答案补造，保留回忆版和缺文声明。
+
+`scripts/apply-shanghai-chinese-text.py <下载根目录>` 按转录清单核对原文件SHA-256后替换指定题组文字，首次保存原截图元数据在 `sourceImages: { stem, answer }`；`textSource`含源哈希、记录哈希、核对日和 `kind: source-checked-transcription`。重跑拒绝覆盖后续人工改动。原 `imageSource` 保留溯源，必要配图仍使用 `stemImages`，`sourceImage`及`pixelCrop`说明来自哪张原图与像素框，`label`给出配图名称；答案为文字，无 `answerImages`。图片刷新脚本遇 `textSource`必须跳过，不能恢复成整页截图。所有ID、原资料编号、主观题评分方式与学生存储格式不变，review仍pending。
+
+原标注沿用 `[[u]]`、`[[dot]]`，新增 `[[wave]]...[[/wave]]` 表示波浪下划线；标注不嵌套，其他文本仍安全转义。表格按行列及空号、流程按节点转录；2016第10题原误印为第9题保留并说明。设计见 `docs/superpowers/specs/2026-10-10-chinese-text-transcription.md`。
 
 ## 上海物理、化学中考资料
 

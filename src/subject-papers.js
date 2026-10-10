@@ -21,10 +21,11 @@
   function rich(parent, text) {
     // Only our checked annotation markers are interpreted; all other source
     // text is escaped by Quiz before local KaTeX formatting.
-    String(text || '').split(/(\[\[(?:u|dot)\]\][\s\S]*?\[\[\/(?:u|dot)\]\])/g).forEach(part => {
-      const marker = part.match(/^\[\[(u|dot)\]\]([\s\S]*)\[\[\/\1\]\]$/);
-      const el = node(marker && marker[1] === 'u' ? 'u' : 'span');
+    String(text || '').split(/(\[\[(?:u|dot|wave)\]\][\s\S]*?\[\[\/(?:u|dot|wave)\]\])/g).forEach(part => {
+      const marker = part.match(/^\[\[(u|dot|wave)\]\]([\s\S]*)\[\[\/\1\]\]$/);
+      const el = node(marker && (marker[1] === 'u' || marker[1] === 'wave') ? 'u' : 'span');
       if (marker && marker[1] === 'dot') el.className = 'subject-papers-dot';
+      if (marker && marker[1] === 'wave') el.className = 'subject-papers-wave';
       el.innerHTML = Quiz.renderText(marker ? marker[2] : part);
       parent.appendChild(el);
     });
@@ -39,7 +40,7 @@
       link.href = item.src; link.target = '_blank'; link.rel = 'noopener';
       link.setAttribute('aria-label', label + '第 ' + (i + 1) + ' 张，打开原图放大');
       const img = node('img'); img.src = item.src;
-      img.alt = label + '第 ' + (i + 1) + ' 张（原 PDF 第 ' + item.page + ' 页）';
+      img.alt = item.label || label + '第 ' + (i + 1) + ' 张（原 PDF 第 ' + item.page + ' 页）';
       img.decoding = 'async';
       // Eager loading keeps long question sheets complete when printed.
       if (Number.isFinite(item.width) && item.width > 0) img.width = item.width;
@@ -65,7 +66,7 @@
     const data = LearningStore.read(KEY, {}, owner);
     const saved = (data[paper.id] || {})[q.id] || {};
     const card = node('section', undefined, 'card subject-papers-question');
-    const numbers = q.originalNumbers || [q.originalNo];
+    const numbers = q.originalNumbers && q.originalNumbers.length ? q.originalNumbers : [q.originalNo];
     card.appendChild(node('h2', '资料第 ' + numbers.join('、') + ' 题 · ' + q.category));
     if (q.context) {
       const context = node('details'); context.open = true;
@@ -74,7 +75,7 @@
       context.appendChild(material); card.appendChild(context);
     }
     const stem = node('div', undefined, 'subject-papers-text'); rich(stem, q.stem); card.appendChild(stem);
-    if (q.stemImages) {
+    if (q.stemImages && q.stemImages.length) {
       renderImages(card, q.stemImages, '资料第 ' + q.originalNo + ' 题原题');
       card.appendChild(node('p', '点击题图可打开原图放大。', 'meta subject-papers-image-hint'));
     }
@@ -107,7 +108,7 @@
     renderImages(explanation, q.answerImages, '资料第 ' + q.originalNo + ' 题参考答案与解析');
     explanation.appendChild(node('h3', '原资料解析'));
     const analysis = node('div', undefined, 'subject-papers-text');
-    rich(analysis, q.explanation || (q.answerImages ? '原资料解析见上方答案图片，供人工核对。' : '原解析尚未完整提取，待补充核对。')); explanation.appendChild(analysis);
+    rich(analysis, q.explanation || (q.textSource ? '原资料说明与解析已并入上方文字参考答案，供人工核对。' : q.answerImages && q.answerImages.length ? '原资料解析见上方答案图片，供人工核对。' : '原解析尚未完整提取，待补充核对。')); explanation.appendChild(analysis);
     if (q.explanationNote) explanation.appendChild(node('p', q.explanationNote, 'meta'));
     function save(submitted) {
       if (LearningStore.scope() !== owner) { feedback.textContent = '账号已切换，请重新打开本页后作答。'; return false; }

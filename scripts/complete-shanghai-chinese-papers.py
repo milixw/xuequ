@@ -76,6 +76,8 @@ def main(download, converted, refresh=False):
         with images.pdfplumber.open(pdf_path) as pdf:
             for first, last, start, end, astart, aend in record['groups']:
                 previous = next((q for q in paper['questions'] if q['originalNo'] == first), None)
+                if previous and previous.get('textSource'):
+                    continue
                 if previous and not refresh:
                     continue
                 stem_parts = regions(pdf, start, end, pdf_path, raster_dir)

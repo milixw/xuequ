@@ -59,14 +59,16 @@ test('上海物化两个入口、22个年份目录与146题原答案，缺图公
   assert(inventory.sources.every(s=>s.paths.every(p=>!p.file.includes('..'))));
 });
 
-test('上海语数24个年份科目入口保留资料编号、来源、答案及待审核状态', () => {
-  const ids = new Set(); assert(catalog.papers.filter(p => ['math','chinese'].includes(p.subject)).length === 24);
+test('上海语数25个年份科目入口保留资料编号、来源、答案及待审核状态', () => {
+  const ids = new Set(); assert(catalog.papers.filter(p => ['math','chinese'].includes(p.subject)).length === 25);
   assert(api.papers(catalog, 'math').reduce((n, p) => n + p.questions.filter(q=>!q.stemImages).length, 0) === 78);
-  assert(api.papers(catalog, 'chinese').reduce((n, p) => n + p.questions.length, 0) === 86);
+  assert(api.papers(catalog, 'chinese').reduce((n, p) => n + p.questions.length, 0) === 92);
   for (const paper of catalog.papers) {
     assert(['math', 'chinese', 'physics', 'chemistry'].includes(paper.subject) && paper.title.includes('上海'));
     assert(paper.review.status === 'pending' && /^[a-f0-9]{64}$/.test(paper.source.sha256));
-    assert(paper.note.includes('混合展示') || paper.skipped.length > 0 && (paper.note.includes('部分原题') || !paper.questions.length && paper.note.includes('资料已找到')));
+    assert(paper.note.includes('混合展示') || paper.skipped.length > 0 && (paper.note.includes('部分原题')
+      || !paper.questions.length && paper.note.includes('资料已找到')
+      || !!paper.textSource && paper.textSource.kind === 'web-page-transcription' && paper.note.includes('公开真题页面')));
     for (const q of paper.questions) {
       assert(q.id === paper.id + '-q' + String(q.originalNo).padStart(2, '0'));
       assert(!ids.has(q.id)); ids.add(q.id);
@@ -91,14 +93,14 @@ test('数学核对后的分数根号指数用本地KaTeX渲染，不展示压平
   assert(q.options.some(o => o.includes('\\frac{x}{3}')) && q.answer === 'D');
 });
 
-test('144道补充图片题本地PNG真实存在，题图与原答案边界分离、跨页有序', () => {
+test('105组必要配图本地PNG真实存在，题图与原答案边界分离、跨页有序', () => {
   let count=0;
   for(const p of catalog.papers) for(const q of p.questions.filter(q=>q.stemImages)) {
     count++;
-    assert((q.answerImages.length || q.category==='作文' && q.answerSource.kind==='no-unique-answer') && p.imageSupplement.sourceSha256===p.source.sha256);
+    assert((q.textSource && q.answer || q.answerImages && q.answerImages.length || q.category==='作文' && q.answerSource.kind==='no-unique-answer') && p.imageSupplement.sourceSha256===p.source.sha256);
     const boundary=q.imageSource ? q.imageSource.answerBoundary : p.imageSupplement.answerBoundary;
     if(q.imageSource) assert(q.imageSource.sourceSha256===p.source.sha256 && /^[a-f0-9]{64}$/.test(q.imageSource.renderedSha256));
-    for(const [kind,images] of [['stem',q.stemImages],['answer',q.answerImages]]) {
+    for(const [kind,images] of [['stem',q.stemImages||[]],['answer',q.answerImages||[]]]) {
       let previous=0;
       for(const im of images) {
         assert(api.imagePath(im.src) && im.src.startsWith('content/past-papers/images/'+p.id+'/'));
@@ -112,7 +114,7 @@ test('144道补充图片题本地PNG真实存在，题图与原答案边界分�
       }
     }
   }
-  assert(count===144);
+  assert(count===105);
   assert(api.find(catalog,'chemistry',2025).questions.find(q=>q.originalNo===21).stemImages.length===2);
   for(const [s,y,n] of [['math',2023,25],['math',2024,25],['math',2025,25],['physics',2023,20],['physics',2025,20],['chemistry',2023,21],['chemistry',2024,21],['chemistry',2025,21]]) {
     const p=api.find(catalog,s,y);assert(p.questions.length===n && !p.skipped.length);
@@ -162,16 +164,69 @@ test('2026上海语文交叉核对四份回忆资料，六组可作答且不冒�
 test('2025上海语文补齐六组题，跨页阅读与作文可作答且答案默认隐藏', () => {
   const p = api.find(catalog, 'chinese', 2025);
   assert(p.questions.map(q => q.originalNo).join(',') === '1,2,3,4,5,6' && !p.skipped.length);
-  assert(p.questions.find(q => q.originalNo === 2).stemImages.map(i => i.page).join(',') === '1,2');
-  assert(p.questions.find(q => q.originalNo === 3).stemImages.map(i => i.page).join(',') === '2,3');
+  const prose=p.questions.find(q=>q.originalNo===2), novel=p.questions.find(q=>q.originalNo===3);
+  assert(prose.stem.includes('陋室铭') && prose.stem.includes('（7）') && prose.stem.includes('[[wave]]'));
+  assert(novel.stem.includes('春江水暖鸭先知') && novel.stem.includes('人物关系图（按连线转录）'));
   const view = setup('chinese', 2025);
   assert(view.nodes.filter(n => n.tag === 'form').length === 6);
   const composition = view.nodes.find(n => n.tag === 'section' && n.textContent.includes('资料第 6 题'));
   assert(composition.all().some(n => n.tag === 'textarea'));
-  for (const im of p.questions.find(q => q.originalNo === 6).answerImages) {
-    assert(composition.all().some(n => n.className === 'english-explanation' && n.hidden &&
-      n.all().some(child => child.tag === 'img' && child.src === im.src)));
+  const answer=composition.all().find(n=>n.className==='english-explanation');
+  assert(answer.hidden && answer.textContent.includes(p.questions.find(q=>q.originalNo===6).answer));
+  assert(view.nodes.filter(n=>n.className==='subject-papers-wave').length===3);
+});
+
+test('全部语文真题文字可读，52组为46组转录加6组网络抓取，仅显示七组必要配图', () => {
+  const manifest=JSON.parse(read('content/past-papers/chinese-text-transcripts.json'));
+  assert(manifest.questions.length===46 && new Set(manifest.questions.map(r=>r.id)).size===46);
+  const papers=api.papers(catalog,'chinese');
+  assert(papers.reduce((n,p)=>n+p.questions.length,0)===92);
+  for(const paper of papers) for(const q of paper.questions) {
+    assert(q.stem.length>40 && !/请根据下面的原资料题图作答|原资料参考答案见下方图片/.test(q.stem+q.answer));
+    if(!q.textSource) continue;
+    const r=manifest.questions.find(r=>r.id===q.id);
+    assert(r && r.stem===q.stem && r.answer===q.answer && r.review.status==='pending');
+    assert(r.sourceSha256===paper.source.sha256 && q.textSource.sourceSha256===paper.source.sha256);
+    assert(/^[a-f0-9]{64}$/.test(q.textSource.recordSha256));
+    assert(q.sourceImages.stem.length && !q.answerImages);
+    assert((q.stemImages||[]).every(im=>im.src.endsWith('-stem-90.png') && im.label && im.sourceImage));
+    const markers=[...q.stem.matchAll(/\[\[(u|dot|wave)\]\]([\s\S]*?)\[\[\/\1\]\]/g)];
+    assert(markers.every(m=>m[2].trim() && !m[2].includes('[[')),q.id+'标注嵌套或空内容');
+    assert(!q.stem.replace(/\[\[(u|dot|wave)\]\][\s\S]*?\[\[\/\1\]\]/g,'').includes('[['),q.id+'有未闭合标注');
   }
+  assert(papers.reduce((n,p)=>n+p.questions.filter(q=>q.stemImages?.length).length,0)===7);
+  const page=setup('chinese',2015), q=api.find(catalog,'chinese',2015).questions.find(q=>q.originalNo===8);
+  assert(q.stem.includes('文学常识：') && q.stem.includes('词语解释：') && q.stem.includes('句子翻译：'));
+  assert(page.nodes.filter(n=>n.className==='english-explanation').every(n=>n.hidden));
+  assert(read('src/app.css').includes('.subject-papers-wave'));
+});
+
+test('2022语文为网络抓取来源：绑定存档哈希、标非官方、如实声明缺图且不冒充本地原卷', () => {
+  const paper=api.find(catalog,'chinese',2022);
+  assert(paper && paper.version.includes('网络抓取') && paper.version.includes('非官方'));
+  assert(paper.source.root==='download' && paper.source.file==='2022年上海市中考语文试卷（网络抓取存档）.txt');
+  assert(/^[a-f0-9]{64}$/.test(paper.source.sha256), '来源哈希须绑定本机存档文件');
+  assert(paper.textSource.kind==='web-page-transcription' && paper.textSource.url.includes('shijuan.net'));
+  assert(paper.textSource.sourceSha256===paper.source.sha256 && /^[a-f0-9]{64}$/.test(paper.textSource.recordSha256));
+  assert(paper.skipped.length===3 && paper.skipped.every(s=>s.includes('图')), '缺图须逐条声明');
+  assert(paper.note.includes('公开真题页面') && paper.note.includes('不是本地整理版 PDF 原卷'));
+  assert(paper.questions.length===6);
+  assert(paper.questions.map(q=>q.originalNo).join()==='1,2,3,4,5,6');
+  for(const q of paper.questions) {
+    assert(/^sh-chinese-2022-q0[1-6]$/.test(q.id) && q.review.status==='pending');
+    assert(!q.textSource && !q.stemImages && !q.sourceImages, q.id+'不得冒用本地转录或裁图来源');
+    assert(q.category!=='作文' || (q.answer.includes('人工评阅') && q.answer.length<80), q.id+'作文不得伪造范文');
+  }
+  assert(paper.questions.slice(0,5).map(q=>q.originalNumbers.length).join()==='4,6,3,5,3');
+  assert(paper.questions[5].category==='作文' && paper.questions[5].originalNumbers.length===0);
+  assert(paper.questions[1].stem.includes('两小儿') && paper.questions[1].answer.includes('热水'));
+  assert(paper.questions[3].stem.includes('写给儿子') && paper.questions[5].stem.includes('这不过是个开场'));
+  const page=setup('chinese',2022), text=page.nodes.map(n=>n.textContent).join('\n');
+  assert(text.includes('网络抓取整理版 · 非官方') && text.includes(paper.source.file));
+  assert(['待审核','配图未随资料保存','资料第 1、2、3、4 题','资料第 11、12、13 题','资料第 6 题']
+    .every(s=>text.includes(s)), '缺图声明与原题组号须在页面可见');
+  assert(['默写','两小儿','劳动宣言','写给儿子','必读名著','这不过是个开场'].every(s=>text.includes(s)));
+  assert(!/<img/i.test(text), '本卷无可用的题图资源');
 });
 
 test('原题图片默认展示、答案图片只在隐藏答案区，放大路径限制且打印隐藏订正', () => {

@@ -11,6 +11,14 @@ spec.loader.exec_module(importer)
 
 
 class ImportTests(unittest.TestCase):
+    def test_completion_listening_does_not_take_same_numbered_grammar_answer(self):
+        paper = {'questions': [dict(id='sh2019-listening-q21', originalNo=21, type='fill', answer=None,
+                                   completionSource={'sourceSha256': 'checked-original'}),
+                               dict(id='sh2019-q21', originalNo=21, type='fill', answer=None)]}
+        self.assertEqual(importer.fill_missing(paper, {21: 'E'}), 1)
+        self.assertIsNone(paper['questions'][0]['answer'])
+        self.assertEqual(paper['questions'][1]['answer'], 'E')
+
     def test_answer_table_image_markers_only(self):
         answers, _ = importer.answer_map('37. C\n英语试卷答案要点\n37.[[image]] B\n59.[[image]] politely', 2017)
         self.assertEqual(answers[37], 'B')

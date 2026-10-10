@@ -31,23 +31,27 @@ template = '''<!doctype html>
 <header><a href="../../index.html#/">‹ 返回首页</a><h1>语文实词虚词</h1></header>
 <nav class="tabs" aria-label="资料分类"><button type="button" id="real" aria-pressed="true">实词 · 180 个</button><button type="button" id="function" aria-pressed="false">虚词</button></nav>
 <section id="real-panel">
-<label for="search">查找实词、词义或例句</label><input id="search" type="search" placeholder="例如：安、所以、得到"><p id="result" role="status"></p><div id="pages">CARDS</div></section>
+<label for="search">查找实词、虚词词条（不搜索释义和例句）</label><input id="search" type="search" placeholder="例如：安、卑、备"><p id="result" role="status"></p><div id="pages">CARDS</div></section>
 <section id="function-panel" hidden><div class="note"><h2>虚词资料待补充</h2></div></section>
 <script>
 'use strict';
 const sheets = Array.from(document.querySelectorAll('.sheet'));
 const originals = sheets.map(sheet => sheet.querySelector('pre').textContent);
+const words = originals.map(text => (text.match(/^\s*\d+[．.]\s*([^：:①\s]+)/) || [,''])[1]);
 const search = document.getElementById('search');
 function updateSearch(){
   const term = search.value.trim(); let visible = 0;
   sheets.forEach((sheet,i)=>{
-    const text = originals[i]; sheet.hidden = !!term && !text.includes(term);
+    const text = originals[i], word = words[i]; sheet.hidden = !!term && !word.includes(term);
     const pre = sheet.querySelector('pre'); pre.textContent = '';
     if(!sheet.hidden){visible++; if(!term){pre.textContent=text;return;}
-      text.split(term).forEach((part,j)=>{if(j){const mark=document.createElement('mark');mark.textContent=term;pre.appendChild(mark);}pre.appendChild(document.createTextNode(part));});
+      const start = text.indexOf(word);
+      pre.appendChild(document.createTextNode(text.slice(0,start)));
+      word.split(term).forEach((part,j)=>{if(j){const mark=document.createElement('mark');mark.textContent=term;pre.appendChild(mark);}pre.appendChild(document.createTextNode(part));});
+      pre.appendChild(document.createTextNode(text.slice(start+word.length)));
     }
   });
-  document.getElementById('result').textContent = term ? (visible ? '匹配文字已标亮' : '没有找到相关内容，请换个关键词') : '';
+  document.getElementById('result').textContent = term ? (visible ? '匹配词条已标亮' : '没有找到相关词条，请换个词') : '';
 }
 search.addEventListener('input',updateSearch);updateSearch();
 function selectTab(real){document.getElementById('real-panel').hidden=!real;document.getElementById('function-panel').hidden=real;document.getElementById('real').setAttribute('aria-pressed',String(real));document.getElementById('function').setAttribute('aria-pressed',String(!real));}

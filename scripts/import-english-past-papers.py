@@ -191,6 +191,8 @@ def parse(text, year):
 def fill_missing(paper, answers, source=None):
     count = 0
     for question in paper['questions']:
+        # Supplement records have their own source/version/answer association.
+        if question.get('completionSource'): continue
         if question.get('answer') is not None: continue
         value = answers.get(question['originalNo'])
         pattern = r'[A-D]' if question['type'] == 'choice' else r'[A-Za-z]+(?:/[A-Za-z]+|\(s\))?'
@@ -218,7 +220,7 @@ def supplement_answers(roots):
     root_map = dict(roots)
     count = 0
     for paper in catalog['papers']:
-        if not paper['questions'] or not any(q.get('answer') is None for q in paper['questions']): continue
+        if not paper['questions'] or not any(q.get('answer') is None and not q.get('completionSource') for q in paper['questions']): continue
         source = paper['source']
         relative = Path(source['file'])
         if relative.is_absolute() or '..' in relative.parts: raise ValueError('Unsafe source path')
@@ -297,6 +299,9 @@ def main(roots):
             by_id.update({q['id']: q for q in old['questions']})
             paper['questions'] = sorted(by_id.values(), key=lambda q: q['originalNo'])
             paper['review'] = old['review']
+            if old.get('coverage'):
+                for field in ['coverage', 'supplementSources', 'note', 'completeness', 'skipped']:
+                    paper[field] = old[field]
             if any(q.get('answerSource') for q in paper['questions']):
                 paper['note'] = old['note']
     # Mechanical removal of page footers and extraction-only image markers,
