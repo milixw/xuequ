@@ -59,10 +59,10 @@ test('上海物化两个入口、22个年份目录与146题原答案，缺图公
   assert(inventory.sources.every(s=>s.paths.every(p=>!p.file.includes('..'))));
 });
 
-test('上海语数25个年份科目入口保留资料编号、来源、答案及待审核状态', () => {
-  const ids = new Set(); assert(catalog.papers.filter(p => ['math','chinese'].includes(p.subject)).length === 25);
+test('上海语数26个年份科目入口保留资料编号、来源、答案及待审核状态', () => {
+  const ids = new Set(); assert(catalog.papers.filter(p => ['math','chinese'].includes(p.subject)).length === 26);
   assert(api.papers(catalog, 'math').reduce((n, p) => n + p.questions.filter(q=>!q.stemImages).length, 0) === 78);
-  assert(api.papers(catalog, 'chinese').reduce((n, p) => n + p.questions.length, 0) === 92);
+  assert(api.papers(catalog, 'chinese').reduce((n, p) => n + p.questions.length, 0) === 99);
   for (const paper of catalog.papers) {
     assert(['math', 'chinese', 'physics', 'chemistry'].includes(paper.subject) && paper.title.includes('上海'));
     assert(paper.review.status === 'pending' && /^[a-f0-9]{64}$/.test(paper.source.sha256));
@@ -176,11 +176,11 @@ test('2025上海语文补齐六组题，跨页阅读与作文可作答且答案�
   assert(view.nodes.filter(n=>n.className==='subject-papers-wave').length===3);
 });
 
-test('全部语文真题文字可读，52组为46组转录加6组网络抓取，仅显示七组必要配图', () => {
+test('全部语文真题文字可读，59组为46组转录加13组网络抓取，仅显示七组必要配图', () => {
   const manifest=JSON.parse(read('content/past-papers/chinese-text-transcripts.json'));
   assert(manifest.questions.length===46 && new Set(manifest.questions.map(r=>r.id)).size===46);
   const papers=api.papers(catalog,'chinese');
-  assert(papers.reduce((n,p)=>n+p.questions.length,0)===92);
+  assert(papers.reduce((n,p)=>n+p.questions.length,0)===99);
   for(const paper of papers) for(const q of paper.questions) {
     assert(q.stem.length>40 && !/请根据下面的原资料题图作答|原资料参考答案见下方图片/.test(q.stem+q.answer));
     if(!q.textSource) continue;
@@ -223,9 +223,47 @@ test('2022语文为网络抓取来源：绑定存档哈希、标非官方、如�
   assert(paper.questions[3].stem.includes('写给儿子') && paper.questions[5].stem.includes('这不过是个开场'));
   const page=setup('chinese',2022), text=page.nodes.map(n=>n.textContent).join('\n');
   assert(text.includes('网络抓取整理版 · 非官方') && text.includes(paper.source.file));
-  assert(['待审核','配图未随资料保存','资料第 1、2、3、4 题','资料第 11、12、13 题','资料第 6 题']
-    .every(s=>text.includes(s)), '缺图声明与原题组号须在页面可见');
+  assert(['待审核','配图未随资料保存'].every(s=>text.includes(s)), '缺图声明须在页面可见');
+  assert(['资料第 1、2、3、4 题','资料第 5、6、7、8、9、10 题','资料第 11、12、13 题',
+    '资料第 14、15、16、17、18 题','资料第 19、20、21 题','资料第 6 题 · 作文']
+    .every(s=>text.includes(s)), '原题组号须逐组可见');
   assert(['默写','两小儿','劳动宣言','写给儿子','必读名著','这不过是个开场'].every(s=>text.includes(s)));
+  assert(!/<img/i.test(text), '本卷无可用的题图资源');
+});
+
+test('2021语文为网络抓取来源：绑定存档哈希、标非官方、篇目与官方评析一致且不冒充本地原卷', () => {
+  const paper=api.find(catalog,'chinese',2021);
+  assert(paper && paper.version.includes('网络抓取') && paper.version.includes('非官方'));
+  assert(paper.source.root==='download' && paper.source.file==='2021年上海市中考语文试卷（网络抓取存档）.txt');
+  assert(/^[a-f0-9]{64}$/.test(paper.source.sha256), '来源哈希须绑定本机存档文件');
+  assert(paper.textSource.kind==='web-page-transcription' && paper.textSource.url.includes('kaowang.cn'));
+  assert(paper.textSource.sourceSha256===paper.source.sha256 && /^[a-f0-9]{64}$/.test(paper.textSource.recordSha256));
+  assert(paper.skipped.length===3 && paper.skipped.some(s=>s.includes('图')), '缺图须逐条声明');
+  assert(paper.note.includes('公开真题页面') && paper.note.includes('教育考试院'), '须留下官方锚点');
+  assert(paper.questions.length===7);
+  assert(paper.questions.map(q=>q.originalNo).join()==='1,2,3,4,5,6,7');
+  for(const q of paper.questions) {
+    assert(/^sh-chinese-2021-q0[1-7]$/.test(q.id) && q.review.status==='pending');
+    assert(q.stem.length>40 && q.answer && !q.textSource && !q.stemImages && !q.sourceImages,
+      q.id+'不得冒用本地转录或裁图来源');
+    assert(q.category!=='作文' || (q.answer.includes('人工评阅') && !q.answer.includes('范文如下')),
+      q.id+'作文不得伪造范文');
+  }
+  assert(paper.questions.slice(0,6).map(q=>q.originalNumbers.length).join()==='5,3,3,4,5,3');
+  assert(paper.questions[6].category==='作文');
+  // 与上海市教育考试院 2021-06-19 专家评析核对的锚点
+  const all=paper.questions.map(q=>q.stem+q.answer).join('\n');
+  assert(['卖油翁','核舟记','口技','郑和','玩具诊所','愚公','比看上去更有意思']
+    .every(s=>all.includes(s)), '官方评析确认的篇目与作文题须齐全');
+  assert(paper.questions[1].answer.includes('欧阳修') && paper.questions[1].answer.includes('熟能生巧'));
+  assert(paper.questions[3].stem.includes('现存最早') && paper.questions[3].answer.includes('航海图'));
+  assert(paper.questions[6].stem.includes('比看上去更有意思'));
+  const page=setup('chinese',2021), text=page.nodes.map(n=>n.textContent).join('\n');
+  assert(text.includes('网络抓取整理版 · 非官方') && text.includes(paper.source.file));
+  assert(text.includes('待审核'), '待审核状态须在页面可见');
+  assert(['资料第 1、2、3、4、5 题','资料第 6、7、8 题','资料第 9、10、11 题',
+    '资料第 12、13、14、15 题','资料第 16、17、18、19、20 题','资料第 21、22、23 题']
+    .every(s=>text.includes(s)), '原题组号须逐组可见');
   assert(!/<img/i.test(text), '本卷无可用的题图资源');
 });
 
