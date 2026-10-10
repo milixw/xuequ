@@ -3,6 +3,29 @@ const fs = require('fs');
 const path = require('path');
 const vm = require('vm');
 const { test, assert } = require('./harness');
+test('61篇古诗文逐段译文完整，译文独立默认折叠并安全转义', () => {
+  const root = path.join(__dirname, '..');
+  const html = fs.readFileSync(path.join(root, 'content/chinese/上海中考古诗文·虚实词联动注释版.html'), 'utf8');
+  const translations = require('../content/chinese/classical-translations.js');
+  const context = {};
+  vm.runInNewContext(html.slice(html.indexOf('const D = ['), html.indexOf('const XU ='))+';globalThis.poems=D;', context);
+  assert(context.poems.length===61 && Object.keys(translations).length===61);
+  for(const poem of context.poems) {
+    const entry = translations[poem[1]];
+    assert(entry.review.status==='pending');
+    assert(entry.paragraphs.length===poem[5].split('|').length, poem[1]+'漏译原文段落');
+    assert(entry.paragraphs.every(p=>typeof p==='string' && p.trim().length>=8));
+  }
+  const renderingContext={ChinesePoemTranslations:translations,esc:s=>s.replace(/</g,'&lt;')};
+  vm.createContext(renderingContext);
+  vm.runInContext(html.slice(html.indexOf('function translationHTML('), html.indexOf('function renderText(')), renderingContext);
+  const result=renderingContext.translationHTML('出师表');
+  assert(result.startsWith('<details class="po-translation">') && !/<details[^>]*\bopen\b/.test(result));
+  assert(result.includes('待语文教师审核') && result.includes('不知道再说什么'));
+  renderingContext.ChinesePoemTranslations={'测试':{paragraphs:['<img src=x>']}};
+  assert(renderingContext.translationHTML('测试').includes('&lt;img') && !renderingContext.translationHTML('测试').includes('<img'));
+  assert(html.includes('src="classical-translations.js"'));
+});
 test('语文实词资料完整保留内容并隐藏 PDF 入口及页码信息', () => {
   const root = path.join(__dirname, '..');
   const html = fs.readFileSync(path.join(root, 'content/chinese/classical-words.html'), 'utf8');

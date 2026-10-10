@@ -59,10 +59,10 @@ test('上海物化两个入口、22个年份目录与146题原答案，缺图公
   assert(inventory.sources.every(s=>s.paths.every(p=>!p.file.includes('..'))));
 });
 
-test('上海语数24个年份科目入口112题保留资料编号、来源、答案及待审核状态', () => {
+test('上海语数24个年份科目入口保留资料编号、来源、答案及待审核状态', () => {
   const ids = new Set(); assert(catalog.papers.filter(p => ['math','chinese'].includes(p.subject)).length === 24);
   assert(api.papers(catalog, 'math').reduce((n, p) => n + p.questions.filter(q=>!q.stemImages).length, 0) === 78);
-  assert(api.papers(catalog, 'chinese').reduce((n, p) => n + p.questions.length, 0) === 34);
+  assert(api.papers(catalog, 'chinese').reduce((n, p) => n + p.questions.length, 0) === 86);
   for (const paper of catalog.papers) {
     assert(['math', 'chinese', 'physics', 'chemistry'].includes(paper.subject) && paper.title.includes('上海'));
     assert(paper.review.status === 'pending' && /^[a-f0-9]{64}$/.test(paper.source.sha256));
@@ -91,12 +91,13 @@ test('数学核对后的分数根号指数用本地KaTeX渲染，不展示压平
   assert(q.options.some(o => o.includes('\\frac{x}{3}')) && q.answer === 'D');
 });
 
-test('98道补充图片题本地PNG真实存在，题图与原答案边界分离、跨页有序', () => {
+test('144道补充图片题本地PNG真实存在，题图与原答案边界分离、跨页有序', () => {
   let count=0;
   for(const p of catalog.papers) for(const q of p.questions.filter(q=>q.stemImages)) {
     count++;
-    assert(q.answerImages.length && p.imageSupplement.sourceSha256===p.source.sha256);
-    const boundary=p.imageSupplement.answerBoundary;
+    assert((q.answerImages.length || q.category==='作文' && q.answerSource.kind==='no-unique-answer') && p.imageSupplement.sourceSha256===p.source.sha256);
+    const boundary=q.imageSource ? q.imageSource.answerBoundary : p.imageSupplement.answerBoundary;
+    if(q.imageSource) assert(q.imageSource.sourceSha256===p.source.sha256 && /^[a-f0-9]{64}$/.test(q.imageSource.renderedSha256));
     for(const [kind,images] of [['stem',q.stemImages],['answer',q.answerImages]]) {
       let previous=0;
       for(const im of images) {
@@ -111,10 +112,65 @@ test('98道补充图片题本地PNG真实存在，题图与原答案边界分离
       }
     }
   }
-  assert(count===98);
+  assert(count===144);
   assert(api.find(catalog,'chemistry',2025).questions.find(q=>q.originalNo===21).stemImages.length===2);
   for(const [s,y,n] of [['math',2023,25],['math',2024,25],['math',2025,25],['physics',2023,20],['physics',2025,20],['chemistry',2023,21],['chemistry',2024,21],['chemistry',2025,21]]) {
     const p=api.find(catalog,s,y);assert(p.questions.length===n && !p.skipped.length);
+  }
+});
+
+test('上海语文十一份本地资料题号完整，无重复小问，旧Word图文可作答', () => {
+  const crops=JSON.parse(read('content/past-papers/chinese-completion-crops.json'));
+  for(const [year,total] of [[2013,27],[2014,27],[2015,26],[2016,27],[2017,8],[2018,23],[2019,26],[2020,26],[2023,6],[2024,6],[2025,6]]) {
+    const paper=api.find(catalog,'chinese',year);
+    const numbers=paper.questions.flatMap(q=>q.originalNumbers||[q.originalNo]).sort((a,b)=>a-b);
+    assert(numbers.join(',')===Array.from({length:total},(_,i)=>i+1).join(','), String(year));
+    assert(!paper.skipped.length);
+    const page=setup('chinese',year);
+    assert(page.nodes.filter(n=>n.tag==='form').length===paper.questions.length);
+    assert(paper.questions.some(q=>q.category==='作文'));
+    if(crops[year]) for(const q of paper.questions.filter(q=>q.imageSource)) {
+      assert(crops[year].sourceSha256===q.imageSource.sourceSha256);
+      assert(crops[year].renderedSha256===q.imageSource.renderedSha256);
+    }
+  }
+  assert(api.find(catalog,'chinese',2020).questions.some(q=>q.originalNo===13));
+  assert(api.find(catalog,'chinese',2026).skipped.length && api.find(catalog,'chinese',2026).version.includes('回忆'));
+});
+
+test('2026上海语文交叉核对四份回忆资料，六组可作答且不冒充完整原卷', () => {
+  const paper=api.find(catalog,'chinese',2026);
+  const transcript=JSON.parse(read('content/past-papers/chinese-2026-recollections.json'));
+  assert(paper.questions.length===6 && paper.skipped.length===3);
+  assert(paper.note.includes('不是官方小题号') && paper.version.includes('非官方'));
+  assert(new Set(paper.recollectionSources.map(s=>s.sha256)).size===4);
+  assert(JSON.stringify(paper.recollectionSources)===JSON.stringify(transcript.sources));
+  for(const q of paper.questions) {
+    assert(q.type==='written' && q.review.status==='pending');
+    assert(api.check(q,q.answer)===null);
+    assert(JSON.stringify(q.recollectionSources)===JSON.stringify(paper.recollectionSources));
+    assert(!/【答案】|（[A-D]）/.test(q.stem));
+  }
+  const prose=paper.questions.find(q=>q.originalNo===2);
+  assert(prose.context.includes('【甲】') && prose.context.includes('【乙】') && prose.context.includes('岂'));
+  assert(paper.questions.find(q=>q.originalNo===4).contextLabel.includes('非试卷完整原文'));
+  const page=setup('chinese',2026);
+  assert(page.nodes.filter(n=>n.tag==='form').length===6);
+  assert(page.nodes.filter(n=>n.className==='english-explanation').every(n=>n.hidden));
+});
+
+test('2025上海语文补齐六组题，跨页阅读与作文可作答且答案默认隐藏', () => {
+  const p = api.find(catalog, 'chinese', 2025);
+  assert(p.questions.map(q => q.originalNo).join(',') === '1,2,3,4,5,6' && !p.skipped.length);
+  assert(p.questions.find(q => q.originalNo === 2).stemImages.map(i => i.page).join(',') === '1,2');
+  assert(p.questions.find(q => q.originalNo === 3).stemImages.map(i => i.page).join(',') === '2,3');
+  const view = setup('chinese', 2025);
+  assert(view.nodes.filter(n => n.tag === 'form').length === 6);
+  const composition = view.nodes.find(n => n.tag === 'section' && n.textContent.includes('资料第 6 题'));
+  assert(composition.all().some(n => n.tag === 'textarea'));
+  for (const im of p.questions.find(q => q.originalNo === 6).answerImages) {
+    assert(composition.all().some(n => n.className === 'english-explanation' && n.hidden &&
+      n.all().some(child => child.tag === 'img' && child.src === im.src)));
   }
 });
 

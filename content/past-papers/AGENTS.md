@@ -14,6 +14,8 @@
   past-papers/science-source-inventory.json  上海物化资料独立清单，按 SHA-256 去重，保留两个根目录的来源路径、年份与转录状态
   past-papers/images/<试卷ID>/    原 PDF 裁切的本地原题和答案 PNG，源页号、点坐标 bbox 与像素尺寸存入题目；不把答案图放进题图
   past-papers/image-supplement-inventory.json  图片补题清单与不能自动定位的资料说明，绑定原文件 SHA-256
+  past-papers/chinese-completion-crops.json  2013—2020、2023/2024语文缺题按页核对的题/答案裁切坐标，一基页号、PDF点
+  past-papers/chinese-2026-recollections.json  四份本地2026回忆资料核对后的六组整理稿、版本差异与来源哈希，不冒充官方原卷
 ```
 
 ## 测试
@@ -39,6 +41,14 @@
 脚本 `python scripts/supplement-shanghai-question-images.py "D:\下载\中考真题" "F:\BaiduNetdiskDownload"` 依赖 pdfplumber 和 Poppler pdftoppm，校验原源 SHA-256、独立答案区、题号连续唯一及题卷/答案对应；只追加稳定原 ID，不改文字题。`--refresh-images` 仅重新裁切已接入图片题的图片和裁切元数据，不替换题干、答案、类型或 ID；不对未经确认的扫描件猜题号。图片支持离线加载、手机自适应、原图放大及打印，打印隐藏答案与解析（包括图片），保留文字选项和题图。
 
 首批新增 98 道图片题：数学 37、物理 25、化学 36；按当前资料题号补齐数学 2023—2025、物理 2023/2025、化学 2023—2025 共八份 PDF 的剩余题目。已有文字题及账号记录不变，全部待教师审核，回忆版不冒充官方卷。2020、2026 等扫描件、只有 Word 的旧资料以及英语题目仍需后续定位，不宣称所有资料已补齐。`imageSupplement` 保存源哈希、独立答案边界和原题号清单，供题/答案图片隔离校验。设计见 `docs/superpowers/specs/2026-10-04-original-question-images.md`。
+
+## 上海语文缺题补齐
+
+2025 语文已用 `scripts/complete-shanghai-chinese-2025.py` 按原 PDF 补齐第 2、3、6 组题及原参考答案图片，保留其余已发布文字、ID 与整组编号，共 6 组（含作文），当时语文总计 37 组。分值锚点核对题/答案编号，源 SHA-256 绑定，题图不包含答案，作文范文只供人工参考，全部 pending。仅确认当前本地整理版资料完整，不冒充官方完整版；此定向脚本重跑不覆盖已有题。英语仍缺可靠原题卷，不能从听力原文或答案编造题目。
+
+随后用 `scripts/complete-shanghai-chinese-papers.py <下载根目录> <临时转换PDF目录>` 追加其他年份43组，语文总计80组；2013—2020、2023—2025共11份已覆盖当前本地资料全部题号及作文。旧Word仅在临时目录用LibreOffice导出 `<年份>.pdf`，原资料不修改；2018/2019答案穿插正文，逐组裁切并排除答案，不能用整卷统一答案界线。新题 `imageSource` 记录原文件 `sourceSha256`、转换PDF的 `renderedSha256`、本组题图区结束界线 `answerBoundary`；检验题图在界线之前、答案图之后，转换不改变原资料来源。原文/图表及已发布题不替换。2016原资料将第10题误印为第9题，按阅读组标题及答案编号核对，图片保留误印并说明。2016/2020作文无原范文，`answerSource.kind: no-unique-answer`，不伪造标准答案、无答案图片，作文全部人工评阅。2026“完整版”实际是回忆整合提纲，正文、选项、材料均有缺失，仍待可靠原卷，不标完整。2021/2022目前没有本地资料入口。
+
+2026随后经用户明确同意按多份回忆资料整理：用 `scripts/apply-shanghai-chinese-recollections.py <下载根目录>` 验证两PDF、两Word原哈希，追加六组文字作答，语文现共86组。组号1—6为整理资料编号，不是官方小题号；`recollectionSources`在试卷及题目上保存四份来源的相对路径、SHA-256及`kind: local-recollection`，原文件不作为运行时链接。默写、文言、作文按相互支持的版本整理；现代文材料明确为复述，小说明确非完整原文，只保留节选能支持的小问；名著选项按估分稿排列并标争议。甲同学意见、排序导语、小说发笑与第7段原文仍缺，`skipped`保留原因；不从答案反造内容，不宣称2026完整。六组均主观作答、原资料参考答案人工核对、pending，复导不覆盖已发布题。
 
 ## 上海物理、化学中考资料
 

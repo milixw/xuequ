@@ -29,9 +29,9 @@
           "file": "2023年上海市中考语文试卷.pdf"
         }
       ],
-      "status": "partial-imported",
+      "status": "source-complete-imported",
       "paperId": "sh-chinese-2023",
-      "questionCount": 5
+      "questionCount": 6
     },
     {
       "sha256": "03af4b5b06ee6b03645adca76238291d7f971d312531dd7090a83dba6765de8d",
@@ -57,9 +57,9 @@
           "file": "2024年上海市中考语文试卷.pdf"
         }
       ],
-      "status": "partial-imported",
+      "status": "source-complete-imported",
       "paperId": "sh-chinese-2024",
-      "questionCount": 5
+      "questionCount": 6
     },
     {
       "sha256": "f8b95c38bfa87a3fe7ab5f3df4a06d5c3302efc91748a5b1a643c6d60190ff8a",
@@ -85,9 +85,9 @@
           "file": "2025年上海市中考语文试卷.pdf"
         }
       ],
-      "status": "partial-imported",
+      "status": "source-complete-imported",
       "paperId": "sh-chinese-2025",
-      "questionCount": 3
+      "questionCount": 6
     },
     {
       "sha256": "603a620926ea149d417f67beeb4d03b9331489b9266b109ddd0c317a33bcf235",
@@ -175,9 +175,9 @@
           "file": "2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/2026上海中考语文回忆版真题及解析.pdf"
         }
       ],
-      "status": "pending-transcription",
+      "status": "recollection-compiled-partial",
       "paperId": "sh-chinese-2026",
-      "questionCount": 0
+      "questionCount": 6
     },
     {
       "sha256": "23e0b8bd1a19b25e16e96d6aafab004b378e8aa303c19e1410863f2f37fbdea6",
@@ -275,9 +275,9 @@
           "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中语文 历年中考真题（2013-2024）/2013上海语文试卷+答案+解析(word整理版).doc"
         }
       ],
-      "status": "partial-imported",
+      "status": "source-complete-imported",
       "paperId": "sh-chinese-2013",
-      "questionCount": 3
+      "questionCount": 7
     },
     {
       "sha256": "d0055945e54d26b6925ae50cef47900c80bc4e82e11d2445750af10596ad609c",
@@ -293,9 +293,9 @@
           "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中语文 历年中考真题（2013-2024）/2014上海语文试卷+答案+解析(word整理版).doc"
         }
       ],
-      "status": "partial-imported",
+      "status": "source-complete-imported",
       "paperId": "sh-chinese-2014",
-      "questionCount": 3
+      "questionCount": 8
     },
     {
       "sha256": "9f98227f86d7be3d14f13ef398251e30b6f99e54ece22242cc6db4de87c36ec7",
@@ -311,9 +311,9 @@
           "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中语文 历年中考真题（2013-2024）/2015上海语文试卷+答案+解析(word整理版).doc"
         }
       ],
-      "status": "partial-imported",
+      "status": "source-complete-imported",
       "paperId": "sh-chinese-2015",
-      "questionCount": 3
+      "questionCount": 8
     },
     {
       "sha256": "8237be0f791eeed452ffbeae1487c65cf7aba330c754c01ac7a097c3ca798940",
@@ -329,9 +329,9 @@
           "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中语文 历年中考真题（2013-2024）/2016上海语文试卷+答案+解析(word整理版).doc"
         }
       ],
-      "status": "pending-transcription",
+      "status": "source-complete-imported",
       "paperId": "sh-chinese-2016",
-      "questionCount": 0
+      "questionCount": 8
     },
     {
       "sha256": "a54951bc5bed1160f716e68f40e64d35f198886120e5a19b5baf5d9563709a9d",
@@ -347,9 +347,9 @@
           "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中语文 历年中考真题（2013-2024）/2017上海语文试卷+答案+解析(word整理版).doc"
         }
       ],
-      "status": "partial-imported",
+      "status": "source-complete-imported",
       "paperId": "sh-chinese-2017",
-      "questionCount": 3
+      "questionCount": 8
     },
     {
       "sha256": "49bfa67f99f7722c6707d4dc4be887fe718a29363330940478069b8ba69412d4",
@@ -365,9 +365,9 @@
           "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中语文 历年中考真题（2013-2024）/2018上海语文试卷+答案+解析(word整理版).doc"
         }
       ],
-      "status": "partial-imported",
+      "status": "source-complete-imported",
       "paperId": "sh-chinese-2018",
-      "questionCount": 4
+      "questionCount": 8
     },
     {
       "sha256": "1c27afb94c0c4d4c63d16380cc2ff80c70f96062e4183f2e9211e9d86057593d",
@@ -383,9 +383,9 @@
           "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中语文 历年中考真题（2013-2024）/2019上海语文试卷+答案+解析(word整理版).docx"
         }
       ],
-      "status": "partial-imported",
+      "status": "source-complete-imported",
       "paperId": "sh-chinese-2019",
-      "questionCount": 3
+      "questionCount": 8
     },
     {
       "sha256": "71d5b6b72ad9a945e145e02407e873c1bce0142445a4770b45092f806d8b7283",
@@ -401,9 +401,9 @@
           "file": "中考真题/各省市《历年中考真题》2013-2024/历年中考真题（版本二，按省份划分）/上海/初中语文 历年中考真题（2013-2024）/2020上海语文试卷+答案(word整理版).docx"
         }
       ],
-      "status": "partial-imported",
+      "status": "source-complete-imported",
       "paperId": "sh-chinese-2020",
-      "questionCount": 2
+      "questionCount": 7
     },
     {
       "sha256": "d0a7292506994469ee95a64cb8a8129e033e03236d704f4aa825785bdabd8f1f",

@@ -214,7 +214,13 @@
       '<a class="card" href="content/chinese/shanghai-junior-outline.html"><h2>语文考纲</h2>' +
       '<p>查看上海初中语文考试范围、考点清单与复习方向</p></a>' +
       '<a class="card" href="content/chinese/classical-words.html"><h2>语文实词虚词</h2>' +
-      '<p>阅读 180 个文言实词，查找词义和例句 · 虚词资料待补充</p></a>';
+      '<p>阅读 180 个文言实词，查找词义和例句 · 虚词资料待补充</p></a>' +
+      '<a class="card" href="content/chinese/上海中考古诗文·虚实词联动注释版.html"><h2>古诗文联动注释</h2>' +
+      '<p>阅读 61 篇古诗文，点词查释义，联动查看出处</p></a>' +
+      '<a class="card" href="content/chinese/上海中考古诗文阅读应考手册.html"><h2>古诗文阅读应考手册</h2>' +
+      '<p>梳理古诗文阅读考点、解题方法和答题要点</p></a>' +
+      '<a class="card" href="content/chinese/上海中考现代文阅读应考手册.html"><h2>现代文阅读应考手册</h2>' +
+      '<p>查看现代文阅读题型、分析方法和答题技巧</p></a>';
     main.appendChild(chinese);
     const english = document.createElement('section');
     english.className = 'home-english';
@@ -523,7 +529,7 @@
   const DATA_SCRIPTS = {
     EnglishPastPapers: 'content/english/past-papers/catalog.js?v=20261003-shanghai-answers',
     JiangsuEnglishPastPapers: 'content/english/past-papers/jiangsu.js?v=20261003-jiangsu-answers',
-    ShanghaiSubjectPapers: 'content/past-papers/shanghai.js?v=20261004-images',
+    ShanghaiSubjectPapers: 'content/past-papers/shanghai.js?v=20261010-chinese-complete',
   };
   const dataLoading = {};
 

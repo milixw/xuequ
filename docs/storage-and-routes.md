@@ -24,6 +24,8 @@
 ## 本地存储
 
 首页“语文考纲”链接到 `content/chinese/shanghai-junior-outline.html`，展示用户提供的归纳资料，可返回首页；不新增 hash 路由或存储键。
+首页两份阅读应考手册分别链接到 `content/chinese/上海中考古诗文阅读应考手册.html`、`content/chinese/上海中考现代文阅读应考手册.html`，本地离线打开，可返回首页，不新增 hash 路由或存储键。
+首页“古诗文联动注释”链接到 `content/chinese/上海中考古诗文·虚实词联动注释版.html`，配套三份参考页同目录离线使用，可返回首页，不新增 hash 路由或存储键。
 
 首页“语文实词虚词”链接到独立离线页面 `content/chinese/classical-words.html`，实词展示资料正文并支持查找，虚词待补充；不展示 PDF 打开、下载入口和来源、页码、页数信息。原 PDF 为同目录 `classical-words.pdf`，供维护核对。不新增 hash 路由或存储键。
 

@@ -33,6 +33,8 @@
 
 首页语文实词虚词入口链接到 `content/chinese/classical-words.html`，资料与原 PDF 放在 `content/chinese/`，无需首屏加载全文。
 首页语文考纲入口链接到 `content/chinese/shanghai-junior-outline.html`，为独立离线参考页。
+首页语文区另有 `content/chinese/上海中考古诗文阅读应考手册.html` 和 `content/chinese/上海中考现代文阅读应考手册.html` 两份独立离线复习资料。
+首页古诗文联动注释入口链接到 `content/chinese/上海中考古诗文·虚实词联动注释版.html`，配套三份参考页同目录离线使用。
 
 - 首屏只加载首页和常用页面要用的脚本；大体积数据（真题文字数据）不写进 `index.html`，在 `app.js` 的 `DATA_SCRIPTS` 里登记，进入对应页面时用 `<script>` 按需加载
 - 零构建、不引入框架。第三方库只能放在 `vendor/` 里本地加载，不走 CDN（国内访问 CDN 不稳定）

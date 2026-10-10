@@ -2599,12 +2599,89 @@
           "answer": "（ 1 ）①本题考查宣传语。\nA. 亦真亦幻西游行，寓学于乐收获多（亦真亦幻符合小说虚构的特点，而且寓学于乐也契合题干提到的 “ 西游园 ” 活动，在游园中学\n习到知识）；\nB. 降妖伏魔取经路，吃喝玩乐惹人羡（吃喝玩乐不妥，削减了《西游记》的深刻主题）；\nC. 重读经典名著，围观师徒游戏人生（游戏人生不适合，师徒四人一路降妖除魔，为了心中目标克服艰难险阻，这并非 “ 游戏 ” 的态\n度）；\n\nD. 走进神魔小说，学习丰富的古代史（学习古代史不正确，这是一部虚构的神魔小说，内容虚虚实实，并不能用来学习历史）。\n故选： A 。\n②本题考查海报设计。海报中通常包括活动的性质、主办单位、时间、地点等内容，多用于影视剧和新品宣传中，利用图片、文\n字、色彩、空间等要素进行完整的结合。其语言要求简明扼要，形式要做到新颖美观。并不需要呈现活动完整方案、背景意义以及\n活动价值；观察这幅海报，上边虽然提到了时间是在 12 ： 00—13 ： 00 ，但是并没有明确活动具体日期，故需要要明确活动的具体日\n期。\n故选： B 。\n（ 2 ）本题考查人物形象分析概括。题干要求用四个字概括猪八戒的优点和缺点。猪八戒，又名猪刚鬣、猪悟能，是古典名著《西\n游记》中的角色。猪八戒身上既有人的吃苦耐劳、憨厚率直的品质以及贪婪自私的本性，又有神的本领，同时还有猪的形体特征。\n他性格憨厚，力气大，但好吃懒做，胆小，爱占小便宜，贪图女色，经常被妖怪的美色所迷惑，难分敌我。他贪吃贪睡，好进谗\n言。他常常想捉弄人，但不是搬起石头来砸自己的脚就是作茧自缚。猪八戒能知错就改，能听取他人意见，最终也修成正果，被如\n来佛封为 “ 净坛使者 ” 。猪八戒优点：憨厚淳朴 / 知错能改 / 忠勇善良 / 性格直率 / 重情重义等；猪八戒缺点：好吃懒做 / 见识短浅 / 搬弄是\n非 / 贪恋女色 / 占小便宜 / 胆小怕事等。\n（ 3 ）本题考查名著内容的理解和分析。\n三打白骨精：唐僧师徒四人取经路过白虎岭，白骨精想吃唐僧肉，分别三次变化为年轻女子、老妇、老翁，均被孙悟空识破。前两\n次白骨精化风逃走，第三次被一棍子打死。唐僧以为孙悟空打死了三个无辜的人，加上八戒在一旁进谗言，赶走了孙悟空。三调芭\n蕉扇：唐僧师徒四人去西天取经，路遇火焰山受阻。孙悟空万不得已，到翠云山向牛魔王之妻罗刹女（铁扇公主）借昔芭蕉扇。公\n主扇走了悟空，后来悟空变成虫子进入公主肚子里，迫使公主答应借扇，借来的却是假扇，火越扇越大；悟空变成牛魔王的样子，\n骗取真扇；牛魔王变成八戒将扇子骗回去，悟空与其打斗起来，一众神佛都来助阵，牛魔王被降伏。悟空借到芭蕉扇，扇灭火焰山\n的火，师徒四人过了火焰山。从情节设计的角度 “ 三打 ”“ 三调 ” ， “ 三 ” 在古代形容数量多，故事情节有 “ 三 ” 处波折，说明事件的发生\n不是偶然的，可使情节更曲折，又不显得重复累赘，吸引读者的阅读兴趣，增加阅读的趣味性。\n示例： “ 三打 ”“ 三调 ” 这样的重复式结构，增强了故事的节奏感和紧张感。每次重复都让读者对结果充满期待，且每次情节又有变\n化，如白骨精的三次幻化不同，孙悟空的应对也不同，这使故事避免了单调。同时，三次的设计也充分展现了人物的性格和成长，\n如孙悟空的坚定与智慧。这种层层递进的情节，如同攀登台阶，一步步将故事推向高潮，让读者沉浸其中，充分感受到《西游记》\n情节设计的精妙与魅力，故而吸引人。\n（ 4 ）本题考查个性化解读名著的能力。这是一道开放类试题，结合相关人物的性格，言之成理即可。\n示例一：我认为你的指责是错的。你的指责忽略了孙悟空保护你的初衷，也没有正确认识到妖怪的邪恶本质。在面对危险时，不能\n一味要求慈悲而忽视自身安全，孙悟空的果断行动是必要的，你应理解他的行为，而不是盲目责怪。\n示例二：我认为你的指责是对的。你作为高僧，慈悲为怀是你的修行理念。你希望通过教诲让悟空也懂得慈悲的重要性，而不是一\n味杀戮。虽然悟空打妖怪是为了保护你，但你也希望他能找到更温和的方式，这也是你引导悟空成长的一种方式，不能简单说你完\n全错了。\n示例三：我认为你们都有一定道理。孙悟空保护唐你打妖怪是有道理的，因为那些妖怪大多心怀恶意，妄图加害你们，孙悟空的行\n动是为了确保你的安全以及取经之路的顺利进行，这体现了他的勇敢和担当。而你坚持慈悲也有其道理，你作为佛门弟子，慈悲是\n其根本理念，你希望能以善念度化众生，不想悟空轻易杀生，这也是你对佛法的坚守。\n答案：\n（ 1 ）① A   ② B\n（ 2 ）憨厚淳朴 / 知错能改 / 忠勇善良等；好吃懒做 / 见识短浅 / 搬弄是非 / 贪恋女色 / 占小便宜等。\n（ 3 ）情节上使故事更加曲折有趣，形成跌宕起伏之感。第一次是 “ 起 ” ，主人公为了达到某种目的，进行了第一次尝试；第二次是\n“ 变 ” ，虽然核心情节要重复第一次，但是有一定变化；第三次是 “ 结 ” ，无论成败，要给整个 “ 三段式 ” 结构一个总结性的交代。\n（ 4 ）示例一：我认为你的做法是错的。邪恶的妖怪伤害了你，而孙悟空去保护你，你却责怪他，分清恶与善，如遇善良的妖怪，\n我们也要心存善念，而对于恶势力我们要勇于反抗。\n示例二：我认为你没有错。虽然悟空是为了保护你，但他选择的方式可能过于激进，直接将妖怪打死。在你的认知中，本就是僧人\n要讲慈悲大义，而悟空恰好违背了这点，所以你没有错。\n示例三：你们都有道理。悟空为了保护你去打妖怪，尽到了徒弟的本分。你作为出家人坚持自己的信念责怪悟空，是出于师傅对徒\n弟的教诲。你们只是立场不同，或许可以多换位思考。",
           "explanation": "《西游记》我国四大名著之一，作者是明代吴承恩，主要描写了孙悟空、猪八戒、沙僧三人保护唐僧西行取经，唐僧从投胎到取经\n归来共遇到八十一难，一路降妖伏魔，化险为夷，最后到达西天、取得真经的故事。它是我国神魔小说的典范。",
           "category": "综合运用"
+        },
+        {
+          "id": "sh-chinese-2023-q06",
+          "originalNo": 6,
+          "originalNumbers": [
+            6
+          ],
+          "type": "written",
+          "category": "作文",
+          "stem": "请根据下面的作文题目与要求写作。",
+          "answer": "作文没有唯一答案；原资料写作指导或范文仅供参考，由教师人工评阅。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2023/q06-stem-01.png",
+              "page": 4,
+              "bbox": [
+                28,
+                630,
+                567.92,
+                778
+              ],
+              "width": 1080,
+              "height": 296
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2023/q06-answer-01.png",
+              "page": 9,
+              "bbox": [
+                28,
+                705.5,
+                567.92,
+                817
+              ],
+              "width": 1080,
+              "height": 223
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2023/q06-answer-02.png",
+              "page": 10,
+              "bbox": [
+                28,
+                48,
+                567.92,
+                805
+              ],
+              "width": 1080,
+              "height": 1514
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "63c7bc76edeb02a626472cbf2135595a5228b1b0e30a0eadf3a7ca5adf821fc0",
+            "renderedSha256": "63c7bc76edeb02a626472cbf2135595a5228b1b0e30a0eadf3a7ca5adf821fc0",
+            "answerBoundary": {
+              "page": 4,
+              "top": 778
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
         }
       ],
-      "skipped": [
-        "6: 作文暂不导入"
-      ],
-      "note": "部分原题已导入，题干、答案与解析来自本地整理资料，待教师核对。语文按资料整组题号编排，整篇阅读及小问一起作答；不冒充官方小题编号。"
+      "skipped": [],
+      "note": "已按本地整理版资料补齐全部题号、阅读小问及作文，文字与本地原题图片混合展示；保留原资料编号及配图标注，主观题人工订正，参考答案待教师核对。",
+      "imageSupplement": {
+        "sourceSha256": "63c7bc76edeb02a626472cbf2135595a5228b1b0e30a0eadf3a7ca5adf821fc0",
+        "answerBoundary": {
+          "page": 6,
+          "top": 78.6
+        },
+        "originalNumbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
     },
     {
       "id": "sh-chinese-2024",
@@ -2680,12 +2757,89 @@
           "answer": "（ 1 ） B\n\n（ 2 ） A\n（ 3 ）江水；困倦的鸣声\n（ 4 ）示例：建议一：把 “ 一阵阵 ” 改成 “ 一片又一片 ” ，化听觉为视觉，使语言陌生化，更好地体现读书声断断续续、此起彼伏的特\n点，也体现了同学们毕业时恋恋不舍的情感。\n（ 5 ）既能体现艾青诗歌风格的变化，又能展现艾青诗歌中的时代风貌；按照主题或者情感的不同来进行编排，能更好地展现同学\n们在毕业时多样的表达。",
           "explanation": "（ 1 ）本题考查诗歌创作。\nACD. 正确；\nB. 有误。因为吟诵方法是诗歌创作后的表现方式，而不是创作过程中需要查阅的内容。\n故选： B 。\n（ 2 ）本题考查诗歌创作顺序。\n根据题干可知，要通过体会《艾青诗选》中的诗句和意象来加深对意象的认识，那么第一步应该是在艾青的诗歌中找到意象，然后\n分析这些意象都有什么特点，再结合时代背景，分析这些意象在具体的时代中承载的情感。进而体会意象的作用。故顺序应该是：\n寻找诗中出现的意象 —— 品味诗中意象的特点 —— 分析意象与时代关系；\n故选： A 。\n（ 3 ）本题考查句子赏析。\n结合句子 “ 江水戏逐着阳光 ” 可知，这里用 “ 戏逐 ” 把江水、阳光拟人化，生动写出了阳光照耀在江水上面、波光粼粼的画面；\n结合题干 “ 动静结合，实现了视觉和听觉的融合 ” 可知，要从视觉和听觉角度分析。 “ 江水戏逐着阳光，静静地流着 ” 是视觉描写，描\n写江水和阳光， “ 从江边的树荫下，传出了勤劳的耕牛的，困倦的鸣声 ” 是听觉描写，描写耕牛的叫声，江水和阳光是静态描写，耕\n牛的鸣叫声是动态描写，动静结合。故诗句中把波光粼粼和耕牛的叫声结合。\n（ 4 ）本题考查诗歌句子。\n可以从诗歌语言的多样性、节奏感、意象的具体化、色彩感、想象修辞等入手赏析诗歌。\n建议一：把 “ 一阵阵 ” 改成 “ 一层又一层 ” 的好处：从形式上看，字数比原来多，增加语言的多样性和节奏感，使节奏舒缓一些，内容\n上看，用 “ 一层又一层 ” 写读书声是此起彼伏的，是连绵不断的，而且 “ 层 ” 把读书声具象化了，好像水纹一般，有了厚度，引发人的\n联想，丰富了诗歌的内容。\n建议二：把 “ 花香 ” 改为 “ 荷香 ” 的好处：使诗歌的意象更加具体，诗歌题目是 “ 初夏 ” ，荷香更符合初夏的特征。\n建议三：把 “ 多少 ” 改成 “ 多少颜色 ” 的好处：改句比原句增加了 “ 颜色 ” 一词，从视觉角度写梦境，增加了诗歌的想象力和色彩感，使\n梦境更绚丽多彩。\n（ 5 ）本题考查诗歌编排。\n《艾青诗选》分为三阶段：第一阶段， 1937 年及以前，诗歌充满 “ 土地的忧郁 ” ，多写国家民族的苦难、悲伤与反抗，具有非常凝重\n深厚而又大气的风格。第二阶段， 1938—1978 年，诗歌中的主要意象是 “ 土地 ” 和 “ 太阳 ” 。第三阶段， 1978 年及以后，诗句变得更整\n齐，诗情变得更深沉，诗意变得更警策。《艾青诗选》按照时间来编排，目的是为了展示诗人创作的发展脉络。\n而本题编排《毕业诗歌集》是这一年毕业的同学们的诗集，是同一时间写成的，因此不能按时间来编排。可以按诗歌的主题或情感\n如 “ 怀念 ”“ 感恩 ”“ 祝福 ” 等分类编排，以方便读者有选择地进行阅读。",
           "category": "综合运用"
+        },
+        {
+          "id": "sh-chinese-2024-q06",
+          "originalNo": 6,
+          "originalNumbers": [
+            6
+          ],
+          "type": "written",
+          "category": "作文",
+          "stem": "请根据下面的作文题目与要求写作。",
+          "answer": "作文没有唯一答案；原资料写作指导或范文仅供参考，由教师人工评阅。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2024/q06-stem-01.png",
+              "page": 4,
+              "bbox": [
+                28,
+                678.5,
+                567.92,
+                808
+              ],
+              "width": 1080,
+              "height": 259
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2024/q06-answer-01.png",
+              "page": 9,
+              "bbox": [
+                28,
+                516.5,
+                567.92,
+                817
+              ],
+              "width": 1080,
+              "height": 601
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2024/q06-answer-02.png",
+              "page": 10,
+              "bbox": [
+                28,
+                48,
+                567.92,
+                805
+              ],
+              "width": 1080,
+              "height": 1514
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "9d810165b01fbef526750090c203e48ba8b908f73aca8a58e712b0dfe2a2e870",
+            "renderedSha256": "9d810165b01fbef526750090c203e48ba8b908f73aca8a58e712b0dfe2a2e870",
+            "answerBoundary": {
+              "page": 4,
+              "top": 808
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
         }
       ],
-      "skipped": [
-        "6: 作文暂不导入"
-      ],
-      "note": "部分原题已导入，题干、答案与解析来自本地整理资料，待教师核对。语文按资料整组题号编排，整篇阅读及小问一起作答；不冒充官方小题编号。"
+      "skipped": [],
+      "note": "已按本地整理版资料补齐全部题号、阅读小问及作文，文字与本地原题图片混合展示；保留原资料编号及配图标注，主观题人工订正，参考答案待教师核对。",
+      "imageSupplement": {
+        "sourceSha256": "9d810165b01fbef526750090c203e48ba8b908f73aca8a58e712b0dfe2a2e870",
+        "answerBoundary": {
+          "page": 6,
+          "top": 78.6
+        },
+        "originalNumbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
     },
     {
       "id": "sh-chinese-2025",
@@ -2715,6 +2869,136 @@
           "category": "古诗文默写"
         },
         {
+          "id": "sh-chinese-2025-q02",
+          "originalNo": 2,
+          "type": "written",
+          "category": "文言文阅读",
+          "stem": "请根据下面的原资料题图作答，按小问编号填写答案。",
+          "answer": "原资料参考答案与解析见下方图片。",
+          "explanation": null,
+          "explanationNote": "保留原资料标注、人物关系图及跨页小问；参考答案待教师核对。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2025/q02-stem-01.png",
+              "page": 1,
+              "bbox": [
+                28,
+                262.311,
+                567.92,
+                811.873
+              ],
+              "width": 1080,
+              "height": 1100
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2025/q02-stem-02.png",
+              "page": 2,
+              "bbox": [
+                28,
+                48,
+                567.92,
+                138
+              ],
+              "width": 1080,
+              "height": 180
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2025/q02-answer-01.png",
+              "page": 7,
+              "bbox": [
+                28,
+                354.056,
+                567.92,
+                808.152
+              ],
+              "width": 1080,
+              "height": 909
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2025/q02-answer-02.png",
+              "page": 8,
+              "bbox": [
+                28,
+                48,
+                567.92,
+                378.344
+              ],
+              "width": 1080,
+              "height": 661
+            }
+          ],
+          "review": {
+            "status": "pending"
+          }
+        },
+        {
+          "id": "sh-chinese-2025-q03",
+          "originalNo": 3,
+          "type": "written",
+          "category": "现代文阅读",
+          "stem": "请根据下面的原资料题图作答，按小问编号填写答案。",
+          "answer": "原资料参考答案与解析见下方图片。",
+          "explanation": null,
+          "explanationNote": "保留原资料标注、人物关系图及跨页小问；参考答案待教师核对。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2025/q03-stem-01.png",
+              "page": 2,
+              "bbox": [
+                28,
+                297.145,
+                567.92,
+                656.511
+              ],
+              "width": 1080,
+              "height": 720
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2025/q03-stem-02.png",
+              "page": 3,
+              "bbox": [
+                28,
+                48,
+                567.92,
+                321.402
+              ],
+              "width": 1080,
+              "height": 547
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2025/q03-answer-01.png",
+              "page": 8,
+              "bbox": [
+                28,
+                378.441,
+                567.92,
+                808.088
+              ],
+              "width": 1080,
+              "height": 861
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2025/q03-answer-02.png",
+              "page": 9,
+              "bbox": [
+                28,
+                48,
+                567.92,
+                276.513
+              ],
+              "width": 1080,
+              "height": 458
+            }
+          ],
+          "review": {
+            "status": "pending"
+          }
+        },
+        {
           "id": "sh-chinese-2025-q04",
           "originalNo": 4,
           "type": "written",
@@ -2739,14 +3023,78 @@
           "context": "阅读下列材料，完成问题。\n材料一\n美国博物馆向我归还流失近 80 年的楚帛书\n       ①新华社华盛顿 5 月 16 日电    当地时间 5 月 16 日，国家文物局在中国驻美国大使馆接收美国史密森学会国立亚洲艺术\n博物馆返还的子弹库帛书《五行令》《攻守占》。文化和旅游部副部长、国家文物局局长饶权在视频致辞中指出，美国\n史密森学会国立亚洲艺术博物馆向中方返还帛书《五行令》《攻守占》，彰显其在文化遗产保护合作中恪守博物馆伦理\n的努力，是中国主导制定的《青岛建议书》以对话与合作推动历史上流失文物保护与返还理念的成功实践。帛书回归\n后，将在文物原生环境中得到更加全面、系统保护和研究，让文物价值得到更加准确、完整理解和阐释。\n       ②子弹库帛书 1942 年出土于长沙子弹库楚墓，是目前出土的唯一战国帛书， _______ 是迄今发现的中国最早的帛书和\n首个典籍意义上的古书，对于中国古文字、古文献研究以及学术史、思想史研究具有不可替代的重要价值。子弹库帛书\n分三卷，此次回归的《五行令》和《攻守占》为子弹库帛书第二卷、第三卷。\n       ③子弹库帛书 1946 年非法流失美国。第一时间关注到美国史密森学会发布了关于返还非道德方式获取文物的政策性\n文件后，国家文物局对国立亚洲艺术博物馆保存的子弹库帛书《五行令》《攻守占》启动了追索工作。基于溯源及流转\n历史研究形成的扎实、完整证据链，基于以文物回归纠正历史错误、推动双方在专业领域的长期合作这一共识经过多轮\n磋商，美方同意将文物退出馆藏并返还中国。\n       ④子弹库帛书《五行令》《攻守占》回归祖国，成为主动追索历史上流失重点文物并取得成功的案例，也是秉持\n《青岛建议书》对话与合作的核心精神，以溯源及流转历史研究成果为支撑，实现流失海外中国文物追索成功的示范案\n例。《五行令》《攻守占》将于 2025 年 7 月在中国国家博物馆举办的 “ 万里同归 —— 新时代文物追索返还成果展 ” 上首次面\n向公众展出。国家文物局将继续推动子弹库帛书《四时令》早日回归。\n（选自《解放日报》 2025 年 5 月 17 日刊，有删改）\n材料二\n国宝战国帛书回家\n      ① 5 月 18 日 3 时 55 分，北京首都国际机场，从美国华盛顿飞来的 CA818 航班划过晨雾，稳稳降落在跑道上。机上的大部\n\n分乘客并不知道，流失美国长达 79 年的珍贵文物 — 子弹库帛书《五行令》《攻守占》，就存放在工作组人员身旁的 4 个\n文物包装箱中。\n      ②美国时间 5 月 16 日，国家文物局在中国驻美国大使馆接收了美国史密森尼学会国立亚洲艺术博物馆返还的子弹库帛\n书《五行令》《攻守占》。经过查验封箱后，国家文物局工作组马不停蹄，带着它们踏上了回家的路。\n      ③子弹库帛书是目前出土的唯一的战国帛书。帛书分为《四时令》《五行令》《攻守占》三卷，字数多达 900 余字，\n是迄今为止发现的中国最早的帛书和首个典籍意义上的古书。同西方世界大名鼎鼎的 “ 死海文书 ” 相比，子弹库帛书的年\n代还要早 100 多年。\n      ④跨越 11000 多公里，飞行 16 个多小时，帛书归来，断章重续。\n      ⑤ 4 时 45 分，准备妥当后， 4 名工作人员每人手捧一件文物包装箱，缓步离开机舱。 5 时 06 分，文物抵达要客区，安放\n在铺有软垫的桌子上。海关人员查验完报关单后，工作人员小心翼翼开启了芙有月名图的包装箱封条。\n      ⑥ 5 时 27 分，文物整装待发，披着东方的晨雾踏上归国之路。\n（选自《文汇报》 2025 年 5 月 19 日刊，有删改）\n（ 1 ）下面最适合填写在材料一横线处的一项是   ______\nA. 只\nB. 但\nC. 也\nD. 才\n（ 2 ）作为一则新闻，下面对材料一分析不正确的一项是   ______\nA ．在新闻事件后第一时间发出，具有很强的时效性。\nB ．按照时间顺序说明了子弹库帛书流失、追索过程。\nC ．导语部分点明了新闻发生的时间、地点与事件。\nD ．新闻的重要性逐层递进，符合新闻的价值。\n（ 3 ）新闻的编写需要具有读者意识，材料二符合读者需求的一项是   ______\nA ．了解不同人物对子弹库帛书回归的看法差异。\nB ．明确掌握子弹库帛书回归的价值与背景信息。\nC ．了解子弹库帛书的机场运输过程与转运细节。\nD ．深入探究艺术博物馆的建馆历史与发展历程。\n（ 4 ）材料一、材料二均为报道子弹库帛书回归这一事件的新闻，但语言特点不同：\n材料一： ______\n材料二： ______",
           "contextLabel": "本题引用的新闻材料（资料第 4 题，含原小问）",
           "category": "综合运用"
+        },
+        {
+          "id": "sh-chinese-2025-q06",
+          "originalNo": 6,
+          "type": "written",
+          "category": "作文",
+          "stem": "请根据下面的作文题目与要求写作。",
+          "answer": "作文没有唯一答案；下方为原资料范文和写作分析，供人工参考。",
+          "explanation": null,
+          "explanationNote": "保留原资料标注、人物关系图及跨页小问；参考答案待教师核对。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2025/q06-stem-01.png",
+              "page": 5,
+              "bbox": [
+                28,
+                744.421,
+                567.92,
+                811.176
+              ],
+              "width": 1080,
+              "height": 135
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2025/q06-answer-01.png",
+              "page": 10,
+              "bbox": [
+                28,
+                684.985,
+                567.92,
+                811.92
+              ],
+              "width": 1080,
+              "height": 255
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2025/q06-answer-02.png",
+              "page": 11,
+              "bbox": [
+                28,
+                48,
+                567.92,
+                263.972
+              ],
+              "width": 1080,
+              "height": 432
+            }
+          ],
+          "review": {
+            "status": "pending"
+          }
         }
       ],
-      "skipped": [
-        "2: 加点、波浪线或人物关系图未完整转录",
-        "3: 加点、波浪线或人物关系图未完整转录",
-        "6: 作文暂不导入"
-      ],
-      "note": "部分原题已导入，题干、答案与解析来自本地整理资料，待教师核对。语文按资料整组题号编排，整篇阅读及小问一起作答；不冒充官方小题编号。"
+      "skipped": [],
+      "note": "已按本地整理版资料补齐第1—6组题（含全部小问及作文），文字与本地原题图片混合展示；保留资料编号，不冒充官方小题编号。参考答案及作文范文来自原资料，待教师核对。",
+      "imageSupplement": {
+        "sourceSha256": "e2f375bd85855aab33aaf66d77c58cabacb289944c84d53e0d75bda9fb259c2c",
+        "answerBoundary": {
+          "page": 7,
+          "top": 78.597
+        },
+        "originalNumbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6
+        ]
+      }
     },
     {
       "id": "sh-math-2026",
@@ -3036,14 +3384,302 @@
           "review": {
             "status": "pending"
           }
+        },
+        {
+          "id": "sh-chinese-2013-q12",
+          "originalNo": 12,
+          "originalNumbers": [
+            12,
+            13,
+            14,
+            15
+          ],
+          "type": "written",
+          "category": "阅读与综合运用（原题图片）",
+          "stem": "请根据下面的原资料题图作答，按小问编号填写答案。",
+          "answer": "原资料参考答案见下方图片，按小问编号人工核对。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2013/q12-stem-01.png",
+              "page": 2,
+              "bbox": [
+                28,
+                135,
+                567.304,
+                459.5
+              ],
+              "width": 1079,
+              "height": 649
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2013/q12-answer-01.png",
+              "page": 5,
+              "bbox": [
+                28,
+                291.5,
+                567.304,
+                557.5
+              ],
+              "width": 1079,
+              "height": 532
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "3adb9ffbef4a462de91bfc41019258710a42cfd0f127c4cf42cb4bb6906fa9b5",
+            "renderedSha256": "4f202584a4e07bba73854ab8466b271c9ea6153474dd65f45304f30f947ba962",
+            "answerBoundary": {
+              "page": 2,
+              "top": 459.5
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
+        },
+        {
+          "id": "sh-chinese-2013-q16",
+          "originalNo": 16,
+          "originalNumbers": [
+            16,
+            17,
+            18,
+            19,
+            20
+          ],
+          "type": "written",
+          "category": "阅读与综合运用（原题图片）",
+          "stem": "请根据下面的原资料题图作答，按小问编号填写答案。",
+          "answer": "原资料参考答案见下方图片，按小问编号人工核对。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2013/q16-stem-01.png",
+              "page": 2,
+              "bbox": [
+                28,
+                462.5,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 709
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2013/q16-stem-02.png",
+              "page": 3,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                338
+              ],
+              "width": 1079,
+              "height": 580
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2013/q16-answer-01.png",
+              "page": 5,
+              "bbox": [
+                28,
+                557.5,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 519
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2013/q16-answer-02.png",
+              "page": 6,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                167
+              ],
+              "width": 1079,
+              "height": 238
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "3adb9ffbef4a462de91bfc41019258710a42cfd0f127c4cf42cb4bb6906fa9b5",
+            "renderedSha256": "4f202584a4e07bba73854ab8466b271c9ea6153474dd65f45304f30f947ba962",
+            "answerBoundary": {
+              "page": 3,
+              "top": 338
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
+        },
+        {
+          "id": "sh-chinese-2013-q21",
+          "originalNo": 21,
+          "originalNumbers": [
+            21,
+            22,
+            23,
+            24,
+            25,
+            26
+          ],
+          "type": "written",
+          "category": "阅读与综合运用（原题图片）",
+          "stem": "请根据下面的原资料题图作答，按小问编号填写答案。",
+          "answer": "原资料参考答案见下方图片，按小问编号人工核对。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2013/q21-stem-01.png",
+              "page": 3,
+              "bbox": [
+                28,
+                338,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 958
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2013/q21-stem-02.png",
+              "page": 4,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                536
+              ],
+              "width": 1079,
+              "height": 976
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2013/q21-answer-01.png",
+              "page": 6,
+              "bbox": [
+                28,
+                167,
+                567.304,
+                510
+              ],
+              "width": 1079,
+              "height": 686
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "3adb9ffbef4a462de91bfc41019258710a42cfd0f127c4cf42cb4bb6906fa9b5",
+            "renderedSha256": "4f202584a4e07bba73854ab8466b271c9ea6153474dd65f45304f30f947ba962",
+            "answerBoundary": {
+              "page": 4,
+              "top": 536
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
+        },
+        {
+          "id": "sh-chinese-2013-q27",
+          "originalNo": 27,
+          "originalNumbers": [
+            27
+          ],
+          "type": "written",
+          "category": "作文",
+          "stem": "请根据下面的作文题目与要求写作。",
+          "answer": "作文没有唯一答案；原资料写作指导或范文仅供参考，由教师人工评阅。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2013/q27-stem-01.png",
+              "page": 4,
+              "bbox": [
+                28,
+                536,
+                567.304,
+                622.5
+              ],
+              "width": 1079,
+              "height": 173
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2013/q27-answer-01.png",
+              "page": 6,
+              "bbox": [
+                28,
+                510,
+                567.304,
+                805
+              ],
+              "width": 1079,
+              "height": 590
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "3adb9ffbef4a462de91bfc41019258710a42cfd0f127c4cf42cb4bb6906fa9b5",
+            "renderedSha256": "4f202584a4e07bba73854ab8466b271c9ea6153474dd65f45304f30f947ba962",
+            "answerBoundary": {
+              "page": 4,
+              "top": 622.5
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
         }
       ],
-      "skipped": [
-        "12: 题目依赖的加点或画线尚未恢复",
-        "16: 题目依赖的加点或画线尚未恢复",
-        "21: 题目依赖的加点或画线尚未恢复"
-      ],
-      "note": "部分原题已导入，原资料文字和参考答案待核对、待教师审核。阅读与全部小问保留在同一道题中。"
+      "skipped": [],
+      "note": "已按本地整理版资料补齐全部题号、阅读小问及作文，文字与本地原题图片混合展示；保留原资料编号及配图标注，主观题人工订正，参考答案待教师核对。",
+      "imageSupplement": {
+        "sourceSha256": "3adb9ffbef4a462de91bfc41019258710a42cfd0f127c4cf42cb4bb6906fa9b5",
+        "answerBoundary": {
+          "page": 4,
+          "top": 624.5
+        },
+        "originalNumbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27
+        ]
+      }
     },
     {
       "id": "sh-chinese-2014",
@@ -3110,15 +3746,367 @@
           "review": {
             "status": "pending"
           }
+        },
+        {
+          "id": "sh-chinese-2014-q10",
+          "originalNo": 10,
+          "originalNumbers": [
+            10,
+            11,
+            12,
+            13
+          ],
+          "type": "written",
+          "category": "阅读与综合运用（原题图片）",
+          "stem": "请根据下面的原资料题图作答，按小问编号填写答案。",
+          "answer": "原资料参考答案见下方图片，按小问编号人工核对。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2014/q10-stem-01.png",
+              "page": 1,
+              "bbox": [
+                28,
+                569,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 496
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2014/q10-stem-02.png",
+              "page": 2,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                162.5
+              ],
+              "width": 1079,
+              "height": 229
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2014/q10-answer-01.png",
+              "page": 5,
+              "bbox": [
+                28,
+                369.5,
+                567.304,
+                666
+              ],
+              "width": 1079,
+              "height": 593
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "d0055945e54d26b6925ae50cef47900c80bc4e82e11d2445750af10596ad609c",
+            "renderedSha256": "ee265b1b3d713c771a29b0a79d7776c5fe5e0c118df80e73962ce0185f19b6e7",
+            "answerBoundary": {
+              "page": 2,
+              "top": 162.5
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
+        },
+        {
+          "id": "sh-chinese-2014-q14",
+          "originalNo": 14,
+          "originalNumbers": [
+            14,
+            15,
+            16,
+            17,
+            18
+          ],
+          "type": "written",
+          "category": "阅读与综合运用（原题图片）",
+          "stem": "请根据下面的原资料题图作答，按小问编号填写答案。",
+          "answer": "原资料参考答案见下方图片，按小问编号人工核对。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2014/q14-stem-01.png",
+              "page": 2,
+              "bbox": [
+                28,
+                179,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 1276
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2014/q14-stem-02.png",
+              "page": 3,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                148
+              ],
+              "width": 1079,
+              "height": 200
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2014/q14-answer-01.png",
+              "page": 5,
+              "bbox": [
+                28,
+                666,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 302
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2014/q14-answer-02.png",
+              "page": 6,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                369.5
+              ],
+              "width": 1079,
+              "height": 643
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "d0055945e54d26b6925ae50cef47900c80bc4e82e11d2445750af10596ad609c",
+            "renderedSha256": "ee265b1b3d713c771a29b0a79d7776c5fe5e0c118df80e73962ce0185f19b6e7",
+            "answerBoundary": {
+              "page": 3,
+              "top": 148
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
+        },
+        {
+          "id": "sh-chinese-2014-q19",
+          "originalNo": 19,
+          "originalNumbers": [
+            19,
+            20,
+            21,
+            22,
+            23
+          ],
+          "type": "written",
+          "category": "阅读与综合运用（原题图片）",
+          "stem": "请根据下面的原资料题图作答，按小问编号填写答案。",
+          "answer": "原资料参考答案见下方图片，按小问编号人工核对。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2014/q19-stem-01.png",
+              "page": 3,
+              "bbox": [
+                28,
+                148,
+                567.304,
+                694
+              ],
+              "width": 1079,
+              "height": 1092
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2014/q19-answer-01.png",
+              "page": 6,
+              "bbox": [
+                28,
+                369.5,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 895
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "d0055945e54d26b6925ae50cef47900c80bc4e82e11d2445750af10596ad609c",
+            "renderedSha256": "ee265b1b3d713c771a29b0a79d7776c5fe5e0c118df80e73962ce0185f19b6e7",
+            "answerBoundary": {
+              "page": 3,
+              "top": 694
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
+        },
+        {
+          "id": "sh-chinese-2014-q24",
+          "originalNo": 24,
+          "originalNumbers": [
+            24,
+            25,
+            26
+          ],
+          "type": "written",
+          "category": "阅读与综合运用（原题图片）",
+          "stem": "请根据下面的原资料题图作答，按小问编号填写答案。",
+          "answer": "原资料参考答案见下方图片，按小问编号人工核对。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2014/q24-stem-01.png",
+              "page": 3,
+              "bbox": [
+                28,
+                694,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 246
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2014/q24-stem-02.png",
+              "page": 4,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                474.5
+              ],
+              "width": 1079,
+              "height": 853
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2014/q24-answer-01.png",
+              "page": 7,
+              "bbox": [
+                28,
+                73.5,
+                567.304,
+                213.5
+              ],
+              "width": 1079,
+              "height": 280
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "d0055945e54d26b6925ae50cef47900c80bc4e82e11d2445750af10596ad609c",
+            "renderedSha256": "ee265b1b3d713c771a29b0a79d7776c5fe5e0c118df80e73962ce0185f19b6e7",
+            "answerBoundary": {
+              "page": 4,
+              "top": 474.5
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
+        },
+        {
+          "id": "sh-chinese-2014-q27",
+          "originalNo": 27,
+          "originalNumbers": [
+            27
+          ],
+          "type": "written",
+          "category": "作文",
+          "stem": "请根据下面的作文题目与要求写作。",
+          "answer": "作文没有唯一答案；原资料写作指导或范文仅供参考，由教师人工评阅。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2014/q27-stem-01.png",
+              "page": 4,
+              "bbox": [
+                28,
+                474.5,
+                567.304,
+                592.5
+              ],
+              "width": 1079,
+              "height": 236
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2014/q27-answer-01.png",
+              "page": 7,
+              "bbox": [
+                28,
+                213.5,
+                567.304,
+                805
+              ],
+              "width": 1079,
+              "height": 1183
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "d0055945e54d26b6925ae50cef47900c80bc4e82e11d2445750af10596ad609c",
+            "renderedSha256": "ee265b1b3d713c771a29b0a79d7776c5fe5e0c118df80e73962ce0185f19b6e7",
+            "answerBoundary": {
+              "page": 4,
+              "top": 592.5
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
         }
       ],
-      "skipped": [
-        "10: 题目依赖的加点或画线尚未恢复",
-        "14: 题目依赖的加点或画线尚未恢复",
-        "19: 题目依赖的加点或画线尚未恢复",
-        "24: 图片或原文标记未恢复"
-      ],
-      "note": "部分原题已导入，原资料文字和参考答案待核对、待教师审核。阅读与全部小问保留在同一道题中。"
+      "skipped": [],
+      "note": "已按本地整理版资料补齐全部题号、阅读小问及作文，文字与本地原题图片混合展示；保留原资料编号及配图标注，主观题人工订正，参考答案待教师核对。",
+      "imageSupplement": {
+        "sourceSha256": "d0055945e54d26b6925ae50cef47900c80bc4e82e11d2445750af10596ad609c",
+        "answerBoundary": {
+          "page": 4,
+          "top": 594.62
+        },
+        "originalNumbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27
+        ]
+      }
     },
     {
       "id": "sh-chinese-2015",
@@ -3171,6 +4159,59 @@
           }
         },
         {
+          "id": "sh-chinese-2015-q08",
+          "originalNo": 8,
+          "originalNumbers": [
+            8,
+            9
+          ],
+          "type": "written",
+          "category": "阅读与综合运用（原题图片）",
+          "stem": "请根据下面的原资料题图作答，按小问编号填写答案。",
+          "answer": "原资料参考答案见下方图片，按小问编号人工核对。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2015/q08-stem-01.png",
+              "page": 1,
+              "bbox": [
+                28,
+                460,
+                567.304,
+                678
+              ],
+              "width": 1079,
+              "height": 436
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2015/q08-answer-01.png",
+              "page": 5,
+              "bbox": [
+                28,
+                494.5,
+                567.304,
+                603.5
+              ],
+              "width": 1079,
+              "height": 218
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "9f98227f86d7be3d14f13ef398251e30b6f99e54ece22242cc6db4de87c36ec7",
+            "renderedSha256": "5f3bdedbeba5f5d1c8e124ed58226fa22cbde8556df85073fee138f12a172fce",
+            "answerBoundary": {
+              "page": 1,
+              "top": 678
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
+        },
+        {
           "id": "sh-chinese-2015-q10",
           "originalNo": 10,
           "originalNumbers": [
@@ -3186,15 +4227,311 @@
           "review": {
             "status": "pending"
           }
+        },
+        {
+          "id": "sh-chinese-2015-q13",
+          "originalNo": 13,
+          "originalNumbers": [
+            13,
+            14,
+            15,
+            16,
+            17
+          ],
+          "type": "written",
+          "category": "阅读与综合运用（原题图片）",
+          "stem": "请根据下面的原资料题图作答，按小问编号填写答案。",
+          "answer": "原资料参考答案见下方图片，按小问编号人工核对。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2015/q13-stem-01.png",
+              "page": 2,
+              "bbox": [
+                28,
+                272.5,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 1089
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2015/q13-stem-02.png",
+              "page": 3,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                226
+              ],
+              "width": 1079,
+              "height": 356
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2015/q13-answer-01.png",
+              "page": 6,
+              "bbox": [
+                28,
+                182.5,
+                567.304,
+                463.5
+              ],
+              "width": 1079,
+              "height": 562
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "9f98227f86d7be3d14f13ef398251e30b6f99e54ece22242cc6db4de87c36ec7",
+            "renderedSha256": "5f3bdedbeba5f5d1c8e124ed58226fa22cbde8556df85073fee138f12a172fce",
+            "answerBoundary": {
+              "page": 3,
+              "top": 226
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
+        },
+        {
+          "id": "sh-chinese-2015-q18",
+          "originalNo": 18,
+          "originalNumbers": [
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "type": "written",
+          "category": "阅读与综合运用（原题图片）",
+          "stem": "请根据下面的原资料题图作答，按小问编号填写答案。",
+          "answer": "原资料参考答案见下方图片，按小问编号人工核对。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2015/q18-stem-01.png",
+              "page": 3,
+              "bbox": [
+                28,
+                226,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 1182
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2015/q18-stem-02.png",
+              "page": 4,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                319.5
+              ],
+              "width": 1079,
+              "height": 543
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2015/q18-answer-01.png",
+              "page": 6,
+              "bbox": [
+                28,
+                463.5,
+                567.304,
+                713
+              ],
+              "width": 1079,
+              "height": 499
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "9f98227f86d7be3d14f13ef398251e30b6f99e54ece22242cc6db4de87c36ec7",
+            "renderedSha256": "5f3bdedbeba5f5d1c8e124ed58226fa22cbde8556df85073fee138f12a172fce",
+            "answerBoundary": {
+              "page": 4,
+              "top": 319.5
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
+        },
+        {
+          "id": "sh-chinese-2015-q23",
+          "originalNo": 23,
+          "originalNumbers": [
+            23,
+            24,
+            25
+          ],
+          "type": "written",
+          "category": "阅读与综合运用（原题图片）",
+          "stem": "请根据下面的原资料题图作答，按小问编号填写答案。",
+          "answer": "原资料参考答案见下方图片，按小问编号人工核对。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2015/q23-stem-01.png",
+              "page": 4,
+              "bbox": [
+                28,
+                319.5,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 995
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2015/q23-stem-02.png",
+              "page": 5,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                162.5
+              ],
+              "width": 1079,
+              "height": 229
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2015/q23-answer-01.png",
+              "page": 6,
+              "bbox": [
+                28,
+                713,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 208
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2015/q23-answer-02.png",
+              "page": 7,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                198
+              ],
+              "width": 1079,
+              "height": 300
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "9f98227f86d7be3d14f13ef398251e30b6f99e54ece22242cc6db4de87c36ec7",
+            "renderedSha256": "5f3bdedbeba5f5d1c8e124ed58226fa22cbde8556df85073fee138f12a172fce",
+            "answerBoundary": {
+              "page": 5,
+              "top": 162.5
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
+        },
+        {
+          "id": "sh-chinese-2015-q26",
+          "originalNo": 26,
+          "originalNumbers": [
+            26
+          ],
+          "type": "written",
+          "category": "作文",
+          "stem": "请根据下面的作文题目与要求写作。",
+          "answer": "作文没有唯一答案；原资料写作指导或范文仅供参考，由教师人工评阅。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2015/q26-stem-01.png",
+              "page": 5,
+              "bbox": [
+                28,
+                162.5,
+                567.304,
+                312
+              ],
+              "width": 1079,
+              "height": 299
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2015/q26-answer-01.png",
+              "page": 7,
+              "bbox": [
+                28,
+                198,
+                567.304,
+                805
+              ],
+              "width": 1079,
+              "height": 1214
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "9f98227f86d7be3d14f13ef398251e30b6f99e54ece22242cc6db4de87c36ec7",
+            "renderedSha256": "5f3bdedbeba5f5d1c8e124ed58226fa22cbde8556df85073fee138f12a172fce",
+            "answerBoundary": {
+              "page": 5,
+              "top": 312
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
         }
       ],
-      "skipped": [
-        "8: 图片或原文标记未恢复",
-        "13: 题目依赖的加点或画线尚未恢复",
-        "18: 图片或原文标记未恢复",
-        "23: 图片或原文标记未恢复"
-      ],
-      "note": "部分原题已导入，原资料文字和参考答案待核对、待教师审核。阅读与全部小问保留在同一道题中。"
+      "skipped": [],
+      "note": "已按本地整理版资料补齐全部题号、阅读小问及作文，文字与本地原题图片混合展示；保留原资料编号及配图标注，主观题人工订正，参考答案待教师核对。",
+      "imageSupplement": {
+        "sourceSha256": "9f98227f86d7be3d14f13ef398251e30b6f99e54ece22242cc6db4de87c36ec7",
+        "answerBoundary": {
+          "page": 5,
+          "top": 313.82
+        },
+        "originalNumbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ]
+      }
     },
     {
       "id": "sh-chinese-2016",
@@ -3210,17 +4547,496 @@
       "review": {
         "status": "pending"
       },
-      "questions": [],
-      "skipped": [
-        "1: 图片或原文标记未恢复",
-        "6: 图片或原文标记未恢复",
-        "8: 图片或原文标记未恢复",
-        "11: 题目依赖的加点或画线尚未恢复",
-        "14: 图片或原文标记未恢复",
-        "19: 图片或原文标记未恢复",
-        "24: 图片或原文标记未恢复"
+      "questions": [
+        {
+          "id": "sh-chinese-2016-q01",
+          "originalNo": 1,
+          "originalNumbers": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "type": "written",
+          "category": "阅读与综合运用（原题图片）",
+          "stem": "请根据下面的原资料题图作答，按小问编号填写答案。",
+          "answer": "原资料参考答案见下方图片，按小问编号人工核对。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2016/q01-stem-01.png",
+              "page": 1,
+              "bbox": [
+                28,
+                127.5,
+                567.304,
+                240
+              ],
+              "width": 1079,
+              "height": 225
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2016/q01-answer-01.png",
+              "page": 5,
+              "bbox": [
+                28,
+                120,
+                567.304,
+                135.5
+              ],
+              "width": 1079,
+              "height": 31
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "8237be0f791eeed452ffbeae1487c65cf7aba330c754c01ac7a097c3ca798940",
+            "renderedSha256": "cc74e42ac178f003283e2620441075c68c9992b2c8417aa5e94da91edfce7945",
+            "answerBoundary": {
+              "page": 1,
+              "top": 240
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
+        },
+        {
+          "id": "sh-chinese-2016-q06",
+          "originalNo": 6,
+          "originalNumbers": [
+            6,
+            7
+          ],
+          "type": "written",
+          "category": "阅读与综合运用（原题图片）",
+          "stem": "请根据下面的原资料题图作答，按小问编号填写答案。",
+          "answer": "原资料参考答案见下方图片，按小问编号人工核对。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2016/q06-stem-01.png",
+              "page": 1,
+              "bbox": [
+                28,
+                240,
+                567.304,
+                446
+              ],
+              "width": 1079,
+              "height": 412
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2016/q06-answer-01.png",
+              "page": 5,
+              "bbox": [
+                28,
+                135.5,
+                567.304,
+                149.5
+              ],
+              "width": 1079,
+              "height": 28
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "8237be0f791eeed452ffbeae1487c65cf7aba330c754c01ac7a097c3ca798940",
+            "renderedSha256": "cc74e42ac178f003283e2620441075c68c9992b2c8417aa5e94da91edfce7945",
+            "answerBoundary": {
+              "page": 1,
+              "top": 446
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
+        },
+        {
+          "id": "sh-chinese-2016-q08",
+          "originalNo": 8,
+          "originalNumbers": [
+            8,
+            9,
+            10
+          ],
+          "type": "written",
+          "category": "阅读与综合运用（原题图片）",
+          "stem": "请根据下面的原资料题图作答，按小问编号填写答案。",
+          "answer": "原资料参考答案见下方图片，按小问编号人工核对。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。原资料将第10题误印为第9题，依阅读组“第8—10题”和原答案第10题核对；图片保留原误印。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2016/q08-stem-01.png",
+              "page": 1,
+              "bbox": [
+                28,
+                446,
+                567.304,
+                654.5
+              ],
+              "width": 1079,
+              "height": 417
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2016/q08-answer-01.png",
+              "page": 5,
+              "bbox": [
+                28,
+                135.5,
+                567.304,
+                162
+              ],
+              "width": 1079,
+              "height": 53
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "8237be0f791eeed452ffbeae1487c65cf7aba330c754c01ac7a097c3ca798940",
+            "renderedSha256": "cc74e42ac178f003283e2620441075c68c9992b2c8417aa5e94da91edfce7945",
+            "answerBoundary": {
+              "page": 1,
+              "top": 654.5
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
+        },
+        {
+          "id": "sh-chinese-2016-q11",
+          "originalNo": 11,
+          "originalNumbers": [
+            11,
+            12,
+            13
+          ],
+          "type": "written",
+          "category": "阅读与综合运用（原题图片）",
+          "stem": "请根据下面的原资料题图作答，按小问编号填写答案。",
+          "answer": "原资料参考答案见下方图片，按小问编号人工核对。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2016/q11-stem-01.png",
+              "page": 1,
+              "bbox": [
+                28,
+                654.5,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 325
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2016/q11-stem-02.png",
+              "page": 2,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                115
+              ],
+              "width": 1079,
+              "height": 134
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2016/q11-answer-01.png",
+              "page": 5,
+              "bbox": [
+                28,
+                149.5,
+                567.304,
+                185.5
+              ],
+              "width": 1079,
+              "height": 72
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "8237be0f791eeed452ffbeae1487c65cf7aba330c754c01ac7a097c3ca798940",
+            "renderedSha256": "cc74e42ac178f003283e2620441075c68c9992b2c8417aa5e94da91edfce7945",
+            "answerBoundary": {
+              "page": 2,
+              "top": 115
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
+        },
+        {
+          "id": "sh-chinese-2016-q14",
+          "originalNo": 14,
+          "originalNumbers": [
+            14,
+            15,
+            16,
+            17,
+            18
+          ],
+          "type": "written",
+          "category": "阅读与综合运用（原题图片）",
+          "stem": "请根据下面的原资料题图作答，按小问编号填写答案。",
+          "answer": "原资料参考答案见下方图片，按小问编号人工核对。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2016/q14-stem-01.png",
+              "page": 2,
+              "bbox": [
+                28,
+                128.5,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 1377
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2016/q14-answer-01.png",
+              "page": 5,
+              "bbox": [
+                28,
+                185.5,
+                567.304,
+                287
+              ],
+              "width": 1079,
+              "height": 203
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "8237be0f791eeed452ffbeae1487c65cf7aba330c754c01ac7a097c3ca798940",
+            "renderedSha256": "cc74e42ac178f003283e2620441075c68c9992b2c8417aa5e94da91edfce7945",
+            "answerBoundary": {
+              "page": 2,
+              "top": 817
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
+        },
+        {
+          "id": "sh-chinese-2016-q19",
+          "originalNo": 19,
+          "originalNumbers": [
+            19,
+            20,
+            21,
+            22,
+            23
+          ],
+          "type": "written",
+          "category": "阅读与综合运用（原题图片）",
+          "stem": "请根据下面的原资料题图作答，按小问编号填写答案。",
+          "answer": "原资料参考答案见下方图片，按小问编号人工核对。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2016/q19-stem-01.png",
+              "page": 3,
+              "bbox": [
+                28,
+                89,
+                567.304,
+                657
+              ],
+              "width": 1079,
+              "height": 1136
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2016/q19-answer-01.png",
+              "page": 5,
+              "bbox": [
+                28,
+                287,
+                567.304,
+                427.5
+              ],
+              "width": 1079,
+              "height": 281
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "8237be0f791eeed452ffbeae1487c65cf7aba330c754c01ac7a097c3ca798940",
+            "renderedSha256": "cc74e42ac178f003283e2620441075c68c9992b2c8417aa5e94da91edfce7945",
+            "answerBoundary": {
+              "page": 3,
+              "top": 657
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
+        },
+        {
+          "id": "sh-chinese-2016-q24",
+          "originalNo": 24,
+          "originalNumbers": [
+            24,
+            25,
+            26
+          ],
+          "type": "written",
+          "category": "阅读与综合运用（原题图片）",
+          "stem": "请根据下面的原资料题图作答，按小问编号填写答案。",
+          "answer": "原资料参考答案见下方图片，按小问编号人工核对。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2016/q24-stem-01.png",
+              "page": 3,
+              "bbox": [
+                28,
+                657,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 320
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2016/q24-stem-02.png",
+              "page": 4,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                446
+              ],
+              "width": 1079,
+              "height": 796
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2016/q24-answer-01.png",
+              "page": 5,
+              "bbox": [
+                28,
+                427.5,
+                567.304,
+                805
+              ],
+              "width": 1079,
+              "height": 755
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "8237be0f791eeed452ffbeae1487c65cf7aba330c754c01ac7a097c3ca798940",
+            "renderedSha256": "cc74e42ac178f003283e2620441075c68c9992b2c8417aa5e94da91edfce7945",
+            "answerBoundary": {
+              "page": 4,
+              "top": 446
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
+        },
+        {
+          "id": "sh-chinese-2016-q27",
+          "originalNo": 27,
+          "originalNumbers": [
+            27
+          ],
+          "type": "written",
+          "category": "作文",
+          "stem": "请根据下面的作文题目与要求写作。",
+          "answer": "作文没有唯一答案。原资料未提供本题范文或写作指导，请按题目要求请教师人工评阅。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2016/q27-stem-01.png",
+              "page": 4,
+              "bbox": [
+                28,
+                446,
+                567.304,
+                538
+              ],
+              "width": 1079,
+              "height": 184
+            }
+          ],
+          "answerImages": [],
+          "imageSource": {
+            "sourceSha256": "8237be0f791eeed452ffbeae1487c65cf7aba330c754c01ac7a097c3ca798940",
+            "renderedSha256": "cc74e42ac178f003283e2620441075c68c9992b2c8417aa5e94da91edfce7945",
+            "answerBoundary": {
+              "page": 4,
+              "top": 538
+            }
+          },
+          "review": {
+            "status": "pending"
+          },
+          "answerSource": {
+            "kind": "no-unique-answer",
+            "originalAnswer": null
+          }
+        }
       ],
-      "note": "资料已找到，但原题、公式或答案尚未可靠转录，暂不能作答。阅读与全部小问保留在同一道题中。"
+      "skipped": [],
+      "note": "已按本地整理版资料补齐全部题号、阅读小问及作文，文字与本地原题图片混合展示；保留原资料编号及配图标注，主观题人工订正，参考答案待教师核对。",
+      "imageSupplement": {
+        "sourceSha256": "8237be0f791eeed452ffbeae1487c65cf7aba330c754c01ac7a097c3ca798940",
+        "answerBoundary": {
+          "page": 5,
+          "top": 106.5
+        },
+        "originalNumbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26,
+          27
+        ]
+      }
     },
     {
       "id": "sh-chinese-2017",
@@ -3281,15 +5097,455 @@
           "review": {
             "status": "pending"
           }
+        },
+        {
+          "id": "sh-chinese-2017-q04",
+          "originalNo": 4,
+          "originalNumbers": [
+            4
+          ],
+          "type": "written",
+          "category": "阅读与综合运用（原题图片）",
+          "stem": "请根据下面的原资料题图作答，按小问编号填写答案。",
+          "answer": "原资料参考答案见下方图片，按小问编号人工核对。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2017/q04-stem-01.png",
+              "page": 2,
+              "bbox": [
+                28,
+                116,
+                567.304,
+                451
+              ],
+              "width": 1079,
+              "height": 670
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2017/q04-answer-01.png",
+              "page": 9,
+              "bbox": [
+                28,
+                545.5,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 543
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2017/q04-answer-02.png",
+              "page": 10,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                654.5
+              ],
+              "width": 1079,
+              "height": 1213
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "a54951bc5bed1160f716e68f40e64d35f198886120e5a19b5baf5d9563709a9d",
+            "renderedSha256": "7cb030934382565cd085e802b40e2f560fc9c15411994b78bc69e94f00687341",
+            "answerBoundary": {
+              "page": 2,
+              "top": 451
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
+        },
+        {
+          "id": "sh-chinese-2017-q05",
+          "originalNo": 5,
+          "originalNumbers": [
+            5
+          ],
+          "type": "written",
+          "category": "阅读与综合运用（原题图片）",
+          "stem": "请根据下面的原资料题图作答，按小问编号填写答案。",
+          "answer": "原资料参考答案见下方图片，按小问编号人工核对。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2017/q05-stem-01.png",
+              "page": 2,
+              "bbox": [
+                28,
+                472.5,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 689
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2017/q05-stem-02.png",
+              "page": 3,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                658.5
+              ],
+              "width": 1079,
+              "height": 1221
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2017/q05-answer-01.png",
+              "page": 10,
+              "bbox": [
+                28,
+                676,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 282
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2017/q05-answer-02.png",
+              "page": 11,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 1538
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2017/q05-answer-03.png",
+              "page": 12,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 1538
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2017/q05-answer-04.png",
+              "page": 13,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                292
+              ],
+              "width": 1079,
+              "height": 488
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "a54951bc5bed1160f716e68f40e64d35f198886120e5a19b5baf5d9563709a9d",
+            "renderedSha256": "7cb030934382565cd085e802b40e2f560fc9c15411994b78bc69e94f00687341",
+            "answerBoundary": {
+              "page": 3,
+              "top": 658.5
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
+        },
+        {
+          "id": "sh-chinese-2017-q06",
+          "originalNo": 6,
+          "originalNumbers": [
+            6
+          ],
+          "type": "written",
+          "category": "阅读与综合运用（原题图片）",
+          "stem": "请根据下面的原资料题图作答，按小问编号填写答案。",
+          "answer": "原资料参考答案见下方图片，按小问编号人工核对。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2017/q06-stem-01.png",
+              "page": 3,
+              "bbox": [
+                28,
+                658.5,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 317
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2017/q06-stem-02.png",
+              "page": 4,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 1538
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2017/q06-stem-03.png",
+              "page": 5,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                249.5
+              ],
+              "width": 1079,
+              "height": 403
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2017/q06-answer-01.png",
+              "page": 13,
+              "bbox": [
+                28,
+                292,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 1050
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2017/q06-answer-02.png",
+              "page": 14,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 1538
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2017/q06-answer-03.png",
+              "page": 15,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                594
+              ],
+              "width": 1079,
+              "height": 1092
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "a54951bc5bed1160f716e68f40e64d35f198886120e5a19b5baf5d9563709a9d",
+            "renderedSha256": "7cb030934382565cd085e802b40e2f560fc9c15411994b78bc69e94f00687341",
+            "answerBoundary": {
+              "page": 5,
+              "top": 249.5
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
+        },
+        {
+          "id": "sh-chinese-2017-q07",
+          "originalNo": 7,
+          "originalNumbers": [
+            7
+          ],
+          "type": "written",
+          "category": "阅读与综合运用（原题图片）",
+          "stem": "请根据下面的原资料题图作答，按小问编号填写答案。",
+          "answer": "原资料参考答案见下方图片，按小问编号人工核对。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2017/q07-stem-01.png",
+              "page": 5,
+              "bbox": [
+                28,
+                271,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 1092
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2017/q07-stem-02.png",
+              "page": 6,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                160.5
+              ],
+              "width": 1079,
+              "height": 225
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2017/q07-answer-01.png",
+              "page": 15,
+              "bbox": [
+                28,
+                615.5,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 403
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2017/q07-answer-02.png",
+              "page": 16,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 1538
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2017/q07-answer-03.png",
+              "page": 17,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                313.5
+              ],
+              "width": 1079,
+              "height": 531
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "a54951bc5bed1160f716e68f40e64d35f198886120e5a19b5baf5d9563709a9d",
+            "renderedSha256": "7cb030934382565cd085e802b40e2f560fc9c15411994b78bc69e94f00687341",
+            "answerBoundary": {
+              "page": 6,
+              "top": 160.5
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
+        },
+        {
+          "id": "sh-chinese-2017-q08",
+          "originalNo": 8,
+          "originalNumbers": [
+            8
+          ],
+          "type": "written",
+          "category": "作文",
+          "stem": "请根据下面的作文题目与要求写作。",
+          "answer": "作文没有唯一答案；原资料写作指导或范文仅供参考，由教师人工评阅。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2017/q08-stem-01.png",
+              "page": 6,
+              "bbox": [
+                28,
+                160.5,
+                567.304,
+                738
+              ],
+              "width": 1079,
+              "height": 1155
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2017/q08-answer-01.png",
+              "page": 17,
+              "bbox": [
+                28,
+                335,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 964
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2017/q08-answer-02.png",
+              "page": 18,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 1538
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2017/q08-answer-03.png",
+              "page": 19,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                805
+              ],
+              "width": 1079,
+              "height": 1514
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "a54951bc5bed1160f716e68f40e64d35f198886120e5a19b5baf5d9563709a9d",
+            "renderedSha256": "7cb030934382565cd085e802b40e2f560fc9c15411994b78bc69e94f00687341",
+            "answerBoundary": {
+              "page": 6,
+              "top": 738
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
         }
       ],
-      "skipped": [
-        "4: 题目依赖的加点或画线尚未恢复",
-        "5: 题目依赖的加点或画线尚未恢复",
-        "6: 题目依赖的加点或画线尚未恢复",
-        "7: 图片或原文标记未恢复"
-      ],
-      "note": "部分原题已导入，原资料文字和参考答案待核对、待教师审核。阅读与全部小问保留在同一道题中。"
+      "skipped": [],
+      "note": "已按本地整理版资料补齐全部题号、阅读小问及作文，文字与本地原题图片混合展示；保留原资料编号及配图标注，主观题人工订正，参考答案待教师核对。",
+      "imageSupplement": {
+        "sourceSha256": "a54951bc5bed1160f716e68f40e64d35f198886120e5a19b5baf5d9563709a9d",
+        "answerBoundary": {
+          "page": 7,
+          "top": 117.1
+        },
+        "originalNumbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8
+        ]
+      }
     },
     {
       "id": "sh-chinese-2018",
@@ -3355,6 +5611,232 @@
           }
         },
         {
+          "id": "sh-chinese-2018-q07",
+          "originalNo": 7,
+          "originalNumbers": [
+            7,
+            8,
+            9
+          ],
+          "type": "written",
+          "category": "阅读与综合运用（原题图片）",
+          "stem": "请根据下面的原资料题图作答，按小问编号填写答案。",
+          "answer": "原资料参考答案见下方图片，按小问编号人工核对。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2018/q07-stem-01.png",
+              "page": 3,
+              "bbox": [
+                28,
+                528,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 578
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2018/q07-stem-02.png",
+              "page": 4,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                140
+              ],
+              "width": 1079,
+              "height": 184
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2018/q07-answer-01.png",
+              "page": 4,
+              "bbox": [
+                28,
+                140,
+                567.304,
+                185
+              ],
+              "width": 1079,
+              "height": 90
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "49bfa67f99f7722c6707d4dc4be887fe718a29363330940478069b8ba69412d4",
+            "renderedSha256": "475a1a3d0a39aa08520e6bbf13a5c0ea23ae9f201344c631bb9e0e8a0d44ec19",
+            "answerBoundary": {
+              "page": 4,
+              "top": 140
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
+        },
+        {
+          "id": "sh-chinese-2018-q10",
+          "originalNo": 10,
+          "originalNumbers": [
+            10,
+            11,
+            12,
+            13,
+            14
+          ],
+          "type": "written",
+          "category": "阅读与综合运用（原题图片）",
+          "stem": "请根据下面的原资料题图作答，按小问编号填写答案。",
+          "answer": "原资料参考答案见下方图片，按小问编号人工核对。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2018/q10-stem-01.png",
+              "page": 4,
+              "bbox": [
+                28,
+                483,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 668
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2018/q10-stem-02.png",
+              "page": 5,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 1538
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2018/q10-stem-03.png",
+              "page": 6,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                375
+              ],
+              "width": 1079,
+              "height": 654
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2018/q10-answer-01.png",
+              "page": 6,
+              "bbox": [
+                28,
+                375,
+                567.304,
+                583.5
+              ],
+              "width": 1079,
+              "height": 417
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "49bfa67f99f7722c6707d4dc4be887fe718a29363330940478069b8ba69412d4",
+            "renderedSha256": "475a1a3d0a39aa08520e6bbf13a5c0ea23ae9f201344c631bb9e0e8a0d44ec19",
+            "answerBoundary": {
+              "page": 6,
+              "top": 375
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
+        },
+        {
+          "id": "sh-chinese-2018-q15",
+          "originalNo": 15,
+          "originalNumbers": [
+            15,
+            16,
+            17,
+            18,
+            19
+          ],
+          "type": "written",
+          "category": "阅读与综合运用（原题图片）",
+          "stem": "请根据下面的原资料题图作答，按小问编号填写答案。",
+          "answer": "原资料参考答案见下方图片，按小问编号人工核对。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2018/q15-stem-01.png",
+              "page": 7,
+              "bbox": [
+                28,
+                733.5,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 167
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2018/q15-stem-02.png",
+              "page": 8,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 1538
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2018/q15-stem-03.png",
+              "page": 9,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                361
+              ],
+              "width": 1079,
+              "height": 626
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2018/q15-answer-01.png",
+              "page": 9,
+              "bbox": [
+                28,
+                361,
+                567.304,
+                498
+              ],
+              "width": 1079,
+              "height": 274
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "49bfa67f99f7722c6707d4dc4be887fe718a29363330940478069b8ba69412d4",
+            "renderedSha256": "475a1a3d0a39aa08520e6bbf13a5c0ea23ae9f201344c631bb9e0e8a0d44ec19",
+            "answerBoundary": {
+              "page": 9,
+              "top": 361
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
+        },
+        {
           "id": "sh-chinese-2018-q20",
           "originalNo": 20,
           "originalNumbers": [
@@ -3370,14 +5852,114 @@
           "review": {
             "status": "pending"
           }
+        },
+        {
+          "id": "sh-chinese-2018-q23",
+          "originalNo": 23,
+          "originalNumbers": [
+            23
+          ],
+          "type": "written",
+          "category": "作文",
+          "stem": "请根据下面的作文题目与要求写作。",
+          "answer": "作文没有唯一答案；原资料写作指导或范文仅供参考，由教师人工评阅。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2018/q23-stem-01.png",
+              "page": 11,
+              "bbox": [
+                28,
+                648,
+                567.304,
+                714
+              ],
+              "width": 1079,
+              "height": 132
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2018/q23-answer-01.png",
+              "page": 11,
+              "bbox": [
+                28,
+                714,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 206
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2018/q23-answer-02.png",
+              "page": 12,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 1538
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2018/q23-answer-03.png",
+              "page": 13,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                803
+              ],
+              "width": 1079,
+              "height": 1510
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "49bfa67f99f7722c6707d4dc4be887fe718a29363330940478069b8ba69412d4",
+            "renderedSha256": "475a1a3d0a39aa08520e6bbf13a5c0ea23ae9f201344c631bb9e0e8a0d44ec19",
+            "answerBoundary": {
+              "page": 11,
+              "top": 714
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
         }
       ],
-      "skipped": [
-        "7: 题目依赖的加点或画线尚未恢复",
-        "10: 图片或原文标记未恢复",
-        "15: 题目依赖的加点或画线尚未恢复"
-      ],
-      "note": "部分原题已导入，原资料文字和参考答案待核对、待教师审核。阅读与全部小问保留在同一道题中。"
+      "skipped": [],
+      "note": "已按本地整理版资料补齐全部题号、阅读小问及作文，文字与本地原题图片混合展示；保留原资料编号及配图标注，主观题人工订正，参考答案待教师核对。",
+      "imageSupplement": {
+        "sourceSha256": "49bfa67f99f7722c6707d4dc4be887fe718a29363330940478069b8ba69412d4",
+        "originalNumbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23
+        ]
+      }
     },
     {
       "id": "sh-chinese-2019",
@@ -3445,15 +6027,396 @@
           "review": {
             "status": "pending"
           }
+        },
+        {
+          "id": "sh-chinese-2019-q11",
+          "originalNo": 11,
+          "originalNumbers": [
+            11,
+            12,
+            13
+          ],
+          "type": "written",
+          "category": "阅读与综合运用（原题图片）",
+          "stem": "请根据下面的原资料题图作答，按小问编号填写答案。",
+          "answer": "原资料参考答案见下方图片，按小问编号人工核对。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2019/q11-stem-01.png",
+              "page": 6,
+              "bbox": [
+                28,
+                545.5,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 543
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2019/q11-stem-02.png",
+              "page": 7,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                355.5
+              ],
+              "width": 1079,
+              "height": 615
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2019/q11-answer-01.png",
+              "page": 30,
+              "bbox": [
+                28,
+                255,
+                567.304,
+                344
+              ],
+              "width": 1079,
+              "height": 178
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "1c27afb94c0c4d4c63d16380cc2ff80c70f96062e4183f2e9211e9d86057593d",
+            "renderedSha256": "16d7f179fca093c7d3d16a7708b1e3b0401df34f91048e4905bbc1a70dccffc2",
+            "answerBoundary": {
+              "page": 7,
+              "top": 355.5
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
+        },
+        {
+          "id": "sh-chinese-2019-q14",
+          "originalNo": 14,
+          "originalNumbers": [
+            14,
+            15,
+            16,
+            17
+          ],
+          "type": "written",
+          "category": "阅读与综合运用（原题图片）",
+          "stem": "请根据下面的原资料题图作答，按小问编号填写答案。",
+          "answer": "原资料参考答案见下方图片，按小问编号人工核对。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2019/q14-stem-01.png",
+              "page": 10,
+              "bbox": [
+                28,
+                405.5,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 823
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2019/q14-stem-02.png",
+              "page": 11,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 1538
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2019/q14-answer-01.png",
+              "page": 30,
+              "bbox": [
+                28,
+                405,
+                567.304,
+                695.5
+              ],
+              "width": 1079,
+              "height": 581
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "1c27afb94c0c4d4c63d16380cc2ff80c70f96062e4183f2e9211e9d86057593d",
+            "renderedSha256": "16d7f179fca093c7d3d16a7708b1e3b0401df34f91048e4905bbc1a70dccffc2",
+            "answerBoundary": {
+              "page": 11,
+              "top": 817
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
+        },
+        {
+          "id": "sh-chinese-2019-q18",
+          "originalNo": 18,
+          "originalNumbers": [
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "type": "written",
+          "category": "阅读与综合运用（原题图片）",
+          "stem": "请根据下面的原资料题图作答，按小问编号填写答案。",
+          "answer": "原资料参考答案见下方图片，按小问编号人工核对。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2019/q18-stem-01.png",
+              "page": 15,
+              "bbox": [
+                28,
+                491.5,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 651
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2019/q18-stem-02.png",
+              "page": 16,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 1538
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2019/q18-stem-03.png",
+              "page": 17,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 1538
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2019/q18-stem-04.png",
+              "page": 18,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                545.5
+              ],
+              "width": 1079,
+              "height": 995
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2019/q18-answer-01.png",
+              "page": 30,
+              "bbox": [
+                28,
+                725,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 184
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2019/q18-answer-02.png",
+              "page": 31,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                414
+              ],
+              "width": 1079,
+              "height": 732
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "1c27afb94c0c4d4c63d16380cc2ff80c70f96062e4183f2e9211e9d86057593d",
+            "renderedSha256": "16d7f179fca093c7d3d16a7708b1e3b0401df34f91048e4905bbc1a70dccffc2",
+            "answerBoundary": {
+              "page": 18,
+              "top": 545.5
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
+        },
+        {
+          "id": "sh-chinese-2019-q23",
+          "originalNo": 23,
+          "originalNumbers": [
+            23,
+            24,
+            25
+          ],
+          "type": "written",
+          "category": "阅读与综合运用（原题图片）",
+          "stem": "请根据下面的原资料题图作答，按小问编号填写答案。",
+          "answer": "原资料参考答案见下方图片，按小问编号人工核对。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2019/q23-stem-01.png",
+              "page": 22,
+              "bbox": [
+                28,
+                640,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 354
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2019/q23-stem-02.png",
+              "page": 23,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                685.5
+              ],
+              "width": 1079,
+              "height": 1275
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2019/q23-answer-01.png",
+              "page": 31,
+              "bbox": [
+                28,
+                445,
+                567.304,
+                565.5
+              ],
+              "width": 1079,
+              "height": 241
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "1c27afb94c0c4d4c63d16380cc2ff80c70f96062e4183f2e9211e9d86057593d",
+            "renderedSha256": "16d7f179fca093c7d3d16a7708b1e3b0401df34f91048e4905bbc1a70dccffc2",
+            "answerBoundary": {
+              "page": 23,
+              "top": 685.5
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
+        },
+        {
+          "id": "sh-chinese-2019-q26",
+          "originalNo": 26,
+          "originalNumbers": [
+            26
+          ],
+          "type": "written",
+          "category": "作文",
+          "stem": "请根据下面的作文题目与要求写作。",
+          "answer": "作文没有唯一答案；原资料写作指导或范文仅供参考，由教师人工评阅。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2019/q26-stem-01.png",
+              "page": 25,
+              "bbox": [
+                28,
+                394,
+                567.304,
+                575.5
+              ],
+              "width": 1079,
+              "height": 363
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2019/q26-answer-01.png",
+              "page": 31,
+              "bbox": [
+                28,
+                595,
+                567.304,
+                684
+              ],
+              "width": 1079,
+              "height": 178
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "1c27afb94c0c4d4c63d16380cc2ff80c70f96062e4183f2e9211e9d86057593d",
+            "renderedSha256": "16d7f179fca093c7d3d16a7708b1e3b0401df34f91048e4905bbc1a70dccffc2",
+            "answerBoundary": {
+              "page": 25,
+              "top": 575.5
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
         }
       ],
-      "skipped": [
-        "11: 图片或原文标记未恢复",
-        "14: 题目依赖的加点或画线尚未恢复",
-        "18: 图片或原文标记未恢复",
-        "23: 图片或原文标记未恢复"
-      ],
-      "note": "部分原题已导入，原资料文字和参考答案待核对、待教师审核。阅读与全部小问保留在同一道题中。"
+      "skipped": [],
+      "note": "已按本地整理版资料补齐全部题号、阅读小问及作文，文字与本地原题图片混合展示；保留原资料编号及配图标注，主观题人工订正，参考答案待教师核对。",
+      "imageSupplement": {
+        "sourceSha256": "1c27afb94c0c4d4c63d16380cc2ff80c70f96062e4183f2e9211e9d86057593d",
+        "originalNumbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ]
+      }
     },
     {
       "id": "sh-chinese-2020",
@@ -3506,14 +6469,356 @@
           "review": {
             "status": "pending"
           }
+        },
+        {
+          "id": "sh-chinese-2020-q10",
+          "originalNo": 10,
+          "originalNumbers": [
+            10,
+            11,
+            12
+          ],
+          "type": "written",
+          "category": "阅读与综合运用（原题图片）",
+          "stem": "请根据下面的原资料题图作答，按小问编号填写答案。",
+          "answer": "原资料参考答案见下方图片，按小问编号人工核对。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2020/q10-stem-01.png",
+              "page": 1,
+              "bbox": [
+                28,
+                650.5,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 333
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2020/q10-stem-02.png",
+              "page": 2,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                291.5
+              ],
+              "width": 1079,
+              "height": 487
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2020/q10-answer-01.png",
+              "page": 5,
+              "bbox": [
+                28,
+                665.5,
+                567.304,
+                728
+              ],
+              "width": 1079,
+              "height": 125
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "71d5b6b72ad9a945e145e02407e873c1bce0142445a4770b45092f806d8b7283",
+            "renderedSha256": "1169d44970720108a7b989bcd7ca41ed2e45f7f8cc1c8117431ba594b18fced0",
+            "answerBoundary": {
+              "page": 2,
+              "top": 291.5
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
+        },
+        {
+          "id": "sh-chinese-2020-q13",
+          "originalNo": 13,
+          "originalNumbers": [
+            13,
+            14,
+            15,
+            16,
+            17
+          ],
+          "type": "written",
+          "category": "阅读与综合运用（原题图片）",
+          "stem": "请根据下面的原资料题图作答，按小问编号填写答案。",
+          "answer": "原资料参考答案见下方图片，按小问编号人工核对。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2020/q13-stem-01.png",
+              "page": 2,
+              "bbox": [
+                28,
+                291.5,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 1051
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2020/q13-stem-02.png",
+              "page": 3,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                291.5
+              ],
+              "width": 1079,
+              "height": 487
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2020/q13-answer-01.png",
+              "page": 6,
+              "bbox": [
+                28,
+                73,
+                567.304,
+                244.5
+              ],
+              "width": 1079,
+              "height": 343
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "71d5b6b72ad9a945e145e02407e873c1bce0142445a4770b45092f806d8b7283",
+            "renderedSha256": "1169d44970720108a7b989bcd7ca41ed2e45f7f8cc1c8117431ba594b18fced0",
+            "answerBoundary": {
+              "page": 3,
+              "top": 291.5
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
+        },
+        {
+          "id": "sh-chinese-2020-q18",
+          "originalNo": 18,
+          "originalNumbers": [
+            18,
+            19,
+            20,
+            21,
+            22
+          ],
+          "type": "written",
+          "category": "阅读与综合运用（原题图片）",
+          "stem": "请根据下面的原资料题图作答，按小问编号填写答案。",
+          "answer": "原资料参考答案见下方图片，按小问编号人工核对。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2020/q18-stem-01.png",
+              "page": 3,
+              "bbox": [
+                28,
+                291.5,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 1051
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2020/q18-stem-02.png",
+              "page": 4,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                401
+              ],
+              "width": 1079,
+              "height": 706
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2020/q18-answer-01.png",
+              "page": 6,
+              "bbox": [
+                28,
+                260,
+                567.304,
+                463
+              ],
+              "width": 1079,
+              "height": 406
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "71d5b6b72ad9a945e145e02407e873c1bce0142445a4770b45092f806d8b7283",
+            "renderedSha256": "1169d44970720108a7b989bcd7ca41ed2e45f7f8cc1c8117431ba594b18fced0",
+            "answerBoundary": {
+              "page": 4,
+              "top": 401
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
+        },
+        {
+          "id": "sh-chinese-2020-q23",
+          "originalNo": 23,
+          "originalNumbers": [
+            23,
+            24,
+            25
+          ],
+          "type": "written",
+          "category": "阅读与综合运用（原题图片）",
+          "stem": "请根据下面的原资料题图作答，按小问编号填写答案。",
+          "answer": "原资料参考答案见下方图片，按小问编号人工核对。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2020/q23-stem-01.png",
+              "page": 4,
+              "bbox": [
+                28,
+                401,
+                567.304,
+                817
+              ],
+              "width": 1079,
+              "height": 832
+            },
+            {
+              "src": "content/past-papers/images/sh-chinese-2020/q23-stem-02.png",
+              "page": 5,
+              "bbox": [
+                28,
+                48,
+                567.304,
+                385
+              ],
+              "width": 1079,
+              "height": 674
+            }
+          ],
+          "answerImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2020/q23-answer-01.png",
+              "page": 6,
+              "bbox": [
+                28,
+                478.5,
+                567.304,
+                805
+              ],
+              "width": 1079,
+              "height": 653
+            }
+          ],
+          "imageSource": {
+            "sourceSha256": "71d5b6b72ad9a945e145e02407e873c1bce0142445a4770b45092f806d8b7283",
+            "renderedSha256": "1169d44970720108a7b989bcd7ca41ed2e45f7f8cc1c8117431ba594b18fced0",
+            "answerBoundary": {
+              "page": 5,
+              "top": 385
+            }
+          },
+          "review": {
+            "status": "pending"
+          }
+        },
+        {
+          "id": "sh-chinese-2020-q26",
+          "originalNo": 26,
+          "originalNumbers": [
+            26
+          ],
+          "type": "written",
+          "category": "作文",
+          "stem": "请根据下面的作文题目与要求写作。",
+          "answer": "作文没有唯一答案。原资料未提供本题范文或写作指导，请按题目要求请教师人工评阅。",
+          "explanation": null,
+          "explanationNote": "原题标注、配图与跨页内容均保留；原资料仍待教师审核。",
+          "stemImages": [
+            {
+              "src": "content/past-papers/images/sh-chinese-2020/q26-stem-01.png",
+              "page": 5,
+              "bbox": [
+                28,
+                385,
+                567.304,
+                494.5
+              ],
+              "width": 1079,
+              "height": 219
+            }
+          ],
+          "answerImages": [],
+          "imageSource": {
+            "sourceSha256": "71d5b6b72ad9a945e145e02407e873c1bce0142445a4770b45092f806d8b7283",
+            "renderedSha256": "1169d44970720108a7b989bcd7ca41ed2e45f7f8cc1c8117431ba594b18fced0",
+            "answerBoundary": {
+              "page": 5,
+              "top": 494.5
+            }
+          },
+          "review": {
+            "status": "pending"
+          },
+          "answerSource": {
+            "kind": "no-unique-answer",
+            "originalAnswer": null
+          }
         }
       ],
-      "skipped": [
-        "10: 图片或原文标记未恢复",
-        "18: 图片或原文标记未恢复",
-        "23: 图片或原文标记未恢复"
-      ],
-      "note": "部分原题已导入，原资料文字和参考答案待核对、待教师审核。阅读与全部小问保留在同一道题中。"
+      "skipped": [],
+      "note": "已按本地整理版资料补齐全部题号、阅读小问及作文，文字与本地原题图片混合展示；保留原资料编号及配图标注，主观题人工订正，参考答案待教师核对。",
+      "imageSupplement": {
+        "sourceSha256": "71d5b6b72ad9a945e145e02407e873c1bce0142445a4770b45092f806d8b7283",
+        "answerBoundary": {
+          "page": 5,
+          "top": 496.5
+        },
+        "originalNumbers": [
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13,
+          14,
+          15,
+          16,
+          17,
+          18,
+          19,
+          20,
+          21,
+          22,
+          23,
+          24,
+          25,
+          26
+        ]
+      }
     },
     {
       "id": "sh-math-2013",
@@ -4187,7 +7492,7 @@
       "subject": "chinese",
       "year": 2026,
       "title": "2026 年上海语文中考资料",
-      "version": "未完成转录 · 待核对",
+      "version": "多份回忆资料整理版（非官方）",
       "source": {
         "root": "download",
         "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/2026上海中考语文回忆版真题及解析.pdf",
@@ -4196,11 +7501,254 @@
       "review": {
         "status": "pending"
       },
-      "questions": [],
-      "skipped": [
-        "扫描、原题标记或回忆资料尚未完整核对，不根据答案补造题干"
+      "questions": [
+        {
+          "id": "sh-chinese-2026-q01",
+          "originalNo": 1,
+          "type": "written",
+          "category": "默写与运用（回忆整理）",
+          "stem": "根据回忆资料，完成下列默写。\n（1）潭西南而望，斗折蛇行，____。（柳宗元《小石潭记》）\n（2）____，后不见来者。（陈子昂《登幽州台歌》）\n（3）无可奈何花落去，____。（晏殊《浣溪沙·一曲新词酒一杯》）\n（4）小申在游玩时，看见山里风光明媚、鸟儿自在欢快地鸣叫，潭水清澈明净，他想起可以用常建《题破山寺后禅院》中‘____，____’两句来表示。",
+          "answer": "（1）明灭可见。（2）前不见古人。（3）似曾相识燕归来。（4）山光悦鸟性，潭影空人心。",
+          "explanation": null,
+          "explanationNote": "第一份PDF‘斗沂蛇行’与另一PDF、题卷图片‘斗折蛇行’不一致，本页采用后者；理解性默写情境在各资料中表述略有不同。",
+          "review": {
+            "status": "pending"
+          },
+          "recollectionSources": [
+            {
+              "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/2026上海中考语文回忆版真题及解析.pdf",
+              "sha256": "71ba391a1787f08a1133546072afee49b51a3554e7d161bd2e175014c72ad45e",
+              "kind": "local-recollection"
+            },
+            {
+              "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/上海市初中语文中考真题（考生回忆版）.pdf",
+              "sha256": "be20c34e56a795cae8dd1f0c0c25bb492c5a9e10d7336e7ae0f2163fb607dafe",
+              "kind": "local-recollection"
+            },
+            {
+              "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/2026年上海中考语文真题（完整版）.docx",
+              "sha256": "b21a053c323a43ba649aa0336b4cb54c89975c7be35a30e459f2a61962cba0b4",
+              "kind": "local-recollection"
+            },
+            {
+              "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/2026年上海中考语文真题答案（最全估分版）.docx",
+              "sha256": "23e0b8bd1a19b25e16e96d6aafab004b378e8aa303c19e1410863f2f37fbdea6",
+              "kind": "local-recollection"
+            }
+          ]
+        },
+        {
+          "id": "sh-chinese-2026-q02",
+          "originalNo": 2,
+          "type": "written",
+          "category": "文言文阅读（回忆整理）",
+          "stem": "按本页小问编号作答。\n（1）《书戴嵩画牛》作者是____（填朝代）的文学家苏轼。\n（2）‘拊’由‘扌’和‘付’组成，下列造字法与其相同的是____。A.宝　B.角　C.斗　D.织\n（3）解释下列加点词（本页用文字注明所考字）。①‘好书画’中‘好’的意思是____：A.友好　B.喜爱　C.和善　D.完成。②‘有一牧童见之’中‘见’的意思是____：A.遇见　B.知道　C.看见　D.拜见。\n（4）对‘锦囊玉轴，常以自随’翻译最恰当的一项是____。A.用锦缎和玉作装饰，经常自由携带。B.用锦缎和玉作装饰，经常随身携带。C.用锦缎作画囊，用玉作画轴，经常自由携带。D.用锦缎作画囊，用玉作画轴，经常随身携带。\n（5）牧童‘拊掌大笑’并表示‘谬矣’。结合注释，下列对牧童说法错误的一项是____。A.天真直率　B.哗众取宠　C.认知有限　D.敢于质疑。\n（6）小申学完《书戴嵩画牛》后想到了《滹南诗话》中王若虚与苏轼的对话。苏东坡云：评判画作只看画得像不像，见识就跟小孩子差不多；写诗死死局限在题目表层意思里，算不上懂诗的人。王若虚对苏轼的看法：佳作的精妙，在形似之上追求神韵意境，但不能完全抛弃外形逼真；写诗不必死死拘束于题目字面，却也不能完全脱离题旨。《书戴嵩画牛》表达的意思是____；王若虚认为苏轼的话反映的重要意思是____。",
+          "answer": "（1）北宋（宋代）。（2）D。（3）①B；②C。（4）D。（5）B。（6）回忆解析PDF参考：艺术创作要贴合客观事实，源于生活实践；艺术创作需形神兼备，以形似为基础追求意境，不脱离本质。估分版另强调：文学艺术允许合理加工与想象，但不能脱离现实、故弄玄虚。请人工核对具体表达。",
+          "explanation": null,
+          "explanationNote": "另一份回忆PDF的课内外阅读分题方式及部分选项不同，本组以回忆解析PDF为主，并与题卷图片、估分版核对；不同版本的答案字母不能直接互换。",
+          "review": {
+            "status": "pending"
+          },
+          "context": "【甲】书戴嵩画牛\n蜀中有杜处士，好书画，所宝以百数。有戴嵩《牛》一轴，尤所爱，锦囊玉轴，常以自\n随。一日曝书画，有一牧童见之，拊掌大笑，曰：“此画斗牛也。牛斗，力在角，尾搐入两\n股间，今乃掉尾而斗，谬矣。”处士笑而然之。古语有云：“耕当问奴，织当问婢。”不可改\n也 。\n【乙】\n东坡云：论画以形似，见与儿童邻。赋诗必此诗，定非知诗人。夫所贵于画者，为其似\n耳。画而不似，则如勿画。命题而赋诗，不必此诗果为何语。然则坡之论非欤？曰：论妙于\n形似之外，而非遗其形似，不窘于题，而要不失其题，如是而已耳。\n世之人不本其题，无得于心，而借此论以为高。画山水者，未能正作一木一石，而托云\n烟杳霭，谓之气象。赋诗者茫昧僻远，按题而索之，不知所谓，乃曰格律贵尔。一有不然，\n则必相嗤点，以为浅易而寻常，不求是而求奇，真伪未知，而先论高下，亦自欺而已矣，岂\n坡公之本意也哉？",
+          "contextLabel": "甲、乙两文（按回忆解析PDF整理）",
+          "recollectionSources": [
+            {
+              "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/2026上海中考语文回忆版真题及解析.pdf",
+              "sha256": "71ba391a1787f08a1133546072afee49b51a3554e7d161bd2e175014c72ad45e",
+              "kind": "local-recollection"
+            },
+            {
+              "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/上海市初中语文中考真题（考生回忆版）.pdf",
+              "sha256": "be20c34e56a795cae8dd1f0c0c25bb492c5a9e10d7336e7ae0f2163fb607dafe",
+              "kind": "local-recollection"
+            },
+            {
+              "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/2026年上海中考语文真题（完整版）.docx",
+              "sha256": "b21a053c323a43ba649aa0336b4cb54c89975c7be35a30e459f2a61962cba0b4",
+              "kind": "local-recollection"
+            },
+            {
+              "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/2026年上海中考语文真题答案（最全估分版）.docx",
+              "sha256": "23e0b8bd1a19b25e16e96d6aafab004b378e8aa303c19e1410863f2f37fbdea6",
+              "kind": "local-recollection"
+            }
+          ]
+        },
+        {
+          "id": "sh-chinese-2026-q03",
+          "originalNo": 3,
+          "type": "written",
+          "category": "非连续性文本（回忆整理）",
+          "stem": "本组依据回忆资料的材料复述练习，不替代完整阅读原卷。\n（1）结合材料一，下列概括最恰当的一项是____。A.人与自然和谐共生　B.科技进步而欣慰　C.体现我国在生物多样性保护上成效显著，体现大国担当　D.调侃文化进步。\n（2）根据材料二，完成回忆资料中的流程：发现狗獾——停止施工——____——____——狗獾数量增长。\n（3）围绕‘上海狗獾保护实践’，评析材料后的采访问题。①三道问题是否全部贴合探究主题？逐条说明理由。②采访问题与材料三的已有信息是否重复？简述判断依据。",
+          "answer": "（1）回忆资料参考C。（2）开展狗獾自然引迁工程；建立常态化管护监测体系。（3）估分版参考：三问分别了解日常管护、保护模式的借鉴意义及当前困难，均与探究主题相关。材料三描述居民的态度与现象，采访进一步了解实际工作、借鉴意义或问题成因，不是简单重复。不同回忆版本也有‘青少年参加活动需要什么素质’等另一组三问，须结合所采用版本核对。",
+          "explanation": null,
+          "explanationNote": "材料原文尚未全部恢复。本页为对已提供回忆资料的复述整理；采访三问在各资料中有两套表述，本组只采用狗獾管护这一套，不将两套题的参考答案混用。",
+          "review": {
+            "status": "pending"
+          },
+          "context": "【材料一】回忆估分资料将主题概括为‘十四五’生态文明保护、生物多样性保护及我国对外合作。资料列举森林覆盖率、保护地体系、生态修复与重点流域恢复等内容，并给出我国开展国际生物多样性合作的实例。现有文件对这一材料的原文复述不完全一致，本页不把复述数据作为官方原卷数据。\n【材料二】回忆估分资料复述：狗獾是上海本土野生动物。2018年，建设项目用地与狗獾种群栖息地重叠。上海暂停建设、开展狗獾自然引迁工程，保护栖息环境，并建立常态化监测和管护体系，通过林地改造、植被恢复、隐蔽场所搭建等方式改善栖息地。狗獾种群数量随后增长。\n【材料三】回忆资料记述青少年参与科普活动、观察野生动物，以及居民对野生动物进入城区的不同看法：一些居民担忧疾病、夜间扰民、破坏绿化和潜在安全问题，另一些居民认为动物回归体现生态改善，应学习与本土野生动物和平共处。\n【采访问题】本组采用回忆解析PDF及估分版共同列出的狗獾管护三问：①您日常通过哪些志愿工作参与狗獾栖息地管护？②城市中还有哪些野生动物可以借鉴狗獾模式开展保育？③您认为现阶段狗獾保护工作最大的阻碍是什么？",
+          "contextLabel": "生态保护材料复述（回忆估分资料，非官方原文）",
+          "recollectionSources": [
+            {
+              "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/2026上海中考语文回忆版真题及解析.pdf",
+              "sha256": "71ba391a1787f08a1133546072afee49b51a3554e7d161bd2e175014c72ad45e",
+              "kind": "local-recollection"
+            },
+            {
+              "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/上海市初中语文中考真题（考生回忆版）.pdf",
+              "sha256": "be20c34e56a795cae8dd1f0c0c25bb492c5a9e10d7336e7ae0f2163fb607dafe",
+              "kind": "local-recollection"
+            },
+            {
+              "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/2026年上海中考语文真题（完整版）.docx",
+              "sha256": "b21a053c323a43ba649aa0336b4cb54c89975c7be35a30e459f2a61962cba0b4",
+              "kind": "local-recollection"
+            },
+            {
+              "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/2026年上海中考语文真题答案（最全估分版）.docx",
+              "sha256": "23e0b8bd1a19b25e16e96d6aafab004b378e8aa303c19e1410863f2f37fbdea6",
+              "kind": "local-recollection"
+            }
+          ]
+        },
+        {
+          "id": "sh-chinese-2026-q04",
+          "originalNo": 4,
+          "type": "written",
+          "category": "小说阅读节选（回忆整理）",
+          "stem": "以下只收录现有节选能够支持的小问。\n（1）打进电话者是小男孩而非成年人，请分析作者这样设计的意图。\n（2）老古的杂货铺会停业还是会继续营业？请推测并说明理由。",
+          "answer": "（1）回忆估分资料参考：孩童的求助纯粹、不受网红打卡功利心态影响，与成人追捧符号而不重实用形成对比；孩子代表真实生活需求，让老古重新找到经营初心；推动情节转折，突出服务平凡烟火的价值。（2）根据本页节选‘撕了写好的闭店告示’，可推测继续经营，因为男孩的真实需求使老古找回经营意义。估分资料也给出停业的另一种讨论，须结合所依据版本的全文判断；本页不把缺失原文的结尾当作已确认原题。",
+          "explanation": null,
+          "explanationNote": "原资料明确注明该文字不是试卷完整原文；主人公名称、结尾及第7段内容的回忆有差异。发笑原因和‘某种精神’两问所需原文尚缺，未根据参考答案补写正文。",
+          "review": {
+            "status": "pending"
+          },
+          "context": "老古经营巷口杂货铺三十余年，针头线脑、老旧五金、零碎小物件一应俱全。旧城改造启动，老街整片拆迁，平地店铺无处落脚。恰逢施工队起高楼，老古给包工头商量，把一间简易小铺安在了塔吊操作杆上，人称‘空中杂货店’。\n起初只是方便工地工人，卖水、手套、铆钉、老式螺丝。不知谁拍了照片发到网上，一夜之间，这间悬在十米高空的小店成了城市网红地标。\n游客源源不断涌来，顺着施工梯爬上塔吊平台。大家举着手机拍照，围着老古要签名、合影，称赞他是坚守市井烟火的象征、浮躁城市里难得的温情符号。货架前人头攒动，可大多人拍完照转身就走，很少有人真正买下一样杂货。偶尔有人随手拿瓶矿泉水，也只是为了拍照道具。\n老古看着满货架积压的老式零件、缝衣针线，心里不是滋味。他开店初衷，是给人提供急需的零碎物件，解决实在的难处，不是供人打卡消遣。如今铺子只剩热闹，没了买卖，更丢了原本的用处。夜深人静，他独坐高空小店，写下闭店通知，打算过完这周就撤走货架。\n闭店前一晚，手机忽然响起，是个稚嫩的男孩声音。男孩声音带着焦急，说家里老式木摇椅松了，跑遍全城商铺，都找不到配套的老式沉头螺丝钉，听街坊说空中杂货店还存着旧五金，恳请老古留几颗。\n挂了电话，老古走到货架深处，翻出一铁皮盒尘封多年的螺丝钉。冰凉的金属零件握在手心，他忽然豁然开朗。\n那些打卡的人追捧的是‘符号’，而真正需要这间店的人，惦记的是铺子里独一份的实用与温柔。网红热度终会散去，但有人还在等着这间高空小店，为平凡生活补上一枚微小、踏实的缺口。老古撕了写好的闭店告示，重新擦亮货架上所有旧货。",
+          "contextLabel": "《空中杂货铺》回忆节选（估分资料明确注明非试卷完整原文）",
+          "recollectionSources": [
+            {
+              "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/2026上海中考语文回忆版真题及解析.pdf",
+              "sha256": "71ba391a1787f08a1133546072afee49b51a3554e7d161bd2e175014c72ad45e",
+              "kind": "local-recollection"
+            },
+            {
+              "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/上海市初中语文中考真题（考生回忆版）.pdf",
+              "sha256": "be20c34e56a795cae8dd1f0c0c25bb492c5a9e10d7336e7ae0f2163fb607dafe",
+              "kind": "local-recollection"
+            },
+            {
+              "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/2026年上海中考语文真题（完整版）.docx",
+              "sha256": "b21a053c323a43ba649aa0336b4cb54c89975c7be35a30e459f2a61962cba0b4",
+              "kind": "local-recollection"
+            },
+            {
+              "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/2026年上海中考语文真题答案（最全估分版）.docx",
+              "sha256": "23e0b8bd1a19b25e16e96d6aafab004b378e8aa303c19e1410863f2f37fbdea6",
+              "kind": "local-recollection"
+            }
+          ]
+        },
+        {
+          "id": "sh-chinese-2026-q05",
+          "originalNo": 5,
+          "type": "written",
+          "category": "名著综合运用（回忆整理）",
+          "stem": "以下为资料能够恢复的小问；各回忆稿对选项次序有差异，本页按估分资料排列。\n（1）结合《七律·长征》与《红星照耀中国》‘强渡大渡河’选段，分析两者在展览中的作用，最恰当的一项是____。A.文体不同，文体互补，体现展览的一致性。B.相互印证，体现展品的丰富。C.都是纪实作品，便于读者了解背景信息。D.具有抒情性，便于读者把握情感。\n（2）围绕‘名著阅读展览能否代替阅读原著’，补全对话。A：我们的展览办得真好，我觉得看名著的展出比阅读原著有意思。B：看展有利于____。A：那是不是说明看名著展览可以代替阅读原著？B：并不能，理由一：____；理由二：____。",
+          "answer": "（1）回忆资料参考B。资料中对B、C有争议，当前未经过教师审核。（2）资料示例：参观展览可以快速梳理名著核心脉络、直观了解经典片段并激发深入阅读兴趣。仍须读原著：展览为片段呈现，原著有完整情节、细腻的人物刻画和更多细节；直接阅读可以自主品读文笔与写作手法，更直接、深入地体会作者思想。",
+          "explanation": null,
+          "explanationNote": "两份PDF及两份Word资料的小题编号不同。甲同学意见和排序导语没有完整恢复，本页只保留材料与选项可核对的小问，不用答案反造题干。",
+          "review": {
+            "status": "pending"
+          },
+          "context": "学校举办《红星照耀中国》阅读展，作为策展小组的一员，请你参与。\n【文本一】《七律·长征》　毛泽东\n红军不怕远征难，万水千山只等闲。\n五岭逶迤腾细浪，乌蒙磅礴走泥丸。\n金沙水拍云崖暖，大渡桥横铁索寒。\n更喜岷山千里雪，三军过后尽开颜。\n【文本二】《红星照耀中国》第五篇‘长征’、第三节‘大渡河英雄’选段（按回忆估分资料）：这时候有更多的红军蜂拥爬上了铁索，赶来扑灭了火焰，铺上了新板。不久，在安顺场过了河的一师也出现了，对残余的敌军陆地展开侧翼进攻，这样没有多久白军就全部窜逃——有的窜逃，有的是同红军一起追击，因为有一百左右的四川军队缴械投诚，参加了红军。",
+          "contextLabel": "回忆估分资料保留的两则材料",
+          "recollectionSources": [
+            {
+              "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/2026上海中考语文回忆版真题及解析.pdf",
+              "sha256": "71ba391a1787f08a1133546072afee49b51a3554e7d161bd2e175014c72ad45e",
+              "kind": "local-recollection"
+            },
+            {
+              "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/上海市初中语文中考真题（考生回忆版）.pdf",
+              "sha256": "be20c34e56a795cae8dd1f0c0c25bb492c5a9e10d7336e7ae0f2163fb607dafe",
+              "kind": "local-recollection"
+            },
+            {
+              "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/2026年上海中考语文真题（完整版）.docx",
+              "sha256": "b21a053c323a43ba649aa0336b4cb54c89975c7be35a30e459f2a61962cba0b4",
+              "kind": "local-recollection"
+            },
+            {
+              "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/2026年上海中考语文真题答案（最全估分版）.docx",
+              "sha256": "23e0b8bd1a19b25e16e96d6aafab004b378e8aa303c19e1410863f2f37fbdea6",
+              "kind": "local-recollection"
+            }
+          ]
+        },
+        {
+          "id": "sh-chinese-2026-q06",
+          "originalNo": 6,
+          "type": "written",
+          "category": "作文（回忆整理）",
+          "stem": "愿望实现以后，还会发生什么呢？请以‘如愿以偿之后’为题，写一篇600字左右的文章。要求：（1）不得透露个人相关信息；（2）不得抄袭。",
+          "answer": "作文没有唯一答案。回忆估分资料的写作指导：重点写愿望实现‘之后’的心理、行动或新感悟，避免全文只写如何实现愿望。可结合真实生活，表达圆梦后的成长与反思，由教师人工评阅。",
+          "explanation": null,
+          "explanationNote": "回忆解析PDF、题卷图片与估分版对题目和字数要求一致；另一份简略回忆PDF未保留题目，不作为标题核对依据。",
+          "review": {
+            "status": "pending"
+          },
+          "recollectionSources": [
+            {
+              "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/2026上海中考语文回忆版真题及解析.pdf",
+              "sha256": "71ba391a1787f08a1133546072afee49b51a3554e7d161bd2e175014c72ad45e",
+              "kind": "local-recollection"
+            },
+            {
+              "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/上海市初中语文中考真题（考生回忆版）.pdf",
+              "sha256": "be20c34e56a795cae8dd1f0c0c25bb492c5a9e10d7336e7ae0f2163fb607dafe",
+              "kind": "local-recollection"
+            },
+            {
+              "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/2026年上海中考语文真题（完整版）.docx",
+              "sha256": "b21a053c323a43ba649aa0336b4cb54c89975c7be35a30e459f2a61962cba0b4",
+              "kind": "local-recollection"
+            },
+            {
+              "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/2026年上海中考语文真题答案（最全估分版）.docx",
+              "sha256": "23e0b8bd1a19b25e16e96d6aafab004b378e8aa303c19e1410863f2f37fbdea6",
+              "kind": "local-recollection"
+            }
+          ]
+        }
       ],
-      "note": "资料已找到，题干待完整转录，暂不能作答。"
+      "skipped": [
+        "小说关于老古发笑及第7段‘某种精神’的小问：现有节选缺少相应原文，未混入可作答题。",
+        "综合运用中‘甲同学’意见和四条排序导语未完整恢复，未根据参考答案倒造选项。",
+        "回忆资料对现代文材料、分值和小题编号有差异；当前整理内容不代表官方完整原卷。"
+      ],
+      "note": "部分原题已按回忆资料整理，可练习六组；交叉核对四份本地回忆资料，整理六组可作答内容。以下为回忆资料整理版，资料组号1—6不是官方小题号，组内编号按本页排列；部分材料是回忆复述或节选，分值、选项和题干仍待核对。",
+      "recollectionSources": [
+        {
+          "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/2026上海中考语文回忆版真题及解析.pdf",
+          "sha256": "71ba391a1787f08a1133546072afee49b51a3554e7d161bd2e175014c72ad45e",
+          "kind": "local-recollection"
+        },
+        {
+          "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/上海市初中语文中考真题（考生回忆版）.pdf",
+          "sha256": "be20c34e56a795cae8dd1f0c0c25bb492c5a9e10d7336e7ae0f2163fb607dafe",
+          "kind": "local-recollection"
+        },
+        {
+          "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/2026年上海中考语文真题（完整版）.docx",
+          "sha256": "b21a053c323a43ba649aa0336b4cb54c89975c7be35a30e459f2a61962cba0b4",
+          "kind": "local-recollection"
+        },
+        {
+          "file": "中考真题/2026年全国中考真题答案（按省市分类）/上海市/1、语文（真题+答案）/2026年上海中考语文真题答案（最全估分版）.docx",
+          "sha256": "23e0b8bd1a19b25e16e96d6aafab004b378e8aa303c19e1410863f2f37fbdea6",
+          "kind": "local-recollection"
+        }
+      ]
     },
     {
       "id": "sh-chemistry-2013",

@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>上海中考现代文阅读 · 应考手册</title>
+<style>
+  :root{
+    --bg:#f6f7f9; --card:#ffffff; --ink:#1f2328; --sub:#5b6470;
+    --line:#e3e7ec; --brand:#1f6feb; --brand-soft:#eaf2ff;
+    --star:#b45309; --star-soft:#fff7ed; --ok:#0f7b46; --ok-soft:#eaf7f0;
+    --pur:#6d28d9; --pur-soft:#f3edff; --red:#c0392b; --red-soft:#fdecea;
+    --teal:#0e7490; --teal-soft:#e6f6f9;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);
+    font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,sans-serif;line-height:1.85;}
+  .wrap{max-width:1020px;margin:0 auto;padding:28px 20px 60px;}
+  header{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:24px 28px;margin-bottom:16px;}
+  h1{margin:0 0 8px;font-size:25px;}
+  .lede{color:var(--sub);font-size:14px;margin:0;}
+  h2{font-size:19px;margin:30px 0 12px;padding-bottom:7px;border-bottom:1px solid var(--line);}
+  .tip{background:var(--ok-soft);border:1px solid #cfe9db;color:#145c38;border-radius:10px;padding:12px 16px;font-size:14px;margin-bottom:16px;}
+  .warn{background:var(--red-soft);border:1px solid #f5c2bc;color:#8a2a1e;border-radius:10px;padding:12px 16px;font-size:14px;margin-bottom:16px;}
+  .note{background:var(--star-soft);border:1px solid #f0d3ae;color:#7c3d06;border-radius:10px;padding:12px 16px;font-size:14px;margin-bottom:16px;}
+  .tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:16px;position:sticky;top:0;z-index:9;background:var(--bg);padding:8px 0;}
+  .tab{border:1px solid var(--line);background:var(--card);border-radius:10px;padding:8px 15px;font-size:14px;cursor:pointer;color:var(--sub);}
+  .tab.on{background:var(--brand);border-color:var(--brand);color:#fff;font-weight:600;}
+  .search{width:100%;padding:10px 14px;border:1px solid var(--line);border-radius:10px;font-size:15px;outline:none;margin-bottom:14px;}
+  .search:focus{border-color:var(--brand);box-shadow:0 0 0 3px var(--brand-soft);}
+  .pane{display:none;}
+  .pane.on{display:block;}
+  table{width:100%;border-collapse:collapse;background:var(--card);font-size:14px;border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+  th,td{padding:9px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top;}
+  th{background:#f2f5f9;font-weight:600;font-size:13px;color:var(--sub);}
+  tr:last-child td{border-bottom:none;}
+  td.c,th.c{text-align:center;white-space:nowrap;}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:12px;margin-bottom:12px;overflow:hidden;}
+  .card > .hd{padding:13px 17px;cursor:pointer;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+  .card > .hd:hover{background:#f7f9fc;}
+  .card.open .bd{display:block;}
+  .bd{display:none;padding:2px 18px 16px;border-top:1px dashed var(--line);font-size:14px;}
+  .nm{font-size:15px;font-weight:600;}
+  .arw{margin-left:auto;color:var(--sub);font-size:12px;}
+  .tag{font-size:11px;border-radius:4px;padding:1px 7px;background:#eef1f5;color:var(--sub);white-space:nowrap;}
+  .tag.r{background:var(--red);color:#fff;}
+  .tag.p{background:var(--pur);color:#fff;}
+  .tag.t{background:var(--teal);color:#fff;}
+  .tag.b{background:var(--brand);color:#fff;}
+  .tag.o{background:var(--star);color:#fff;}
+  .tag.g{background:var(--ok);color:#fff;}
+  .formula{background:var(--brand-soft);border-left:3px solid var(--brand);padding:9px 14px;margin:8px 0;border-radius:0 8px 8px 0;font-size:14px;}
+  .score{background:var(--pur-soft);border-left:3px solid var(--pur);padding:9px 14px;margin:8px 0;border-radius:0 8px 8px 0;font-size:13.5px;color:#3b1f6e;}
+  .bad{background:var(--red-soft);border-left:3px solid var(--red);padding:9px 14px;margin:8px 0;border-radius:0 8px 8px 0;font-size:13.5px;color:#7d2a1c;}
+  .eg{background:#f8fafc;border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin:8px 0;font-size:13.5px;color:#3d4653;}
+  .eg .q{color:var(--sub);}
+  .eg .a{color:var(--ok);}
+  .bar{height:22px;border-radius:6px;display:flex;overflow:hidden;margin:6px 0 4px;font-size:11px;color:#fff;line-height:22px;text-align:center;}
+  .bar span{display:inline-block;height:100%;}
+  .lg{display:flex;gap:14px;flex-wrap:wrap;font-size:12.5px;color:var(--sub);margin-bottom:8px;}
+  .lg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:5px;}
+  ul{margin:6px 0 6px 20px;padding:0;}
+  li{margin:3px 0;}
+  .kv{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:10px;}
+  .kv > div{flex:1;min-width:150px;background:var(--card);border:1px solid var(--line);border-radius:10px;padding:11px 14px;}
+  .kv .t{font-size:12px;color:var(--sub);}
+  .kv .v{font-size:18px;font-weight:600;}
+  .foot{color:var(--sub);font-size:12.5px;text-align:center;margin-top:28px;}
+  @media print{.tabs,.search{display:none}.bd{display:block!important}.pane{display:block!important}body{background:#fff}}
+</style>
+<style>@media(max-width:600px){.wrap{padding:12px 10px 40px}header{padding:16px 12px}h1{font-size:21px}.tabs{flex-wrap:wrap}.tabs button,button{min-height:36px}.search{min-width:0;max-width:100%}table{display:block;max-width:100%;overflow-x:auto}.bd{overflow-wrap:anywhere}}</style></head>
+<body><nav style="padding:12px 16px"><a href="../../index.html" style="display:inline-block;min-height:36px;line-height:36px">← 返回首页</a></nav>
+<div class="wrap">
+
+<header>
+  <h1>上海中考现代文阅读 · 应考手册</h1>
+  <p class="lede">依据 2023—2026 年上海中考语文真题交叉整理 · 覆盖两大文本类型、8 类必考题、术语规范与踩分规则</p>
+  <p style="margin:14px 0 0;padding-top:12px;border-top:1px dashed var(--line);font-size:13px;color:var(--sub)">
+    <b>配套文件：</b>
+    <a href="上海中考古诗文阅读应考手册.html" style="color:var(--brand);text-decoration:none">古诗文阅读应考手册</a> ·
+    <a href="上海中考古诗文·虚实词联动注释版.html" style="color:var(--brand);text-decoration:none">61 篇虚实词联动注释版</a> ·
+    <a href="上海中考文言虚实词范围速查表.html" style="color:var(--brand);text-decoration:none">150 实词 + 6 虚词速查表</a> ·
+    <a href="上海中考必背古诗文61篇·全文版.html" style="color:var(--brand);text-decoration:none">61 篇原文全文</a>
+  </p>
+</header>
+
+<div class="tabs">
+  <div class="tab on" data-p="p1">卷面定位</div>
+  <div class="tab" data-p="p2">五年真题</div>
+  <div class="tab" data-p="p3">两大文本</div>
+  <div class="tab" data-p="p4">八大题型</div>
+  <div class="tab" data-p="p5">术语与踩分</div>
+</div>
+
+<input class="search" id="q" placeholder="搜索题型、术语、篇名或关键词，如：作用 / 含义 / 插叙 / 非连 / 开放">
+
+<!-- ========== 1 卷面定位 ========== -->
+<div class="pane on" id="p1">
+
+  <div class="tip">
+    <b>一句话结论：</b>现代文阅读固定 <b>两篇</b>——<b>实用类</b>（原说明文，2025 年起升级为非连续性文本）＋<b>文学类</b>（小说或散文）。
+    合计 <b>34—37 分</b>，其中<b>文学类是主战场，占 20—21 分</b>，且压轴的 8 分开放题几乎年年出在文学类。
+  </div>
+
+  <h2>一、在全卷中的位置</h2>
+  <div class="bar">
+    <span style="width:23.3%;background:#1f6feb">古诗文 35</span>
+    <span style="width:24%;background:#0f7b46">现代文 36</span>
+    <span style="width:13.3%;background:#b45309">综合运用 20</span>
+    <span style="width:40%;background:#6d28d9">作文 60</span>
+  </div>
+  <div class="lg">
+    <span><i style="background:#1f6feb"></i>古诗文 约 35 分</span>
+    <span><i style="background:#0f7b46"></i>现代文 约 34—37 分</span>
+    <span><i style="background:#b45309"></i>综合运用 18—20 分</span>
+    <span><i style="background:#6d28d9"></i>作文 60 分</span>
+  </div>
+  <p style="font-size:13.5px;color:var(--sub)">满分 150 分 / 100 分钟。现代文约占 <b>24%</b>，是除作文外分值最高、最容易拉开差距的板块。</p>
+
+  <div class="kv">
+    <div><div class="t">实用类文本</div><div class="v" style="color:var(--teal)">14—16 分</div><div class="t">4 题左右</div></div>
+    <div><div class="t">文学类文本</div><div class="v" style="color:var(--pur)">20—21 分</div><div class="t">4—5 题</div></div>
+    <div><div class="t">合计</div><div class="v">34—37 分</div><div class="t">约占全卷四分之一</div></div>
+  </div>
+
+  <h2>二、题目的位置规律</h2>
+  <table>
+    <tr><th style="width:110px">位置</th><th>装什么</th><th>难度走向</th></tr>
+    <tr><td class="c">第 1 篇</td><td><b>实用类</b>：说明文 / 非连续性文本（多则材料）</td><td>起点低，送分为主；最后 1 题常升级为 6—8 分评析题</td></tr>
+    <tr><td class="c">第 2 篇</td><td><b>文学类</b>：小说 / 散文 / 科幻小说</td><td>由浅入深，第 1 题多为选择（3—4 分），末题是 6—8 分综合探究</td></tr>
+  </table>
+  <div class="note">
+    <b>梯度是稳定的：</b>两类文本都遵循「选择判断 → 局部理解 → 分析表达 → 综合探究」的四段式。
+    这意味着<b>前面的小题可以练到接近满分</b>，真正的区分度集中在每篇的<b>最后一道大题</b>（6—8 分）。
+  </div>
+
+  <h2>三、近年三个重要变化</h2>
+  <table>
+    <tr><th style="width:150px">变化</th><th>具体表现</th><th>应对</th></tr>
+    <tr><td><b>① 非连取代单篇说明文</b></td><td>2026 年第一篇整合「全国生态数据＋上海狗獾保育工程＋市民采访笔记」<b>三则材料</b>，不再是单一说明文</td><td>练跨材料比对：同一主题下不同材料的角度、详略、语言风格差异</td></tr>
+    <tr><td><b>② 明确「去模板化」</b></td><td>阅卷反馈：<b>套话不给分</b>，主观题必须引用原文词句、数据、情节作证据</td><td>答案里必须出现<b>原文具体信息</b>（人名、数据、细节），抽象形容词换成具体证据</td></tr>
+    <tr><td><b>③ 文学类偏爱科幻外壳</b></td><td>2023《邂逅外星人》、2026《空中杂货铺》均为科幻小说</td><td>审题先确认「本文设定」，不要按现实逻辑硬套</td></tr>
+  </table>
+
+  <div class="warn">
+    <b>最大的坑：</b>很多同学背了一堆「渲染气氛、烘托心情、为下文作铺垫」，然后被压分。
+    近年阅卷明确<b>反对无文本依据的术语堆砌</b>。正确姿势是：<b>先给结论，再引原文句子当证据，最后点明效果</b>。
+  </div>
+</div>
+
+<!-- ========== 2 五年真题 ========== -->
+<div class="pane" id="p2">
+  <p style="font-size:13.5px;color:var(--sub);margin-top:0">点任意一行展开详细设问与答案要点。数据来自 2023—2026 年上海中考真题。</p>
+  <div id="yearBox"></div>
+  <div class="note" style="margin-top:16px">
+    <b>从真题读出的三条规律：</b>
+    <ul>
+      <li><b>小说已超过散文</b>：2023、2025、2026 都考小说，仅 2024 考散文（且是回忆性散文）。</li>
+      <li><b>压轴题分值固化</b>：文学类末题稳定在 <b>8 分</b>（2024 选材组材 8 分、2026 写作意图 6 分＋开放推测 8 分）。</li>
+      <li><b>起始题高度重复</b>：几乎每年文学类第 1 题都是「词语在文中的具体所指」——这是必拿分。</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ========== 3 两大文本 ========== -->
+<div class="pane" id="p3">
+  <div id="textBox"></div>
+</div>
+
+<!-- ========== 4 八大题型 ========== -->
+<div class="pane" id="p4">
+  <div class="tip">
+    <b>怎么用：</b>先判断<b>是哪一类题</b>（看题干关键词），再套对应公式。<b>八类题型覆盖了近五年全部考题</b>。
+  </div>
+  <div id="typeBox"></div>
+</div>
+
+<!-- ========== 5 术语与踩分 ========== -->
+<div class="pane" id="p5">
+  <h2>一、术语对照表（混用＝丢分）</h2>
+  <div class="warn">
+    <b>最容易混的四组：</b><br>
+    ①「<b>比喻</b>」是修辞（文学类用），「<b>打比方</b>」是说明方法（说明文用），「<b>比喻论证</b>」是论证方法（议论文用）——三个不能互换。<br>
+    ②「<b>举例子</b>」是说明方法，「<b>举例论证</b>」是论证方法。<br>
+    ③「<b>作比较</b>」是说明方法，「<b>对比论证</b>」是论证方法，「<b>对比</b>」是表现手法。<br>
+    ④「<b>插叙</b>」是记叙顺序，「<b>伏笔/铺垫</b>」是结构手法，「<b>照应</b>」是篇章手法。
+  </div>
+  <div id="termBox"></div>
+
+  <h2>二、分值与答题要点的对应</h2>
+  <table>
+    <tr><th class="c" style="width:110px">题目分值</th><th>要写几个要点</th><th>说明</th></tr>
+    <tr><td class="c"><b>2 分</b></td><td>1—2 点</td><td>多为选择题或单一要点；主观题写 2 点更保险</td></tr>
+    <tr><td class="c"><b>3—4 分</b></td><td>2—3 点</td><td>典型如「词语的两层含义」＝ 2 点各 2 分</td></tr>
+    <tr><td class="c"><b>5—6 分</b></td><td>3 点左右</td><td>常见组合：内容 2 点 ＋ 效果 1 点，或结构 1 点 ＋ 内容 2 点</td></tr>
+    <tr><td class="c"><b>8 分</b></td><td>4 点以上＋原文证据</td><td>压轴题。必须分点，每点都要挂原文依据</td></tr>
+  </table>
+  <div class="formula" style="margin-top:12px">
+    万能骨架：<b>手法/判断</b> ＋ <b>写了什么（引原文）</b> ＋ <b>表现/突出什么</b> ＋ <b>抒发/证明什么</b> ＋ <b>结构上的作用</b>
+  </div>
+
+  <h2>三、考场四步法</h2>
+  <table>
+    <tr><th class="c" style="width:80px">步骤</th><th>做什么</th><th>时间</th></tr>
+    <tr><td class="c"><b>① 辨</b></td><td>先读标题与首尾段，判断文体（小说/散文/说明/非连），圈出人物与时间线</td><td>3—4 分钟</td></tr>
+    <tr><td class="c"><b>② 审</b></td><td>先读题后读文。圈题干关键词（含义/作用/赏析/概括/评析/推测），看分值定要点数</td><td>每题 30 秒</td></tr>
+    <tr><td class="c"><b>③ 定</b></td><td>回原文定位答题区间。<b>答案 90% 在关键词前后 1—2 句</b>或该段中心句</td><td>—</td></tr>
+    <tr><td class="c"><b>④ 答</b></td><td>分点标号 ①②③，关键词前置，每点务必带上原文词句</td><td>—</td></tr>
+  </table>
+
+  <h2>四、交卷前自查清单</h2>
+  <div id="checkBox"></div>
+
+  <h2>五、四轮训练节奏</h2>
+  <table>
+    <tr><th class="c" style="width:110px">轮次</th><th>做什么</th><th>目标</th></tr>
+    <tr><td class="c"><b>第 1 轮</b></td><td>按<b>题型</b>刷，不按套卷。一个题型连做 5 题，对着答案抄<b>采分点</b></td><td>建立题型反射</td></tr>
+    <tr><td class="c"><b>第 2 轮</b></td><td>做近 5 年真题。<b>限时</b>：实用类 12 分钟，文学类 18 分钟</td><td>练速度</td></tr>
+    <tr><td class="c"><b>第 3 轮</b></td><td>只做每篇的<b>最后一道大题</b>（6—8 分），写完对照答案补漏</td><td>攻区分度</td></tr>
+    <tr><td class="c"><b>第 4 轮</b></td><td>整理<b>丢分台账</b>：错在哪类题、是术语错还是漏点</td><td>消灭重复错误</td></tr>
+  </table>
+</div>
+
+<div class="foot">
+  数据来源：上海市初中学业水平考试语文真题（2023—2026）及市教育考试院专家评析。<br>
+  2022 年及以前篇目未纳入（未能完成交叉核实）。各年分值有 1—3 分浮动，以当年试卷为准。
+</div>
+
+</div>
+
+<script>
+const YEAR = [
+  [2026,"实用类","非连续性文本","人与自然 · 生物多样性保护（狗獾异地引迁保育：全国生态数据 / 上海保育工程 / 市民采访笔记）",16,
+   "①信息判断选择（4 分）　②内容概括（4 分）　③流程图梳理（跨三则材料）　④采访提纲评析（8 分）",
+   "第 ④ 题是全场最难：要求逐条说明三道采访问题是否贴合采访目的，并判断是否与现有材料重复。",
+   "①判断的唯一标准是<b>采访目的</b>（了解青少年参与生物多样性保护宣传活动的情况）。问题一谈「青少年参加科学性活动所需素质」，偏离目的；问题二询问「市民对野生动物进城的顾虑」，既偏离目的，又与笔记二、笔记三重复；问题三「青少年参与宣传活动的注意事项」紧扣目的。<br>②指出重复必须引具体材料：笔记二写市民偶遇野生动物受惊，笔记三写居民看法分歧，材料已完整呈现顾虑与分歧，无法获取新信息。<br>③最后给修改建议：重设问题一、更换问题二，围绕青少年宣传活动设计全新提问。"],
+  [2026,"文学类","科幻小说","《空中杂货铺》",21,
+   "①科幻设定解读选择（「甲虫」「瓢虫」所指）　②词语含义：第 ⑥ 段「某种精神」的两点内涵（4 分）　③写作意图分析：来电者为何是小男孩而非成年人（6 分）　④开放探究：推测杂货铺停业还是继续营业并说理由（8 分）",
+   "压轴 8 分题<b>没有唯一答案</b>，但必须观点明确、理由紧扣文本细节。",
+   "②「某种精神」＝<b>①人到老年仍敢追新梦、不服老、勇于尝试新鲜事物；②坚守朴素烟火初心，守住普通人平凡温暖的小店情怀</b>（两点各 2 分）。<br>③男孩来电的用意：<b>与追捧符号的成年人形成鲜明对比</b>——成人要的是打卡的象征，孩子要的是实实在在的用处；<b>最能触动老古被符号化的初心</b>，成为他撕掉闭店告示、决定留下的转折；<b>推动情节由冷转暖</b>完成反转；<b>凸显平凡生活仍需要实在的温柔这一主旨</b>。<br>④开放题必须先表态，再从文中已出现的伏笔、细节引证据，不能凭空设想。"],
+  [2025,"实用类","非连续性文本","流失文物帛书回归（追索程序 / 专家论证 / 外交沟通 / 文化机构合作）",14,
+   "①文意理解选择 ×3　②不同材料的语言特点比较",
+   "最后一题要求对比两则材料的<b>语言风格差异</b>，这是非连续性文本的标志性新题型。",
+   "语言特点比较的答法：<b>材料 A 语言庄重严谨、具有官方权威性，多使用专业术语和概括性表述；材料 B 语言生动形象、富有现场感与叙事性，注重细节描写与场景还原</b>。要点＝体裁 ＋ 句式 ＋ 词汇 ＋ 表达效果，每点都挂一句原文佐证。"],
+  [2025,"文学类","小说","《稻穗香》（稻鸭共生 · 福广与福胜的「鸭」之争）",20,
+   "①文意选择（3 分）　②情节与心理概括（4 分）　③第 ⑤ 段心理描写的作用（4 分）　④结尾景物描写的作用（3 分）　⑤标题「稻穗香」的妙处（4 分）",
+   "标题妙处是上海卷<b>高频保留题</b>，几乎隔年出现。",
+   "③心理描写作用：先写<b>怀疑</b>（以为福广捡走鸭不还），再写<b>自我否定</b>（福广不是偷摸的人）——<b>制造悬念、引发读者对鸭归属的好奇；推动情节发展，为后文试探鸭、两人争执做铺垫</b>；并与后文揭示「鸭是新品种样品」形成呼应，使反转合理。<br>④结尾景物：<b>「春风拂过，阳光拱开云衣」烘托和解的温馨氛围；「影子斜长，像是靠在一起」借光影暗喻关系破冰；「鹅鸭合群找食」呼应前文误会，以和谐场景收束，升华「春暖人和」的主题</b>。<br>⑤标题妙处：<b>点明核心场景（稻鸭共生）；「香」暗示丰收与希望；富有画面感；含蓄暗示「互相成全」的主题</b>（与当年作文题《相互成全》形成呼应）。"],
+  [2024,"实用类","说明文","棕色大熊猫的毛色基因研究",14,
+   "①文意选择 ×2　②第 ⑧ 段（结尾段）的作用 / 能否删去",
+   "典型的段落作用题——<b>说明文同样考句段作用</b>，不要以为只有记叙文才考。",
+   "分两层答：<b>内容上</b>总结棕色大熊猫基因研究的意义，强调这一发现对野生动物毛色变异与遗传研究的贡献，提出未来实现彩色熊猫的可能，表达继续探索保护的愿望；<b>结构上</b>总结全文、呼应标题。<b>务必先表态「不能删」，再分内容与结构两点作答。</b>"],
+  [2024,"文学类","散文","《草茎上的流年》（咪咪猫 / 狗尾巴草）",21,
+   "①词语理解填空：「贴切」「亲近」的原因（4 分）　②分析三个「放飞」的表达效果（5 分）　③叙述视角分析选择（4 分）　④围绕线索物的选材组材与情感分析（8 分）",
+   "第 ④ 题 8 分是全卷文学类压轴：要分析<b>选材组材</b>表达了哪些情感，必须答出<b>多层情感</b>。",
+   "①「贴切」＝<b>猫与狗尾巴草外形都布满绒毛</b>；「亲近」＝<b>猫是家乡人熟悉且喜欢的动物</b>。<br>②三个「放飞」＝<b>反复</b>，<b>由实到虚、层层递进</b>；分别对应<b>童年欢乐 → 排遣烦恼 → 承载对远方的憧憬</b>，呈现它由童年玩具变为情感寄托的过程。<br>③叙述视角选 D：<b>视角转换与叙述内容的变化彼此契合，使叙述层次更丰富</b>。<br>④情感须分层：<b>对童年与故乡的怀恋 / 对二姐的佩服与感恩 / 对家乡变化的欣慰 / 对流年逝去的感慨</b>，每层都要挂一处原文。"],
+  [2023,"实用类","说明文","《国产设备给西安古城墙做“CT”》（宇宙射线缪子成像技术）",15,
+   "①说明内容梳理填空（6 分）　②选符合原文的一项（3 分）　③第 ⑥ 段不能删去，请简述理由（6 分）",
+   "第 ① 题 6 分＝<b>梳理全文说明思路</b>，答案就是各段段意概括：原有检测方式的不足 → 缪子成像技术的原理 → 该技术的优势与局限。",
+   "①梳理题＝<b>给每段写一句话大意</b>，优先抄该段中心句或首句。<br>②选择题陷阱常设在<b>宏观拔高</b>：如答案是「我国生物多样性保护取得成效、展现大国担当」，而干扰项「坚持人与自然和谐共生、走绿色发展道路」原文并未直接表述，就不能选。<br>③「能否删去」＝先答不能，再说<b>本段写了什么</b> ＋ <b>承接上文什么 / 引出下文什么</b> ＋ <b>呼应标题或主旨</b>。"],
+  [2023,"文学类","科幻小说","《邂逅外星人》",20,
+   "①标题中「邂逅」的含义选择（2 分）　②概括第 ⑩ 段「结果」的两层含义（4 分）　③选择分析正确的一项（4 分）　④分析画线句的语言表现力（4 分）　⑤首尾都出现「神秘的敲击声」，分析其作用（6 分）",
+   "「首尾呼应句的作用」是<b>年年变形出现</b>的核心题型。",
+   "①「邂逅」＝<b>不期而遇</b>（不是约好的）。<br>②「结果」两层：<b>一是万户飞天失败；二是万户被历史铭记</b>（国际天文联合会将月球背面环形山命名为「万户」）。<br>④语言表现力：画线句用了<b>比拟</b>（把思绪写成能被「拽回」的实体），<b>传神描摹出相谈正欢的小申被报站声惊醒、回到现实的情状</b>，<b>表现他完全沉浸在太空遐想中</b>，凸显对太空探索的好奇。<br>⑤首尾句作用：<b>开篇由杨利伟的疑惑引出小申的遐想与对话，推动情节；结尾再次发问，与开篇呼应使结构完整；刻画出一个对太空充满好奇的少年形象；留下有问未答的悬念，意味深长</b>。"],
+  [2022,"—","—","（2022 年及以前篇目未纳入本表：未能完成交叉核实，避免以讹传讹）",0,
+   "—","—","如需补充，建议以当年官方试卷或各区教研室发布的真题汇编为准。"]
+];
+const TEXT = [
+  ["实用类文本（含非连续性文本）","t","原来叫「说明文」，2025 年起升级为<b>非连续性文本</b>：围绕同一主题组合 2—3 则<b>不同形式</b>的材料（数据图表 / 新闻报道 / 采访笔记 / 文献摘录 / 流程图）。分值 14—16 分。",
+   ["<b>信息筛选与判断</b>：选项是否在原文有据（常设「宏观拔高」陷阱）",
+    "<b>梳理概括</b>：段意概括、流程图填空、完成表格",
+    "<b>句段能否删去</b>：从内容与结构两方面作答",
+    "<b>材料间关系</b>：某则材料的作用、材料可否互换",
+    "<b>语言特点比较</b>：不同材料的体裁与语体差异",
+    "<b>评析类</b>：采访提纲、活动方案、流程图设计（6—8 分）"],
+   "①先读题干定主题，再快速扫材料抓<b>每则材料的身份</b>（数据？采访？科普？）——材料身份决定它的语言风格与作用。<br>②<b>绝不选原文没有的宏观表述</b>。原文只写生态保护成效，就不能选「坚持绿色发展道路」。<br>③梳理题答案必须来自原文，宁可抄原句也不要自己概括发挥。<br>④评析题（如采访提纲）的唯一标尺是<b>目的</b>：问自己「这一问能不能帮我达成采访目的、能不能得到新信息」。",
+   "Q：三则材料能否删去其一？<br>A：<b>不能。</b>材料一提供……（数据支撑），材料二提供……（背景与原理），材料三提供……（真实个案与民意）。三者角度不同、互为补充，删去则论证不完整。"],
+  ["文学类文本（小说 / 散文）","p","上海卷的绝对重心，<b>占 20—21 分</b>。近四年三考小说（含两篇科幻）、一考散文。主题集中在<b>少年成长、亲情和解、旧物回忆、平凡坚守</b>。",
+   ["<b>词语含义</b>：本义 ＋ 语境义 ＋ 深层义",
+    "<b>赏析 / 语言表现力</b>：修辞、描写、句式、用词",
+    "<b>句段作用</b>：内容 ＋ 结构 ＋ 情感与主旨",
+    "<b>人物心理与情感变化</b>：梳理变化轨迹",
+    "<b>标题含义与妙处</b>",
+    "<b>选材组材 / 构思用意</b>（含次要人物设置）",
+    "<b>叙述视角</b>（童年之我 vs 成年之我）",
+    "<b>开放探究</b>：推测结局、评价人物（8 分）"],
+   "①读小说先抓<b>人物关系图</b>和<b>转折句</b>——几乎每道 8 分题都问「作者为什么这么安排」，答案指向情节转折与人物关系。<br>②散文抓<b>线索物</b>（2024 年是「咪咪猫」），它同时串联材料与情感。<br>③遇到科幻设定，先按题干提示确认世界观，再答题，切勿按现实逻辑硬套。<br>④2026 年起主观题<b>禁用套话</b>：每个判断后面必须跟一句原文证据。",
+   "Q：文中写次要人物 XX，有什么用意？<br>A：<b>①</b>与主要人物形成<b>对比或衬托</b>，突出其……；<b>②</b>推动情节——引出或促使……发生；<b>③</b>丰富文章主题，表达……；<b>④</b>若处于第一人称叙述中，还可能担当线索或见证者。"]
+];
+const TYPE = [
+  {n:"词语含义题", k:"「××」在文中的意思是／指的是／的含义／为什么用「××」／两层含义",
+   f:"<b>本义</b>（词典义，有时可省） ＋ <b>语境义</b>（在本文具体指什么） ＋ <b>深层义</b>（人物心理／情感／主旨）",
+   eg:["2026《空中杂货铺》：第 ⑥ 段中「某种精神」具体指什么？（4 分）",
+       "①人到老年仍敢于追逐新梦想、不服老、勇于尝试新鲜事物；②坚守朴素烟火初心，守住普通人平凡温暖的小店情怀。两个要点各 2 分，缺一不可。"],
+   pt:["动词＝找动作背后的<b>心理</b>；形容词＝找它<b>描述的对象</b>；指代类＝向<b>前后句</b>找指代内容。",
+       "问「两层含义」「多个要点」时务必答满点数：<b>4 分题＝2 点，6 分题＝3 点</b>。"],
+   bd:["只写词典义、不写语境义，最多拿一半分。","把形容词换成抽象词（如「表现了他很难过」），不引原文中的具体行为或细节。"]},
+
+  {n:"语言表现力 / 赏析题", k:"赏析／分析语言表现力／表达效果／这样写的好处／加点词的妙处",
+   f:"<b>判定手法</b>（修辞／描写／句式／用词） ＋ <b>写了什么</b>（概括内容并引原句） ＋ <b>效果</b>（形象／生动／准确地写出……的特点） ＋ <b>情感或主旨</b>",
+   eg:["2023《邂逅外星人》：分析第 ⑮ 段画线句的语言表现力。（4 分）",
+       "运用比拟，把无形的思绪写成能被「拽回」的实体，传神描摹出相谈正欢的小申被报站声惊醒、跌回现实的情状，表现他完全沉浸在与外星人对话的遐想中，凸显其对太空探索的好奇与向往。"],
+   pt:["先找最明显的手法：<b>比喻、拟人、排比、反复、夸张、对比</b>最常见；其次是<b>人物描写</b>（动作、神态、心理、语言、外貌）。",
+       "没有明显修辞时，从<b>句式</b>（短句／长句／整散结合）、<b>用词</b>（动词、叠词、色彩词）、<b>人称</b>入手。"],
+   bd:["只答手法不答具体内容，等于没答。","把「比喻」说成「打比方」（那是说明方法），术语混用直接扣分。"]},
+
+  {n:"句段作用题", k:"有什么作用／能否删去／为什么要写这一段／结尾段的作用／画线句的作用",
+   f:"<b>内容上</b>：写了……，表现／突出／交代了……　＋　<b>结构上</b>：总领全文／引出下文／承上启下／铺垫照应／总结全文／呼应开头或标题　＋　<b>表达效果</b>：升华主旨／留下悬念／耐人寻味",
+   eg:["2023《国产设备给西安古城墙做“CT”》第 13 题：第 ⑥ 段不能删去，请简述理由。（6 分）",
+       "不能删。第 ⑥ 段说明缪子成像技术已拓展到地质勘查、矿产勘探、集装箱检测等更广阔空间，并提出用其探测青藏高原冰川厚度的新思路，还交代了国产化率已达 95%；内容上承接并推进上文的技术应用，结构上为第 ⑦ 段「实现技术的中国式现代化」的议论作铺垫，同时呼应标题中的「国产」二字。"],
+   pt:["先按<b>所处位置</b>判断：开头＝总领／引出；中间＝承上启下／铺垫；结尾＝总结／升华／呼应。",
+       "说明文同样考这道题，不要以为只有记叙文才考句段作用。"],
+   bd:["「能否删去」题忘记第一步表态，直接开始分析，白白丢 1 分。","只写「承上启下」四个字，不说明承接了什么、引出了什么。"]},
+
+  {n:"概括梳理题", k:"概括／梳理／完成填空／流程图／表格／说明过程／简要概括",
+   f:"<b>定位区间</b>（题干指定的段落） → <b>提取关键词</b>（优先原文原句） → <b>按结构表述</b>（人＋事＋结果 / 时间线 / 流程图箭头短语）",
+   eg:["2023 第 11 题：根据第 ②—④ 段的说明内容，完成填空。（6 分）",
+       "（1）原有检测方式（钻孔法、雷达法）的不同与不足；（2）缪子成像技术的原理；（3）缪子成像技术的优势与局限。每空 2 分，本质就是该段的段意概括。"],
+   pt:["给<b>每段写一句话大意</b>，就是梳理题的标准答案。",
+       "流程图填空要求<b>动词＋宾语</b>的短语结构，看前后箭头已有的格式照抄（仿句式）。"],
+   bd:["跨段串答，把不属于该区间的东西写进来。","自己发挥概括，反而丢掉原文中的关键限定词。"]},
+
+  {n:"人物心理 / 情感变化题", k:"心理变化／情感变化／××的心情／为什么会这样／揣摩人物心理",
+   f:"<b>按情节顺序</b>梳理：<b>①</b>初始状态 → <b>②</b>（转折事件）→ <b>③</b>变化后状态。每点都要<b>写出对应的情节原因</b>。",
+   eg:["2025《稻穗香》：第 ⑤ 段福胜的心理描写有什么作用？（4 分）",
+       "先写他怀疑「福广捡走鸭不归还」，继而自我否定「福广不是偷摸的人」。制造悬念，引发读者对鸭归属的好奇；推动情节发展，为后文试探鸭、两人起争执做铺垫；与后文揭示「鸭是新品种样品」呼应，让情节反转更合理。"],
+   pt:["情感变化题通常<b>4 分＝2 个转折点</b>或<b>3 个阶段</b>，先看清分值再动笔。",
+       "用准确的情感词：愧疚、释然、怅惘、欣慰、隔膜→和解，不要一律写成「感动」。"],
+   bd:["只答情感词，不答触发变化的<b>具体事件</b>。","把人物的想法误当成作者的态度。"]},
+
+  {n:"标题妙处题", k:"标题的含义／妙处／好在哪／能否改成××／为什么以此为标题",
+   f:"<b>表层义</b>（字面所指，常是线索物或核心场景） ＋ <b>深层义</b>（象征／双关／主旨） ＋ <b>作用</b>：线索／点明对象或场景／概括主要情节／设置悬念吸引读者／暗示或揭示主题 ＋ <b>表达效果</b>（画面感、诗意、反差）",
+   eg:["2025《稻穗香》：标题有什么妙处？（4 分）",
+       "点明文章核心场景「稻鸭共生」；「香」暗示丰收与希望，富有画面感；作为情感寄托贯穿全文；含蓄暗示「互相成全」的主题（与当年作文题《相互成全》形成呼应）。"],
+   pt:["看到<b>物名类标题</b>（草茎上的流年、稻穗香、身边的小店），第一反应：<b>它是线索，也是情感载体</b>。",
+       "问「能否改」＝先表态不能，再说原标题好在哪、改后失去了什么。"],
+   bd:["只说「吸引读者」这类套话，被判无文本依据。","忘记答标题与主旨之间的关系，丢掉最关键的 1—2 分。"]},
+
+  {n:"选材组材 / 构思用意题", k:"为什么这样安排／选材组材／某人物或情节设置的用意／叙述视角的作用／线索的作用",
+   f:"<b>①结构</b>（线索、串联、推动或补全情节） ＋ <b>②手法</b>（对比、衬托、铺垫、伏笔照应、虚实结合） ＋ <b>③内容</b>（丰富或突出了……的形象） ＋ <b>④主旨</b>（深化了……的主题）",
+   eg:["2026《空中杂货铺》：打来电话者是小男孩而非成年人，作者这样设计的意图是什么？（6 分）",
+       "①与热衷打卡、追捧符号的成年人形成鲜明对比——成人要的是象征，孩子要的是实用；②最能触动已被符号化的老古，成为他撕掉闭店告示、决定留下的转折；③推动情节由冷转暖，完成反转；④凸显「平凡生活仍然需要实在的温柔」这一主旨。"],
+   pt:["凡是问「作者为什么这样安排」，答案一定落在<b>情节、人物、主题</b>三者上，而不会是「因为这是真的」。",
+       "次要人物／次要情节＝对比衬托 ＋ 推动情节 ＋ 丰富主题，是万能三件套，但必须填入具体内容。"],
+   bd:["脱离文本谈大道理，比如写「体现了社会浮躁」却不引文中任何一处细节。","只答对比，却不说明和谁比、比出了什么。"]},
+
+  {n:"开放探究题（压轴 8 分）", k:"谈谈你的看法／推测并说明理由／是否赞同／联系生活实际／结合全文分析",
+   f:"<b>①第一句就明确表态</b> ＋ <b>②—④ 分条给理由</b>，每条都＝<b>文本依据</b>＋<b>简要分析</b> ＋ <b>⑤（若要求）联系生活实际或升华</b>",
+   eg:["2026《空中杂货铺》：老古的杂货铺会停业还是继续营业？请推测并说明理由。（8 分）",
+       "表态：我推测会继续营业。理由：①文中写到男孩恳请、老古翻出尘封的螺丝钉并撕掉闭店告示、重新擦亮货架，是最直接的依据；②他开店的初衷是给人解决实实在在的难处，男孩的需求正印证了这份价值；③与只拍照不消费的游客形成对照，说明真正需要这间店的人依然存在；④文末议论句点明网红热度会散去，但有人还在等这间小店。（答「停业」亦可，必须从文本中找依据。）"],
+   pt:["这是<b>唯一一类答案不止一种</b>的题，评分看的是<b>观点明确＋理由充分＋紧扣文本</b>，不看站哪边。",
+       "必须写满 3—4 条理由，每条挂一处原文细节（人名、物件、动词、数据）。"],
+   bd:["通篇写自己的感想，通篇没有一个原文细节。","表态模棱两可（「也许会…也许不会…」），直接被视为观点不明。"]}
+];
+const TERM = [
+  ["修辞手法（文学类）","p","比喻 · 拟人 · 排比 · 反复 · 夸张 · 对比 · 反问 · 设问 · 对偶 · 借代 · 引用",
+   "答题格式：运用了××修辞，把……比作/写成……，生动形象地写出……的……特点，表达……情感。<br><b>反复</b>（2024 考了三个「放飞」）：强调某种情感，形成一唱三叹的节奏，使情感<b>由实到虚、层层递进</b>。<br><b>对比</b>：把……和……对照，突出……，给人强烈反差。"],
+  ["描写方法（文学类）","p","人物描写：动作 · 神态 · 心理 · 语言 · 外貌<br>环境描写：自然环境 · 社会环境<br>描写角度：正面（直接） · 侧面（间接） · 细节描写",
+   "<b>动作描写</b>：传神写出……的情状，表现其……的性格/心理。<br><b>心理描写</b>（2025 考）：直接呈现内心矛盾，<b>制造悬念、推动情节、为后文……做铺垫</b>。<br><b>环境描写</b>：①交代时地背景 ②渲染……气氛 ③烘托人物……心情 ④<b>推动情节发展</b> ⑤暗示或升华主题 ⑥借景物象征……<br><b>侧面描写</b>：通过写……来烘托主要人物的……，比正面更含蓄有力。"],
+  ["说明方法（实用类）","t","举例子 · 列数字 · 作比较 · 打比方 · 下定义 · 分类别 · 列图表 · 作诠释 · 引资料",
+   "答题格式：运用了××说明方法，<b>具体准确</b>（举例子、列数字、引资料）/ <b>突出</b>（作比较）/ <b>生动形象</b>（打比方）/ <b>条理清晰</b>（分类别、列图表）/ <b>科学严密</b>（下定义）地说明了……的……特征。<br><b>注意</b>：此处必须用「打比方」而不是「比喻」，用「举例子」而不是「举例论证」。"],
+  ["论证方法（议论文）","t","举例论证 · 道理论证 · 对比论证 · 比喻论证 · 引用论证",
+   "答题格式：运用了××论证，<b>具体有力</b>（举例）/ <b>权威有力</b>（道理、引用）/ <b>突出强调</b>（对比）/ <b>生动形象、通俗易懂</b>（比喻）地论证了……的观点，使论证更有说服力。<br><b>注</b>：议论文在上海中考现代文中出现频率低于说明文与非连，但综合运用题常涉及。"],
+  ["记叙顺序（文学类）","p","顺叙 · 倒叙 · 插叙 · 补叙",
+   "<b>倒叙</b>：制造悬念，吸引读者，避免平铺直叙。<br><b>插叙</b>：补充交代……的来龙去脉，使情节更完整；丰富人物……的形象；<b>为下文……做铺垫</b>；有时与眼前形成对比。<br><b>补叙</b>：文末补充交代结果，解开前文悬念，使情节完整。<br>答题务必说清「插叙了什么事」。"],
+  ["叙述视角 / 人称","p","第一人称「我」 · 第三人称 · 童年之我 vs 成年之我（双重视角）",
+   "<b>第一人称</b>：真实可信，便于直接抒情，是线索人物与见证者。<br><b>第三人称</b>：不受时空限制，便于客观全面地展现。<br><b>童年与成年双重视角</b>（2024 考点）：<b>视角转换与叙述内容的变化彼此契合，使叙述层次更丰富</b>；成年视角赋予童年往事以回味与感慨，形成时光纵深感。"],
+  ["表现手法 / 篇章手法","p","对比衬托 · 铺垫伏笔 · 照应 · 象征 · 欲扬先抑 · 以小见大 · 线索贯穿 · 虚实结合",
+   "<b>铺垫</b>：前文写……，为后文……的出现（或转折）蓄势，使情节发展合理。<br><b>伏笔与照应</b>：前有……埋伏，后有……呼应，使结构严谨。<br><b>象征</b>：用具体的……象征抽象的……，含蓄深化主旨。<br><b>以小见大</b>：借一件小事，折射……的深层主题。"],
+  ["非连续性文本常用词","t","材料 · 数据 · 图表 · 采访提纲 · 流程图 · 调查报告 · 新闻特写 · 文献摘录",
+   "指认材料身份是解题第一步：<b>数据类</b>提供量化证据，<b>新闻类</b>重时效与客观性，<b>采访笔记</b>提供真实个案与民意，<b>文献摘录</b>提供学术背景。<br>评析类问题的两个通用标尺：<b>①是否贴合目的</b>；<b>②能否获得新信息（是否与已有材料重复）</b>。"]
+];
+
+const CHECK = [
+  ["我先<mark>判断了文体</mark>吗？","实用类用说明方法术语，文学类用修辞术语。术语错，整题可能归零。"],
+  ["每道题<mark>圈了题干关键词</mark>吗？","含义 / 作用 / 赏析 / 概括 / 评析 / 推测，问法不同，公式不同。"],
+  ["我按<mark>分值拆了要点</mark>吗？","2 分＝2 点，4 分＝2—3 点，6 分＝3 点，8 分＝4 点以上。宁多勿少。"],
+  ["答案里<mark>有没有原文信息</mark>？","人名、物件、动词、数据、引句——缺一处就可能被判套话。"],
+  ["作用题<mark>内容与结构都答了</mark>吗？","多数作用题至少两个维度，只答一半直接腰斩。"],
+  ["（若能删去题）<mark>我先表态了吗</mark>？","第一句必须写「不能删」或「不能调换」。"],
+  ["标题题<mark>答到主旨</mark>了吗？","只答「吸引读者」「富有诗意」通常不够。"],
+  ["开放题<mark>第一句是明确观点</mark>吗？","不要写「也许是……也许不是……」，阅卷判定为观点不明。"],
+  ["我<mark>分点标号</mark>了吗？","①②③ 让采分点一眼可见，卷面分也是分。"],
+  ["有没有<mark>错别字和病句</mark>？","尤其古诗文默写之外，答案中的专业字词也要写对。"]
+];
+/* ---------------- 渲染 ---------------- */
+const $ = id => document.getElementById(id);
+const vis = new Set([0,1,2,3,4,5,6,7,8]);
+
+function hit(s, kw){
+  if(!kw) return true;
+  const t = String(s).replace(/<[^>]+>/g, '');
+  return kw.split(/\s+/).every(k => t.toLowerCase().indexOf(k) !== -1);
+}
+
+function card(head, bodyHTML, key){
+  return '<div class="card" data-k="' + key + '"><div class="hd">' + head +
+         '<span class="arw">展开 ▾</span></div><div class="bd">' + bodyHTML + '</div></div>';
+}
+
+function renderYear(kw){
+  let h = '', g = null;
+  YEAR.forEach((r, i) => {
+    const [yr, cls, kind, name, sc, qs, note, key] = r;
+    const blob = [yr, cls, kind, name, qs, note, key].join(' ');
+    if(!hit(blob, kw)) return;
+    if(yr !== g){ g = yr; h += '<h2>' + yr + ' 年</h2>'; }
+    const tg = cls === '文学类' ? 'p' : 't';
+    let head = '<span class="nm">' + name + '</span>' +
+      '<span class="tag ' + tg + '">' + kind + '</span>' +
+      (sc ? '<span class="tag o">' + sc + ' 分</span>' : '') +
+      '<span class="tag">' + cls + '</span>';
+    let bd = '';
+    if(sc){
+      bd += '<h3>题目设置</h3><p>' + qs + '</p>';
+      bd += '<div class="score"><b>难点：</b>' + note + '</div>';
+      bd += '<h3>答案要点与思路</h3><p>' + key + '</p>';
+    } else {
+      bd += '<p>' + key + '</p>';
+    }
+    h += card(head, bd, i);
+  });
+  $('yearBox').innerHTML = h || '<div class="note">没有匹配的篇目，换个词试试。</div>';
+}
+
+function renderText(kw){
+  let h = '';
+  TEXT.forEach((r, i) => {
+    const [nm, tg, intro, list, method, eg] = r;
+    const blob = nm + intro + list.join('') + method + eg;
+    if(!hit(blob, kw)) return;
+    let head = '<span class="nm">' + nm + '</span><span class="tag ' + tg + '">' +
+      (tg === 't' ? '14—16 分' : '20—21 分') + '</span>';
+    let bd = '<p>' + intro + '</p>';
+    bd += '<h3>常考题型</h3><ul>' + list.map(x => '<li>' + x + '</li>').join('') + '</ul>';
+    bd += '<h3>方法要点</h3><p>' + method + '</p>';
+    bd += '<div class="eg">' + eg + '</div>';
+    h += card(head, bd, 'x' + i);
+  });
+  $('textBox').innerHTML = h || '<div class="note">没有匹配的内容。</div>';
+}
+
+function renderType(kw){
+  let h = '';
+  TYPE.forEach((r, i) => {
+    const blob = r.n + r.k + r.f + r.eg.join('') + r.pt.join('') + r.bd.join('');
+    if(!hit(blob, kw)) return;
+    let head = '<span class="nm">第 ' + (i + 1) + ' 类 · ' + r.n + '</span>';
+    let bd = '<div class="formula"><b>识别：</b>' + r.k + '</div>';
+    bd += '<div class="formula"><b>公式：</b>' + r.f + '</div>';
+    bd += '<div class="eg"><span class="q"><b>真题：</b>' + r.eg[0] + '</span><br>' +
+          '<span class="a"><b>参考答案：</b>' + r.eg[1] + '</span></div>';
+    bd += '<div class="score"><b>踩分要诀</b><ul>' + r.pt.map(x => '<li>' + x + '</li>').join('') + '</ul></div>';
+    bd += '<div class="bad"><b>常见丢分</b><ul>' + r.bd.map(x => '<li>' + x + '</li>').join('') + '</ul></div>';
+    h += card(head, bd, 'y' + i);
+  });
+  $('typeBox').innerHTML = h || '<div class="note">没有匹配的题型。</div>';
+}
+
+function renderTerm(kw){
+  let h = '';
+  TERM.forEach((r, i) => {
+    const [nm, tg, list, note] = r;
+    if(!hit(nm + list + note, kw)) return;
+    let head = '<span class="nm">' + nm + '</span><span class="tag ' + tg + '">' +
+      (tg === 't' ? '实用类' : '文学类') + '</span>';
+    let bd = '<p style="color:var(--sub)"><b>包含：</b>' + list + '</p>' + '<p>' + note + '</p>';
+    h += card(head, bd, 'z' + i);
+  });
+  $('termBox').innerHTML = h || '<div class="note">没有匹配的术语。</div>';
+}
+
+function renderCheck(){
+  $('checkBox').innerHTML = '<table><tr><th class="c" style="width:230px">问自己</th><th>为什么重要</th></tr>' +
+    CHECK.map(r => '<tr><td>' + r[0] + '</td><td>' + r[1] + '</td></tr>').join('') + '</table>';
+}
+
+function renderAll(kw){
+  renderYear(kw); renderText(kw); renderType(kw); renderTerm(kw);
+}
+
+/* ---------------- 交互 ---------------- */
+document.querySelectorAll('.tab').forEach(t => {
+  t.onclick = () => {
+    document.querySelectorAll('.tab').forEach(x => x.classList.remove('on'));
+    document.querySelectorAll('.pane').forEach(x => x.classList.remove('on'));
+    t.classList.add('on');
+    $(t.dataset.p).classList.add('on');
+  };
+});
+
+function bindCards(){
+  document.querySelectorAll('.card > .hd').forEach(hd => {
+    if(hd.dataset.bound) return;
+    hd.dataset.bound = 1;
+    hd.onclick = () => {
+      const c = hd.parentElement;
+      c.classList.toggle('open');
+      hd.querySelector('.arw').textContent = c.classList.contains('open') ? '收起 ▴' : '展开 ▾';
+    };
+  });
+}
+
+let timer = null;
+$('q').addEventListener('input', e => {
+  clearTimeout(timer);
+  const v = e.target.value.trim().toLowerCase();
+  timer = setTimeout(() => { renderAll(v); bindCards(); }, 160);
+});
+
+renderAll('');
+renderCheck();
+bindCards();
+</script>
+</body>
+</html>
