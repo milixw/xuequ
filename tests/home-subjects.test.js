@@ -8,11 +8,15 @@ const root = path.join(__dirname, '..');
 const app = fs.readFileSync(path.join(root, 'src', 'app.js'), 'utf8');
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
 
-test('首页保留原有教材、试卷和趣味玩法布局', () => {
+test('首页按课本、练习、中考真题、趣味玩法分区，不另设学科页', () => {
   const home = app.slice(app.indexOf('function home()'), app.indexOf('// ---------- 册 ----------'));
   assert(home.includes('mountSemesterSwitcher(header, semester && semester.id, username)'));
-  assert(home.includes('volumes.forEach(v => appendVolumeCard(main, v))'));
-  assert(home.includes('main.appendChild(exam)'));
+  assert(home.includes('volumes.forEach(v => appendVolumeCard(books, v))'));
+  assert(home.includes('grid.appendChild(exam)'));
+  const order = ["'本学期课本'", "'练习'", "'复习资料'", "'中考真题'", "'趣味玩法'"].map(s => home.indexOf(s));
+  assert(order.every((n, i) => n >= 0 && (i === 0 || n > order[i - 1])), '首页分区顺序不对');
+  for (const s of ['chinese', 'math', 'physics', 'chemistry']) assert(home.includes(`href: '#/shanghai-papers/${s}'`));
+  assert(home.includes("href: '#/english-exams'"));
   assert(home.includes('FUN_GAMES.map(g =>'));
   assert(!home.includes('HOME_SUBJECTS'));
   assert(!home.includes('appendHomeOutlines'));
@@ -20,12 +24,12 @@ test('首页保留原有教材、试卷和趣味玩法布局', () => {
   assert(!app.includes("if (parts[0] === 'subject')"));
 });
 
-test('首页英语学习大纲、单词和试题库三个入口依次显示，单词入口进每日任务', () => {
+test('首页有英语学习大纲、单词和试题库三个入口，单词入口进每日任务', () => {
   const home = app.slice(app.indexOf('function home()'), app.indexOf('// ---------- 册 ----------'));
   const outlineIndex = home.indexOf("title: '英语学习大纲'");
   const vocabIndex = home.indexOf("title: '英语单词'");
   const bankIndex = home.indexOf("title: '英语试题库'");
-  assert(outlineIndex >= 0 && vocabIndex > outlineIndex && bankIndex > vocabIndex);
+  assert(outlineIndex >= 0 && vocabIndex >= 0 && bankIndex > vocabIndex);
   assert(home.includes("href: 'content/english/shanghai-junior-outline.html'"));
   assert(home.includes("href: '#/words'"), '首页英语单词入口应进每日单词任务');
   const wordsUi = fs.readFileSync(path.join(root, 'src', 'words-ui.js'), 'utf8');

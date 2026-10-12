@@ -70,10 +70,27 @@ a { color: inherit; text-decoration: none; }
   background: var(--primary); color: #fff; margin-bottom: 6px;
 }
 
-/* 首页英语资料入口。 */
-.home-english { margin-top: 18px; }
-.home-english .group { margin: 0 0 8px; }
-.home-english-entry { min-height: 64px; }
+/* 首页：课本卡片 + 练习两列格子 + 中考学科一排 */
+.home-section .group { margin: 18px 0 8px; }
+.home-section:first-child .group { margin-top: 10px; }
+.card.volume { margin-bottom: 10px; }
+.card.volume h2 { display: flex; align-items: center; gap: 8px; }
+.card.volume .tag { margin-bottom: 0; flex: none; }
+.card.volume .meta { margin-top: 2px; font-size: 13px; }
+.home-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.home-tile {
+  display: flex; flex-direction: column; gap: 2px; min-width: 0; min-height: 64px;
+  background: var(--card); border-radius: 12px; padding: 10px 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .06); cursor: pointer;
+}
+.home-tile b { font-size: 15px; }
+.home-tile small { font-size: 12px; color: var(--muted); line-height: 1.4; }
+.home-chips { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
+.home-chips a {
+  display: flex; align-items: center; justify-content: center; min-height: 44px;
+  background: var(--card); border-radius: 12px; font-size: 15px; font-weight: 600;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .06);
+}
 
 /* 英语历年中考文字题，320px 手机优先。 */
 .english-exams-year { margin-top: 14px; }

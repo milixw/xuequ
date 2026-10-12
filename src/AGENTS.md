@@ -23,7 +23,7 @@
   words-ui.js                     英语单词页面：#/words 今日任务、本册各单元、单元词表、一题一屏练习（L1～L4），册页面每个 Unit 的“单词”行；词表按 catalog 里册的 words 字段用 <script> 按需加载
   subject-papers.js               上海语数物化真题：文字与本地题图混合，题图可放大，答案图只在订正区；按账号保存，打印不含答案
   account-ui.js                   右上角账号区和登录弹窗
-  app.js                          hash 路由和页面：首页（教材、试卷、趣味玩法，另有英语大纲和试题库入口）→ 册 → 小节 / 真题卷 → 做题
+  app.js                          hash 路由和页面：首页（本学期课本、练习、复习资料、中考真题、趣味玩法五区）→ 册 → 小节 / 真题卷 → 做题
   app.css                         全部样式
 ```
 
@@ -33,7 +33,7 @@
 
 首页语文实词虚词入口链接到 `content/chinese/classical-words.html`，资料与原 PDF 放在 `content/chinese/`，无需首屏加载全文。
 首页语文考纲入口链接到 `content/chinese/shanghai-junior-outline.html`，为独立离线参考页。
-首页语文区另有 `content/chinese/上海中考古诗文阅读应考手册.html` 和 `content/chinese/上海中考现代文阅读应考手册.html` 两份独立离线复习资料。
+首页“复习资料”另有 `content/chinese/上海中考古诗文阅读应考手册.html` 和 `content/chinese/上海中考现代文阅读应考手册.html` 两份独立离线复习资料。
 首页古诗文联动注释入口链接到 `content/chinese/上海中考古诗文·虚实词联动注释版.html`，配套三份参考页同目录离线使用。
 上海原题 `subject-papers.js` 支持安全转义的 `[[u]]` 普通下划线、`[[dot]]` 加点和 `[[wave]]` 波浪下划线标记，不支持嵌套。语文文字转录题的 `textSource` 表示原解析已并入文字参考答案，`sourceImages`只溯源不展示；必要局部配图仍用 `stemImages`，可用 `label`作无障碍名称。
 

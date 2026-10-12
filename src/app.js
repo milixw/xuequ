@@ -145,6 +145,7 @@
     { name: '立体图形', tag: '展开图 · 截面', when: '不限年级', icon: '◆', color: '#2f6fd6', href: 'src/games/solids/index.html' },
   ];
 
+  // 首页课本卡片只写学科、册名和进度；教材版本在册页面的副标题里
   function appendVolumeCard(main, v) {
     const metas = Content.sectionMetas().filter(s => s.volumeId === v.id);
     const ready = metas.filter(s => s.section.ready).length;
@@ -153,15 +154,34 @@
     card.className = 'card volume';
     card.href = `#/v/${v.id}`;
     card.innerHTML =
-      `<span class="tag">${escapeHtml(v.subject.name)}</span>` +
-      `<h2>${escapeHtml(v.volume.name)}</h2>` +
-      `<p>${escapeHtml(v.edition.name)}</p>` +
+      `<h2><span class="tag">${escapeHtml(v.subject.name)}</span>${escapeHtml(v.volume.name)}</h2>` +
       `<p class="meta">${metas.length ? `已上线 ${ready} / ${metas.length} 节 · 已答对 ${solved} 题` : ''}` +
       `${v.volume.words ? `${metas.length ? ' · ' : ''}有课本单元词表` : ''}</p>`;
     main.appendChild(card);
   }
 
+  // 首页分区：灰色小标题 + 内容
+  function homeSection(main, title, note) {
+    const box = document.createElement('section');
+    box.className = 'home-section';
+    box.innerHTML = `<h3 class="group">${escapeHtml(title)}${note ? `<small>${escapeHtml(note)}</small>` : ''}</h3>`;
+    main.appendChild(box);
+    return box;
+  }
+
+  // 两列小格里的入口：标题 + 一行说明
+  function appendHomeTiles(grid, entries) {
+    for (const entry of entries) {
+      const link = document.createElement('a');
+      link.className = 'home-tile';
+      link.href = entry.href;
+      link.innerHTML = `<b>${escapeHtml(entry.title)}</b><small>${escapeHtml(entry.desc)}</small>`;
+      grid.appendChild(link);
+    }
+  }
+
   // ---------- 首页 ----------
+  // 从上到下：本学期课本 → 练习（试卷、英语单词和试题库）→ 复习资料（英语大纲、语文资料）→ 中考真题（按学科一排）→ 趣味玩法
   function home() {
     const main = page('学趣闯关', null, '跟着课本学，一节一关');
     const header = app.querySelector('header.bar');
@@ -170,13 +190,17 @@
     mountSemesterSwitcher(header, semester && semester.id, username);
     AccountUI.mount(header);
     const volumes = semester ? Content.volumes().filter(v => v.volume.id === semester.id) : [];
-    volumes.forEach(v => appendVolumeCard(main, v));
+    const books = homeSection(main, '本学期课本', '右上角切换学期');
+    volumes.forEach(v => appendVolumeCard(books, v));
+
+    // 练习：两列小格子，试卷排第一个
+    const practice = homeSection(main, '练习');
+    const grid = document.createElement('div');
+    grid.className = 'home-grid';
+    practice.appendChild(grid);
     const exam = document.createElement('a');
-    exam.className = 'card volume exam-entry';
-    exam.innerHTML =
-      `<span class="tag">试卷</span>` +
-      `<h2>试卷</h2>` +
-      `<p>先交卷，再看分数和错题解析</p>`;
+    exam.className = 'home-tile exam-entry';
+    exam.innerHTML = `<b>试卷</b><small>限时测试，交卷后看错题</small>`;
     let pressStart = 0;
     let longPressed = false;
     exam.addEventListener('pointerdown', () => {
@@ -193,60 +217,52 @@
       }
     });
     exam.addEventListener('contextmenu', e => e.preventDefault());
-    main.appendChild(exam);
+    grid.appendChild(exam);
+    appendHomeTiles(grid, [
+      { title: '英语单词', desc: '每天 10 分钟背课本单词', href: '#/words' },
+      { title: '英语试题库', desc: '按知识点和题型练错题', href: '#/english-bank' },
+    ]);
 
-    const shanghai = document.createElement('section');
-    shanghai.innerHTML = '<h3 class="group">上海中考真题</h3>';
+    // 复习资料：独立的离线参考页，同样两列小格
+    const notes = homeSection(main, '复习资料');
+    const notesGrid = document.createElement('div');
+    notesGrid.className = 'home-grid';
+    notes.appendChild(notesGrid);
+    appendHomeTiles(notesGrid, [
+      { title: '英语学习大纲', desc: '上海初中英语知识点梳理', href: 'content/english/shanghai-junior-outline.html' },
+      { title: '语文考纲', desc: '考试范围、考点清单与复习方向', href: 'content/chinese/shanghai-junior-outline.html' },
+      { title: '语文实词虚词', desc: '180 个文言实词的词义和例句', href: 'content/chinese/classical-words.html' },
+      { title: '古诗文联动注释', desc: '61 篇古诗文，点词查释义', href: 'content/chinese/上海中考古诗文·虚实词联动注释版.html' },
+      { title: '古诗文阅读应考手册', desc: '考点、解题方法和答题要点', href: 'content/chinese/上海中考古诗文阅读应考手册.html' },
+      { title: '现代文阅读应考手册', desc: '题型、分析方法和答题技巧', href: 'content/chinese/上海中考现代文阅读应考手册.html' },
+    ]);
+
+    // 中考真题：五个学科排成一排，进去再按年份选；英语先选上海或江苏
+    const shanghai = homeSection(main, '中考真题', '上海历年原题，英语另有江苏');
+    const chips = document.createElement('div');
+    chips.className = 'home-chips';
     for (const entry of [
-      { title: '数学中考真题', desc: '按年份练习上海数学原题', href: '#/shanghai-papers/math' },
-      { title: '语文中考真题', desc: '整篇阅读作答，查看原资料参考答案', href: '#/shanghai-papers/chinese' },
-      { title: '物理中考真题', desc: '按年份练习上海物理原题和原答案', href: '#/shanghai-papers/physics' },
-      { title: '化学中考真题', desc: '按年份练习上海化学原题和原答案', href: '#/shanghai-papers/chemistry' },
+      { title: '语文', href: '#/shanghai-papers/chinese' },
+      { title: '数学', href: '#/shanghai-papers/math' },
+      { title: '英语', href: '#/english-exams' }, // 英语中考真题
+      { title: '物理', href: '#/shanghai-papers/physics' },
+      { title: '化学', href: '#/shanghai-papers/chemistry' },
     ]) {
       const link = document.createElement('a');
-      link.className = 'card'; link.href = entry.href;
-      link.innerHTML = `<h2>${escapeHtml(entry.title)}</h2><p>${escapeHtml(entry.desc)}</p>`;
-      shanghai.appendChild(link);
-    }
-    main.appendChild(shanghai);
-    const chinese = document.createElement('section');
-    chinese.innerHTML = '<h3 class="group">语文</h3>' +
-      '<a class="card" href="content/chinese/shanghai-junior-outline.html"><h2>语文考纲</h2>' +
-      '<p>查看上海初中语文考试范围、考点清单与复习方向</p></a>' +
-      '<a class="card" href="content/chinese/classical-words.html"><h2>语文实词虚词</h2>' +
-      '<p>阅读 180 个文言实词，查找词义和例句 · 虚词资料待补充</p></a>' +
-      '<a class="card" href="content/chinese/上海中考古诗文·虚实词联动注释版.html"><h2>古诗文联动注释</h2>' +
-      '<p>阅读 61 篇古诗文，点词查释义，联动查看出处</p></a>' +
-      '<a class="card" href="content/chinese/上海中考古诗文阅读应考手册.html"><h2>古诗文阅读应考手册</h2>' +
-      '<p>梳理古诗文阅读考点、解题方法和答题要点</p></a>' +
-      '<a class="card" href="content/chinese/上海中考现代文阅读应考手册.html"><h2>现代文阅读应考手册</h2>' +
-      '<p>查看现代文阅读题型、分析方法和答题技巧</p></a>';
-    main.appendChild(chinese);
-    const english = document.createElement('section');
-    english.className = 'home-english';
-    english.innerHTML = '<h3 class="group">英语</h3>';
-    for (const entry of [
-      { title: '英语学习大纲', desc: '查看上海初中英语知识点梳理', href: 'content/english/shanghai-junior-outline.html' },
-      { title: '英语单词', desc: '每天 10 分钟背课本单词，按记忆规律复习', href: '#/words' },
-      { title: '英语试题库', desc: '按知识点和题型练习错题', href: '#/english-bank' },
-      { title: '英语中考真题', desc: '按年份直接作答上海英语中考文字题', href: '#/english-exams' },
-    ]) {
-      const link = document.createElement('a');
-      link.className = 'card home-english-entry';
       link.href = entry.href;
-      link.innerHTML = `<h2>${escapeHtml(entry.title)}</h2><p>${escapeHtml(entry.desc)}</p>`;
-      english.appendChild(link);
+      link.textContent = entry.title;
+      chips.appendChild(link);
     }
-    main.appendChild(english);
+    shanghai.appendChild(chips);
+
     // 趣味玩法：宫格，每格只写名字、练什么、课本位置，详细玩法进了游戏再看
-    const games = document.createElement('section');
-    games.innerHTML =
-      `<h3 class="group">趣味玩法</h3><div class="fun-grid">` +
+    const games = homeSection(main, '趣味玩法');
+    games.insertAdjacentHTML('beforeend',
+      `<div class="fun-grid">` +
       FUN_GAMES.map(g =>
         `<a class="fun-tile" href="${g.href}"><span class="icon" style="background:${g.color}">${g.icon}</span>` +
         `<b>${escapeHtml(g.name)}</b><small>${escapeHtml(g.tag)}</small><i class="when">${escapeHtml(g.when)}</i></a>`).join('') +
-      `</div>`;
-    main.appendChild(games);
+      `</div>`);
   }
 
   // ---------- 册 ----------
