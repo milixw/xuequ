@@ -8,6 +8,8 @@
 |---|---|
 | `#/` | 首页：右上角切换学期；从上到下分「本学期课本」（该学期各科教材卡片）、「练习」（试卷、英语单词、英语试题库两列小格）、「复习资料」（英语学习大纲和语文考纲、实词虚词、古诗文联动注释、两本应考手册，离线参考页）、「中考真题」（语文、数学、英语、物理、化学一排，英语进 `#/english-exams` 选上海或江苏）、「趣味玩法」 |
 | `#/shanghai-papers/<学科>` / `#/shanghai-papers/<学科>/<年份>` | 首页“中考真题”一排进入 math、chinese、physics、chemistry 的年份目录；原题文字与本地图片混合、题图点击放大，答案图在订正区、打印隐藏答案与作答控件；单选判分，其余人工订正；跨页小问不拆题，未能定位的资料待补 |
+| `#/shanghai-papers/<学科>/<年份>/<题组ID>` | 从阅读手册题型练习直达指定题组，保留原阅读材料、关联材料和同组小问；答案默认隐藏，返回键回到该年份全卷。使用原题组 ID 与原存储，不复制题目或新增进度键；无效 ID 明确报错 |
+| `#/nantong-chinese` / `#/nantong-chinese/<年份>` | 首页入口暂时隐藏，保留年份目录及原题作答页面；主观作答、参考答案人工核对，数据独立按需加载，沿用按账号的 subject-papers 键与 `nt-chinese-<年份>` 分组 |
 | `#/english-exams` / `#/english-exams/shanghai` | 中考地区目录 / 上海年份目录；旧 `#/english-exams/<年份>` 与 `#/english-exams/shanghai/<年份>` 均可作答上海题目 |
 | `#/english-exams/jiangsu` / `#/english-exams/jiangsu/<城市ID>` / `#/english-exams/jiangsu/<城市ID>/<年份>` | 江苏城市目录 → 年份目录 → 原题作答；按城市隔离试卷，同篇阅读/完形合为一道大题、文章显示一次、全部小题统一提交，原小题 ID 和逐题错误统计不变；无答案不评分，无法提取的年份标待补充 |
 | `#/english-plan` / `#/english-plan/<天数>` / `#/english-plan/<天数>/result` / `#/english-plan/<天数>/result/<记录ID>` | 英语七天计划、每日作答及按提交时间查看错题；屏幕显示订正答案和解析（旧记录按 ID 补取当前解析），A4 打印只保留原题和题号，不打印答案或解析；不改题目 ID 或原题文本 |
@@ -33,6 +35,7 @@
 
 | 键 | 位置 | 内容 |
 |---|---|---|
+| `xq.reading-handbook.modern.v1` | sessionStorage | 现代文阅读手册当前标签、页面纵向位置、搜索词、展开卡片及修辞表横向位置；同一浏览器标签内回退/重载恢复，存储异常不影响阅读，不是学生学习进度 |
 | `xq.progress.v2` | localStorage | 数学小节和真题卷的共享进度，真题卷用 `exam:<真题卷ID>` 作分组 ID；旧英语分组仅作为迁移备份，不再写入 |
 | `xq.english-progress.v1.<归属>` | localStorage | 英语题库及中考文字题练习进度，结构同旧英语分组，按账号隔离；上海中考分组保持 `english-exam:<年份>`，江苏分组为 `english-exam:js-<城市ID>-<年份>`；英语题库可单题重置，重置不清除累计错误 |
 | `xq.errors.v2.<归属>` | localStorage | `{ counts: { [分组ID]: { [题目ID]: 次数 } }, events: { [提交事件ID]: true } }`；按账号记录累计错答次数及事件去重，从本账号七天记录补回明确事件；`Progress.errorCount` 查询单题，`errorStats` 返回次数降序统计；重置不清除，打印隐藏次数；旧 v1 保留备份 |

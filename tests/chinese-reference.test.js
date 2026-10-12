@@ -3,6 +3,44 @@ const fs = require('fs');
 const path = require('path');
 const vm = require('vm');
 const { test, assert } = require('./harness');
+
+test('现代文14类题型练习匹配真实上海原题及问法，支持按篇名搜索', () => {
+  const html = fs.readFileSync(path.join(__dirname, '../content/chinese/上海中考现代文阅读应考手册.html'), 'utf8');
+  const nodes = new Map();
+  const getNode = id => {
+    if (!nodes.has(id)) nodes.set(id, { innerHTML:'', addEventListener() {} });
+    return nodes.get(id);
+  };
+  const context = { document:{getElementById:getNode,querySelectorAll:()=>[]},clearTimeout(){},setTimeout(){return 1;} };
+  vm.createContext(context);
+  vm.runInContext(html.match(/<script>([\s\S]*?)<\/script>/)[1] + ';globalThis.types=TYPE;globalThis.practice=TYPE_PRACTICE;globalThis.rhetoricExams=RHETORIC_EXAMS;', context);
+  assert(context.types.length === 14 && context.practice.length === 14);
+  assert(context.types.slice(8).every(t => t.review.status === 'pending'));
+  const catalog = require('../content/past-papers/shanghai.js');
+  assert(context.rhetoricExams.length===6);
+  assert(context.rhetoricExams.reduce((n,r)=>n+r.examples.length,0)===8);
+  for (const row of context.rhetoricExams) {
+    assert(row.review.status==='pending');
+    for (const [year,id,label,probe] of row.examples) {
+      const paper=catalog.papers.find(p=>p.subject==='chinese' && p.year===year);
+      assert(paper.questions.some(q=>q.id===id && q.stem.includes(probe)),label+'必须对应真实原题');
+      assert(getNode('termBox').innerHTML.includes('../../index.html#/shanghai-papers/chinese/'+year+'/'+id));
+    }
+  }
+  vm.runInContext("renderTerm('放飞');",context);
+  assert(getNode('termBox').innerHTML.includes('rhetoric-exam-table'));
+  for (const rows of context.practice) {
+    assert(rows.length > 0);
+    for (const [year,id,label,probe] of rows) {
+      const paper = catalog.papers.find(p => p.subject==='chinese' && p.year===year);
+      const q = paper.questions.find(q => q.id===id);
+      assert(q && q.stem.includes(probe), label + '必须对应真实原题问法');
+      assert(getNode('typeBox').innerHTML.includes('../../index.html#/shanghai-papers/chinese/'+year+'/'+id));
+    }
+  }
+  vm.runInContext("renderType('无人机');", context);
+  assert(getNode('typeBox').innerHTML.includes('sh-chinese-2017-q05'));
+});
 test('阅读手册历年专项可离线渲染、搜索，原题链接有效且原创讲解待审核', () => {
   const catalog = require('../content/past-papers/shanghai.js');
   const years = new Set(catalog.papers.filter(p => p.subject === 'chinese').map(p => p.year));
@@ -19,10 +57,20 @@ test('阅读手册历年专项可离线渲染、搜索，原题链接有效且�
     vm.runInContext(script + ';globalThis.entries=EXTRA;globalThis.years=YEAR;', context);
     assert(context.entries.length >= 11);
     assert(context.entries.every(r => r.review.status === 'pending' && r.method && r.wrong && r.better && r.practice));
-    for (const year of [2013,2014,2015,2016,2017,2018,2019,2020,2023,2024,2025,2026]) {
+    const tracked = kind === '现代文'
+      ? [2013,2014,2015,2016,2017,2018,2019,2020,2021,2022,2023,2024,2025,2026]
+      : [2013,2014,2015,2016,2017,2018,2019,2020,2023,2024,2025,2026];
+    for (const year of tracked) {
       assert(context.years.some(r => r[0] === year), kind + '漏了已分析年份' + year);
     }
-    assert(!context.years.some(r => r[0] === 2021 || r[0] === 2022), '缺可靠卷不应造年份记录');
+    if (kind !== '现代文') {
+      assert(!context.years.some(r => r[0] === 2021 || r[0] === 2022), '古诗文手册未补 2021、2022，不应造年份记录');
+    } else {
+      const y2021 = context.years.filter(r => r[0] === 2021);
+      const y2022 = context.years.filter(r => r[0] === 2022);
+      assert(y2021.length === 2 && y2022.length === 2, '2021、2022 应各有实用类与文学类两条');
+      assert(y2021.concat(y2022).every(r => String(r[7]).includes('网络抓取整理版')), '2021、2022 条目须标明非官方来源');
+    }
     const all = getNode('extraBox').innerHTML;
     for (const match of all.matchAll(/href="\.\.\/\.\.\/index.html#\/shanghai-papers\/chinese\/(\d+)"/g)) {
       assert(years.has(Number(match[1])), '专项链接到不存在的试卷');

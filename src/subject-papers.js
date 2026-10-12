@@ -31,7 +31,7 @@
     });
   }
   function imagePath(src) {
-    return typeof src === 'string' && /^content\/past-papers\/images\/sh-(?:math|chinese|physics|chemistry)-\d{4}\/q\d{2}-(?:stem|answer)-\d{2}\.png$/.test(src);
+    return typeof src === 'string' && /^content\/past-papers\/images\/(?:sh-(?:math|chinese|physics|chemistry)|nt-chinese)-\d{4}\/q\d{2}-(?:stem|answer)-\d{2}\.png$/.test(src);
   }
   function renderImages(parent, images, label) {
     (Array.isArray(images) ? images : []).forEach((item, i) => {
@@ -48,12 +48,12 @@
       link.appendChild(img); parent.appendChild(link);
     });
   }
-  function renderList(main, catalog, subject) {
+  function renderList(main, catalog, subject, routeBase) {
     if (!NAMES[subject]) { main.appendChild(node('p', '未收录这一学科。', 'error')); return; }
-    main.appendChild(node('p', '仅收录上海原题，按年份练习。当前部分导入，整理资料待核对、待教师审核。', 'notice'));
+    main.appendChild(node('p', (catalog.region || '上海') + '原题，按年份练习。整理资料待核对、待教师审核。', 'notice'));
     for (const paper of papers(catalog, subject)) {
       const card = node('a', undefined, 'card');
-      card.href = '#/shanghai-papers/' + subject + '/' + paper.year;
+      card.href = (routeBase || '#/shanghai-papers/' + subject) + '/' + paper.year;
       card.appendChild(node('h2', paper.title));
       card.appendChild(node('p', paper.version + ' · ' + (paper.questions.length ? paper.questions.length +
         (subject === 'chinese' ? ' 道整组题（含多个小问）' : ' 道题') : '资料已找到 · 题目待完整转录') + ' · 待审核', 'meta'));
@@ -140,9 +140,11 @@
     reveal.addEventListener('click', () => save(false)); form.appendChild(reveal);
     card.appendChild(form); card.appendChild(feedback); card.appendChild(explanation); main.appendChild(card);
   }
-  function renderYear(main, catalog, subject, year) {
+  function renderYear(main, catalog, subject, year, questionId) {
     const paper = find(catalog, subject, year);
     if (!paper) { main.appendChild(node('p', '未收录这一学科或年份，请返回目录。', 'error')); return; }
+    const questions = questionId ? paper.questions.filter(q => q.id === questionId) : paper.questions;
+    if (questionId && !questions.length) { main.appendChild(node('p', '未找到这一题组，请返回本年份查看。', 'error')); return; }
     main.appendChild(node('p', paper.version + ' · 待审核。' + paper.note, 'notice'));
     main.appendChild(node('p', '原资料来源：' + paper.source.file +
       (paper.questions.length ? '（已整理为网页文字或本地原题图片）' : '（尚未完整转录）'), 'meta'));
@@ -151,14 +153,14 @@
       return;
     }
     const select = node('select'); select.className = 'subject-papers-filter'; select.setAttribute('aria-label', '筛选题型');
-    for (const name of ['全部题型', ...new Set(paper.questions.map(q => q.category))]) {
+    for (const name of ['全部题型', ...new Set(questions.map(q => q.category))]) {
       const option = node('option', name); option.value = name; select.appendChild(option);
     }
     main.appendChild(select);
     const list = node('div'); main.appendChild(list);
     function redraw() {
       list.textContent = '';
-      paper.questions.filter(q => !select.value || select.value === '全部题型' || q.category === select.value)
+      questions.filter(q => !select.value || select.value === '全部题型' || q.category === select.value)
         .forEach(q => renderQuestion(list, paper, q));
     }
     select.addEventListener('change', redraw); redraw();

@@ -1,5 +1,7 @@
 # 上海语数物化中考原题约定
 
+南通语文导入见 `docs/nantong-chinese-import.md`。
+
 `content/past-papers/` 收录上海语文、数学、物理、化学历年中考原题（文字 + 本地题图），页面在 `src/subject-papers.js`。英语中考题在 `content/english/past-papers/`，见 `content/english/AGENTS.md`。
 
 **大文件不要整体读取**：`shanghai.js`（约 500KB）和 `images/` 下的 PNG。查题用 `grep -n "<题目ID>"` 或 `node -e`。

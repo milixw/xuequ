@@ -31,6 +31,10 @@
 
 ## 代码约定
 
+上海真题路由可在年份后附原题组 ID，`subject-papers.js` 仅展示该组及已有 context，返回年份全卷；默认隐藏答案，沿用原 ID 与账号存储，用于阅读手册的题型跳转。
+
+南通语文首页入口暂时隐藏；保留 `#/nantong-chinese` 路由与 `content/past-papers/nantong-chinese.js` 按需数据，复用人工核对和账号存储，图片允许 `nt-chinese-<年份>` 目录，上海旧 ID 与路由不变。
+
 首页语文实词虚词入口链接到 `content/chinese/classical-words.html`，资料与原 PDF 放在 `content/chinese/`，无需首屏加载全文。
 首页语文考纲入口链接到 `content/chinese/shanghai-junior-outline.html`，为独立离线参考页。
 首页“复习资料”另有 `content/chinese/上海中考古诗文阅读应考手册.html` 和 `content/chinese/上海中考现代文阅读应考手册.html` 两份独立离线复习资料。

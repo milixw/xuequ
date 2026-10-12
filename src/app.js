@@ -552,6 +552,7 @@
 
   // 真题数据体积大（江苏英语约 3MB），首屏不加载，进入对应页面时再用 <script> 加载（file:// 下不能用 fetch）
   const DATA_SCRIPTS = {
+    NantongChinesePapers: 'content/past-papers/nantong-chinese.js?v=20261012',
     EnglishPastPapers: 'content/english/past-papers/catalog.js?v=20261010-completion',
     JiangsuEnglishPastPapers: 'content/english/past-papers/jiangsu.js?v=20261003-jiangsu-answers',
     ShanghaiSubjectPapers: 'content/past-papers/shanghai.js?v=20261010-chinese-complete',
@@ -614,13 +615,21 @@
     else EnglishExams.renderList(main, EnglishPastPapers);
   }
 
-  function subjectPapersPage(subject, year) {
+  function subjectPapersPage(subject, year, questionId) {
     const name = { math: '数学', chinese: '语文', physics: '物理', chemistry: '化学' }[subject];
     const paper = year && SubjectPapers.find(ShanghaiSubjectPapers, subject, year);
     const main = page(year ? (paper ? paper.title : '未收录这一年份') : '上海' + (name || '') + '中考真题',
-      year ? '#/shanghai-papers/' + subject : '#/', '上海原题 · 部分导入 · 待教师审核');
-    if (year) SubjectPapers.renderYear(main, ShanghaiSubjectPapers, subject, year);
+      questionId ? '#/shanghai-papers/' + subject + '/' + year : year ? '#/shanghai-papers/' + subject : '#/', '上海原题 · 部分导入 · 待教师审核');
+    if (year) SubjectPapers.renderYear(main, ShanghaiSubjectPapers, subject, year, questionId);
     else SubjectPapers.renderList(main, ShanghaiSubjectPapers, subject);
+  }
+
+  function nantongChinesePage(year) {
+    const paper = year && SubjectPapers.find(NantongChinesePapers, 'chinese', year);
+    const main = page(year ? (paper ? paper.title : '未收录这一年份') : '南通语文中考真题',
+      year ? '#/nantong-chinese' : '#/', '江苏南通 · 本地整理原题 · 待教师审核');
+    if (year) SubjectPapers.renderYear(main, NantongChinesePapers, 'chinese', year);
+    else SubjectPapers.renderList(main, NantongChinesePapers, 'chinese', '#/nantong-chinese');
   }
 
   async function englishPlanPage(day, view, reportId) {
@@ -657,13 +666,14 @@
     prevParts = parts;
     window.scrollTo(0, 0);
     if (parts[0] === 'english-bank') return englishBankPage(parts[1]);
+    if (parts[0] === 'nantong-chinese') return withData(['NantongChinesePapers'], '南通语文中考真题', '#/', () => nantongChinesePage(parts[1]));
     if (parts[0] === 'english-exams') {
       const names = !parts[1] ? ['EnglishPastPapers', 'JiangsuEnglishPastPapers']
         : parts[1] === 'jiangsu' ? ['JiangsuEnglishPastPapers'] : ['EnglishPastPapers'];
       return withData(names, '英语中考真题', parts[1] ? '#/english-exams' : '#/', () => englishExamsPage(parts[1], parts[2], parts[3]));
     }
     if (parts[0] === 'shanghai-papers') {
-      return withData(['ShanghaiSubjectPapers'], '上海中考真题', '#/', () => subjectPapersPage(parts[1], parts[2]));
+      return withData(['ShanghaiSubjectPapers'], '上海中考真题', '#/', () => subjectPapersPage(parts[1], parts[2], parts[3]));
     }
     if (parts[0] === 'english-plan') return englishPlanPage(parts[1], parts[2], parts[3]);
     if (parts[0] === 'words') return wordsPage(parts.slice(1));

@@ -17,7 +17,7 @@ class Node {
   addEventListener(name, fn) { this.events[name] = fn; }
   all() { return [this, ...this.children.flatMap(n => n.all())]; }
 }
-function setup(subject = 'math', year = 2023, values = new Map(), fail = false, data = catalog) {
+function setup(subject = 'math', year = 2023, values = new Map(), fail = false, data = catalog, questionId) {
   const context = { document: { createElement: tag => new Node(tag) },
     Quiz: { renderText: text => text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;') },
     localStorage: { getItem: key => values.get(key) || null, setItem: (key, value) => {
@@ -25,10 +25,23 @@ function setup(subject = 'math', year = 2023, values = new Map(), fail = false, 
     } } };
   context.LearningStore = require('../src/learning-store.js').create(context.localStorage);
   vm.runInNewContext(read('src/subject-papers.js'), context);
-  const main = new Node('main'); context.SubjectPapers.renderYear(main, data, subject, year);
+  const main = new Node('main'); context.SubjectPapers.renderYear(main, data, subject, year, questionId);
   return { context, main, values, nodes: main.all() };
 }
 const submit = form => form.events.submit({ preventDefault() {} });
+
+test('上海题型深链接只展示对应原题组、保留关联材料且不提前显示答案', () => {
+  const selected = setup('chinese',2025,new Map(),false,catalog,'sh-chinese-2025-q05');
+  assert(selected.nodes.filter(n => n.tag==='form').length===1);
+  assert(selected.main.textContent.includes('子弹库帛书'));
+  assert(selected.nodes.some(n => n.tag==='details' && n.open));
+  assert(selected.nodes.filter(n => n.className==='english-explanation').every(n => n.hidden));
+  const missing = setup('chinese',2025,new Map(),false,catalog,'sh-chinese-2015-q18');
+  assert(missing.main.textContent.includes('未找到这一题组'));
+  assert(!missing.nodes.some(n => n.tag==='form'));
+  const all = setup('chinese',2025);
+  assert(all.nodes.filter(n => n.tag==='form').length === api.find(catalog,'chinese',2025).questions.length);
+});
 
 test('上海物化两个入口、22个年份目录与146题原答案，缺图公式不冒充完整卷', () => {
   for (const [subject, count] of [['physics',69],['chemistry',77]]) {

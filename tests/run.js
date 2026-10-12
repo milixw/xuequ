@@ -23,6 +23,7 @@ require('./chinese-reference.test.js');
 require('./english-words.test.js');
 require('./english-exams.test.js');
 require('./subject-papers.test.js');
+require('./nantong-chinese.test.js');
 require('./agents-docs.test.js');
 
 process.exit(require('./harness').run() ? 1 : 0);
