@@ -6,7 +6,7 @@ const digitalQuestion = (id, level, stem, options, answer, explain) =>
 
 Content.section({
   id: 'english/sh2022/g8s1/2.1',
-  title: 'Digital life — 数字生活 ----- 时间状语从句（二）',
+  title: '阅读与语法 ----- 时间状语从句（二）',
   review: { status: 'pending' },
   reading: {
     title: 'A Map Made by Students',

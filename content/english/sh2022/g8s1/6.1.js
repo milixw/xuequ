@@ -6,7 +6,7 @@ const futureQuestion = (id, level, stem, options, answer, explain) =>
 
 Content.section({
   id: 'english/sh2022/g8s1/6.1',
-  title: 'Life in the future — 未来设想 ----- 条件状语从句',
+  title: '阅读与语法 ----- 条件状语从句',
   review: { status: 'pending' },
   reading: {
     title: 'A Morning in 2075?',

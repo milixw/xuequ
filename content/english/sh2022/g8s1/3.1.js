@@ -6,7 +6,7 @@ const curiousQuestion = (id, level, stem, options, answer, explain) =>
 
 Content.section({
   id: 'english/sh2022/g8s1/3.1',
-  title: 'Curious minds — 探究表达 ----- 动词不定式',
+  title: '阅读与语法 ----- 动词不定式',
   review: { status: 'pending' },
   reading: {
     title: 'Why Did the Shadows Move?',

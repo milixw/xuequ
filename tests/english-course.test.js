@@ -10,12 +10,12 @@ require('../content/catalog.js');
 
 const root = path.join(__dirname, '..');
 const expected = [
-  ['Water（水）', 'Water — 水资源', '时间状语从句（一）'],
-  ['Digital life（数字生活）', 'Digital life — 数字生活', '时间状语从句（二）'],
-  ['Curious minds（好奇的心）', 'Curious minds — 探究表达', '动词不定式'],
-  ['Then and now（过去与现在）', 'Then and now — 今昔对比', '让步状语从句'],
-  ['Teamwork（团队合作）', 'Teamwork — 合作表达', '原因状语从句'],
-  ['Life in the future（未来生活）', 'Life in the future — 未来设想', '条件状语从句'],
+  ['Water（水）', '时间状语从句（一）'],
+  ['Digital life（数字生活）', '时间状语从句（二）'],
+  ['Curious minds（好奇的心）', '动词不定式'],
+  ['Then and now（过去与现在）', '让步状语从句'],
+  ['Teamwork（团队合作）', '原因状语从句'],
+  ['Life in the future（未来生活）', '条件状语从句'],
 ];
 
 test('英语八上六个 Unit 按教材顺序接入，每节有原创知识卡和三档练习', () => {
@@ -28,8 +28,8 @@ test('英语八上六个 Unit 按教材顺序接入，每节有原创知识卡�
     assert(chapter.sections.length === 1, `Unit ${i + 1} 当前应有一节综合入门`);
     const section = chapter.sections[0];
     assert(section.ready, `Unit ${i + 1} 未上线`);
-    assert(section.title.startsWith(expected[i][1] + ' ----- '), `Unit ${i + 1} 目录应先显示英文原题，再显示中文主题`);
-    assert(section.title.endsWith(expected[i][2]), `Unit ${i + 1} 语法范围不符`);
+    assert(section.title.startsWith('阅读与语法 ----- '), `Unit ${i + 1} 标题应先写小节类型，不重复 Unit 名`);
+    assert(section.title.endsWith(expected[i][1]), `Unit ${i + 1} 语法范围不符`);
     assert(section.title.split(' ----- ').length === 2, `Unit ${i + 1} 标题应以 ----- 分隔主题和知识点`);
     const file = path.join(root, 'content', 'english', 'sh2022', 'g8s1', section.no + '.js');
     assert(fs.existsSync(file), `缺少 ${file}`);
@@ -37,7 +37,7 @@ test('英语八上六个 Unit 按教材顺序接入，每节有原创知识卡�
     const lesson = Content.sections[`english/sh2022/g8s1/${section.no}`];
     assert(lesson && lesson.review.status === 'pending', `Unit ${i + 1} 应待审核`);
     assert(lesson.reading && lesson.reading.paragraphs.length >= 2, `Unit ${i + 1} 缺少原创阅读`);
-    assert(lesson.reading.topic === expected[i][2], `Unit ${i + 1} 阅读标题后的知识点不符`);
+    assert(lesson.reading.topic === expected[i][1], `Unit ${i + 1} 阅读标题后的知识点不符`);
     assert(lesson.intro.length >= 3 && lesson.intro.length <= 6, `Unit ${i + 1} 知识卡数量不符`);
     assert(lesson.questions.length === 16, `Unit ${i + 1} 应有原 6 题加新增 10 题`);
     assert(lesson.questions.filter(q => q.level === 'basic').length === 5, `Unit ${i + 1} 基础题应有 5 道`);

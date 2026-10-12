@@ -6,7 +6,7 @@ const changeQuestion = (id, level, stem, options, answer, explain) =>
 
 Content.section({
   id: 'english/sh2022/g8s1/4.1',
-  title: 'Then and now — 今昔对比 ----- 让步状语从句',
+  title: '阅读与语法 ----- 让步状语从句',
   review: { status: 'pending' },
   reading: {
     title: 'Two Pictures of One Street',

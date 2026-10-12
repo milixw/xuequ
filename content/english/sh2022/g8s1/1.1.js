@@ -6,7 +6,7 @@ const waterQuestion = (id, level, stem, options, answer, explain) =>
 
 Content.section({
   id: 'english/sh2022/g8s1/1.1',
-  title: 'Water — 水资源 ----- 时间状语从句（一）',
+  title: '阅读与语法 ----- 时间状语从句（一）',
   review: { status: 'pending' },
   reading: {
     title: 'The Garden after the Rain',

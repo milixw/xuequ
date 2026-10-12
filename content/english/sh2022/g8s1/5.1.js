@@ -6,7 +6,7 @@ const teamQuestion = (id, level, stem, options, answer, explain) =>
 
 Content.section({
   id: 'english/sh2022/g8s1/5.1',
-  title: 'Teamwork — 合作表达 ----- 原因状语从句',
+  title: '阅读与语法 ----- 原因状语从句',
   review: { status: 'pending' },
   reading: {
     title: 'One Booth, Four Ideas',
