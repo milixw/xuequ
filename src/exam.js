@@ -227,7 +227,7 @@
           recBtn.setAttribute('aria-disabled', 'true');
         }
         card.innerHTML =
-          `<div><div class="name">${UI.escapeHtml(m.section.no)}　${UI.escapeHtml(m.section.title)}</div>` +
+          `<div><div class="name">${UI.escapeHtml(m.section.no)}　${UI.escapeHtml(m.section.title.replace(' ----- ', '：'))}</div>` +
           `<div class="meta">20 道 · 约 40 分钟</div></div>` +
           `<div class="card-actions"></div>`;
         const actions = card.querySelector('.card-actions');
@@ -284,7 +284,7 @@
     const bar = document.createElement('div');
     bar.className = 'exam-bar';
     bar.innerHTML =
-      `<div class="title">${UI.escapeHtml(section.title)}</div>` +
+      `<div class="title">${UI.escapeHtml(section.title.replace(' ----- ', '：'))}</div>` +
       `<div class="timer" id="timer">--:--</div>` +
       `<button class="submit" id="submit">交卷</button>`;
     main.appendChild(bar);
@@ -391,7 +391,7 @@
     const r = Exam.result();
     const elapsed = Math.floor((Date.now() - s.startedAt) / 1000);
 
-    renderHeader(main, section.title, '#/exam', '成绩');
+    renderHeader(main, section.title.replace(' ----- ', '：'), '#/exam', '成绩');
     const box = document.createElement('div');
     box.className = 'exam-result';
     box.innerHTML =
@@ -451,7 +451,7 @@
     }
     const section = await Content.load(sectionId);
 
-    renderHeader(main, section.title, '#/exam', '历史成绩');
+    renderHeader(main, section.title.replace(' ----- ', '：'), '#/exam', '历史成绩');
     const box = document.createElement('div');
     box.className = 'exam-result';
     box.innerHTML =

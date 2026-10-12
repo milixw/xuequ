@@ -462,24 +462,24 @@ Content.catalog = {
           words: 'content/english/words/sh2022-g6s1.js',  // 单元词表（src/words.js），目前有 Unit 1～4
           chapters: [
             { no: 1, title: 'School life（学校生活）', sections: [
-              { no: '1.1', title: 'School life — 学校生活 ----- 一般现在时', ready: true },
-              { no: '1.2', title: 'School life — 语法练习 ----- 一般现在时', ready: true },
-              { no: '1.3', title: 'School life — 语音与听力 ----- 字母 i 的读音、听关键词', ready: true },
+              { no: '1.1', title: '阅读与语法 ----- 一般现在时', ready: true },
+              { no: '1.2', title: '语法练习 ----- 一般现在时', ready: true },
+              { no: '1.3', title: '语音与听力 ----- 字母 i 的读音、听关键词', ready: true },
             ] },
             { no: 2, title: 'Family ties（家庭纽带）', sections: [
-              { no: '2.1', title: 'Family ties — 家庭纽带 ----- 现在进行时', ready: true },
-              { no: '2.2', title: 'Family ties — 语法练习 ----- 现在进行时与人称代词', ready: true },
-              { no: '2.3', title: 'Family ties — 语音与听力 ----- 字母 a、e 的读音、听家庭关系', ready: true },
+              { no: '2.1', title: '阅读与语法 ----- 现在进行时', ready: true },
+              { no: '2.2', title: '语法练习 ----- 现在进行时与人称代词', ready: true },
+              { no: '2.3', title: '语音与听力 ----- 字母 a、e 的读音、听家庭关系', ready: true },
             ] },
             { no: 3, title: 'Food（食物）', sections: [
-              { no: '3.1', title: 'Food — 食物 ----- 可数名词与不可数名词', ready: true },
-              { no: '3.2', title: 'Food — 语法练习 ----- 可数名词与不可数名词', ready: true },
-              { no: '3.3', title: 'Food — 语音与听力 ----- 字母 o、u 的读音、听数量', ready: true },
+              { no: '3.1', title: '阅读与语法 ----- 可数名词与不可数名词', ready: true },
+              { no: '3.2', title: '语法练习 ----- 可数名词与不可数名词', ready: true },
+              { no: '3.3', title: '语音与听力 ----- 字母 o、u 的读音、听数量', ready: true },
             ] },
             { no: 4, title: 'Sports（体育运动）', sections: [
-              { no: '4.1', title: 'Sports — 体育运动 ----- 疑问词 what、who', ready: true },
-              { no: '4.2', title: 'Sports — 语法练习 ----- 疑问词 what、who 与频度副词', ready: true },
-              { no: '4.3', title: 'Sports — 语音与听力 ----- 字母组合 ei、ea、ee 的读音、听运动与频率', ready: true },
+              { no: '4.1', title: '阅读与语法 ----- 疑问词 what、who', ready: true },
+              { no: '4.2', title: '语法练习 ----- 疑问词 what、who 与频度副词', ready: true },
+              { no: '4.3', title: '语音与听力 ----- 字母组合 ei、ea、ee 的读音、听运动与频率', ready: true },
             ] },
             { no: 5, title: 'Animals and us（动物与我们）', sections: [] },
             { no: 6, title: 'Travelling around China（游中国）', sections: [] },

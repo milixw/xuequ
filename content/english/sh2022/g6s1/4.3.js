@@ -9,7 +9,7 @@ const writeQ643 = (id, level, stem, answer, explain, audio) =>
 
 Content.section({
   id: 'english/sh2022/g6s1/4.3',
-  title: 'Sports — 语音与听力 ----- 字母组合 ei、ea、ee 的读音、听运动与频率',
+  title: '语音与听力 ----- 字母组合 ei、ea、ee 的读音、听运动与频率',
   review: { status: 'pending' },
   intro: [
     { title: 'ee 和 ea 常读 /iː/', body: '字母组合 ee 几乎都读长音 /iː/；ea 大多也读 /iː/。发 /iː/ 时嘴角向两边拉开，声音拖长一点。', example: 'see，green，sweet（ee）；sea，speak，beach（ea）', pitfall: 'ea 有时读短音 /e/，如 head；少数读 /eɪ/，如 steak。' },

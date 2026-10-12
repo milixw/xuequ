@@ -6,7 +6,7 @@ const sportsQ641 = (id, level, stem, options, answer, explain) =>
 
 Content.section({
   id: 'english/sh2022/g6s1/4.1',
-  title: 'Sports — 体育运动 ----- 疑问词 what、who',
+  title: '阅读与语法 ----- 疑问词 what、who',
   review: { status: 'pending' },
   reading: {
     title: "Leo's First Practice",

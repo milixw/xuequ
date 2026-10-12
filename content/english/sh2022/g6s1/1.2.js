@@ -11,7 +11,7 @@ const openQ612 = (id, stem, reference, checks, explain) =>
 
 Content.section({
   id: 'english/sh2022/g6s1/1.2',
-  title: 'School life — 语法练习 ----- 一般现在时',
+  title: '语法练习 ----- 一般现在时',
   review: { status: 'pending' },
   levelNames: { basic: '辨认', extended: '运用', challenge: '产出' },
   knowledgeRefs: ['tense'],

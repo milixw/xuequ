@@ -316,7 +316,7 @@
     if (!def.units.some(u => String(u.no) === String(chapterNo))) return '';
     const sum = Words.unitSummary(Words.load(storeFor()), Words.unitId(volumeId, chapterNo));
     return `<a class="row words-row" href="#/words/${volumeId}/${chapterNo}"><span class="no">词</span>` +
-      `<span class="name">单词 · 已掌握 ${sum.mastered} / 共 ${sum.total}</span>` +
+      `<span class="name"><b>单词</b><small>已掌握 ${sum.mastered} / 共 ${sum.total} 个</small></span>` +
       `<span class="bar-bg"><span style="width:${sum.total ? sum.mastered / sum.total * 100 : 0}%"></span></span></a>`;
   }
 

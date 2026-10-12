@@ -6,7 +6,7 @@ const foodQ631 = (id, level, stem, options, answer, explain) =>
 
 Content.section({
   id: 'english/sh2022/g6s1/3.1',
-  title: 'Food — 食物 ----- 可数名词与不可数名词',
+  title: '阅读与语法 ----- 可数名词与不可数名词',
   review: { status: 'pending' },
   reading: {
     title: 'The Class Picnic',

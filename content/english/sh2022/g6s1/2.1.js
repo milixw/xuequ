@@ -6,7 +6,7 @@ const familyQ621 = (id, level, stem, options, answer, explain) =>
 
 Content.section({
   id: 'english/sh2022/g6s1/2.1',
-  title: 'Family ties — 家庭纽带 ----- 现在进行时',
+  title: '阅读与语法 ----- 现在进行时',
   review: { status: 'pending' },
   reading: {
     title: "Sunday at Grandma's",

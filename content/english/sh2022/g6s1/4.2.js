@@ -11,7 +11,7 @@ const openQ642 = (id, stem, reference, checks, explain) =>
 
 Content.section({
   id: 'english/sh2022/g6s1/4.2',
-  title: 'Sports — 语法练习 ----- 疑问词 what、who 与频度副词',
+  title: '语法练习 ----- 疑问词 what、who 与频度副词',
   review: { status: 'pending' },
   levelNames: { basic: '辨认', extended: '运用', challenge: '产出' },
   knowledgeRefs: ['tense'],

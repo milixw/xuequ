@@ -11,7 +11,7 @@ const openQ622 = (id, stem, reference, checks, explain) =>
 
 Content.section({
   id: 'english/sh2022/g6s1/2.2',
-  title: 'Family ties — 语法练习 ----- 现在进行时与人称代词',
+  title: '语法练习 ----- 现在进行时与人称代词',
   review: { status: 'pending' },
   levelNames: { basic: '辨认', extended: '运用', challenge: '产出' },
   knowledgeRefs: ['tense', 'pronouns'],

@@ -9,7 +9,7 @@ const writeQ623 = (id, level, stem, answer, explain, audio) =>
 
 Content.section({
   id: 'english/sh2022/g6s1/2.3',
-  title: 'Family ties — 语音与听力 ----- 字母 a、e 的读音、听家庭关系',
+  title: '语音与听力 ----- 字母 a、e 的读音、听家庭关系',
   review: { status: 'pending' },
   intro: [
     { title: '字母 a 的常见读音', body: '在“a + 一个辅音字母 + 不发音的 e”里，a 读字母名称的音 /eɪ/；在 a 后面跟辅音结尾的短词里，a 常读嘴张大的 /æ/；有些词里读长音 /ɑː/。', example: 'cake，game（/eɪ/）；bag，hat（/æ/）；fast，dark（/ɑː/）', pitfall: '同一个字母有几种读音，先看单词结构，拿不准就查音标。' },

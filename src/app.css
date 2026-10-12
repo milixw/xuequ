@@ -396,6 +396,8 @@ main > audio { max-width: 100%; }
   background: var(--card); padding: 12px 14px; margin-bottom: 8px; border-radius: 10px;
 }
 .chapter .row.disabled { opacity: .55; }
+.chapter .name b { font-weight: 600; }
+.chapter .name small { display: block; font-size: 13px; color: var(--muted); line-height: 1.4; }
 .chapter .no { color: var(--muted); font-variant-numeric: tabular-nums; }
 .chapter .count { font-size: 13px; color: var(--primary); }
 .chapter .count.soon { color: var(--muted); }

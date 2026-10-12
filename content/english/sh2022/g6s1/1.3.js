@@ -9,7 +9,7 @@ const writeQ613 = (id, level, stem, answer, explain, audio) =>
 
 Content.section({
   id: 'english/sh2022/g6s1/1.3',
-  title: 'School life — 语音与听力 ----- 字母 i 的读音、听关键词',
+  title: '语音与听力 ----- 字母 i 的读音、听关键词',
   review: { status: 'pending' },
   intro: [
     { title: '字母 i 读 /aɪ/', body: '在“i + 一个辅音字母 + 不发音的 e”这样的词里，i 常常读它在字母表里的名字 /aɪ/，和 hi 里的 i 一样。', example: 'nine，ride，slide', pitfall: '词尾的 e 不发音，但它让前面的 i 读 /aɪ/。' },

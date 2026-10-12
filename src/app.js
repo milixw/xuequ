@@ -48,6 +48,15 @@
         `<li><strong>${escapeHtml(item.term)}</strong><span>${escapeHtml(item.meaning)}</span></li>`).join('')}</ol></article>`;
   }
 
+  // 英语小节标题写成“类型 ----- 知识点”：标题栏里连成一行，目录里分两行
+  function sectionTitle(title) {
+    return title.replace(' ----- ', '：');
+  }
+  function sectionTitleHtml(title) {
+    const [kind, point] = title.split(' ----- ');
+    return point === undefined ? escapeHtml(title) : `<b>${escapeHtml(kind)}</b><small>${escapeHtml(point)}</small>`;
+  }
+
   function page(title, backHref, subtitle) {
     app.innerHTML =
       `<header class="bar">` +
@@ -291,7 +300,7 @@
         const solved = Progress.solvedCount(s.id);
         row.innerHTML =
           `<span class="no">${s.section.no}</span>` +
-          `<span class="name">${escapeHtml(s.section.title)}</span>` +
+          `<span class="name">${sectionTitleHtml(s.section.title)}</span>` +
           (content
             ? `<span class="count">${solved}/${total}</span><span class="bar-bg"><span style="width:${total ? (solved / total) * 100 : 0}%"></span></span>`
             : `<span class="count soon">制作中</span>`);
@@ -339,7 +348,7 @@
     const g = window.Games && window.Games[id];
     if (!g) return showError(page('找不到这个游戏', '#/'), '链接可能有误，请返回首页。');
     const meta = Content.sectionMeta(g.section);
-    const main = page(g.title, fromHome ? '#/' : `#/s/${g.section}`, meta ? `${meta.section.no} ${meta.section.title} · 动手玩` : '动手玩');
+    const main = page(g.title, fromHome ? '#/' : `#/s/${g.section}`, meta ? `${meta.section.no} ${sectionTitle(meta.section.title)} · 动手玩` : '动手玩');
     g.mount(main, levelId);
   }
 
@@ -359,7 +368,7 @@
     if (!meta) return showError(page('找不到这一节', '#/'), '链接可能有误，请返回首页。');
     if (!section) return showError(page('内容还没准备好', `#/v/${meta.volumeId}`), '这一节正在制作中。');
     const chapterLabel = meta.subject.id === 'english' ? `Unit ${meta.chapter.no}` : `第 ${meta.chapter.no} 章`;
-    const main = page(`${meta.section.no}　${section.title}`, `#/v/${meta.volumeId}`, `${chapterLabel} ${meta.chapter.title}`);
+    const main = page(`${meta.section.no}　${sectionTitle(section.title)}`, `#/v/${meta.volumeId}`, `${chapterLabel} ${meta.chapter.title}`);
 
     if (section.review.status !== 'approved') {
       main.insertAdjacentHTML('beforeend', '<p class="notice">本节内容由 AI 编写，尚未经过老师审核，如发现错误欢迎反馈。</p>');
@@ -453,7 +462,7 @@
     const qs = orderedQuestions(section);
     const index = qs.findIndex(q => q.id === qid);
     if (index < 0) return showError(page('找不到这道题', `#/s/${sectionId}`), '返回小节重新选择吧。');
-    const main = page(`${meta.section.no}　${section.title}`, `#/s/${sectionId}`);
+    const main = page(`${meta.section.no}　${sectionTitle(section.title)}`, `#/s/${sectionId}`);
     const href = q => (q ? `#/q/${sectionId}/${q.id}` : null);
     Quiz.mount(main, {
       sectionId,
@@ -497,7 +506,7 @@
     for (const sectionNo of sectionOrder) {
       const group = exam.questions.filter(q => q.section === sectionNo);
       const sectionMeta = Content.sectionMeta(`${meta.volumeId}/${sectionNo}`);
-      const title = sectionMeta ? sectionMeta.section.title : group[0].sectionTitle;
+      const title = sectionMeta ? sectionTitle(sectionMeta.section.title) : group[0].sectionTitle;
       main.insertAdjacentHTML(
         'beforeend',
         `<div class="level-group"><h4><b>${escapeHtml(sectionNo)}</b> ${escapeHtml(title)} · ${group.length} 题</h4>` +

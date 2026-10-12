@@ -11,7 +11,7 @@ const openQ632 = (id, stem, reference, checks, explain) =>
 
 Content.section({
   id: 'english/sh2022/g6s1/3.2',
-  title: 'Food — 语法练习 ----- 可数名词与不可数名词',
+  title: '语法练习 ----- 可数名词与不可数名词',
   review: { status: 'pending' },
   levelNames: { basic: '辨认', extended: '运用', challenge: '产出' },
   knowledgeRefs: ['quantity'],

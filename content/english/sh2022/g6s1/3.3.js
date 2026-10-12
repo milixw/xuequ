@@ -9,7 +9,7 @@ const writeQ633 = (id, level, stem, answer, explain, audio) =>
 
 Content.section({
   id: 'english/sh2022/g6s1/3.3',
-  title: 'Food — 语音与听力 ----- 字母 o、u 的读音、听数量',
+  title: '语音与听力 ----- 字母 o、u 的读音、听数量',
   review: { status: 'pending' },
   intro: [
     { title: '字母 o 的常见读音', body: '在“o + 一个辅音字母 + 不发音的 e”里，o 读字母名称的音 /əʊ/；在 o 后面跟辅音结尾的短词里，o 常读短音 /ɒ/；不重读时读轻轻的 /ə/。', example: 'nose，bone（/əʊ/）；box，lot（/ɒ/）', pitfall: 'come、love 是例外，o 读 /ʌ/。' },

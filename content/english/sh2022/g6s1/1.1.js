@@ -6,7 +6,7 @@ const schoolQ611 = (id, level, stem, options, answer, explain) =>
 
 Content.section({
   id: 'english/sh2022/g6s1/1.1',
-  title: 'School life — 学校生活 ----- 一般现在时',
+  title: '阅读与语法 ----- 一般现在时',
   review: { status: 'pending' },
   reading: {
     title: "Lin Tao's School Day",
