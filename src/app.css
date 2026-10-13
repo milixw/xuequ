@@ -1107,6 +1107,7 @@ button.say-big { min-width: 72px; min-height: 72px; border-radius: 36px; font-si
 .pv-section { margin-bottom: 12px; }
 .pv-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
 .pv-head small { color: var(--muted); font-size: 12px; }
+.pv-note { margin: 6px 0 0; color: var(--muted); font-size: 13px; }
 .pv-section audio { display: block; width: 100%; margin: 8px 0 6px; }
 .pv-rates { display: flex; gap: 6px; margin-bottom: 8px; }
 .pv-rates button { min-height: 36px; padding: 4px 10px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); font-size: 13px; cursor: pointer; }

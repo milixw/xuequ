@@ -224,6 +224,7 @@
       card.className = 'card pv-section';
       card.innerHTML =
         `<div class="pv-head"><h2>${esc(sec.name)}</h2>${sec.page ? `<small>课本第 ${esc(String(sec.page))} 页</small>` : ''}</div>` +
+        (sec.note ? `<p class="pv-note">${esc(sec.note)}</p>` : '') +
         (sec.audio ? `<audio controls preload="none" src="${esc(BASE + sec.audio)}"></audio>` +
           `<div class="pv-rates" role="group" aria-label="语速">${[0.75, 1, 1.25].map(r =>
             `<button type="button" data-rate="${r}"${r === 1 ? ' class="on"' : ''}>${r} 倍</button>`).join('')}</div>` : '') +
