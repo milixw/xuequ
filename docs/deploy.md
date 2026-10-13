@@ -230,6 +230,8 @@ sudo certbot --nginx -d xue.你的域名 -d 其他.你的域名    # 同一台�
 
 **线上实际布局**（2026-10-13 起）：站点挂在 `https://www.mymili.com.cn/xuequ/`，公开部分由 mymili 仓库的 `pnpm deploy:xuequ` 发布到 `/srv/xuequ/releases/<版本>/`，软链 `/srv/xuequ/web/xuequ` 指向在线版本；nginx 配置是 `/etc/nginx/snippets/xuequ.conf`，只被 443 server 引用（HTTP 不挂）。说明见 mymili 仓库 `docs/deploy-aliyun.md` §8。下面按这个布局写；上面第五节的 `/xue/` 是旧的通用写法。
 
+**平时只要在 mymili 仓库跑 `pnpm deploy:xuequ`**：发完公开部分会接着跑 `private/scripts/pack.sh` 和 `private/scripts/setup-server.sh`，把下面 1～3 步全部做完并检查（可重复运行）；口令取 mymili `.deploy.env` 的 `XUEQU_PRIVATE_PASS`，不写进本仓库。下面是这些脚本具体做了什么，手工排查时参考。
+
 HTTP 站点不配：页面查不到口令服务，就不显示“🔑 课本资料”入口；凭证 cookie 带 `Secure`，HTTP 下浏览器也不会发送。
 
 ### 1. 口令服务（systemd）
