@@ -256,7 +256,13 @@
     box.innerHTML = can
       ? `<button type="button" class="say say-big" aria-label="播放听力">🔊</button><span>点喇叭听，可以多听几遍</span>`
       : `<p class="notice">这台设备暂时不能朗读，请直接读听力原文：</p><p class="q-script" lang="en">${escapeHtml(audio.text)}</p>`;
-    if (can) box.querySelector('button').addEventListener('click', () => speech.say(audio.text));
+    const showScript = () => {
+      if (box.querySelector('.q-script')) return;
+      box.insertAdjacentHTML('beforeend', `<p class="notice">没能放出声音，请直接读听力原文：</p><p class="q-script" lang="en">${escapeHtml(audio.text)}</p>`);
+    };
+    if (can) box.querySelector('button').addEventListener('click', () => {
+      if (!speech.say(audio.text, showScript)) showScript();
+    });
     return box;
   }
 
