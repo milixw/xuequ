@@ -60,7 +60,7 @@ test('英语八上使用现有懒加载路径与首页学期入口，不引入�
   assert(Content.semesters().some(s => s.id === 'g8s1'));
   const app = fs.readFileSync(path.join(root, 'src', 'app.js'), 'utf8');
   assert(app.includes("v.subject.id === 'english' ? `Unit ${chapter.no}`"));
-  assert(app.indexOf('renderReading(section.reading)') < app.indexOf("'<h3 class=\"group\">知识点</h3>'"), '单元阅读应排在知识点之前');
+  assert(app.indexOf('renderReading(section.reading, speakable)') < app.indexOf("'<h3 class=\"group\">知识点</h3>'"), '单元阅读应排在知识点之前');
   assert(app.includes('reading.translations[paragraphIndex][sentenceIndex]'), '单元阅读缺少逐句译文');
   assert(app.includes('<h2>${escapeHtml(reading.title)}</h2>'), '阅读标题应只显示文章名');
   assert(!app.includes('----- ${escapeHtml(reading.topic)}'), '阅读标题不应追加知识点');
@@ -72,4 +72,49 @@ test('英语八上使用现有懒加载路径与首页学期入口，不引入�
   assert(css.includes('.reading-line, .unit-reading .reading-en { display: inline; }'), '关闭翻译时应连续排版英文');
   assert(css.includes('.unit-reading.show-translations .reading-en { display: block; }'), '打开翻译时应逐句换行');
   assert(css.includes('.unit-reading.show-translations .reading-translation { display: block; }'), '翻译开关样式缺失');
+});
+
+test('单元阅读朗读：逐句读、点句单读、离开页面停止', () => {
+  const app = fs.readFileSync(path.join(root, 'src', 'app.js'), 'utf8');
+  assert(app.includes('if (speakable) bindReadingSpeech(readingEl)'), '单元阅读未接入朗读');
+  assert(app.includes("replace(/\\[\\[([^\\]]+)\\]\\]/g, '$1')"), '朗读文本应去掉 [[ ]] 标记');
+  assert(app.includes('rate: 1,'), '单元阅读应用正常语速');
+  assert(app.includes('if (window.Speech) Speech.stop();'), '切换页面时应停止朗读');
+});
+
+test('Speech：被打断的朗读不再回调，句子用百度在线读音', () => {
+  const g = globalThis;
+  const saved = { speechSynthesis: g.speechSynthesis, SpeechSynthesisUtterance: g.SpeechSynthesisUtterance, Audio: g.Audio };
+  try {
+    const spoken = [];
+    g.SpeechSynthesisUtterance = function (text) { this.text = text; };
+    g.speechSynthesis = {
+      getVoices: () => [{ lang: 'en-US', localService: false, name: 'remote' }, { lang: 'en-US', localService: true, name: 'local' }],
+      speak: u => spoken.push(u), cancel() {}, speaking: false, pending: false, paused: false,
+    };
+    const Speech = require('../src/speech.js');
+    assert(Speech.englishVoice().name === 'local', '应优先本机英文语音');
+    const ends = [];
+    Speech.say('One.', { rate: 1, onEnd: () => ends.push('one') });
+    Speech.say('Two.', { onEnd: () => ends.push('two') });
+    assert(spoken[0].rate === 1 && spoken[1].rate === 0.9, '语速参数不对');
+    spoken[0].onend();
+    assert(ends.length === 0, '被打断的朗读不应回调');
+    spoken[1].onend();
+    assert(ends.join() === 'two');
+    Speech.say('Three.', { onEnd: () => ends.push('three') });
+    Speech.stop();
+    spoken[2].onend();
+    assert(ends.join() === 'two', 'stop 之后不应回调');
+
+    const urls = [];
+    g.speechSynthesis = undefined;
+    g.Audio = function (u) { urls.push(u); this.addEventListener = () => {}; this.play = () => {}; this.pause = () => {}; };
+    Speech.say('Kate goes jogging.', { rate: 1 });
+    Speech.say('apple');
+    assert(/fanyi\.baidu\.com\/gettts\?lan=en&spd=5/.test(urls[0]), '句子应走百度读音、正常语速');
+    assert(urls[1].startsWith('https://dict.youdao.com/dictvoice?audio=apple'), '单词应走有道读音');
+  } finally {
+    Object.assign(g, saved);
+  }
 });

@@ -353,6 +353,11 @@ main > audio { max-width: 100%; }
 /* 知识点 */
 .reading-heading { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }
 .unit-reading .reading-heading h2 { margin: 0; }
+.reading-tools { display: flex; flex-wrap: wrap; gap: 8px; }
+.reading-play { min-height: 40px; padding: 5px 12px; border: 0; border-radius: 8px; background: #eef3fb; color: #174b91; font-size: 13px; cursor: pointer; white-space: nowrap; }
+.reading-hint { margin: -4px 0 10px; color: var(--muted); font-size: 12px; }
+.unit-reading .reading-en[data-say] { cursor: pointer; border-radius: 4px; transition: background .2s; }
+.unit-reading .reading-en.speaking { background: #ffe08a; box-shadow: 0 0 0 2px #ffe08a; }
 .reading-toggle { display: inline-flex; align-items: center; gap: 5px; min-height: 40px; padding: 5px 8px; border-radius: 8px; background: #eef3fb; color: #174b91; font-size: 13px; cursor: pointer; white-space: nowrap; }
 .reading-toggle input { width: 18px; height: 18px; accent-color: var(--primary); }
 .reading-paragraph { margin-bottom: 12px; }

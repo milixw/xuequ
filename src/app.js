@@ -23,7 +23,7 @@
   }
 
   // 英语原创阅读用 [[词或短语]] 标注重点词；正文始终先转义，不能把内容当 HTML 执行。
-  function renderReading(reading) {
+  function renderReading(reading, speakable) {
     const entries = new Map(reading.vocabulary.map((item, i) => [item.term, { ...item, number: i + 1 }]));
     const paragraphs = reading.paragraphs.map((paragraph, paragraphIndex) => {
       const sentences = paragraph.match(/[^.!?]+[.!?]+|[^.!?]+$/g) || [];
@@ -37,15 +37,76 @@
             `${escapeHtml(entry.term)}<sup>${entry.number}</sup></mark>`;
         }).join('');
         const translation = reading.translations[paragraphIndex][sentenceIndex];
-        return `<div class="reading-line"><p class="reading-en">${english}</p>` +
+        // 朗读用的纯文本：去掉 [[ ]] 标记，不读生词编号
+        const say = speakable ? ` data-say="${escapeHtml(sentence.trim().replace(/\[\[([^\]]+)\]\]/g, '$1'))}" role="button" tabindex="0"` : '';
+        return `<div class="reading-line"><p class="reading-en"${say}>${english}</p>` +
           `<p class="reading-translation" lang="zh-CN">${escapeHtml(translation)}</p></div>`;
       }).join(' ')}</div>`;
     }).join('');
     return `<h3 class="group">单元阅读 · 原创</h3><article class="card unit-reading">` +
       `<div class="reading-heading"><h2>${escapeHtml(reading.title)}</h2>` +
-      `<label class="reading-toggle"><input type="checkbox">显示翻译</label></div>${paragraphs}` +
+      `<div class="reading-tools">${speakable ? '<button type="button" class="reading-play">🔊 朗读全文</button>' : ''}` +
+      `<label class="reading-toggle"><input type="checkbox">显示翻译</label></div></div>` +
+      (speakable ? '<p class="reading-hint">点任意一句英文，可以单独听这一句</p>' : '') + `${paragraphs}` +
       `<h3>重点词与短语</h3><ol>${reading.vocabulary.map(item =>
         `<li><strong>${escapeHtml(item.term)}</strong><span>${escapeHtml(item.meaning)}</span></li>`).join('')}</ol></article>`;
+  }
+
+  // 单元阅读朗读：“朗读全文”逐句往下读（Chrome 一次读太长会半路停），点某一句只读这一句；正在读的句子高亮
+  function bindReadingSpeech(readingEl) {
+    const lines = [...readingEl.querySelectorAll('.reading-en[data-say]')];
+    const playBtn = readingEl.querySelector('.reading-play');
+    const hint = readingEl.querySelector('.reading-hint');
+    const hintText = hint.textContent;
+    let playingAll = false;
+
+    function mark(line) {
+      lines.forEach(l => l.classList.toggle('speaking', l === line));
+    }
+    function reset() {
+      playingAll = false;
+      playBtn.textContent = '🔊 朗读全文';
+      mark(null);
+    }
+    function fail() {
+      reset();
+      hint.textContent = '没能放出声音，请检查网络或稍后再试';
+    }
+    function read(i, all) {
+      const line = lines[i];
+      hint.textContent = hintText;
+      mark(line);
+      if (all) line.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+      const started = Speech.say(line.dataset.say, {
+        rate: 1,
+        onEnd: () => (all && i + 1 < lines.length ? read(i + 1, true) : reset()),
+        onFail: fail,
+      });
+      if (!started) fail();
+    }
+
+    playBtn.addEventListener('click', () => {
+      if (playingAll) {
+        Speech.stop();
+        return reset();
+      }
+      playingAll = true;
+      playBtn.textContent = '■ 停止';
+      read(0, true);
+    });
+    lines.forEach((line, i) => {
+      const one = () => {
+        reset();
+        read(i, false);
+      };
+      line.addEventListener('click', one);
+      line.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          one();
+        }
+      });
+    });
   }
 
   // 英语小节标题写成“类型 ----- 知识点”：标题栏里连成一行，目录里分两行
@@ -375,11 +436,13 @@
     }
 
     if (section.reading) {
-      main.insertAdjacentHTML('beforeend', renderReading(section.reading));
+      const speakable = !!(window.Speech && Speech.available());
+      main.insertAdjacentHTML('beforeend', renderReading(section.reading, speakable));
       const readingEl = main.querySelector('.unit-reading');
       readingEl.querySelector('.reading-toggle input').addEventListener('change', event => {
         readingEl.classList.toggle('show-translations', event.target.checked);
       });
+      if (speakable) bindReadingSpeech(readingEl);
     }
 
     main.insertAdjacentHTML('beforeend', '<h3 class="group">知识点</h3>');
@@ -661,6 +724,7 @@
 
   function route() {
     EnglishExams.stopMedia();
+    if (window.Speech) Speech.stop();
     const parts = (location.hash.slice(1) || '/').split('/').filter(Boolean);
     const prev = prevParts;
     prevParts = parts;

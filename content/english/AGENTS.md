@@ -51,7 +51,7 @@
 
 ## 英语八上单元内容格式
 
-英语八上 `content/english/sh2022/g8s1/<小节号>.js` 的 `Content.section` 在 `intro` 和 `questions` 之外还有 `reading`，页面按“原创文章 → 重点词与短语 → 知识点 → 练习”的顺序显示：
+英语八上 `content/english/sh2022/g8s1/<小节号>.js` 的 `Content.section` 在 `intro` 和 `questions` 之外还有 `reading`，页面按“原创文章 → 重点词与短语 → 知识点 → 练习”的顺序显示（文章可逐句朗读，不用加字段）：
 
 英语小节 `title` 统一用“主题 ----- 主要知识点”（五个半角短横线），`catalog.js` 和小节文件要一致；“主题”写小节类型，不重复 Unit 名，见 `docs/sop-english-unit.md`。`reading.title` 在页面上只显示文章名，不追加知识点；`reading.topic` 是内容元数据，不在文章标题中展示。
 

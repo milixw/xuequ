@@ -261,7 +261,7 @@
       box.insertAdjacentHTML('beforeend', `<p class="notice">没能放出声音，请直接读听力原文：</p><p class="q-script" lang="en">${escapeHtml(audio.text)}</p>`);
     };
     if (can) box.querySelector('button').addEventListener('click', () => {
-      if (!speech.say(audio.text, showScript)) showScript();
+      if (!speech.say(audio.text, { onFail: showScript })) showScript();
     });
     return box;
   }
