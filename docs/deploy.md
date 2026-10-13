@@ -10,7 +10,7 @@
 
 - 会先跑一遍校验，不通过就中止（确要跳过：`./scripts/build.sh --skip-tests`）
 - 产物：`dist/xuequ-<日期>-<提交号>.tar.gz`，约 400 KB
-- 只包含运行需要的文件：`index.html`、`src/`、`vendor/`、`content/`、`serve.js`、`run.sh`、`VERSION`
+- 只包含运行需要的文件：`index.html`、`src/`、`vendor/`、`content/`、`serve.js`、`run.sh`、`private-gate.js`（私有资料口令服务，见第八节）、`VERSION`
 - 不包含：测试、文档、教材照片、开发脚本
 - `VERSION` 里记录了构建时间、提交号和已上线的小节清单，上线后可以核对
 
@@ -223,3 +223,88 @@ sudo certbot --nginx -d xue.你的域名 -d 其他.你的域名    # 同一台�
 - **没有访问统计**：需要的话可以在服务器上看 `server.log`，或者接入统计服务
 - **和别的服务共用一台机器**：按第五节走 nginx 静态方案时本项目没有常驻进程；用 `serve.js` 时约占几十 MB 内存，1 核 1G 的机器也够用
 - **更新内容后**：页面和内容文件的缓存是 5 分钟（`no-cache` / `max-age=300`），学生刷新即可拿到新内容；KaTeX 相关文件按一年缓存，因为文件名不变但内容也不会变
+
+## 八、私有课本资料（口令解锁，只支持 HTTPS）
+
+课本原文和录音放在 GitHub 私有仓库 `xuequ-private`，不在公开包里。线上由 nginx 提供文件，口令服务 `private-gate.js` 只负责核对口令和凭证。设计见 `docs/superpowers/specs/2026-10-13-private-textbook.md`。
+
+**下面几段只加进 HTTPS 的 server 块**。HTTP 站点不配：页面查不到口令服务，就不显示“🔑 课本资料”入口；凭证 cookie 带 `Secure`，HTTP 下浏览器也不会发送。
+
+### 1. 口令服务（systemd）
+
+```bash
+nginx -V 2>&1 | grep -o with-http_auth_request_module   # 必须有输出，没有就换带这个模块的 nginx
+
+sudo tee /etc/xuequ-gate.env > /dev/null <<EOF
+PRIVATE_PASS=这里写口令
+PRIVATE_SECRET=$(openssl rand -hex 32)
+PORT=6477
+HOST=127.0.0.1
+PRIVATE_COOKIE_PATH=/xue/
+EOF
+sudo chmod 600 /etc/xuequ-gate.env
+
+sudo tee /etc/systemd/system/xuequ-gate.service > /dev/null <<'EOF'
+[Unit]
+Description=xuequ private textbook gate
+After=network.target
+
+[Service]
+Type=simple
+User=www-data
+EnvironmentFile=/etc/xuequ-gate.env
+ExecStart=/usr/bin/node /srv/web/xue/private-gate.js
+Restart=always
+RestartSec=3
+
+[Install]
+WantedBy=multi-user.target
+EOF
+sudo systemctl daemon-reload && sudo systemctl enable --now xuequ-gate
+sudo journalctl -u xuequ-gate -n 20      # 看到“口令服务已启动”就行
+```
+
+- `/srv/web/xue` 是第五节的版本软链，升级后 `sudo systemctl restart xuequ-gate` 让口令服务也用上新版本
+- **改口令**：改 `/etc/xuequ-gate.env` 里的 `PRIVATE_PASS` 再重启，所有人的旧凭证立刻失效，要重新输入
+- 凭证有效期 30 天；同一 IP 每分钟最多试 5 次口令
+
+### 2. 私有文件
+
+```bash
+sudo mkdir -p /srv/xue-private
+sudo tar -xzf ~/xuequ-private-<日期>.tar.gz -C /srv/xue-private --strip-components=1   # 私有仓库的打包产物
+```
+
+**不要放进 `/srv/web/xue/` 下面**，那里没有口令保护。
+
+### 3. nginx 配置（加进 HTTPS 的 server 块，和第五节那几段放在一起）
+
+```nginx
+location ^~ /xue/api/private/ {                  # 解锁、状态接口
+    proxy_pass http://127.0.0.1:6477;
+    proxy_set_header X-Forwarded-Proto $scheme;
+    proxy_set_header X-Real-IP $remote_addr;
+}
+
+location = /xue/api/private-auth {               # 只给下面的 auth_request 用
+    internal;
+    proxy_pass http://127.0.0.1:6477/check;
+    proxy_pass_request_body off;
+    proxy_set_header Content-Length "";
+}
+
+location ^~ /xue/private/ {                      # 私有文件：凭证有效才放行
+    auth_request /xue/api/private-auth;
+    alias /srv/xue-private/;
+    add_header Cache-Control "private, max-age=300" always;
+    add_header X-Content-Type-Options nosniff always;
+}
+```
+
+`^~` 保证这些路径不会被第五节的 `.html` 正则规则抢走。验证：
+
+```bash
+sudo nginx -t && sudo systemctl reload nginx
+curl -s https://<域名>/xue/api/private/status                                    # {"unlocked":false}
+curl -s -o /dev/null -w '%{http_code}\n' https://<域名>/xue/private/manifest.js   # 401
+```

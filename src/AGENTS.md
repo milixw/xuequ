@@ -23,6 +23,7 @@
   words-ui.js                     英语单词页面：#/words 今日任务、本册各单元、单元词表、一题一屏练习（L1～L4），册页面每个 Unit 的“单词”行；词表按 catalog 里册的 words 字段用 <script> 按需加载
   subject-papers.js               上海语数物化真题：文字与本地题图混合，题图可放大，答案图只在订正区；按账号保存，打印不含答案
   account-ui.js                   右上角账号区和登录弹窗
+  private-ui.js                   私有课本资料：首页“🔑 课本资料”入口与口令框、#/textbook 录音和原文页、英语小节页链接；资料在 private/（私有仓库），用 <script> 加载
   app.js                          hash 路由和页面：首页（本学期课本、练习、复习资料、中考真题、趣味玩法五区）→ 册 → 小节 / 真题卷 → 做题
   app.css                         全部样式
 ```

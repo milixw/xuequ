@@ -30,7 +30,7 @@ mkdir -p "${OUT}"
 # 运行时需要的文件（不含测试、文档、教材照片、开发脚本）
 cp index.html "${OUT}/"
 cp -R src vendor content "${OUT}/"
-cp scripts/serve.js scripts/run.sh "${OUT}/"
+cp scripts/serve.js scripts/run.sh scripts/private-gate.js "${OUT}/"
 chmod +x "${OUT}/run.sh"
 
 cat > "${OUT}/VERSION" <<EOF

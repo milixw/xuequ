@@ -12,6 +12,7 @@
 //   #/english-bank[/<题目ID>] 英语错题库
 //   #/english-plan[/<天数>[/(result|retry)/<记录ID>]] 英语七天复习计划、每日作答、错题记录与重做
 //   #/words[/<册ID>[/<单元号>]] 英语单词：今日任务、本册各单元、单元词表（src/words-ui.js）
+//   #/textbook[/<册ID>/<单元号>] 私有课本资料：录音和课文原文，口令解锁（src/private-ui.js）
 
 (function () {
   const app = document.getElementById('app');
@@ -306,6 +307,7 @@
       { title: '古诗文阅读应考手册', desc: '考点、解题方法和答题要点', href: 'content/chinese/上海中考古诗文阅读应考手册.html' },
       { title: '现代文阅读应考手册', desc: '题型、分析方法和答题技巧', href: 'content/chinese/上海中考现代文阅读应考手册.html' },
     ]);
+    PrivateUI.homeTile(notesGrid); // 有私有课本资料（或可输口令解锁）时才出现
 
     // 中考真题：五个学科排成一排，进去再按年份选；英语先选上海或江苏
     const shanghai = homeSection(main, '中考真题', '上海历年原题，英语另有江苏');
@@ -434,6 +436,8 @@
     if (section.review.status !== 'approved') {
       main.insertAdjacentHTML('beforeend', '<p class="notice">本节内容由 AI 编写，尚未经过老师审核，如发现错误欢迎反馈。</p>');
     }
+
+    PrivateUI.sectionLink(main, meta);
 
     if (section.reading) {
       const speakable = !!(window.Speech && Speech.available());
@@ -725,6 +729,7 @@
   function route() {
     EnglishExams.stopMedia();
     if (window.Speech) Speech.stop();
+    PrivateUI.stop();
     const parts = (location.hash.slice(1) || '/').split('/').filter(Boolean);
     const prev = prevParts;
     prevParts = parts;
@@ -741,6 +746,7 @@
     }
     if (parts[0] === 'english-plan') return englishPlanPage(parts[1], parts[2], parts[3]);
     if (parts[0] === 'words') return wordsPage(parts.slice(1));
+    if (parts[0] === 'textbook') return PrivateUI.textbookPage(parts.slice(1), { page, showError, escapeHtml });
     if (parts[0] === 'v') return volumePage(parts.slice(1).join('/'));
     if (parts[0] === 's') return sectionPage(parts.slice(1).join('/'));
     if (parts[0] === 'q') return questionPage(parts.slice(1, -1).join('/'), parts[parts.length - 1]);

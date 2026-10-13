@@ -24,6 +24,8 @@ require('./english-words.test.js');
 require('./english-exams.test.js');
 require('./subject-papers.test.js');
 require('./nantong-chinese.test.js');
+require('./private-gate.test.js');
+require('./private-ui.test.js');
 require('./agents-docs.test.js');
 
 process.exit(require('./harness').run() ? 1 : 0);

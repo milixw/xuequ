@@ -15,6 +15,7 @@
 | `#/english-plan` / `#/english-plan/<天数>` / `#/english-plan/<天数>/result` / `#/english-plan/<天数>/result/<记录ID>` | 英语七天计划、每日作答及按提交时间查看错题；屏幕显示订正答案和解析（旧记录按 ID 补取当前解析），A4 打印只保留原题和题号，不打印答案或解析；不改题目 ID 或原题文本 |
 | `#/english-plan/<天数>/retry/<记录ID>` | 独立重做该提交记录中的错题；按快照恢复原题及答案，草稿不影响每日练习；提交追加新时间点记录（含全对），原记录不变；新错题可继续重做，重做答对题的答案和解析只在屏幕展示、不打印 |
 | `#/words` / `#/words/<册ID>` / `#/words/<册ID>/<单元号>` | 英语单词：今日任务（到期复习 + 新词，一题一屏）/ 本册各单元掌握情况 / 单元词表（学这一单元、只练本单元）；首页“英语单词”入口进 `#/words`，中考词汇表从这里链出。设计见 `docs/superpowers/specs/2026-10-08-english-unit-structure.md` |
+| `#/textbook` / `#/textbook/<册ID>/<单元号>` | 私有课本资料（`src/private-ui.js`）：册和单元列表 / 本单元各栏目的课本录音（0.75、1、1.25 倍速）和可显示隐藏的课文原文。资料在 `private/`（私有仓库，不入开源库）；本机能加载 `private/manifest.js` 就直接用，线上要先在首页“🔑 课本资料”输口令，凭证是口令服务发的 HttpOnly cookie `xq_private`（30 天，页面读不到，不占 localStorage）。英语小节页在已解锁且本单元有资料时顶部多一行链接。设计见 `docs/superpowers/specs/2026-10-13-private-textbook.md` |
 | `#/v/<册ID>` | 册：章节列表 + 本册的真题卷；英语册有词表时每个 Unit 多一行“单词 · 已掌握 n / 共 m” |
 | `#/s/<小节ID>` | 小节：知识点 + 题目列表 |
 | `#/q/<小节ID>/<题目ID>` | 做题 |

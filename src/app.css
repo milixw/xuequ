@@ -1099,3 +1099,18 @@ button.say-big { min-width: 72px; min-height: 72px; border-radius: 36px; font-si
 .open-actions { display: flex; gap: 10px; margin-top: 10px; }
 .open-actions button { flex: 1; min-height: 44px; font: inherit; border-radius: 10px; border: 1px solid var(--line); background: var(--card); color: var(--text); }
 .open-actions .primary { background: var(--ok); border-color: var(--ok); color: #fff; }
+
+/* 私有课本资料（src/private-ui.js） */
+.pv-link { margin: 0 0 12px; font-size: 14px; }
+.pv-link a { display: inline-flex; align-items: center; min-height: 36px; }
+.card.pv-unit { display: block; margin-bottom: 10px; }
+.pv-section { margin-bottom: 12px; }
+.pv-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+.pv-head small { color: var(--muted); font-size: 12px; }
+.pv-section audio { display: block; width: 100%; margin: 8px 0 6px; }
+.pv-rates { display: flex; gap: 6px; margin-bottom: 8px; }
+.pv-rates button { min-height: 36px; padding: 4px 10px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); font-size: 13px; cursor: pointer; }
+.pv-rates button.on { border-color: var(--primary); background: #eef3fb; color: var(--primary); font-weight: 600; }
+.pv-toggle { min-height: 36px; padding: 4px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); color: var(--primary); font-size: 13px; cursor: pointer; }
+.pv-text { margin-top: 8px; }
+.pv-text p { margin: 0 0 8px; color: var(--text); font-size: 15px; line-height: 1.75; }
