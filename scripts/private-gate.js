@@ -5,10 +5,10 @@
 // 设计文档：docs/superpowers/specs/2026-10-13-private-textbook.md
 //
 // 用法（只监听本机，前面由 nginx 转发）：
-//   PRIVATE_PASS=口令 PRIVATE_SECRET=随机长串 node private-gate.js
-//   可选：PORT（默认 6477）、HOST（默认 127.0.0.1）、PRIVATE_COOKIE_PATH（默认 /xue/）
+//   PRIVATE_PASS=这里写口令 PRIVATE_SECRET=随机长串 node private-gate.js
+//   可选：PORT（默认 6477）、HOST（默认 127.0.0.1）、PRIVATE_COOKIE_PATH（默认 /xuequ/）
 //
-// 接口（nginx 把 /xue/api/private/ 转发过来，路径按结尾匹配）：
+// 接口（nginx 把 /xuequ/api/private/ 转发过来，路径按结尾匹配）：
 //   POST …/unlock  {"pass":"…"}  对 → 204 + cookie；错 → 403；太频繁 → 429；不是 https → 403
 //   GET  …/check                 凭证有效 → 204，否则 401（nginx auth_request 用）
 //   GET  …/status                {"unlocked":true|false}
@@ -21,7 +21,7 @@ const LIMIT = 5;            // 同一 IP 每分钟最多尝试几次
 const WINDOW = 60 * 1000;
 
 // now 可注入，方便测试过期和限流
-function createGate({ pass, secret, cookiePath = '/xue/', now = Date.now }) {
+function createGate({ pass, secret, cookiePath = '/xuequ/', now = Date.now }) {
   if (!pass || !secret) throw new Error('缺少 PRIVATE_PASS 或 PRIVATE_SECRET');
   // 签名密钥里含口令：改口令后旧凭证全部失效
   const key = secret + '\n' + pass;
@@ -103,7 +103,7 @@ function serve() {
     gate = createGate({
       pass: process.env.PRIVATE_PASS,
       secret: process.env.PRIVATE_SECRET,
-      cookiePath: process.env.PRIVATE_COOKIE_PATH || '/xue/',
+      cookiePath: process.env.PRIVATE_COOKIE_PATH || '/xuequ/',
     });
   } catch (e) {
     console.error(e.message);

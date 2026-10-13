@@ -226,21 +226,23 @@ sudo certbot --nginx -d xue.你的域名 -d 其他.你的域名    # 同一台�
 
 ## 八、私有课本资料（口令解锁，只支持 HTTPS）
 
-课本原文和录音放在 GitHub 私有仓库 `xuequ-private`，不在公开包里。线上由 nginx 提供文件，口令服务 `private-gate.js` 只负责核对口令和凭证。设计见 `docs/superpowers/specs/2026-10-13-private-textbook.md`。
+课本原文和录音放在 GitHub 私有仓库 `xuequ-private`（本机克隆在 `private/`），不在公开包里。线上由 nginx 提供文件，口令服务 `private-gate.js` 只负责核对口令和凭证。设计见 `docs/superpowers/specs/2026-10-13-private-textbook.md`。
 
-**下面几段只加进 HTTPS 的 server 块**。HTTP 站点不配：页面查不到口令服务，就不显示“🔑 课本资料”入口；凭证 cookie 带 `Secure`，HTTP 下浏览器也不会发送。
+**线上实际布局**（2026-10-13 起）：站点挂在 `https://www.mymili.com.cn/xuequ/`，公开部分由 mymili 仓库的 `pnpm deploy:xuequ` 发布到 `/srv/xuequ/releases/<版本>/`，软链 `/srv/xuequ/web/xuequ` 指向在线版本；nginx 配置是 `/etc/nginx/snippets/xuequ.conf`，只被 443 server 引用（HTTP 不挂）。说明见 mymili 仓库 `docs/deploy-aliyun.md` §8。下面按这个布局写；上面第五节的 `/xue/` 是旧的通用写法。
+
+HTTP 站点不配：页面查不到口令服务，就不显示“🔑 课本资料”入口；凭证 cookie 带 `Secure`，HTTP 下浏览器也不会发送。
 
 ### 1. 口令服务（systemd）
 
-```bash
-nginx -V 2>&1 | grep -o with-http_auth_request_module   # 必须有输出，没有就换带这个模块的 nginx
+服务器 nginx 已带 `auth_request` 模块、已装 node（`/usr/local/bin/node`），口令服务程序随公开包发布，在 `/srv/xuequ/web/xuequ/private-gate.js`。
 
+```bash
 sudo tee /etc/xuequ-gate.env > /dev/null <<EOF
 PRIVATE_PASS=这里写口令
 PRIVATE_SECRET=$(openssl rand -hex 32)
 PORT=6477
 HOST=127.0.0.1
-PRIVATE_COOKIE_PATH=/xue/
+PRIVATE_COOKIE_PATH=/xuequ/
 EOF
 sudo chmod 600 /etc/xuequ-gate.env
 
@@ -251,9 +253,9 @@ After=network.target
 
 [Service]
 Type=simple
-User=www-data
+User=nobody
 EnvironmentFile=/etc/xuequ-gate.env
-ExecStart=/usr/bin/node /srv/web/xue/private-gate.js
+ExecStart=/usr/local/bin/node /srv/xuequ/web/xuequ/private-gate.js
 Restart=always
 RestartSec=3
 
@@ -261,50 +263,59 @@ RestartSec=3
 WantedBy=multi-user.target
 EOF
 sudo systemctl daemon-reload && sudo systemctl enable --now xuequ-gate
-sudo journalctl -u xuequ-gate -n 20      # 看到“口令服务已启动”就行
+sudo journalctl -u xuequ-gate -n 20
 ```
 
-- `/srv/web/xue` 是第五节的版本软链，升级后 `sudo systemctl restart xuequ-gate` 让口令服务也用上新版本
+看到“口令服务已启动”就行。
+
+- `pnpm deploy:xuequ` 发布新版本后，`private-gate.js` 改过时要 `sudo systemctl restart xuequ-gate`（软链已指向新版本）
 - **改口令**：改 `/etc/xuequ-gate.env` 里的 `PRIVATE_PASS` 再重启，所有人的旧凭证立刻失效，要重新输入
 - 凭证有效期 30 天；同一 IP 每分钟最多试 5 次口令
 
 ### 2. 私有文件
 
+在私有仓库里打包（`./scripts/pack.sh`），上传后解压到 `/srv/xuequ/private/`：
+
 ```bash
-sudo mkdir -p /srv/xue-private
-sudo tar -xzf ~/xuequ-private-<日期>.tar.gz -C /srv/xue-private --strip-components=1   # 私有仓库的打包产物
+sudo mkdir -p /srv/xuequ/private
+sudo tar --no-same-owner -xzf ~/xuequ-private-<日期>.tar.gz -C /srv/xuequ/private --strip-components=1
+sudo chmod -R a+rX /srv/xuequ/private
 ```
 
-**不要放进 `/srv/web/xue/` 下面**，那里没有口令保护。
+**不要放进 `/srv/xuequ/web/` 下面**，那里没有口令保护；`pnpm deploy:xuequ` 也不会碰 `/srv/xuequ/private/`。
 
-### 3. nginx 配置（加进 HTTPS 的 server 块，和第五节那几段放在一起）
+### 3. nginx 配置
+
+追加到 `/etc/nginx/snippets/xuequ.conf` 的末尾，放在 `location ^~ /xuequ/ { … }` **外面**（同为 `^~` 前缀，nginx 取最长的那个，所以这几段优先于 `/xuequ/`）：
 
 ```nginx
-location ^~ /xue/api/private/ {                  # 解锁、状态接口
+location ^~ /xuequ/api/private/ {
     proxy_pass http://127.0.0.1:6477;
     proxy_set_header X-Forwarded-Proto $scheme;
     proxy_set_header X-Real-IP $remote_addr;
 }
 
-location = /xue/api/private-auth {               # 只给下面的 auth_request 用
+location = /xuequ/api/private-auth {
     internal;
     proxy_pass http://127.0.0.1:6477/check;
     proxy_pass_request_body off;
     proxy_set_header Content-Length "";
 }
 
-location ^~ /xue/private/ {                      # 私有文件：凭证有效才放行
-    auth_request /xue/api/private-auth;
-    alias /srv/xue-private/;
-    add_header Cache-Control "private, max-age=300" always;
+location ^~ /xuequ/private/ {
+    auth_request /xuequ/api/private-auth;
+    alias /srv/xuequ/private/;
     add_header X-Content-Type-Options nosniff always;
+    add_header Cache-Control "private, max-age=300" always;
 }
 ```
 
-`^~` 保证这些路径不会被第五节的 `.html` 正则规则抢走。验证：
+第一段是解锁和状态接口，第二段只给第三段的 `auth_request` 用，第三段是私有文件：凭证有效才放行。
 
 ```bash
 sudo nginx -t && sudo systemctl reload nginx
-curl -s https://<域名>/xue/api/private/status                                    # {"unlocked":false}
-curl -s -o /dev/null -w '%{http_code}\n' https://<域名>/xue/private/manifest.js   # 401
+curl -s https://www.mymili.com.cn/xuequ/api/private/status
+curl -s -o /dev/null -w '%{http_code}\n' https://www.mymili.com.cn/xuequ/private/manifest.js
 ```
+
+前一条应输出 `{"unlocked":false}`，后一条应输出 `401`。

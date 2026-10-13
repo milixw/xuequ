@@ -21,7 +21,7 @@ test('口令服务：口令对发 30 天凭证，凭证能通过校验', () => {
   const r = unlock('open-sesame');
   assert(r.status === 204, '口令对应返回 204');
   const c = r.headers['Set-Cookie'];
-  for (const attr of ['HttpOnly', 'Secure', 'SameSite=Strict', 'Path=/xue/', `Max-Age=${TTL}`]) assert(c.includes(attr), `cookie 缺少 ${attr}`);
+  for (const attr of ['HttpOnly', 'Secure', 'SameSite=Strict', 'Path=/xuequ/', `Max-Age=${TTL}`]) assert(c.includes(attr), `cookie 缺少 ${attr}`);
   assert(TTL === 30 * 24 * 3600);
   assert(check(`other=1; ${COOKIE}=${tokenOf(r)}`).status === 204, '有效凭证应放行');
   assert(check().status === 401, '没有凭证应拒绝');
@@ -62,7 +62,7 @@ test('口令服务：同一 IP 每分钟最多尝试 5 次', () => {
 
 test('口令服务：status 接口、未知路径、缺配置', () => {
   const { gate, unlock, tokenOf } = setup();
-  const status = cookie => JSON.parse(gate.handle({ method: 'GET', path: '/xue/api/private/status', ip: '1', body: '', headers: { cookie } }).body);
+  const status = cookie => JSON.parse(gate.handle({ method: 'GET', path: '/xuequ/api/private/status', ip: '1', body: '', headers: { cookie } }).body);
   assert(status('').unlocked === false);
   assert(status(`${COOKIE}=${tokenOf(unlock('open-sesame'))}`).unlocked === true);
   assert(gate.handle({ method: 'GET', path: '/unlock', ip: '1', body: '', headers: {} }).status === 404, 'unlock 只接受 POST');

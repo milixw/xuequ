@@ -23,9 +23,9 @@
 线上：
 
 ```
-nginx  /xue/            → /srv/web/xue/           公开静态文件（现状不变）
-       /xue/private/    → /srv/xue-private/        先问口令服务，凭证有效才放行（auth_request）
-       /xue/api/private/ → 127.0.0.1:<端口>         口令服务：解锁、校验、状态
+nginx  /xuequ/            → /srv/xuequ/web/xuequ/   公开静态文件（现状不变，mymili 的 pnpm deploy:xuequ 发布）
+       /xuequ/private/    → /srv/xuequ/private/      先问口令服务，凭证有效才放行（auth_request）
+       /xuequ/api/private/ → 127.0.0.1:6477            口令服务：解锁、校验、状态
 ```
 
 录音和课文由 nginx 直接提供：nginx 支持 Range 请求，iPhone Safari 播放、拖动进度条都靠它；口令服务只回答“这个请求能不能放行”，不传文件。
@@ -33,12 +33,12 @@ nginx  /xue/            → /srv/web/xue/           公开静态文件（现状�
 ## 口令与登录凭证
 
 - 口令只存在服务器环境变量 `PRIVATE_PASS` 里，不写进任何仓库。另有 `PRIVATE_SECRET`（随机长串）用来给凭证签名
-- `POST /xue/api/private/unlock`，请求体 `{ "pass": "…" }`：
-  - 口令对 → 返回 204，并设 cookie `xq_private=<到期时间>.<签名>`；签名 = HMAC-SHA256(`PRIVATE_SECRET` + 口令, 到期时间)。属性：`HttpOnly; Secure; SameSite=Strict; Path=/xue/; Max-Age=2592000`（30 天）
+- `POST /xuequ/api/private/unlock`，请求体 `{ "pass": "…" }`：
+  - 口令对 → 返回 204，并设 cookie `xq_private=<到期时间>.<签名>`；签名 = HMAC-SHA256(`PRIVATE_SECRET` + 口令, 到期时间)。属性：`HttpOnly; Secure; SameSite=Strict; Path=/xuequ/; Max-Age=2592000`（30 天）
   - 口令错 → 403；同一 IP 每分钟最多 5 次，超过返回 429（防暴力猜）
   - 只接受 HTTPS：nginx 转发时带 `X-Forwarded-Proto`，不是 `https` 一律拒绝
-- `GET /xue/api/private/check`：nginx `auth_request` 用，凭证签名对且没过期返回 204，否则 401
-- `GET /xue/api/private/status`：返回 `{ "unlocked": true|false }`，页面用来决定显示“🔑 课本资料”还是直接进入
+- `GET /xuequ/api/private/check`：nginx `auth_request` 用，凭证签名对且没过期返回 204，否则 401
+- `GET /xuequ/api/private/status`：返回 `{ "unlocked": true|false }`，页面用来决定显示“🔑 课本资料”还是直接进入
 - **改口令即作废所有人的凭证**（签名里含口令）；比对用 `crypto.timingSafeEqual`
 - 只用 Node 标准库，零依赖；systemd 单元和 nginx 配置写进 `docs/deploy.md`
 
@@ -84,7 +84,7 @@ Private.unit('english/g6s1/1', {
 
 - `.gitignore` 加 `private/`
 - 新测试：git 跟踪的文件里不能有 `private/` 下的路径；开源代码里不能出现 `PRIVATE_PASS` 的取值或任何 cookie 签名密钥
-- 公开打包 `scripts/build.sh` 不变（只打 `index.html`、`src/`、`vendor/`、`content/`），不会带上 `private/`；私有仓库自带打包脚本，产物上传到 `/srv/xue-private/`
+- 公开打包 `scripts/build.sh` 不变（只打 `index.html`、`src/`、`vendor/`、`content/`），不会带上 `private/`；私有仓库自带打包脚本，产物上传到 `/srv/xuequ/private/`
 - 约定文档里只写接口和格式，不写口令、不贴课文
 
 ## 版权说明
@@ -102,4 +102,4 @@ Private.unit('english/g6s1/1', {
 
 - 入口位置放首页“复习资料”区可以吗
 - 原文先只做 Reading，其他栏目只有录音，可以吗
-- 口令服务端口和 `/srv/xue-private/` 路径按服务器实际情况定
+- 口令服务端口和 `/srv/xuequ/private/` 路径按服务器实际情况定
