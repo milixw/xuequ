@@ -1115,3 +1115,23 @@ button.say-big { min-width: 72px; min-height: 72px; border-radius: 36px; font-si
 .pv-toggle { min-height: 36px; padding: 4px 12px; border: 1px solid var(--line); border-radius: 8px; background: var(--card); color: var(--primary); font-size: 13px; cursor: pointer; }
 .pv-text { margin-top: 8px; }
 .pv-text p { margin: 0 0 8px; color: var(--text); font-size: 15px; line-height: 1.75; }
+.pv-vols, .pv-views { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 12px; }
+.pv-vols a, .pv-views a { display: inline-flex; align-items: center; min-height: 36px; padding: 4px 14px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); color: var(--text); font-size: 14px; text-decoration: none; }
+.pv-vols a.on, .pv-views a.on { border-color: var(--primary); background: #eef3fb; color: var(--primary); font-weight: 600; }
+.card.pv-unit p { margin-top: 2px; font-size: 13px; }
+/* 听读：课本页竖排，底部固定播放栏；main 留出播放栏的高度 */
+.pv-book { padding-bottom: 180px; }
+.pv-page { margin: 0 auto 10px; max-width: 820px; scroll-margin-top: var(--pv-top, 72px); }
+.pv-page img { display: block; width: 100%; height: auto; border-radius: 4px; background: #fff; box-shadow: 0 1px 3px rgba(0, 0, 0, .12); }
+.pv-page figcaption { margin-top: 3px; color: var(--muted); font-size: 12px; text-align: center; }
+.pv-bar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; padding: 8px 12px calc(8px + env(safe-area-inset-bottom)); background: var(--card); border-top: 1px solid var(--line); box-shadow: 0 -2px 8px rgba(0, 0, 0, .08); }
+.pv-bar > * { max-width: 820px; margin-left: auto; margin-right: auto; }
+.pv-chips { display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px; -webkit-overflow-scrolling: touch; }
+.pv-chips button { flex: none; display: inline-flex; align-items: baseline; gap: 4px; min-height: 36px; padding: 4px 10px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); font-size: 13px; cursor: pointer; white-space: nowrap; }
+.pv-chips button small { color: var(--muted); font-size: 11px; }
+.pv-chips button.on { border-color: var(--primary); background: #eef3fb; color: var(--primary); font-weight: 600; }
+.pv-foot { display: flex; align-items: center; gap: 8px; margin-top: 6px; }
+.pv-now { flex: 1; min-width: 0; margin: 0; color: var(--muted); font-size: 12px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pv-bar audio { display: block; width: 100%; height: 40px; }
+.pv-foot .pv-rates { flex: none; gap: 4px; margin: 0; }
+.pv-foot .pv-rates button { padding: 4px 8px; }

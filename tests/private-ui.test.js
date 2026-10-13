@@ -61,6 +61,8 @@ test('私有课本资料：manifest 和单元文件的注册', () => {
     assert(PrivateUI.unitMeta('g6s1', '1').file === 'english/g6s1/U1.js', '单元号字符串和数字都能查');
     assert(PrivateUI.unitMeta('g6s1', 2) === null);
     assert(PrivateUI.unitMeta('g8s1', 1) === null);
+    assert(PrivateUI.pageRange([[12, 25]]) === '第 12～25 页');
+    assert(PrivateUI.pageRange([[-8, 11], [96, 153]]) === '封面～第 11 页、第 96～153 页', '附录含封面时的页码说明');
   } finally {
     globalThis.Private = saved;
   }

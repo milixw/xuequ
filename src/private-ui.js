@@ -170,6 +170,10 @@
   }
 
   // parts：#/textbook 之后的部分；ui：app.js 的 { page, showError, escapeHtml }
+  //   []                     → 跳到本学期那一册（首页右上角选的学期），没有就第一册
+  //   [册ID]                 → 本册单元目录，顶部切换册
+  //   [册ID, 单元号]          → 听读：整本课本页面 + 底部播放栏（册没有页面图片时用列表）
+  //   [册ID, 单元号, 'list'] → 列表：各栏目的录音和原文
   async function textbookPage(parts, ui) {
     const hash = location.hash;
     const s = await state();
@@ -184,30 +188,63 @@
       }
       return;
     }
-    if (parts.length >= 2) return unitPage(parts[0], parts[1], ui);
-    return indexPage(ui);
+    if (!parts.length) {
+      const id = defaultVolume();
+      if (!id) return ui.showError(ui.page('课本资料', '#/'), '资料清单是空的。');
+      location.replace('#/textbook/' + id);
+      return;
+    }
+    if (parts.length === 1) return indexPage(parts[0], ui);
+    const vol = volumeOf(parts[0]);
+    if (parts[2] === 'list' || !(vol && vol.book)) return unitPage(parts[0], parts[1], ui);
+    return readerPage(parts[0], parts[1], ui);
   }
 
-  function indexPage(ui) {
+  function volumeIds() {
+    return Object.keys((manifest && manifest.english) || {});
+  }
+  // 首页右上角选的学期（册 ID 和学期 ID 相同）；本学期没有资料就第一册
+  function defaultVolume() {
+    const ids = volumeIds();
+    let current = null;
+    try {
+      const sem = root.Content.semester(root.Accounts.grade.get(root.Accounts.current()));
+      current = sem && sem.id;
+    } catch {
+      current = null;
+    }
+    return ids.includes(current) ? current : ids[0] || null;
+  }
+
+  function pageRange(ranges) {
+    return ranges.map(([a, b]) => (a < 1 ? `封面～第 ${b} 页` : `第 ${a}～${b} 页`)).join('、');
+  }
+
+  function indexPage(volId, ui) {
     const esc = ui.escapeHtml;
+    const vol = volumeOf(volId);
     const main = ui.page('课本资料', '#/', '课本录音和课文原文，只供自己学习');
-    const vols = Object.entries((manifest && manifest.english) || {});
-    if (!vols.length) return ui.showError(main, '资料清单是空的。');
-    for (const [volId, vol] of vols) {
-      main.insertAdjacentHTML('beforeend', `<h3 class="group">英语 · ${esc(vol.title)}</h3>`);
-      for (const u of vol.units) {
-        main.insertAdjacentHTML('beforeend',
-          `<a class="card pv-unit" href="#/textbook/${esc(volId)}/${esc(String(u.no))}">` +
-          `<h2>${esc(unitLabel(u))}</h2></a>`);
-      }
+    if (!vol) return ui.showError(main, '没有这一册的资料。');
+    // 册切换：一册时也显示，让学生知道看的是哪一册
+    main.insertAdjacentHTML('beforeend', `<nav class="pv-vols" aria-label="选择课本">${volumeIds().map(id => {
+      const v = volumeOf(id);
+      return `<a href="#/textbook/${esc(id)}"${id === volId ? ' class="on" aria-current="page"' : ''}>英语${esc(v.short || v.title)}</a>`;
+    }).join('')}</nav>`);
+    for (const u of vol.units) {
+      main.insertAdjacentHTML('beforeend',
+        `<a class="card pv-unit" href="#/textbook/${esc(volId)}/${esc(String(u.no))}">` +
+        `<h2>${esc(unitLabel(u))}</h2>${u.pages ? `<p>课本${esc(pageRange(u.pages))}</p>` : ''}</a>`);
     }
   }
 
-  async function unitPage(volId, no, ui) {
-    const esc = ui.escapeHtml;
+  // 两个视图共用：标题、返回、视图切换
+  async function unitShell(volId, no, ui, view) {
     const meta = unitMeta(volId, no);
     const vol = volumeOf(volId);
-    if (!meta) return ui.showError(ui.page('课本资料', '#/textbook'), '找不到这个单元。');
+    if (!meta) {
+      ui.showError(ui.page('课本资料', '#/textbook'), '找不到这个单元。');
+      return null;
+    }
     const hash = location.hash;
     let unit = null;
     try {
@@ -215,19 +252,111 @@
     } catch {
       unit = null;
     }
-    if (location.hash !== hash) return;
-    const main = ui.page(unitLabel(meta), '#/textbook', `英语 ${vol.title} · 课本资料`);
-    if (!unit) return ui.showError(main, '这个单元的资料加载失败，请刷新重试。');
-    main.insertAdjacentHTML('beforeend', '<p class="notice">课本录音和原文只供自己学习，请勿外传。</p>');
+    if (location.hash !== hash) return null;
+    const main = ui.page(unitLabel(meta), `#/textbook/${volId}`, `英语${vol.short || vol.title} · 课本资料`);
+    if (!unit) {
+      ui.showError(main, '这个单元的资料加载失败，请刷新重试。');
+      return null;
+    }
+    const base = `#/textbook/${volId}/${meta.no}`;
+    if (vol.book) {
+      main.insertAdjacentHTML('beforeend', `<nav class="pv-views" aria-label="显示方式">` +
+        `<a href="${base}"${view === 'reader' ? ' class="on" aria-current="page"' : ''}>📖 看课本听录音</a>` +
+        `<a href="${base}/list"${view === 'list' ? ' class="on" aria-current="page"' : ''}>☰ 录音和原文</a></nav>`);
+    }
+    main.insertAdjacentHTML('beforeend', '<p class="notice">课本页面、录音和原文只供自己学习，请勿外传。</p>');
+    return { main, meta, vol, unit };
+  }
+
+  function rateButtons() {
+    return `<div class="pv-rates" role="group" aria-label="语速">${[0.75, 1, 1.25].map(r =>
+      `<button type="button" data-rate="${r}"${r === 1 ? ' class="on"' : ''}>${r} 倍</button>`).join('')}</div>`;
+  }
+  // 倍速按钮接到某个 <audio>；preload="none" 时有的浏览器播放后会把倍速重置成 1，开始播放时再设一次
+  function bindRates(box, audio) {
+    const btns = [...box.querySelectorAll('.pv-rates button')];
+    btns.forEach(btn => btn.addEventListener('click', () => {
+      audio.playbackRate = Number(btn.dataset.rate);
+      btns.forEach(b => b.classList.toggle('on', b === btn));
+    }));
+    audio.addEventListener('playing', () => {
+      const on = btns.find(b => b.classList.contains('on'));
+      if (on) audio.playbackRate = Number(on.dataset.rate);
+    });
+  }
+
+  // 听读：本单元的课本页从上往下排，图片滑到附近才加载；底部固定播放栏，点栏目跳到那一页并播放
+  async function readerPage(volId, no, ui) {
+    const shell = await unitShell(volId, no, ui, 'reader');
+    if (!shell) return;
+    const { main, meta, vol, unit } = shell;
+    const esc = ui.escapeHtml;
+    const { dir, offset, count } = vol.book;
+    const inBook = p => p + offset >= 1 && p + offset <= count;
+
+    // 页面：单元范围内的页，再加上范围外、但有栏目指向的页（比如总词表）
+    const pages = [];
+    for (const [a, b] of meta.pages || []) for (let p = a; p <= b; p++) if (inBook(p)) pages.push(p);
+    const extra = [...new Set(unit.sections.map(x => x.page).filter(p => p && inBook(p) && !pages.includes(p)))].sort((a, b) => a - b);
+
+    const book = document.createElement('div');
+    book.className = 'pv-book';
+    const figure = (p, label) => `<figure class="pv-page" id="pv-pg-${p}">` +
+      `<img src="${esc(BASE + dir)}/p${String(p + offset).padStart(3, '0')}.jpg" width="1241" height="1754" loading="lazy" decoding="async" alt="${esc(label)}">` +
+      `<figcaption>${esc(label)}</figcaption></figure>`;
+    const label = p => (p >= 1 ? `课本第 ${p} 页` : '封面和目录');
+    book.innerHTML = pages.map(p => figure(p, label(p))).join('') +
+      (extra.length ? `<h3 class="group">本单元在别处的页</h3>${extra.map(p => figure(p, label(p))).join('')}` : '');
+    main.appendChild(book);
+
+    // 底部播放栏：栏目按钮 + 一个共用的 <audio>
+    const playable = unit.sections.filter(x => x.audio || x.page);
+    const bar = document.createElement('div');
+    bar.className = 'pv-bar';
+    bar.innerHTML =
+      `<div class="pv-chips" role="group" aria-label="栏目">${playable.map((x, i) =>
+        `<button type="button" data-i="${i}">${esc(x.name)}${x.page ? `<small>p.${esc(String(x.page))}</small>` : ''}</button>`).join('')}</div>` +
+      `<audio controls preload="none"></audio>` +
+      `<div class="pv-foot"><p class="pv-now">点上面的栏目：翻到那一页并播放</p>${rateButtons()}</div>`;
+    main.appendChild(bar);
+    // 顶部标题栏是粘性定位，跳到某页时留出它的高度，页面上端才不会被挡住
+    const header = document.querySelector('header.bar');
+    if (header) book.style.setProperty('--pv-top', header.offsetHeight + 6 + 'px');
+    const audio = bar.querySelector('audio');
+    players.push(audio);
+    bindRates(bar, audio);
+    const now = bar.querySelector('.pv-now');
+    const chips = [...bar.querySelectorAll('.pv-chips button')];
+    chips.forEach(btn => btn.addEventListener('click', () => {
+      const sec = playable[Number(btn.dataset.i)];
+      chips.forEach(b => b.classList.toggle('on', b === btn));
+      btn.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+      const target = sec.page && book.querySelector(`#pv-pg-${sec.page}`);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (sec.audio) {
+        const src = BASE + sec.audio;
+        if (!audio.src.endsWith(src)) audio.src = src;
+        audio.play().catch(() => {});
+        now.textContent = `正在听：${sec.name}${sec.page ? `（课本第 ${sec.page} 页）` : ''}`;
+      } else {
+        audio.pause();
+        now.textContent = `${sec.name}：${sec.note || '这一栏没有录音'}`;
+      }
+    }));
+  }
+
+  async function unitPage(volId, no, ui) {
+    const shell = await unitShell(volId, no, ui, 'list');
+    if (!shell) return;
+    const { main, unit } = shell;
+    const esc = ui.escapeHtml;
     for (const sec of unit.sections) {
       const card = document.createElement('article');
       card.className = 'card pv-section';
       card.innerHTML =
         `<div class="pv-head"><h2>${esc(sec.name)}</h2>${sec.page ? `<small>课本第 ${esc(String(sec.page))} 页</small>` : ''}</div>` +
         (sec.note ? `<p class="pv-note">${esc(sec.note)}</p>` : '') +
-        (sec.audio ? `<audio controls preload="none" src="${esc(BASE + sec.audio)}"></audio>` +
-          `<div class="pv-rates" role="group" aria-label="语速">${[0.75, 1, 1.25].map(r =>
-            `<button type="button" data-rate="${r}"${r === 1 ? ' class="on"' : ''}>${r} 倍</button>`).join('')}</div>` : '') +
+        (sec.audio ? `<audio controls preload="none" src="${esc(BASE + sec.audio)}"></audio>${rateButtons()}` : '') +
         (sec.text && sec.text.length ? `<button type="button" class="pv-toggle">显示原文</button>` +
           `<div class="pv-text" lang="en" hidden>${sec.text.map(t => `<p>${esc(t)}</p>`).join('')}</div>` : '');
       main.appendChild(card);
@@ -237,15 +366,7 @@
         players.push(audio);
         // 同一时间只放一段
         audio.addEventListener('play', () => players.forEach(a => { if (a !== audio) a.pause(); }));
-        card.querySelectorAll('.pv-rates button').forEach(btn => btn.addEventListener('click', () => {
-          audio.playbackRate = Number(btn.dataset.rate);
-          card.querySelectorAll('.pv-rates button').forEach(b => b.classList.toggle('on', b === btn));
-        }));
-        // preload="none" 时有的浏览器播放后会把倍速重置成 1，开始播放时再设一次
-        audio.addEventListener('playing', () => {
-          const on = card.querySelector('.pv-rates .on');
-          if (on) audio.playbackRate = Number(on.dataset.rate);
-        });
+        bindRates(card, audio);
       }
       const toggle = card.querySelector('.pv-toggle');
       if (toggle) {
@@ -258,7 +379,7 @@
     }
   }
 
-  const PrivateUI = { homeTile, sectionLink, textbookPage, stop, state, unlock, unitMeta };
+  const PrivateUI = { homeTile, sectionLink, textbookPage, stop, state, unlock, unitMeta, pageRange };
   if (typeof module !== 'undefined') module.exports = PrivateUI;
   else root.PrivateUI = PrivateUI;
 })(typeof globalThis !== 'undefined' ? globalThis : this);
