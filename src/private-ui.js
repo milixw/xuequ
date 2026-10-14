@@ -214,9 +214,23 @@
   function volumeIds() {
     return Object.keys((manifest && manifest.english) || {});
   }
-  // 首页右上角选的学期（册 ID 和学期 ID 相同）；本学期没有资料就第一册
+  // 册的显示名：“沪教版 英语六上”；旧 manifest 没有 edition 时只写“英语六上”
+  function volumeName(vol) {
+    return `${vol.edition ? vol.edition + ' ' : ''}英语${vol.short || vol.title}`;
+  }
+  // 上次看的册（沪教版、人教精通版的册 ID 不同，记住了才不会每次都跳回首页学期那一册）
+  const LAST_KEY = 'xq.textbookVol.v1';
+  function lastVolume() {
+    try { return localStorage.getItem(LAST_KEY); } catch { return null; }
+  }
+  function rememberVolume(id) {
+    try { localStorage.setItem(LAST_KEY, id); } catch { /* 存不了就算了 */ }
+  }
+  // 上次看的册；没有就首页右上角选的学期（沪教版册 ID 和学期 ID 相同）；都没有资料就第一册
   function defaultVolume() {
     const ids = volumeIds();
+    const last = lastVolume();
+    if (last && ids.includes(last)) return last;
     let current = null;
     try {
       const sem = root.Content.semester(root.Accounts.grade.get(root.Accounts.current()));
@@ -234,13 +248,21 @@
   function indexPage(volId, ui) {
     const esc = ui.escapeHtml;
     const vol = volumeOf(volId);
-    const main = ui.page('课本资料', '#/', '课本录音和课文原文，只供自己学习');
+    const main = ui.page('课本资料', '#/', vol ? `${volumeName(vol)} · 课本录音和课文原文` : '课本录音和课文原文，只供自己学习');
     if (!vol) return ui.showError(main, '没有这一册的资料。');
-    // 册切换：一册时也显示，让学生知道看的是哪一册
-    main.insertAdjacentHTML('beforeend', `<nav class="pv-vols" aria-label="选择课本">${volumeIds().map(id => {
-      const v = volumeOf(id);
-      return `<a href="#/textbook/${esc(id)}"${id === volId ? ' class="on" aria-current="page"' : ''}>英语${esc(v.short || v.title)}</a>`;
-    }).join('')}</nav>`);
+    rememberVolume(volId);
+    // 册切换：按教材版本分行（沪教版、人教精通版），一册时也显示，让学生知道看的是哪一册
+    const groups = new Map();
+    for (const id of volumeIds()) {
+      const ed = volumeOf(id).edition || '';
+      if (!groups.has(ed)) groups.set(ed, []);
+      groups.get(ed).push(id);
+    }
+    main.insertAdjacentHTML('beforeend', `<nav class="pv-eds" aria-label="选择课本">${[...groups].map(([ed, ids]) =>
+      `<div class="pv-vols">${ed ? `<span class="pv-ed">${esc(ed)}</span>` : ''}${ids.map(id => {
+        const v = volumeOf(id);
+        return `<a href="#/textbook/${esc(id)}"${id === volId ? ' class="on" aria-current="page"' : ''}>${ed ? '' : '英语'}${esc(v.short || v.title)}</a>`;
+      }).join('')}</div>`).join('')}</nav>`);
     for (const u of vol.units) {
       main.insertAdjacentHTML('beforeend',
         `<a class="card pv-unit" href="#/textbook/${esc(volId)}/${esc(String(u.no))}">` +
@@ -264,7 +286,7 @@
       unit = null;
     }
     if (location.hash !== hash) return null;
-    const main = ui.page(unitLabel(meta), `#/textbook/${volId}`, `英语${vol.short || vol.title} · 课本资料`);
+    const main = ui.page(unitLabel(meta), `#/textbook/${volId}`, `${volumeName(vol)} · 课本资料`);
     if (!unit) {
       ui.showError(main, '这个单元的资料加载失败，请刷新重试。');
       return null;

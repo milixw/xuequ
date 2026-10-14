@@ -15,7 +15,7 @@
 | `#/english-plan` / `#/english-plan/<天数>` / `#/english-plan/<天数>/result` / `#/english-plan/<天数>/result/<记录ID>` | 英语七天计划、每日作答及按提交时间查看错题；屏幕显示订正答案和解析（旧记录按 ID 补取当前解析），A4 打印只保留原题和题号，不打印答案或解析；不改题目 ID 或原题文本 |
 | `#/english-plan/<天数>/retry/<记录ID>` | 独立重做该提交记录中的错题；按快照恢复原题及答案，草稿不影响每日练习；提交追加新时间点记录（含全对），原记录不变；新错题可继续重做，重做答对题的答案和解析只在屏幕展示、不打印 |
 | `#/words` / `#/words/<册ID>` / `#/words/<册ID>/<单元号>` | 英语单词：今日任务（到期复习 + 新词，一题一屏）/ 本册各单元掌握情况 / 单元词表（学这一单元、只练本单元）；首页“英语单词”入口进 `#/words`，中考词汇表从这里链出。设计见 `docs/superpowers/specs/2026-10-08-english-unit-structure.md` |
-| `#/textbook` / `#/textbook/<册ID>` / `#/textbook/<册ID>/<单元号>` / `…/<单元号>/list` | 私有课本资料（`src/private-ui.js`）：`#/textbook` 跳到首页右上角所选学期那一册（没有资料就第一册）；册页顶部切换册、列出单元和课本页码范围；单元默认“看课本听录音”——整本课本页面图片按单元竖排（滑到附近才加载，范围外的栏目页如总词表附在后面），底部固定播放栏，点栏目翻到那一页并播放；`/list` 是各栏目录音（0.75、1、1.25 倍速）和可显示隐藏的课文原文。资料在 `private/`（私有仓库，不入开源库）；本机能加载 `private/manifest.js` 就直接用，线上要先在首页“🔑 课本资料”输口令，凭证是口令服务发的 HttpOnly cookie `xq_private`（30 天，页面读不到，不占 localStorage）。英语小节页在已解锁且本单元有资料时顶部多一行链接。设计见 `docs/superpowers/specs/2026-10-13-private-textbook.md` |
+| `#/textbook` / `#/textbook/<册ID>` / `#/textbook/<册ID>/<单元号>` / `…/<单元号>/list` | 私有课本资料（`src/private-ui.js`）：`#/textbook` 跳到上次看的册，没有就首页右上角所选学期那一册（沪教版册 ID 同学期 ID；都没有就第一册）；册 ID 沪教版是 `g6s1` 这样，人教精通版加 `rj-` 前缀（`rj-g4s1`）；册页顶部按教材版本分行切换册、列出单元（人教精通版含 `r1`、`r2` 两个 Revision）和课本页码范围；单元默认“看课本听录音”——整本课本页面图片按单元竖排（滑到附近才加载，范围外的栏目页如总词表附在后面），底部固定播放栏，点栏目翻到那一页并播放；`/list` 是各栏目录音（0.75、1、1.25 倍速）和可显示隐藏的课文原文。资料在 `private/`（私有仓库，不入开源库）；本机能加载 `private/manifest.js` 就直接用，线上要先在首页“🔑 课本资料”输口令，凭证是口令服务发的 HttpOnly cookie `xq_private`（30 天，页面读不到，不占 localStorage）。英语小节页在已解锁且本单元有资料时顶部多一行链接。设计见 `docs/superpowers/specs/2026-10-13-private-textbook.md` |
 | `#/v/<册ID>` | 册：章节列表 + 本册的真题卷；英语册有词表时每个 Unit 多一行“单词 · 已掌握 n / 共 m” |
 | `#/s/<小节ID>` | 小节：知识点 + 题目列表 |
 | `#/q/<小节ID>/<题目ID>` | 做题 |
@@ -50,6 +50,7 @@
 | `xq.subject-papers.v1.<归属>` | localStorage | 上海语数物化 `{ [试卷ID]: { [题目ID]: { response, attempts, wrongCount, revealed, solved } } }`；通过 LearningStore 按账号/访客隔离，只累计单选题错误，主观题不标答对；查看答案不增加提交次数，切换账号后旧表单拒绝写入 |
 | `xq.history.v1.<账号>` | localStorage | 该账号的考试历史，退出登录也保留 |
 | `xq.grade.v1.<账号>` / `xq.grade.v1` | localStorage | 首页选的学期（登录 / 未登录），默认 `g6s1` |
+| `xq.textbookVol.v1` | localStorage | 课本资料上次看的册 ID（如 `g6s1`、`rj-g4s1`），`#/textbook` 优先跳到它；不分账号 |
 | `xq.exam.v1` | sessionStorage | 进行中的限时测试（含截止时间） |
 | `fg-solved.v2` | localStorage | 函数轨道通关记录（早于 `xq.` 约定，保持不动） |
 | `xq.solids.v1` | localStorage | 立体图形实验室：`{ done: [关卡ID], nets: [1-3 拼出的展开图标准形] }` |

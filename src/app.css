@@ -1144,6 +1144,10 @@ button.say-big { min-width: 72px; min-height: 72px; border-radius: 36px; font-si
 .pv-vols, .pv-views { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 12px; }
 .pv-vols a, .pv-views a { display: inline-flex; align-items: center; min-height: 36px; padding: 4px 14px; border: 1px solid var(--line); border-radius: 18px; background: var(--card); color: var(--text); font-size: 14px; text-decoration: none; }
 .pv-vols a.on, .pv-views a.on { border-color: var(--primary); background: #eef3fb; color: var(--primary); font-weight: 600; }
+/* 册切换按教材版本分行：行首是版本名（沪教版、人教精通版） */
+.pv-eds { margin: 0 0 12px; }
+.pv-eds .pv-vols { align-items: center; margin: 0 0 8px; }
+.pv-ed { min-width: 5em; color: var(--muted); font-size: 13px; }
 .card.pv-unit p { margin-top: 2px; font-size: 13px; }
 /* 听读：课本页竖排，底部固定播放栏；main 留出播放栏的高度 */
 .pv-book { padding-bottom: 180px; }
