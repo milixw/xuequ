@@ -9,8 +9,8 @@ if [ ! -f "${PID_FILE}" ]; then
 fi
 
 read -r PID PORT < "${PID_FILE}"
-# 只关闭确实是 http.server 的进程，避免 PID 被系统复用后误杀别的程序
-if kill -0 "${PID}" 2>/dev/null && ps -p "${PID}" -o command= | grep -q "http.server"; then
+# 只关闭确实是 start.sh 启动的服务器进程（serve.js 或 http.server），避免 PID 被系统复用后误杀别的程序
+if kill -0 "${PID}" 2>/dev/null && ps -p "${PID}" -o command= | grep -qE "serve\.js|http\.server"; then
   kill "${PID}"
   echo "服务器已关闭（PID ${PID}，端口 ${PORT}）"
 else

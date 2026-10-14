@@ -4,6 +4,7 @@
 // 用法：node serve.js          （默认 0.0.0.0:8080）
 //      PORT=9000 node serve.js
 //      HOST=127.0.0.1 node serve.js   （只监听本机，前面套 nginx 时用）
+//      ROOT=. node scripts/serve.js   （本机开发：scripts/start.sh 这样用，根目录是仓库）
 
 const http = require('http');
 const fs = require('fs');
@@ -12,7 +13,7 @@ const url = require('url');
 
 const PORT = Number(process.env.PORT) || 6476;
 const HOST = process.env.HOST || '0.0.0.0';
-const ROOT = path.resolve(__dirname);
+const ROOT = path.resolve(process.env.ROOT || __dirname);
 
 const MIME = {
   '.html': 'text/html; charset=utf-8',
@@ -22,7 +23,9 @@ const MIME = {
   '.svg': 'image/svg+xml',
   '.png': 'image/png',
   '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
   '.mp3': 'audio/mpeg',
+  '.m4a': 'audio/mp4',
   '.mp4': 'video/mp4',
   '.woff2': 'font/woff2',
   '.woff': 'font/woff',
@@ -36,6 +39,31 @@ function cacheControl(pathname) {
   if (pathname.startsWith('/vendor/')) return 'public, max-age=31536000, immutable';
   if (pathname === '/' || pathname.endsWith('.html')) return 'no-cache';
   return 'public, max-age=300, must-revalidate';
+}
+
+// 私有课本资料（仓库下的 private/，本机开发时才有）只放出运行要用的部分；
+// README（含口令）、.git、texts/、scripts/、dist/ 都不对局域网开放
+// macOS 文件系统不分大小写，/PRIVATE/README.md 也能读到，所以先转小写再比
+function privateAllowed(pathname) {
+  pathname = path.posix.normalize(pathname).toLowerCase();
+  if (!pathname.startsWith('/private/')) return true;
+  return pathname === '/private/manifest.js' || pathname.startsWith('/private/english/');
+}
+
+// 只支持单段 Range（bytes=a-b、bytes=a-、bytes=-n）；iOS Safari 播放音视频必须有 206，否则放不出来
+function parseRange(header, size) {
+  const m = /^bytes=(\d*)-(\d*)$/.exec(header || '');
+  if (!m || (m[1] === '' && m[2] === '')) return null;
+  let start, end;
+  if (m[1] === '') {
+    start = Math.max(0, size - Number(m[2]));
+    end = size - 1;
+  } else {
+    start = Number(m[1]);
+    end = m[2] === '' ? size - 1 : Math.min(Number(m[2]), size - 1);
+  }
+  if (start > end || start >= size) return 'invalid';
+  return { start, end };
 }
 
 function send(res, status, body, headers = {}) {
@@ -65,7 +93,7 @@ const server = http.createServer((req, res) => {
 
   const filePath = path.join(ROOT, pathname === '/' ? 'index.html' : pathname);
   // 防目录穿越：解析后必须仍在 ROOT 之内
-  if (filePath !== ROOT && !filePath.startsWith(ROOT + path.sep)) {
+  if ((filePath !== ROOT && !filePath.startsWith(ROOT + path.sep)) || !privateAllowed(pathname)) {
     send(res, 403, '禁止访问', { 'Content-Type': MIME['.txt'] });
     return done(403);
   }
@@ -82,6 +110,7 @@ const server = http.createServer((req, res) => {
       'Cache-Control': cacheControl(pathname),
       'Last-Modified': stat.mtime.toUTCString(),
       ETag: etag,
+      'Accept-Ranges': 'bytes',
       'X-Content-Type-Options': 'nosniff',
     };
 
@@ -91,17 +120,34 @@ const server = http.createServer((req, res) => {
       return done(304);
     }
 
-    headers['Content-Length'] = stat.size;
-    res.writeHead(200, headers);
+    // If-Range 对不上（文件已经变了）就整份重发
+    const ifRange = req.headers['if-range'];
+    const range = !ifRange || ifRange === etag ? parseRange(req.headers.range, stat.size) : null;
+    if (range === 'invalid') {
+      res.writeHead(416, { ...headers, 'Content-Range': `bytes */${stat.size}`, 'Content-Length': 0 });
+      res.end();
+      return done(416);
+    }
+    let status = 200;
+    let streamOpts;
+    if (range) {
+      status = 206;
+      streamOpts = range;
+      headers['Content-Range'] = `bytes ${range.start}-${range.end}/${stat.size}`;
+      headers['Content-Length'] = range.end - range.start + 1;
+    } else {
+      headers['Content-Length'] = stat.size;
+    }
+    res.writeHead(status, headers);
     if (req.method === 'HEAD') {
       res.end();
-      return done(200);
+      return done(status);
     }
 
-    const stream = fs.createReadStream(filePath);
+    const stream = fs.createReadStream(filePath, streamOpts);
     stream.on('error', () => res.destroy());
     stream.pipe(res);
-    res.on('finish', () => done(200));
+    res.on('finish', () => done(status));
   });
 });
 
