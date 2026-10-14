@@ -232,6 +232,15 @@ sudo certbot --nginx -d xue.你的域名 -d 其他.你的域名    # 同一台�
 
 **平时只要在 mymili 仓库跑 `pnpm deploy:xuequ`**：发完公开部分会接着跑 `private/scripts/setup-server.sh`，把下面 1～3 步全部做完并检查（可重复运行）；口令取 mymili `.deploy.env` 的 `XUEQU_PRIVATE_PASS`，不写进本仓库。下面是这些脚本具体做了什么，手工排查时参考。
 
+### 发布流程（在哪个项目的会话里操作都按这个来）
+
+只有维护者本机能发布：要有同级目录 `../mymili`（米粒论期仓库，没有远程，只在本机提交）、它的 `.deploy.env`（服务器登录和口令，不入库），以及 `private/`。在本仓库的会话里也能发，不用切到 mymili：
+
+1. 改动在本仓库提交、推送（`node tests/run.js` 全绿）；改了私有资料，`private/` 里也提交、推送。包的版本名取 HEAD 提交号，工作区不干净会提醒
+2. 发布：`pnpm -C ../mymili deploy:xuequ`（另有 `--list`、`--rollback`、`--private`，见 mymili `docs/deploy-aliyun.md` §8）。Claude Code 自动模式会拦这条命令，请维护者在输入框里用 `! pnpm -C ../mymili deploy:xuequ` 自己跑
+3. **记服务器操作记录**：每次写服务器（发布、回滚、改 nginx、装软件……）都在 mymili 的 `docs/server-log.md` 最上面加一条（目的、改动、备份、验证、回退、相关提交，格式照那个文件开头），服务器现状变了同步改 mymili `docs/deploy-aliyun.md` §8，然后在 mymili 仓库提交（只提交这两个文档，不要带上它的其他改动）
+4. 线上验证：手机或浏览器打开 `https://www.mymili.com.cn/xuequ/` 看改动；动了私有资料还要试一次解锁和播放录音
+
 HTTP 站点不配：页面查不到口令服务，就不显示“🔑 课本资料”入口；凭证 cookie 带 `Secure`，HTTP 下浏览器也不会发送。
 
 ### 1. 口令服务（systemd）
