@@ -216,6 +216,31 @@
     { name: '立体图形', tag: '展开图 · 截面', when: '不限年级', icon: '◆', color: '#2f6fd6', href: 'src/games/solids/index.html' },
   ];
 
+  // 首页“复习资料”：都是独立的离线参考页。icon 是一两个字的图标，颜色按学科
+  const NOTE_GROUPS = [
+    { subject: '语文', color: '#c0513a', items: [
+      { icon: '纲', title: '语文考纲', desc: '考试范围、考点清单与复习方向', href: 'content/chinese/shanghai-junior-outline.html' },
+      { icon: '词', title: '文言实词虚词', desc: '180 个文言实词的词义和例句', href: 'content/chinese/classical-words.html' },
+      { icon: '注', title: '古诗文联动注释', desc: '61 篇古诗文，点词查释义', href: 'content/chinese/上海中考古诗文·虚实词联动注释版.html' },
+      { icon: '诗', title: '古诗文阅读应考手册', desc: '考点、解题方法和答题要点', href: 'content/chinese/上海中考古诗文阅读应考手册.html' },
+      { icon: '文', title: '现代文阅读应考手册', desc: '题型、分析方法和答题技巧', href: 'content/chinese/上海中考现代文阅读应考手册.html' },
+    ] },
+    { subject: '英语', color: '#2f6fd6', items: [
+      { icon: 'Aa', title: '英语学习大纲', desc: '上海初中英语知识点梳理', href: 'content/english/shanghai-junior-outline.html' },
+    ] },
+  ];
+
+  // 列表行：左边图标、中间标题和一行说明、右边箭头
+  function noteRow(entry) {
+    const link = document.createElement('a');
+    link.className = 'note-row';
+    link.href = entry.href;
+    link.innerHTML = `<span class="icon">${escapeHtml(entry.icon)}</span>` +
+      `<span class="text"><b>${escapeHtml(entry.title)}</b><small>${escapeHtml(entry.desc)}</small></span>` +
+      `<i class="go" aria-hidden="true">›</i>`;
+    return link;
+  }
+
   // 首页课本卡片只写学科、册名和进度；教材版本在册页面的副标题里
   function appendVolumeCard(main, v) {
     const metas = Content.sectionMetas().filter(s => s.volumeId === v.id);
@@ -252,7 +277,7 @@
   }
 
   // ---------- 首页 ----------
-  // 从上到下：本学期课本 → 练习（试卷、英语单词和试题库）→ 复习资料（英语大纲、语文资料）→ 中考真题（按学科一排）→ 趣味玩法
+  // 从上到下：本学期课本（已解锁时带本册课本录音）→ 练习（试卷、英语单词和试题库）→ 复习资料（按学科分组，含课本资料总入口）→ 中考真题（按学科一排）→ 趣味玩法
   function home() {
     const main = page('学趣闯关', null, '跟着课本学，一节一关');
     const header = app.querySelector('header.bar');
@@ -294,20 +319,24 @@
       { title: '英语试题库', desc: '按知识点和题型练错题', href: '#/english-bank' },
     ]);
 
-    // 复习资料：独立的离线参考页，同样两列小格
+    // 复习资料：按学科分组的列表行，组内按 考纲 → 积累 → 应考 排；🔑 课本资料总入口在英语组末尾
     const notes = homeSection(main, '复习资料');
-    const notesGrid = document.createElement('div');
-    notesGrid.className = 'home-grid';
-    notes.appendChild(notesGrid);
-    appendHomeTiles(notesGrid, [
-      { title: '英语学习大纲', desc: '上海初中英语知识点梳理', href: 'content/english/shanghai-junior-outline.html' },
-      { title: '语文考纲', desc: '考试范围、考点清单与复习方向', href: 'content/chinese/shanghai-junior-outline.html' },
-      { title: '语文实词虚词', desc: '180 个文言实词的词义和例句', href: 'content/chinese/classical-words.html' },
-      { title: '古诗文联动注释', desc: '61 篇古诗文，点词查释义', href: 'content/chinese/上海中考古诗文·虚实词联动注释版.html' },
-      { title: '古诗文阅读应考手册', desc: '考点、解题方法和答题要点', href: 'content/chinese/上海中考古诗文阅读应考手册.html' },
-      { title: '现代文阅读应考手册', desc: '题型、分析方法和答题技巧', href: 'content/chinese/上海中考现代文阅读应考手册.html' },
-    ]);
-    PrivateUI.homeTile(notesGrid); // 有私有课本资料（或可输口令解锁）时才出现
+    const noteLists = {};
+    for (const group of NOTE_GROUPS) {
+      notes.insertAdjacentHTML('beforeend', `<h4 class="note-subject">${escapeHtml(group.subject)}</h4>`);
+      const list = document.createElement('div');
+      list.className = 'note-list';
+      list.style.setProperty('--subject', group.color);
+      group.items.forEach(entry => list.appendChild(noteRow(entry)));
+      notes.appendChild(list);
+      noteLists[group.subject] = list;
+    }
+    // 有私有课本资料（或可输口令解锁）时才出现；已解锁时本学期课本区也加一行本册直达
+    PrivateUI.homeLinks(noteLists['英语'], books, semester && semester.id, entry => {
+      const row = noteRow(entry);
+      row.classList.add('pv-row');
+      return row;
+    });
 
     // 中考真题：五个学科排成一排，进去再按年份选；英语先选上海或江苏
     const shanghai = homeSection(main, '中考真题', '上海历年原题，英语另有江苏');

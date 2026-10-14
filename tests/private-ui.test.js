@@ -41,7 +41,11 @@ test('私有课本资料：页面接线（入口、路由、换页停止、小�
   const html = read('index.html');
   assert(html.indexOf('src/private-ui.js') > 0 && html.indexOf('src/private-ui.js') < html.indexOf('src/app.js'), 'private-ui.js 应在 app.js 之前加载');
   const app = read('src/app.js');
-  assert(app.includes('PrivateUI.homeTile(notesGrid)'), '首页复习资料区缺少入口');
+  assert(app.includes("PrivateUI.homeLinks(noteLists['英语'], books,"), '首页复习资料英语组缺少总入口（本学期课本区的本册直达也靠它）');
+  const homeLinks = read('src/private-ui.js').slice(read('src/private-ui.js').indexOf('function homeLinks('), read('src/private-ui.js').indexOf('// ---------- 英语小节页'));
+  assert(homeLinks.includes("if (s === 'none') return;"), '没有私有资料时首页不应出现入口');
+  assert(homeLinks.includes('openUnlock('), '未解锁时点总入口要先输口令');
+  assert(homeLinks.includes("s === 'unlocked' && booksBox.isConnected && volumeOf(volId)"), '本册直达只在已解锁且本册有资料时出现');
   assert(app.includes("if (parts[0] === 'textbook') return PrivateUI.textbookPage("), '缺少 #/textbook 路由');
   assert(app.includes('PrivateUI.stop();'), '换页时应停止录音');
   assert(app.includes('PrivateUI.sectionLink(main, meta)'), '英语小节页缺少录音链接');

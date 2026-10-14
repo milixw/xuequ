@@ -26,11 +26,14 @@ test('首页按课本、练习、中考真题、趣味玩法分区，不另设�
 
 test('首页有英语学习大纲、单词和试题库三个入口，单词入口进每日任务', () => {
   const home = app.slice(app.indexOf('function home()'), app.indexOf('// ---------- 册 ----------'));
-  const outlineIndex = home.indexOf("title: '英语学习大纲'");
+  // 英语学习大纲在复习资料的 NOTE_GROUPS 里（定义在 home() 外面）
+  const notes = app.slice(app.indexOf('const NOTE_GROUPS'), app.indexOf('function noteRow('));
+  assert(home.includes('NOTE_GROUPS'), '首页复习资料应按 NOTE_GROUPS 分组显示');
+  const outlineIndex = notes.indexOf("title: '英语学习大纲'");
   const vocabIndex = home.indexOf("title: '英语单词'");
   const bankIndex = home.indexOf("title: '英语试题库'");
   assert(outlineIndex >= 0 && vocabIndex >= 0 && bankIndex > vocabIndex);
-  assert(home.includes("href: 'content/english/shanghai-junior-outline.html'"));
+  assert(notes.includes("href: 'content/english/shanghai-junior-outline.html'"));
   assert(home.includes("href: '#/words'"), '首页英语单词入口应进每日单词任务');
   const wordsUi = fs.readFileSync(path.join(root, 'src', 'words-ui.js'), 'utf8');
   assert(wordsUi.includes("'content/english/shanghai-exam-vocabulary.html'"), '中考词汇表要从单词页链出去');

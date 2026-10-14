@@ -1,6 +1,6 @@
 'use strict';
 
-// 私有课本资料（课文原文与录音）：首页“🔑 课本资料”入口、口令框、#/textbook 页面、英语小节页的“听课本录音”链接。
+// 私有课本资料（课文原文与录音）：首页“🔑 课本资料”入口和本学期一册的直达链接、口令框、#/textbook 页面、英语小节页的“听课本录音”链接。
 // 资料在私有仓库（克隆到 private/，不入开源库），线上由 nginx 凭口令服务（scripts/private-gate.js）的凭证放行。
 // 本机直接打开时 private/manifest.js 能加载就直接可用，不问口令。
 // 设计文档：docs/superpowers/specs/2026-10-13-private-textbook.md
@@ -130,20 +130,31 @@
   }
 
   // ---------- 首页入口：资料可用或可解锁时才出现 ----------
-  function homeTile(grid) {
+  // notesList：复习资料英语组，放总入口（未解锁时点了先输口令）
+  // booksBox：本学期课本区，已解锁且这一册有资料时加一行直达链接
+  // makeRow(entry)：app.js 的列表行，entry 是 { icon, title, desc, href }
+  function homeLinks(notesList, booksBox, volId, makeRow) {
     state().then(s => {
-      if (s === 'none' || !grid.isConnected) return;
-      const link = document.createElement('a');
-      link.className = 'home-tile';
-      link.href = '#/textbook';
-      link.innerHTML = `<b>🔑 课本资料</b><small>${s === 'locked' ? '输入口令后听课本录音' : '课本录音和课文原文'}</small>`;
-      if (s === 'locked') {
-        link.addEventListener('click', e => {
-          e.preventDefault();
-          openUnlock(() => { location.hash = '#/textbook'; });
+      if (s === 'none') return;
+      if (notesList.isConnected) {
+        const link = makeRow({
+          icon: '🔑', title: '课本资料', href: '#/textbook',
+          desc: s === 'locked' ? '输入口令后听课本录音' : '各册课本录音和课文原文',
         });
+        if (s === 'locked') {
+          link.addEventListener('click', e => {
+            e.preventDefault();
+            openUnlock(() => { location.hash = '#/textbook'; });
+          });
+        }
+        notesList.appendChild(link);
       }
-      grid.appendChild(link);
+      if (s === 'unlocked' && booksBox.isConnected && volumeOf(volId)) {
+        booksBox.appendChild(makeRow({
+          icon: '🎧', title: '本册课本录音', href: '#/textbook/' + encodeURIComponent(volId),
+          desc: '看课本、听录音、看课文原文',
+        }));
+      }
     });
   }
 
@@ -379,7 +390,7 @@
     }
   }
 
-  const PrivateUI = { homeTile, sectionLink, textbookPage, stop, state, unlock, unitMeta, pageRange };
+  const PrivateUI = { homeLinks, sectionLink, textbookPage, stop, state, unlock, unitMeta, pageRange };
   if (typeof module !== 'undefined') module.exports = PrivateUI;
   else root.PrivateUI = PrivateUI;
 })(typeof globalThis !== 'undefined' ? globalThis : this);
