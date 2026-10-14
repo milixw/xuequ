@@ -23,7 +23,7 @@
 线上：
 
 ```
-nginx  /xuequ/            → /srv/xuequ/web/xuequ/   公开静态文件（现状不变，mymili 的 pnpm deploy:xuequ 发布）
+nginx  /xuequ/            → /srv/xuequ/web/xuequ/   公开静态文件（现状不变，由发布脚本发布）
        /xuequ/private/    → /srv/xuequ/private/      先问口令服务，凭证有效才放行（auth_request）
        /xuequ/api/private/ → 127.0.0.1:6477            口令服务：解锁、校验、状态
 ```

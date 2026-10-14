@@ -37,6 +37,20 @@ test('私有课本资料：开源代码里不写口令', () => {
   }
 });
 
+// 线上站点的域名、发布仓库名等不能进开源仓库；词表在私有仓库里（private/public-blocklist.txt），没有 private/ 时跳过
+test('私有课本资料：开源仓库里不出现线上站点信息', () => {
+  const list = path.join(root, 'private', 'public-blocklist.txt');
+  if (!fs.existsSync(list)) return;
+  let hits = '';
+  try {
+    hits = execFileSync('git', ['grep', '-n', '-i', '-F', '-f', list, '--', '.'], { cwd: root, encoding: 'utf8' });
+  } catch (e) {
+    if (e.status === 1) return; // 没有匹配
+    throw e;
+  }
+  assert(false, `开源仓库里出现了线上站点信息（词表见 private/public-blocklist.txt，说明见 private/DEPLOY.md）：\n      ${hits.trim().split('\n').slice(0, 10).join('\n      ')}`);
+});
+
 test('私有课本资料：页面接线（入口、路由、换页停止、小节链接）', () => {
   const html = read('index.html');
   assert(html.indexOf('src/private-ui.js') > 0 && html.indexOf('src/private-ui.js') < html.indexOf('src/app.js'), 'private-ui.js 应在 app.js 之前加载');

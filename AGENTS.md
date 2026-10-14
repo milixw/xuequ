@@ -39,7 +39,7 @@ Claude Code（`.claude/settings.json`）、Cursor（`.cursorignore`）、Gemini 
 | 趣味玩法、动手玩游戏 | `src/games/AGENTS.md`、`docs/games-backlog.md` |
 | 改测试 | `tests/AGENTS.md` |
 | 限时测试、账号 | `docs/exam.md`、`docs/storage-and-routes.md` |
-| 部署、打包、发布上线 | `docs/deploy.md`（线上发布走 mymili 仓库的 `pnpm -C ../mymili deploy:xuequ`，流程和服务器操作记录见第八节“发布流程”） |
+| 部署、打包、发布上线 | `docs/deploy.md`；维护者的线上发布流程在私有仓库的 `DEPLOY.md`（本机 `private/` 里，开源仓库不写线上站点信息） |
 | 改这些约定文档本身 | 本文件的“维护约定文档” |
 
 ## 全局硬规则
