@@ -1,17 +1,21 @@
 'use strict';
 
-// 私有课本资料的口令服务：核对口令、发 30 天登录凭证、给 nginx auth_request 回答“能不能放行”。
+// 私有课本资料的口令服务：核对口令或分享链接、发 30 天登录凭证、给 nginx auth_request 回答“能不能放行”。
 // 只用 Node 标准库。不传文件，录音和课文由 nginx 直接提供。
 // 设计文档：docs/superpowers/specs/2026-10-13-private-textbook.md
 //
 // 用法（只监听本机，前面由 nginx 转发）：
 //   PRIVATE_PASS=这里写口令 PRIVATE_SECRET=随机长串 node private-gate.js
 //   可选：PORT（默认 6477）、HOST（默认 127.0.0.1）、PRIVATE_COOKIE_PATH（默认 /xuequ/）
+// 生成分享链接（同样的环境变量，参数是站点首页地址）：
+//   node private-gate.js share https://<域名>/xuequ/
 //
 // 接口（nginx 把 /xuequ/api/private/ 转发过来，路径按结尾匹配）：
 //   POST …/unlock  {"pass":"…"}  对 → 204 + cookie；错 → 403；太频繁 → 429；不是 https → 403
 //   GET  …/check                 凭证有效 → 204，否则 401（nginx auth_request 用）
 //   GET  …/status                {"unlocked":true|false}
+//   GET  …/open/<分享码>          分享链接：码对 → 302 到课本资料页 + cookie；码错或不是 https → 302 过去但不发凭证
+//                                 分享码由 PRIVATE_SECRET 和口令算出，改口令后旧链接作废
 
 const crypto = require('crypto');
 
@@ -44,6 +48,10 @@ function createGate({ pass, secret, cookiePath = '/xuequ/', now = Date.now }) {
     return same(m[2], sign(m[1]));
   }
 
+  // 分享码：128 位以上，猜不中，不必限流
+  const shareCode = () => crypto.createHmac('sha256', key).update(COOKIE + ':share').digest('base64url').slice(0, 24);
+  const shareLink = base => base.replace(/\/?$/, '/') + 'api/private/open/' + shareCode();
+
   function readCookie(header) {
     for (const part of String(header || '').split(';')) {
       const i = part.indexOf('=');
@@ -64,6 +72,7 @@ function createGate({ pass, secret, cookiePath = '/xuequ/', now = Date.now }) {
     return list.length > LIMIT;
   }
 
+  const cookieHeader = () => `${COOKIE}=${makeToken()}; Path=${cookiePath}; Max-Age=${TTL}; HttpOnly; Secure; SameSite=Strict`;
   const reply = (status, body, headers = {}) => ({
     status,
     headers: { 'Cache-Control': 'no-store', ...(body ? { 'Content-Type': 'application/json; charset=utf-8' } : {}), ...headers },
@@ -75,6 +84,11 @@ function createGate({ pass, secret, cookiePath = '/xuequ/', now = Date.now }) {
     const unlocked = () => verifyToken(readCookie(req.headers.cookie));
     if (req.path.endsWith('/check') && req.method === 'GET') return reply(unlocked() ? 204 : 401);
     if (req.path.endsWith('/status') && req.method === 'GET') return reply(200, { unlocked: unlocked() });
+    const open = /\/open\/([^/]*)$/.exec(req.path);
+    if (open && req.method === 'GET') {
+      const ok = req.headers['x-forwarded-proto'] === 'https' && same(open[1], shareCode());
+      return reply(302, null, { Location: cookiePath + '#/textbook', ...(ok ? { 'Set-Cookie': cookieHeader() } : {}) });
+    }
     if (req.path.endsWith('/unlock') && req.method === 'POST') {
       if (req.headers['x-forwarded-proto'] !== 'https') return reply(403, { error: 'https' });
       if (tooMany(req.ip)) return reply(429, { error: 'busy' });
@@ -85,22 +99,17 @@ function createGate({ pass, secret, cookiePath = '/xuequ/', now = Date.now }) {
         return reply(400, { error: 'bad' });
       }
       if (typeof given !== 'string' || !same(given, pass)) return reply(403, { error: 'pass' });
-      const cookie = `${COOKIE}=${makeToken()}; Path=${cookiePath}; Max-Age=${TTL}; HttpOnly; Secure; SameSite=Strict`;
-      return reply(204, null, { 'Set-Cookie': cookie });
+      return reply(204, null, { 'Set-Cookie': cookieHeader() });
     }
     return reply(404, { error: 'none' });
   }
 
-  return { handle, makeToken, verifyToken };
+  return { handle, makeToken, verifyToken, shareLink };
 }
 
-function serve() {
-  const http = require('http');
-  const PORT = Number(process.env.PORT) || 6477;
-  const HOST = process.env.HOST || '127.0.0.1';
-  let gate;
+function gateFromEnv() {
   try {
-    gate = createGate({
+    return createGate({
       pass: process.env.PRIVATE_PASS,
       secret: process.env.PRIVATE_SECRET,
       cookiePath: process.env.PRIVATE_COOKIE_PATH || '/xuequ/',
@@ -109,6 +118,13 @@ function serve() {
     console.error(e.message);
     process.exit(1);
   }
+}
+
+function serve() {
+  const http = require('http');
+  const PORT = Number(process.env.PORT) || 6477;
+  const HOST = process.env.HOST || '127.0.0.1';
+  const gate = gateFromEnv();
   if (process.env.PRIVATE_SECRET.length < 32) console.warn('提醒：PRIVATE_SECRET 建议至少 32 个字符');
 
   const server = http.createServer((req, res) => {
@@ -129,13 +145,22 @@ function serve() {
       });
       res.writeHead(r.status, { ...r.headers, 'Content-Length': Buffer.byteLength(r.body) });
       res.end(r.body);
-      // 日志不记口令和 cookie
-      if (!req.url.endsWith('/check')) console.log(`${new Date().toISOString()} ${req.method} ${req.url} ${r.status}`);
+      // 日志不记口令、cookie 和分享码
+      const url = req.url.replace(/\/open\/[^/?]*/, '/open/***');
+      if (!req.url.endsWith('/check')) console.log(`${new Date().toISOString()} ${req.method} ${url} ${r.status}`);
     });
   });
   server.listen(PORT, HOST, () => console.log(`口令服务已启动：http://${HOST}:${PORT}`));
   for (const sig of ['SIGTERM', 'SIGINT']) process.on(sig, () => server.close(() => process.exit(0)));
 }
 
-if (require.main === module) serve();
+if (require.main === module) {
+  if (process.argv[2] === 'share') {
+    if (!/^https:\/\//.test(process.argv[3] || '')) {
+      console.error('用法：node private-gate.js share https://<域名>/xuequ/');
+      process.exit(1);
+    }
+    console.log(gateFromEnv().shareLink(process.argv[3]));
+  } else serve();
+}
 else module.exports = { createGate, COOKIE, TTL, LIMIT };

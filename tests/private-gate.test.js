@@ -69,3 +69,23 @@ test('口令服务：status 接口、未知路径、缺配置', () => {
   assert(gate.handle({ method: 'GET', path: '/x', ip: '1', body: '', headers: {} }).headers['Cache-Control'] === 'no-store');
   assert.throws(() => createGate({ pass: '', secret: 'x' }), '缺口令应报错');
 });
+
+test('口令服务：分享链接打开后发凭证并跳到课本资料页', () => {
+  const { gate, check, tokenOf } = setup();
+  const link = gate.shareLink('https://example.com/xuequ');
+  const m = /^https:\/\/example\.com\/xuequ\/api\/private\/open\/([A-Za-z0-9_-]{24})$/.exec(link);
+  assert(m, '分享链接格式不对：' + link);
+  assert(gate.shareLink('https://example.com/xuequ/') === link, '结尾斜杠可有可无');
+  const open = (code, proto = 'https') => gate.handle({
+    method: 'GET', path: '/xuequ/api/private/open/' + code, ip: '1.1.1.1', body: '', headers: { 'x-forwarded-proto': proto },
+  });
+  const r = open(m[1]);
+  assert(r.status === 302 && r.headers.Location === '/xuequ/#/textbook', '应跳到课本资料页');
+  assert(r.headers['Set-Cookie'].includes('HttpOnly'));
+  assert(check(`${COOKIE}=${tokenOf(r)}`).status === 204, '分享链接发的凭证应放行');
+  for (const bad of [open('x' + m[1].slice(1)), open(''), open(m[1], 'http')]) {
+    assert(bad.status === 302 && !bad.headers['Set-Cookie'], '码错或非 https 只跳转、不发凭证');
+  }
+  const other = createGate({ pass: 'new-pass', secret: 's'.repeat(40) });
+  assert(other.shareLink('https://example.com/xuequ/') !== link, '改口令后分享链接作废');
+});

@@ -275,6 +275,13 @@ sudo journalctl -u xuequ-gate -n 20
 - 发布新版本后，`private-gate.js` 改过时要 `sudo systemctl restart xuequ-gate`（软链已指向新版本）
 - **改口令**：改 `/etc/xuequ-gate.env` 里的 `PRIVATE_PASS` 再重启，所有人的旧凭证立刻失效，要重新输入
 - 凭证有效期 30 天；同一 IP 每分钟最多试 5 次口令
+- **分享链接**（推荐的发放方式，学生点开就解锁并进入课本资料页，不用输口令）：在服务器上生成，链接里的分享码由 `PRIVATE_SECRET` 和口令算出，改口令后旧链接作废
+
+```bash
+sudo bash -c 'set -a; . /etc/xuequ-gate.env; /usr/local/bin/node /srv/xuequ/web/xuequ/private-gate.js share https://<域名>/xuequ/'
+```
+
+  输出形如 `https://<域名>/xuequ/api/private/open/<分享码>`；走的是现有的 `/xuequ/api/private/` 转发，nginx 不用改
 
 ### 2. 私有文件
 

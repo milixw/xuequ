@@ -39,6 +39,7 @@ nginx  /xuequ/            → /srv/xuequ/web/xuequ/   公开静态文件（现�
   - 只接受 HTTPS：nginx 转发时带 `X-Forwarded-Proto`，不是 `https` 一律拒绝
 - `GET /xuequ/api/private/check`：nginx `auth_request` 用，凭证签名对且没过期返回 204，否则 401
 - `GET /xuequ/api/private/status`：返回 `{ "unlocked": true|false }`，页面用来决定显示“🔑 课本资料”还是直接进入
+- `GET /xuequ/api/private/open/<分享码>`（2026-10-15 加，口令不好推广）：分享链接。码对且是 HTTPS → 302 到 `/xuequ/#/textbook` 并发同样的 30 天凭证；码错 → 照样跳过去但不发凭证（页面显示未解锁）。分享码 = HMAC-SHA256(`PRIVATE_SECRET` + 口令, `xq_private:share`) 的 base64url 前 24 位（144 位，猜不中，不限流，避免同一学校出口 IP 的学生被误拦）；改口令即作废。服务器上 `node private-gate.js share https://<域名>/xuequ/` 生成；日志里分享码打码
 - **改口令即作废所有人的凭证**（签名里含口令）；比对用 `crypto.timingSafeEqual`
 - 只用 Node 标准库，零依赖；systemd 单元和 nginx 配置写进 `docs/deploy.md`
 
@@ -46,7 +47,7 @@ nginx  /xuequ/            → /srv/xuequ/web/xuequ/   公开静态文件（现�
 
 - 入口：首页“复习资料”区加一个“🔑 课本资料”小格
   - 本机直接打开（`file://` 或本地服务器）且 `private/manifest.js` 存在：直接可用，不问口令
-  - 线上：先查 `status`；没解锁时点小格弹出口令框（输入框 + “解锁”按钮，错了提示“口令不对”，太频繁提示“稍后再试”），解锁后进入
+  - 线上：主要靠分享链接解锁（见上）；先查 `status`；没解锁时点小格弹出口令框（备用）（输入框 + “解锁”按钮，错了提示“口令不对”，太频繁提示“稍后再试”），解锁后进入
   - 线上没部署口令服务（`status` 返回 404）：不显示这个小格
 - 解锁后用 `<script>` 加载 `private/manifest.js` 和各单元文件（同源请求自动带 cookie）；不用 `fetch` 读本地文件，`file://` 也能用。`fetch` 只用于调口令服务的三个接口
 - 新路由 `#/textbook/<册ID>/<单元号>`：本单元课本栏目列表，每个栏目一个录音播放器（可调 0.75 / 1 / 1.25 倍速），有原文的栏目下面显示原文，可“显示 / 隐藏原文”
