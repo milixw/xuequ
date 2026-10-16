@@ -10,6 +10,46 @@
 </head>
 <body>
 <div id="app"></div>
+<script>
+// 全局报错兜底：任何脚本出错时在底部提示刷新，并带上出错位置方便排查（放在最前，前面的脚本挂了也能显示）
+(function () {
+  var bar = null;
+  function show(detail) {
+    if (bar) return;
+    bar = document.createElement('div');
+    bar.setAttribute('role', 'alert');
+    bar.style.cssText = 'position:fixed;left:8px;right:8px;bottom:8px;z-index:9999;padding:10px 12px;border-radius:8px;' +
+      'background:#fff4f4;color:#7a1f1f;border:1px solid #e3a5a5;font-size:14px;line-height:1.5;box-shadow:0 2px 8px rgba(0,0,0,.15)';
+    var text = document.createElement('div');
+    text.textContent = '页面出错了，刷新一下试试。如果一直这样，请把下面这行告诉老师：';
+    var info = document.createElement('div');
+    info.style.cssText = 'font-size:12px;color:#555;word-break:break-all;margin:4px 0 8px';
+    info.textContent = detail;
+    var reload = document.createElement('button');
+    reload.type = 'button';
+    reload.textContent = '刷新';
+    reload.style.cssText = 'min-height:36px;min-width:72px;margin-right:8px';
+    reload.onclick = function () { location.reload(); };
+    var close = document.createElement('button');
+    close.type = 'button';
+    close.textContent = '关闭';
+    close.style.cssText = 'min-height:36px;min-width:72px';
+    close.onclick = function () { bar.remove(); bar = null; };
+    bar.append(text, info, reload, close);
+    document.body.appendChild(bar);
+  }
+  window.addEventListener('error', function (e) {
+    if (!e.error) return; // 没有错误对象的（如 ResizeObserver 提示）不是真出错
+    var where = e.filename ? ' @ ' + e.filename.split('/').slice(-2).join('/') + ':' + e.lineno : '';
+    show(String(e.error.message || e.error) + where);
+  });
+  window.addEventListener('unhandledrejection', function (e) {
+    var r = e.reason;
+    if (r && (r.name === 'NotAllowedError' || r.name === 'AbortError')) return; // 浏览器拦截自动播放之类
+    show(String((r && r.message) || r));
+  });
+})();
+</script>
 <script src="vendor/katex/katex.min.js"></script>
 <script src="src/answer.js?v=20261008-words"></script>
 <script src="src/accounts.js"></script>

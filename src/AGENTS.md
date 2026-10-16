@@ -42,6 +42,7 @@
 首页古诗文联动注释入口链接到 `content/chinese/上海中考古诗文·虚实词联动注释版.html`，配套三份参考页同目录离线使用。
 上海原题 `subject-papers.js` 支持安全转义的 `[[u]]` 普通下划线、`[[dot]]` 加点和 `[[wave]]` 波浪下划线标记，不支持嵌套。语文文字转录题的 `textSource` 表示原解析已并入文字参考答案，`sourceImages`只溯源不展示；必要局部配图仍用 `stemImages`，可用 `label`作无障碍名称。
 
+- `index.html` 里 `#app` 后面的内联脚本是全局报错兜底（`error` / `unhandledrejection` 时底部提示刷新并显示出错位置），要放在所有 `<script src>` 前面；故意不处理的 Promise 拒绝自己 `.catch`，别让它冒到这里
 - 首屏只加载首页和常用页面要用的脚本；大体积数据（真题文字数据）不写进 `index.html`，在 `app.js` 的 `DATA_SCRIPTS` 里登记，进入对应页面时用 `<script>` 按需加载
 - 零构建、不引入框架。第三方库只能放在 `vendor/` 里本地加载，不走 CDN（国内访问 CDN 不稳定）
 - 内容文件（小节、真题卷）在浏览器里共用一个全局作用域，顶层的 `const`、`let`、`function` 名字要加小节号后缀（如 `S201`、`roots212`），否则后加载的文件报错不执行、页面显示“制作中”；`tests/content.test.js` 会把所有内容文件放进同一个上下文检查
