@@ -85,3 +85,25 @@ test('私有课本资料：manifest 和单元文件的注册', () => {
     globalThis.Private = saved;
   }
 });
+
+test('私有课本资料：分享链接限定范围时只显示能看的册', () => {
+  const saved = globalThis.Private;
+  try {
+    delete require.cache[require.resolve('../src/private-ui.js')];
+    const PrivateUI = require('../src/private-ui.js');
+    const vol = () => ({ title: 'x', units: [{ no: 1, title: 'U', file: 'f.js' }] });
+    const load = () => globalThis.Private.manifest({ english: { g6s1: vol(), g7s1: vol(), 'rj-g4s1': vol() } });
+    load();
+    PrivateUI.pruneManifest(['english:g6s1', 'english:rj-g4s1']);
+    assert(PrivateUI.unitMeta('g6s1', 1) && PrivateUI.unitMeta('rj-g4s1', 1), '范围内的册应保留');
+    assert(PrivateUI.unitMeta('g7s1', 1) === null, '范围外的册应去掉');
+    load();
+    PrivateUI.pruneManifest(null);
+    assert(PrivateUI.unitMeta('g7s1', 1), 'scope 为 null 是全部资料');
+    const ui = read('src/private-ui.js');
+    assert(/loadScript\(BASE \+ 'manifest\.js'\)\s*\.then\(applyScope\)/.test(ui), '加载 manifest 后要按范围过滤');
+    assert(ui.includes("if (location.protocol !== 'https:' || !manifest) return;"), '本机打开不查范围');
+  } finally {
+    globalThis.Private = saved;
+  }
+});

@@ -27,7 +27,7 @@
   fermat.test.js                  费马点：作图法和数值最小点对照、120°、三线共点、旋转后共线、路网最优、关卡数据和答案
   export-blind.js                 导出不含答案的盲解题单（给复核子代理用）
   poly.js                         给 verify 用的整式运算（展开、加减、代入、次数），测试时挂成全局 Poly
-  private-gate.test.js            私有课本资料口令服务：口令对错、30 天凭证、过期与篡改、改口令作废、限流、只认 https
-  private-ui.test.js              私有课本资料：private/ 不入库、不打包、代码里不写口令、页面接线、manifest 注册
+  private-gate.test.js            私有课本资料口令服务：口令对错、30 天凭证、过期与篡改、改口令作废、限流、只认 https、分享链接按册授权（范围签名、路径拦截、合并范围、旧码兼容）
+  private-ui.test.js              私有课本资料：private/ 不入库、不打包、代码里不写口令、页面接线、manifest 注册、按授权范围只显示能看的册
   agents-docs.test.js             AI 约定文档的护栏：各层 AGENTS.md 的大小上限、CLAUDE.md 导入、文档里引用的路径存在、学科目录有约定文件、存储键已登记
 ```

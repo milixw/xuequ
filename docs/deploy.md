@@ -282,6 +282,14 @@ sudo bash -c 'set -a; . /etc/xuequ-gate.env; /usr/local/bin/node /srv/xuequ/web/
 ```
 
   输出形如 `https://<域名>/xuequ/api/private/open/<分享码>`；走的是现有的 `/xuequ/api/private/` 转发，nginx 不用改
+- **只给某几册的分享链接**：在命令后面写“学科:册ID”，同一学科的册用逗号隔开；没写到的册看不了（录音、课本图片、课文都返回 401，页面上也不显示）。不写范围就是全部资料（就是上面那个链接）。先用 `list` 查能填的册：
+
+```bash
+sudo bash -c 'set -a; . /etc/xuequ-gate.env; /usr/local/bin/node /srv/xuequ/web/xuequ/private-gate.js list'
+sudo bash -c 'set -a; . /etc/xuequ-gate.env; /usr/local/bin/node /srv/xuequ/web/xuequ/private-gate.js share https://<域名>/xuequ/ english:g6s1,g6s2 english:rj-g4s1'
+```
+
+  `list` 和 `share` 读 `/srv/xuequ/private/manifest.js` 核对册 ID（别处用 `PRIVATE_DIR` 指定）。范围写在链接里并签名，改不了；不设有效期，学生打开后凭证 30 天，同一个人先后打开几个链接时范围合并。改口令后所有链接一起作废
 
 ### 2. 私有文件
 
@@ -313,6 +321,7 @@ location = /xuequ/api/private-auth {
     proxy_pass http://127.0.0.1:6477/check;
     proxy_pass_request_body off;
     proxy_set_header Content-Length "";
+    proxy_set_header X-Original-URI $request_uri;
 }
 
 location ^~ /xuequ/private/ {
@@ -323,7 +332,7 @@ location ^~ /xuequ/private/ {
 }
 ```
 
-第一段是解锁和状态接口，第二段只给第三段的 `auth_request` 用，第三段是私有文件：凭证有效才放行。
+第一段是解锁和状态接口，第二段只给第三段的 `auth_request` 用，第三段是私有文件：凭证有效才放行。第二段的 `X-Original-URI` 把原请求路径交给口令服务，限定范围的凭证靠它判断这一册能不能看（2026-10-16 加；老配置缺这一行时，全部资料的凭证照常可用，限定范围的凭证什么都打不开）。
 
 ```bash
 sudo nginx -t && sudo systemctl reload nginx

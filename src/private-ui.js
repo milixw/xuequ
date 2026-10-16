@@ -45,11 +45,34 @@
     });
   }
 
+  // 分享链接可以只给某几册：线上按口令服务 status 的 scope（["english:g6s1", …]，null 是全部）
+  // 把 manifest 里看不了的册去掉，页面就只显示能看的册。真正的拦截在服务器（看不了的册文件返回 401）
+  async function applyScope() {
+    if (location.protocol !== 'https:' || !manifest) return;
+    let scope = null;
+    try {
+      const r = await fetch(API + 'status', { credentials: 'same-origin', cache: 'no-store' });
+      if (r.ok) scope = (await r.json()).scope || null;
+    } catch {
+      scope = null;
+    }
+    pruneManifest(scope);
+  }
+  function pruneManifest(scope) {
+    if (!Array.isArray(scope) || !manifest) return;
+    for (const subject of Object.keys(manifest)) {
+      for (const id of Object.keys(manifest[subject] || {})) {
+        if (!scope.includes(subject + ':' + id)) delete manifest[subject][id];
+      }
+    }
+  }
+
   // 'unlocked' 资料可用；'locked' 线上有口令服务但还没解锁；'none' 没有私有资料（公开部署、HTTP 站点）
   let statePromise = null;
   function state() {
     if (!statePromise) {
       statePromise = loadScript(BASE + 'manifest.js')
+        .then(applyScope)
         .then(() => (manifest ? 'unlocked' : 'none'))
         .catch(async () => {
           if (location.protocol !== 'https:') return 'none';
@@ -202,7 +225,7 @@
     }
     if (!parts.length) {
       const id = defaultVolume();
-      if (!id) return ui.showError(ui.page('课本资料', '#/'), '资料清单是空的。');
+      if (!id) return ui.showError(ui.page('课本资料', '#/'), '没有可以看的课本资料。');
       location.replace('#/textbook/' + id);
       return;
     }
@@ -413,7 +436,7 @@
     }
   }
 
-  const PrivateUI = { homeLinks, sectionLink, textbookPage, stop, state, unlock, unitMeta, pageRange };
+  const PrivateUI = { homeLinks, sectionLink, textbookPage, stop, state, unlock, unitMeta, pageRange, pruneManifest };
   if (typeof module !== 'undefined') module.exports = PrivateUI;
   else root.PrivateUI = PrivateUI;
 })(typeof globalThis !== 'undefined' ? globalThis : this);
