@@ -11,6 +11,11 @@ const read = file => fs.readFileSync(path.join(root, file), 'utf8');
 
 class Node {
   constructor(tag) { this.tag = tag; this.children = []; this.events = {}; this.value = ''; }
+  set type(value) {
+    if (this.tag === 'textarea') throw new TypeError('textarea.type is read-only');
+    this._type = value;
+  }
+  get type() { return this.tag === 'textarea' ? 'textarea' : this._type; }
   set textContent(value) { this.text = String(value); this.children = []; }
   get textContent() { return (this.text || '') + this.children.map(n => n.textContent).join(''); }
   appendChild(child) { this.children.push(child); return child; }
@@ -32,8 +37,8 @@ function setup(year, data = catalog, city) {
 
 test('上海原题优先文字，仅必要原图保留且不以原件链接代替题目', () => {
   const years = exams.papers(catalog).map(p => p.year);
-  assert(JSON.stringify(years) === JSON.stringify([2026, 2025, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013]));
-  assert(catalog.papers.reduce((n, p) => n + p.questions.length, 0) === 715);
+  assert(JSON.stringify(years) === JSON.stringify([2026, 2025, 2024, 2023, 2022, 2021, 2020, 2019, 2018, 2017, 2016, 2015, 2014, 2013]));
+  assert(catalog.papers.reduce((n, p) => n + p.questions.length, 0) === 972);
   const ids = new Set();
   for (const paper of catalog.papers) {
     assert(paper.review.status === 'pending');
@@ -61,7 +66,9 @@ test('上海原题优先文字，仅必要原图保留且不以原件链接代�
 });
 
 test('缺失年份和回忆版如实标注，不根据答案造原题', () => {
-  assert(catalog.missingYears.join(',') === '2021,2022,2023,2024');
+  assert(catalog.missingYears.length === 0);
+  assert(exams.find(catalog, 2024).coverage.writtenIncluded === 0);
+  assert(exams.find(catalog, 2024).questions.length === 5);
   assert(exams.find(catalog, 2025).questions.every(q => q.part === 'listening'));
   assert(exams.find(catalog, 2026).version.includes('非官方'));
   assert(exams.find(catalog, 2018).questions.filter(q => !q.completionSource).every(q => q.answerSource.kind === 'public-supplement'));
@@ -72,7 +79,7 @@ test('缺失年份和回忆版如实标注，不根据答案造原题', () => {
 
 test('历史笔试69项连续覆盖，253个原有题目及答案逐字保持', () => {
   const crypto = require('crypto');
-  const originals = catalog.papers.flatMap(p => p.questions).filter(q => !q.completionSource).sort((a, b) => a.id.localeCompare(b.id));
+  const originals = catalog.papers.flatMap(p => p.questions).filter(q => !q.completionSource && !q.webSource).sort((a, b) => a.id.localeCompare(b.id));
   assert(crypto.createHash('sha256').update(JSON.stringify(originals)).digest('hex') === 'db7fcd985d7443200c29664c5c1742e05f010ad4c566d3f4bdcba095f79afdd6');
   for (let year = 2013; year <= 2020; year++) {
     const paper = exams.find(catalog, year), written = paper.questions.filter(q => q.part !== 'listening');
@@ -83,6 +90,59 @@ test('历史笔试69项连续覆盖，253个原有题目及答案逐字保持', 
       assert(written.some(q => q.category === category), year + category);
     }
   }
+});
+
+test('网上补录保持原715题不变，2021至2023按原题号连续覆盖并明确听力缺口', () => {
+  const crypto = require('crypto');
+  const previous = catalog.papers.flatMap(p => p.questions).filter(q => !q.webSource).sort((a, b) => a.id.localeCompare(b.id));
+  assert(previous.length === 715);
+  assert(crypto.createHash('sha256').update(JSON.stringify(previous)).digest('hex') === '470c137708bbfc29fc6e0f7c2566725007d9c1a01e66be719352cc09d8611e8c');
+  for (const year of [2021, 2022, 2023]) {
+    const p = exams.find(catalog, year);
+    assert(p.questions.length === 84 && p.questions.every((q, i) => q.originalNo === i + 1));
+    assert(p.questions.filter(q => q.part === 'written').length === 64);
+    assert(p.questions.filter(q => q.part === 'listening').length === 20);
+    assert(!p.audio && p.coverage.gaps.some(g => g.includes('原听力录音')));
+    assert(p.questions.filter(q => q.category === '句型转换' || q.category === '阅读简答' || q.category === '作文').every(q => q.type === 'open'));
+    for (const q of p.questions) {
+      assert(!/【(?:答案|解析|分析)】|答案解析部分|Ⅶ\. Writing/.test(q.stem + (q.passage || '')), q.id);
+      if (q.category === '选词填空' || q.category === '完形填空' || q.category === '首字母填空') {
+        assert(q.passage.includes('(' + q.originalNo + ')'), q.id + ' 缺本题填空位置');
+      }
+      if (q.category === '选词填空') assert(/^[A-E]$/.test(q.answer), q.id);
+      if (q.category === '首字母填空') assert(/^[a-z]+$/i.test(q.answer), q.id);
+    }
+  }
+  assert(exams.find(catalog, 2021).questions.find(q => q.originalNo === 49).type === 'open');
+  const p = exams.find(catalog, 2023);
+  assert(p.questions.find(q => q.originalNo === 59).passage.includes('We are a sports organization'));
+  assert(p.questions.find(q => q.originalNo === 60).options.join('|') === 'Where are we?|How old are we?|Who do we help?|What do we do?');
+});
+
+test('网上补录来源、必要图片和转录一致，缺题年份不冒充完整原卷', () => {
+  const crypto = require('crypto'), records = JSON.parse(read('content/english/past-papers/web-completion-transcripts.json'));
+  let count = 0;
+  for (const entry of records.papers) {
+    const paper = exams.find(catalog, entry.year);
+    assert(crypto.createHash('sha256').update(JSON.stringify(entry.questions)).digest('hex') === entry.questionsSha256);
+    assert(entry.sources.length >= 2 && entry.sources.every(s => /^https:\/\//.test(s.url) && /^[a-f0-9]{64}$/.test(s.sha256)));
+    for (const item of entry.questions) {
+      const q = paper.questions.find(q => q.id === item.id), { webSource, ...body } = q;
+      assert(JSON.stringify(body) === JSON.stringify(item), item.id);
+      assert(webSource.sourceSha256 === entry.sources[0].sha256 && webSource.checkedAt === records.checkedAt);
+      count++;
+    }
+    for (const fig of entry.images) {
+      assert(crypto.createHash('sha256').update(fs.readFileSync(path.join(root, fig.src))).digest('hex') === fig.sha256);
+      assert(fig.originalUrl.startsWith('https://') && /^[a-f0-9]{64}$/.test(fig.originalSha256));
+    }
+  }
+  assert(count === 257);
+  const page = setup(2024);
+  assert(page.nodes.filter(n => n.tag === 'form').length === 5);
+  assert(page.main.textContent.includes('完整笔试') && page.main.textContent.includes('缺少原选项与原录音'));
+  assert(page.nodes.some(n => n.tag === 'a' && n.href === records.papers.find(p => p.year === 2024).sources[0].url));
+  assert(exams.find(catalog, 2024).questions.every(q => q.type === 'open' && q.answer === null));
 });
 
 test('462条补充与来源清单一致，配图绑定本地文件及哈希且无答案污染', () => {
@@ -174,7 +234,7 @@ test('中考无答案题不记错误，账号切换后旧表单拒绝写入且�
 });
 
 test('上海已导入的253小题均有答案，公开补充与原答案分开标注', () => {
-  const questions = catalog.papers.flatMap(p => p.questions).filter(q => !q.completionSource);
+  const questions = catalog.papers.flatMap(p => p.questions).filter(q => !q.completionSource && !q.webSource);
   assert(questions.length === 253 && questions.every(q => q.answer));
   assert(questions.filter(q => q.answerSource).length === 35);
   const supplements = JSON.parse(read('content/english/past-papers/answer-supplements.json'));
@@ -204,7 +264,7 @@ test('中考纯文本保持下划线，题型筛选和错误年份可正常显�
   select.value = '词性转换'; select.events.change();
   assert(page.main.all().filter(n => n.tag === 'form').length === 8);
   const main = new Node('main');
-  page.context.EnglishExams.renderYear(main, catalog, 2024);
+  page.context.EnglishExams.renderYear(main, catalog, 2012);
   assert(main.textContent.includes('未收录这一年份'));
 });
 

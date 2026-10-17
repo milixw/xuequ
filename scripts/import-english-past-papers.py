@@ -192,7 +192,7 @@ def fill_missing(paper, answers, source=None):
     count = 0
     for question in paper['questions']:
         # Supplement records have their own source/version/answer association.
-        if question.get('completionSource'): continue
+        if question.get('completionSource') or question.get('webSource'): continue
         if question.get('answer') is not None: continue
         value = answers.get(question['originalNo'])
         pattern = r'[A-D]' if question['type'] == 'choice' else r'[A-Za-z]+(?:/[A-Za-z]+|\(s\))?'
@@ -220,7 +220,7 @@ def supplement_answers(roots):
     root_map = dict(roots)
     count = 0
     for paper in catalog['papers']:
-        if not paper['questions'] or not any(q.get('answer') is None and not q.get('completionSource') for q in paper['questions']): continue
+        if not paper['questions'] or not any(q.get('answer') is None and not q.get('completionSource') and not q.get('webSource') for q in paper['questions']): continue
         source = paper['source']
         relative = Path(source['file'])
         if relative.is_absolute() or '..' in relative.parts: raise ValueError('Unsafe source path')
@@ -304,6 +304,9 @@ def main(roots):
                     paper[field] = old[field]
             if any(q.get('answerSource') for q in paper['questions']):
                 paper['note'] = old['note']
+        # Later source-bound batches may add years outside this legacy importer.
+        generated_years = {p['year'] for p in papers}
+        papers.extend(p for p in previous['papers'] if p['year'] not in generated_years)
     # Mechanical removal of page footers and extraction-only image markers,
     # including previously generated text. This never changes answers or IDs.
     for paper in papers:
@@ -315,7 +318,8 @@ def main(roots):
                         question[field] = question[field].replace('[[image]]', '')
             if question.get('options'):
                 question['options'] = [clean(option) for option in question['options']]
-    catalog = dict(importedAt='2026-10-03', missingYears=[2021, 2022, 2023, 2024], papers=sorted(papers, key=lambda p: p['year'], reverse=True))
+    present_years = {p['year'] for p in papers}
+    catalog = dict(importedAt='2026-10-03', missingYears=[y for y in [2021, 2022, 2023, 2024] if y not in present_years], papers=sorted(papers, key=lambda p: p['year'], reverse=True))
     write_catalog(catalog)
 
 

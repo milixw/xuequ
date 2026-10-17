@@ -117,7 +117,9 @@
       });
       part.appendChild(choices);
     } else {
-      const input = node(q.type === 'open' ? 'textarea' : 'input'); input.type = 'text'; input.autocomplete = 'off';
+      const input = node(q.type === 'open' ? 'textarea' : 'input');
+      if (q.type !== 'open') input.type = 'text';
+      input.autocomplete = 'off';
       input.setAttribute('aria-label', '原第 ' + q.originalNo + ' 题答案');
       input.className = 'english-exams-fill';
       input.addEventListener('input', () => { selected = input.value; });
@@ -181,8 +183,19 @@
     const paper = find(catalog, year, city);
     if (!paper) { main.appendChild(node('p', '未收录这一年份，请返回年份列表。', 'error')); return; }
     main.appendChild(node('p', paper.version + ' · 待审核。' + paper.note, 'notice'));
-    if (paper.source) main.appendChild(node('p', '题目来源：' + paper.source.file.split('/').pop() +
+    if (paper.source) main.appendChild(node('p', '题目来源：' + (paper.source.name || paper.source.file.split('/').pop()) +
       '（优先文字，必要原图可点击放大）', 'english-exams-meta'));
+    if (paper.webSources && paper.webSources.length) {
+      const sources = node('details'); sources.appendChild(node('summary', '查看公开核对来源'));
+      paper.webSources.forEach((source, index) => {
+        if (!/^https:\/\//.test(source.url)) return;
+        const line = node('p'), link = node('a', '核对来源 ' + (index + 1));
+        link.href = source.url; link.target = '_blank'; link.rel = 'noopener noreferrer';
+        link.style = 'display:inline-flex;align-items:center;min-height:36px';
+        line.appendChild(link); sources.appendChild(line);
+      });
+      main.appendChild(sources);
+    }
     if (paper.coverage && paper.coverage.gaps.length) main.appendChild(node('p', '原资料尚缺或待核：' + paper.coverage.gaps.join('；'), 'notice'));
     if (paper.questions.some(q => q.part === 'listening') && !paper.audio) main.appendChild(node('p', '本地资料没有对应原录音；听力题已保留，原听力文字若有则在订正区查看。', 'english-exams-meta'));
     if (paper.audio) {

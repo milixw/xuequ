@@ -33,3 +33,5 @@
   private-ui.test.js              私有课本资料：private/ 不入库、不打包、代码里不写口令、页面接线、manifest 注册、按授权范围只显示能看的册
   agents-docs.test.js             AI 约定文档的护栏：各层 AGENTS.md 的大小上限、CLAUDE.md 导入、文档里引用的路径存在、学科目录有约定文件、存储键已登记
 ```
+
+上海英语网上补录的独立 Python 回归为 `tests/supplement-shanghai-english-web.test.py`，检查幂等、冲突拒绝、来源哈希与路径安全；JS 页面和题号覆盖沿用 `tests/english-exams.test.js`。

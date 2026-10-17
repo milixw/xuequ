@@ -11,6 +11,12 @@ spec.loader.exec_module(importer)
 
 
 class ImportTests(unittest.TestCase):
+    def test_legacy_answer_supplement_skips_web_source_questions(self):
+        paper = {'questions': [dict(id='sh2024-q06', originalNo=6, type='open', answer=None,
+                                   webSource={'sourceSha256': 'checked-web-source'})]}
+        self.assertEqual(importer.fill_missing(paper, {6: 'A'}), 0)
+        self.assertIsNone(paper['questions'][0]['answer'])
+
     def test_completion_listening_does_not_take_same_numbered_grammar_answer(self):
         paper = {'questions': [dict(id='sh2019-listening-q21', originalNo=21, type='fill', answer=None,
                                    completionSource={'sourceSha256': 'checked-original'}),
