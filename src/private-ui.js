@@ -345,6 +345,17 @@
   }
 
   // 听读：本单元的课本页从上往下排，图片滑到附近才加载；底部固定播放栏，点栏目跳到那一页并播放
+  // 栏目占的课本页：一般只有 page；单元词表跨页时还有 pageEnd（生成脚本按课本算出）
+  function sectionPages(sec) {
+    if (!sec.page) return [];
+    const out = [];
+    for (let p = sec.page; p <= Math.max(sec.page, sec.pageEnd || 0); p++) out.push(p);
+    return out;
+  }
+  function sectionPageText(sec) {
+    return sec.pageEnd ? `课本第 ${sec.page}～${sec.pageEnd} 页` : `课本第 ${sec.page} 页`;
+  }
+
   async function readerPage(volId, no, ui) {
     const shell = await unitShell(volId, no, ui, 'reader');
     if (!shell) return;
@@ -356,7 +367,7 @@
     // 页面：单元范围内的页，再加上范围外、但有栏目指向的页（比如总词表）
     const pages = [];
     for (const [a, b] of meta.pages || []) for (let p = a; p <= b; p++) if (inBook(p)) pages.push(p);
-    const extra = [...new Set(unit.sections.map(x => x.page).filter(p => p && inBook(p) && !pages.includes(p)))].sort((a, b) => a - b);
+    const extra = [...new Set(unit.sections.flatMap(sectionPages).filter(p => inBook(p) && !pages.includes(p)))].sort((a, b) => a - b);
 
     const book = document.createElement('div');
     book.className = 'pv-book';
@@ -374,7 +385,7 @@
     bar.className = 'pv-bar';
     bar.innerHTML =
       `<div class="pv-chips" role="group" aria-label="栏目">${playable.map((x, i) =>
-        `<button type="button" data-i="${i}">${esc(x.name)}${x.page ? `<small>p.${esc(String(x.page))}</small>` : ''}</button>`).join('')}</div>` +
+        `<button type="button" data-i="${i}">${esc(x.name)}${x.page ? `<small>p.${esc(x.pageEnd ? `${x.page}–${x.pageEnd}` : String(x.page))}</small>` : ''}</button>`).join('')}</div>` +
       `<audio controls preload="none"></audio>` +
       `<div class="pv-foot"><p class="pv-now">点上面的栏目：翻到那一页并播放</p>${rateButtons()}</div>`;
     main.appendChild(bar);
@@ -396,7 +407,7 @@
         const src = BASE + sec.audio;
         if (!audio.src.endsWith(src)) audio.src = src;
         audio.play().catch(() => {});
-        now.textContent = `正在听：${sec.name}${sec.page ? `（课本第 ${sec.page} 页）` : ''}`;
+        now.textContent = `正在听：${sec.name}${sec.page ? `（${sectionPageText(sec)}）` : ''}`;
       } else {
         audio.pause();
         now.textContent = `${sec.name}：${sec.note || '这一栏没有录音'}`;
@@ -413,7 +424,7 @@
       const card = document.createElement('article');
       card.className = 'card pv-section';
       card.innerHTML =
-        `<div class="pv-head"><h2>${esc(sec.name)}</h2>${sec.page ? `<small>课本第 ${esc(String(sec.page))} 页</small>` : ''}</div>` +
+        `<div class="pv-head"><h2>${esc(sec.name)}</h2>${sec.page ? `<small>${esc(sectionPageText(sec))}</small>` : ''}</div>` +
         (sec.note ? `<p class="pv-note">${esc(sec.note)}</p>` : '') +
         (sec.audio ? `<audio controls preload="none" src="${esc(BASE + sec.audio)}"></audio>${rateButtons()}` : '') +
         (sec.text && sec.text.length ? `<button type="button" class="pv-toggle">显示原文</button>` +
@@ -443,7 +454,7 @@
     return (manifest && manifest.exams) || {};
   }
 
-  const PrivateUI = { homeLinks, sectionLink, textbookPage, stop, state, unlock, openUnlock, examSets, unitMeta, pageRange, pruneManifest, BASE };
+  const PrivateUI = { homeLinks, sectionLink, textbookPage, stop, state, unlock, openUnlock, examSets, unitMeta, pageRange, pruneManifest, sectionPages, sectionPageText, BASE };
   if (typeof module !== 'undefined') module.exports = PrivateUI;
   else root.PrivateUI = PrivateUI;
 })(typeof globalThis !== 'undefined' ? globalThis : this);

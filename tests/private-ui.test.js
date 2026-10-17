@@ -81,6 +81,9 @@ test('私有课本资料：manifest 和单元文件的注册', () => {
     assert(PrivateUI.unitMeta('g8s1', 1) === null);
     assert(PrivateUI.pageRange([[12, 25]]) === '第 12～25 页');
     assert(PrivateUI.pageRange([[-8, 11], [96, 153]]) === '封面～第 11 页、第 96～153 页', '附录含封面时的页码说明');
+    assert(PrivateUI.sectionPages({ page: 134, pageEnd: 135 }).join() === '134,135', '单元词表跨页时每一页都要放进单元页');
+    assert(PrivateUI.sectionPages({ page: 134 }).join() === '134' && PrivateUI.sectionPages({}).length === 0);
+    assert(PrivateUI.sectionPageText({ page: 134, pageEnd: 136 }) === '课本第 134～136 页' && PrivateUI.sectionPageText({ page: 52 }) === '课本第 52 页');
   } finally {
     globalThis.Private = saved;
   }
