@@ -16,6 +16,7 @@
 | `#/english-plan/<天数>/retry/<记录ID>` | 独立重做该提交记录中的错题；按快照恢复原题及答案，草稿不影响每日练习；提交追加新时间点记录（含全对），原记录不变；新错题可继续重做，重做答对题的答案和解析只在屏幕展示、不打印 |
 | `#/words` / `#/words/<册ID>` / `#/words/<册ID>/<单元号>` | 英语单词：今日任务（到期复习 + 新词，一题一屏）/ 本册各单元掌握情况 / 单元词表（学这一单元、只练本单元）；首页“英语单词”入口进 `#/words`，中考词汇表从这里链出。设计见 `docs/superpowers/specs/2026-10-08-english-unit-structure.md` |
 | `#/textbook` / `#/textbook/<册ID>` / `#/textbook/<册ID>/<单元号>` / `…/<单元号>/list` | 私有课本资料（`src/private-ui.js`）：`#/textbook` 跳到上次看的册，没有就首页右上角所选学期那一册（沪教版册 ID 同学期 ID；都没有就第一册）；册 ID 沪教版是 `g6s1` 这样，人教精通版加 `rj-` 前缀（`rj-g4s1`）；册页顶部按教材版本分行切换册、列出单元（人教精通版含 `r1`、`r2` 两个 Revision）和课本页码范围；单元默认“看课本听录音”——整本课本页面图片按单元竖排（滑到附近才加载，范围外的栏目页如总词表附在后面），底部固定播放栏，点栏目翻到那一页并播放；`/list` 是各栏目录音（0.75、1、1.25 倍速）和可显示隐藏的课文原文。资料在 `private/`（私有仓库，不入开源库）；本机能加载 `private/manifest.js` 就直接用，线上要先打开分享链接 `/xuequ/api/private/open/<分享码>`（口令服务发凭证后 302 到 `#/textbook`）或在首页“🔑 课本资料”输口令，凭证是口令服务发的 HttpOnly cookie `xq_private`（30 天，页面读不到，不占 localStorage）。分享链接可以只给某几册（2026-10-16 起），这时页面按口令服务 `status` 返回的范围只显示能看的册。英语小节页在已解锁且本单元有资料时顶部多一行链接。设计见 `docs/superpowers/specs/2026-10-13-private-textbook.md` |
+| `#/mock` / `#/mock/<卷集ID>` / `…/<卷ID>` / `…/review` | 模拟考试（`src/mock-exam.js`）：私有库里的整卷试卷和解析（页面图片）。`#/mock` 只有一个卷集时直接进去；卷集页按语文、数学、英语分组列卷子（时长、满分、上次分数），复习资料在最上面；一份卷子先看说明再“开始考试”，作答时底部固定倒计时条（最后 5 分钟变色，时间到自动交卷，关掉再打开接着计时），交卷后才显示解析页，可切换“只看解析”、填自评分数、重新做一遍；`review` 是复习资料翻看。资料和解锁同课本资料：线上凭证范围是 `exams:<卷集ID>`，只给卷集的分享链接打开后跳到 `#/mock`。首页“练习”区有能做的卷子或可输口令时才出现“模拟考试”小格。设计见 `docs/superpowers/specs/2026-10-17-mock-exam.md` |
 | `#/v/<册ID>` | 册：章节列表 + 本册的真题卷；英语册有词表时每个 Unit 多一行“单词 · 已掌握 n / 共 m” |
 | `#/s/<小节ID>` | 小节：知识点 + 题目列表 |
 | `#/q/<小节ID>/<题目ID>` | 做题 |
@@ -53,6 +54,7 @@
 | `xq.history.v1.<账号>` | localStorage | 该账号的考试历史，退出登录也保留 |
 | `xq.grade.v1.<账号>` / `xq.grade.v1` | localStorage | 首页选的学期（登录 / 未登录），默认 `g6s1` |
 | `xq.textbookVol.v1` | localStorage | 课本资料上次看的册 ID（如 `g6s1`、`rj-g4s1`），`#/textbook` 优先跳到它；不分账号 |
+| `xq.mockExam.v1` | localStorage | 模拟考试记录：`{ "<卷集ID>/<卷ID>": { startedAt?, history: [{ at, usedSec, score? }] } }`，`startedAt` 是进行中的开始时间，`history` 每次交卷一条（最多 10 条），`score` 是自评分数；不分账号 |
 | `xq.exam.v1` | sessionStorage | 进行中的限时测试（含截止时间） |
 | `fg-solved.v2` | localStorage | 函数轨道通关记录（早于 `xq.` 约定，保持不动） |
 | `xq.solids.v1` | localStorage | 立体图形实验室：`{ done: [关卡ID], nets: [1-3 拼出的展开图标准形] }` |

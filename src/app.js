@@ -13,6 +13,7 @@
 //   #/english-plan[/<天数>[/(result|retry)/<记录ID>]] 英语七天复习计划、每日作答、错题记录与重做
 //   #/words[/<册ID>[/<单元号>]] 英语单词：今日任务、本册各单元、单元词表（src/words-ui.js）
 //   #/textbook[/<册ID>/<单元号>] 私有课本资料：录音和课文原文，口令解锁（src/private-ui.js）
+//   #/mock[/<卷集ID>[/<卷ID>|review]] 模拟考试：私有整卷限时做、交卷看解析（src/mock-exam.js）
 
 (function () {
   const app = document.getElementById('app');
@@ -277,7 +278,7 @@
   }
 
   // ---------- 首页 ----------
-  // 从上到下：本学期课本（已解锁时带本册课本录音）→ 练习（试卷、英语单词和试题库）→ 复习资料（按学科分组，含课本资料总入口）→ 中考真题（按学科一排）→ 趣味玩法
+  // 从上到下：本学期课本（已解锁时带本册课本录音）→ 练习（试卷、英语单词和试题库，有私有资料时加模拟考试）→ 复习资料（按学科分组，含课本资料总入口）→ 中考真题（按学科一排）→ 趣味玩法
   function home() {
     const main = page('学趣闯关', null, '跟着课本学，一节一关');
     const header = app.querySelector('header.bar');
@@ -318,6 +319,14 @@
       { title: '英语单词', desc: '每天 10 分钟背课本单词', href: '#/words' },
       { title: '英语试题库', desc: '按知识点和题型练错题', href: '#/english-bank' },
     ]);
+    // 模拟考试（私有资料）：有能做的卷子或可输口令解锁时才出现
+    MockExam.homeTile(grid, entry => {
+      const tile = document.createElement('a');
+      tile.className = 'home-tile';
+      tile.href = entry.href;
+      tile.innerHTML = `<b>${escapeHtml(entry.title)}</b><small>${escapeHtml(entry.desc)}</small>`;
+      return tile;
+    });
 
     // 复习资料：按学科分组的列表行，组内按 考纲 → 积累 → 应考 排；🔑 课本资料总入口在英语组末尾
     const notes = homeSection(main, '复习资料');
@@ -759,6 +768,7 @@
     EnglishExams.stopMedia();
     if (window.Speech) Speech.stop();
     PrivateUI.stop();
+    MockExam.stop();
     const parts = (location.hash.slice(1) || '/').split('/').filter(Boolean);
     const prev = prevParts;
     prevParts = parts;
@@ -776,6 +786,7 @@
     if (parts[0] === 'english-plan') return englishPlanPage(parts[1], parts[2], parts[3]);
     if (parts[0] === 'words') return wordsPage(parts.slice(1));
     if (parts[0] === 'textbook') return PrivateUI.textbookPage(parts.slice(1), { page, showError, escapeHtml });
+    if (parts[0] === 'mock') return MockExam.mockPage(parts.slice(1), { page, showError, escapeHtml });
     if (parts[0] === 'v') return volumePage(parts.slice(1).join('/'));
     if (parts[0] === 's') return sectionPage(parts.slice(1).join('/'));
     if (parts[0] === 'q') return questionPage(parts.slice(1, -1).join('/'), parts[parts.length - 1]);

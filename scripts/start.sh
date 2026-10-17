@@ -1,7 +1,7 @@
 #!/bin/bash
 # 启动本地服务器（后台运行），手机连同一个 Wi-Fi 就能访问
 # 用法：./scripts/start.sh [端口]，默认 8000；在任何目录下运行都可以
-# 用 node 跑 scripts/serve.js（支持分段请求，iPhone 才能播放课本录音；private/ 只放出 manifest.js 和 english/）；
+# 用 node 跑 scripts/serve.js（支持分段请求，iPhone 才能播放课本录音；private/ 只放出 manifest.js、english/ 和 exams/）；
 # 没有 node 才退回 python3 -m http.server（录音在 iPhone 上放不了，private/ 整个目录对局域网可见）
 cd "$(dirname "$0")/.." || exit 1
 PORT="${1:-8000}"

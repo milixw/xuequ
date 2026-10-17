@@ -47,7 +47,7 @@ function cacheControl(pathname) {
 function privateAllowed(pathname) {
   pathname = path.posix.normalize(pathname).toLowerCase();
   if (!pathname.startsWith('/private/')) return true;
-  return pathname === '/private/manifest.js' || pathname.startsWith('/private/english/');
+  return pathname === '/private/manifest.js' || pathname.startsWith('/private/english/') || pathname.startsWith('/private/exams/');
 }
 
 // 只支持单段 Range（bytes=a-b、bytes=a-、bytes=-n）；iOS Safari 播放音视频必须有 206，否则放不出来

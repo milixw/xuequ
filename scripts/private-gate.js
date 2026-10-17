@@ -18,10 +18,12 @@
 //   GET  …/check                 凭证有效且请求的文件在凭证范围内 → 204，否则 401（nginx auth_request 用，
 //                                 原请求路径由 nginx 放在 X-Original-URI 头里）
 //   GET  …/status                {"unlocked":true|false, "scope":["english:g6s1",…]|null}，scope 为 null 是全部资料
-//   GET  …/open/<分享码>          分享链接：码对 → 302 到课本资料页 + cookie；码错或不是 https → 302 过去但不发凭证
+//   GET  …/open/<分享码>          分享链接：码对 → 302 到课本资料页（范围只有 exams: 时到模拟考试页）+ cookie；
+//                                 码错或不是 https → 302 到课本资料页但不发凭证
 //                                 分享码由 PRIVATE_SECRET 和口令算出，改口令后旧链接作废
 //
-// 范围：分享码可以限定只看某几册（“学科:册ID”，对应私有文件 <学科>/<册ID>/…）。
+// 范围：分享码可以限定只看某几册（“学科:册ID”，对应私有文件 <学科>/<册ID>/…）；
+//   模拟考试的卷集同样写成 exams:<卷集ID>（对应 exams/<卷集ID>/…，设计见 docs/superpowers/specs/2026-10-17-mock-exam.md）。
 //   不限范围的码（2026-10-15 发出去的那个）和口令解锁都是全部资料。
 //   限定范围的码形如 english:g6s1+english:g6s2.<签名>，范围在签名里，改了就作废；
 //   凭证也带范围，先后打开几个链接时范围合并。manifest.js 只要凭证有效就放行，页面按 status 的范围只显示能看的册。
@@ -156,7 +158,9 @@ function createGate({ pass, secret, cookiePath = '/xuequ/', now = Date.now }) {
         const tok = held();
         cookie = { 'Set-Cookie': cookieHeader(tok ? unionScope(tok.scope, got.scope) : got.scope) };
       }
-      return reply(302, null, { Location: cookiePath + '#/textbook', ...cookie });
+      // 范围里只有模拟考试的卷集时直接进模拟考试，其余进课本资料
+      const onlyExams = got && got.scope && got.scope.every(x => x.startsWith('exams:'));
+      return reply(302, null, { Location: cookiePath + (onlyExams ? '#/mock' : '#/textbook'), ...cookie });
     }
     if (req.path.endsWith('/unlock') && req.method === 'POST') {
       if (req.headers['x-forwarded-proto'] !== 'https') return reply(403, { error: 'https' });

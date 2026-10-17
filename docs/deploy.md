@@ -226,7 +226,7 @@ sudo certbot --nginx -d xue.你的域名 -d 其他.你的域名    # 同一台�
 
 ## 八、私有课本资料（口令解锁，只支持 HTTPS）
 
-课本原文和录音放在 GitHub 私有仓库 `xuequ-private`（本机克隆在 `private/`），不在公开包里。线上由 nginx 提供文件，口令服务 `private-gate.js` 只负责核对口令和凭证。设计见 `docs/superpowers/specs/2026-10-13-private-textbook.md`。
+课本原文和录音、模拟考试的整卷试卷和解析放在 GitHub 私有仓库 `xuequ-private`（本机克隆在 `private/`），不在公开包里。线上由 nginx 提供文件，口令服务 `private-gate.js` 只负责核对口令和凭证。设计见 `docs/superpowers/specs/2026-10-13-private-textbook.md`、`docs/superpowers/specs/2026-10-17-mock-exam.md`。
 
 **下面按这样的布局写**：站点挂在 `https://<域名>/xuequ/`，公开部分发布到 `/srv/xuequ/releases/<版本>/`，软链 `/srv/xuequ/web/xuequ` 指向在线版本；nginx 配置是 `/etc/nginx/snippets/xuequ.conf`，只被 443 server 引用（HTTP 不挂）。上面第五节的 `/xue/` 是旧的通用写法。
 
@@ -289,11 +289,12 @@ sudo bash -c 'set -a; . /etc/xuequ-gate.env; /usr/local/bin/node /srv/xuequ/web/
 sudo bash -c 'set -a; . /etc/xuequ-gate.env; /usr/local/bin/node /srv/xuequ/web/xuequ/private-gate.js share https://<域名>/xuequ/ english:g6s1,g6s2 english:rj-g4s1'
 ```
 
+  模拟考试的卷集也这样写：`exams:g6s1-mid`（六年级上学期期中，对应 `/srv/xuequ/private/exams/g6s1-mid/`），可以和课本写在同一个链接里；范围里只有卷集时，打开后直接进模拟考试页（`#/mock`），否则进课本资料页。
   `list` 和 `share` 读 `/srv/xuequ/private/manifest.js` 核对册 ID（别处用 `PRIVATE_DIR` 指定）。范围写在链接里并签名，改不了；不设有效期，学生打开后凭证 30 天，同一个人先后打开几个链接时范围合并。改口令后所有链接一起作废
 
 ### 2. 私有文件
 
-`setup-server.sh` 用 rsync **增量同步**到 `/srv/xuequ/private/`（服务器要装 rsync）：只同步 `manifest.js` 和 `english/`，按大小和修改时间只传新增和变了的课本图片、录音，删掉本地已没有的；先传资料再传 `manifest.js`，页面不会读到缺文件的状态。课本图片、录音越来越多也只传改动部分。
+`setup-server.sh` 用 rsync **增量同步**到 `/srv/xuequ/private/`（服务器要装 rsync）：只同步 `manifest.js`、`english/` 和 `exams/`（模拟考试的试卷、解析页面图片），按大小和修改时间只传新增和变了的课本图片、录音、试卷图片，删掉本地已没有的；先传资料再传 `manifest.js`，页面不会读到缺文件的状态。课本图片、录音越来越多也只传改动部分。
 
 没有 rsync 的服务器可以手工整包部署：在私有仓库里打包（`./scripts/pack.sh`），上传后解压：
 

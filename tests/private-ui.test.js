@@ -100,10 +100,74 @@ test('私有课本资料：分享链接限定范围时只显示能看的册', ()
     load();
     PrivateUI.pruneManifest(null);
     assert(PrivateUI.unitMeta('g7s1', 1), 'scope 为 null 是全部资料');
+    globalThis.Private.manifest({ english: { g6s1: vol() }, exams: { 'g6s1-mid': { title: '期中', papers: [] }, 'g7s1-mid': { title: '期中', papers: [] } } });
+    PrivateUI.pruneManifest(['exams:g6s1-mid']);
+    assert(Object.keys(PrivateUI.examSets()).join() === 'g6s1-mid', '模拟考试卷集也按范围过滤');
+    assert(PrivateUI.unitMeta('g6s1', 1) === null, '只给卷集时课本的册都去掉');
     const ui = read('src/private-ui.js');
     assert(/loadScript\(BASE \+ 'manifest\.js'\)\s*\.then\(applyScope\)/.test(ui), '加载 manifest 后要按范围过滤');
     assert(ui.includes("if (location.protocol !== 'https:' || !manifest) return;"), '本机打开不查范围');
   } finally {
     globalThis.Private = saved;
+  }
+});
+
+test('模拟考试：页面接线（首页小格、路由、换页停计时、登记路由和存储键）', () => {
+  const html = read('index.html');
+  const at = f => html.indexOf(f);
+  assert(at('src/private-ui.js') < at('src/mock-exam.js') && at('src/mock-exam.js') < at('src/app.js'), 'mock-exam.js 应在 private-ui.js 之后、app.js 之前加载');
+  const app = read('src/app.js');
+  assert(app.includes('MockExam.homeTile(grid,'), '首页练习区缺少模拟考试小格');
+  assert(app.includes("if (parts[0] === 'mock') return MockExam.mockPage("), '缺少 #/mock 路由');
+  assert(app.includes('MockExam.stop();'), '换页时应停止计时');
+  const mock = read('src/mock-exam.js');
+  assert(mock.includes("if (s === 'none' || !grid.isConnected) return;"), '没有私有资料时首页不应出现模拟考试');
+  assert(mock.includes("if (s === 'unlocked' && !Object.keys(PrivateUI.examSets()).length) return;"), '已解锁但没有卷集权限时不出现');
+  assert(!/fetch\(/.test(mock), '私有文件用 <script>/<img> 加载，不用 fetch');
+  const doc = read('docs/storage-and-routes.md');
+  assert(doc.includes('#/mock') && doc.includes('`xq.mockExam.v1`'), '#/mock 路由和 xq.mockExam.v1 要登记到 docs/storage-and-routes.md');
+  const homeLinks = read('src/private-ui.js');
+  assert(homeLinks.includes("(s === 'locked' || volumeIds().length)"), '只给了模拟考试的链接时不显示课本资料入口');
+});
+
+test('模拟考试：计时、交卷和分数', () => {
+  const M = require('../src/mock-exam.js');
+  const t0 = 1_760_000_000_000;
+  const rec = { startedAt: t0, history: [{ at: 1, usedSec: 60, score: 80 }] };
+  assert(M.remainingSec(rec, 90, t0) === 5400);
+  assert(M.remainingSec(rec, 90, t0 + 5399_500) === 1, '不足一秒按一秒算');
+  assert(M.remainingSec(rec, 90, t0 + 5400_000) === 0);
+  const done = M.submit(rec, 90, t0 + 1234_000);
+  assert(done.startedAt === null, '交卷后清掉计时');
+  assert(done.history.length === 2 && done.history[0].score === 80, '以前的分数保留');
+  assert(done.history[1].usedSec === 1234 && done.history[1].at === t0 + 1234_000);
+  assert(M.submit(rec, 90, t0 + 9999_000).history[1].usedSec === 5400, '超时交卷用时按限时记');
+  const many = { startedAt: t0, history: Array.from({ length: 10 }, (_, i) => ({ at: i, usedSec: 1 })) };
+  assert(M.submit(many, 90, t0).history.length === 10, '历史最多留 10 条');
+  assert(M.parseScore('86', 100) === 86 && M.parseScore(' 92.5 ', 100) === 92.5 && M.parseScore('0', 100) === 0);
+  for (const bad of ['', '101', '-1', '8.3', 'abc', '1e2']) assert(M.parseScore(bad, 100) === null, '不该接受：' + bad);
+  assert(M.parseScore('102', 102) === 102, '满分另有书写分时上限可以更高');
+  assert(M.clock(5400) === '90:00' && M.clock(65) === '1:05' && M.clock(-3) === '0:00');
+  assert(M.duration(5400) === '90 分钟' && M.duration(1234) === '20 分 34 秒' && M.duration(42) === '42 秒');
+});
+
+test('模拟考试：本机记录读写容错', () => {
+  const M = require('../src/mock-exam.js');
+  const saved = globalThis.localStorage;
+  const store = {};
+  globalThis.localStorage = { getItem: k => (k in store ? store[k] : null), setItem: (k, v) => { store[k] = String(v); } };
+  try {
+    assert(M.getRecord('s/p').startedAt === null && M.getRecord('s/p').history.length === 0, '没有记录时是空的');
+    M.putRecord('s/p', { startedAt: 5, history: [{ at: 1, usedSec: 2 }] });
+    assert(M.getRecord('s/p').startedAt === 5 && M.getRecord('s/p').history.length === 1);
+    store[M.KEY] = '{坏掉的';
+    assert(M.getRecord('s/p').history.length === 0, 'JSON 坏了当作没做过');
+    store[M.KEY] = JSON.stringify({ 's/p': { history: [null, { at: 'x' }, { at: 3, usedSec: 1 }] } });
+    assert(M.getRecord('s/p').history.length === 1, '格式不对的历史条目跳过');
+    globalThis.localStorage = { getItem() { throw new Error('blocked'); }, setItem() { throw new Error('blocked'); } };
+    assert(M.getRecord('s/p').history.length === 0, '读不了时不报错');
+    M.putRecord('s/p', { startedAt: null, history: [] });
+  } finally {
+    globalThis.localStorage = saved;
   }
 });

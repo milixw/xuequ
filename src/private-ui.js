@@ -116,12 +116,13 @@
   }
 
   // ---------- 口令框（沿用登录框的 .modal 样式） ----------
-  function openUnlock(onDone) {
+  // title、desc：口令框的标题和说明，模拟考试入口也用它
+  function openUnlock(onDone, title = '🔑 课本资料', desc = '输入口令后可以听课本录音、看课文原文（30 天内不用再输）。') {
     const modal = document.createElement('div');
     modal.className = 'modal';
     modal.innerHTML =
-      `<div class="modal-body"><h2>🔑 课本资料</h2>` +
-      `<p>输入口令后可以听课本录音、看课文原文（30 天内不用再输）。资料只供自己学习，请勿外传。</p>` +
+      `<div class="modal-body"><h2>${title}</h2>` +
+      `<p>${desc}资料只供自己学习，请勿外传。</p>` +
       `<input type="password" id="pv-pass" autocomplete="current-password" aria-label="口令">` +
       `<p class="ac-err" id="pv-err"></p>` +
       `<div class="modal-actions"><button type="button" class="secondary" id="pv-cancel">取消</button>` +
@@ -160,7 +161,8 @@
   function homeLinks(notesList, booksBox, volId, makeRow) {
     state().then(s => {
       if (s === 'none') return;
-      if (notesList.isConnected) {
+      // 分享链接只给了模拟考试时，没有能看的册，不显示课本资料入口
+      if (notesList.isConnected && (s === 'locked' || volumeIds().length)) {
         const link = makeRow({
           icon: '🔑', title: '课本资料', href: '#/textbook',
           desc: s === 'locked' ? '用分享链接打开，或输入口令' : '各册课本录音和课文原文',
@@ -436,7 +438,12 @@
     }
   }
 
-  const PrivateUI = { homeLinks, sectionLink, textbookPage, stop, state, unlock, unitMeta, pageRange, pruneManifest };
+  // 模拟考试（src/mock-exam.js）用：manifest.exams 里能看的卷集，{ <卷集ID>: {…} }
+  function examSets() {
+    return (manifest && manifest.exams) || {};
+  }
+
+  const PrivateUI = { homeLinks, sectionLink, textbookPage, stop, state, unlock, openUnlock, examSets, unitMeta, pageRange, pruneManifest, BASE };
   if (typeof module !== 'undefined') module.exports = PrivateUI;
   else root.PrivateUI = PrivateUI;
 })(typeof globalThis !== 'undefined' ? globalThis : this);

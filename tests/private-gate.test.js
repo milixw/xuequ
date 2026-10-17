@@ -152,6 +152,19 @@ test('口令服务：限定范围的码和凭证不能篡改', () => {
   assert.throws(() => gate.shareLink('https://e.com/xuequ/', []), '空范围应报错');
 });
 
+test('口令服务：模拟考试的卷集按 exams:<卷集ID> 授权，只给卷集时跳到模拟考试页', () => {
+  const { gate, open, codeOf, file, tokenOf } = scoped();
+  const r = open(codeOf(gate.shareLink('https://e.com/xuequ/', ['exams:g6s1-mid'])));
+  assert(r.headers.Location === '/xuequ/#/mock', '只有卷集时应跳到 #/mock：' + r.headers.Location);
+  const t = tokenOf(r);
+  assert(file('/xuequ/private/exams/g6s1-mid/math-a/paper/p001.jpg', t) === 204);
+  assert(file('/xuequ/private/exams/g6s1-mid/review/p001.jpg', t) === 204);
+  assert(file('/xuequ/private/exams/g6s2-mid/math-a/paper/p001.jpg', t) === 401, '别的卷集不放行');
+  assert(file('/xuequ/private/english/g6s1/U1.js', t) === 401, '课本不放行');
+  const both = open(codeOf(gate.shareLink('https://e.com/xuequ/', ['english:g6s1', 'exams:g6s1-mid'])));
+  assert(both.headers.Location === '/xuequ/#/textbook', '课本加卷集时照旧进课本资料页');
+});
+
 test('口令服务：先后打开几个链接范围合并，有全部资料就是全部', () => {
   const { gate, open, codeOf, status, tokenOf } = scoped();
   const link = list => codeOf(gate.shareLink('https://e.com/xuequ/', list));
