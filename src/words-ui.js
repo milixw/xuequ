@@ -26,7 +26,19 @@
     return loading[v.id];
   }
   function loadAll() {
-    return Promise.all(wordVolumes().map(loadVolume));
+    return Promise.all([...wordVolumes().map(loadVolume), loadSupplement()]);
+  }
+
+  function loadSupplement() {
+    if (window.GreenVocabularyData) return Promise.resolve();
+    if (!loading.green) loading.green = new Promise(resolve => {
+      const el = document.createElement('script');
+      el.src = 'content/english/green-vocabulary-enrichment.js?v=20261012';
+      el.onload = resolve;
+      el.onerror = () => { delete loading.green; resolve(); };
+      document.head.appendChild(el);
+    });
+    return loading.green;
   }
 
   // 当前学期对应的英语册（没有就取第一本有词表的册）
@@ -189,6 +201,7 @@
         (w.ipa ? `<p class="words-ipa">${escapeHtml(w.ipa)}</p>` : '') + wordLine(w) +
         ((w.forms || []).length ? `<p class="words-forms">变形：${w.forms.map(escapeHtml).join('，')}</p>` : '') +
         (w.ex || []).map(ex => `<p class="words-ex">${escapeHtml(ex.en.replace(/\[\[([^\]]+)\]\]/g, '$1'))}<br><span>${escapeHtml(ex.zh)}</span></p>`).join('') +
+        (typeof VocabularyDetails !== 'undefined' ? VocabularyDetails.render(w.w, (w.ex || []).map(ex => ex.en.replace(/\[\[([^\]]+)\]\]/g, '$1'))) : '') +
         `<div class="words-actions"><button type="button" class="primary" data-k="0">记住了，开始练</button>` +
         `<button type="button" data-k="1">我认识</button></div></section>`;
       bindSay(main);
@@ -294,7 +307,8 @@
       `<div class="words-actions"><button type="button" class="primary" data-act="learn">${data.settings.unit === uid ? '正在学这一单元' : '学这一单元'}</button>` +
       `<button type="button" data-act="practice"${sum.learned ? '' : ' disabled'}>只练本单元</button></div>` +
       `<ul class="words-list">${list.map(e => `<li><span class="w">${escapeHtml(e.word.w)}</span>${sayButton(e.word.w)}` +
-        `<span class="zh">${escapeHtml(e.word.zh)}</span><span class="box">${boxLabel(data.words[e.key])}</span></li>`).join('')}</ul>`;
+        `<span class="zh">${escapeHtml(e.word.zh)}</span><span class="box">${boxLabel(data.words[e.key])}</span>` +
+        (typeof VocabularyDetails !== 'undefined' ? VocabularyDetails.render(e.word.w) : '') + '</li>').join('')}</ul>`;
     bindSay(main);
     main.querySelector('[data-act="learn"]').addEventListener('click', () => {
       data.settings.unit = uid;

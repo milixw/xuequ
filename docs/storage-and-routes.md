@@ -27,10 +27,12 @@
 ## 本地存储
 
 首页“语文考纲”链接到 `content/chinese/shanghai-junior-outline.html`，展示用户提供的归纳资料，可返回首页；不新增 hash 路由或存储键。
+英语词汇总表和课本单元词表通过 `green-vocabulary-enrichment.js`、`vocabulary-details.js` 补充词汇关系及原创例句，总表新增“2025手册 · 考纲词组”筛选按钮；不改原词条或学习进度，不新增路由、存储键，见 `docs/green-vocabulary.md`。
+英语词汇总表另有三项专项链接，进入 `content/english/green-vocabulary-study.html#confusables` / `#patterns` / `#verbs`，分别是易混辨析、搭配与句型转换、不规则动词。练习输入临时保留在页面DOM，切换不清空，刷新不保存；无新增存储键，见 `docs/green-vocabulary-study.md`。
 首页两份阅读应考手册分别链接到 `content/chinese/上海中考古诗文阅读应考手册.html`、`content/chinese/上海中考现代文阅读应考手册.html`，本地离线打开，可返回首页，不新增 hash 路由或存储键。
 首页“古诗文联动注释”链接到 `content/chinese/上海中考古诗文·虚实词联动注释版.html`，配套三份参考页同目录离线使用，可返回首页，不新增 hash 路由或存储键。
 
-首页“语文实词虚词”链接到独立离线页面 `content/chinese/classical-words.html`，实词展示资料正文并支持查找，虚词待补充；不展示 PDF 打开、下载入口和来源、页码、页数信息。原 PDF 为同目录 `classical-words.pdf`，供维护核对。不新增 hash 路由或存储键。
+首页“语文实词虚词”链接到独立离线页面 `content/chinese/classical-words.html`，实词180条、虚词6个基础词及31个拓展词，搜索只匹配当前分类词名；虚词用本地 `classical-function-words.js` 加载，不宣称拓展词是官方范围。不展示 PDF 打开、下载入口和来源、页码、页数信息。原 PDF 为同目录 `classical-words.pdf`，供维护核对。不新增 hash 路由或存储键。
 
 所有键名都以 `xq.` 开头，读写都包在 try/catch 里。改结构时升版本号（`v1` → `v2`）并写迁移，不要直接改旧键的格式。
 

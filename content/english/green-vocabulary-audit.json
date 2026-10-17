@@ -1,0 +1,3636 @@
+{
+  "source": {
+    "file": "2025上海初中英语考纲词汇用法手册(绿本) (本书编写组) (z-library.sk, 1lib.sk, z-lib.sk).pdf",
+    "sha256": "2c7a821fe0ad94f4114f749f379b3bab7f7cf94038ab3930bb4ddc5eef3b90e8",
+    "pdfPages": 368
+  },
+  "stats": {
+    "words": 900,
+    "synonyms": 35,
+    "antonyms": 104,
+    "derivatives": 448,
+    "inflections": 114,
+    "collocations": 192,
+    "examples": 363,
+    "phrases": 281,
+    "additionalPhrases": 2
+  },
+  "ocrAudit": {
+    "ocrPages": 368,
+    "gaps": [],
+    "matchedBlocks": 1554,
+    "matchedWords": 1649,
+    "unmatchedHeads": [
+      {
+        "page": 7,
+        "head": "4.ab/bav/pep.在.....上",
+        "name": "ab"
+      },
+      {
+        "page": 10,
+        "head": "27.*affect/a'fekt/v.影响；使感染",
+        "name": "affect"
+      },
+      {
+        "page": 11,
+        "head": "31.aftr/foprep、在.之后在.后面",
+        "name": "aftr"
+      },
+      {
+        "page": 25,
+        "head": "100.atttude/'entjud/n.态度",
+        "name": "atttude"
+      },
+      {
+        "page": 31,
+        "head": "152.*behaviour/br'heivja/（（美>behavior）n.行为，举止",
+        "name": "behaviour"
+      },
+      {
+        "page": 36,
+        "head": "191.boss/bps/n.老板；首领",
+        "name": "boss"
+      },
+      {
+        "page": 62,
+        "head": "382.danage/demnd/n.&v.破坏，提害",
+        "name": "danage"
+      },
+      {
+        "page": 64,
+        "head": "397.Deccmber/di'sembo/n.十二月",
+        "name": "deccmber"
+      },
+      {
+        "page": 68,
+        "head": "436.disabled/dis'erbld/n.（thedisabled）残疾人士；伤残者",
+        "name": "disabled"
+      },
+      {
+        "page": 74,
+        "head": "485.effective/r'fektrv/adj.产生预期结果的；有效的",
+        "name": "effective"
+      },
+      {
+        "page": 91,
+        "head": "597.fre/lao/n.火火炉，火灾",
+        "name": "fre"
+      },
+      {
+        "page": 92,
+        "head": "608.flexible/fleksabl/adj.能适应新情况的；灵活的；可变动的；柔韧的；有弹性的",
+        "name": "flexible"
+      },
+      {
+        "page": 99,
+        "head": "659.Tum/Ln/n.乐趣：有趣的事；娱乐；玩笑",
+        "name": "tum"
+      },
+      {
+        "page": 99,
+        "head": "662.further/f3:Oa（r）/adv.较远，更远；进一步；而且",
+        "name": "further"
+      },
+      {
+        "page": 105,
+        "head": "699、grec/grit/v.问候：向·..…致敬",
+        "name": "grec"
+      },
+      {
+        "page": 109,
+        "head": "722.hamhan/y，&n.害",
+        "name": "hamhan"
+      },
+      {
+        "page": 109,
+        "head": "723.harmnul/hamfol/adj.有害的：导致损害的",
+        "name": "harmnul"
+      },
+      {
+        "page": 111,
+        "head": "734,hrt/ha/n.心心",
+        "name": "hrt"
+      },
+      {
+        "page": 112,
+        "head": "741.hepl/hclpfol/adj.有帮助的有益的",
+        "name": "hepl"
+      },
+      {
+        "page": 112,
+        "head": "742.hclpless/helphs/adj、无助的，没有帮助的",
+        "name": "hclpless"
+      },
+      {
+        "page": 114,
+        "head": "765.hopeful/haupfl/adj.满怀希望的；抱有希望的；表现出希望的；给人以希望的",
+        "name": "hopeful"
+      },
+      {
+        "page": 114,
+        "head": "766.hopeless/'hauplis/adj.没有希望的；无望的",
+        "name": "hopeless"
+      },
+      {
+        "page": 117,
+        "head": "782.bumorous/hjumras/adj.曲默的，风趣的",
+        "name": "bumorous"
+      },
+      {
+        "page": 121,
+        "head": "811.influence/Influans/n.影响；作用；影响力；支配力",
+        "name": "influence"
+      },
+      {
+        "page": 136,
+        "head": "910.limit/limit/n.极限；限制；限度；界限",
+        "name": "limit"
+      },
+      {
+        "page": 147,
+        "head": "978.membermcmba/n.成员：会员",
+        "name": "membermcmba"
+      },
+      {
+        "page": 147,
+        "head": "979.mcmory/meman/（复memories）n.回忆；记忆",
+        "name": "mcmory"
+      },
+      {
+        "page": 147,
+        "head": "982.mess/mes/n.混乱，杂乱",
+        "name": "mess"
+      },
+      {
+        "page": 155,
+        "head": "1042.igbbarhod/’nebohoi/（（美）neighborhood）n.邻近地区，街坊",
+        "name": "igbbarhod"
+      },
+      {
+        "page": 167,
+        "head": "1109、outing/au/n.远足，邓游：（集体）外出游玩（或学习等）",
+        "name": "outing"
+      },
+      {
+        "page": 167,
+        "head": "1115.Pacific/posfik/n.太平洋",
+        "name": "pacific"
+      },
+      {
+        "page": 175,
+        "head": "1182.plagroundplcgraund/n.操场，运动场",
+        "name": "plagroundplcgraund"
+      },
+      {
+        "page": 179,
+        "head": "1217.pp/n..表场",
+        "name": "pp"
+      },
+      {
+        "page": 179,
+        "head": "1218.prclaus/prefas/adj，宝费的，珍贵的",
+        "name": "prclaus"
+      },
+      {
+        "page": 179,
+        "head": "1219.prediet/prdkt/v.预言：预料",
+        "name": "prediet"
+      },
+      {
+        "page": 180,
+        "head": "1234.probable/probabl/adj.很可能发生（或存在等）的；很可能的；大概的",
+        "name": "probable"
+      },
+      {
+        "page": 187,
+        "head": "1287.rcognize/rekognaz/（（英）recognise）v.辨认出；认识",
+        "name": "rcognize"
+      },
+      {
+        "page": 191,
+        "head": "1322.reward/riwo:d/n.奖励；奖赏；报酬；报答，回报",
+        "name": "reward"
+      },
+      {
+        "page": 195,
+        "head": "1357.alt/sxt/n.盐",
+        "name": "alt"
+      },
+      {
+        "page": 197,
+        "head": "1371.cientist/aantst/n.科学家",
+        "name": "cientist"
+      },
+      {
+        "page": 199,
+        "head": "1386.wd/sid/n.种子",
+        "name": "wd"
+      },
+      {
+        "page": 199,
+        "head": "1387.sccm/sim/v.似乎，好像",
+        "name": "sccm"
+      },
+      {
+        "page": 201,
+        "head": "1406.sape/jap/n.形状：外形，样子",
+        "name": "sape"
+      },
+      {
+        "page": 203,
+        "head": "1424.sght/san/n.风景；视力",
+        "name": "sght"
+      },
+      {
+        "page": 203,
+        "head": "1426.sgn/san/n.符号，标记",
+        "name": "sgn"
+      },
+      {
+        "page": 203,
+        "head": "1429.sik/silk/n.丝，丝绸",
+        "name": "sik"
+      },
+      {
+        "page": 203,
+        "head": "1431.*stmilar/simila/adj.相似的，像的",
+        "name": "stmilar"
+      },
+      {
+        "page": 207,
+        "head": "1459.social/saufl/adj.社会上的；社会地位的；社交的；好社交的",
+        "name": "social"
+      },
+      {
+        "page": 215,
+        "head": "1522,supid/'sjupid/adj.愚的，笨的",
+        "name": "supid"
+      },
+      {
+        "page": 230,
+        "head": "1635.transportation/itraenspo:teijn/n.运输；交通；交通工具",
+        "name": "transportation"
+      },
+      {
+        "page": 231,
+        "head": "1642.t/rak/n、卡车，货车",
+        "name": "t"
+      },
+      {
+        "page": 233,
+        "head": "1657.underline/andolam/v在...下面划线；强调，使突出",
+        "name": "underline"
+      },
+      {
+        "page": 237,
+        "head": "1690.visi/vzt/n.&p.参观；访间，拜访",
+        "name": "visi"
+      },
+      {
+        "page": 287,
+        "head": "1.a/e；a/art.一（件；个；场....….）",
+        "name": "a"
+      },
+      {
+        "page": 287,
+        "head": "2.an/n/art.一（件；个；场......）",
+        "name": "an"
+      },
+      {
+        "page": 287,
+        "head": "3.absent/aebsant/adj.缺席的；不在的",
+        "name": "absent"
+      },
+      {
+        "page": 287,
+        "head": "5.account/akaunt/n.账户，账号；解释，说明",
+        "name": "account"
+      },
+      {
+        "page": 287,
+        "head": "6.action/aekfn/n.行动；行为",
+        "name": "action"
+      },
+      {
+        "page": 287,
+        "head": "7.ad/ad/（=advertisement/ad'va:tismant/）n.广告",
+        "name": "ad"
+      },
+      {
+        "page": 287,
+        "head": "8.admire/ad'maia（r）/v.欣赏；钦佩；赞赏；仰慕",
+        "name": "admire"
+      },
+      {
+        "page": 287,
+        "head": "9.AI/'ela1/（=artificial intelligence/a:tifilntelid3ns/）n.人I智能",
+        "name": "ai"
+      },
+      {
+        "page": 288,
+        "head": "10.aid/erd/n.援助；帮助；辅助物；援助款项",
+        "name": "aid"
+      },
+      {
+        "page": 288,
+        "head": "11.aloud/'laud/adv.大声地；出声地",
+        "name": "aloud"
+      },
+      {
+        "page": 288,
+        "head": "12.ant/ent/n.蚂蚁",
+        "name": "ant"
+      },
+      {
+        "page": 288,
+        "head": "13.anyway/enrwer/adv.无论如何；不管怎样",
+        "name": "anyway"
+      },
+      {
+        "page": 288,
+        "head": "14.apartment/apa:tmant/n.公寓；公寓套房",
+        "name": "apartment"
+      },
+      {
+        "page": 288,
+        "head": "15.app/aep/（=application/aeplilkerfn/）n.应用程序；应用软件",
+        "name": "app"
+      },
+      {
+        "page": 288,
+        "head": "16.asleep/a'sli:p/adj.睡着的",
+        "name": "asleep"
+      },
+      {
+        "page": 288,
+        "head": "17.astronaut/aestrano:t/n.宇航员；航天飞行员",
+        "name": "astronaut"
+      },
+      {
+        "page": 288,
+        "head": "18.athlete/eoli:t/n.运动员",
+        "name": "athlete"
+      },
+      {
+        "page": 288,
+        "head": "19.awake/aweik/（awoke/awauk/，awoken/awaukan/）v.（使）醒来；唤起；激发起",
+        "name": "awake"
+      },
+      {
+        "page": 288,
+        "head": "20.aware/wea（r）/adj.知道的；意识到的",
+        "name": "aware"
+      },
+      {
+        "page": 289,
+        "head": "21.badminton/baedminton/n.羽毛球",
+        "name": "badminton"
+      },
+      {
+        "page": 289,
+        "head": "22.bamboo/baem'bu:/n.竹子",
+        "name": "bamboo"
+      },
+      {
+        "page": 289,
+        "head": "23.band/baend/n.乐队；带子",
+        "name": "band"
+      },
+      {
+        "page": 289,
+        "head": "24.baseball/beisbo:l/n.棒球",
+        "name": "baseball"
+      },
+      {
+        "page": 289,
+        "head": "26.bean/bin/n.豆",
+        "name": "bean"
+      },
+      {
+        "page": 289,
+        "head": "27.bee/bi:/n.蜜蜂",
+        "name": "bee"
+      },
+      {
+        "page": 289,
+        "head": "28.behave/br'herv/v.表现；举止得体；作出反应",
+        "name": "behave"
+      },
+      {
+        "page": 289,
+        "head": "29.benefit/benifrt/n.利益；益处；优势；保险金；成效；福利",
+        "name": "benefit"
+      },
+      {
+        "page": 289,
+        "head": "31.birth/ba:0/n.出生，诞生",
+        "name": "birth"
+      },
+      {
+        "page": 289,
+        "head": "32.bleed/blid/（bled/bled/，bled）v.流血，出血",
+        "name": "bleed"
+      },
+      {
+        "page": 289,
+        "head": "33.blouse/blauz/n.（女式）衬衫",
+        "name": "blouse"
+      },
+      {
+        "page": 289,
+        "head": "34.budget/bad3it/n.预算",
+        "name": "budget"
+      },
+      {
+        "page": 290,
+        "head": "35.bully/'bol/v.恐吓；胁迫；欺负",
+        "name": "bully"
+      },
+      {
+        "page": 290,
+        "head": "36.calendar/kaelimda（r）/n.日历；日程表",
+        "name": "calendar"
+      },
+      {
+        "page": 290,
+        "head": "37.cancer/kaensa（r)/n.癌症",
+        "name": "cancer"
+      },
+      {
+        "page": 290,
+        "head": "39.candy/'kaendi/n.糖果",
+        "name": "candy"
+      },
+      {
+        "page": 290,
+        "head": "41.cash/kaef/n.现金",
+        "name": "cash"
+      },
+      {
+        "page": 290,
+        "head": "42.central/sentral/adj.中心的；中央的",
+        "name": "central"
+      },
+      {
+        "page": 290,
+        "head": "44.chalk/tfok/n.粉笔",
+        "name": "chalk"
+      },
+      {
+        "page": 290,
+        "head": "45.cbapion/empon/n.冠军",
+        "name": "cbapion"
+      },
+      {
+        "page": 291,
+        "head": "46.characteristic/kaeraktoristk/n.特征；特点；品质",
+        "name": "characteristic"
+      },
+      {
+        "page": 291,
+        "head": "47.cheat/tfi:t/v.作，舞；欺骗",
+        "name": "cheat"
+      },
+      {
+        "page": 291,
+        "head": "48.chip/tJip/n.炸薯条；芯片",
+        "name": "chip"
+      },
+      {
+        "page": 291,
+        "head": "49.chore/tfo:（r）/n.家务；琐事",
+        "name": "chore"
+      },
+      {
+        "page": 291,
+        "head": "50.classic/klaesrk/adj.经典的；古典的",
+        "name": "classic"
+      },
+      {
+        "page": 291,
+        "head": "52.coach/kautJ/n.教练",
+        "name": "coach"
+      },
+      {
+        "page": 291,
+        "head": "54.compete/kompit/v.竞争；对抗",
+        "name": "compete"
+      },
+      {
+        "page": 291,
+        "head": "55.condition/kandijn/n.环境，境况，条件；状态",
+        "name": "condition"
+      },
+      {
+        "page": 291,
+        "head": "56.cookie/kuki/n.曲奇",
+        "name": "cookie"
+      },
+      {
+        "page": 291,
+        "head": "57.cooperate/kouppareit/v.合作：配合；协作；协助",
+        "name": "cooperate"
+      },
+      {
+        "page": 291,
+        "head": "58.corn/kon/n.玉米",
+        "name": "corn"
+      },
+      {
+        "page": 292,
+        "head": "59.could/kud/（can的过去式）aux.v.能够：可以",
+        "name": "could"
+      },
+      {
+        "page": 292,
+        "head": "60.countryside/kAntrisaid/n.农村；乡村",
+        "name": "countryside"
+      },
+      {
+        "page": 292,
+        "head": "61.courage/kArid3/n.勇气；勇敢；胆量",
+        "name": "courage"
+      },
+      {
+        "page": 292,
+        "head": "63.cucumber/\"kju:kAmba（r)/n.黄瓜",
+        "name": "cucumber"
+      },
+      {
+        "page": 292,
+        "head": "64.curious/kjuarias/adj.好奇的；不寻常的",
+        "name": "curious"
+      },
+      {
+        "page": 292,
+        "head": "65.deaf/def/adj.聋的",
+        "name": "deaf"
+      },
+      {
+        "page": 292,
+        "head": "67.digital/'did3itl/adj.数字的；数码的",
+        "name": "digital"
+      },
+      {
+        "page": 292,
+        "head": "68.dining/dainin/n.吃饭，就餐（diningroom餐厅；客厅）",
+        "name": "dining"
+      },
+      {
+        "page": 292,
+        "head": "69.direct/darekt/adj.直接的；笔直的",
+        "name": "direct"
+      },
+      {
+        "page": 292,
+        "head": "70.disappoint/disapoint/v.使失望",
+        "name": "disappoint"
+      },
+      {
+        "page": 292,
+        "head": "71.disease/drziz/n.疾病",
+        "name": "disease"
+      },
+      {
+        "page": 293,
+        "head": "72.doll/dbl/n.玩偶；洋娃娃；玩具",
+        "name": "doll"
+      },
+      {
+        "page": 293,
+        "head": "73.donate/daunert/v.捐赠；捐献",
+        "name": "donate"
+      },
+      {
+        "page": 293,
+        "head": "74.doubt/daut/v.怀疑；不相信",
+        "name": "doubt"
+      },
+      {
+        "page": 293,
+        "head": "75.dragon/draegon/n.龙",
+        "name": "dragon"
+      },
+      {
+        "page": 293,
+        "head": "76.drama/dra:ma/n.戏剧",
+        "name": "drama"
+      },
+      {
+        "page": 293,
+        "head": "78.eagle/igl/n.鹰",
+        "name": "eagle"
+      },
+      {
+        "page": 293,
+        "head": "80.emperor/empara（r)/n.皇帝",
+        "name": "emperor"
+      },
+      {
+        "page": 293,
+        "head": "81.empress/empras/n.皇后；女皇",
+        "name": "empress"
+      },
+      {
+        "page": 293,
+        "head": "82.energetic/enad3etuk/adj.精力充沛的；充满活力的",
+        "name": "energetic"
+      },
+      {
+        "page": 293,
+        "head": "83.era/ara/n.时代；年代",
+        "name": "era"
+      },
+      {
+        "page": 293,
+        "head": "84.eraser/1reiza（r）/n.橡皮；黑板擦",
+        "name": "eraser"
+      },
+      {
+        "page": 293,
+        "head": "85.expert/ekspa:t/n.专家；行家；能手",
+        "name": "expert"
+      },
+      {
+        "page": 294,
+        "head": "87.fantastic/faentestuk/adj.了不起的；极好的；很大的；富于想象的",
+        "name": "fantastic"
+      },
+      {
+        "page": 294,
+        "head": "90.follk/fauk/n.人们；民间音乐",
+        "name": "follk"
+      },
+      {
+        "page": 294,
+        "head": "91.force/fo:s/n.武力；暴力",
+        "name": "force"
+      },
+      {
+        "page": 294,
+        "head": "92.found/faund/v.创办，成立；兴建",
+        "name": "found"
+      },
+      {
+        "page": 294,
+        "head": "94.giraffe/d3i'ra:f/n.长颈鹿",
+        "name": "giraffe"
+      },
+      {
+        "page": 294,
+        "head": "96.glue/glu:/n.胶；胶水",
+        "name": "glue"
+      },
+      {
+        "page": 295,
+        "head": "99.grammar /grema（r)/n.语法",
+        "name": "grammar"
+      },
+      {
+        "page": 295,
+        "head": "100.grey/grel/（（美）gray）n.灰色",
+        "name": "grey"
+      },
+      {
+        "page": 295,
+        "head": "101.guard/ga:d/n.保护；看守；卫兵；警卫员",
+        "name": "guard"
+      },
+      {
+        "page": 295,
+        "head": "102.gym/d3im/（=gymnasium/d3imneiziam/）n.体育馆",
+        "name": "gym"
+      },
+      {
+        "page": 295,
+        "head": "103.handsome/haensam/adj.英俊的；漂亮的",
+        "name": "handsome"
+      },
+      {
+        "page": 295,
+        "head": "104.he/hi:/pron.他[主格]",
+        "name": "he"
+      },
+      {
+        "page": 295,
+        "head": "105.hen/hen/n.母鸡",
+        "name": "hen"
+      },
+      {
+        "page": 295,
+        "head": "106.her/ha:（r)/pron.她[宾格]；她的",
+        "name": "her"
+      },
+      {
+        "page": 295,
+        "head": "107.hers/ha:z/pron.她的（所有物）",
+        "name": "hers"
+      },
+      {
+        "page": 295,
+        "head": "108.herself/h3:self/pron.她自己",
+        "name": "herself"
+      },
+      {
+        "page": 295,
+        "head": "109.hi/hal/int.嗨，你好；喂",
+        "name": "hi"
+      },
+      {
+        "page": 295,
+        "head": "110.hike/hark/n.徒步旅行",
+        "name": "hike"
+      },
+      {
+        "page": 296,
+        "head": "111.him/him/pron.他[宾格]",
+        "name": "him"
+      },
+      {
+        "page": 296,
+        "head": "112.himself/him'self/pron.他自己",
+        "name": "himself"
+      },
+      {
+        "page": 296,
+        "head": "113.his/hiz/pron.他的；他的（所有物）",
+        "name": "his"
+      },
+      {
+        "page": 296,
+        "head": "115.I/ar/pron.我[主格]",
+        "name": "i"
+      },
+      {
+        "page": 296,
+        "head": "116.insect/Insekt/n.昆虫",
+        "name": "insect"
+      },
+      {
+        "page": 296,
+        "head": "117.instrument/Instrumant/n.乐器；工具",
+        "name": "instrument"
+      },
+      {
+        "page": 296,
+        "head": "118.it/rt/pron.它[主格/宾格]",
+        "name": "it"
+      },
+      {
+        "page": 296,
+        "head": "119.its/its/pron.它的",
+        "name": "its"
+      },
+      {
+        "page": 296,
+        "head": "120.itself/it'self/pron.它自己",
+        "name": "itself"
+      },
+      {
+        "page": 296,
+        "head": "121.jog/d3pg/v.慢跑",
+        "name": "jog"
+      },
+      {
+        "page": 296,
+        "head": "122.kiss/kis/v.吻；接吻",
+        "name": "kiss"
+      },
+      {
+        "page": 296,
+        "head": "123.knee/ni:/n.膝盖",
+        "name": "knee"
+      },
+      {
+        "page": 297,
+        "head": "124.kungfu/kanfu:/n.功夫（中国拳术）",
+        "name": "kungfu"
+      },
+      {
+        "page": 297,
+        "head": "125.landscape/laendskeip/n.景观；地貌；风景，景色",
+        "name": "landscape"
+      },
+      {
+        "page": 297,
+        "head": "126.laptop/laeptop/n.笔记本电脑",
+        "name": "laptop"
+      },
+      {
+        "page": 297,
+        "head": "127.leaf/lif/（复leaves）n.叶；叶片；叶子",
+        "name": "leaf"
+      },
+      {
+        "page": 297,
+        "head": "128.least/li:st/adj.最少的；最小的",
+        "name": "least"
+      },
+      {
+        "page": 297,
+        "head": "129.lemon/leman/n.柠檬",
+        "name": "lemon"
+      },
+      {
+        "page": 297,
+        "head": "130.less/les/adj.更少的；较小的。",
+        "name": "less"
+      },
+      {
+        "page": 297,
+        "head": "131.lightning/laitnin/n.闪电",
+        "name": "lightning"
+      },
+      {
+        "page": 297,
+        "head": "132.literature/litratJa（r）/n.文学；文学作品",
+        "name": "literature"
+      },
+      {
+        "page": 297,
+        "head": "133.lively/\"larvl/adj.活泼的；令人兴奋的；生气勃勃的",
+        "name": "lively"
+      },
+      {
+        "page": 297,
+        "head": "134.loss/los/n.损失；丢失；亏损；去世",
+        "name": "loss"
+      },
+      {
+        "page": 298,
+        "head": "137.master /ma:sta（r)/n.大师；主人",
+        "name": "master"
+      },
+      {
+        "page": 298,
+        "head": "138.me/mi:/pron.我[宾格]",
+        "name": "me"
+      },
+      {
+        "page": 298,
+        "head": "139.medal/medl/n.奖章；勋章",
+        "name": "medal"
+      },
+      {
+        "page": 298,
+        "head": "140.might/mat/（may的过去式）aux.v.可能；也许",
+        "name": "might"
+      },
+      {
+        "page": 298,
+        "head": "141.mine/main/pron.我的（所有物）",
+        "name": "mine"
+      },
+      {
+        "page": 298,
+        "head": "142.mobile/maubail/adj.流动的；可移动的",
+        "name": "mobile"
+      },
+      {
+        "page": 298,
+        "head": "143.Ms/miz/（<美）Ms.）n.女士（一般用来称呼婚姻状况不明的女士）",
+        "name": "ms"
+      },
+      {
+        "page": 298,
+        "head": "144.mutton/matn/n.羊肉",
+        "name": "mutton"
+      },
+      {
+        "page": 298,
+        "head": "145.my/mai/pron.我的",
+        "name": "my"
+      },
+      {
+        "page": 298,
+        "head": "146.myself/mai'self/pron.我自己",
+        "name": "myself"
+      },
+      {
+        "page": 298,
+        "head": "147.neck/nek/n.脖子",
+        "name": "neck"
+      },
+      {
+        "page": 298,
+        "head": "148.negative/negotiv/adj.负面的；消极的；否定的",
+        "name": "negative"
+      },
+      {
+        "page": 299,
+        "head": "150.nod/npd/v.点头；点头示意",
+        "name": "nod"
+      },
+      {
+        "page": 299,
+        "head": "151.noon/nu:n/n.中午",
+        "name": "noon"
+      },
+      {
+        "page": 299,
+        "head": "152.normal/n:ml/adj.正常的；一般的",
+        "name": "normal"
+      },
+      {
+        "page": 299,
+        "head": "154.notebook/nautbuk/n.笔记本",
+        "name": "notebook"
+      },
+      {
+        "page": 299,
+        "head": "155.object/obd3ikt/n.对象；物体；目标",
+        "name": "object"
+      },
+      {
+        "page": 299,
+        "head": "157.onion/njan/n.洋葱",
+        "name": "onion"
+      },
+      {
+        "page": 299,
+        "head": "158.opera/opr/n.歌剧",
+        "name": "opera"
+      },
+      {
+        "page": 300,
+        "head": "159.our/aus（r)/pron.我们的",
+        "name": "our"
+      },
+      {
+        "page": 300,
+        "head": "160.ours/auaz/pron.我们的（所有物）",
+        "name": "ours"
+      },
+      {
+        "page": 300,
+        "head": "161.ourselves/aua'selvz/pron.我们自己",
+        "name": "ourselves"
+      },
+      {
+        "page": 300,
+        "head": "162.packet/pakit/n.包裹",
+        "name": "packet"
+      },
+      {
+        "page": 300,
+        "head": "163.pancake/paenkeik/n.薄饼；烙饼",
+        "name": "pancake"
+      },
+      {
+        "page": 300,
+        "head": "164.paragraph/paeragra:f/n.段；段落",
+        "name": "paragraph"
+      },
+      {
+        "page": 300,
+        "head": "165.pardon/pa:dn/v.&n.原谅；救免",
+        "name": "pardon"
+      },
+      {
+        "page": 300,
+        "head": "166.penguin/pengwin/n.企鹅",
+        "name": "penguin"
+      },
+      {
+        "page": 300,
+        "head": "167.pepper/pepa（r)/n.胡椒粉",
+        "name": "pepper"
+      },
+      {
+        "page": 300,
+        "head": "168.perform/pafo：m/v.执行；工作，履行；表演；演出",
+        "name": "perform"
+      },
+      {
+        "page": 300,
+        "head": "169.period/piriad/n.时段；时期",
+        "name": "period"
+      },
+      {
+        "page": 300,
+        "head": "170.pie/par/n.果馅饼；果馅派；肉馅饼",
+        "name": "pie"
+      },
+      {
+        "page": 300,
+        "head": "171.ping-pong/punppn/n.乒乓球；乒乓球运动",
+        "name": "ping-pong"
+      },
+      {
+        "page": 300,
+        "head": "172.poet/pourt/n.诗人",
+        "name": "poet"
+      },
+      {
+        "page": 300,
+        "head": "173.police/palis/n.警方",
+        "name": "police"
+      },
+      {
+        "page": 300,
+        "head": "174.porridge/porid3/n.粥",
+        "name": "porridge"
+      },
+      {
+        "page": 300,
+        "head": "175.position/pazijn/n.位置；职责",
+        "name": "position"
+      },
+      {
+        "page": 301,
+        "head": "176.positive/ppzativ/adj.完全的；自信的；积极乐观的；拥护的",
+        "name": "positive"
+      },
+      {
+        "page": 301,
+        "head": "177.pour/po:（r)/v.倒；倾倒；倾泻",
+        "name": "pour"
+      },
+      {
+        "page": 301,
+        "head": "178.pressure/preJa（r）/n.压力，压迫；压强；大气压；挤压；催促",
+        "name": "pressure"
+      },
+      {
+        "page": 301,
+        "head": "179.pride/praid/n.骄傲；自豪；自尊心",
+        "name": "pride"
+      },
+      {
+        "page": 301,
+        "head": "180.prince/prins/n.王子；亲王",
+        "name": "prince"
+      },
+      {
+        "page": 301,
+        "head": "181.princess/prin'ses/n.公主",
+        "name": "princess"
+      },
+      {
+        "page": 301,
+        "head": "182.proper/prppa（r)/adj.适当的；正确的",
+        "name": "proper"
+      },
+      {
+        "page": 301,
+        "head": "183.punish/paniJ/v.惩罚；处罚；责怪",
+        "name": "punish"
+      },
+      {
+        "page": 301,
+        "head": "184.purple/pa:pl/n.紫色",
+        "name": "purple"
+      },
+      {
+        "page": 301,
+        "head": "185.rabbit/raebrt/n.兔子",
+        "name": "rabbit"
+      },
+      {
+        "page": 301,
+        "head": "186.rainbow/reinbau/n.彩虹",
+        "name": "rainbow"
+      },
+      {
+        "page": 301,
+        "head": "187.rapid/raepid/adj.快速的；迅速的；快捷的",
+        "name": "rapid"
+      },
+      {
+        "page": 301,
+        "head": "188.recommend/rekamend/v.建议；推荐；介绍",
+        "name": "recommend"
+      },
+      {
+        "page": 302,
+        "head": "189.regret/rigret/n.遗憾；后悔；懊悔",
+        "name": "regret"
+      },
+      {
+        "page": 302,
+        "head": "190.remain/rmein/v.剩余，余留；保留，保持不变",
+        "name": "remain"
+      },
+      {
+        "page": 302,
+        "head": "191.risk/risk/n.风险；危险",
+        "name": "risk"
+      },
+      {
+        "page": 302,
+        "head": "193.sand/saend/n.沙；沙滩",
+        "name": "sand"
+      },
+      {
+        "page": 302,
+        "head": "194.satisfy/saetisfai/v.满足；使满意",
+        "name": "satisfy"
+      },
+      {
+        "page": 302,
+        "head": "195.scare/skea（r)/n.恐惧；恐慌；惊吓",
+        "name": "scare"
+      },
+      {
+        "page": 302,
+        "head": "197.schoolbag/'sku:lbag/n.书包",
+        "name": "schoolbag"
+      },
+      {
+        "page": 302,
+        "head": "198.scissors/sizaz/n.剪刀",
+        "name": "scissors"
+      },
+      {
+        "page": 302,
+        "head": "199.separate/separert/v.分离；分开；隔开",
+        "name": "separate"
+      },
+      {
+        "page": 303,
+        "head": "200.shark/Ja:k/n.鲨鱼",
+        "name": "shark"
+      },
+      {
+        "page": 303,
+        "head": "201.she/fi/pron.她[主格]",
+        "name": "she"
+      },
+      {
+        "page": 303,
+        "head": "202.shock/Jok/n.震惊；休克；惊；令人震惊",
+        "name": "shock"
+      },
+      {
+        "page": 303,
+        "head": "203.shoot/Ju:t/（shot/Jot/，shot）v.拍摄；射击；发射",
+        "name": "shoot"
+      },
+      {
+        "page": 303,
+        "head": "205.shoulder/Jaulda（r)/n.肩，肩膀",
+        "name": "shoulder"
+      },
+      {
+        "page": 303,
+        "head": "206.silver/'silva(r)/n.银",
+        "name": "silver"
+      },
+      {
+        "page": 303,
+        "head": "207.ski/ski:/n.滑雪板；滑雪机",
+        "name": "ski"
+      },
+      {
+        "page": 303,
+        "head": "208.slim/slim/adj.苗条的",
+        "name": "slim"
+      },
+      {
+        "page": 303,
+        "head": "209.smooth/smu:0/adj.平滑的；光滑的；平稳的",
+        "name": "smooth"
+      },
+      {
+        "page": 303,
+        "head": "210.snake/snerk/n.蛇",
+        "name": "snake"
+      },
+      {
+        "page": 303,
+        "head": "211.socialism/saufalizam/n.社会主义",
+        "name": "socialism"
+      },
+      {
+        "page": 304,
+        "head": "212.sock/sbk/n.短袜",
+        "name": "sock"
+      },
+      {
+        "page": 304,
+        "head": "213.sofa/soufo/n.沙发",
+        "name": "sofa"
+      },
+      {
+        "page": 304,
+        "head": "214.soil/soil/n.土壤",
+        "name": "soil"
+      },
+      {
+        "page": 304,
+        "head": "215.somewhere/'samwea（r)/adv.在某处；到某处",
+        "name": "somewhere"
+      },
+      {
+        "page": 304,
+        "head": "216.sore/ss:(r)/adj.疼痛的，酸痛的",
+        "name": "sore"
+      },
+      {
+        "page": 304,
+        "head": "218.spirit/sprrt/n.精神；灵魂；心灵",
+        "name": "spirit"
+      },
+      {
+        "page": 304,
+        "head": "219.stage/steid3/n.阶段；舞台；步骤；时期",
+        "name": "stage"
+      },
+      {
+        "page": 304,
+        "head": "220.standard/'stendad/n.标准；规范；水平；规格",
+        "name": "standard"
+      },
+      {
+        "page": 304,
+        "head": "221.stomach/'stAmak/n.胃；腹部",
+        "name": "stomach"
+      },
+      {
+        "page": 304,
+        "head": "222.sudden/'sAdn/adj.突然的",
+        "name": "sudden"
+      },
+      {
+        "page": 304,
+        "head": "223.suit/sju:t；su:t/v.适合；适宜；相配",
+        "name": "suit"
+      },
+      {
+        "page": 304,
+        "head": "224.sweater/sweta（r)/n.毛衣",
+        "name": "sweater"
+      },
+      {
+        "page": 304,
+        "head": "225.tail/teil/n.尾巴；尾部；后部；燕尾服",
+        "name": "tail"
+      },
+      {
+        "page": 305,
+        "head": "226.teamwork/timwk/n.团队合作",
+        "name": "teamwork"
+      },
+      {
+        "page": 305,
+        "head": "228.tent/tent/n.帐篷",
+        "name": "tent"
+      },
+      {
+        "page": 305,
+        "head": "229.the/0o；O/art.这个",
+        "name": "the"
+      },
+      {
+        "page": 305,
+        "head": "230.their/dea（r）/pron.他们的",
+        "name": "their"
+      },
+      {
+        "page": 305,
+        "head": "231.theirs/deaz/pron.他们的（所有物）",
+        "name": "theirs"
+      },
+      {
+        "page": 305,
+        "head": "232.themselves/Omselvz/pron.他们自己",
+        "name": "themselves"
+      },
+      {
+        "page": 305,
+        "head": "233.therefore/eafo:（r）/adv.因此；所以；因而",
+        "name": "therefore"
+      },
+      {
+        "page": 305,
+        "head": "234.they/oer/pron.他们[主格]",
+        "name": "they"
+      },
+      {
+        "page": 305,
+        "head": "236.throat/0raut/n.喉咙；咽喉；嗓子",
+        "name": "throat"
+      },
+      {
+        "page": 305,
+        "head": "237.thunder/θnda（r)/v.打雷",
+        "name": "thunder"
+      },
+      {
+        "page": 305,
+        "head": "238.tiny/'taini/adj.微小的；极小的；微量的",
+        "name": "tiny"
+      },
+      {
+        "page": 305,
+        "head": "239.tofu/taufu:/n.豆腐",
+        "name": "tofu"
+      },
+      {
+        "page": 305,
+        "head": "240.toilet/tolat/n.厕所；盥洗室",
+        "name": "toilet"
+      },
+      {
+        "page": 306,
+        "head": "241.ton/tan/n.吨",
+        "name": "ton"
+      },
+      {
+        "page": 306,
+        "head": "242.total/'ttutl/adj.总的",
+        "name": "total"
+      },
+      {
+        "page": 306,
+        "head": "243.trade/treid/n.贸易；交易",
+        "name": "trade"
+      },
+      {
+        "page": 306,
+        "head": "244.training/treinin/n.培训；训练",
+        "name": "training"
+      },
+      {
+        "page": 306,
+        "head": "245.treasure/'tre3a（r)/n.财富；珍宝",
+        "name": "treasure"
+      },
+      {
+        "page": 306,
+        "head": "246.treat/tri:t/v.治疗；处理，招待",
+        "name": "treat"
+      },
+      {
+        "page": 306,
+        "head": "247.T-shirt /'ti:∫at/n.T恤",
+        "name": "t-shirt"
+      },
+      {
+        "page": 306,
+        "head": "249.universe/ju:niv3:s/n.宇宙；天地万物；万象",
+        "name": "universe"
+      },
+      {
+        "page": 306,
+        "head": "250.upon/apon/prep.在....上；在上面；与on同义",
+        "name": "upon"
+      },
+      {
+        "page": 306,
+        "head": "251.us/As/pron.我们[宾格]",
+        "name": "us"
+      },
+      {
+        "page": 306,
+        "head": "252.vacation /verkeijn/n.假期",
+        "name": "vacation"
+      },
+      {
+        "page": 307,
+        "head": "253.virus/vairas/n.病毒",
+        "name": "virus"
+      },
+      {
+        "page": 307,
+        "head": "254.voluntary/volontri/adj.自愿的；志愿的",
+        "name": "voluntary"
+      },
+      {
+        "page": 307,
+        "head": "255.vote/vaut/n.投票；选票",
+        "name": "vote"
+      },
+      {
+        "page": 307,
+        "head": "256.wallet/wplit/n.钱包",
+        "name": "wallet"
+      },
+      {
+        "page": 307,
+        "head": "257.watermelon/wo:tmelan/n.西瓜",
+        "name": "watermelon"
+      },
+      {
+        "page": 307,
+        "head": "258.we/wi:/pron.我们[主格]",
+        "name": "we"
+      },
+      {
+        "page": 307,
+        "head": "259.whale/werl/n.鲸鱼",
+        "name": "whale"
+      },
+      {
+        "page": 307,
+        "head": "260.whatever/woteva（r）/pron.任何，每一；无论什么，不管什么",
+        "name": "whatever"
+      },
+      {
+        "page": 307,
+        "head": "261.wheel/wi:l/n.方向盘；轮子",
+        "name": "wheel"
+      },
+      {
+        "page": 307,
+        "head": "262.whenever/weneva（r）/conj.无论何时；在任何..…·的时候",
+        "name": "whenever"
+      },
+      {
+        "page": 307,
+        "head": "263.worse/w3:s/adj.更坏的；更差的",
+        "name": "worse"
+      },
+      {
+        "page": 307,
+        "head": "264.worst/w3:st/adj.最坏的；最差的",
+        "name": "worst"
+      },
+      {
+        "page": 307,
+        "head": "265.X-ray/eksrel/n.X射线；X光；X光照片",
+        "name": "x-ray"
+      },
+      {
+        "page": 308,
+        "head": "266.yard/ja:d/n.院子；码",
+        "name": "yard"
+      },
+      {
+        "page": 308,
+        "head": "268.you/ju:/pron.你[主格]；你们[主格]",
+        "name": "you"
+      },
+      {
+        "page": 308,
+        "head": "269.your/jo:（r）/pron.你的；你们的",
+        "name": "your"
+      },
+      {
+        "page": 308,
+        "head": "270.yours/jo:z/pron.你的（所有物）；你们的（所有物）",
+        "name": "yours"
+      },
+      {
+        "page": 308,
+        "head": "271.yourself/jo:self/pron.你自己",
+        "name": "yourself"
+      },
+      {
+        "page": 308,
+        "head": "272.youth/ju:0/n.青年，年轻人",
+        "name": "youth"
+      }
+    ],
+    "unparsedPhrases": [
+      {
+        "page": 251,
+        "text": "9.add..o..,加上"
+      },
+      {
+        "page": 259,
+        "text": "71.*both...and...两者都"
+      },
+      {
+        "page": 260,
+        "text": "80.*changeone'smind改变主意"
+      },
+      {
+        "page": 263,
+        "text": "104.fall aep "
+      },
+      {
+        "page": 265,
+        "text": "130.*g0on继续"
+      },
+      {
+        "page": 265,
+        "text": "135.goover（=review）复习；仔细地再读一遍"
+      },
+      {
+        "page": 268,
+        "text": "164.holdone'sbreath屏住呼吸"
+      },
+      {
+        "page": 269,
+        "text": "179.*inonesfifties在某人五十多岁时"
+      },
+      {
+        "page": 272,
+        "text": "198.*keep...from阻止；使.....免于"
+      },
+      {
+        "page": 272,
+        "text": "205.learn...from向....学习"
+      },
+      {
+        "page": 274,
+        "text": "220.loseone'sway迷路"
+      },
+      {
+        "page": 275,
+        "text": "230.kef of...….开笑"
+      },
+      {
+        "page": 275,
+        "text": "235.*make up one's mind 下决心"
+      },
+      {
+        "page": 275,
+        "text": "238.*nolonger/not...any longer不再"
+      },
+      {
+        "page": 276,
+        "text": "246.onone'sside在某人一边"
+      },
+      {
+        "page": 278,
+        "text": "267.prefer...to（比起.…来）更喜欢"
+      },
+      {
+        "page": 279,
+        "text": "270.protec...from保.免受"
+      },
+      {
+        "page": 280,
+        "text": "280.*saveone'slife挽救某人生命"
+      },
+      {
+        "page": 280,
+        "text": "282.se...off为..送行"
+      },
+      {
+        "page": 280,
+        "text": "286.*share...with与.分享"
+      },
+      {
+        "page": 281,
+        "text": "298.*stop...from阻止.…做"
+      },
+      {
+        "page": 282,
+        "text": "311.*takeone'sadvice听从某人劝告"
+      },
+      {
+        "page": 283,
+        "text": "319.*tell...from区别；分辨"
+      },
+      {
+        "page": 284,
+        "text": "321.the same...as与....·同样"
+      },
+      {
+        "page": 284,
+        "text": "327.*toone'sjoy/surprise使某人高兴/惊奇的是"
+      },
+      {
+        "page": 284,
+        "text": "328.to...o太..以至不能"
+      },
+      {
+        "page": 286,
+        "text": "340.what'smore而且"
+      }
+    ],
+    "appendixFamilies": 319
+  },
+  "excluded": {
+    "relations": [
+      {
+        "word": "again",
+        "type": "synonyms",
+        "value": "oncemore",
+        "pages": [
+          12
+        ]
+      },
+      {
+        "word": "always",
+        "type": "synonyms",
+        "value": "allthetime",
+        "pages": [
+          17
+        ]
+      },
+      {
+        "word": "appear",
+        "type": "synonyms",
+        "value": "comeintoview",
+        "pages": [
+          21,
+          332
+        ]
+      },
+      {
+        "word": "attend",
+        "type": "synonyms",
+        "value": "bepresent",
+        "pages": [
+          24
+        ]
+      },
+      {
+        "word": "attend",
+        "type": "synonyms",
+        "value": "goto",
+        "pages": [
+          24
+        ]
+      },
+      {
+        "word": "bin",
+        "type": "synonyms",
+        "value": "dustbin",
+        "pages": [
+          33
+        ]
+      },
+      {
+        "word": "brave",
+        "type": "antonyms",
+        "value": "cowardly",
+        "pages": [
+          37,
+          333
+        ]
+      },
+      {
+        "word": "chance",
+        "type": "synonyms",
+        "value": "opportunity",
+        "pages": [
+          46
+        ]
+      },
+      {
+        "word": "congratulation",
+        "type": "synonyms",
+        "value": "jointogether",
+        "pages": [
+          56,
+          335
+        ]
+      },
+      {
+        "word": "convenient",
+        "type": "antonyms",
+        "value": "inconvenient",
+        "pages": [
+          58,
+          336
+        ]
+      },
+      {
+        "word": "danger",
+        "type": "synonyms",
+        "value": "risk",
+        "pages": [
+          62,
+          337
+        ]
+      },
+      {
+        "word": "dead",
+        "type": "antonyms",
+        "value": "living",
+        "pages": [
+          63,
+          337
+        ]
+      },
+      {
+        "word": "elder",
+        "type": "antonyms",
+        "value": "younger",
+        "pages": [
+          75
+        ]
+      },
+      {
+        "word": "excellent",
+        "type": "synonyms",
+        "value": "outstanding",
+        "pages": [
+          81
+        ]
+      },
+      {
+        "word": "far",
+        "type": "antonyms",
+        "value": "ncar",
+        "pages": [
+          86
+        ]
+      },
+      {
+        "word": "final",
+        "type": "synonyms",
+        "value": "lastly",
+        "pages": [
+          89,
+          340
+        ]
+      },
+      {
+        "word": "final",
+        "type": "synonyms",
+        "value": "atlast",
+        "pages": [
+          89,
+          340
+        ]
+      },
+      {
+        "word": "hamburger",
+        "type": "synonyms",
+        "value": "burger",
+        "pages": [
+          106
+        ]
+      },
+      {
+        "word": "happen",
+        "type": "antonyms",
+        "value": "unhappily",
+        "pages": [
+          107
+        ]
+      },
+      {
+        "word": "important",
+        "type": "antonyms",
+        "value": "unimportant",
+        "pages": [
+          119,
+          343
+        ]
+      },
+      {
+        "word": "increase",
+        "type": "antonyms",
+        "value": "decrease",
+        "pages": [
+          121
+        ]
+      },
+      {
+        "word": "kind",
+        "type": "synonyms",
+        "value": "sort",
+        "pages": [
+          128,
+          344
+        ]
+      },
+      {
+        "word": "lie",
+        "type": "synonyms",
+        "value": "belocated",
+        "pages": [
+          134
+        ]
+      },
+      {
+        "word": "like",
+        "type": "antonyms",
+        "value": "unlike",
+        "pages": [
+          136,
+          345
+        ]
+      },
+      {
+        "word": "luckily",
+        "type": "antonyms",
+        "value": "unluckily",
+        "pages": [
+          141,
+          345
+        ]
+      },
+      {
+        "word": "lucky",
+        "type": "antonyms",
+        "value": "unlucky",
+        "pages": [
+          141,
+          345
+        ]
+      },
+      {
+        "word": "luggage",
+        "type": "synonyms",
+        "value": "baggage",
+        "pages": [
+          141
+        ]
+      },
+      {
+        "word": "miss",
+        "type": "synonyms",
+        "value": "crror",
+        "pages": [
+          148
+        ]
+      },
+      {
+        "word": "movie",
+        "type": "antonyms",
+        "value": "littlc",
+        "pages": [
+          151
+        ]
+      },
+      {
+        "word": "open",
+        "type": "antonyms",
+        "value": "closed",
+        "pages": [
+          164,
+          347
+        ]
+      },
+      {
+        "word": "patient",
+        "type": "antonyms",
+        "value": "impatient",
+        "pages": [
+          170,
+          347,
+          348
+        ]
+      },
+      {
+        "word": "plane",
+        "type": "synonyms",
+        "value": "aeroplane",
+        "pages": [
+          174
+        ]
+      },
+      {
+        "word": "pleased",
+        "type": "synonyms",
+        "value": "delighted",
+        "pages": [
+          175,
+          348
+        ]
+      },
+      {
+        "word": "present",
+        "type": "antonyms",
+        "value": "absent",
+        "pages": [
+          179
+        ]
+      },
+      {
+        "word": "realize",
+        "type": "synonyms",
+        "value": "beawareof",
+        "pages": [
+          186,
+          349
+        ]
+      },
+      {
+        "word": "regular",
+        "type": "antonyms",
+        "value": "irregular",
+        "pages": [
+          187,
+          349
+        ]
+      },
+      {
+        "word": "repair",
+        "type": "synonyms",
+        "value": "mend",
+        "pages": [
+          189
+        ]
+      },
+      {
+        "word": "safely",
+        "type": "antonyms",
+        "value": "dangerously",
+        "pages": [
+          194,
+          350
+        ]
+      },
+      {
+        "word": "should",
+        "type": "synonyms",
+        "value": "oughtto",
+        "pages": [
+          202
+        ]
+      },
+      {
+        "word": "usually",
+        "type": "antonyms",
+        "value": "unusually",
+        "pages": [
+          236,
+          354
+        ]
+      }
+    ],
+    "derivatives": [
+      {
+        "word": "accept",
+        "value": "acceptable",
+        "pages": [
+          7,
+          330
+        ]
+      },
+      {
+        "word": "accident",
+        "value": "accidental",
+        "pages": [
+          7,
+          330
+        ]
+      },
+      {
+        "word": "accident",
+        "value": "accidentally",
+        "pages": [
+          7,
+          330
+        ]
+      },
+      {
+        "word": "accurate",
+        "value": "accuracy",
+        "pages": [
+          8,
+          330
+        ]
+      },
+      {
+        "word": "achieve",
+        "value": "achievement",
+        "pages": [
+          8,
+          330
+        ]
+      },
+      {
+        "word": "act",
+        "value": "action",
+        "pages": [
+          8,
+          330,
+          331
+        ]
+      },
+      {
+        "word": "actually",
+        "value": "actual",
+        "pages": [
+          9,
+          331
+        ]
+      },
+      {
+        "word": "advertisement",
+        "value": "advertise",
+        "pages": [
+          10,
+          331
+        ]
+      },
+      {
+        "word": "agree",
+        "value": "agreement",
+        "pages": [
+          13,
+          331
+        ]
+      },
+      {
+        "word": "alive",
+        "value": "living",
+        "pages": [
+          14,
+          331
+        ]
+      },
+      {
+        "word": "amazing",
+        "value": "amaze",
+        "pages": [
+          17,
+          331
+        ]
+      },
+      {
+        "word": "ambition",
+        "value": "ambitious",
+        "pages": [
+          17,
+          331
+        ]
+      },
+      {
+        "word": "amount",
+        "value": "amuse",
+        "pages": [
+          18
+        ]
+      },
+      {
+        "word": "apologize",
+        "value": "apology",
+        "pages": [
+          21,
+          331
+        ]
+      },
+      {
+        "word": "appear",
+        "value": "appearance",
+        "pages": [
+          21,
+          332
+        ]
+      },
+      {
+        "word": "argue",
+        "value": "argument",
+        "pages": [
+          22,
+          332
+        ]
+      },
+      {
+        "word": "arrange",
+        "value": "arrangement",
+        "pages": [
+          22,
+          332
+        ]
+      },
+      {
+        "word": "arrival",
+        "value": "arrival",
+        "pages": [
+          22
+        ]
+      },
+      {
+        "word": "automatic",
+        "value": "automatically",
+        "pages": [
+          25,
+          332
+        ]
+      },
+      {
+        "word": "available",
+        "value": "availability",
+        "pages": [
+          25,
+          332
+        ]
+      },
+      {
+        "word": "available",
+        "value": "averagely",
+        "pages": [
+          25,
+          332
+        ]
+      },
+      {
+        "word": "awful",
+        "value": "awfully",
+        "pages": [
+          26,
+          332
+        ]
+      },
+      {
+        "word": "bad",
+        "value": "badly",
+        "pages": [
+          27,
+          332
+        ]
+      },
+      {
+        "word": "bakery",
+        "value": "bake",
+        "pages": [
+          27,
+          332
+        ]
+      },
+      {
+        "word": "bakery",
+        "value": "baker",
+        "pages": [
+          27,
+          332
+        ]
+      },
+      {
+        "word": "basic",
+        "value": "basically",
+        "pages": [
+          28,
+          333
+        ]
+      },
+      {
+        "word": "basic",
+        "value": "basics",
+        "pages": [
+          28,
+          333
+        ]
+      },
+      {
+        "word": "bath",
+        "value": "bathe",
+        "pages": [
+          28,
+          333
+        ]
+      },
+      {
+        "word": "beg",
+        "value": "beggar",
+        "pages": [
+          31,
+          333
+        ]
+      },
+      {
+        "word": "believe",
+        "value": "belief",
+        "pages": [
+          31,
+          333
+        ]
+      },
+      {
+        "word": "boil",
+        "value": "boiled",
+        "pages": [
+          35,
+          333
+        ]
+      },
+      {
+        "word": "boil",
+        "value": "boiling",
+        "pages": [
+          35,
+          333
+        ]
+      },
+      {
+        "word": "brave",
+        "value": "bravely",
+        "pages": [
+          37,
+          333
+        ]
+      },
+      {
+        "word": "brave",
+        "value": "bravery",
+        "pages": [
+          37,
+          333
+        ]
+      },
+      {
+        "word": "build",
+        "value": "builder",
+        "pages": [
+          39,
+          334
+        ]
+      },
+      {
+        "word": "celebrate",
+        "value": "celebration",
+        "pages": [
+          46,
+          334
+        ]
+      },
+      {
+        "word": "chemical",
+        "value": "chemist",
+        "pages": [
+          48,
+          334
+        ]
+      },
+      {
+        "word": "colour",
+        "value": "colourful",
+        "pages": [
+          54,
+          335
+        ]
+      },
+      {
+        "word": "colour",
+        "value": "colourless",
+        "pages": [
+          54,
+          335
+        ]
+      },
+      {
+        "word": "comfortable",
+        "value": "comfort",
+        "pages": [
+          54,
+          335
+        ]
+      },
+      {
+        "word": "comfortable",
+        "value": "comfortably",
+        "pages": [
+          54,
+          335
+        ]
+      },
+      {
+        "word": "communicate",
+        "value": "communication",
+        "pages": [
+          54,
+          335
+        ]
+      },
+      {
+        "word": "complain",
+        "value": "complaint",
+        "pages": [
+          55,
+          335
+        ]
+      },
+      {
+        "word": "conclusion",
+        "value": "conclude",
+        "pages": [
+          56,
+          335
+        ]
+      },
+      {
+        "word": "congratulation",
+        "value": "congratulate",
+        "pages": [
+          56,
+          335
+        ]
+      },
+      {
+        "word": "congratulation",
+        "value": "connection",
+        "pages": [
+          56,
+          335
+        ]
+      },
+      {
+        "word": "consider",
+        "value": "considerate",
+        "pages": [
+          57,
+          336
+        ]
+      },
+      {
+        "word": "consider",
+        "value": "consideration",
+        "pages": [
+          57,
+          336
+        ]
+      },
+      {
+        "word": "continue",
+        "value": "continuous",
+        "pages": [
+          57,
+          336
+        ]
+      },
+      {
+        "word": "convenient",
+        "value": "convenience",
+        "pages": [
+          58,
+          336
+        ]
+      },
+      {
+        "word": "cook",
+        "value": "cooked",
+        "pages": [
+          58,
+          336
+        ]
+      },
+      {
+        "word": "cook",
+        "value": "cooker",
+        "pages": [
+          58,
+          336
+        ]
+      },
+      {
+        "word": "cook",
+        "value": "cookery",
+        "pages": [
+          58,
+          336
+        ]
+      },
+      {
+        "word": "corner",
+        "value": "correction",
+        "pages": [
+          58
+        ]
+      },
+      {
+        "word": "corner",
+        "value": "uncorrected",
+        "pages": [
+          58
+        ]
+      },
+      {
+        "word": "custom",
+        "value": "customs",
+        "pages": [
+          61,
+          336
+        ]
+      },
+      {
+        "word": "cycle",
+        "value": "cycling",
+        "pages": [
+          61
+        ]
+      },
+      {
+        "word": "cycle",
+        "value": "cyclist",
+        "pages": [
+          61
+        ]
+      },
+      {
+        "word": "danger",
+        "value": "dangerously",
+        "pages": [
+          62,
+          337
+        ]
+      },
+      {
+        "word": "dark",
+        "value": "darkness",
+        "pages": [
+          62,
+          337
+        ]
+      },
+      {
+        "word": "dead",
+        "value": "dying",
+        "pages": [
+          63,
+          337
+        ]
+      },
+      {
+        "word": "decorate",
+        "value": "decoration",
+        "pages": [
+          64,
+          337
+        ]
+      },
+      {
+        "word": "deep",
+        "value": "depth",
+        "pages": [
+          64,
+          337
+        ]
+      },
+      {
+        "word": "departure",
+        "value": "depart",
+        "pages": [
+          65,
+          337
+        ]
+      },
+      {
+        "word": "depend",
+        "value": "dependence",
+        "pages": [
+          65,
+          337
+        ]
+      },
+      {
+        "word": "depend",
+        "value": "dependent",
+        "pages": [
+          65,
+          337
+        ]
+      },
+      {
+        "word": "describe",
+        "value": "description",
+        "pages": [
+          65,
+          337
+        ]
+      },
+      {
+        "word": "design",
+        "value": "designer",
+        "pages": [
+          65,
+          337
+        ]
+      },
+      {
+        "word": "desire",
+        "value": "desirable",
+        "pages": [
+          66,
+          337
+        ]
+      },
+      {
+        "word": "detective",
+        "value": "developed",
+        "pages": [
+          66
+        ]
+      },
+      {
+        "word": "detective",
+        "value": "developing",
+        "pages": [
+          66
+        ]
+      },
+      {
+        "word": "direction",
+        "value": "direct",
+        "pages": [
+          68,
+          338
+        ]
+      },
+      {
+        "word": "disappointed",
+        "value": "disappointing",
+        "pages": [
+          68,
+          338
+        ]
+      },
+      {
+        "word": "disappointed",
+        "value": "disappointment",
+        "pages": [
+          68,
+          338
+        ]
+      },
+      {
+        "word": "discover",
+        "value": "discovery",
+        "pages": [
+          69,
+          338
+        ]
+      },
+      {
+        "word": "draw",
+        "value": "drawing",
+        "pages": [
+          70,
+          338
+        ]
+      },
+      {
+        "word": "education",
+        "value": "educate",
+        "pages": [
+          74,
+          338
+        ]
+      },
+      {
+        "word": "education",
+        "value": "educator",
+        "pages": [
+          74,
+          338
+        ]
+      },
+      {
+        "word": "effect",
+        "value": "effective",
+        "pages": [
+          74,
+          338
+        ]
+      },
+      {
+        "word": "electric",
+        "value": "electrical",
+        "pages": [
+          75
+        ]
+      },
+      {
+        "word": "encourage",
+        "value": "encouragement",
+        "pages": [
+          76,
+          338
+        ]
+      },
+      {
+        "word": "especially",
+        "value": "especial",
+        "pages": [
+          79
+        ]
+      },
+      {
+        "word": "exactly",
+        "value": "exact",
+        "pages": [
+          80
+        ]
+      },
+      {
+        "word": "excited",
+        "value": "excite",
+        "pages": [
+          82
+        ]
+      },
+      {
+        "word": "excited",
+        "value": "excitcdly",
+        "pages": [
+          82
+        ]
+      },
+      {
+        "word": "excited",
+        "value": "excitement",
+        "pages": [
+          82
+        ]
+      },
+      {
+        "word": "explain",
+        "value": "explanation",
+        "pages": [
+          84
+        ]
+      },
+      {
+        "word": "explore",
+        "value": "explorer",
+        "pages": [
+          84
+        ]
+      },
+      {
+        "word": "fail",
+        "value": "failure",
+        "pages": [
+          85
+        ]
+      },
+      {
+        "word": "feel",
+        "value": "feeling",
+        "pages": [
+          88,
+          340
+        ]
+      },
+      {
+        "word": "fit",
+        "value": "unfit",
+        "pages": [
+          92,
+          340
+        ]
+      },
+      {
+        "word": "graduate",
+        "value": "graduation",
+        "pages": [
+          104,
+          341
+        ]
+      },
+      {
+        "word": "grow",
+        "value": "growth",
+        "pages": [
+          105,
+          341
+        ]
+      },
+      {
+        "word": "help",
+        "value": "helper",
+        "pages": [
+          111,
+          342
+        ]
+      },
+      {
+        "word": "hometown",
+        "value": "dishonesty",
+        "pages": [
+          113
+        ]
+      },
+      {
+        "word": "hope",
+        "value": "hopefully",
+        "pages": [
+          114,
+          342
+        ]
+      },
+      {
+        "word": "host",
+        "value": "hostess",
+        "pages": [
+          115,
+          342
+        ]
+      },
+      {
+        "word": "hungry",
+        "value": "hunger",
+        "pages": [
+          117,
+          343
+        ]
+      },
+      {
+        "word": "hunt",
+        "value": "hunter",
+        "pages": [
+          117,
+          343
+        ]
+      },
+      {
+        "word": "hurry",
+        "value": "hurried",
+        "pages": [
+          117,
+          343
+        ]
+      },
+      {
+        "word": "hurry",
+        "value": "hurriedly",
+        "pages": [
+          117,
+          343
+        ]
+      },
+      {
+        "word": "imagine",
+        "value": "imagination",
+        "pages": [
+          119,
+          343
+        ]
+      },
+      {
+        "word": "immediately",
+        "value": "immediate",
+        "pages": [
+          119,
+          343
+        ]
+      },
+      {
+        "word": "introduce",
+        "value": "introduction",
+        "pages": [
+          123,
+          343
+        ]
+      },
+      {
+        "word": "jump",
+        "value": "jumper",
+        "pages": [
+          126,
+          344
+        ]
+      },
+      {
+        "word": "know",
+        "value": "knowledgeable",
+        "pages": [
+          129,
+          344
+        ]
+      },
+      {
+        "word": "late",
+        "value": "lately",
+        "pages": [
+          130
+        ]
+      },
+      {
+        "word": "laugh",
+        "value": "laughter",
+        "pages": [
+          131,
+          344
+        ]
+      },
+      {
+        "word": "lazy",
+        "value": "lazily",
+        "pages": [
+          132,
+          344
+        ]
+      },
+      {
+        "word": "lazy",
+        "value": "laziness",
+        "pages": [
+          132,
+          344
+        ]
+      },
+      {
+        "word": "lead",
+        "value": "leader",
+        "pages": [
+          132,
+          344
+        ]
+      },
+      {
+        "word": "lend",
+        "value": "lengthen",
+        "pages": [
+          133
+        ]
+      },
+      {
+        "word": "life",
+        "value": "lifeless",
+        "pages": [
+          135,
+          331
+        ]
+      },
+      {
+        "word": "life",
+        "value": "lively",
+        "pages": [
+          135,
+          331
+        ]
+      },
+      {
+        "word": "life",
+        "value": "living",
+        "pages": [
+          135,
+          331
+        ]
+      },
+      {
+        "word": "love",
+        "value": "huckily",
+        "pages": [
+          140,
+          345
+        ]
+      },
+      {
+        "word": "love",
+        "value": "unlucky",
+        "pages": [
+          140,
+          345
+        ]
+      },
+      {
+        "word": "magic",
+        "value": "magician",
+        "pages": [
+          142,
+          345
+        ]
+      },
+      {
+        "word": "manage",
+        "value": "management",
+        "pages": [
+          143,
+          345,
+          346
+        ]
+      },
+      {
+        "word": "marry",
+        "value": "marriage",
+        "pages": [
+          144
+        ]
+      },
+      {
+        "word": "marry",
+        "value": "married",
+        "pages": [
+          144
+        ]
+      },
+      {
+        "word": "message",
+        "value": "messenger",
+        "pages": [
+          147,
+          346
+        ]
+      },
+      {
+        "word": "move",
+        "value": "moved",
+        "pages": [
+          151,
+          346
+        ]
+      },
+      {
+        "word": "move",
+        "value": "movement",
+        "pages": [
+          151,
+          346
+        ]
+      },
+      {
+        "word": "move",
+        "value": "moving",
+        "pages": [
+          151,
+          346
+        ]
+      },
+      {
+        "word": "music",
+        "value": "musical",
+        "pages": [
+          152,
+          346
+        ]
+      },
+      {
+        "word": "native",
+        "value": "naturally",
+        "pages": [
+          153
+        ]
+      },
+      {
+        "word": "open",
+        "value": "opening",
+        "pages": [
+          164,
+          347
+        ]
+      },
+      {
+        "word": "pain",
+        "value": "painful",
+        "pages": [
+          168,
+          347
+        ]
+      },
+      {
+        "word": "patient",
+        "value": "patience",
+        "pages": [
+          170,
+          347,
+          348
+        ]
+      },
+      {
+        "word": "patient",
+        "value": "patiently",
+        "pages": [
+          170,
+          347,
+          348
+        ]
+      },
+      {
+        "word": "peace",
+        "value": "peaceful",
+        "pages": [
+          170
+        ]
+      },
+      {
+        "word": "performance",
+        "value": "perform",
+        "pages": [
+          171
+        ]
+      },
+      {
+        "word": "performance",
+        "value": "performer",
+        "pages": [
+          171
+        ]
+      },
+      {
+        "word": "person",
+        "value": "personality",
+        "pages": [
+          171,
+          348
+        ]
+      },
+      {
+        "word": "person",
+        "value": "personally",
+        "pages": [
+          171,
+          348
+        ]
+      },
+      {
+        "word": "piano",
+        "value": "pianist",
+        "pages": [
+          172,
+          348
+        ]
+      },
+      {
+        "word": "poem",
+        "value": "poet",
+        "pages": [
+          176,
+          348
+        ]
+      },
+      {
+        "word": "pronounce",
+        "value": "pronunciation",
+        "pages": [
+          181,
+          349
+        ]
+      },
+      {
+        "word": "properly",
+        "value": "proper",
+        "pages": [
+          182,
+          349
+        ]
+      },
+      {
+        "word": "prove",
+        "value": "proof",
+        "pages": [
+          182,
+          349
+        ]
+      },
+      {
+        "word": "rarely",
+        "value": "rare",
+        "pages": [
+          185,
+          349
+        ]
+      },
+      {
+        "word": "regular",
+        "value": "regularly",
+        "pages": [
+          187,
+          349
+        ]
+      },
+      {
+        "word": "relax",
+        "value": "relaxation",
+        "pages": [
+          188,
+          350
+        ]
+      },
+      {
+        "word": "rush",
+        "value": "sadness",
+        "pages": [
+          194
+        ]
+      },
+      {
+        "word": "satisfied",
+        "value": "satisfaction",
+        "pages": [
+          195,
+          350
+        ]
+      },
+      {
+        "word": "secret",
+        "value": "secretly",
+        "pages": [
+          198,
+          351
+        ]
+      },
+      {
+        "word": "seriously",
+        "value": "servant",
+        "pages": [
+          200,
+          351
+        ]
+      },
+      {
+        "word": "short",
+        "value": "shorte",
+        "pages": [
+          201,
+          351
+        ]
+      },
+      {
+        "word": "signal",
+        "value": "silence",
+        "pages": [
+          203,
+          351
+        ]
+      },
+      {
+        "word": "simple",
+        "value": "simply",
+        "pages": [
+          204,
+          351
+        ]
+      },
+      {
+        "word": "sleep",
+        "value": "asleep",
+        "pages": [
+          205,
+          351
+        ]
+      },
+      {
+        "word": "south",
+        "value": "southern",
+        "pages": [
+          209,
+          352
+        ]
+      },
+      {
+        "word": "special",
+        "value": "specially",
+        "pages": [
+          210,
+          352
+        ]
+      },
+      {
+        "word": "strange",
+        "value": "stranger",
+        "pages": [
+          214,
+          352
+        ]
+      },
+      {
+        "word": "strong",
+        "value": "strength",
+        "pages": [
+          214,
+          352
+        ]
+      },
+      {
+        "word": "succeed",
+        "value": "successfully",
+        "pages": [
+          215,
+          352
+        ]
+      },
+      {
+        "word": "suddenly",
+        "value": "sudden",
+        "pages": [
+          216,
+          352
+        ]
+      },
+      {
+        "word": "surprise",
+        "value": "surprising",
+        "pages": [
+          218,
+          353
+        ]
+      },
+      {
+        "word": "taste",
+        "value": "tasty",
+        "pages": [
+          220,
+          353
+        ]
+      },
+      {
+        "word": "term",
+        "value": "terribly",
+        "pages": [
+          222
+        ]
+      },
+      {
+        "word": "tidy",
+        "value": "untidy",
+        "pages": [
+          225,
+          353
+        ]
+      },
+      {
+        "word": "tradition",
+        "value": "traditionally",
+        "pages": [
+          229,
+          353
+        ]
+      },
+      {
+        "word": "translate",
+        "value": "translation",
+        "pages": [
+          229,
+          353
+        ]
+      },
+      {
+        "word": "type",
+        "value": "typist",
+        "pages": [
+          232,
+          354
+        ]
+      },
+      {
+        "word": "type",
+        "value": "typewriter",
+        "pages": [
+          232,
+          354
+        ]
+      },
+      {
+        "word": "use",
+        "value": "usefully",
+        "pages": [
+          235,
+          354
+        ]
+      },
+      {
+        "word": "week",
+        "value": "weekly",
+        "pages": [
+          240
+        ]
+      },
+      {
+        "word": "wide",
+        "value": "width",
+        "pages": [
+          244,
+          355
+        ]
+      },
+      {
+        "word": "wonder",
+        "value": "wonderfully",
+        "pages": [
+          246,
+          355
+        ]
+      },
+      {
+        "word": "worry",
+        "value": "worried",
+        "pages": [
+          248,
+          355
+        ]
+      },
+      {
+        "word": "fog",
+        "value": "foggy",
+        "pages": [
+          294,
+          340
+        ]
+      }
+    ],
+    "collocations": [
+      {
+        "word": "about",
+        "value": "how aboul doing sth.what about doing sth.",
+        "pages": [
+          6
+        ]
+      },
+      {
+        "word": "be",
+        "value": "beawareof",
+        "pages": [
+          28
+        ]
+      },
+      {
+        "word": "break",
+        "value": "a fifteen-minute break",
+        "pages": [
+          37
+        ]
+      },
+      {
+        "word": "button",
+        "value": "by oneself",
+        "pages": [
+          41
+        ]
+      },
+      {
+        "word": "challenge",
+        "value": "meet/faceanewchallenge",
+        "pages": [
+          46
+        ]
+      },
+      {
+        "word": "class",
+        "value": "have aclass",
+        "pages": [
+          50
+        ]
+      },
+      {
+        "word": "compare",
+        "value": "compareAwithB",
+        "pages": [
+          55
+        ]
+      },
+      {
+        "word": "congratulation",
+        "value": "be connected to / with",
+        "pages": [
+          56,
+          335
+        ]
+      },
+      {
+        "word": "cover",
+        "value": "becovercdwith",
+        "pages": [
+          59
+        ]
+      },
+      {
+        "word": "die",
+        "value": "dicof",
+        "pages": [
+          67,
+          337
+        ]
+      },
+      {
+        "word": "english",
+        "value": "enjoy oneself",
+        "pages": [
+          77
+        ]
+      },
+      {
+        "word": "fall",
+        "value": "fall asleep",
+        "pages": [
+          85
+        ]
+      },
+      {
+        "word": "fried",
+        "value": "make friends with",
+        "pages": [
+          96
+        ]
+      },
+      {
+        "word": "garden",
+        "value": "takeupgardening",
+        "pages": [
+          100
+        ]
+      },
+      {
+        "word": "glass",
+        "value": "goDutchAA",
+        "pages": [
+          102
+        ]
+      },
+      {
+        "word": "glass",
+        "value": "goforit",
+        "pages": [
+          102
+        ]
+      },
+      {
+        "word": "glass",
+        "value": "go hiking",
+        "pages": [
+          102
+        ]
+      },
+      {
+        "word": "glass",
+        "value": "go sailing",
+        "pages": [
+          102
+        ]
+      },
+      {
+        "word": "glass",
+        "value": "go shopping",
+        "pages": [
+          102
+        ]
+      },
+      {
+        "word": "hamburger",
+        "value": "onthcotherhand",
+        "pages": [
+          106
+        ]
+      },
+      {
+        "word": "huge",
+        "value": "huge amounts of",
+        "pages": [
+          116
+        ]
+      },
+      {
+        "word": "improve",
+        "value": "improvegardeningskills",
+        "pages": [
+          120
+        ]
+      },
+      {
+        "word": "internet",
+        "value": "surf the Internet",
+        "pages": [
+          122
+        ]
+      },
+      {
+        "word": "joke",
+        "value": "I want to be ajournalist after graduation.",
+        "pages": [
+          125
+        ]
+      },
+      {
+        "word": "light",
+        "value": "at all k light",
+        "pages": [
+          135
+        ]
+      },
+      {
+        "word": "like",
+        "value": "givea like",
+        "pages": [
+          136,
+          345
+        ]
+      },
+      {
+        "word": "locate",
+        "value": "be located (in /on/at)",
+        "pages": [
+          138,
+          345
+        ]
+      },
+      {
+        "word": "lost",
+        "value": "a lot of (lots of)",
+        "pages": [
+          140,
+          345
+        ]
+      },
+      {
+        "word": "note",
+        "value": "take notes",
+        "pages": [
+          158
+        ]
+      },
+      {
+        "word": "phone",
+        "value": "mobile phone",
+        "pages": [
+          171
+        ]
+      },
+      {
+        "word": "post",
+        "value": "anonlinepost",
+        "pages": [
+          177,
+          348
+        ]
+      },
+      {
+        "word": "reply",
+        "value": "receiveareply",
+        "pages": [
+          189
+        ]
+      },
+      {
+        "word": "shake",
+        "value": "shake hands with",
+        "pages": [
+          200
+        ]
+      },
+      {
+        "word": "society",
+        "value": "socialstudy",
+        "pages": [
+          207,
+          352
+        ]
+      },
+      {
+        "word": "soon",
+        "value": "sooner or later",
+        "pages": [
+          209
+        ]
+      },
+      {
+        "word": "sport",
+        "value": "have sports",
+        "pages": [
+          211
+        ]
+      },
+      {
+        "word": "suppose",
+        "value": "besupposedtodo",
+        "pages": [
+          217
+        ]
+      },
+      {
+        "word": "text",
+        "value": "conj.(",
+        "pages": [
+          222
+        ]
+      },
+      {
+        "word": "use",
+        "value": "beusedtodoingsth.",
+        "pages": [
+          235,
+          354
+        ]
+      },
+      {
+        "word": "use",
+        "value": "usedtodosth.",
+        "pages": [
+          235,
+          354
+        ]
+      },
+      {
+        "word": "weekday",
+        "value": "on weekdays",
+        "pages": [
+          240
+        ]
+      },
+      {
+        "word": "weekend",
+        "value": "at / on weekends",
+        "pages": [
+          240
+        ]
+      },
+      {
+        "word": "word",
+        "value": "in other words",
+        "pages": [
+          247
+        ]
+      },
+      {
+        "word": "year",
+        "value": "once every four years",
+        "pages": [
+          249
+        ]
+      }
+    ],
+    "phrases": [
+      {
+        "en": "be/becomeawareof",
+        "meaning": "意识到；察觉，知道",
+        "pages": [
+          254
+        ],
+        "confidence": 0.9737936428615025,
+        "sourceNo": 38
+      },
+      {
+        "en": "socialstudy",
+        "meaning": "社会研究；社会学习",
+        "pages": [
+          281
+        ],
+        "confidence": 0.9450768294433752,
+        "sourceNo": 293
+      }
+    ]
+  },
+  "checkedAt": "2026-10-12",
+  "note": "OCR原始例句仅在本地缓存，未发布。未可靠识别或校验不通过的关系和词组未展示，不宣称整本手册每项已录入。"
+}

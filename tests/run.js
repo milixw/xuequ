@@ -21,6 +21,8 @@ require('./learning-accounts.test.js');
 require('./home-subjects.test.js');
 require('./chinese-reference.test.js');
 require('./english-words.test.js');
+require('./green-vocabulary.test.js');
+require('./green-vocabulary-study.test.js');
 require('./english-exams.test.js');
 require('./subject-papers.test.js');
 require('./nantong-chinese.test.js');

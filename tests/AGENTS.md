@@ -14,6 +14,8 @@
   （英语题库、七天计划、中考真题相关的十几个测试，含单独用 Python 运行的导入回归，列表见 content/english/AGENTS.md 和 content/past-papers/AGENTS.md）
   learning-accounts.test.js       账号/访客隔离、同页切换、旧页面拒绝写入、旧共享数据迁移与备份校验
   english-words.test.js           英语单词：词表格式、分盒升降与到期、认读词不拼写、“我认识”只进第 2 盒、每日队列上限、跨册共用进度、7 天模拟、kind en 判分、存储异常、页面接入
+  green-vocabulary.test.js        绿本补充的来源、审核、词组去重、原数据不变、词族分组及安全渲染
+  green-vocabulary-study.test.js  39组辨析、24组原创转换练习、104动词分类与语义陷阱、离线入口及安全渲染
   home-subjects.test.js           首页分区布局、英语三个入口与词汇例句的离线接入校验
   chinese-reference.test.js       语文实词 180 条编号连续与完整性、原 PDF、离线搜索与脚本校验
   nantong-chinese.test.js         南通语文来源、年份与 ID、人工核对、题/答案图片分界及缺答案声明

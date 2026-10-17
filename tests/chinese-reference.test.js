@@ -85,13 +85,13 @@ test('阅读手册历年专项可离线渲染、搜索，原题链接有效且�
     assert(!html.includes('4 分题＝2 点') && !html.includes('固定立意方向'));
   }
 });
-test('61篇古诗文逐段译文完整，译文独立默认折叠并安全转义', () => {
+test('61篇古诗文及教材补充逐段译文完整，译文独立默认折叠并安全转义', () => {
   const root = path.join(__dirname, '..');
   const html = fs.readFileSync(path.join(root, 'content/chinese/上海中考古诗文·虚实词联动注释版.html'), 'utf8');
   const translations = require('../content/chinese/classical-translations.js');
   const context = {};
   vm.runInNewContext(html.slice(html.indexOf('const D = ['), html.indexOf('const XU ='))+';globalThis.poems=D;', context);
-  assert(context.poems.length===61 && Object.keys(translations).length===61);
+  assert(context.poems.length===62 && Object.keys(translations).length===62);
   for(const poem of context.poems) {
     const entry = translations[poem[1]];
     assert(entry.review.status==='pending');
@@ -117,7 +117,14 @@ test('语文实词资料完整保留内容并隐藏 PDF 入口及页码信息', 
     assert(Number(entry[1]) === i + 1, '卡片编号必须连续');
     assert(entry[2].startsWith(`${i + 1}．`), '原文编号必须与卡片编号一致');
   });
-  assert(html.includes('180') && html.includes('虚词资料待补充'));
+  assert(html.includes('180') && html.includes('虚词 · 37 个'));
+  assert(!html.includes('虚词资料待补充'));
+  const functionWords=require('../content/chinese/classical-function-words.js');
+  assert(functionWords.entries.length===37);
+  assert(functionWords.entries.slice(0,6).map(e=>e.word).join('')==='之其而以何于');
+  assert(new Set(functionWords.entries.map(e=>e.word)).size===37);
+  assert(functionWords.entries.reduce((n,e)=>n+e.rows.length,0)===124);
+  assert(functionWords.entries.every(e=>e.review.status==='pending' && e.rows.every(row=>row.length===e.headers.length)));
   assert(html.includes('得到') && !html.includes('\uFFFD'), '文字提取不应产生替代字符');
   assert(html.includes('document.createTextNode(part)') && html.includes('mark.textContent=term'));
   assert(!html.includes('fetch('));

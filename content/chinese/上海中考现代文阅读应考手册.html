@@ -50,6 +50,14 @@
   .tag.o{background:var(--star);color:#fff;}
   .tag.g{background:var(--ok);color:#fff;}
   .formula{background:var(--brand-soft);border-left:3px solid var(--brand);padding:9px 14px;margin:8px 0;border-radius:0 8px 8px 0;font-size:14px;}
+  .fmt{background:#fffaf2;border:1px solid #f2d9b0;border-left:4px solid var(--star);border-radius:10px;padding:8px 16px;margin:10px 0;}
+  .fmt-legend{font-size:12.5px;color:var(--sub);margin:0 0 4px;line-height:1.8;}
+  .fmt-legend .fmt-k,.fmt-legend .fmt-x,.fmt-legend .fmt-b{font-size:12.5px;font-weight:700;}
+  .fmt-row{padding:9px 0;font-size:14.5px;line-height:1.95;border-top:1px dashed #f0d3ae;}
+  .fmt-row:first-of-type{border-top:0;}
+  .fmt-k{display:inline-block;margin-right:9px;padding:2px 9px;border-radius:5px;background:var(--brand);color:#fff;font-weight:700;font-size:13.5px;letter-spacing:.5px;}
+  .fmt-x{color:#a13c07;font-weight:700;background:#fff;border-bottom:2px dotted #e08a2c;padding:0 3px;border-radius:2px;}
+  .fmt-b{color:#0b6b3a;font-weight:700;}
   .score{background:var(--pur-soft);border-left:3px solid var(--pur);padding:9px 14px;margin:8px 0;border-radius:0 8px 8px 0;font-size:13.5px;color:#3b1f6e;}
   .bad{background:var(--red-soft);border-left:3px solid var(--red);padding:9px 14px;margin:8px 0;border-radius:0 8px 8px 0;font-size:13.5px;color:#7d2a1c;}
   .eg{background:#f8fafc;border:1px solid var(--line);border-radius:8px;padding:10px 14px;margin:8px 0;font-size:13.5px;color:#3d4653;}
@@ -83,6 +91,12 @@
 .rhetoric-exam-table th:first-child{width:20%;}
 .rhetoric-exam-table th:nth-child(2),.rhetoric-exam-table th:nth-child(3){width:40%;}
 .rhetoric-exam-table a{display:block;min-height:40px;margin:6px 0;color:var(--brand);line-height:1.6;}
+.desc-table{display:table;table-layout:fixed;min-width:660px;}
+.desc-table th:first-child{width:16%;}
+.desc-table th:nth-child(2){width:42%;}
+.desc-table th:nth-child(3){width:42%;}
+.desc-table tbody th{vertical-align:top;text-align:left;}
+.desc-table .grp td{background:#f1f5f9;font-weight:700;color:var(--sub);}
 @media(max-width:600px){.rhetoric-scroll-hint{display:block;}}
 .type-practice{display:flex;flex-direction:column;gap:6px;margin:12px 0;padding:12px;border:1px solid var(--line);border-radius:8px;background:var(--brand-soft);}
 .type-practice a{display:flex;align-items:center;min-height:40px;color:var(--brand);text-decoration:underline;line-height:1.5;padding:4px 0;}
@@ -697,62 +711,152 @@ const TERM = [
     "修辞手法（各类文本均可使用）",
     "p",
     "比喻 · 拟人 · 夸张 · 排比 · 对偶 · 反复 · 设问 · 反问 · 借代 · 反语 · 引用",
-    "<b>下面均为原创方法例句，不是真题或课本原句；讲解待语文教师审核。</b><p class=\"rhetoric-scroll-hint\">表格可左右滑动，查看完整例句。</p><div class=\"rhetoric-scroll\" role=\"region\" aria-label=\"修辞手法对照表，可左右滚动\" tabindex=\"0\"><table class=\"rhetoric-table\"><thead><tr><th scope=\"col\">修辞手法</th><th scope=\"col\">通俗解释</th><th scope=\"col\">原创例句与作用</th></tr></thead><tbody><tr><th scope=\"row\">比喻</th><td>用具有相似点的事物打比方。</td><td><b>例句：</b>夜空中的月亮像一盏小灯。<br><b>作用：</b>用小灯比喻月亮，突出它在夜空中明亮的样子。</td></tr><tr><th scope=\"row\">拟人</th><td>赋予事物人的动作、情感或神态。</td><td><b>例句：</b>窗边的花向我点头。<br><b>作用：</b>把花写得像人一样，显得亲切、活泼。</td></tr><tr><th scope=\"row\">夸张</th><td>有意放大或缩小，突出特点，不是把夸大的说法当事实。</td><td><b>例句：</b>听到这个消息，他高兴得快要飞起来了。<br><b>作用：</b>突出高兴的程度。</td></tr><tr><th scope=\"row\">排比</th><td>把三个或以上结构相同或相似、内容相关的短语或句子排列起来。</td><td><b>例句：</b>阅读让我们认识世界，让我们理解他人，让我们发现自己。<br><b>作用：</b>突出阅读的多种价值，增强表达的气势。</td></tr><tr><th scope=\"row\">对偶</th><td>用字数相等、结构相同或相近、意思相关的两句或两部分表达。</td><td><b>例句：</b>山间清风送爽，窗前明月照人。<br><b>作用：</b>结构整齐，读起来有节奏。</td></tr><tr><th scope=\"row\">反复</th><td>有意重复词语或句子，强调内容或感情。</td><td><b>例句：</b>等一等，等一等，让我们把这个问题想清楚。<br><b>作用：</b>强调希望放慢脚步、认真思考的态度。</td></tr><tr><th scope=\"row\">设问</th><td>为了引起注意，自己提出问题，再自己回答。</td><td><b>例句：</b>怎样让讨论更有效？先认真听懂对方的意见。<br><b>作用：</b>引出下文，提醒读者关注讨论的方法。</td></tr><tr><th scope=\"row\">反问</th><td>用问句表达确定的意思，通常不需要回答。</td><td><b>例句：</b>难道认真倾听不是一种尊重吗？<br><b>作用：</b>强调认真倾听就是尊重，语气更强。</td></tr><tr><th scope=\"row\">借代</th><td>用与对象相关的事物名称代替对象。</td><td><b>例句：</b>几位白大褂走进了病房。<br><b>作用：</b>用衣着代指穿着它的医护人员，使表达简洁、形象。</td></tr><tr><th scope=\"row\">反语</th><td>字面意思与实际意思相反，要结合语气和语境理解。</td><td><b>例句：</b>面对被踩坏的花坛，同学说：你们可真爱惜花草！<br><b>作用：</b>表面赞扬，实际批评破坏花草的行为。</td></tr><tr><th scope=\"row\">引用</th><td>引用现成的话语等来表达自己的意思。</td><td><b>例句：</b>他指着活动规则中的“借书后请按时归还”，提醒大家遵守约定。<br><b>作用：</b>引用规则说明提醒的依据；这里的活动情境及规则句均为原创示例。</td></tr></tbody></table></div><b>容易混淆：</b>比喻重在两类事物的相似点，拟人重在把事物当人来写；排比通常三个或以上，对偶由相互对应的两部分构成；设问通常自问自答，反问用问句表达已有判断；借代重在相关关系，比喻重在相似关系。<br><b>对比：</b>通常作为表现手法单独分析：把两种情况相互对照，突出差异，不能看到对照就套用比喻。<br><b>赏析路径：</b>按题干要求，说清用了什么手法、写出了什么具体特点、表达了怎样的感情或产生什么效果。不要把所有手法的效果都写成“生动形象”。",
+    "<b>下面均为原创方法例句，不是真题或课本原句；讲解待语文教师审核。</b><p class=\"rhetoric-scroll-hint\">表格可左右滑动，查看完整例句。</p><div class=\"rhetoric-scroll\" role=\"region\" aria-label=\"修辞手法对照表，可左右滚动\" tabindex=\"0\"><table class=\"rhetoric-table\"><thead><tr><th scope=\"col\">修辞手法</th><th scope=\"col\">通俗解释</th><th scope=\"col\">原创例句与作用</th></tr></thead><tbody><tr><th scope=\"row\">比喻</th><td>用具有相似点的事物打比方。</td><td><b>例句：</b>夜空中的月亮像一盏小灯。<br><b>作用：</b>用小灯比喻月亮，突出它在夜空中明亮的样子。</td></tr><tr><th scope=\"row\">拟人</th><td>赋予事物人的动作、情感或神态。</td><td><b>例句：</b>窗边的花向我点头。<br><b>作用：</b>把花写得像人一样，显得亲切、活泼。</td></tr><tr><th scope=\"row\">夸张</th><td>有意放大或缩小，突出特点，不是把夸大的说法当事实。</td><td><b>例句：</b>听到这个消息，他高兴得快要飞起来了。<br><b>作用：</b>突出高兴的程度。</td></tr><tr><th scope=\"row\">排比</th><td>把三个或以上结构相同或相似、内容相关的短语或句子排列起来。</td><td><b>例句：</b>阅读让我们认识世界，让我们理解他人，让我们发现自己。<br><b>作用：</b>突出阅读的多种价值，增强表达的气势。</td></tr><tr><th scope=\"row\">对偶</th><td>用字数相等、结构相同或相近、意思相关的两句或两部分表达。</td><td><b>例句：</b>山间清风送爽，窗前明月照人。<br><b>作用：</b>结构整齐，读起来有节奏。</td></tr><tr><th scope=\"row\">反复</th><td>有意重复词语或句子，强调内容或感情。</td><td><b>例句：</b>等一等，等一等，让我们把这个问题想清楚。<br><b>作用：</b>强调希望放慢脚步、认真思考的态度。</td></tr><tr><th scope=\"row\">设问</th><td>为了引起注意，自己提出问题，再自己回答。</td><td><b>例句：</b>怎样让讨论更有效？先认真听懂对方的意见。<br><b>作用：</b>引出下文，提醒读者关注讨论的方法。</td></tr><tr><th scope=\"row\">反问</th><td>用问句表达确定的意思，通常不需要回答。</td><td><b>例句：</b>难道认真倾听不是一种尊重吗？<br><b>作用：</b>强调认真倾听就是尊重，语气更强。</td></tr><tr><th scope=\"row\">借代</th><td>用与对象相关的事物名称代替对象。</td><td><b>例句：</b>几位白大褂走进了病房。<br><b>作用：</b>用衣着代指穿着它的医护人员，使表达简洁、形象。</td></tr><tr><th scope=\"row\">反语</th><td>字面意思与实际意思相反，要结合语气和语境理解。</td><td><b>例句：</b>面对被踩坏的花坛，同学说：你们可真爱惜花草！<br><b>作用：</b>表面赞扬，实际批评破坏花草的行为。</td></tr><tr><th scope=\"row\">引用</th><td>引用现成的话语等来表达自己的意思。</td><td><b>例句：</b>他指着活动规则中的“借书后请按时归还”，提醒大家遵守约定。<br><b>作用：</b>引用规则说明提醒的依据；这里的活动情境及规则句均为原创示例。</td></tr></tbody></table></div><b>容易混淆：</b>比喻重在两类事物的相似点，拟人重在把事物当人来写；排比通常三个或以上，对偶由相互对应的两部分构成；设问通常自问自答，反问用问句表达已有判断；借代重在相关关系，比喻重在相似关系。<br><b>对比：</b>通常作为表现手法单独分析：把两种情况相互对照，突出差异，不能看到对照就套用比喻。<div class=\"fmt\"><div class=\"fmt-row\"><span class=\"fmt-k\">赏析路径</span><span class=\"fmt-x\">什么手法</span> → <span class=\"fmt-b\">写出什么具体特点</span> → <span class=\"fmt-b\">表达什么感情或效果</span>（按题干要求取舍，不要把所有手法的效果都写成“生动形象”）。</div></div>",
     { review: { status: 'pending' } }
   ],
   [
     "描写方法（文学类）",
     "p",
-    "人物描写：动作 · 神态 · 心理 · 语言 · 外貌<br>环境描写：自然环境 · 社会环境<br>描写角度：正面（直接） · 侧面（间接） · 细节描写",
-    "<b>动作描写</b>：传神写出……的情状，表现其……的性格/心理。<br><b>心理描写</b>（2025 考）：直接呈现内心矛盾，<b>制造悬念、推动情节、为后文……做铺垫</b>。<br><b>环境描写</b>：①交代时地背景 ②渲染……气氛 ③烘托人物……心情 ④<b>推动情节发展</b> ⑤暗示或升华主题 ⑥借景物象征……<br><b>侧面描写</b>：通过写……来烘托主要人物的……，比正面更含蓄有力。"
+    "人物描写：外貌 · 神态 · 动作 · 语言 · 心理<br>环境描写：自然环境 · 社会环境<br>角度与笔法：正面（直接） · 侧面（间接） · 细节描写 · 白描",
+    "<b>先弄清一件事：描写方法有三个分类维度，彼此交叉，不是三选一。</b>同一句话常同时属于几类——「朱伯用小牙刷在灰灰的两颊上轻轻地梳理」既是<b>动作描写</b>（按对象），也是<b>正面描写</b>（按角度），还是<b>细节描写</b>（按笔法）。答题时挑<b>题目问的那个维度</b>说，不必全列。" +
+    "<p class=\"rhetoric-scroll-hint\">表格可左右滑动，查看完整内容。</p><div class=\"rhetoric-scroll\" role=\"region\" aria-label=\"描写方法分类对照表，可左右滚动\" tabindex=\"0\"><table class=\"desc-table\"><thead><tr><th scope=\"col\">类别</th><th scope=\"col\">写什么 · 怎样判断</th><th scope=\"col\">常见作用 / 答题落脚点</th></tr></thead><tbody>" +
+    "<tr class=\"grp\"><td colspan=\"3\">一、人物描写（五种）</td></tr>" +
+    "<tr><th scope=\"row\">外貌（肖像）描写</th><td>写长相、身材、衣着等<b>静态</b>特征。标志：写「长什么样、穿什么」。</td><td>交代身份与处境；暗示性格、命运；可与后文的境况形成对比。</td></tr>" +
+    "<tr><th scope=\"row\">神态描写</th><td>写<b>面部表情、眼神的变化</b>。标志：眉、眼、脸色＋变化动词（皱起、舒展、闪过、呆滞）。</td><td>把此刻的情绪外化，让人物「活」在当下；也读得出人物之间的态度。</td></tr>" +
+    "<tr><th scope=\"row\">动作描写</th><td>写做了什么、怎样做。标志：<b>一连串动词</b>。</td><td>传神写出……的情状，表现其……的性格／心理（2015 年第20题参考答案原话）。</td></tr>" +
+    "<tr><th scope=\"row\">语言描写</th><td>写说了什么、怎样说。标志：引号、语气、停顿、口头禅、答非所问。</td><td>闻其声如见其人；表现性格、身份与人物关系；透露言外之意，推动情节。</td></tr>" +
+    "<tr><th scope=\"row\">心理描写</th><td>写心里想了什么。标志：「想／觉得／感到」、内心独白、自问自答、梦境与幻觉。</td><td>直接呈现内心矛盾；<b>制造悬念、推动情节、为后文……做铺垫</b>（2025 年考）。</td></tr>" +
+    "<tr class=\"grp\"><td colspan=\"3\">二、环境描写（两类）</td></tr>" +
+    "<tr><th scope=\"row\">自然环境描写</th><td>写景物、天气、季节时令。</td><td>见下方六条；常用来渲染气氛、烘托心情、借景物暗示主题。</td></tr>" +
+    "<tr><th scope=\"row\">社会环境描写</th><td>写时代背景、场所气氛、人情风俗。</td><td>交代人物活动的社会条件；暗示主题的现实根源。</td></tr>" +
+    "<tr class=\"grp\"><td colspan=\"3\">三、描写角度与笔法</td></tr>" +
+    "<tr><th scope=\"row\">正面（直接）描写</th><td>直接写对象本身的样子、言行、心理。</td><td>直观明确，便于突出特征。</td></tr>" +
+    "<tr><th scope=\"row\">侧面（间接）描写</th><td>借<b>别人的反应</b>、环境或物件来烘托对象。</td><td>通过写……来烘托主要人物的……，比正面更含蓄有力。问「写旁观者／写旁人有什么用」，答案多半落在这里。</td></tr>" +
+    "<tr><th scope=\"row\">细节描写</th><td>对某一动作、神态、物件作细处放大（常与动作、神态描写同时出现）。</td><td>以小见大，使形象具体可感；常是情感与主题的落脚点。</td></tr>" +
+    "<tr><th scope=\"row\">白描</th><td>不加渲染，用简练的笔墨勾勒轮廓。</td><td>语言质朴而形象鲜明；答题要说清「简练却传神」具体在哪里。</td></tr>" +
+    "</tbody></table></div>" +
+    "<div class=\"warn\"><b>最容易错的一组：神态 ≠ 外貌。</b>神态写的是表情的<b>动态变化</b>（他皱起眉头、眼里闪过一丝犹豫），外貌写的是<b>长相穿着的静态特征</b>（他浓眉大眼、穿着朴素）——一个写此刻的情绪，一个写长什么样。2014 年第20题要提取的「苦笑」「呆滞」就属于神态，不是外貌。</div>" +
+    "<h3>环境描写的作用：六条里挑有依据的</h3><p>①交代时地背景 ②渲染……气氛 ③烘托人物……心情 ④推动情节发展／为下文……作铺垫 ⑤暗示或深化主题 ⑥借景物象征……。<b>不要六条全抄</b>，只答能从原文找到依据的那几条。2014 年第19题参考答案给出开头环境描写的三条常用思路：<b>渲染某种气氛 → 表现人物某种心情 → 为下文作铺垫</b>，可先按这三条自查，再看有没有暗示主题的作用。</p>" +
+    "<h3>答题格式（照着套）</h3>" +
+    "<div class=\"fmt\">" +
+    "<p class=\"fmt-legend\"><span class=\"fmt-k\">蓝底白字</span>＝手法名称　<span class=\"fmt-x\">橙色虚线</span>＝要填的原文内容　<span class=\"fmt-b\">绿色加粗</span>＝得分关键词，不能漏</p>" +
+    "<div class=\"fmt-row\"><span class=\"fmt-k\">人物描写</span>运用了<span class=\"fmt-x\">××</span>描写，写了<span class=\"fmt-x\">……</span>（具体内容），<span class=\"fmt-b\">表现／刻画</span>了人物<span class=\"fmt-x\">……</span>的性格、心理或品质。</div>" +
+    "<div class=\"fmt-row\"><span class=\"fmt-k\">环境描写</span><span class=\"fmt-b\">交代</span>了<span class=\"fmt-x\">……</span>，<span class=\"fmt-b\">渲染</span>了<span class=\"fmt-x\">……</span>气氛，<span class=\"fmt-b\">烘托</span>人物<span class=\"fmt-x\">……</span>心情，<span class=\"fmt-b\">推动情节发展／为下文作铺垫</span>。</div>" +
+    "<div class=\"fmt-row\"><span class=\"fmt-k\">侧面描写</span>通过写<span class=\"fmt-x\">……</span>来<span class=\"fmt-b\">烘托</span>主要人物<span class=\"fmt-x\">……</span>的<span class=\"fmt-x\">……</span>，比正面更含蓄有力。</div>" +
+    "<div class=\"fmt-row\"><span class=\"fmt-k\">通用三步</span>手法名称 → 写出什么具体特点 → 表达谁的什么心情（2015 年第20题解析给的思路：先选一个角度，再结合具体内容说效果，最后分析思想感情）。</div>" +
+    "</div>" +
+    "<h3>上海真题怎样考描写？</h3><p>下表按已收录原题整理，不是官方固定分类；分析待语文教师审核。点击真题名称进入完整阅读题组，按标明的小题作答，答案默认隐藏。</p><p class=\"rhetoric-scroll-hint\">表格可左右滑动，点击真题名称开始练习。</p><div class=\"rhetoric-scroll\" role=\"region\" aria-label=\"描写方法与上海真题链接，可左右滚动\" tabindex=\"0\"><table class=\"rhetoric-exam-table\"><thead><tr><th scope=\"col\">上海真题 · 点击练习</th><th scope=\"col\">描写类型</th><th scope=\"col\">原卷参考答案要点</th></tr></thead><tbody>" +
+    "<tr><th scope=\"row\"><a href=\"../../index.html#/shanghai-papers/chinese/2025/sh-chinese-2025-q03\">2025《春江水暖鸭先知》· 第（3）问 →</a></th><td>心理描写</td><td>第⑤段福胜「心里不由咯噔一下」，先怀疑福广捡鸭不还，又自我否定「福广不是偷鸡摸狗的人」。答案：制造悬念，引发读者对鸭的归属的好奇，推动情节发展，为后文试探鸭、两人起争执作铺垫。</td></tr>" +
+    "<tr><th scope=\"row\"><a href=\"../../index.html#/shanghai-papers/chinese/2025/sh-chinese-2025-q03\">2025《春江水暖鸭先知》· 第（4）问 →</a></th><td>景物（环境）描写</td><td>第⑪段「春风拂过，阳光拱开厚厚的云衣」「影子被拉得斜长，像是靠在了一起」「鹅鸭合群找食」。答案：用自然景象烘托和解的温馨氛围；借光影暗喻两位老汉关系破冰；呼应前文鸭的误会，暗含「春暖人和」的主题。</td></tr>" +
+    "<tr><th scope=\"row\"><a href=\"../../index.html#/shanghai-papers/chinese/2017/sh-chinese-2017-q06\">2017《十七岁那年的单车》· 第（5）问 →</a></th><td>动作描写 ＋ 细节描写</td><td>第㉔段「父亲犹豫了一下，伸出手环住了儿子的腰。刘伟身体一震」。答案：①「环住」体现父亲对儿子的认可；②身体「一震」是内心的震动，表明刘伟体会到父亲的信任与关爱；③「车铃声」渲染了父子和好带来的愉悦。</td></tr>" +
+    "<tr><th scope=\"row\"><a href=\"../../index.html#/shanghai-papers/chinese/2015/sh-chinese-2015-q18\">2015《评语》· 第20题 →</a></th><td>神态 ＋ 动作（＋心理）</td><td>第⑭段「他挑起一边的眉毛，说：『活泼欠用功啦！』他厌恶我无意的挖苦，丢还我的成绩单」。答案示例即写：本句中的动作描写，传神地写出阿益对「我」所说话语的不满。「厌恶」是心理，「挑起眉毛」是神态，「丢还」是动作——一句话三类并存，任选其一说透即可。</td></tr>" +
+    "<tr><th scope=\"row\"><a href=\"../../index.html#/shanghai-papers/chinese/2020/sh-chinese-2020-q18\">2020《念念不忘 必有回响》· 第18题 →</a></th><td>环境描写（选择题）</td><td>第①段「无边丝雨，飘飘洒洒，连绵山脉笼罩在雨雾中」。A 点明春季、B 交代地点是偏远山区、C 为第③段停电作铺垫，三项都成立；D「烘托了我对支教工作的恐惧心理」在原文中没有依据，是不正确项（答案 D）。<b>启示：</b>环境描写的作用是具体对应的，不能凭印象往人物心情上硬套。</td></tr>" +
+    "<tr><th scope=\"row\"><a href=\"../../index.html#/shanghai-papers/chinese/2021/sh-chinese-2021-q05\">2021 玩具修复师 · 第19题 →</a></th><td>动作 ＋ 细节（原参考答案从拟人入手）</td><td>第⑩段「朱伯用小牙刷在灰灰的两颊上轻轻地梳理……它圆乎乎的脸上不知道什么时候悄悄漾起了笑意」。原参考答案写的是<b>拟人</b>：生动形象地写出小熊修复后可爱的样子，表现朱伯技艺的高超与欣慰之情。同一句也完全可以从描写角度作答（动作＋细节＋用词），但<b>只能选一个角度说清</b>，见「句式与用词特点」卡。</td></tr>" +
+    "</tbody></table></div>" +
+    "<div class=\"note\"><b>例句均取自仓库已收录的上海中考真题原文</b>：2014、2015、2017、2020、2025 为本地整理版，2021 为网络抓取整理版，均非官方卷；<b>分类、判断标志与答题格式为 AI 编写，待语文教师审核</b>。描写方法的名称在不同教材中略有出入，以课堂上老师要求的说法为准。</div>",
+    { review: { status: 'pending' } }
   ],
   [
     "句式与用词特点（文学类）",
     "p",
     "短句 · 长句 · 整散结合 · 动词 · 叠词 · 色彩词 · 口语与书面语 · 语气词",
-    "赏析题找不到明显修辞时，就从这个角度入手：<b>句式</b>看长短与节奏（短句急促有力，长句细密舒缓），<b>用词</b>看动词、叠词、色彩词、口语词，每一个词都要说出它写出了什么、表达了什么心情。<br><br><b>真题例句（2021 年上海中考现代文 · 第19题考这一句的语言表现力）：</b><br>「朱伯用小牙刷在灰灰的两颊上轻轻地梳理，因为反复抚摸而塌陷的绒毛又竖了起来，它圆乎乎的脸上不知道什么时候悄悄漾起了笑意。」<br>可以这样分析：<b>叠词</b>「圆乎乎」写出绒毛重新蓬起后小熊憨态可掬的样子；<b>动词</b>「漾起」把笑意写成水波般慢慢扩散，比「露出」更有过程感；「悄悄」「轻轻地」两个修饰语写出朱伯的温柔耐心。整句没有比喻、拟人以外的复杂手法，靠的就是用词与细节。<br>答题模板：<b>哪个词（＋词性特点）→ 写出什么样子 → 传达谁的什么心情</b>。<br><span style=\"color:var(--sub)\">（例句为 2021 年上海中考现代文原题文字，网络抓取整理版 · 非官方；分析为 AI 编写，待语文教师审核）</span>"
+    "赏析题找不到明显修辞时，就从这个角度入手：<b>句式</b>看长短与节奏（短句急促有力，长句细密舒缓），<b>用词</b>看动词、叠词、色彩词、口语词，每一个词都要说出它写出了什么、表达了什么心情。<br><br><b>真题例句（2021 年上海中考现代文 · 第19题考这一句的语言表现力）：</b><br>「朱伯用小牙刷在灰灰的两颊上轻轻地梳理，因为反复抚摸而塌陷的绒毛又竖了起来，它圆乎乎的脸上不知道什么时候悄悄漾起了笑意。」<br>可以这样分析：<b>叠词</b>「圆乎乎」写出绒毛重新蓬起后小熊憨态可掬的样子；<b>动词</b>「漾起」把笑意写成水波般慢慢扩散，比「露出」更有过程感；「悄悄」「轻轻地」两个修饰语写出朱伯的温柔耐心。整句没有更复杂的手法。<b>注意：原卷参考答案是从「拟人」入手的</b>——生动形象地写出小熊修复后可爱的样子，表现朱伯技艺的高超与欣慰之情；用词与细节是另一条同样成立的分析路径。<b>作答时选一条写透即可，不要两条混着写。</b><div class=\"fmt\"><div class=\"fmt-row\"><span class=\"fmt-k\">答题模板</span><span class=\"fmt-x\">哪个词（＋词性特点）</span> → <span class=\"fmt-b\">写出什么样子</span> → <span class=\"fmt-b\">传达谁的什么心情</span></div></div><span style=\"color:var(--sub)\">（例句为 2021 年上海中考现代文原题文字，网络抓取整理版 · 非官方；分析为 AI 编写，待语文教师审核）</span>"
   ],
   [
     "说明方法（实用类）",
     "t",
     "举例子 · 列数字 · 作比较 · 打比方 · 下定义 · 分类别 · 列图表 · 作诠释 · 引资料",
-    "答题格式：运用了××说明方法，<b>具体准确</b>（举例子、列数字、引资料）/ <b>突出</b>（作比较）/ <b>生动形象</b>（打比方）/ <b>条理清晰</b>（分类别、列图表）/ <b>科学严密</b>（下定义）地说明了……的……特征。<br><b>注意</b>：若问说明方法，通常称打比方；若问修辞，则称比喻，用「举例子」而不是「举例论证」。"
+    "<div class=\"fmt\"><div class=\"fmt-row\"><span class=\"fmt-k\">答题格式</span>运用了<span class=\"fmt-x\">××</span>说明方法，<span class=\"fmt-b\">具体准确</span>（举例子、列数字、引资料）／<span class=\"fmt-b\">突出</span>（作比较）／<span class=\"fmt-b\">生动形象</span>（打比方）／<span class=\"fmt-b\">条理清晰</span>（分类别、列图表）／<span class=\"fmt-b\">科学严密</span>（下定义）地说明了<span class=\"fmt-x\">……</span>的<span class=\"fmt-x\">……</span>特征。</div></div><b>注意</b>：若问说明方法，通常称打比方；若问修辞，则称比喻，用「举例子」而不是「举例论证」。"
   ],
   [
     "说明顺序与衔接标志（实用类）",
     "t",
     "逻辑顺序 · 时间顺序 · 空间顺序 · 由主到次 · 由现象到本质 · 由条件到结果；标志词：首先／其次／此外／同时／因此／可见／除了……同样",
-    "段落能否调换、语段补在哪里，考的都是<b>说明顺序</b>。判断方法：先概括各段写了什么，再看段首段尾的<b>衔接词</b>和<b>指代</b>——「同时」表并列，「这」「其」「独特的区位优势」这类回指词说明承接上文，「带来了」「因此」说明因果。<br><br><b>真题例句（2019 年上海中考《上海是怎么来的？》第④⑤⑥段，第17题考能否调换）：</b><br>④「上海的『江海之会』在世界上可谓独一无二。」<br>⑤「<b>同时</b>，上海还处在中国南北之中。」<br>⑥「<b>独特的区位优势带来了</b>人口的持续增长。」<br>「同时」说明④⑤是并列的两个区位优势；⑥用「独特的区位优势」回指④⑤，再用「带来了」引出结果——先说区位条件，再说它带来的人口与文化结果，是<b>由条件到结果的逻辑顺序</b>，所以第⑥段不能与④⑤调换。<br>同类标志可对照 2021 年《郑和的远航》：「<b>首先</b>要归功于指南针和罗盘等定向技术的运用」「<b>其次</b>，是航海图的绘制与使用」「<b>除了</b>强大的导航能力，郑和船队在组织协调方面<b>同样</b>体现了高水平」。<br>答题模板：<b>先概括各段内容 → 指出顺序类型与标志词 → 说明调换后哪里衔接不上</b>。<br><span style=\"color:var(--sub)\">（例句为 2019 年上海中考真题本地整理版原文、2021 年网络抓取整理版原文；分析为 AI 编写，待语文教师审核）</span>"
+    "段落能否调换、语段补在哪里，考的都是<b>说明顺序</b>。判断方法：先概括各段写了什么，再看段首段尾的<b>衔接词</b>和<b>指代</b>——「同时」表并列，「这」「其」「独特的区位优势」这类回指词说明承接上文，「带来了」「因此」说明因果。<br><br><b>真题例句（2019 年上海中考《上海是怎么来的？》第④⑤⑥段，第17题考能否调换）：</b><br>④「上海的『江海之会』在世界上可谓独一无二。」<br>⑤「<b>同时</b>，上海还处在中国南北之中。」<br>⑥「<b>独特的区位优势带来了</b>人口的持续增长。」<br>「同时」说明④⑤是并列的两个区位优势；⑥用「独特的区位优势」回指④⑤，再用「带来了」引出结果——先说区位条件，再说它带来的人口与文化结果，是<b>由条件到结果的逻辑顺序</b>，所以第⑥段不能与④⑤调换。<br>同类标志可对照 2021 年《郑和的远航》：「<b>首先</b>要归功于指南针和罗盘等定向技术的运用」「<b>其次</b>，是航海图的绘制与使用」「<b>除了</b>强大的导航能力，郑和船队在组织协调方面<b>同样</b>体现了高水平」。<div class=\"fmt\"><div class=\"fmt-row\"><span class=\"fmt-k\">答题模板</span><span class=\"fmt-b\">先概括各段内容</span> → <span class=\"fmt-b\">指出顺序类型与标志词</span> → <span class=\"fmt-x\">说明调换后哪里衔接不上</span></div></div><span style=\"color:var(--sub)\">（例句为 2019 年上海中考真题本地整理版原文、2021 年网络抓取整理版原文；分析为 AI 编写，待语文教师审核）</span>"
   ],
   [
     "论证方法（议论文）",
     "t",
     "举例论证 · 道理论证 · 对比论证 · 比喻论证 · 引用论证",
-    "答题格式：运用了××论证，<b>具体有力</b>（举例）/ <b>权威有力</b>（道理、引用）/ <b>突出强调</b>（对比）/ <b>生动形象、通俗易懂</b>（比喻）地论证了……的观点，使论证更有说服力。<br><b>注</b>：议论文在现代文中出现频率低于说明文与非连，但并未退出——本地资料中 2013、2016、2022 年第一篇现代文都是议论文；综合运用题也常涉及。"
+    "<div class=\"fmt\"><div class=\"fmt-row\"><span class=\"fmt-k\">答题格式</span>运用了<span class=\"fmt-x\">××</span>论证，<span class=\"fmt-b\">具体有力</span>（举例）／<span class=\"fmt-b\">权威有力</span>（道理、引用）／<span class=\"fmt-b\">突出强调</span>（对比）／<span class=\"fmt-b\">生动形象、通俗易懂</span>（比喻）地论证了<span class=\"fmt-x\">……</span>的观点，<span class=\"fmt-b\">使论证更有说服力</span>。</div></div><b>注</b>：议论文在现代文中出现频率低于说明文与非连，但并未退出——本地资料中 2013、2016、2022 年第一篇现代文都是议论文；综合运用题也常涉及。"
   ],
   [
     "记叙顺序（文学类）",
     "p",
     "顺叙 · 倒叙 · 插叙 · 补叙",
-    "<b>倒叙</b>：制造悬念，吸引读者，避免平铺直叙。<br><b>插叙</b>：补充交代……的来龙去脉，使情节更完整；丰富人物……的形象；<b>为下文……做铺垫</b>；有时与眼前形成对比。<br><b>补叙</b>：文末补充交代结果，解开前文悬念，使情节完整。<br><b>2021 年把插叙作用做成选择题</b>：先判断该段插叙了什么事，再排除把次要摩擦说成主要矛盾、把「增加可读性」当成写作目的的误读项。<br>答题务必说清「插叙了什么事」。"
+    "<div class=\"fmt\">" +
+    "<div class=\"fmt-row\"><span class=\"fmt-k\">倒叙</span><span class=\"fmt-b\">制造悬念</span>，吸引读者，避免平铺直叙。</div>" +
+    "<div class=\"fmt-row\"><span class=\"fmt-k\">插叙</span>补充交代<span class=\"fmt-x\">……</span>的来龙去脉，<span class=\"fmt-b\">使情节更完整</span>；<span class=\"fmt-b\">丰富人物</span><span class=\"fmt-x\">……</span>的形象；<span class=\"fmt-b\">为下文</span><span class=\"fmt-x\">……</span><span class=\"fmt-b\">做铺垫</span>；有时与眼前形成对比。</div>" +
+    "<div class=\"fmt-row\"><span class=\"fmt-k\">补叙</span>文末补充交代结果，<span class=\"fmt-b\">解开前文悬念</span>，使情节完整。</div>" +
+    "</div><b>2021 年把插叙作用做成选择题</b>：先判断该段插叙了什么事，再排除把次要摩擦说成主要矛盾、把「增加可读性」当成写作目的的误读项。<br>答题务必说清「插叙了什么事」。"
   ],
   [
     "叙述视角 / 人称",
     "p",
     "第一人称「我」 · 第三人称 · 童年之我 vs 成年之我（双重视角）",
-    "<b>第一人称</b>：便于呈现亲历感（不等于所写事实必然真实），便于直接抒情，是线索人物与见证者。<br><b>第三人称</b>：可灵活展现人物与事件，但是否全知须看具体叙述范围。<br><b>童年与成年双重视角</b>（2024 考点）：<b>视角转换与叙述内容的变化彼此契合，使叙述层次更丰富</b>；成年视角赋予童年往事以回味与感慨，形成时光纵深感。"
+    "<div class=\"fmt\">" +
+    "<div class=\"fmt-row\"><span class=\"fmt-k\">第一人称</span>便于呈现<span class=\"fmt-b\">亲历感</span>（不等于所写事实必然真实），便于<span class=\"fmt-b\">直接抒情</span>，是线索人物与见证者。</div>" +
+    "<div class=\"fmt-row\"><span class=\"fmt-k\">第三人称</span>可灵活展现人物与事件，但是否全知须看具体叙述范围。</div>" +
+    "<div class=\"fmt-row\"><span class=\"fmt-k\">双重视角</span>（2024 考点）<span class=\"fmt-b\">视角转换与叙述内容的变化彼此契合，使叙述层次更丰富</span>；成年视角赋予童年往事以回味与感慨，形成<span class=\"fmt-b\">时光纵深感</span>。</div>" +
+    "</div>"
   ],
   [
     "表现手法 / 篇章手法",
     "p",
-    "对比衬托 · 铺垫伏笔 · 照应 · 象征 · 欲扬先抑 · 以小见大 · 线索贯穿 · 虚实结合",
-    "<b>铺垫</b>：前文写……，为后文……的出现（或转折）蓄势，使情节发展合理。<br><b>伏笔与照应</b>：前有……埋伏，后有……呼应，使结构严谨。<br><b>象征</b>：用具体的……象征抽象的……，含蓄深化主旨。<br><b>以小见大</b>：借一件小事，折射……的深层主题。"
+    "情感与主旨：象征 · 托物言志 · 借景抒情 · 以小见大 · 卒章显志 · 直抒胸臆<br>结构与情节：线索贯穿 · 铺垫 · 伏笔 · 照应 · 悬念误会 · 戛然而止<br>关系与对比：对比 · 衬托 · 欲扬先抑 · 虚实结合 · 反复 · 详略得当",
+    "<b>先分清层级：修辞管一句话怎么写漂亮，描写管一处细节怎么写具体，表现手法管整篇怎么组织、情和意怎么放进去。</b>所以题干问「这样写有什么好处」「作者为什么要写××」「结尾有什么妙处」「××在文中反复出现有什么作用」，多半考的就是表现手法。同一处文字常常同时用到几种（2025 年第⑪段既是<b>对比</b>也是<b>象征</b>），答题挑<b>题干问的那个</b>说透即可，不必全列。" +
+    "<p class=\"rhetoric-scroll-hint\">表格可左右滑动，查看完整内容。</p><div class=\"rhetoric-scroll\" role=\"region\" aria-label=\"表现手法分类对照表，可左右滚动\" tabindex=\"0\"><table class=\"desc-table\"><thead><tr><th scope=\"col\">类别</th><th scope=\"col\">怎样判断</th><th scope=\"col\">常见作用 / 答题落脚点</th></tr></thead><tbody>" +
+    "<tr class=\"grp\"><td colspan=\"3\">一、情感与主旨（情和意怎么放进去）</td></tr>" +
+    "<tr><th scope=\"row\">象征</th><td>用一个具体事物（物件、景物、细节）承载抽象意义，且这个事物<b>在文中反复出现</b>。</td><td>用……象征……，把抽象的主题写得具体可感，含蓄深化主旨。</td></tr>" +
+    "<tr><th scope=\"row\">托物言志</th><td>借某一事物的特点，写作者的<b>志向、品格</b>；多见于咏物类散文。</td><td>把……的志向寄托在……上，使情感表达更含蓄有力。</td></tr>" +
+    "<tr><th scope=\"row\">借景抒情（情景交融）</th><td>写景的句子带着明显感情色彩：乐景写乐情，哀景写哀情。</td><td>借……的景物，抒发了……的情感，情景交融，富有感染力。</td></tr>" +
+    "<tr><th scope=\"row\">以小见大</th><td>写的是一件小事、一个小物件，落点却在一个<b>大主题</b>上。</td><td>借……这件小事，折射出……的深层主题。</td></tr>" +
+    "<tr><th scope=\"row\">卒章显志</th><td>文章<b>到结尾</b>才把主旨点明，前面都是蓄势。</td><td>结尾点明……的主旨，收束全文，使主旨更鲜明。</td></tr>" +
+    "<tr><th scope=\"row\">直抒胸臆</th><td>不借景、不借物，直接说出自己的感受与评价。</td><td>直接抒发……的情感，真挚强烈，感染力强。</td></tr>" +
+    "<tr class=\"grp\"><td colspan=\"3\">二、结构与情节（材料怎么排）</td></tr>" +
+    "<tr><th scope=\"row\">线索贯穿</th><td>有一个人、一件事或一件物<b>从头到尾反复出现</b>，把全文串起来（2024 年考）。</td><td>以……为线索，贯穿全文，把……串联起来，使结构紧凑、主题集中。</td></tr>" +
+    "<tr><th scope=\"row\">铺垫</th><td>前文写……，<b>为后文的出现或转折蓄势</b>；后文不必回过头点它。</td><td>前文写了……，为后文……作铺垫，推动情节发展，使情节发展合理。</td></tr>" +
+    "<tr><th scope=\"row\">伏笔</th><td>前文藏下一个<b>不起眼的细节</b>，后文要把它揭开、对上。</td><td>前文……为后文……埋下伏笔，前有埋伏后有交代，使结构严谨。</td></tr>" +
+    "<tr><th scope=\"row\">照应（呼应）</th><td>前面出现过的内容，后面<b>再提一次</b>；首尾照应、前后照应、文题照应。</td><td>……与……互相照应，使结构完整严谨，突出……。</td></tr>" +
+    "<tr><th scope=\"row\">悬念 · 误会 · 一波三折</th><td>提出问题不答、信息不全，或人物之间互相<b>误解</b>；情节反复起伏反转。</td><td>制造悬念（设置误会），引发读者对……的好奇，推动情节，使故事一波三折。</td></tr>" +
+    "<tr><th scope=\"row\">戛然而止（留白结尾）</th><td>写到关键处<b>突然收住</b>，不交代结果（2014 年考）。</td><td>结尾戛然而止，意味深长，给读者留下回味和思考的空间。</td></tr>" +
+    "<tr class=\"grp\"><td colspan=\"3\">三、关系与对比（特点怎么突出）</td></tr>" +
+    "<tr><th scope=\"row\">对比</th><td>把<b>两方</b>（两个人、两种态度、前后两种情景）并置对照，<b>不分主次</b>。</td><td>把……与……进行对比（形成反差），突出……，引发读者对……的思考。</td></tr>" +
+    "<tr><th scope=\"row\">衬托</th><td>有<b>主有次</b>：用次要的（宾）烘托主要的（主）；正衬是同类相衬，反衬是相反相衬。</td><td>用……衬托（正衬／反衬）……的……，使主体特点更突出。</td></tr>" +
+    "<tr><th scope=\"row\">欲扬先抑</th><td>先写不好（抑），再写其好（扬），<b>情感方向发生转折</b>。</td><td>先写……，再写……，前后形成反差，使……更突出，也使文章更有波澜。</td></tr>" +
+    "<tr><th scope=\"row\">虚实结合</th><td>实写眼前之景与现实，虚写想象、回忆、梦境。</td><td>实写……，虚写……，虚实结合，拓展文章的意境与内容。</td></tr>" +
+    "<tr><th scope=\"row\">反复（复沓）</th><td>同一个词句、同一个情节<b>重复出现</b>（2017 年考）。</td><td>强调……，突出人物……的情感，加深读者印象。</td></tr>" +
+    "<tr><th scope=\"row\">详略得当</th><td>主要内容详写，次要内容略写。</td><td>详写……、略写……，主次分明，突出……的重点。</td></tr>" +
+    "</tbody></table></div>" +
+    "<div class=\"warn\"><b>最容易混的三组：</b><br>①<b>对比 vs 衬托</b>——看主次：对比两方并重、不分主次；衬托有主有次，宾衬主。<br>②<b>铺垫 vs 伏笔 vs 照应</b>——看呼应：铺垫只管往前蓄势，后文不必回头点它；伏笔是前文藏、后文一定要揭开；照应是后文把前文再提一次。<br>③<b>象征 vs 托物言志 vs 借景抒情</b>——看落点：象征落到抽象意义（主题）；托物言志落到作者的志向品格；借景抒情落到此刻的情感。</div>" +
+    "<div class=\"eg\"><b>先练这 8 种：</b>线索、铺垫、伏笔与照应、悬念、对比、象征、反复、戛然而止——它们在本地已收录的上海真题参考答案中反复出现。<br><b>这几项不要硬套：</b>欲扬先抑、以小见大、托物言志、虚实结合、详略得当属于通用手法清单，本地真题的阅读参考答案中并未出现（欲扬先抑只出现在作文写法指导里）。<b>有原文依据才写</b>，不要每题都套一遍。</div>" +
+    "<h3>答题格式（照着套）</h3>" +
+    "<div class=\"fmt\">" +
+    "<p class=\"fmt-legend\"><span class=\"fmt-k\">蓝底白字</span>＝手法名称　<span class=\"fmt-x\">橙色虚线</span>＝要填的原文内容　<span class=\"fmt-b\">绿色加粗</span>＝得分关键词，不能漏</p>" +
+    "<div class=\"fmt-row\"><span class=\"fmt-k\">铺垫／伏笔</span>前文写了<span class=\"fmt-x\">……</span>，为后文<span class=\"fmt-x\">……</span>的出现（或转折、揭开）<span class=\"fmt-b\">作铺垫（埋下伏笔）</span>，<span class=\"fmt-b\">推动情节发展</span>，使情节合理、结构严谨。</div>" +
+    "<div class=\"fmt-row\"><span class=\"fmt-k\">照应</span>前文<span class=\"fmt-x\">……</span>与后文<span class=\"fmt-x\">……</span><span class=\"fmt-b\">互相照应（首尾呼应）</span>，使结构完整严谨，突出<span class=\"fmt-x\">……</span>。</div>" +
+    "<div class=\"fmt-row\"><span class=\"fmt-k\">线索</span>以<span class=\"fmt-x\">……</span>为线索，<span class=\"fmt-b\">贯穿全文</span>，把<span class=\"fmt-x\">……</span>串联起来，使结构紧凑、主题集中。</div>" +
+    "<div class=\"fmt-row\"><span class=\"fmt-k\">对比</span>把<span class=\"fmt-x\">……</span>与<span class=\"fmt-x\">……</span><span class=\"fmt-b\">进行对比（形成反差）</span>，<span class=\"fmt-b\">突出</span><span class=\"fmt-x\">……</span>，引发读者对<span class=\"fmt-x\">……</span>的思考。</div>" +
+    "<div class=\"fmt-row\"><span class=\"fmt-k\">衬托</span>用<span class=\"fmt-x\">……</span><span class=\"fmt-b\">衬托（正衬／反衬）</span><span class=\"fmt-x\">……</span>的<span class=\"fmt-x\">……</span>，<span class=\"fmt-b\">使主体特点更突出</span>。</div>" +
+    "<div class=\"fmt-row\"><span class=\"fmt-k\">象征</span>用<span class=\"fmt-x\">……</span>象征<span class=\"fmt-x\">……</span>，<span class=\"fmt-b\">把抽象的主题写得具体可感</span>，含蓄深化主旨。</div>" +
+    "<div class=\"fmt-row\"><span class=\"fmt-k\">通用三步</span>手法名称 → 结合原文说清写了什么 → <span class=\"fmt-b\">落到人物、情节或主题上的作用</span>。</div>" +
+    "</div>" +
+    "<h3>上海真题怎样考表现手法？</h3><p>下表按已收录原题整理，不是官方固定分类；答案要点逐条比对原卷参考答案，分析待语文教师审核。点击真题名称进入完整阅读题组，按标明的小题作答。</p><p class=\"rhetoric-scroll-hint\">表格可左右滑动，点击真题名称开始练习。</p><div class=\"rhetoric-scroll\" role=\"region\" aria-label=\"表现手法与上海真题链接，可左右滚动\" tabindex=\"0\"><table class=\"rhetoric-exam-table\"><thead><tr><th scope=\"col\">上海真题 · 点击练习</th><th scope=\"col\">手法</th><th scope=\"col\">原卷参考答案要点</th></tr></thead><tbody>" +
+    "<tr><th scope=\"row\"><a href=\"../../index.html#/shanghai-papers/chinese/2025/sh-chinese-2025-q03\">2025《春江水暖鸭先知》· 第（3）问 →</a></th><td>铺垫 · 悬念 · 呼应 · 一波三折</td><td>第⑤段福胜的心理先怀疑福广捡鸭不还、又自我否定。答案：制造悬念，引发读者对鸭的归属的好奇，推动情节发展，为后文试探鸭、两人起争执作铺垫；与后文揭示「鸭是新品种样品」呼应，让情节反转合理，使故事一波三折。</td></tr>" +
+    "<tr><th scope=\"row\"><a href=\"../../index.html#/shanghai-papers/chinese/2025/sh-chinese-2025-q03\">2025《春江水暖鸭先知》· 第（4）问 →</a></th><td>对比 · 象征（暗喻）</td><td>第⑪段「春风拂过，阳光拱开厚厚的云衣」的自然景象与前文两位老汉的矛盾冲突形成鲜明对比，烘托出关系即将和解的温馨氛围；「影子被拉得斜长，像是靠在了一起」借光影暗喻关系破冰，暗含「春暖人和」的主题。</td></tr>" +
+    "<tr><th scope=\"row\"><a href=\"../../index.html#/shanghai-papers/chinese/2024/sh-chinese-2024-q04\">2024《草茎上的流年》· 第（4）问 →</a></th><td>线索 · 象征 · 前后照应</td><td>咪咪猫是文章的<b>叙事和情感线索</b>，贯穿了「我」从小到大的生活；咪咪猫作为<b>童年记忆的象征</b>，表现童年生活的无忧无虑；童年的「我」与成年的「我」由咪咪猫串联，自然承转，前后照应。</td></tr>" +
+    "<tr><th scope=\"row\"><a href=\"../../index.html#/shanghai-papers/chinese/2023/sh-chinese-2023-q04\">2023《邂逅外星人》· 第（5）问 →</a></th><td>铺垫 · 首尾呼应 · 悬念</td><td>首尾都出现「神秘的敲击声」：开篇引发小申的遐想，<b>为下文幻想与外星人相遇并交流作铺垫</b>；结尾小申的提问与开篇情节呼应，使结构更加完整严谨；结尾有问未答，留下悬念，给人意犹未尽、回味无穷之感。</td></tr>" +
+    "<tr><th scope=\"row\"><a href=\"../../index.html#/shanghai-papers/chinese/2017/sh-chinese-2017-q06\">2017《十七岁那年的单车》· 第（4）问 →</a></th><td>反复（重复）＋ 铺垫</td><td>第⑨段与第⑦段内容基本相同（母亲留饭、父亲揭开锅盖看）。答案：这些<b>重复动作</b>蕴含着父母对儿子的牵挂，突出了对孩子的爱；<b>也为后文父子矛盾的解决做了铺垫</b>。</td></tr>" +
+    "<tr><th scope=\"row\"><a href=\"../../index.html#/shanghai-papers/chinese/2014/sh-chinese-2014-q19\">2014《列车上》· 第23题 →</a></th><td>对比（反差）· 戛然而止</td><td>阳光男孩的主动交流与前文其他人的表现<b>形成反差（对比）</b>，引发我们对人际交流问题的思考；结尾戛然而止，意味深长，给人以回味和思考的空间。</td></tr>" +
+    "</tbody></table></div>" +
+    "<div class=\"note\"><b>例句与答案要点取自仓库已收录的上海中考真题原文</b>（2014、2017、2023、2024、2025 均为本地整理版，非官方卷）；<b>分类、判断标志与答题格式为 AI 编写，待语文教师审核</b>。表现手法的名称在不同教材中略有出入，以课堂上老师要求的说法为准。</div>",
+    { review: { status: 'pending' } }
   ],
   [
     "非连续性文本常用词",
     "t",
     "材料 · 数据 · 图表 · 采访提纲 · 流程图 · 调查报告 · 新闻特写 · 文献摘录",
-    "指认材料身份是解题第一步：<b>数据类</b>提供量化证据，<b>新闻类</b>重时效与客观性，<b>采访笔记</b>提供真实个案与民意，<b>文献摘录</b>提供学术背景。<br>评析类问题的两个通用标尺：<b>①是否贴合目的</b>；<b>②能否获得新信息（是否与已有材料重复）</b>。"
+    "指认材料身份是解题第一步：<span class=\"fmt-b\">数据类</span>提供量化证据，<span class=\"fmt-b\">新闻类</span>重时效与客观性，<span class=\"fmt-b\">采访笔记</span>提供真实个案与民意，<span class=\"fmt-b\">文献摘录</span>提供学术背景。<div class=\"fmt\"><div class=\"fmt-row\"><span class=\"fmt-k\">评析两标尺</span><span class=\"fmt-b\">①是否贴合目的</span>　<span class=\"fmt-b\">②能否获得新信息</span>（是否与已有材料重复）</div></div>"
   ]
 ];
 const CHECK = [
