@@ -1,0 +1,230 @@
+{
+  "checkedAt": "2026-10-17",
+  "note": "公开合集音频，保留原录音；下载并校验容器和时长，尚未逐题试听核对版本。2017杂音较大、2020音质一般为上传者说明。",
+  "files": [
+    {
+      "year": 2013,
+      "src": "content/english/past-papers/2013/listening-original.m4a",
+      "url": "https://www.bilibili.com/video/BV1rx411Q7gW/?p=6",
+      "cid": 15884467,
+      "title": "2013年中考听力",
+      "bytes": 6975932,
+      "sha256": "d01b969be5eac0df0ecefe8e0df44649e0049a7f1e5ee3253e0214887b8a6b8a",
+      "durationSeconds": 831.031,
+      "codec": "mp4a.40.2",
+      "matching": "year-label-only",
+      "review": {
+        "status": "pending"
+      },
+      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。"
+    },
+    {
+      "year": 2014,
+      "src": "content/english/past-papers/2014/listening-original.m4a",
+      "url": "https://www.bilibili.com/video/BV1rx411Q7gW/?p=7",
+      "cid": 15884468,
+      "title": "2014年中考听力",
+      "bytes": 5904825,
+      "sha256": "758c62fc290b3ed02e1b06204845371fce187f143c2081eca2e2995e1c3acc4b",
+      "durationSeconds": 703.275,
+      "codec": "mp4a.40.2",
+      "matching": "year-label-only",
+      "review": {
+        "status": "pending"
+      },
+      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。"
+    },
+    {
+      "year": 2015,
+      "src": "content/english/past-papers/2015/listening-original.m4a",
+      "url": "https://www.bilibili.com/video/BV1rx411Q7gW/?p=8",
+      "cid": 15884469,
+      "title": "2015年中考听力",
+      "bytes": 6871082,
+      "sha256": "0b92b33e71bd9bea928c5ae96b5eef482deaa3c8046a487203353a94f5e6ae42",
+      "durationSeconds": 818.492,
+      "codec": "mp4a.40.2",
+      "matching": "year-label-only",
+      "review": {
+        "status": "pending"
+      },
+      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。"
+    },
+    {
+      "year": 2016,
+      "src": "content/english/past-papers/2016/listening-original.m4a",
+      "url": "https://www.bilibili.com/video/BV1rx411Q7gW/?p=9",
+      "cid": 15884470,
+      "title": "2016年中考听力",
+      "bytes": 6187600,
+      "sha256": "8ad73cb0c7c38474a58741ce06dc4dca88e646bf90d44e6c4e865f2023cbaf61",
+      "durationSeconds": 737.059,
+      "codec": "mp4a.40.2",
+      "matching": "year-label-only",
+      "review": {
+        "status": "pending"
+      },
+      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。"
+    },
+    {
+      "year": 2017,
+      "src": "content/english/past-papers/2017/listening-original.m4a",
+      "url": "https://www.bilibili.com/video/BV1rx411Q7gW/?p=10",
+      "cid": 171632366,
+      "title": "2017年中考听力",
+      "bytes": 12128213,
+      "sha256": "dee86bcd42f16844487d95a74c413136c9b774baca4ad72c7040d95b895f519a",
+      "durationSeconds": 1150.455,
+      "codec": "mp4a.40.2",
+      "matching": "year-label-only",
+      "review": {
+        "status": "pending"
+      },
+      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。上传者提示：杂音较大。"
+    },
+    {
+      "year": 2018,
+      "src": "content/english/past-papers/2018/listening-original.m4a",
+      "url": "https://www.bilibili.com/video/BV1rx411Q7gW/?p=11",
+      "cid": 171639855,
+      "title": "2018年中考听力",
+      "bytes": 15461504,
+      "sha256": "5c28e3de7daef758d982e810346dbb0fe0bd60a83290276bce9bb677c6ae6753",
+      "durationSeconds": 964.487,
+      "codec": "mp4a.40.2",
+      "matching": "year-label-only",
+      "review": {
+        "status": "pending"
+      },
+      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。"
+    },
+    {
+      "year": 2019,
+      "src": "content/english/past-papers/2019/listening-original.m4a",
+      "url": "https://www.bilibili.com/video/BV1rx411Q7gW/?p=12",
+      "cid": 171646039,
+      "title": "2019年中考听力",
+      "bytes": 10539466,
+      "sha256": "d1f64883984492aa575fb2c8d31ba117a26a9a0b471f129d58dd86fd0b2f7510",
+      "durationSeconds": 1256.478,
+      "codec": "mp4a.40.2",
+      "matching": "year-label-only",
+      "review": {
+        "status": "pending"
+      },
+      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。"
+    },
+    {
+      "year": 2020,
+      "src": "content/english/past-papers/2020/listening-original.m4a",
+      "url": "https://www.bilibili.com/video/BV1rx411Q7gW/?p=13",
+      "cid": 206825533,
+      "title": "2020年中考听力",
+      "bytes": 8330818,
+      "sha256": "6a037daf35e16b441a581d9d79e17c492d50da11cd7abc2b88f96d65442bd241",
+      "durationSeconds": 993.117,
+      "codec": "mp4a.40.2",
+      "matching": "year-label-only",
+      "review": {
+        "status": "pending"
+      },
+      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。上传者提示：音质一般。"
+    },
+    {
+      "year": 2021,
+      "src": "content/english/past-papers/2021/listening-original.m4a",
+      "url": "https://www.bilibili.com/video/BV1rx411Q7gW/?p=14",
+      "cid": 358965797,
+      "title": "2021年中考听力",
+      "bytes": 6728350,
+      "sha256": "02a472de03e5d3767c3e052a8b7eccd6f89687c73c97e3ffd9f0132ca8971fef",
+      "durationSeconds": 801.599,
+      "codec": "mp4a.40.2",
+      "matching": "year-label-only",
+      "review": {
+        "status": "pending"
+      },
+      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。"
+    },
+    {
+      "year": 2022,
+      "src": "content/english/past-papers/2022/listening-original.m4a",
+      "url": "https://www.bilibili.com/video/BV1rx411Q7gW/?p=15",
+      "cid": 809875065,
+      "title": "2022年中考听力",
+      "bytes": 6987437,
+      "sha256": "75752c78cd3c78c7c5cf1c99176941d3c1f53531527482c5ebde8b00446cfa3d",
+      "durationSeconds": 832.365,
+      "codec": "mp4a.40.2",
+      "matching": "year-label-only",
+      "review": {
+        "status": "pending"
+      },
+      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。"
+    },
+    {
+      "year": 2023,
+      "src": "content/english/past-papers/2023/listening-original.m4a",
+      "url": "https://www.bilibili.com/video/BV1rx411Q7gW/?p=16",
+      "cid": 27656522327,
+      "title": "2023年中考听力",
+      "bytes": 5843666,
+      "sha256": "50e5e08ac3e3613282b405861ede658bdf6611850dffae1e9ec3921145cac09c",
+      "durationSeconds": 715.114,
+      "codec": "mp4a.40.2",
+      "matching": "year-label-only",
+      "review": {
+        "status": "pending"
+      },
+      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。"
+    },
+    {
+      "year": 2024,
+      "src": "content/english/past-papers/2024/listening-original.m4a",
+      "url": "https://www.bilibili.com/video/BV1rx411Q7gW/?p=17",
+      "cid": 27656522634,
+      "title": "2024年中考听力",
+      "bytes": 3633845,
+      "sha256": "807003d3efaae73990ff015607f62eade2d2034b4da280d4a90da981ebf3427a",
+      "durationSeconds": 679.551,
+      "codec": "mp4a.40.5",
+      "matching": "year-label-only",
+      "review": {
+        "status": "pending"
+      },
+      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。"
+    },
+    {
+      "year": 2025,
+      "src": "content/english/past-papers/2025/listening-original.m4a",
+      "url": "https://www.bilibili.com/video/BV1rx411Q7gW/?p=18",
+      "cid": 30615867041,
+      "title": "2025年中考听力",
+      "bytes": 3438557,
+      "sha256": "6b141f4cdcaa9592b436fcd7f4fe3429c71bc9bcd2c5ea01226eab0b15702307",
+      "durationSeconds": 790.015,
+      "codec": "mp4a.40.5",
+      "matching": "year-label-only",
+      "review": {
+        "status": "pending"
+      },
+      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。"
+    },
+    {
+      "year": 2026,
+      "src": "content/english/past-papers/2026/listening-original.m4a",
+      "url": "https://www.bilibili.com/video/BV1rx411Q7gW/?p=19",
+      "cid": 39534595556,
+      "title": "2026年中考听力",
+      "bytes": 6962531,
+      "sha256": "b629f184f62d7162d4b6be4f52cc3036df987a0a3474656d33f510b20431c298",
+      "durationSeconds": 847.787,
+      "codec": "mp4a.40.2",
+      "matching": "year-label-only",
+      "review": {
+        "status": "pending"
+      },
+      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。"
+    }
+  ]
+}

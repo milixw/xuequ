@@ -1,0 +1,1578 @@
+{
+  "checkedAt": "2026-10-17",
+  "papers": [
+    {
+      "year": 2013,
+      "sources": [
+        {
+          "url": "https://www.yeyulingfeng.com/wendang/133885.html",
+          "file": "2013d.html",
+          "sha256": "d06dad3663aad01bb674ecbfd06fede19d76dbf98afa8175079250826272fb7e"
+        },
+        {
+          "url": "https://www.renrendoc.com/paper/97297799.html",
+          "file": "2013.html",
+          "sha256": "cb90bd59d657dfdda0296c85dea124c2759302dece02188de17cb36e8e69a824"
+        }
+      ],
+      "images": [
+        {
+          "src": "content/english/past-papers/2013/listening-pictures.png",
+          "sha256": "f8d75a80c86ae8cd1c740210683cf690856ac63c2937ddf1db8554073f557935",
+          "originalFile": "2013-page1.gif",
+          "originalSha256": "838f856e8807f10a9602836d49afcfc2860a30d0899066291dbeef1a0d9a32c9",
+          "crop": [
+            205,
+            376,
+            660,
+            596
+          ],
+          "originalUrl": "https://file1.renrendoc.com/fileroot_temp2/2020-10/6/5a710c77-ae52-48f2-95ae-34b74fc712d5/5a710c77-ae52-48f2-95ae-34b74fc712d51.gif"
+        }
+      ],
+      "questions": [
+        {
+          "id": "sh2013-q01",
+          "originalNo": 1,
+          "part": "listening",
+          "category": "听力选图",
+          "type": "fill",
+          "stem": "根据录音选择对应图片，填写图片字母。",
+          "answer": "F",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "materialId": "sh2013-listening-A",
+          "passage": "Listen and choose the right picture（根据你听到的内容，选出相应的图片）",
+          "passageImages": [
+            {
+              "src": "content/english/past-papers/2013/listening-pictures.png",
+              "label": "2013年听力选图原图"
+            }
+          ]
+        },
+        {
+          "id": "sh2013-q02",
+          "originalNo": 2,
+          "part": "listening",
+          "category": "听力选图",
+          "type": "fill",
+          "stem": "根据录音选择对应图片，填写图片字母。",
+          "answer": "C",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "materialId": "sh2013-listening-A",
+          "passage": "Listen and choose the right picture（根据你听到的内容，选出相应的图片）",
+          "passageImages": [
+            {
+              "src": "content/english/past-papers/2013/listening-pictures.png",
+              "label": "2013年听力选图原图"
+            }
+          ]
+        },
+        {
+          "id": "sh2013-q03",
+          "originalNo": 3,
+          "part": "listening",
+          "category": "听力选图",
+          "type": "fill",
+          "stem": "根据录音选择对应图片，填写图片字母。",
+          "answer": "D",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "materialId": "sh2013-listening-A",
+          "passage": "Listen and choose the right picture（根据你听到的内容，选出相应的图片）",
+          "passageImages": [
+            {
+              "src": "content/english/past-papers/2013/listening-pictures.png",
+              "label": "2013年听力选图原图"
+            }
+          ]
+        },
+        {
+          "id": "sh2013-q04",
+          "originalNo": 4,
+          "part": "listening",
+          "category": "听力选图",
+          "type": "fill",
+          "stem": "根据录音选择对应图片，填写图片字母。",
+          "answer": "A",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "materialId": "sh2013-listening-A",
+          "passage": "Listen and choose the right picture（根据你听到的内容，选出相应的图片）",
+          "passageImages": [
+            {
+              "src": "content/english/past-papers/2013/listening-pictures.png",
+              "label": "2013年听力选图原图"
+            }
+          ]
+        },
+        {
+          "id": "sh2013-q05",
+          "originalNo": 5,
+          "part": "listening",
+          "category": "听力选图",
+          "type": "fill",
+          "stem": "根据录音选择对应图片，填写图片字母。",
+          "answer": "B",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "materialId": "sh2013-listening-A",
+          "passage": "Listen and choose the right picture（根据你听到的内容，选出相应的图片）",
+          "passageImages": [
+            {
+              "src": "content/english/past-papers/2013/listening-pictures.png",
+              "label": "2013年听力选图原图"
+            }
+          ]
+        },
+        {
+          "id": "sh2013-q06",
+          "originalNo": 6,
+          "part": "listening",
+          "category": "听力选图",
+          "type": "fill",
+          "stem": "根据录音选择对应图片，填写图片字母。",
+          "answer": "E",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "materialId": "sh2013-listening-A",
+          "passage": "Listen and choose the right picture（根据你听到的内容，选出相应的图片）",
+          "passageImages": [
+            {
+              "src": "content/english/past-papers/2013/listening-pictures.png",
+              "label": "2013年听力选图原图"
+            }
+          ]
+        },
+        {
+          "id": "sh2013-q07",
+          "originalNo": 7,
+          "part": "listening",
+          "category": "听力选择",
+          "type": "choice",
+          "stem": "根据录音中的对话和问题，选择最恰当的答案。",
+          "answer": "B",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "$700.",
+            "$500.",
+            "$300.",
+            "$200."
+          ]
+        },
+        {
+          "id": "sh2013-q08",
+          "originalNo": 8,
+          "part": "listening",
+          "category": "听力选择",
+          "type": "choice",
+          "stem": "根据录音中的对话和问题，选择最恰当的答案。",
+          "answer": "D",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "English.",
+            "French.",
+            "Chinese.",
+            "Canadian."
+          ]
+        },
+        {
+          "id": "sh2013-q09",
+          "originalNo": 9,
+          "part": "listening",
+          "category": "听力选择",
+          "type": "choice",
+          "stem": "根据录音中的对话和问题，选择最恰当的答案。",
+          "answer": "B",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "Jane’s.",
+            "Peter’s.",
+            "Betty’s.",
+            "Sally’s."
+          ]
+        },
+        {
+          "id": "sh2013-q10",
+          "originalNo": 10,
+          "part": "listening",
+          "category": "听力选择",
+          "type": "choice",
+          "stem": "根据录音中的对话和问题，选择最恰当的答案。",
+          "answer": "A",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "Father’s Day.",
+            "Mother’s Day.",
+            "Teachers’ Day.",
+            "Children’s Day."
+          ]
+        },
+        {
+          "id": "sh2013-q11",
+          "originalNo": 11,
+          "part": "listening",
+          "category": "听力选择",
+          "type": "choice",
+          "stem": "根据录音中的对话和问题，选择最恰当的答案。",
+          "answer": "A",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "He asked his teacher for help.",
+            "He worked it out himself.",
+            "He asked his classmate for help.",
+            "He found the answer from the Internet."
+          ]
+        },
+        {
+          "id": "sh2013-q12",
+          "originalNo": 12,
+          "part": "listening",
+          "category": "听力选择",
+          "type": "choice",
+          "stem": "根据录音中的对话和问题，选择最恰当的答案。",
+          "answer": "D",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "Because Lisa’s dad is strict.",
+            "Because he didn’t buy a gift.",
+            "Because Lisa’s dad doesn’t like him.",
+            "Because he’s never met Lisa’s dad."
+          ]
+        },
+        {
+          "id": "sh2013-q13",
+          "originalNo": 13,
+          "part": "listening",
+          "category": "听力选择",
+          "type": "choice",
+          "stem": "根据录音中的对话和问题，选择最恰当的答案。",
+          "answer": "A",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "Mother and son.",
+            "Teacher and student.",
+            "Doctor and patient.",
+            "Waitress and customer."
+          ]
+        },
+        {
+          "id": "sh2013-q14",
+          "originalNo": 14,
+          "part": "listening",
+          "category": "听力选择",
+          "type": "choice",
+          "stem": "根据录音中的对话和问题，选择最恰当的答案。",
+          "answer": "C",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "Hong Kong.",
+            "Museums.",
+            "Travelling.",
+            "Food."
+          ]
+        },
+        {
+          "id": "sh2013-q15",
+          "originalNo": 15,
+          "part": "listening",
+          "category": "听力选择",
+          "type": "choice",
+          "stem": "根据录音中的对话和问题，选择最恰当的答案。",
+          "answer": "C",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "In a bank.",
+            "In a restaurant.",
+            "In a bookstore.",
+            "In a hotel."
+          ]
+        },
+        {
+          "id": "sh2013-q16",
+          "originalNo": 16,
+          "part": "listening",
+          "category": "听力选择",
+          "type": "choice",
+          "stem": "根据录音中的对话和问题，选择最恰当的答案。",
+          "answer": "B",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "She wants to work for Mr. Jones.",
+            "Mr. Jones can fix the recorder.",
+            "She wants to meet Mr. Jones.",
+            "Mr. Jones needs a recorder."
+          ]
+        },
+        {
+          "id": "sh2013-q17",
+          "originalNo": 17,
+          "part": "listening",
+          "category": "听力判断",
+          "type": "choice",
+          "stem": "One day, Henry took his son to the country by train.",
+          "answer": "F",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "符合（T）",
+            "不符合（F）"
+          ],
+          "optionLabels": "TF",
+          "materialId": "sh2013-listening-C"
+        },
+        {
+          "id": "sh2013-q18",
+          "originalNo": 18,
+          "part": "listening",
+          "category": "听力判断",
+          "type": "choice",
+          "stem": "They stayed with a poor family to know about the life there.",
+          "answer": "T",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "符合（T）",
+            "不符合（F）"
+          ],
+          "optionLabels": "TF",
+          "materialId": "sh2013-listening-C"
+        },
+        {
+          "id": "sh2013-q19",
+          "originalNo": 19,
+          "part": "listening",
+          "category": "听力判断",
+          "type": "choice",
+          "stem": "Tom told his father that he didn’t like his trip to the country.",
+          "answer": "F",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "符合（T）",
+            "不符合（F）"
+          ],
+          "optionLabels": "TF",
+          "materialId": "sh2013-listening-C"
+        },
+        {
+          "id": "sh2013-q20",
+          "originalNo": 20,
+          "part": "listening",
+          "category": "听力判断",
+          "type": "choice",
+          "stem": "There were several pet cats and dogs in Tom’s home.",
+          "answer": "F",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "符合（T）",
+            "不符合（F）"
+          ],
+          "optionLabels": "TF",
+          "materialId": "sh2013-listening-C"
+        },
+        {
+          "id": "sh2013-q21",
+          "originalNo": 21,
+          "part": "listening",
+          "category": "听力判断",
+          "type": "choice",
+          "stem": "Tom’s family hung lanterns in their garden at festival times.",
+          "answer": "T",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "符合（T）",
+            "不符合（F）"
+          ],
+          "optionLabels": "TF",
+          "materialId": "sh2013-listening-C"
+        },
+        {
+          "id": "sh2013-q22",
+          "originalNo": 22,
+          "part": "listening",
+          "category": "听力判断",
+          "type": "choice",
+          "stem": "People on the farm got fresh food from the supermarket.",
+          "answer": "F",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "符合（T）",
+            "不符合（F）"
+          ],
+          "optionLabels": "TF",
+          "materialId": "sh2013-listening-C",
+          "sourceNote": "人人文库预览写作 flesh；对照另一份原卷转录恢复为 fresh，待教师审核。"
+        },
+        {
+          "id": "sh2013-q23",
+          "originalNo": 23,
+          "part": "listening",
+          "category": "听力判断",
+          "type": "choice",
+          "stem": "The writer wants to tell us to enjoy what we already have.",
+          "answer": "T",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "符合（T）",
+            "不符合（F）"
+          ],
+          "optionLabels": "TF",
+          "materialId": "sh2013-listening-C"
+        },
+        {
+          "id": "sh2013-q24",
+          "originalNo": 24,
+          "part": "listening",
+          "category": "听力填空",
+          "type": "fill",
+          "stem": "Susan is a __________ schoolgirl in a small town in California.",
+          "answer": "pretty",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "materialId": "sh2013-listening-D"
+        },
+        {
+          "id": "sh2013-q25",
+          "originalNo": 25,
+          "part": "listening",
+          "category": "听力填空",
+          "type": "fill",
+          "stem": "In her spare time, Susan likes to __________ to pop music.",
+          "answer": "dance",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "materialId": "sh2013-listening-D"
+        },
+        {
+          "id": "sh2013-q26",
+          "originalNo": 26,
+          "part": "listening",
+          "category": "听力填空",
+          "type": "fill",
+          "stem": "Susan is only __________ years old and she is good at skating.",
+          "answer": "fifteen/15",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "materialId": "sh2013-listening-D"
+        },
+        {
+          "id": "sh2013-q27",
+          "originalNo": 27,
+          "part": "listening",
+          "category": "听力填空",
+          "type": "fill",
+          "stem": "Whatever Michael teaches her, Susan can do it __________.",
+          "answer": "easily",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "materialId": "sh2013-listening-D"
+        },
+        {
+          "id": "sh2013-q28",
+          "originalNo": 28,
+          "part": "listening",
+          "category": "听力填空",
+          "type": "fill",
+          "stem": "After training she usually plays computer games with her __________.",
+          "answer": "brother",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "materialId": "sh2013-listening-D",
+          "sourceNote": "人人文库预览在 she 后多出横线，按另一份原卷转录仅保留 her 后的填空，待教师审核。"
+        },
+        {
+          "id": "sh2013-q29",
+          "originalNo": 29,
+          "part": "listening",
+          "category": "听力填空",
+          "type": "fill",
+          "stem": "Susan prefers to __________ at home on weekends.",
+          "answer": "rest",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "materialId": "sh2013-listening-D"
+        },
+        {
+          "id": "sh2013-q30",
+          "originalNo": 30,
+          "part": "listening",
+          "category": "听力填空",
+          "type": "fill",
+          "stem": "On __________ mornings, Susan’s father always makes breakfast for her.",
+          "answer": "Sunday",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "materialId": "sh2013-listening-D"
+        }
+      ],
+      "questionsSha256": "2b1a106fa8ad8b631eb9a8c7de291eabceee5377422c0e0d4c81d646b5ce7c11"
+    },
+    {
+      "year": 2014,
+      "sources": [
+        {
+          "url": "https://www.yeyulingfeng.com/wendang/135470.html",
+          "file": "2014.html",
+          "sha256": "6365515784b570745866fc7f726c1c871c258756955d4360dceae34c328eb418"
+        }
+      ],
+      "images": [
+        {
+          "src": "content/english/past-papers/2014/listening-pictures.png",
+          "sha256": "7d2c6e1c54d46f4c26625b0278bf817b6a768552dc8bb5c3a27e63d4bf266f91",
+          "originalFile": "2014-page1.webp",
+          "originalSha256": "bbd32d246b6234ad6fe507cb46429ad6410412d9bf1d9ecd3259dd22bbc7e365",
+          "crop": [
+            95,
+            226,
+            680,
+            535
+          ],
+          "originalUrl": "https://static.diaifu.net/ssd/ssd5/wenku/2026-02-06/69f92064db06e5d2064bba5c3749edc7/69f92064db06e5d2064bba5c3749edc7_1.webp"
+        }
+      ],
+      "questions": [
+        {
+          "id": "sh2014-q01",
+          "originalNo": 1,
+          "part": "listening",
+          "category": "听力选图",
+          "type": "fill",
+          "stem": "根据录音选择对应图片，填写图片字母。",
+          "answer": "G",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "materialId": "sh2014-listening-A",
+          "passage": "Listen and choose the right picture（根据你听到的内容，选出相应的图片）",
+          "passageImages": [
+            {
+              "src": "content/english/past-papers/2014/listening-pictures.png",
+              "label": "2014年听力选图原图"
+            }
+          ]
+        },
+        {
+          "id": "sh2014-q02",
+          "originalNo": 2,
+          "part": "listening",
+          "category": "听力选图",
+          "type": "fill",
+          "stem": "根据录音选择对应图片，填写图片字母。",
+          "answer": "A",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "materialId": "sh2014-listening-A",
+          "passage": "Listen and choose the right picture（根据你听到的内容，选出相应的图片）",
+          "passageImages": [
+            {
+              "src": "content/english/past-papers/2014/listening-pictures.png",
+              "label": "2014年听力选图原图"
+            }
+          ]
+        },
+        {
+          "id": "sh2014-q03",
+          "originalNo": 3,
+          "part": "listening",
+          "category": "听力选图",
+          "type": "fill",
+          "stem": "根据录音选择对应图片，填写图片字母。",
+          "answer": "H",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "materialId": "sh2014-listening-A",
+          "passage": "Listen and choose the right picture（根据你听到的内容，选出相应的图片）",
+          "passageImages": [
+            {
+              "src": "content/english/past-papers/2014/listening-pictures.png",
+              "label": "2014年听力选图原图"
+            }
+          ]
+        },
+        {
+          "id": "sh2014-q04",
+          "originalNo": 4,
+          "part": "listening",
+          "category": "听力选图",
+          "type": "fill",
+          "stem": "根据录音选择对应图片，填写图片字母。",
+          "answer": "B",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "materialId": "sh2014-listening-A",
+          "passage": "Listen and choose the right picture（根据你听到的内容，选出相应的图片）",
+          "passageImages": [
+            {
+              "src": "content/english/past-papers/2014/listening-pictures.png",
+              "label": "2014年听力选图原图"
+            }
+          ]
+        },
+        {
+          "id": "sh2014-q05",
+          "originalNo": 5,
+          "part": "listening",
+          "category": "听力选图",
+          "type": "fill",
+          "stem": "根据录音选择对应图片，填写图片字母。",
+          "answer": "E",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "materialId": "sh2014-listening-A",
+          "passage": "Listen and choose the right picture（根据你听到的内容，选出相应的图片）",
+          "passageImages": [
+            {
+              "src": "content/english/past-papers/2014/listening-pictures.png",
+              "label": "2014年听力选图原图"
+            }
+          ]
+        },
+        {
+          "id": "sh2014-q06",
+          "originalNo": 6,
+          "part": "listening",
+          "category": "听力选图",
+          "type": "fill",
+          "stem": "根据录音选择对应图片，填写图片字母。",
+          "answer": "D",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "materialId": "sh2014-listening-A",
+          "passage": "Listen and choose the right picture（根据你听到的内容，选出相应的图片）",
+          "passageImages": [
+            {
+              "src": "content/english/past-papers/2014/listening-pictures.png",
+              "label": "2014年听力选图原图"
+            }
+          ]
+        },
+        {
+          "id": "sh2014-q07",
+          "originalNo": 7,
+          "part": "listening",
+          "category": "听力选择",
+          "type": "choice",
+          "stem": "根据录音中的对话和问题，选择最恰当的答案。",
+          "answer": "C",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "Chemistry.",
+            "History.",
+            "English.",
+            "Maths."
+          ]
+        },
+        {
+          "id": "sh2014-q08",
+          "originalNo": 8,
+          "part": "listening",
+          "category": "听力选择",
+          "type": "choice",
+          "stem": "根据录音中的对话和问题，选择最恰当的答案。",
+          "answer": "D",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "A hamburger.",
+            "A fruit salad.",
+            "A hot-dog.",
+            "A sandwich."
+          ]
+        },
+        {
+          "id": "sh2014-q09",
+          "originalNo": 9,
+          "part": "listening",
+          "category": "听力选择",
+          "type": "choice",
+          "stem": "根据录音中的对话和问题，选择最恰当的答案。",
+          "answer": "A",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "Tired.",
+            "Surprised.",
+            "Excited.",
+            "Frightened."
+          ]
+        },
+        {
+          "id": "sh2014-q10",
+          "originalNo": 10,
+          "part": "listening",
+          "category": "听力选择",
+          "type": "choice",
+          "stem": "根据录音中的对话和问题，选择最恰当的答案。",
+          "answer": "C",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "Watch TV.",
+            "Play football.",
+            "Go to the cinema.",
+            "Read a book."
+          ]
+        },
+        {
+          "id": "sh2014-q11",
+          "originalNo": 11,
+          "part": "listening",
+          "category": "听力选择",
+          "type": "choice",
+          "stem": "根据录音中的对话和问题，选择最恰当的答案。",
+          "answer": "A",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "Fifteen minutes’ walk.",
+            "Fifteen minutes’ bus ride.",
+            "Fifty minutes’ walk.",
+            "Fifty minutes’ bus ride."
+          ]
+        },
+        {
+          "id": "sh2014-q12",
+          "originalNo": 12,
+          "part": "listening",
+          "category": "听力选择",
+          "type": "choice",
+          "stem": "根据录音中的对话和问题，选择最恰当的答案。",
+          "answer": "B",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "Thursday.",
+            "Friday.",
+            "Saturday.",
+            "Sunday."
+          ]
+        },
+        {
+          "id": "sh2014-q13",
+          "originalNo": 13,
+          "part": "listening",
+          "category": "听力选择",
+          "type": "choice",
+          "stem": "根据录音中的对话和问题，选择最恰当的答案。",
+          "answer": "D",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "Trips.",
+            "Computers.",
+            "Parents.",
+            "Jobs."
+          ]
+        },
+        {
+          "id": "sh2014-q14",
+          "originalNo": 14,
+          "part": "listening",
+          "category": "听力选择",
+          "type": "choice",
+          "stem": "根据录音中的对话和问题，选择最恰当的答案。",
+          "answer": "B",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "At the beach.",
+            "At the airport.",
+            "In the theatre.",
+            "In the hotel."
+          ]
+        },
+        {
+          "id": "sh2014-q15",
+          "originalNo": 15,
+          "part": "listening",
+          "category": "听力判断",
+          "type": "choice",
+          "stem": "My aunt and uncle sent me a bottle of honey as a birthday present last year.",
+          "answer": "F",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "符合（T）",
+            "不符合（F）"
+          ],
+          "optionLabels": "TF",
+          "materialId": "sh2014-listening-C"
+        },
+        {
+          "id": "sh2014-q16",
+          "originalNo": 16,
+          "part": "listening",
+          "category": "听力判断",
+          "type": "choice",
+          "stem": "The smell of my hair attracted lots of bees when I went outside.",
+          "answer": "T",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "符合（T）",
+            "不符合（F）"
+          ],
+          "optionLabels": "TF",
+          "materialId": "sh2014-listening-C"
+        },
+        {
+          "id": "sh2014-q17",
+          "originalNo": 17,
+          "part": "listening",
+          "category": "听力判断",
+          "type": "choice",
+          "stem": "I jumped into my neighbour’s swimming pool to stay away from the bees.",
+          "answer": "T",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "符合（T）",
+            "不符合（F）"
+          ],
+          "optionLabels": "TF",
+          "materialId": "sh2014-listening-C"
+        },
+        {
+          "id": "sh2014-q18",
+          "originalNo": 18,
+          "part": "listening",
+          "category": "听力判断",
+          "type": "choice",
+          "stem": "When I climbed out of the pool, the bees were still flying around.",
+          "answer": "F",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "符合（T）",
+            "不符合（F）"
+          ],
+          "optionLabels": "TF",
+          "materialId": "sh2014-listening-C"
+        },
+        {
+          "id": "sh2014-q19",
+          "originalNo": 19,
+          "part": "listening",
+          "category": "听力判断",
+          "type": "choice",
+          "stem": "My aunt and uncle wrote me a letter and apologized to me.",
+          "answer": "F",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "符合（T）",
+            "不符合（F）"
+          ],
+          "optionLabels": "TF",
+          "materialId": "sh2014-listening-C"
+        },
+        {
+          "id": "sh2014-q20",
+          "originalNo": 20,
+          "part": "listening",
+          "category": "听力判断",
+          "type": "choice",
+          "stem": "This is a story about my unforgettable birthday present.",
+          "answer": "T",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "符合（T）",
+            "不符合（F）"
+          ],
+          "optionLabels": "TF",
+          "materialId": "sh2014-listening-C"
+        },
+        {
+          "id": "sh2014-q21",
+          "originalNo": 21,
+          "part": "listening",
+          "category": "听力填空",
+          "type": "fill",
+          "stem": "Dan Carter lives in London and works as __________ __________ there.",
+          "answer": "a teacher",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "materialId": "sh2014-listening-D"
+        },
+        {
+          "id": "sh2014-q22",
+          "originalNo": 22,
+          "part": "listening",
+          "category": "听力填空",
+          "type": "fill",
+          "stem": "Dan and I stay in touch __________ __________ and sometimes we call each other.",
+          "answer": "by email/by e-mail",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "materialId": "sh2014-listening-D"
+        },
+        {
+          "id": "sh2014-q23",
+          "originalNo": 23,
+          "part": "listening",
+          "category": "听力填空",
+          "type": "fill",
+          "stem": "When I _______ ________ or when I need to talk to somebody, I can always call Dan.",
+          "answer": "feel sad",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "materialId": "sh2014-listening-D"
+        },
+        {
+          "id": "sh2014-q24",
+          "originalNo": 24,
+          "part": "listening",
+          "category": "听力填空",
+          "type": "fill",
+          "stem": "Dan is always __________ __________ everything and he never says sorry.",
+          "answer": "late for",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "materialId": "sh2014-listening-D"
+        },
+        {
+          "id": "sh2014-q25",
+          "originalNo": 25,
+          "part": "listening",
+          "category": "听力填空",
+          "type": "fill",
+          "stem": "One day, we arranged to meet __________ __________ to play football, but Dan didn’t come on time.",
+          "answer": "at 7:00/at seven",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "materialId": "sh2014-listening-D"
+        }
+      ],
+      "questionsSha256": "78d65ef89080a9357d4e961488f6c9d5ba3c708cf0277c469e76061e84726786"
+    },
+    {
+      "year": 2015,
+      "sources": [
+        {
+          "url": "https://www.yeyulingfeng.com/wendang/139147.html",
+          "file": "2015d.html",
+          "sha256": "3b8901e1b1337b6fa916982d99b5f6d8cd51b3d795c8ed7daaa7707889a845bd"
+        },
+        {
+          "url": "https://www.xuebawang.net/t/41766",
+          "file": "2015.html",
+          "sha256": "1ca863587142ec6b622b06c02ccb2cd3eb8ea2062830efaa951756a1e483da9d"
+        },
+        {
+          "url": "https://sh.jiajiaoban.com/e/20170510/5912ac589cde5.shtml",
+          "file": "2015b.html",
+          "sha256": "da33119d965445b490f82618640f16988bf9b4b2d52fd68b1cab0fa05095e349"
+        },
+        {
+          "url": "https://sh.jiajiaoban.com/e/20170510/5912ac589cde5_2.shtml",
+          "file": "2015-transcript.html",
+          "sha256": "83124b68b8b9882782ba3fea05e9400ea361c4a48443f4beaac3b9634ff275c4"
+        }
+      ],
+      "images": [
+        {
+          "src": "content/english/past-papers/2015/listening-pictures.png",
+          "sha256": "4c9c3bf59a1b2038264937564da94650bb9f50b519d610bdd14a34790820030b",
+          "originalFile": "2015-pictures.png",
+          "originalSha256": "70523c1cb172ec3ff74f20d8e94090bb1ad60df98f207e1e4e452d93bedbc952",
+          "crop": null,
+          "originalUrl": "https://dfiles.jiajiaoban.com/img/2017/05/10/135359_5912aaf75d61a.png"
+        }
+      ],
+      "questions": [
+        {
+          "id": "sh2015-q01",
+          "originalNo": 1,
+          "part": "listening",
+          "category": "听力选图",
+          "type": "fill",
+          "stem": "根据录音选择对应图片，填写图片字母。",
+          "answer": "E",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "materialId": "sh2015-listening-A",
+          "passage": "Listen and choose the right picture（根据你听到的内容，选出相应的图片）",
+          "passageImages": [
+            {
+              "src": "content/english/past-papers/2015/listening-pictures.png",
+              "label": "2015年听力选图原图"
+            }
+          ]
+        },
+        {
+          "id": "sh2015-q02",
+          "originalNo": 2,
+          "part": "listening",
+          "category": "听力选图",
+          "type": "fill",
+          "stem": "根据录音选择对应图片，填写图片字母。",
+          "answer": "F",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "materialId": "sh2015-listening-A",
+          "passage": "Listen and choose the right picture（根据你听到的内容，选出相应的图片）",
+          "passageImages": [
+            {
+              "src": "content/english/past-papers/2015/listening-pictures.png",
+              "label": "2015年听力选图原图"
+            }
+          ]
+        },
+        {
+          "id": "sh2015-q03",
+          "originalNo": 3,
+          "part": "listening",
+          "category": "听力选图",
+          "type": "fill",
+          "stem": "根据录音选择对应图片，填写图片字母。",
+          "answer": "B",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "materialId": "sh2015-listening-A",
+          "passage": "Listen and choose the right picture（根据你听到的内容，选出相应的图片）",
+          "passageImages": [
+            {
+              "src": "content/english/past-papers/2015/listening-pictures.png",
+              "label": "2015年听力选图原图"
+            }
+          ]
+        },
+        {
+          "id": "sh2015-q04",
+          "originalNo": 4,
+          "part": "listening",
+          "category": "听力选图",
+          "type": "fill",
+          "stem": "根据录音选择对应图片，填写图片字母。",
+          "answer": "C",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "materialId": "sh2015-listening-A",
+          "passage": "Listen and choose the right picture（根据你听到的内容，选出相应的图片）",
+          "passageImages": [
+            {
+              "src": "content/english/past-papers/2015/listening-pictures.png",
+              "label": "2015年听力选图原图"
+            }
+          ]
+        },
+        {
+          "id": "sh2015-q05",
+          "originalNo": 5,
+          "part": "listening",
+          "category": "听力选图",
+          "type": "fill",
+          "stem": "根据录音选择对应图片，填写图片字母。",
+          "answer": "D",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "materialId": "sh2015-listening-A",
+          "passage": "Listen and choose the right picture（根据你听到的内容，选出相应的图片）",
+          "passageImages": [
+            {
+              "src": "content/english/past-papers/2015/listening-pictures.png",
+              "label": "2015年听力选图原图"
+            }
+          ]
+        },
+        {
+          "id": "sh2015-q06",
+          "originalNo": 6,
+          "part": "listening",
+          "category": "听力选图",
+          "type": "fill",
+          "stem": "根据录音选择对应图片，填写图片字母。",
+          "answer": "G",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "materialId": "sh2015-listening-A",
+          "passage": "Listen and choose the right picture（根据你听到的内容，选出相应的图片）",
+          "passageImages": [
+            {
+              "src": "content/english/past-papers/2015/listening-pictures.png",
+              "label": "2015年听力选图原图"
+            }
+          ]
+        },
+        {
+          "id": "sh2015-q07",
+          "originalNo": 7,
+          "part": "listening",
+          "category": "听力选择",
+          "type": "choice",
+          "stem": "根据录音中的对话和问题，选择最恰当的答案。",
+          "answer": "C",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "A dog.",
+            "A cat.",
+            "A rabbit.",
+            "A bird."
+          ]
+        },
+        {
+          "id": "sh2015-q08",
+          "originalNo": 8,
+          "part": "listening",
+          "category": "听力选择",
+          "type": "choice",
+          "stem": "根据录音中的对话和问题，选择最恰当的答案。",
+          "answer": "A",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "In France.",
+            "In Britain.",
+            "In Italy.",
+            "In Germany."
+          ]
+        },
+        {
+          "id": "sh2015-q09",
+          "originalNo": 9,
+          "part": "listening",
+          "category": "听力选择",
+          "type": "choice",
+          "stem": "根据录音中的对话和问题，选择最恰当的答案。",
+          "answer": "D",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "At 6:30.",
+            "At 7:00.",
+            "At 7:30.",
+            "At 8:00."
+          ]
+        },
+        {
+          "id": "sh2015-q10",
+          "originalNo": 10,
+          "part": "listening",
+          "category": "听力选择",
+          "type": "choice",
+          "stem": "根据录音中的对话和问题，选择最恰当的答案。",
+          "answer": "A",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "Sam.",
+            "Judy.",
+            "Kitty.",
+            "Eddie."
+          ]
+        },
+        {
+          "id": "sh2015-q11",
+          "originalNo": 11,
+          "part": "listening",
+          "category": "听力选择",
+          "type": "choice",
+          "stem": "根据录音中的对话和问题，选择最恰当的答案。",
+          "answer": "D",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "Spring.",
+            "Summer.",
+            "Autumn.",
+            "Winter."
+          ]
+        },
+        {
+          "id": "sh2015-q12",
+          "originalNo": 12,
+          "part": "listening",
+          "category": "听力选择",
+          "type": "choice",
+          "stem": "根据录音中的对话和问题，选择最恰当的答案。",
+          "answer": "B",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "Because a huge dog ran after her.",
+            "Because she had a terrible dream.",
+            "Because her dad woke her up.",
+            "Because the street was too dark."
+          ]
+        },
+        {
+          "id": "sh2015-q13",
+          "originalNo": 13,
+          "part": "listening",
+          "category": "听力选择",
+          "type": "choice",
+          "stem": "根据录音中的对话和问题，选择最恰当的答案。",
+          "answer": "B",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "Walking to his office.",
+            "Looking for a flat.",
+            "Taking some pictures.",
+            "Decorating his bedroom."
+          ]
+        },
+        {
+          "id": "sh2015-q14",
+          "originalNo": 14,
+          "part": "listening",
+          "category": "听力选择",
+          "type": "choice",
+          "stem": "根据录音中的对话和问题，选择最恰当的答案。",
+          "answer": "C",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "How to make movies.",
+            "How to read novels.",
+            "How to learn English.",
+            "How to talk with foreigners."
+          ]
+        },
+        {
+          "id": "sh2015-q15",
+          "originalNo": 15,
+          "part": "listening",
+          "category": "听力判断",
+          "type": "choice",
+          "stem": "The boy went to a store to choose a mobile phone for his mum.",
+          "answer": "F",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "符合（T）",
+            "不符合（F）"
+          ],
+          "optionLabels": "TF",
+          "materialId": "sh2015-listening-C"
+        },
+        {
+          "id": "sh2015-q16",
+          "originalNo": 16,
+          "part": "listening",
+          "category": "听力判断",
+          "type": "choice",
+          "stem": "With the help of the shop assistant, the boy knew how the phone worked.",
+          "answer": "T",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "符合（T）",
+            "不符合（F）"
+          ],
+          "optionLabels": "TF",
+          "materialId": "sh2015-listening-C"
+        },
+        {
+          "id": "sh2015-q17",
+          "originalNo": 17,
+          "part": "listening",
+          "category": "听力判断",
+          "type": "choice",
+          "stem": "The price of the white phone was too high for the boy.",
+          "answer": "T",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "符合（T）",
+            "不符合（F）"
+          ],
+          "optionLabels": "TF",
+          "materialId": "sh2015-listening-C"
+        },
+        {
+          "id": "sh2015-q18",
+          "originalNo": 18,
+          "part": "listening",
+          "category": "听力判断",
+          "type": "choice",
+          "stem": "The white phone couldn’t be used to send emails or play games.",
+          "answer": "F",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "符合（T）",
+            "不符合（F）"
+          ],
+          "optionLabels": "TF",
+          "materialId": "sh2015-listening-C"
+        },
+        {
+          "id": "sh2015-q19",
+          "originalNo": 19,
+          "part": "listening",
+          "category": "听力判断",
+          "type": "choice",
+          "stem": "At last, the boy bought a phone of the same model as the shop assistant’s.",
+          "answer": "T",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "符合（T）",
+            "不符合（F）"
+          ],
+          "optionLabels": "TF",
+          "materialId": "sh2015-listening-C"
+        },
+        {
+          "id": "sh2015-q20",
+          "originalNo": 20,
+          "part": "listening",
+          "category": "听力判断",
+          "type": "choice",
+          "stem": "This dialogue is about whether a student should buy an expensive phone or not.",
+          "answer": "F",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "options": [
+            "符合（T）",
+            "不符合（F）"
+          ],
+          "optionLabels": "TF",
+          "materialId": "sh2015-listening-C"
+        },
+        {
+          "id": "sh2015-q21",
+          "originalNo": 21,
+          "part": "listening",
+          "category": "听力填空",
+          "type": "fill",
+          "stem": "Maria and Lucy used to __________ __________ together, shopping and meeting friends.",
+          "answer": "have fun",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "materialId": "sh2015-listening-D"
+        },
+        {
+          "id": "sh2015-q22",
+          "originalNo": 22,
+          "part": "listening",
+          "category": "听力填空",
+          "type": "fill",
+          "stem": "It takes Lucy all her time to send messages and she doesn’t __________ __________.",
+          "answer": "work hard",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "materialId": "sh2015-listening-D"
+        },
+        {
+          "id": "sh2015-q23",
+          "originalNo": 23,
+          "part": "listening",
+          "category": "听力填空",
+          "type": "fill",
+          "stem": "Lucy checks for messages __________ __________ so she has got problems at school.",
+          "answer": "in class",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "materialId": "sh2015-listening-D"
+        },
+        {
+          "id": "sh2015-q24",
+          "originalNo": 24,
+          "part": "listening",
+          "category": "听力填空",
+          "type": "fill",
+          "stem": "By __________ __________ in the morning, Victor had already drunk three cans of coke.",
+          "answer": "11 o’clock/11 o'clock",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "materialId": "sh2015-listening-D"
+        },
+        {
+          "id": "sh2015-q25",
+          "originalNo": 25,
+          "part": "listening",
+          "category": "听力填空",
+          "type": "fill",
+          "stem": "When Damon tried to talked to his brother, the brother was __________ __________ him.",
+          "answer": "angry with",
+          "explanation": "公开原卷补录，待教师审核。",
+          "review": {
+            "status": "pending"
+          },
+          "materialId": "sh2015-listening-D",
+          "sourceNote": "公开题干 tried to talked 存在语法疑点，原样保留，待核对。"
+        }
+      ],
+      "questionsSha256": "0c8d9a3eb8101f81fdfaf0a762b10a388bbe4d5148be99260a79b466688ad7f3"
+    }
+  ]
+}
