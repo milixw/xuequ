@@ -19,6 +19,26 @@ NUM = re.compile(r'^\s*(\d{1,3})\s*[.．、,，•]\s*', re.M)
 OPTION = re.compile(r'(?<![A-Za-z])([A-D])\s*[.．)）]\s*')
 
 
+def install_audio(source, year, name):
+    manifest = DEST / 'listening-audio.json'
+    if manifest.exists():
+        records = json.loads(manifest.read_text(encoding='utf8')).get('legacyFiles', [])
+        for record in records:
+            if record['year'] != year or record['compression']['originalName'] != name:
+                continue
+            target = (DEST.parents[2] / record['src']).resolve()
+            if not target.is_relative_to(DEST.resolve()) or hashlib.sha256(source.read_bytes()).hexdigest() != record['compression']['originalSha256']:
+                raise ValueError('Compressed audio source/version mismatch')
+            if not target.exists() or hashlib.sha256(target.read_bytes()).hexdigest() != record['sha256']:
+                raise ValueError('Compressed audio checksum mismatch')
+            return record['src'], record
+    target = DEST / str(year) / name
+    target.parent.mkdir(parents=True, exist_ok=True)
+    if not target.exists():
+        shutil.copyfile(source, target)
+    return f'content/english/past-papers/{year}/{name}', None
+
+
 def clean(text):
     # Restore the visible apostrophe represented by the source's private font
     # glyph. Do not paraphrase or repair source spelling/grammar.
@@ -272,18 +292,16 @@ def main(roots):
                      (' 原资料没有答案，题目仅支持作答，不自动判分。' if year == 2018 else ''))
         if year == 2026:
             _, _, audio = locate('2026年上海中考英语听力音频文件.mp3')
-            target = DEST / '2026/listening.mp3'; target.parent.mkdir(parents=True, exist_ok=True)
-            if not target.exists(): shutil.copyfile(audio, target)
-            paper['audio'] = 'content/english/past-papers/2026/listening.mp3'
+            paper['audio'], compression = install_audio(audio, 2026, 'listening.mp3')
+            if compression: paper['audioCompression'] = compression
         papers.append(paper)
         print(year, len(questions), 'questions;', sum(q['answer'] is not None for q in questions), 'with supplied answers')
     papers.append(dict(year=2025, title='2025 年上海英语中考', version='题干待补充', completeness='未找到完整笔试题干',
                        review=dict(status='pending'), questions=[], skipped=[],
                        note='原目录只有听力原文、音频与答案图片/PDF，没有完整笔试题干。不能凭答案编造真题，待补充原卷后生成题目。'))
     _, _, audio = locate('听力音频.mp4')
-    target = DEST / '2025/listening.mp4'; target.parent.mkdir(parents=True, exist_ok=True)
-    if not target.exists(): shutil.copyfile(audio, target)
-    papers[-1]['audio'] = 'content/english/past-papers/2025/listening.mp4'
+    papers[-1]['audio'], compression = install_audio(audio, 2025, 'listening.mp4')
+    if compression: papers[-1]['audioCompression'] = compression
     # Preserve already published IDs and human corrections on later imports.
     # A changed source must be reconciled manually, not silently re-associated.
     previous_path = DEST / 'catalog.js'

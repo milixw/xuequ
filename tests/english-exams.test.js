@@ -9,6 +9,29 @@ const exams = require('../src/english-exams.js');
 const root = path.join(__dirname, '..');
 const read = file => fs.readFileSync(path.join(root, file), 'utf8');
 
+test('听力压缩文件校验、原版溯源及页面录音版本保持一致', () => {
+  const crypto = require('crypto');
+  const manifest = JSON.parse(read('content/english/past-papers/listening-audio.json'));
+  assert(manifest.files.length === 14 && manifest.legacyFiles.length === 2);
+  let before = 0, after = 0;
+  for (const item of [...manifest.files, ...manifest.legacyFiles]) {
+    assert(/^content\/english\/past-papers\/\d{4}\/listening(?:-legacy)?\.m4a$/.test(item.src));
+    const bytes = fs.readFileSync(path.join(root, item.src));
+    assert(bytes.length === item.bytes && crypto.createHash('sha256').update(bytes).digest('hex') === item.sha256);
+    assert(bytes.subarray(4, 8).toString() === 'ftyp');
+    const original = item.compression;
+    assert(/^[a-f0-9]{64}$/.test(original.originalSha256) && original.originalBytes > item.bytes);
+    assert(Math.abs(original.originalDurationSeconds - item.durationSeconds) < 0.15);
+    assert(original.method === ([2024, 2025].includes(item.year) && !item.src.includes('legacy') ? 'remux' : 'aac-lc-40k-mono-24khz'));
+    before += original.originalBytes; after += item.bytes;
+  }
+  assert(after < before * 0.55);
+  for (const item of manifest.legacyFiles) {
+    const paper = exams.find(catalog, item.year);
+    assert(paper.audio === item.src && JSON.stringify(paper.audioCompression) === JSON.stringify(item));
+  }
+});
+
 class Node {
   constructor(tag) { this.tag = tag; this.children = []; this.events = {}; this.value = ''; }
   set type(value) {

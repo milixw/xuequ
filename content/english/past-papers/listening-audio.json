@@ -1,230 +1,376 @@
 {
   "checkedAt": "2026-10-17",
-  "note": "公开合集音频，保留原录音；下载并校验容器和时长，尚未逐题试听核对版本。2017杂音较大、2020音质一般为上传者说明。",
+  "note": "公开合集音频，播放版已压缩；低码率原音轨仅重封装。原版已备份，未逐题试听核对版本。",
   "files": [
     {
       "year": 2013,
-      "src": "content/english/past-papers/2013/listening-original.m4a",
+      "src": "content/english/past-papers/2013/listening.m4a",
       "url": "https://www.bilibili.com/video/BV1rx411Q7gW/?p=6",
       "cid": 15884467,
       "title": "2013年中考听力",
-      "bytes": 6975932,
-      "sha256": "d01b969be5eac0df0ecefe8e0df44649e0049a7f1e5ee3253e0214887b8a6b8a",
-      "durationSeconds": 831.031,
+      "bytes": 3800736,
+      "sha256": "8fe02c888ddbd696c8a0561a9b3455958f6f33ff2685908a5783e4a8fe0c5506",
+      "durationSeconds": 831.03,
       "codec": "mp4a.40.2",
       "matching": "year-label-only",
       "review": {
         "status": "pending"
       },
-      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。"
+      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。",
+      "compression": {
+        "date": "2026-10-18",
+        "method": "aac-lc-40k-mono-24khz",
+        "originalName": "listening-original.m4a",
+        "originalBytes": 6975932,
+        "originalSha256": "d01b969be5eac0df0ecefe8e0df44649e0049a7f1e5ee3253e0214887b8a6b8a",
+        "originalDurationSeconds": 831.03
+      }
     },
     {
       "year": 2014,
-      "src": "content/english/past-papers/2014/listening-original.m4a",
+      "src": "content/english/past-papers/2014/listening.m4a",
       "url": "https://www.bilibili.com/video/BV1rx411Q7gW/?p=7",
       "cid": 15884468,
       "title": "2014年中考听力",
-      "bytes": 5904825,
-      "sha256": "758c62fc290b3ed02e1b06204845371fce187f143c2081eca2e2995e1c3acc4b",
-      "durationSeconds": 703.275,
+      "bytes": 3182760,
+      "sha256": "722b5b7cb99dfee60ad944263cefd51f0e4628539d78ca37e894b1416d7e5f9f",
+      "durationSeconds": 703.28,
       "codec": "mp4a.40.2",
       "matching": "year-label-only",
       "review": {
         "status": "pending"
       },
-      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。"
+      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。",
+      "compression": {
+        "date": "2026-10-18",
+        "method": "aac-lc-40k-mono-24khz",
+        "originalName": "listening-original.m4a",
+        "originalBytes": 5904825,
+        "originalSha256": "758c62fc290b3ed02e1b06204845371fce187f143c2081eca2e2995e1c3acc4b",
+        "originalDurationSeconds": 703.28
+      }
     },
     {
       "year": 2015,
-      "src": "content/english/past-papers/2015/listening-original.m4a",
+      "src": "content/english/past-papers/2015/listening.m4a",
       "url": "https://www.bilibili.com/video/BV1rx411Q7gW/?p=8",
       "cid": 15884469,
       "title": "2015年中考听力",
-      "bytes": 6871082,
-      "sha256": "0b92b33e71bd9bea928c5ae96b5eef482deaa3c8046a487203353a94f5e6ae42",
-      "durationSeconds": 818.492,
+      "bytes": 3784746,
+      "sha256": "636264afe9e90b037908495e7a70b72fc2457f8ca95becbc1b1b5f91e4f29457",
+      "durationSeconds": 818.49,
       "codec": "mp4a.40.2",
       "matching": "year-label-only",
       "review": {
         "status": "pending"
       },
-      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。"
+      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。",
+      "compression": {
+        "date": "2026-10-18",
+        "method": "aac-lc-40k-mono-24khz",
+        "originalName": "listening-original.m4a",
+        "originalBytes": 6871082,
+        "originalSha256": "0b92b33e71bd9bea928c5ae96b5eef482deaa3c8046a487203353a94f5e6ae42",
+        "originalDurationSeconds": 818.49
+      }
     },
     {
       "year": 2016,
-      "src": "content/english/past-papers/2016/listening-original.m4a",
+      "src": "content/english/past-papers/2016/listening.m4a",
       "url": "https://www.bilibili.com/video/BV1rx411Q7gW/?p=9",
       "cid": 15884470,
       "title": "2016年中考听力",
-      "bytes": 6187600,
-      "sha256": "8ad73cb0c7c38474a58741ce06dc4dca88e646bf90d44e6c4e865f2023cbaf61",
-      "durationSeconds": 737.059,
+      "bytes": 3359736,
+      "sha256": "76defec3bb734385f12cb3d5dfabb8691a290d45a801185db30ef32022c30fc7",
+      "durationSeconds": 737.06,
       "codec": "mp4a.40.2",
       "matching": "year-label-only",
       "review": {
         "status": "pending"
       },
-      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。"
+      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。",
+      "compression": {
+        "date": "2026-10-18",
+        "method": "aac-lc-40k-mono-24khz",
+        "originalName": "listening-original.m4a",
+        "originalBytes": 6187600,
+        "originalSha256": "8ad73cb0c7c38474a58741ce06dc4dca88e646bf90d44e6c4e865f2023cbaf61",
+        "originalDurationSeconds": 737.06
+      }
     },
     {
       "year": 2017,
-      "src": "content/english/past-papers/2017/listening-original.m4a",
+      "src": "content/english/past-papers/2017/listening.m4a",
       "url": "https://www.bilibili.com/video/BV1rx411Q7gW/?p=10",
       "cid": 171632366,
       "title": "2017年中考听力",
-      "bytes": 12128213,
-      "sha256": "dee86bcd42f16844487d95a74c413136c9b774baca4ad72c7040d95b895f519a",
-      "durationSeconds": 1150.455,
+      "bytes": 5933547,
+      "sha256": "b3e8a5894cdf207e733d4ce1587fce4a32d36f66b426ce1334fe1e6f3f2d5ceb",
+      "durationSeconds": 1150.46,
       "codec": "mp4a.40.2",
       "matching": "year-label-only",
       "review": {
         "status": "pending"
       },
-      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。上传者提示：杂音较大。"
+      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。上传者提示：杂音较大。",
+      "compression": {
+        "date": "2026-10-18",
+        "method": "aac-lc-40k-mono-24khz",
+        "originalName": "listening-original.m4a",
+        "originalBytes": 12128213,
+        "originalSha256": "dee86bcd42f16844487d95a74c413136c9b774baca4ad72c7040d95b895f519a",
+        "originalDurationSeconds": 1150.46
+      }
     },
     {
       "year": 2018,
-      "src": "content/english/past-papers/2018/listening-original.m4a",
+      "src": "content/english/past-papers/2018/listening.m4a",
       "url": "https://www.bilibili.com/video/BV1rx411Q7gW/?p=11",
       "cid": 171639855,
       "title": "2018年中考听力",
-      "bytes": 15461504,
-      "sha256": "5c28e3de7daef758d982e810346dbb0fe0bd60a83290276bce9bb677c6ae6753",
-      "durationSeconds": 964.487,
+      "bytes": 4607669,
+      "sha256": "7b0957c1fe83b756f14d37eb884be9d7c48bb0e417f54cbd3fe5b4ca49492c25",
+      "durationSeconds": 964.49,
       "codec": "mp4a.40.2",
       "matching": "year-label-only",
       "review": {
         "status": "pending"
       },
-      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。"
+      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。",
+      "compression": {
+        "date": "2026-10-18",
+        "method": "aac-lc-40k-mono-24khz",
+        "originalName": "listening-original.m4a",
+        "originalBytes": 15461504,
+        "originalSha256": "5c28e3de7daef758d982e810346dbb0fe0bd60a83290276bce9bb677c6ae6753",
+        "originalDurationSeconds": 964.49
+      }
     },
     {
       "year": 2019,
-      "src": "content/english/past-papers/2019/listening-original.m4a",
+      "src": "content/english/past-papers/2019/listening.m4a",
       "url": "https://www.bilibili.com/video/BV1rx411Q7gW/?p=12",
       "cid": 171646039,
       "title": "2019年中考听力",
-      "bytes": 10539466,
-      "sha256": "d1f64883984492aa575fb2c8d31ba117a26a9a0b471f129d58dd86fd0b2f7510",
-      "durationSeconds": 1256.478,
+      "bytes": 6501977,
+      "sha256": "35f7227e40270cf746d1b57b7725f12f22533a2b8dae2a022e3d1ec54e6726d6",
+      "durationSeconds": 1256.48,
       "codec": "mp4a.40.2",
       "matching": "year-label-only",
       "review": {
         "status": "pending"
       },
-      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。"
+      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。",
+      "compression": {
+        "date": "2026-10-18",
+        "method": "aac-lc-40k-mono-24khz",
+        "originalName": "listening-original.m4a",
+        "originalBytes": 10539466,
+        "originalSha256": "d1f64883984492aa575fb2c8d31ba117a26a9a0b471f129d58dd86fd0b2f7510",
+        "originalDurationSeconds": 1256.48
+      }
     },
     {
       "year": 2020,
-      "src": "content/english/past-papers/2020/listening-original.m4a",
+      "src": "content/english/past-papers/2020/listening.m4a",
       "url": "https://www.bilibili.com/video/BV1rx411Q7gW/?p=13",
       "cid": 206825533,
       "title": "2020年中考听力",
-      "bytes": 8330818,
-      "sha256": "6a037daf35e16b441a581d9d79e17c492d50da11cd7abc2b88f96d65442bd241",
-      "durationSeconds": 993.117,
+      "bytes": 4739858,
+      "sha256": "fc6a4f737db75045e5e7195bf214ccce7c84e68a7e9a7685cec6527450857e9f",
+      "durationSeconds": 993.12,
       "codec": "mp4a.40.2",
       "matching": "year-label-only",
       "review": {
         "status": "pending"
       },
-      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。上传者提示：音质一般。"
+      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。上传者提示：音质一般。",
+      "compression": {
+        "date": "2026-10-18",
+        "method": "aac-lc-40k-mono-24khz",
+        "originalName": "listening-original.m4a",
+        "originalBytes": 8330818,
+        "originalSha256": "6a037daf35e16b441a581d9d79e17c492d50da11cd7abc2b88f96d65442bd241",
+        "originalDurationSeconds": 993.12
+      }
     },
     {
       "year": 2021,
-      "src": "content/english/past-papers/2021/listening-original.m4a",
+      "src": "content/english/past-papers/2021/listening.m4a",
       "url": "https://www.bilibili.com/video/BV1rx411Q7gW/?p=14",
       "cid": 358965797,
       "title": "2021年中考听力",
-      "bytes": 6728350,
-      "sha256": "02a472de03e5d3767c3e052a8b7eccd6f89687c73c97e3ffd9f0132ca8971fef",
-      "durationSeconds": 801.599,
+      "bytes": 3925633,
+      "sha256": "a4b52760fda4c97b22c3b0ce9d3ed0fffc65ad24e991d002af2427a194918cf2",
+      "durationSeconds": 801.6,
       "codec": "mp4a.40.2",
       "matching": "year-label-only",
       "review": {
         "status": "pending"
       },
-      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。"
+      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。",
+      "compression": {
+        "date": "2026-10-18",
+        "method": "aac-lc-40k-mono-24khz",
+        "originalName": "listening-original.m4a",
+        "originalBytes": 6728350,
+        "originalSha256": "02a472de03e5d3767c3e052a8b7eccd6f89687c73c97e3ffd9f0132ca8971fef",
+        "originalDurationSeconds": 801.6
+      }
     },
     {
       "year": 2022,
-      "src": "content/english/past-papers/2022/listening-original.m4a",
+      "src": "content/english/past-papers/2022/listening.m4a",
       "url": "https://www.bilibili.com/video/BV1rx411Q7gW/?p=15",
       "cid": 809875065,
       "title": "2022年中考听力",
-      "bytes": 6987437,
-      "sha256": "75752c78cd3c78c7c5cf1c99176941d3c1f53531527482c5ebde8b00446cfa3d",
-      "durationSeconds": 832.365,
+      "bytes": 4301239,
+      "sha256": "92a9a25472693919ce582d8906f2f78a075ed21779694217c0e8629bd1ab6822",
+      "durationSeconds": 832.37,
       "codec": "mp4a.40.2",
       "matching": "year-label-only",
       "review": {
         "status": "pending"
       },
-      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。"
+      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。",
+      "compression": {
+        "date": "2026-10-18",
+        "method": "aac-lc-40k-mono-24khz",
+        "originalName": "listening-original.m4a",
+        "originalBytes": 6987437,
+        "originalSha256": "75752c78cd3c78c7c5cf1c99176941d3c1f53531527482c5ebde8b00446cfa3d",
+        "originalDurationSeconds": 832.37
+      }
     },
     {
       "year": 2023,
-      "src": "content/english/past-papers/2023/listening-original.m4a",
+      "src": "content/english/past-papers/2023/listening.m4a",
       "url": "https://www.bilibili.com/video/BV1rx411Q7gW/?p=16",
       "cid": 27656522327,
       "title": "2023年中考听力",
-      "bytes": 5843666,
-      "sha256": "50e5e08ac3e3613282b405861ede658bdf6611850dffae1e9ec3921145cac09c",
-      "durationSeconds": 715.114,
+      "bytes": 3688168,
+      "sha256": "36f52a8a95b0a003b09d6347d0a4e2f43d8da55722f9ea41279729e09bb74396",
+      "durationSeconds": 715.12,
       "codec": "mp4a.40.2",
       "matching": "year-label-only",
       "review": {
         "status": "pending"
       },
-      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。"
+      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。",
+      "compression": {
+        "date": "2026-10-18",
+        "method": "aac-lc-40k-mono-24khz",
+        "originalName": "listening-original.m4a",
+        "originalBytes": 5843666,
+        "originalSha256": "50e5e08ac3e3613282b405861ede658bdf6611850dffae1e9ec3921145cac09c",
+        "originalDurationSeconds": 715.11
+      }
     },
     {
       "year": 2024,
-      "src": "content/english/past-papers/2024/listening-original.m4a",
+      "src": "content/english/past-papers/2024/listening.m4a",
       "url": "https://www.bilibili.com/video/BV1rx411Q7gW/?p=17",
       "cid": 27656522634,
       "title": "2024年中考听力",
-      "bytes": 3633845,
-      "sha256": "807003d3efaae73990ff015607f62eade2d2034b4da280d4a90da981ebf3427a",
-      "durationSeconds": 679.551,
+      "bytes": 3617087,
+      "sha256": "f23a6f9795d3e304437160b4ad04a0bf3fc47c4c815d31ffe3757ae6b9bb026c",
+      "durationSeconds": 679.55,
       "codec": "mp4a.40.5",
       "matching": "year-label-only",
       "review": {
         "status": "pending"
       },
-      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。"
+      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。",
+      "compression": {
+        "date": "2026-10-18",
+        "method": "remux",
+        "originalName": "listening-original.m4a",
+        "originalBytes": 3633845,
+        "originalSha256": "807003d3efaae73990ff015607f62eade2d2034b4da280d4a90da981ebf3427a",
+        "originalDurationSeconds": 679.55
+      }
     },
     {
       "year": 2025,
-      "src": "content/english/past-papers/2025/listening-original.m4a",
+      "src": "content/english/past-papers/2025/listening.m4a",
       "url": "https://www.bilibili.com/video/BV1rx411Q7gW/?p=18",
       "cid": 30615867041,
       "title": "2025年中考听力",
-      "bytes": 3438557,
-      "sha256": "6b141f4cdcaa9592b436fcd7f4fe3429c71bc9bcd2c5ea01226eab0b15702307",
-      "durationSeconds": 790.015,
+      "bytes": 3419114,
+      "sha256": "27b86a750e1c1701a339523f240f6b2b40e90ccb0b1c469b8684743d8f017f86",
+      "durationSeconds": 790.02,
       "codec": "mp4a.40.5",
       "matching": "year-label-only",
       "review": {
         "status": "pending"
       },
-      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。"
+      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。",
+      "compression": {
+        "date": "2026-10-18",
+        "method": "remux",
+        "originalName": "listening-original.m4a",
+        "originalBytes": 3438557,
+        "originalSha256": "6b141f4cdcaa9592b436fcd7f4fe3429c71bc9bcd2c5ea01226eab0b15702307",
+        "originalDurationSeconds": 790.02
+      }
     },
     {
       "year": 2026,
-      "src": "content/english/past-papers/2026/listening-original.m4a",
+      "src": "content/english/past-papers/2026/listening.m4a",
       "url": "https://www.bilibili.com/video/BV1rx411Q7gW/?p=19",
       "cid": 39534595556,
       "title": "2026年中考听力",
-      "bytes": 6962531,
-      "sha256": "b629f184f62d7162d4b6be4f52cc3036df987a0a3474656d33f510b20431c298",
-      "durationSeconds": 847.787,
+      "bytes": 4393247,
+      "sha256": "593f77ced2d6935f3d6070bb1f161a146407c5fcd3f67acb314d8b241263831f",
+      "durationSeconds": 847.79,
       "codec": "mp4a.40.2",
       "matching": "year-label-only",
       "review": {
         "status": "pending"
       },
-      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。"
+      "note": "来源分集标注本年；已校验文件和浏览器解码，尚未逐题试听核对。",
+      "compression": {
+        "date": "2026-10-18",
+        "method": "aac-lc-40k-mono-24khz",
+        "originalName": "listening-original.m4a",
+        "originalBytes": 6962531,
+        "originalSha256": "b629f184f62d7162d4b6be4f52cc3036df987a0a3474656d33f510b20431c298",
+        "originalDurationSeconds": 847.79
+      }
+    }
+  ],
+  "legacyFiles": [
+    {
+      "year": 2025,
+      "src": "content/english/past-papers/2025/listening-legacy.m4a",
+      "bytes": 4093485,
+      "sha256": "d694a549bae0f8955ad0a412f50d3b17e6dd2de960dc9b13b88da9baf89c7b97",
+      "durationSeconds": 793.27,
+      "compression": {
+        "date": "2026-10-18",
+        "method": "aac-lc-40k-mono-24khz",
+        "originalName": "listening.mp4",
+        "originalBytes": 13198445,
+        "originalSha256": "582b3cef6a60ed5b3363a73c4c090de78045b40bbf7ee0e660075991436d73a9",
+        "originalDurationSeconds": 793.24
+      },
+      "codec": "mp4a.40.2"
+    },
+    {
+      "year": 2026,
+      "src": "content/english/past-papers/2026/listening-legacy.m4a",
+      "bytes": 4273424,
+      "sha256": "c191d48f15b07ca2c6d93e3f38c0ff90ab644052dca9c5cf33aee9490aea8579",
+      "durationSeconds": 829.23,
+      "compression": {
+        "date": "2026-10-18",
+        "method": "aac-lc-40k-mono-24khz",
+        "originalName": "listening.mp3",
+        "originalBytes": 6633893,
+        "originalSha256": "53033a2fd3d30ef6835b6ba4201a2a693f1440f8e62279112367ab37786745b0",
+        "originalDurationSeconds": 829.23
+      },
+      "codec": "mp4a.40.2"
     }
   ]
 }

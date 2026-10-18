@@ -552,7 +552,7 @@
         "65–70完形为重组推测题干，不作真题收录"
       ],
       "note": "回忆版 · 非官方。PDF及Word内图片交叉核对后补入选词第二组、句型转换、首字母、简答和作文。资料明确注明“推理出，非原题”的内容未作为真题补入；既有题目不变，新增内容待教师审核。",
-      "audio": "content/english/past-papers/2026/listening.mp3",
+      "audio": "content/english/past-papers/2026/listening-legacy.m4a",
       "supplementSources": [
         {
           "root": "download",
@@ -573,6 +573,22 @@
           "59–64阅读选择只有摘要，缺完整原文和选项",
           "65–70完形为重组推测题干，不作真题收录"
         ]
+      },
+      "audioCompression": {
+        "year": 2026,
+        "src": "content/english/past-papers/2026/listening-legacy.m4a",
+        "bytes": 4273424,
+        "sha256": "c191d48f15b07ca2c6d93e3f38c0ff90ab644052dca9c5cf33aee9490aea8579",
+        "durationSeconds": 829.23,
+        "compression": {
+          "date": "2026-10-18",
+          "method": "aac-lc-40k-mono-24khz",
+          "originalName": "listening.mp3",
+          "originalBytes": 6633893,
+          "originalSha256": "53033a2fd3d30ef6835b6ba4201a2a693f1440f8e62279112367ab37786745b0",
+          "originalDurationSeconds": 829.23
+        },
+        "codec": "mp4a.40.2"
       }
     },
     {
@@ -684,7 +700,7 @@
         "本地仅有听力原文、部分听力问题和答案；缺选项图片、笔试题干、判断句与听力填空句"
       ],
       "note": "压缩包已逐张核对：含听力文字与答案，未找到完整笔试题干。听力问题按文字保留，缺少选择项的题供人工核对；未凭答案编造题干。",
-      "audio": "content/english/past-papers/2025/listening.mp4",
+      "audio": "content/english/past-papers/2025/listening-legacy.m4a",
       "supplementSources": [
         {
           "root": "download",
@@ -696,6 +712,22 @@
         "gaps": [
           "本地仅有听力原文、部分听力问题和答案；缺选项图片、笔试题干、判断句与听力填空句"
         ]
+      },
+      "audioCompression": {
+        "year": 2025,
+        "src": "content/english/past-papers/2025/listening-legacy.m4a",
+        "bytes": 4093485,
+        "sha256": "d694a549bae0f8955ad0a412f50d3b17e6dd2de960dc9b13b88da9baf89c7b97",
+        "durationSeconds": 793.27,
+        "compression": {
+          "date": "2026-10-18",
+          "method": "aac-lc-40k-mono-24khz",
+          "originalName": "listening.mp4",
+          "originalBytes": 13198445,
+          "originalSha256": "582b3cef6a60ed5b3363a73c4c090de78045b40bbf7ee0e660075991436d73a9",
+          "originalDurationSeconds": 793.24
+        },
+        "codec": "mp4a.40.2"
       }
     },
     {

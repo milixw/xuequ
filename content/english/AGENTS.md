@@ -81,6 +81,6 @@ reading: {
 
 补齐上海旧原文件答案使用 `scripts/import-english-past-papers.py` 的 `--supplement-answers`，校验来源哈希，仅补空答案，不改原题和ID。2018年公开答案由`answer-supplements.json`管理，`answerSource.kind: public-supplement`保存来源，非官方、pending。2019听力用sh2019-listening-q<题号>避免与重新编号笔试冲突。`completionSource` 记录独立补录来源，详见 `docs/superpowers/specs/2026-10-10-shanghai-english-completion.md`。
 
-网上补录使用 `web-completion-transcripts.json` 与 `scripts/supplement-shanghai-english-web.py`，校验快照、转录和配图哈希，幂等追加、冲突拒绝覆盖。`webSource`记录来源、日期和题号映射，`webSources`供核对；旧导入保留新增年份、跳过补答案。共972项：2021—2023各84题（笔试64、听力20），2024与2025各仅5个听力问题，2026为33个回忆题。缺原录音、选项、完整笔试如实标注，不造题。句型转换、简答、作文人工核对；2021第49题service存疑，保留原答案、人工核对。详见 `docs/superpowers/specs/2026-10-17-shanghai-english-web-completion.md`。
+补录用 `web-completion-transcripts.json`、`scripts/supplement-shanghai-english-web.py`，校验快照/转录/配图哈希，幂等追加、拒绝覆盖。`webSource`/`webSources`记录来源；旧导入保留新增年份、跳过补答案。缺题干不造题；简答、作文人工核对，2021第49题service保留原答案待核。听力压缩由 `scripts/compress-shanghai-listening.py` 分准备与应用两步处理，`listening-audio.json` 保存播放文件哈希及 `compression` 原版哈希，`legacyFiles`保留旧页面录音版本；重导不得覆盖压缩文件或更换录音版本。见 `docs/references/shanghai-listening-compression.md`。
 
 补齐已导入江苏题目的原答案使用同一命令加 `--supplement-answers`，仅补 `answer: null` 及相应缺失原解析，先验证来源 SHA-256；支持紧凑答案表、题号范围与原解析中的明确“故选”，冲突不猜。保留题干、选项、题号、ID、已有答案和人工订正。当前 1,493 个已导入江苏作答项均有原资料参考答案，仍待教师审核，不代表整卷导入。

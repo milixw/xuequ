@@ -2,7 +2,9 @@
 import importlib.util
 import copy
 import json
+import hashlib
 from pathlib import Path
+import tempfile
 import unittest
 
 spec = importlib.util.spec_from_file_location('importer', Path(__file__).parents[1] / 'scripts/import-english-past-papers.py')
@@ -11,6 +13,28 @@ spec.loader.exec_module(importer)
 
 
 class ImportTests(unittest.TestCase):
+    def test_reimport_reuses_checked_compression_without_changing_recording_version(self):
+        with tempfile.TemporaryDirectory(dir=Path(__file__).parents[1] / 'tmp') as directory:
+            root = Path(directory)
+            old_dest = importer.DEST
+            try:
+                importer.DEST = root / 'content/english/past-papers'
+                target = importer.DEST / '2025/listening-legacy.m4a'
+                target.parent.mkdir(parents=True)
+                target.write_bytes(b'compressed audio')
+                source = root / 'original.mp4'
+                source.write_bytes(b'original audio/video')
+                record = dict(year=2025, src=target.relative_to(root).as_posix(), sha256=hashlib.sha256(target.read_bytes()).hexdigest(),
+                              compression=dict(originalName='listening.mp4', originalSha256=hashlib.sha256(source.read_bytes()).hexdigest()))
+                (importer.DEST / 'listening-audio.json').write_text(json.dumps(dict(legacyFiles=[record])), encoding='utf8')
+                self.assertEqual(importer.install_audio(source, 2025, 'listening.mp4'), (record['src'], record))
+                self.assertFalse((target.parent / 'listening.mp4').exists())
+                source.write_bytes(b'another recording version')
+                with self.assertRaisesRegex(ValueError, 'source/version mismatch'):
+                    importer.install_audio(source, 2025, 'listening.mp4')
+            finally:
+                importer.DEST = old_dest
+
     def test_legacy_answer_supplement_skips_web_source_questions(self):
         paper = {'questions': [dict(id='sh2024-q06', originalNo=6, type='open', answer=None,
                                    webSource={'sourceSha256': 'checked-web-source'})]}
