@@ -1,7 +1,7 @@
 'use strict';
 
 // 模拟考试：私有库里的整卷试卷与解析（页面图片），限时作答、交卷后看解析、自己填分数。
-// 首页“练习”区的“模拟考试”小格、#/mock 页面。资料和解锁都靠 src/private-ui.js（manifest.exams，口令服务按 exams:<卷集ID> 授权）。
+// 学科页（语数英）“考试”组的“模拟考试”行、首页“今天”的进行中提示、#/mock 页面。资料和解锁都靠 src/private-ui.js（manifest.exams，口令服务按 exams:<卷集ID> 授权）。
 // 学生在纸上作答，页面只管计时和翻看；不做在线判分。
 // 设计文档：docs/superpowers/specs/2026-10-17-mock-exam.md
 
@@ -79,20 +79,40 @@
     timer = null;
   }
 
-  // ---------- 首页入口：有能看的卷集或可以解锁时才出现 ----------
-  // grid：首页“练习”的格子区；makeTile(entry)：返回一个小格（entry 是 { title, desc, href }）
-  function homeTile(grid, makeTile) {
+  // ---------- 学科页入口：有这一科的卷子或可以解锁时才出现 ----------
+  // slot：占位元素，出现时换成 makeRow(entry) 返回的行，不出现就删掉；entry 是 { icon, title, desc, href }
+  function entryRow(slot, subjectId, makeRow) {
     PrivateUI.state().then(s => {
-      if (s === 'none' || !grid.isConnected) return;
-      if (s === 'unlocked' && !Object.keys(PrivateUI.examSets()).length) return;
-      const tile = makeTile({ title: '模拟考试', desc: '整卷限时做，交卷后看解析', href: '#/mock' });
+      if (!slot.isConnected) return;
+      const sets = Object.values(PrivateUI.examSets());
+      if (s === 'none' || (s === 'unlocked' && !sets.some(set => set.papers.some(p => p.subject === subjectId)))) {
+        slot.remove();
+        return;
+      }
+      const row = makeRow({ icon: '模', title: '模拟考试', desc: '整卷限时做，交卷后看解析', href: '#/mock' });
       if (s === 'locked') {
-        tile.addEventListener('click', e => {
+        row.addEventListener('click', e => {
           e.preventDefault();
           openUnlock(() => { location.hash = '#/mock'; });
         });
       }
-      grid.appendChild(tile);
+      slot.replaceWith(row);
+    });
+  }
+
+  // 首页“今天”：正在做、还没到时间的那份卷子；没有返回 null
+  function inProgress() {
+    return PrivateUI.state().then(s => {
+      if (s !== 'unlocked') return null;
+      const now = Date.now();
+      for (const [setId, set] of Object.entries(PrivateUI.examSets())) {
+        for (const paper of set.papers) {
+          const rec = getRecord(`${setId}/${paper.id}`);
+          const sec = rec.startedAt ? remainingSec(rec, paper.minutes, now) : 0;
+          if (sec > 0) return { href: `#/mock/${setId}/${paper.id}`, title: paper.title, minutesLeft: Math.ceil(sec / 60) };
+        }
+      }
+      return null;
     });
   }
   function openUnlock(onDone) {
@@ -313,7 +333,7 @@
     }
   }
 
-  const MockExam = { homeTile, mockPage, stop, remainingSec, submit, parseScore, clock, duration, getRecord, putRecord, KEY };
+  const MockExam = { entryRow, inProgress, mockPage, stop, remainingSec, submit, parseScore, clock, duration, getRecord, putRecord, KEY };
   if (typeof module !== 'undefined') module.exports = MockExam;
   else root.MockExam = MockExam;
 })(typeof globalThis !== 'undefined' ? globalThis : this);

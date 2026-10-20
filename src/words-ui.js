@@ -49,6 +49,18 @@
     return (own || list[0] || {}).id || null;
   }
 
+  // 首页“今天”：本学期有课本词表时，今天要复习、新学几个，约几分钟；没有词表或今天没任务返回 null
+  // 只加载词表，不加载 2025 手册补充（首页用不到，文件大）
+  async function todaySummary() {
+    const grade = Accounts.grade.get(Accounts.current());
+    const own = wordVolumes().find(v => v.volume.id === grade);
+    if (!own) return null;
+    await Promise.all(wordVolumes().map(loadVolume));
+    const list = Words.plan(Words.load(storeFor()), Words.today(), { volumeId: own.id });
+    if (!list.due.length && !list.fresh.length) return null;
+    return { due: list.due.length, fresh: list.fresh.length, minutes: Words.minutes(list) };
+  }
+
   function boxLabel(state) {
     if (!state) return '未学';
     if (state.box === 'M') return '已掌握';
@@ -334,5 +346,5 @@
       `<span class="bar-bg"><span style="width:${sum.total ? sum.mastered / sum.total * 100 : 0}%"></span></span></a>`;
   }
 
-  window.WordsUI = { todayPage, volumePage, unitPage, chapterRow, loadAll };
+  window.WordsUI = { todayPage, todaySummary, volumePage, unitPage, chapterRow, loadAll };
 })();

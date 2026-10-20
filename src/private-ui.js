@@ -1,6 +1,6 @@
 'use strict';
 
-// 私有课本资料（课文原文与录音）：首页“🔑 课本资料”入口和本学期一册的直达链接、口令框、#/textbook 页面、英语小节页的“听课本录音”链接。
+// 私有课本资料（课文原文与录音）：英语学科页的“🔑 课本资料”入口和本学期一册的直达链接、口令框、#/textbook 页面、英语小节页的“听课本录音”链接。
 // 资料在私有仓库（克隆到 private/，不入开源库），线上由 nginx 凭口令服务（scripts/private-gate.js）的凭证放行。
 // 线上主要靠分享链接解锁（口令服务发凭证后跳到 #/textbook，页面不用管）；口令框留作备用。
 // 本机直接打开时 private/manifest.js 能加载就直接可用，不问口令。
@@ -154,15 +154,18 @@
     input.focus();
   }
 
-  // ---------- 首页入口：资料可用或可解锁时才出现 ----------
-  // notesList：复习资料英语组，放总入口（未解锁时点了先输口令）
-  // booksBox：本学期课本区，已解锁且这一册有资料时加一行直达链接
+  // ---------- 英语学科页入口：资料可用或可解锁时才出现 ----------
+  // slot：“资料”组里的占位元素，换成总入口（未解锁时点了先输口令），不出现就删掉
+  // booksBox：本学期课本组，已解锁且这一册有资料时加一行直达链接
   // makeRow(entry)：app.js 的列表行，entry 是 { icon, title, desc, href }
-  function homeLinks(notesList, booksBox, volId, makeRow) {
+  function homeLinks(slot, booksBox, volId, makeRow) {
     state().then(s => {
-      if (s === 'none') return;
+      if (s === 'none') {
+        slot.remove();
+        return;
+      }
       // 分享链接只给了模拟考试时，没有能看的册，不显示课本资料入口
-      if (notesList.isConnected && (s === 'locked' || volumeIds().length)) {
+      if (slot.isConnected && (s === 'locked' || volumeIds().length)) {
         const link = makeRow({
           icon: '🔑', title: '课本资料', href: '#/textbook',
           desc: s === 'locked' ? '用分享链接打开，或输入口令' : '各册课本录音和课文原文',
@@ -173,7 +176,9 @@
             openUnlock(() => { location.hash = '#/textbook'; });
           });
         }
-        notesList.appendChild(link);
+        slot.replaceWith(link);
+      } else {
+        slot.remove();
       }
       if (s === 'unlocked' && booksBox.isConnected && volumeOf(volId)) {
         booksBox.appendChild(makeRow({

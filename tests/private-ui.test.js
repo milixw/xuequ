@@ -55,9 +55,10 @@ test('私有课本资料：页面接线（入口、路由、换页停止、小�
   const html = read('index.html');
   assert(html.indexOf('src/private-ui.js') > 0 && html.indexOf('src/private-ui.js') < html.indexOf('src/app.js'), 'private-ui.js 应在 app.js 之前加载');
   const app = read('src/app.js');
-  assert(app.includes("PrivateUI.homeLinks(noteLists['英语'], books,"), '首页复习资料英语组缺少总入口（本学期课本区的本册直达也靠它）');
+  assert(app.includes("PrivateUI.homeLinks(slot, books || main,"), '英语学科页“资料”组缺少课本资料入口（本学期课本组的本册直达也靠它）');
+  assert(read('content/catalog.js').includes("special: 'textbook'"), 'catalog.js 英语资料组要登记课本资料入口');
   const homeLinks = read('src/private-ui.js').slice(read('src/private-ui.js').indexOf('function homeLinks('), read('src/private-ui.js').indexOf('// ---------- 英语小节页'));
-  assert(homeLinks.includes("if (s === 'none') return;"), '没有私有资料时首页不应出现入口');
+  assert(homeLinks.includes("if (s === 'none') {") && homeLinks.includes('slot.remove();'), '没有私有资料时学科页不应出现入口（占位要删掉）');
   assert(homeLinks.includes('openUnlock('), '未解锁时点总入口要先输口令');
   assert(homeLinks.includes("s === 'unlocked' && booksBox.isConnected && volumeOf(volId)"), '本册直达只在已解锁且本册有资料时出现');
   assert(app.includes("if (parts[0] === 'textbook') return PrivateUI.textbookPage("), '缺少 #/textbook 路由');
@@ -115,17 +116,22 @@ test('私有课本资料：分享链接限定范围时只显示能看的册', ()
   }
 });
 
-test('模拟考试：页面接线（首页小格、路由、换页停计时、登记路由和存储键）', () => {
+test('模拟考试：页面接线（学科页入口、首页进行中提示、路由、换页停计时、登记路由和存储键）', () => {
   const html = read('index.html');
   const at = f => html.indexOf(f);
   assert(at('src/private-ui.js') < at('src/mock-exam.js') && at('src/mock-exam.js') < at('src/app.js'), 'mock-exam.js 应在 private-ui.js 之后、app.js 之前加载');
   const app = read('src/app.js');
-  assert(app.includes('MockExam.homeTile(grid,'), '首页练习区缺少模拟考试小格');
+  assert(app.includes('MockExam.entryRow(slot, id, noteRow)'), '学科页“考试”组缺少模拟考试入口');
+  assert(app.includes('MockExam.inProgress()'), '首页“今天”缺少进行中的模拟考试');
   assert(app.includes("if (parts[0] === 'mock') return MockExam.mockPage("), '缺少 #/mock 路由');
   assert(app.includes('MockExam.stop();'), '换页时应停止计时');
   const mock = read('src/mock-exam.js');
-  assert(mock.includes("if (s === 'none' || !grid.isConnected) return;"), '没有私有资料时首页不应出现模拟考试');
-  assert(mock.includes("if (s === 'unlocked' && !Object.keys(PrivateUI.examSets()).length) return;"), '已解锁但没有卷集权限时不出现');
+  const entry = mock.slice(mock.indexOf('function entryRow('), mock.indexOf('function inProgress('));
+  assert(entry.includes("s === 'none' || (s === 'unlocked' && !sets.some(set => set.papers.some(p => p.subject === subjectId)))") && entry.includes('slot.remove();'),
+    '没有私有资料，或已解锁但没有这一科的卷子时，学科页不出现模拟考试');
+  const doing = mock.slice(mock.indexOf('function inProgress('), mock.indexOf('function openUnlock('));
+  assert(doing.includes("if (s !== 'unlocked') return null;") && doing.includes('remainingSec(rec, paper.minutes, now)') && doing.includes('if (sec > 0)'),
+    '首页“今天”只提示已解锁、开始了且还没到时间的卷子');
   assert(!/fetch\(/.test(mock), '私有文件用 <script>/<img> 加载，不用 fetch');
   const doc = read('docs/storage-and-routes.md');
   assert(doc.includes('#/mock') && doc.includes('`xq.mockExam.v1`'), '#/mock 路由和 xq.mockExam.v1 要登记到 docs/storage-and-routes.md');

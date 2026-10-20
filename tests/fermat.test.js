@@ -166,12 +166,12 @@ test('费马点：关卡格式、公式能渲染、答案能被判分器接受',
   }
 });
 
-test('费马点：挂在 18.4，并在 index.html 加载、放进首页宫格', () => {
+test('费马点：挂在 18.4，并在 index.html 加载、登记进趣味玩法', () => {
   assert(FermatGame.section === 'math/sh2024/g7s2/18.4', '应挂在 18.4');
   const root = path.join(__dirname, '..');
   const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
   for (const f of ['logic.js', 'game.js']) assert(html.includes(`src/games/fermat/${f}`), `index.html 没有加载 ${f}`);
   const catalog = fs.readFileSync(path.join(root, 'content', 'catalog.js'), 'utf8');
   assert(/no: '18\.4'[^}]*games: \['fermat'\]/.test(catalog), 'catalog.js 的 18.4 应挂 fermat');
-  assert(fs.readFileSync(path.join(root, 'src', 'app.js'), 'utf8').includes("href: '#/g/fermat'"), '首页宫格应有费马点');
+  assert(/id: 'fermat'[^}]*from: 'g7s2'[^}]*href: '#\/g\/fermat'/.test(catalog), 'catalog.js 的 games 应有费马点（七下起显示）');
 });

@@ -1,7 +1,9 @@
 'use strict';
 
 // 应用外壳：hash 路由 + 页面渲染
-//   #/                 首页：各学科的册
+//   #/                 首页：今天（接着学、今日单词、进行中的模拟考试）+ 学科卡片 + 趣味玩法
+//   #/subject/<学科ID>  学科页：本学期课本、练习、资料、考试，中考类入口九年级以前收在“中考专区”
+//   #/games            全部趣味玩法
 //   #/v/<册ID>          册：章节列表
 //   #/s/<小节ID>        小节：知识点 + 题目列表
 //   #/q/<小节ID>/<题目ID> 做题
@@ -205,32 +207,6 @@
 
   let outsideHandler = null;
 
-  // 首页“趣味玩法”的宫格。挂在小节上的游戏（#/g/...）也可以放进来，从首页进去时返回键回首页
-  // when：什么时候适合玩（课本位置），按课本顺序排
-  const FUN_GAMES = [
-    { name: '24 点', tag: '有理数运算', when: '六上第 1 章', icon: '24', color: '#c0513a', href: 'src/games/24/index.html' },
-    { name: '数学魔术', tag: '字母表示数', when: '六上第 2 章', icon: '?!', color: '#8a4fb0', href: '#/g/magic' },
-    { name: '天平解方程', tag: '等式的性质', when: '六上第 3 章', icon: '=', color: '#3f9a5a', href: '#/g/balance' },
-    { name: '费马点', tag: '距离和最小', when: '七下第 18 章', icon: 'P', color: '#c2417a', href: '#/g/fermat' },
-    { name: '函数轨道', tag: '一次、二次函数', when: '八下第 25 章', icon: 'y=', color: '#b46a24', href: 'src/games/function-track/index.html' },
-    { name: '取石子', tag: '策略推理', when: '不限年级', icon: '●●', color: '#2f6f7a', href: 'src/games/nim/index.html' },
-    { name: '立体图形', tag: '展开图 · 截面', when: '不限年级', icon: '◆', color: '#2f6fd6', href: 'src/games/solids/index.html' },
-  ];
-
-  // 首页“复习资料”：都是独立的离线参考页。icon 是一两个字的图标，颜色按学科
-  const NOTE_GROUPS = [
-    { subject: '语文', color: '#c0513a', items: [
-      { icon: '纲', title: '语文考纲', desc: '考试范围、考点清单与复习方向', href: 'content/chinese/shanghai-junior-outline.html' },
-      { icon: '词', title: '文言实词虚词', desc: '180 个文言实词的词义和例句', href: 'content/chinese/classical-words.html' },
-      { icon: '注', title: '古诗文联动注释', desc: '61 篇古诗文，点词查释义', href: 'content/chinese/上海中考古诗文·虚实词联动注释版.html' },
-      { icon: '诗', title: '古诗文阅读应考手册', desc: '考点、解题方法和答题要点', href: 'content/chinese/上海中考古诗文阅读应考手册.html' },
-      { icon: '文', title: '现代文阅读应考手册', desc: '题型、分析方法和答题技巧', href: 'content/chinese/上海中考现代文阅读应考手册.html' },
-    ] },
-    { subject: '英语', color: '#2f6fd6', items: [
-      { icon: 'Aa', title: '英语学习大纲', desc: '上海初中英语知识点梳理', href: 'content/english/shanghai-junior-outline.html' },
-    ] },
-  ];
-
   // 列表行：左边图标、中间标题和一行说明、右边箭头
   function noteRow(entry) {
     const link = document.createElement('a');
@@ -242,22 +218,31 @@
     return link;
   }
 
-  // 首页课本卡片只写学科、册名和进度；教材版本在册页面的副标题里
-  function appendVolumeCard(main, v) {
+  // 一组列表行的白底容器；--subject 给图标上学科色
+  function noteList(color) {
+    const list = document.createElement('div');
+    list.className = 'note-list';
+    if (color) list.style.setProperty('--subject', color);
+    return list;
+  }
+
+  // 学科页的课本卡片：学科标签、册名和进度；教材版本在册页面的副标题里
+  function appendVolumeCard(box, v) {
     const metas = Content.sectionMetas().filter(s => s.volumeId === v.id);
     const ready = metas.filter(s => s.section.ready).length;
     const solved = metas.reduce((n, s) => n + Progress.solvedCount(s.id), 0);
     const card = document.createElement('a');
     card.className = 'card volume';
     card.href = `#/v/${v.id}`;
+    card.style.setProperty('--subject', v.subject.color || '');
     card.innerHTML =
       `<h2><span class="tag">${escapeHtml(v.subject.name)}</span>${escapeHtml(v.volume.name)}</h2>` +
       `<p class="meta">${metas.length ? `已上线 ${ready} / ${metas.length} 节 · 已答对 ${solved} 题` : ''}` +
       `${v.volume.words ? `${metas.length ? ' · ' : ''}有课本单元词表` : ''}</p>`;
-    main.appendChild(card);
+    box.appendChild(card);
   }
 
-  // 首页分区：灰色小标题 + 内容
+  // 分区：灰色小标题 + 内容
   function homeSection(main, title, note) {
     const box = document.createElement('section');
     box.className = 'home-section';
@@ -266,120 +251,214 @@
     return box;
   }
 
-  // 两列小格里的入口：标题 + 一行说明
-  function appendHomeTiles(grid, entries) {
-    for (const entry of entries) {
-      const link = document.createElement('a');
-      link.className = 'home-tile';
-      link.href = entry.href;
-      link.innerHTML = `<b>${escapeHtml(entry.title)}</b><small>${escapeHtml(entry.desc)}</small>`;
-      grid.appendChild(link);
+  // 趣味玩法宫格：每格只写名字、练什么、课本位置，详细玩法进了游戏再看
+  function funGrid(games) {
+    return `<div class="fun-grid">` + games.map(g =>
+      `<a class="fun-tile" href="${g.href}"><span class="icon" style="background:${g.color}">${g.icon}</span>` +
+      `<b>${escapeHtml(g.name)}</b><small>${escapeHtml(g.tag)}</small><i class="when">${escapeHtml(g.when)}</i></a>`).join('') +
+      `</div>`;
+  }
+
+  // 趣味玩法区：只放当前学期用得上的，其余收在“全部”（#/games）
+  function appendGames(main, semesterId, subjectId) {
+    const { all, shown } = Content.games(semesterId, subjectId);
+    if (!all.length) return;
+    const box = homeSection(main, subjectId ? '玩法' : '趣味玩法');
+    if (shown.length < all.length) {
+      box.querySelector('.group').insertAdjacentHTML('beforeend', `<a class="more" href="#/games">全部 ${all.length} 个 ›</a>`);
     }
+    box.insertAdjacentHTML('beforeend', shown.length ? funGrid(shown) : '<p class="hint">这学期还没有，点右边“全部”看看以后的。</p>');
+  }
+
+  // 首页、学科页共用的当前学期（右上角选的）
+  function currentSemester() {
+    return Content.semester(Accounts.grade.get(Accounts.current()));
+  }
+
+  function mountHeader(semester) {
+    const header = app.querySelector('header.bar');
+    mountSemesterSwitcher(header, semester && semester.id, Accounts.current());
+    AccountUI.mount(header);
+  }
+
+  // ---------- 接着学：上次打开的小节（xq.lastVisit.v1.<归属>，按账号） ----------
+  const LAST_VISIT = 'xq.lastVisit.v1';
+  function recordVisit(sectionId) {
+    LearningStore.write(LAST_VISIT, { section: sectionId, at: Date.now() });
+  }
+  function lastVisit() {
+    const v = LearningStore.read(LAST_VISIT, null);
+    const meta = v && typeof v.section === 'string' ? Content.sectionMeta(v.section) : null;
+    return meta && meta.section.ready ? meta : null;
   }
 
   // ---------- 首页 ----------
-  // 从上到下：本学期课本（已解锁时带本册课本录音）→ 练习（试卷、英语单词和试题库，有私有资料时加模拟考试）→ 复习资料（按学科分组，含课本资料总入口）→ 中考真题（按学科一排）→ 趣味玩法
+  // 从上到下：今天（接着学、今日单词、进行中的模拟考试）→ 学科卡片 → 趣味玩法
+  // 每个学科的课本、练习、资料、考试都在学科页 #/subject/<学科ID>
   function home() {
     const main = page('学趣闯关', null, '跟着课本学，一节一关');
-    const header = app.querySelector('header.bar');
-    const username = Accounts.current();
-    const semester = Content.semester(Accounts.grade.get(username));
-    mountSemesterSwitcher(header, semester && semester.id, username);
-    AccountUI.mount(header);
-    const volumes = semester ? Content.volumes().filter(v => v.volume.id === semester.id) : [];
-    const books = homeSection(main, '本学期课本', '右上角切换学期');
-    volumes.forEach(v => appendVolumeCard(books, v));
+    const semester = currentSemester();
+    mountHeader(semester);
 
-    // 练习：两列小格子，试卷排第一个
-    const practice = homeSection(main, '练习');
+    // 今天：三行按顺序占位，有内容才填上；一行都没有时显示提示
+    const today = homeSection(main, '今天');
+    const list = noteList('var(--primary)');
+    list.hidden = true;
+    today.appendChild(list);
+    const hint = document.createElement('p');
+    hint.className = 'hint today-hint';
+    hint.textContent = '从下面选一个学科开始吧。';
+    today.appendChild(hint);
+    const slots = ['visit', 'words', 'mock'].map(() => list.appendChild(document.createElement('span')));
+    const fill = (i, entry) => {
+      if (!slots[i].isConnected) return;
+      slots[i].replaceWith(noteRow(entry));
+      list.hidden = false;
+      hint.remove();
+    };
+    const visit = lastVisit();
+    if (visit) {
+      fill(0, { icon: '▶', title: '接着学', href: `#/s/${visit.id}`,
+        desc: `${visit.subject.name} ${visit.section.no} ${sectionTitle(visit.section.title)}` });
+    }
+    WordsUI.todaySummary().then(w => {
+      if (!w) return;
+      const parts = [w.due && `复习 ${w.due} 个`, w.fresh && `新学 ${w.fresh} 个`].filter(Boolean);
+      fill(1, { icon: '词', title: '今日单词', href: '#/words', desc: `${parts.join('、')}，约 ${w.minutes} 分钟` });
+    }).catch(() => {});
+    MockExam.inProgress().then(m => {
+      if (m) fill(2, { icon: '⏱', title: '模拟考试进行中', href: m.href, desc: `${m.title} · 还剩约 ${m.minutesLeft} 分钟` });
+    }).catch(() => {});
+
+    // 学科卡片：本学期有课本的写册名和进度，没有的写主要内容
+    const subjects = homeSection(main, '学科', semester ? semester.name : '');
     const grid = document.createElement('div');
-    grid.className = 'home-grid';
-    practice.appendChild(grid);
-    const exam = document.createElement('a');
-    exam.className = 'home-tile exam-entry';
-    exam.innerHTML = `<b>试卷</b><small>限时测试，交卷后看错题</small>`;
-    let pressStart = 0;
-    let longPressed = false;
-    exam.addEventListener('pointerdown', () => {
-      pressStart = Date.now();
-      longPressed = false;
-    });
-    exam.addEventListener('pointerup', () => {
-      if (Date.now() - pressStart > 500) { longPressed = true; return; }
-      if (longPressed) return;
-      if (!Accounts.current()) {
-        AccountUI.ensureLoggedIn(() => { location.hash = '#/exam'; });
+    grid.className = 'subject-grid';
+    for (const subject of Content.subjects()) {
+      const volumes = Content.volumes().filter(v => v.subject === subject && semester && v.volume.id === semester.id);
+      const resources = Content.resources(subject.id, semester && semester.id);
+      if (!volumes.length && !resources.length) continue;
+      let label = '', meta = '';
+      if (volumes.length) {
+        // 一个学期同一科有几册时（数学六上和衔接），写第一册，册数写在进度那行
+        label = volumes[0].volume.name;
+        const solved = Content.sectionMetas().filter(s => volumes.some(v => v.id === s.volumeId))
+          .reduce((n, s) => n + Progress.solvedCount(s.id), 0);
+        meta = (volumes.length > 1 ? `共 ${volumes.length} 册 · ` : '') + `已答对 ${solved} 题`;
       } else {
-        location.hash = '#/exam';
+        label = resources.some(r => r.group === 'notes') ? '复习资料' : '中考真题';
+        meta = resources.some(r => r.group === 'notes') && resources.some(r => r.stage === 'zhongkao' && r.group === 'exam') ? '另有中考真题' : '';
       }
-    });
-    exam.addEventListener('contextmenu', e => e.preventDefault());
-    grid.appendChild(exam);
-    appendHomeTiles(grid, [
-      { title: '英语单词', desc: '每天 10 分钟背课本单词', href: '#/words' },
-      { title: '英语试题库', desc: '按知识点和题型练错题', href: '#/english-bank' },
-    ]);
-    // 模拟考试（私有资料）：有能做的卷子或可输口令解锁时才出现
-    MockExam.homeTile(grid, entry => {
-      const tile = document.createElement('a');
-      tile.className = 'home-tile';
-      tile.href = entry.href;
-      tile.innerHTML = `<b>${escapeHtml(entry.title)}</b><small>${escapeHtml(entry.desc)}</small>`;
-      return tile;
-    });
-
-    // 复习资料：按学科分组的列表行，组内按 考纲 → 积累 → 应考 排；🔑 课本资料总入口在英语组末尾
-    const notes = homeSection(main, '复习资料');
-    const noteLists = {};
-    for (const group of NOTE_GROUPS) {
-      notes.insertAdjacentHTML('beforeend', `<h4 class="note-subject">${escapeHtml(group.subject)}</h4>`);
-      const list = document.createElement('div');
-      list.className = 'note-list';
-      list.style.setProperty('--subject', group.color);
-      group.items.forEach(entry => list.appendChild(noteRow(entry)));
-      notes.appendChild(list);
-      noteLists[group.subject] = list;
+      const card = document.createElement('a');
+      card.className = 'subject-card';
+      card.href = `#/subject/${subject.id}`;
+      card.style.setProperty('--subject', subject.color || 'var(--primary)');
+      card.innerHTML = `<b>${escapeHtml(subject.name)}</b><span>${escapeHtml(label)}</span>` +
+        (meta ? `<small>${escapeHtml(meta)}</small>` : '');
+      grid.appendChild(card);
     }
-    // 有私有课本资料（或可输口令解锁）时才出现；已解锁时本学期课本区也加一行本册直达
-    PrivateUI.homeLinks(noteLists['英语'], books, semester && semester.id, entry => {
-      const row = noteRow(entry);
-      row.classList.add('pv-row');
-      return row;
-    });
+    subjects.appendChild(grid);
 
-    // 中考真题：五个学科排成一排，进去再按年份选；英语先选上海或江苏
-    const shanghai = homeSection(main, '中考真题', '上海历年原题，英语另有江苏');
-    const chips = document.createElement('div');
-    chips.className = 'home-chips';
-    for (const entry of [
-      { title: '语文', href: '#/shanghai-papers/chinese' },
-      { title: '数学', href: '#/shanghai-papers/math' },
-      { title: '英语', href: '#/english-exams' }, // 英语中考真题
-      { title: '物理', href: '#/shanghai-papers/physics' },
-      { title: '化学', href: '#/shanghai-papers/chemistry' },
-    ]) {
-      const link = document.createElement('a');
-      link.href = entry.href;
-      link.textContent = entry.title;
-      chips.appendChild(link);
+    appendGames(main, semester && semester.id);
+  }
+
+  // ---------- 学科页 ----------
+  // 本学期课本 → 练习 → 资料 → 考试 → 玩法（数学）→ 中考专区（九年级以前）；空的组不显示
+  const GROUPS = [['practice', '练习'], ['notes', '资料'], ['exam', '考试']];
+
+  function subjectPage(id) {
+    const subject = Content.subject(id);
+    if (!subject) { location.hash = '#/'; return; }
+    const semester = currentSemester();
+    const main = page(subject.name, '#/', semester ? semester.name : '');
+    mountHeader(semester);
+    const color = subject.color || 'var(--primary)';
+    const resources = Content.resources(id, semester && semester.id);
+
+    // 本学期课本；其他册收在下面，往前复习用
+    const all = Content.volumes().filter(v => v.subject === subject);
+    const mine = all.filter(v => semester && v.volume.id === semester.id);
+    // books：课本卡片的容器，“本册课本录音”（异步）也加在这里，排在“其他册”前面
+    let books = null;
+    if (all.length) {
+      const box = homeSection(main, '本学期课本');
+      books = box.appendChild(document.createElement('div'));
+      books.className = 'volume-cards';
+      if (mine.length) mine.forEach(v => appendVolumeCard(books, v));
+      else books.insertAdjacentHTML('beforeend', '<p class="hint">这学期还没有这一科的课本内容，可以在下面看其他册。</p>');
+      const others = all.filter(v => !mine.includes(v));
+      if (others.length) {
+        const more = document.createElement('details');
+        more.className = 'other-volumes';
+        more.innerHTML = `<summary>其他册（${others.length}）</summary>`;
+        const list = noteList(color);
+        others.forEach(v => list.appendChild(noteRow({ icon: v.volume.name.slice(0, 1), title: v.volume.name, desc: v.edition.name, href: `#/v/${v.id}` })));
+        more.appendChild(list);
+        box.appendChild(more);
+      }
     }
-    shanghai.appendChild(chips);
 
-    // 趣味玩法：宫格，每格只写名字、练什么、课本位置，详细玩法进了游戏再看
-    const games = homeSection(main, '趣味玩法');
-    games.insertAdjacentHTML('beforeend',
-      `<div class="fun-grid">` +
-      FUN_GAMES.map(g =>
-        `<a class="fun-tile" href="${g.href}"><span class="icon" style="background:${g.color}">${g.icon}</span>` +
-        `<b>${escapeHtml(g.name)}</b><small>${escapeHtml(g.tag)}</small><i class="when">${escapeHtml(g.when)}</i></a>`).join('') +
-      `</div>`);
+    // 有 special 的入口由页面代码接管：先放占位，再换成真正的行
+    const rowFor = (r, list) => {
+      if (r.special === 'mock') {
+        const slot = list.appendChild(document.createElement('span'));
+        MockExam.entryRow(slot, id, noteRow);
+        return;
+      }
+      if (r.special === 'textbook') {
+        const slot = list.appendChild(document.createElement('span'));
+        const vol = mine[0] ? mine[0].volume.id : semester && semester.id;
+        PrivateUI.homeLinks(slot, books || main, vol, entry => {
+          const row = noteRow(entry);
+          row.classList.add('pv-row');
+          return row;
+        });
+        return;
+      }
+      const row = list.appendChild(noteRow(r));
+      // 小节测试的记录按账号存，没登录先登录
+      if (r.special === 'exam') {
+        row.addEventListener('click', e => {
+          if (Accounts.current()) return;
+          e.preventDefault();
+          AccountUI.ensureLoggedIn(() => { location.hash = r.href; });
+        });
+      }
+    };
+
+    for (const [group, title] of GROUPS) {
+      const items = resources.filter(r => r.group === group && !r.folded);
+      if (!items.length) continue;
+      const list = noteList(color);
+      items.forEach(r => rowFor(r, list));
+      homeSection(main, title).appendChild(list);
+    }
+
+    appendGames(main, semester && semester.id, id);
+
+    const folded = resources.filter(r => r.folded);
+    if (folded.length) {
+      const zk = document.createElement('details');
+      zk.className = 'zhongkao';
+      zk.innerHTML = `<summary>中考专区（${folded.length}）<small>九年级起直接显示在上面</small></summary>`;
+      const list = noteList(color);
+      folded.forEach(r => rowFor(r, list));
+      zk.appendChild(list);
+      main.appendChild(zk);
+    }
+  }
+
+  // ---------- 全部趣味玩法 ----------
+  function gamesPage() {
+    const main = page('趣味玩法', '#/', '每个游戏标着课本上用得着的位置');
+    main.insertAdjacentHTML('beforeend', funGrid(Content.games(null).all));
   }
 
   // ---------- 册 ----------
   async function volumePage(id) {
     const v = Content.volume(id);
     if (!v) return showError(page('找不到这一册', '#/'), '链接可能有误，请返回首页。');
-    const main = page(v.volume.name, '#/', `${v.subject.name} · ${v.edition.name}`);
+    const main = page(v.volume.name, `#/subject/${v.subject.id}`, `${v.subject.name} · ${v.edition.name}`);
     const metas = Content.sectionMetas().filter(s => s.volumeId === id);
     const examMetas = Content.examMetas().filter(e => e.volumeId === id);
     // 预先加载已上线的小节，用来显示题目总数
@@ -445,11 +524,12 @@
     return (section.games || []).map(id => window.Games && window.Games[id]).filter(Boolean);
   }
 
-  function gamePage(id, levelId, fromHome) {
+  // fromHref：从首页、学科页、全部玩法进来时回那里，其余回游戏所在的小节
+  function gamePage(id, levelId, fromHref) {
     const g = window.Games && window.Games[id];
     if (!g) return showError(page('找不到这个游戏', '#/'), '链接可能有误，请返回首页。');
     const meta = Content.sectionMeta(g.section);
-    const main = page(g.title, fromHome ? '#/' : `#/s/${g.section}`, meta ? `${meta.section.no} ${sectionTitle(meta.section.title)} · 动手玩` : '动手玩');
+    const main = page(g.title, fromHref || `#/s/${g.section}`, meta ? `${meta.section.no} ${sectionTitle(meta.section.title)} · 动手玩` : '动手玩');
     g.mount(main, levelId);
   }
 
@@ -475,6 +555,7 @@
       main.insertAdjacentHTML('beforeend', '<p class="notice">本节内容由 AI 编写，尚未经过老师审核，如发现错误欢迎反馈。</p>');
     }
 
+    recordVisit(id);
     PrivateUI.sectionLink(main, meta);
 
     if (section.reading) {
@@ -568,6 +649,7 @@
     const index = qs.findIndex(q => q.id === qid);
     if (index < 0) return showError(page('找不到这道题', `#/s/${sectionId}`), '返回小节重新选择吧。');
     const main = page(`${meta.section.no}　${sectionTitle(section.title)}`, `#/s/${sectionId}`);
+    recordVisit(sectionId);
     const href = q => (q ? `#/q/${sectionId}/${q.id}` : null);
     Quiz.mount(main, {
       sectionId,
@@ -641,11 +723,11 @@
     });
   }
 
-  // 上一个页面：从首页进游戏时返回键回首页，其余回游戏所在的小节
+  // 上一个页面：从首页、学科页、全部玩法进游戏时返回键回那里，其余回游戏所在的小节
   let prevParts = [];
 
   async function englishBankPage(id) {
-    const main = page(id ? '英语试题' : '英语试题库', id ? '#/english-bank' : '#/', '先学知识点，再练错题');
+    const main = page(id ? '英语试题' : '英语试题库', id ? '#/english-bank' : '#/subject/english', '先学知识点，再练错题');
     try {
       const questions = await EnglishBank.load();
       if (id) EnglishBank.detailPage(main, questions, id);
@@ -696,7 +778,7 @@
 
   function englishExamsPage(region, city, year) {
     if (!region) {
-      const main = page('英语中考真题', '#/', '按地区、城市和年份查看');
+      const main = page('英语中考真题', '#/subject/english', '按地区、城市和年份查看');
       return EnglishExams.renderRegions(main, EnglishPastPapers, JiangsuEnglishPastPapers);
     }
     if (region === 'jiangsu') {
@@ -724,7 +806,7 @@
     const name = { math: '数学', chinese: '语文', physics: '物理', chemistry: '化学' }[subject];
     const paper = year && SubjectPapers.find(ShanghaiSubjectPapers, subject, year);
     const main = page(year ? (paper ? paper.title : '未收录这一年份') : '上海' + (name || '') + '中考真题',
-      questionId ? '#/shanghai-papers/' + subject + '/' + year : year ? '#/shanghai-papers/' + subject : '#/', '上海原题 · 部分导入 · 待教师审核');
+      questionId ? '#/shanghai-papers/' + subject + '/' + year : year ? '#/shanghai-papers/' + subject : '#/subject/' + subject, '上海原题 · 部分导入 · 待教师审核');
     if (year) SubjectPapers.renderYear(main, ShanghaiSubjectPapers, subject, year, questionId);
     else SubjectPapers.renderList(main, ShanghaiSubjectPapers, subject);
   }
@@ -755,7 +837,7 @@
 
   // #/words、#/words/<册ID>、#/words/<册ID>/<单元号>；册 ID 本身含两个斜杠，如 english/sh2022/g6s1
   function wordsPage(rest) {
-    if (!rest.length) return WordsUI.todayPage(page('英语单词', '#/', '每天约 10 分钟，按记忆规律复习'));
+    if (!rest.length) return WordsUI.todayPage(page('英语单词', '#/subject/english', '每天约 10 分钟，按记忆规律复习'));
     const volumeId = rest.slice(0, 3).join('/');
     const v = Content.volume(volumeId);
     if (rest.length > 3) {
@@ -778,19 +860,24 @@
     if (parts[0] === 'english-exams') {
       const names = !parts[1] ? ['EnglishPastPapers', 'JiangsuEnglishPastPapers']
         : parts[1] === 'jiangsu' ? ['JiangsuEnglishPastPapers'] : ['EnglishPastPapers'];
-      return withData(names, '英语中考真题', parts[1] ? '#/english-exams' : '#/', () => englishExamsPage(parts[1], parts[2], parts[3]));
+      return withData(names, '英语中考真题', parts[1] ? '#/english-exams' : '#/subject/english', () => englishExamsPage(parts[1], parts[2], parts[3]));
     }
     if (parts[0] === 'shanghai-papers') {
-      return withData(['ShanghaiSubjectPapers'], '上海中考真题', '#/', () => subjectPapersPage(parts[1], parts[2], parts[3]));
+      return withData(['ShanghaiSubjectPapers'], '上海中考真题', Content.subject(parts[1]) ? '#/subject/' + parts[1] : '#/', () => subjectPapersPage(parts[1], parts[2], parts[3]));
     }
     if (parts[0] === 'english-plan') return englishPlanPage(parts[1], parts[2], parts[3]);
     if (parts[0] === 'words') return wordsPage(parts.slice(1));
     if (parts[0] === 'textbook') return PrivateUI.textbookPage(parts.slice(1), { page, showError, escapeHtml });
     if (parts[0] === 'mock') return MockExam.mockPage(parts.slice(1), { page, showError, escapeHtml });
+    if (parts[0] === 'subject') return subjectPage(parts[1]);
+    if (parts[0] === 'games') return gamesPage();
     if (parts[0] === 'v') return volumePage(parts.slice(1).join('/'));
     if (parts[0] === 's') return sectionPage(parts.slice(1).join('/'));
     if (parts[0] === 'q') return questionPage(parts.slice(1, -1).join('/'), parts[parts.length - 1]);
-    if (parts[0] === 'g') return gamePage(parts[1], parts[2], prev.length === 0);
+    if (parts[0] === 'g') {
+      const from = prev.length === 0 || ['subject', 'games'].includes(prev[0]) ? '#/' + prev.join('/') : null;
+      return gamePage(parts[1], parts[2], from);
+    }
     if (parts[0] === 'e') return examPage(parts.slice(1).join('/'));
     if (parts[0] === 'eq') return examQuestionPage(parts.slice(1, -1).join('/'), parts[parts.length - 1]);
     if (parts[0] === 'exam') {

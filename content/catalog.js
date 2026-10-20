@@ -3,12 +3,29 @@
 // 教材目录：学科 → 教材 → 册 → 章 → 节。只放元数据，小节内容在各自的文件里。
 // ready: true 表示小节内容已经做好（content/<学科>/<教材>/<册>/<小节号>.js 存在）
 // games：挂在这一节的动手玩游戏 ID（src/games/<ID>/，在应用内打开 #/g/<ID>）
+//
+// 学科上另有（首页学科卡片和学科页 #/subject/<学科ID> 都从这里生成，加学科、加入口只改这里）：
+//   color      学科色：卡片、图标底色
+//   resources  学科页里的入口，按 group 分组：practice 练习 / notes 资料 / exam 考试
+//     { group, icon, title, desc, href }   icon 是一两个字的图标
+//     stage: 'zhongkao'   中考类入口：六～八年级收进学科页底部的“中考专区”，九年级正常显示
+//     from: '<学期ID>'     从哪个学期起显示（不写就是不限）
+//     special             要页面代码接管的入口，出现条件和文字由对应模块决定：
+//                         'exam' 小节测试（先登录）、'mock' 模拟考试（有私有资料才出现）、'textbook' 课本资料（口令解锁）
+//   没有课本的学科 editions 写 []
+// 顶层 games：首页“趣味玩法”和 #/games，subject 是所属学科（数学学科页的“玩法”组），from 同上
 
 Content.catalog = {
   subjects: [
     {
       id: 'math',
       name: '数学',
+      color: '#2f6fd6',
+      resources: [
+        { group: 'practice', icon: '测', title: '小节测试', desc: '按小节限时测试，交卷后看错题', href: '#/exam', special: 'exam' },
+        { group: 'exam', icon: '模', title: '模拟考试', desc: '整卷限时做，交卷后看解析', href: '#/mock', special: 'mock' },
+        { group: 'exam', icon: '真', title: '中考真题', desc: '上海历年原题', href: '#/shanghai-papers/math', stage: 'zhongkao' },
+      ],
       editions: [
         {
           id: 'sh2024',
@@ -453,6 +470,18 @@ Content.catalog = {
     {
       id: 'english',
       name: '英语',
+      color: '#3f9a5a',
+      resources: [
+        { group: 'practice', icon: '词', title: '英语单词', desc: '每天 10 分钟背课本单词', href: '#/words' },
+        { group: 'practice', icon: '题', title: '英语试题库', desc: '按知识点和题型练错题', href: '#/english-bank' },
+        { group: 'practice', icon: '7', title: '七天复习计划', desc: '每天一组原题，错题可以打印重做', href: '#/english-plan' },
+        { group: 'practice', icon: '测', title: '小节测试', desc: '按小节限时测试，交卷后看错题', href: '#/exam', special: 'exam' },
+        { group: 'notes', icon: 'Aa', title: '英语学习大纲', desc: '上海初中英语知识点梳理', href: 'content/english/shanghai-junior-outline.html' },
+        { group: 'notes', icon: '🔑', title: '课本资料', desc: '各册课本录音和课文原文', href: '#/textbook', special: 'textbook' },
+        { group: 'notes', icon: '汇', title: '中考词汇表', desc: '上海中考英语单词和短语', href: 'content/english/shanghai-exam-vocabulary.html', stage: 'zhongkao' },
+        { group: 'exam', icon: '模', title: '模拟考试', desc: '整卷限时做，交卷后看解析', href: '#/mock', special: 'mock' },
+        { group: 'exam', icon: '真', title: '中考真题', desc: '上海历年原题，另有江苏', href: '#/english-exams', stage: 'zhongkao' },
+      ],
       editions: [{
         id: 'sh2022',
         name: '上海教育出版社新版（五·四学制，2022 版课标）',
@@ -498,5 +527,50 @@ Content.catalog = {
         }],
       }],
     },
+    {
+      id: 'chinese',
+      name: '语文',
+      color: '#c0513a',
+      resources: [
+        { group: 'notes', icon: '词', title: '文言实词虚词', desc: '180 个文言实词的词义和例句', href: 'content/chinese/classical-words.html' },
+        { group: 'notes', icon: '注', title: '古诗文联动注释', desc: '61 篇古诗文，点词查释义', href: 'content/chinese/上海中考古诗文·虚实词联动注释版.html' },
+        { group: 'notes', icon: '纲', title: '语文考纲', desc: '考试范围、考点清单与复习方向', href: 'content/chinese/shanghai-junior-outline.html', stage: 'zhongkao' },
+        { group: 'notes', icon: '诗', title: '古诗文阅读应考手册', desc: '考点、解题方法和答题要点', href: 'content/chinese/上海中考古诗文阅读应考手册.html', stage: 'zhongkao' },
+        { group: 'notes', icon: '文', title: '现代文阅读应考手册', desc: '题型、分析方法和答题技巧', href: 'content/chinese/上海中考现代文阅读应考手册.html', stage: 'zhongkao' },
+        { group: 'exam', icon: '模', title: '模拟考试', desc: '整卷限时做，交卷后看解析', href: '#/mock', special: 'mock' },
+        { group: 'exam', icon: '真', title: '中考真题', desc: '上海历年原题', href: '#/shanghai-papers/chinese', stage: 'zhongkao' },
+      ],
+      editions: [],
+    },
+    {
+      id: 'physics',
+      name: '物理',
+      color: '#8a4fb0',
+      resources: [
+        { group: 'exam', icon: '真', title: '中考真题', desc: '上海历年原题', href: '#/shanghai-papers/physics', stage: 'zhongkao' },
+      ],
+      editions: [],
+    },
+    {
+      id: 'chemistry',
+      name: '化学',
+      color: '#b46a24',
+      resources: [
+        { group: 'exam', icon: '真', title: '中考真题', desc: '上海历年原题', href: '#/shanghai-papers/chemistry', stage: 'zhongkao' },
+      ],
+      editions: [],
+    },
+  ],
+
+  // 趣味玩法：按课本顺序排；when 是给学生看的课本位置，from 是从哪个学期起首页显示（不写就是不限年级）
+  // 挂在小节上的游戏（#/g/...）也可以放进来
+  games: [
+    { id: '24', subject: 'math', name: '24 点', tag: '有理数运算', when: '六上第 1 章', from: 'g6s1', icon: '24', color: '#c0513a', href: 'src/games/24/index.html' },
+    { id: 'magic', subject: 'math', name: '数学魔术', tag: '字母表示数', when: '六上第 2 章', from: 'g6s1', icon: '?!', color: '#8a4fb0', href: '#/g/magic' },
+    { id: 'balance', subject: 'math', name: '天平解方程', tag: '等式的性质', when: '六上第 3 章', from: 'g6s1', icon: '=', color: '#3f9a5a', href: '#/g/balance' },
+    { id: 'fermat', subject: 'math', name: '费马点', tag: '距离和最小', when: '七下第 18 章', from: 'g7s2', icon: 'P', color: '#c2417a', href: '#/g/fermat' },
+    { id: 'function-track', subject: 'math', name: '函数轨道', tag: '一次、二次函数', when: '八下第 25 章', from: 'g8s2', icon: 'y=', color: '#b46a24', href: 'src/games/function-track/index.html' },
+    { id: 'nim', subject: 'math', name: '取石子', tag: '策略推理', when: '不限年级', icon: '●●', color: '#2f6f7a', href: 'src/games/nim/index.html' },
+    { id: 'solids', subject: 'math', name: '立体图形', tag: '展开图 · 截面', when: '不限年级', icon: '◆', color: '#2f6fd6', href: 'src/games/solids/index.html' },
   ],
 };

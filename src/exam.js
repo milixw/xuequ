@@ -171,7 +171,7 @@
   Exam.listPage = function (main) {
     // 册列表：按当前账号选的学期筛选，和首页保持一致
     const semester = Content.semester(Accounts.grade.get(Accounts.current()));
-    renderHeader(main, '试卷', '#/', '按小节限时测试');
+    renderHeader(main, '小节测试', '#/', '按小节限时测试，交卷后看错题');
     for (const v of (semester ? Content.volumes().filter(v => v.volume.id === semester.id) : [])) {
       const metas = Content.sectionMetas().filter(m => m.volumeId === v.id && m.section.ready);
       const card = document.createElement(metas.length ? 'a' : 'div');
@@ -398,7 +398,7 @@
       `<div class="score">${r.correct}<small> / ${r.total}</small></div>` +
       `<div class="meta">${UI.escapeHtml(s.username)} · 用时 ${Exam.formatTime(elapsed)}</div>` +
       `<div class="actions">` +
-      `<a href="#/exam">返回试卷列表</a>` +
+      `<a href="#/exam">返回小节测试列表</a>` +
       `<button class="primary" id="retry">再来一次</button>` +
       `<a href="#/s/${sectionId}">考后回到练习</a>` +
       `</div>`;
@@ -458,7 +458,7 @@
       `<div class="score">${rec.score}<small> / ${rec.total}</small></div>` +
       `<div class="meta">${UI.escapeHtml(current)} · 用时 ${Exam.formatTime(rec.durationSec || 0)} · 完成于 ${formatDate(rec.completedAt)}</div>` +
       `<div class="actions">` +
-        `<a href="#/exam">返回试卷列表</a>` +
+        `<a href="#/exam">返回小节测试列表</a>` +
         `<button class="primary" id="retry">再做一次</button>` +
         `<a href="#/s/${sectionId}">考后回到练习</a>` +
       `</div>`;

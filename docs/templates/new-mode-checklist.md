@@ -8,5 +8,5 @@
 4. **路由和存储**：新 hash 路由、新的 `xq.` 存储键登记到 `docs/storage-and-routes.md`（测试会检查存储键）；按账号保存的学习数据走 `LearningStore`，不要自己拼账号键
 5. **测试**：新建 `tests/<模式>.test.js` 并在 `tests/run.js` 里 `require`，在 `tests/AGENTS.md` 的列表里加一行
 6. **约定文档**：在 `src/AGENTS.md` 的文件列表加一行；这个模式有自己的目录或内容格式时，建目录级 `AGENTS.md` + `CLAUDE.md`；根 `AGENTS.md` 的任务路由表加一行
-7. **首页入口**：需要首页入口时改 `src/app.js` 的首页部分，并在手机宽度（320px）下截图确认
+7. **入口**：属于某个学科的，在 `content/catalog.js` 那个学科的 `resources` 里加一条（选 `group`，中考类加 `stage: 'zhongkao'`，有年级范围加 `from`），学科页自动出现，不改 `src/app.js`；要先登录、要解锁这类特殊行为才加 `special` 并在 `app.js` 的学科页接上。首页只放“今天”和学科卡片，新模式一般不直接上首页。在手机宽度（320px）下截图确认
 8. `node tests/run.js` 全绿后提交

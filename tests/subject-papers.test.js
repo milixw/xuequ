@@ -57,7 +57,7 @@ test('上海物化两个入口、22个年份目录与146题原答案，缺图公
     assert(JSON.parse(p.values.get(api.KEY+'.guest'))[api.find(catalog,subject,2023).id][q.id].solved);
     const missing=setup(subject,2026);
     assert(missing.main.textContent.includes('不能作答') && !missing.nodes.some(n => n.tag==='form'));
-    assert(read('src/app.js').includes("href: '#/shanghai-papers/"+subject+"'"));
+    assert(read('content/catalog.js').includes("href: '#/shanghai-papers/"+subject+"', stage: 'zhongkao'"));
     for(const paper of ps) for(const q of paper.questions) {
       assert(!/见解析|见详解/.test(q.answer) || q.explanation);
       assert(!/如图|下图|图所示|图像|图象|下表/.test(q.stem));
@@ -379,11 +379,11 @@ test('上海语数存储失败不会显示保存成功，原题HTML转义且筛�
   assert(malicious.main.textContent.includes('&lt;script&gt;') && !malicious.main.textContent.includes('<script>'));
 });
 
-test('上海语数真题数据按需加载，首页数学语文入口及手机控件接入', () => {
+test('上海语数真题数据按需加载，数学语文学科页入口及手机控件接入', () => {
   const index = read('index.html'), app = read('src/app.js'), css = read('src/app.css');
   assert(!index.includes('content/past-papers/shanghai.js') && app.includes("'content/past-papers/shanghai.js?v="));
   assert(index.indexOf('src/subject-papers.js') < index.indexOf('src/app.js'));
-  assert(app.includes('#/shanghai-papers/math') && app.includes('#/shanghai-papers/chinese'));
+  assert(read('content/catalog.js').includes('#/shanghai-papers/math') && read('content/catalog.js').includes('#/shanghai-papers/chinese'));
   assert(app.includes("parts[0] === 'shanghai-papers'"));
   assert(css.includes('.subject-papers-response') && css.includes('min-height: 40px'));
   assert(!read('src/subject-papers.js').includes('fetch('));
@@ -399,5 +399,5 @@ test('上海语数页面路由实调正确科目年份，并设置正确返回�
   vm.runInNewContext(handler + "subjectPapersPage('chinese', '2024'); subjectPapersPage('math');", context);
   assert(calls[0][2] === '#/shanghai-papers/chinese');
   assert(calls[1].join(',') === 'year,chinese,2024');
-  assert(calls[2][2] === '#/' && calls[3].join(',') === 'list,math');
+  assert(calls[2][2] === '#/subject/math' && calls[3].join(',') === 'list,math');
 });

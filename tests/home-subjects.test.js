@@ -7,38 +7,108 @@ const { test, assert } = require('./harness');
 const root = path.join(__dirname, '..');
 const app = fs.readFileSync(path.join(root, 'src', 'app.js'), 'utf8');
 const html = fs.readFileSync(path.join(root, 'index.html'), 'utf8');
+const read = f => fs.readFileSync(path.join(root, f), 'utf8');
 
-test('首页按课本、练习、中考真题、趣味玩法分区，不另设学科页', () => {
-  const home = app.slice(app.indexOf('function home()'), app.indexOf('// ---------- 册 ----------'));
-  assert(home.includes('mountSemesterSwitcher(header, semester && semester.id, username)'));
-  assert(home.includes('volumes.forEach(v => appendVolumeCard(books, v))'));
-  assert(home.includes('grid.appendChild(exam)'));
-  const order = ["'本学期课本'", "'练习'", "'复习资料'", "'中考真题'", "'趣味玩法'"].map(s => home.indexOf(s));
-  assert(order.every((n, i) => n >= 0 && (i === 0 || n > order[i - 1])), '首页分区顺序不对');
-  for (const s of ['chinese', 'math', 'physics', 'chemistry']) assert(home.includes(`href: '#/shanghai-papers/${s}'`));
-  assert(home.includes("href: '#/english-exams'"));
-  assert(home.includes('FUN_GAMES.map(g =>'));
-  assert(!home.includes('HOME_SUBJECTS'));
-  assert(!home.includes('appendHomeOutlines'));
-  assert(!home.includes('subject-grid'));
-  assert(!app.includes("if (parts[0] === 'subject')"));
+// 目录（含学科入口和游戏）：Content 是模块单例，别的测试可能已经加载过 catalog.js
+const Content = require('../src/content.js');
+if (!Content.catalog) {
+  globalThis.Content = Content;
+  require('../content/catalog.js');
+}
+const homeSrc = app.slice(app.indexOf('  function home()'), app.indexOf('  // ---------- 学科页 ----------'));
+const subjectSrc = app.slice(app.indexOf('  function subjectPage('), app.indexOf('  // ---------- 全部趣味玩法 ----------'));
+
+test('首页只有今天、学科卡片、趣味玩法三区，入口都从 catalog.js 生成', () => {
+  const order = ["homeSection(main, '今天')", "homeSection(main, '学科'", 'appendGames(main, semester && semester.id)'].map(x => homeSrc.indexOf(x));
+  assert(order.every((n, i) => n >= 0 && (i === 0 || n > order[i - 1])), '首页分区顺序应为 今天 → 学科 → 趣味玩法');
+  assert(homeSrc.includes('lastVisit()') && homeSrc.includes('WordsUI.todaySummary()') && homeSrc.includes('MockExam.inProgress()'), '今天块缺少接着学、今日单词或进行中的模拟考试');
+  assert(homeSrc.includes('Content.subjects()') && homeSrc.includes('#/subject/${subject.id}'), '学科卡片应从目录生成并进学科页');
+  for (const old of ['NOTE_GROUPS', 'FUN_GAMES', 'home-tile', 'home-chips', "href: '#/shanghai-papers/", "href: '#/english-exams'"]) {
+    assert(!app.includes(old), `app.js 不应再写死首页入口：${old}`);
+  }
+  assert(app.includes("if (parts[0] === 'subject') return subjectPage(parts[1]);") && app.includes("if (parts[0] === 'games') return gamesPage();"));
+  assert(!/\.home-(tile|chips|grid)\b/.test(read('src/app.css')), '旧首页样式应删掉');
 });
 
-test('首页有英语学习大纲、单词和试题库三个入口，单词入口进每日任务', () => {
-  const home = app.slice(app.indexOf('function home()'), app.indexOf('// ---------- 册 ----------'));
-  // 英语学习大纲在复习资料的 NOTE_GROUPS 里（定义在 home() 外面）
-  const notes = app.slice(app.indexOf('const NOTE_GROUPS'), app.indexOf('function noteRow('));
-  assert(home.includes('NOTE_GROUPS'), '首页复习资料应按 NOTE_GROUPS 分组显示');
-  const outlineIndex = notes.indexOf("title: '英语学习大纲'");
-  const vocabIndex = home.indexOf("title: '英语单词'");
-  const bankIndex = home.indexOf("title: '英语试题库'");
-  assert(outlineIndex >= 0 && vocabIndex >= 0 && bankIndex > vocabIndex);
-  assert(notes.includes("href: 'content/english/shanghai-junior-outline.html'"));
-  assert(home.includes("href: '#/words'"), '首页英语单词入口应进每日单词任务');
+test('学科页按 练习 → 资料 → 考试 分组，中考类在九年级以前收进中考专区', () => {
+  assert(app.includes("const GROUPS = [['practice', '练习'], ['notes', '资料'], ['exam', '考试']];"));
+  assert(subjectSrc.includes('Content.resources(id, semester && semester.id)'));
+  assert(subjectSrc.includes("zk.className = 'zhongkao'") && subjectSrc.includes('resources.filter(r => r.folded)'));
+  assert(subjectSrc.includes("more.className = 'other-volumes'"), '学科页应能看到其他册');
+  assert(subjectSrc.includes("r.special === 'exam'") && subjectSrc.includes('AccountUI.ensureLoggedIn('), '小节测试没登录时要先登录');
+  // 学科下一层页面的返回键回学科页
+  assert(app.includes("page(v.volume.name, `#/subject/${v.subject.id}`"));
+  assert(app.includes("page('英语单词', '#/subject/english'"));
+  assert(app.includes("id ? '#/english-bank' : '#/subject/english'"));
+  assert(app.includes("page('英语中考真题', '#/subject/english'"));
+});
+
+test('接着学：小节页和做题页记录上次打开的小节，按账号存', () => {
+  assert(app.includes("const LAST_VISIT = 'xq.lastVisit.v1';"));
+  assert(app.includes('LearningStore.write(LAST_VISIT,') && app.includes('LearningStore.read(LAST_VISIT,'), '应经 LearningStore 按账号读写');
+  const section = app.slice(app.indexOf('  async function sectionPage('), app.indexOf('  // ---------- 做题 ----------'));
+  const question = app.slice(app.indexOf('  async function questionPage('), app.indexOf('  // ---------- 真题卷 ----------'));
+  assert(section.includes('recordVisit(id);') && question.includes('recordVisit(sectionId);'));
+});
+
+test('catalog.js 的学科入口和游戏字段齐全、链接有效', () => {
+  const routes = new Set([...app.matchAll(/parts\[0\] === '([a-z-]+)'/g)].map(m => m[1]));
+  const checkHref = (href, where) => {
+    if (href.startsWith('#/')) assert(routes.has(href.slice(2).split('/')[0]), `${where} 的 ${href} 不是已有路由`);
+    else assert(fs.existsSync(path.join(root, href.split('?')[0])), `${where} 的 ${href} 文件不存在`);
+  };
+  const subjects = Content.subjects();
+  assert(subjects.map(s => s.id).join() === 'math,english,chinese,physics,chemistry');
+  for (const s of subjects) {
+    assert(/^#[0-9a-f]{6}$/.test(s.color), `${s.id} 缺学科色`);
+    assert(Array.isArray(s.editions) && Array.isArray(s.resources) && s.resources.length, `${s.id} 缺 editions 或 resources`);
+    for (const r of s.resources) {
+      const where = `${s.id}/${r.title}`;
+      assert(['practice', 'notes', 'exam'].includes(r.group), `${where} 的 group 不对`);
+      assert(r.icon && r.title && r.desc && r.href, `${where} 缺 icon/title/desc/href`);
+      assert(r.special === undefined || ['exam', 'mock', 'textbook'].includes(r.special), `${where} 的 special 不认识`);
+      assert(r.stage === undefined || r.stage === 'zhongkao', `${where} 的 stage 不认识`);
+      assert(r.from === undefined || Content.semesterRank(r.from) !== null, `${where} 的 from 不是学期 ID`);
+      checkHref(r.href, where);
+    }
+  }
+  const ids = new Set();
+  for (const g of Content.catalog.games) {
+    assert(!ids.has(g.id), `游戏 ${g.id} 重复`); ids.add(g.id);
+    assert(g.name && g.tag && g.when && g.icon && /^#[0-9a-f]{6}$/.test(g.color) && Content.subject(g.subject), `游戏 ${g.id} 字段不全`);
+    assert(g.from === undefined || Content.semesterRank(g.from) !== null, `游戏 ${g.id} 的 from 不是学期 ID`);
+    checkHref(g.href, '游戏 ' + g.id);
+  }
+});
+
+test('按年级显示：六年级收起中考类入口和以后的游戏，九年级全部展开', () => {
+  assert(Content.semesterRank('g6s1') === 12 && Content.semesterRank('g6s2') === 13 && Content.semesterRank('bridge') === null);
+  assert(Content.grade('g9s1') === 9);
+  const g6 = Content.resources('chinese', 'g6s1');
+  assert(g6.filter(r => r.folded).map(r => r.title).join() === '语文考纲,古诗文阅读应考手册,现代文阅读应考手册,中考真题');
+  assert(g6.some(r => r.title === '文言实词虚词' && !r.folded), '实词虚词各年级都用得上，不收起');
+  assert(Content.resources('chinese', 'g9s1').every(r => !r.folded), '九年级不收起');
+  const games6 = Content.games('g6s1');
+  assert(!games6.shown.some(g => g.id === 'fermat' || g.id === 'function-track') && games6.shown.some(g => g.id === 'nim'), '六上不显示七下、八下的游戏，不限年级的照常显示');
+  assert(Content.games('g7s2').shown.some(g => g.id === 'fermat'));
+  assert(Content.games(null).shown.length === Content.games(null).all.length, '认不出学期时全部显示');
+});
+
+test('试卷改名小节测试，路由和存储键不变', () => {
+  const exam = read('src/exam.js');
+  assert(exam.includes("renderHeader(main, '小节测试', '#/'") && !exam.includes('返回试卷列表'));
+  assert(read('content/catalog.js').includes("title: '小节测试'") && read('content/catalog.js').includes("href: '#/exam', special: 'exam'"));
+  assert(exam.includes("'xq.exam.v1'") || exam.includes('xq.exam.v1'));
+});
+
+test('英语学科页有学习大纲、单词、试题库、七天计划入口，中考词汇表从单词页链出', () => {
+  const english = Content.subject('english').resources;
+  const href = t => (english.find(r => r.title === t) || {}).href;
+  assert(href('英语单词') === '#/words' && href('英语试题库') === '#/english-bank' && href('七天复习计划') === '#/english-plan');
+  assert(href('英语学习大纲') === 'content/english/shanghai-junior-outline.html');
   const wordsUi = fs.readFileSync(path.join(root, 'src', 'words-ui.js'), 'utf8');
   assert(wordsUi.includes("'content/english/shanghai-exam-vocabulary.html'"), '中考词汇表要从单词页链出去');
-  assert(home.includes("href: '#/english-bank'"));
-  assert(fs.existsSync(path.join(root, 'content/english/shanghai-junior-outline.html')));
+  assert(wordsUi.includes('async function todaySummary()'), '首页今日单词要用 WordsUI.todaySummary');
   const vocab = fs.readFileSync(path.join(root, 'content/english/shanghai-exam-vocabulary.html'), 'utf8');
   assert(vocab.includes('name="viewport" content="width=device-width, initial-scale=1"'));
   assert(vocab.includes('<script id="data" type="application/json">'));

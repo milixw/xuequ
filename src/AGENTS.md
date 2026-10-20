@@ -11,7 +11,7 @@
   accounts.js                     本地账号（无密码）、按账号保存的考试历史、学期偏好
   progress.js                     做题进度（小节和真题卷共用）、独立累计答错次数及按提交事件去重
   learning-store.js               学习数据账号归属、旧共享数据备份与指定账号迁移；未登录访客独立，不回退至他人数据
-  content.js                      内容注册表：目录查询、学期列表、按需加载小节文件和真题卷文件
+  content.js                      内容注册表：目录查询、学期列表、按需加载小节文件和真题卷文件；学科与入口查询（subjects、resources 按学期过滤并标出要收进中考专区的、games、semesterRank、grade）
   demos.js                        演示动画：题目的 demo 字段放在解析里，知识点卡片的 demo 字段放在卡片末尾；第 14 章用 motion（平移、旋转、翻折、旋转 180° 的过程）、sweep、rotOverlap、billiard；第 15 章用 scaleOrder（两边同乘一个数，数轴伸缩、翻转）、solutionSet（数轴上画解集、找公共部分和整数解）；第 16 章用 vertAngles（拖动直线看对顶角与垂直）、parallelAngles（三线八角与平行）；第 17 章用 angleSum（内角拼成平角）、ssaSwing（边边角摆出两个三角形）；第 18 章用 perpBisector（拖动点看到线段两端的距离是否相等）；第 22 章用 rtMedian、hlCongruent、ladderSlide、bisectorDist、incenter、pythagorasProof、perpShortest；第 23 章用 exteriorWalk（沿边走一圈看外角和）、parallelogramDrag（滑块改平行四边形看性质）、quadFamily（平行四边形到矩形、菱形、正方形的对角线）、midlineRotate（旋转 180° 证中位线定理）、varignon（拖动顶点看中点四边形）、centroid（三条中线交于重心、分成 2∶1）；第 27 章用 parabolaShape（滑块改 a 看 y=ax² 的开口）、parabolaShift（y=a(x+m)²+h 由 y=ax² 平移，标顶点和对称轴）、parabolaRoots（滑块改 c 看 Δ 和与 x 轴交点）、fenceArea（围栏面积 S 关于边长 x 的抛物线和最大值），依赖 DOM
   quiz.js                         做题引擎：题目渲染、作答、判分反馈、解析、快捷输入栏、renderText 排版；英语 open 题（参考答案 + 自查要点自评）、audio 听力题（Speech 朗读，不能朗读时显示原文）、小节自定义档位名 levelNames
   exam.js                         限时测试：会话状态机、计时、交卷判分、结果页
@@ -20,14 +20,14 @@
   english-exams.js                上海及江苏英语中考题：地区 → 城市 → 年份目录，同材料合并作答、必要原图可放大、原答案与解析、按账号累计错误；主观题人工核对，不以措辞不匹配计错，不展示 Word 原件
   speech.js                       英语朗读：优先设备本机英文语音，没有时用在线读音（单词有道、句子百度，需 index.html 的 no-referrer），离线又无英文语音时按钮变灰；say 可带 rate/onEnd/onFail，stop 停止（单元阅读逐句朗读用）
   words.js                        英语单词纯逻辑：词表注册（Words.volume）、分盒间隔复习（1～5 盒、M 掌握、R 认读）、每日队列（到期最多 40、超 30 新词减半）、一轮练习流程、干扰项、例句挖空轮换、格式校验
-  words-ui.js                     英语单词页面：#/words 今日任务、本册各单元、单元词表、一题一屏练习（L1～L4），册页面每个 Unit 的“单词”行；词表按 catalog 里册的 words 字段用 <script> 按需加载
+  words-ui.js                     英语单词页面：#/words 今日任务、本册各单元、单元词表、一题一屏练习（L1～L4），册页面每个 Unit 的“单词”行，首页“今日单词”用的 todaySummary；词表按 catalog 里册的 words 字段用 <script> 按需加载
   vocabulary-details.js           2025手册词汇拓展共享展示与词组去重；课本词表仅显示补充，不改原拼写答案或进度
   vocabulary-study.js             词汇专项：39组辨析、原创句型自查、不规则动词分类及搜索；独立离线页，无新增进度
   subject-papers.js               上海语数物化真题：文字与本地题图混合，题图可放大，答案图只在订正区；按账号保存，打印不含答案
   account-ui.js                   右上角账号区和登录弹窗
-  private-ui.js                   私有课本资料：首页复习资料英语组的“🔑 课本资料”总入口与口令框、已解锁时本学期课本区的本册直达行、#/textbook 按册切换的单元目录、看课本听录音（整页图片 + 底部播放栏）和录音原文列表、英语小节页链接；资料在 private/（私有仓库），用 <script> 加载
-  mock-exam.js                    模拟考试：首页练习区的“模拟考试”小格、#/mock 卷集和卷子页（整卷页面图片、倒计时、交卷后看解析、自评分数，存 xq.mockExam.v1）；资料和解锁靠 private-ui.js 的 examSets、openUnlock
-  app.js                          hash 路由和页面：首页（本学期课本、练习、复习资料、中考真题、趣味玩法五区）→ 册 → 小节 / 真题卷 → 做题
+  private-ui.js                   私有课本资料：英语学科页“资料”组的“🔑 课本资料”总入口（替换占位元素）与口令框、已解锁时本学期课本组的本册直达行、#/textbook 按册切换的单元目录、看课本听录音（整页图片 + 底部播放栏）和录音原文列表、英语小节页链接；资料在 private/（私有仓库），用 <script> 加载
+  mock-exam.js                    模拟考试：语数英学科页“考试”组的“模拟考试”行（entryRow，替换占位元素，只在有这一科卷子或可解锁时出现）、首页“今天”的进行中提示（inProgress）、#/mock 卷集和卷子页（整卷页面图片、倒计时、交卷后看解析、自评分数，存 xq.mockExam.v1）；资料和解锁靠 private-ui.js 的 examSets、openUnlock
+  app.js                          hash 路由和页面：首页（今天、学科卡片、趣味玩法）→ 学科页 #/subject/<学科ID>（本学期课本、练习、资料、考试、玩法、中考专区）→ 册 → 小节 / 真题卷 → 做题；#/games 全部玩法；“接着学”记录（xq.lastVisit.v1）
   app.css                         全部样式
 ```
 
@@ -37,12 +37,11 @@
 
 上海真题路由可在年份后附原题组 ID，`subject-papers.js` 仅展示该组及已有 context，返回年份全卷；默认隐藏答案，沿用原 ID 与账号存储，用于阅读手册的题型跳转。
 
+**首页和学科页的入口不写在 `app.js` 里**：各学科的练习、资料、考试入口登记在 `content/catalog.js` 学科的 `resources`，趣味玩法登记在顶层 `games`（字段说明见那个文件开头）；`app.js` 只按数据渲染。要页面代码接管的入口（小节测试先登录、模拟考试、课本资料）在数据里写 `special`，渲染时先放占位元素，由对应模块换成真正的行。学科下一层页面（册、英语单词、英语试题库、英语中考、上海真题目录）的返回键回学科页。设计见 `docs/superpowers/specs/2026-10-20-home-today-subjects.md`。
+
 南通语文首页入口暂时隐藏；保留 `#/nantong-chinese` 路由与 `content/past-papers/nantong-chinese.js` 按需数据，复用人工核对和账号存储，图片允许 `nt-chinese-<年份>` 目录，上海旧 ID 与路由不变。
 
-首页语文实词虚词入口链接到 `content/chinese/classical-words.html`，资料与原 PDF 放在 `content/chinese/`，无需首屏加载全文。
-首页语文考纲入口链接到 `content/chinese/shanghai-junior-outline.html`，为独立离线参考页。
-首页“复习资料”按学科分组（app.js 的 NOTE_GROUPS），另有 `content/chinese/上海中考古诗文阅读应考手册.html` 和 `content/chinese/上海中考现代文阅读应考手册.html` 两份独立离线复习资料。
-首页古诗文联动注释入口链接到 `content/chinese/上海中考古诗文·虚实词联动注释版.html`，配套三份参考页同目录离线使用。
+语文学科页的资料都是独立离线参考页：文言实词虚词 `content/chinese/classical-words.html`（资料与原 PDF 放在 `content/chinese/`，无需首屏加载全文）、古诗文联动注释 `content/chinese/上海中考古诗文·虚实词联动注释版.html`（配套三份参考页同目录离线使用），以及中考专区里的语文考纲 `content/chinese/shanghai-junior-outline.html`、`content/chinese/上海中考古诗文阅读应考手册.html` 和 `content/chinese/上海中考现代文阅读应考手册.html`。
 上海原题 `subject-papers.js` 支持安全转义的 `[[u]]` 普通下划线、`[[dot]]` 加点和 `[[wave]]` 波浪下划线标记，不支持嵌套。语文文字转录题的 `textSource` 表示原解析已并入文字参考答案，`sourceImages`只溯源不展示；必要局部配图仍用 `stemImages`，可用 `label`作无障碍名称。
 
 - `index.html` 里 `#app` 后面的内联脚本是全局报错兜底（`error` / `unhandledrejection` 时底部提示刷新并显示出错位置），要放在所有 `<script src>` 前面；故意不处理的 Promise 拒绝自己 `.catch`，别让它冒到这里
@@ -53,4 +52,4 @@
 - 界面文字用中文，面向初中生，表述要通俗；负号显示用 `−`（U+2212），但判分时 `-` 和 `−` 都要接受
 - 移动端优先：页面在 320px 宽度下也要能正常使用，可点击控件不小于 36px
 - localStorage 的读写都要包在 try/catch 里，键名统一加 `xq.` 前缀
-- 新增学科时，只需要加 `content/<学科>/` 和 `catalog.js` 条目；如果需要新题型，再扩展 `quiz.js` 和 `answer.js`
+- 新增学科时，只需要加 `content/<学科>/` 和 `catalog.js` 条目（含 `color`、`resources`，首页卡片和学科页自动出现）；如果需要新题型，再扩展 `quiz.js` 和 `answer.js`

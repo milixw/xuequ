@@ -76,39 +76,38 @@ a { color: inherit; text-decoration: none; }
   background: var(--primary); color: #fff; margin-bottom: 6px;
 }
 
-/* 首页：课本卡片 + 练习两列格子 + 中考学科一排 */
-.home-section .group { margin: 18px 0 8px; }
+/* 首页和学科页：分区标题、学科卡片、课本卡片、列表行三种组件 */
+.home-section .group { margin: 18px 0 8px; display: flex; align-items: baseline; }
 .home-section:first-child .group { margin-top: 10px; }
+.home-section .group .more { margin-left: auto; font-size: 13px; font-weight: normal; color: var(--primary); padding: 6px 0; }
+.home-section .hint, .today-hint { margin: 0; font-size: 13px; color: var(--muted); }
 .card.volume { margin-bottom: 10px; }
 .card.volume h2 { display: flex; align-items: center; gap: 8px; }
-.card.volume .tag { margin-bottom: 0; flex: none; }
+.card.volume .tag { margin-bottom: 0; flex: none; background: var(--subject, var(--primary)); }
 .card.volume .meta { margin-top: 2px; font-size: 13px; }
-.home-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
-.home-tile {
-  display: flex; flex-direction: column; gap: 2px; min-width: 0; min-height: 64px;
-  background: var(--card); border-radius: 12px; padding: 10px 12px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, .06); cursor: pointer;
-}
-.home-tile b { font-size: 15px; }
-.home-tile small { font-size: 12px; color: var(--muted); line-height: 1.4; }
-.home-chips { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; }
-.home-chips a {
-  display: flex; align-items: center; justify-content: center; min-height: 44px;
-  background: var(--card); border-radius: 12px; font-size: 15px; font-weight: 600;
+
+/* 首页学科卡片：两列，顶部一条学科色 */
+.subject-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+.subject-card {
+  display: flex; flex-direction: column; gap: 2px; min-width: 0; min-height: 84px;
+  background: var(--card); border-radius: 12px; padding: 12px 14px 10px;
+  border-top: 4px solid var(--subject, var(--primary));
   box-shadow: 0 1px 3px rgba(0, 0, 0, .06);
 }
+.subject-card b { font-size: 18px; color: var(--subject, var(--primary)); }
+.subject-card span { font-size: 14px; }
+.subject-card small { font-size: 12px; color: var(--muted); }
 
-/* 首页复习资料：按学科分组的列表行，图标颜色取所在组的 --subject */
-.note-subject { margin: 10px 0 6px; font-size: 13px; font-weight: 600; color: var(--muted); }
+/* 列表行：图标颜色取容器上的 --subject */
 .note-list {
   background: var(--card); border-radius: 12px; overflow: hidden;
   box-shadow: 0 1px 3px rgba(0, 0, 0, .06);
 }
 .note-row {
   display: flex; align-items: center; gap: 12px; min-height: 56px; padding: 8px 12px;
-  border-top: 1px solid var(--line);
 }
-.note-row:first-child { border-top: 0; }
+/* 行与行之间的分隔线；占位用的空 span 不算 */
+.note-row ~ .note-row { border-top: 1px solid var(--line); }
 .note-row .icon {
   flex: none; width: 36px; height: 36px; border-radius: 10px;
   display: flex; align-items: center; justify-content: center;
@@ -119,10 +118,26 @@ a { color: inherit; text-decoration: none; }
 .note-row b { font-size: 15px; }
 .note-row small { font-size: 12px; color: var(--muted); line-height: 1.4; }
 .note-row .go { flex: none; font-style: normal; font-size: 20px; color: var(--line); }
-/* 本学期课本区的“本册课本录音”：单独一张卡片，接在课本卡片后面 */
-.home-section > .note-row {
+/* 学科页本学期课本组的“本册课本录音”：单独一张卡片，接在课本卡片后面 */
+.volume-cards > .note-row {
   background: var(--card); border-radius: 12px; box-shadow: 0 1px 3px rgba(0, 0, 0, .06); border-top: 0;
 }
+
+/* 学科页：其他册、中考专区，点开就地展开 */
+.other-volumes, .zhongkao { margin-top: 10px; }
+.zhongkao { margin-top: 22px; }
+.other-volumes summary, .zhongkao summary {
+  cursor: pointer; min-height: 40px; display: flex; align-items: center; gap: 6px;
+  font-size: 14px; color: var(--primary);
+}
+.other-volumes summary::-webkit-details-marker, .zhongkao summary::-webkit-details-marker { display: none; }
+.other-volumes summary::before, .zhongkao summary::before {
+  content: '›'; display: inline-block; width: 12px; font-size: 18px; transition: transform .15s;
+}
+.other-volumes[open] summary::before, .zhongkao[open] summary::before { transform: rotate(90deg); }
+.zhongkao summary { font-size: 15px; font-weight: 600; color: var(--muted); }
+.zhongkao summary small { font-weight: normal; font-size: 12px; }
+.other-volumes .note-list, .zhongkao .note-list { margin-top: 4px; }
 
 /* 英语历年中考文字题，320px 手机优先。 */
 .english-exams-year { margin-top: 14px; }
@@ -1017,7 +1032,7 @@ main > audio { max-width: 100%; }
 .fm-board .lb.sm { font-size: 16px; font-style: normal; font-weight: 400; fill: var(--muted); }
 .fm-board .lb.fp { fill: #c2417a; }
 
-/* 首页趣味玩法宫格 */
+/* 趣味玩法宫格：首页、数学学科页、#/games */
 .fun-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 .fun-tile {
   display: flex; flex-direction: column; align-items: center; text-align: center; gap: 2px;

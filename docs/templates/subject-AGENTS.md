@@ -4,7 +4,7 @@
 
 建目录和数据的步骤：
 
-1. `content/catalog.js` 加学科 → 教材 → 册 → 章 → 节条目（先全部 `ready: false`），学科、教材、册的 ID 规则见 `content/AGENTS.md` 的“编号”
+1. `content/catalog.js` 加学科 → 教材 → 册 → 章 → 节条目（先全部 `ready: false`），学科、教材、册的 ID 规则见 `content/AGENTS.md` 的“编号”；学科上同时写学科色 `color` 和学科页入口 `resources`（只有资料、真题没有课本的学科 `editions: []`），首页学科卡片和学科页 `#/subject/<学科ID>` 会自动出现
 2. 课本资料整理成 `docs/textbooks/<学科>-<教材ID>-<册ID>.md`：目录、页码、各节知识范围、“课本页码 = 文件页码 − N”、原件路径（原件放 `refs/`，不入库）
 3. 需要题型台账时建 `docs/question-types/<学科>/<册ID>.md`（格式照数学的分册文件）；不建台账要在本学科 `AGENTS.md` 写明原因
 4. 需要新题型时扩展 `src/quiz.js`、`src/answer.js`，并补测试；需要专门的校验（像英语的 `tests/english-course.test.js`）就加一个测试文件并在 `tests/run.js` 里 `require`

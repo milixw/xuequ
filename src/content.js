@@ -128,6 +128,49 @@
     examMeta(id) {
       return Content.examMetas().find(e => e.id === id) || null;
     },
+
+    // ---------- 学科、入口、游戏（首页和学科页用） ----------
+    subjects() {
+      return Content.catalog.subjects;
+    },
+
+    subject(id) {
+      return Content.catalog.subjects.find(s => s.id === id) || null;
+    },
+
+    // 学期 ID 排成可比较的数：g6s1 → 12、g6s2 → 13；认不出的返回 null
+    semesterRank(id) {
+      const m = /^g(\d+)s([12])$/.exec(id || '');
+      return m ? Number(m[1]) * 2 + Number(m[2]) - 1 : null;
+    },
+
+    // 学期 ID 里的年级：g9s1 → 9
+    grade(semesterId) {
+      const rank = Content.semesterRank(semesterId);
+      return rank === null ? null : Math.floor(rank / 2);
+    },
+
+    // from 不晚于当前学期（或没写 from）才显示；当前学期认不出时全部显示
+    shownFrom(entry, semesterId) {
+      const now = Content.semesterRank(semesterId);
+      const from = Content.semesterRank(entry.from);
+      return now === null || from === null || from <= now;
+    },
+
+    // 学科页的入口：按学期过滤，中考类在九年级以前标 folded（收进“中考专区”）
+    resources(subjectId, semesterId) {
+      const subject = Content.subject(subjectId);
+      const grade = Content.grade(semesterId);
+      return ((subject && subject.resources) || [])
+        .filter(r => Content.shownFrom(r, semesterId))
+        .map(r => ({ ...r, folded: r.stage === 'zhongkao' && grade !== null && grade < 9 }));
+    },
+
+    // 趣味玩法：shown 是当前学期能用的，all 是全部；subjectId 只取某一学科的
+    games(semesterId, subjectId) {
+      const all = (Content.catalog.games || []).filter(g => !subjectId || g.subject === subjectId);
+      return { all, shown: all.filter(g => Content.shownFrom(g, semesterId)) };
+    },
   };
 
   if (typeof module !== 'undefined') module.exports = Content;
