@@ -13,3 +13,8 @@ refs/
 
 # 私有课本资料（GitHub 私有仓库 xuequ-private 的克隆，有版权，不进开源库）
 private/
+
+# 工作区临时目录（导入脚本的中间文件、手工备份）和 Python 缓存
+tmp/
+__pycache__/
+*.pyc

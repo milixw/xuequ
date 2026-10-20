@@ -31,6 +31,7 @@ class ExpansionTests(unittest.TestCase):
         self.assertFalse(m.append_questions(papers, dict(id=old['id'], source={'sha256': 'changed'}, questions=[])))
 
     def test_discovery_deduplicates_content_and_excludes_other_regions(self):
+        (m.ROOT / 'tmp/pdfs').mkdir(parents=True, exist_ok=True)
         with tempfile.TemporaryDirectory(dir=m.ROOT / 'tmp/pdfs') as directory:
             root = Path(directory)
             self.assertTrue(root.resolve().is_relative_to(m.ROOT.resolve()))

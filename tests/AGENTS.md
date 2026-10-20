@@ -1,6 +1,6 @@
 # tests/ 约定
 
-`node tests/run.js` 跑全部 JS 校验（提交前必须全绿）；新测试文件要在 `run.js` 里 `require`。纯逻辑测试不依赖 DOM，被测文件末尾用 `module.exports` 导出。Python 回归测试（`*.test.py`）单独运行，见各内容目录的 AGENTS.md。
+`node tests/run.js` 跑全部 JS 校验（提交前必须全绿）；新测试文件要在 `run.js` 里 `require`。纯逻辑测试不依赖 DOM，被测文件末尾用 `module.exports` 导出。导入脚本的 Python 回归（`*.test.py`，各自说明见各内容目录的 AGENTS.md）由 `python.test.js` 一并调用；没装 Python 3 或缺模块时只提醒不算失败，改了导入脚本要先装齐依赖再跑：`pip install python-docx pdfplumber pypdf Pillow numpy`。
 
 ```
   run.js                          测试入口
@@ -11,7 +11,7 @@
   english-course.test.js          英语八上六个 Unit 的目录、内容、待审核状态与入口校验
   accounts.test.js                账号、考试历史、学期偏好
   account-ui.test.js              账号区和登录弹窗
-  （英语题库、七天计划、中考真题相关的十几个测试，含单独用 Python 运行的导入回归，列表见 content/english/AGENTS.md 和 content/past-papers/AGENTS.md）
+  （英语题库、七天计划、中考真题相关的十几个测试，含 Python 导入回归，列表见 content/english/AGENTS.md 和 content/past-papers/AGENTS.md）
   learning-accounts.test.js       账号/访客隔离、同页切换、旧页面拒绝写入、旧共享数据迁移与备份校验
   english-words.test.js           英语单词：词表格式、分盒升降与到期、认读词不拼写、“我认识”只进第 2 盒、每日队列上限、跨册共用进度、7 天模拟、kind en 判分、存储异常、页面接入
   green-vocabulary.test.js        绿本补充的来源、审核、词组去重、原数据不变、词族分组及安全渲染
@@ -32,6 +32,7 @@
   private-gate.test.js            私有课本资料口令服务：口令对错、30 天凭证、过期与篡改、改口令作废、限流、只认 https、分享链接按册授权（范围签名、路径拦截、合并范围、旧码兼容）
   private-ui.test.js              私有课本资料：private/ 不入库、不打包、代码里不写口令、页面接线、manifest 注册、按授权范围只显示能看的册
   agents-docs.test.js             AI 约定文档的护栏：各层 AGENTS.md 的大小上限、CLAUDE.md 导入、文档里引用的路径存在、学科目录有约定文件、存储键已登记
+  python.test.js                  逐个运行 tests/*.test.py；缺 Python 或缺模块时给提醒
 ```
 
-上海英语网上补录的独立 Python 回归为 `tests/supplement-shanghai-english-web.test.py`，检查幂等、冲突拒绝、来源哈希与路径安全；JS 页面和题号覆盖沿用 `tests/english-exams.test.js`。
+上海英语网上补录的 Python 回归为 `tests/supplement-shanghai-english-web.test.py`，检查幂等、冲突拒绝、来源哈希与路径安全；JS 页面和题号覆盖沿用 `tests/english-exams.test.js`。

@@ -31,12 +31,12 @@
 
 ```
   english-bank.test.js            英语题库与知识点归类校验
-  import-english-bank.test.py      PDF 解析提取回归（单独用 Python 运行，需 pdfplumber）；覆盖复合小题、跨页解析和空解析
+  import-english-bank.test.py      PDF 解析提取回归（需 pdfplumber）；覆盖复合小题、跨页解析和空解析
   english-plan.test.js            七天计划覆盖、路由入口和 A4 打印校验
   english-plan-retry.test.js      提交记录重做、快照还原、草稿隔离、新记录与错误统计、存储异常及打印校验
   english-exams.test.js           历年文字题数据、原题标记、路由入口、判分、账号隔离及无原件展示校验
-  import-english-past-papers.test.py  原题文字提取回归（单独 Python 运行，需 pypdf、python-docx）：旧 Word 题号、原答案、下划线、图片依赖和缺失题干
-  import-jiangsu-english.test.py   江苏解析回归（单独 Python 运行）：行内答案、交错解析、文章分组、缺图与重复题号跳过
+  import-english-past-papers.test.py  原题文字提取回归（需 pypdf、python-docx）：旧 Word 题号、原答案、下划线、图片依赖和缺失题干
+  import-jiangsu-english.test.py   江苏解析回归：行内答案、交错解析、文章分组、缺图与重复题号跳过
 ```
 
 ## 英语八上单元的出题标准

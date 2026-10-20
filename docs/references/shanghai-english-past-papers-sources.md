@@ -127,7 +127,7 @@
 
 - `completion-transcripts.json`：题目快照同步 89 题（56 题新补 ＋ 33 题此前补过答案但快照未同步的历史遗留），10 个 entry 的 `questionsSha256` 重算。
 - `tests/english-exams.test.js`：715 题内容快照哈希更新为 `a967c2ad…`（题数不变，仍是 715）。
-- 备份：`tmp/catalog-backup-20261017.js`、`tmp/completion-transcripts-backup-20261017.json`。
+- 备份：改动前的 `catalog.js`、`completion-transcripts.json` 曾在 tmp 目录存过两个备份文件，tmp 目录现在不入库，需要时从提交 91d6411 取出。
 
 ### 剩余缺口（均为不该补或无标准答案）
 

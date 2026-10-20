@@ -26,10 +26,10 @@
 
 ```
   subject-papers.test.js          上海语数原题、数学公式、参考答案、主观题不误判、账号隔离、存储失败、筛选与离线入口
-  import-shanghai-subject-papers.test.py  上海语数提取回归：答案分界、重复题号、原标注、页脚及压平公式解析拒绝展示（单独 Python 运行，需 pypdf）
-  expand-shanghai-subject-papers.test.py  扩充回归：正文 XML 中公式对象不丢失、原上标标注、原题及人工修正不覆盖、两目录去重与整组阅读（单独 Python 运行，需 pypdf、python-docx）
-  import-shanghai-science-papers.test.py  物化提取回归：上下标、公式对象、原答案解析、复合题与不完整公式拒绝导入（单独 Python 运行）
-  supplement-shanghai-question-images.test.py  PDF 题号、答案边界、单选答案、跨页裁图及空白过滤回归（单独 Python 运行，需 pdfplumber）
+  import-shanghai-subject-papers.test.py  上海语数提取回归：答案分界、重复题号、原标注、页脚及压平公式解析拒绝展示（需 pypdf）
+  expand-shanghai-subject-papers.test.py  扩充回归：正文 XML 中公式对象不丢失、原上标标注、原题及人工修正不覆盖、两目录去重与整组阅读（需 pypdf、python-docx）
+  import-shanghai-science-papers.test.py  物化提取回归：上下标、公式对象、原答案解析、复合题与不完整公式拒绝导入
+  supplement-shanghai-question-images.test.py  PDF 题号、答案边界、单选答案、跨页裁图及空白过滤回归（需 pdfplumber）
 ```
 
 ## 导入与编号
