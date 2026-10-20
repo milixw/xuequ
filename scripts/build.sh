@@ -1,12 +1,20 @@
 #!/bin/bash
 # 打包成可以上传到云服务器的压缩包
-# 用法：./scripts/build.sh [--skip-tests]
+# 用法：./scripts/build.sh [--skip-tests] [--dir]
 # 产物：dist/xuequ-<日期>-<提交号>.tar.gz
+#   --dir  只留目录 dist/xuequ-<日期>-<提交号>/、不打压缩包（给用 rsync 增量上传的发布脚本用）
 set -e
 cd "$(dirname "$0")/.." || exit 1
 
 SKIP_TESTS=0
-[ "$1" = "--skip-tests" ] && SKIP_TESTS=1
+DIR_ONLY=0
+for arg in "$@"; do
+  case "$arg" in
+    --skip-tests) SKIP_TESTS=1 ;;
+    --dir) DIR_ONLY=1 ;;
+    *) echo "未知参数：${arg}（可选 --skip-tests / --dir）"; exit 1 ;;
+  esac
+done
 
 if [ "${SKIP_TESTS}" = 0 ]; then
   echo "==> 运行校验"
@@ -45,6 +53,12 @@ EOF
   echo "已上线的小节："
   grep -o "{ no: '[0-9.]*', title: '[^']*', ready: true }" content/catalog.js | sed "s/{ no: '/  /; s/', title: '/ /; s/', ready: true }//"
 } >> "${OUT}/VERSION"
+
+if [ "${DIR_ONLY}" = 1 ]; then
+  echo
+  echo "已生成目录：${OUT}/（$(du -sh "${OUT}" | cut -f1)）"
+  exit 0
+fi
 
 echo "==> 打包"
 tar -czf "dist/${NAME}.tar.gz" -C dist "${NAME}"

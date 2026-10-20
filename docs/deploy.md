@@ -9,7 +9,8 @@
 ```
 
 - 会先跑一遍校验，不通过就中止（确要跳过：`./scripts/build.sh --skip-tests`）
-- 产物：`dist/xuequ-<日期>-<提交号>.tar.gz`，约 400 KB
+- 产物：`dist/xuequ-<日期>-<提交号>.tar.gz`，约 100 MB（大头是英语听力音频和真题题图，已压缩过，打包几乎压不动）
+- `./scripts/build.sh --dir` 只生成目录 `dist/xuequ-<日期>-<提交号>/`、不打压缩包：用 rsync 增量上传时用它，没改的音频、图片不用重传（rsync 的 `--link-dest` 指向上一个版本目录，没变的文件硬链接过去，多留几个版本也几乎不多占空间）
 - 只包含运行需要的文件：`index.html`、`src/`、`vendor/`、`content/`、`serve.js`、`run.sh`、`private-gate.js`（私有资料口令服务，见第八节）、`VERSION`
 - 不包含：测试、文档、教材照片、开发脚本
 - `VERSION` 里记录了构建时间、提交号和已上线的小节清单，上线后可以核对
