@@ -164,14 +164,20 @@
       `<a class="card" href="#/mock/${esc(id)}"><h2>${esc(sets[id].title)}</h2><p>${sets[id].papers.length} 份卷子${sets[id].review ? ' · 附复习资料' : ''}</p></a>`).join('');
   }
 
-  function statusText(key, minutes) {
+  function statusText(key, minutes, scored) {
     const rec = getRecord(key);
     if (rec.startedAt) {
       return remainingSec(rec, minutes, Date.now()) > 0 ? '<span class="mk-doing">正在做</span>' : '<span class="mk-doing">时间到了，点开交卷</span>';
     }
     const last = rec.history[rec.history.length - 1];
     if (!last) return '';
-    return typeof last.score === 'number' ? `上次 ${last.score} 分` : '做过，还没填分数';
+    if (typeof last.score === 'number') return `上次 ${last.score} 分`;
+    return scored ? '做过，还没填分数' : '做过';
+  }
+
+  // 卷子没写满分（full）就是练习卷：不显示满分，交卷后不填分数
+  function fullText(p) {
+    return p.full ? ` · 满分 ${p.full}` : '';
   }
 
   function setPage(setId, set, back, ui) {
@@ -186,9 +192,9 @@
       const papers = set.papers.filter(p => p.subject === subject);
       if (!papers.length) continue;
       html += `<h3 class="group">${esc(name)}</h3>` + papers.map(p => {
-        const st = statusText(`${setId}/${p.id}`, p.minutes);
+        const st = statusText(`${setId}/${p.id}`, p.minutes, !!p.full);
         return `<a class="card mk-row" href="#/mock/${esc(setId)}/${esc(p.id)}"><h2>${esc(p.title)}</h2>` +
-          `<p>${p.minutes} 分钟 · 满分 ${p.full}${st ? ` · ${st}` : ''}</p></a>`;
+          `<p>${p.minutes} 分钟${fullText(p)}${st ? ` · ${st}` : ''}</p></a>`;
       }).join('');
     }
     main.innerHTML = html;
@@ -217,6 +223,7 @@
     const key = `${setId}/${paper.id}`;
     const esc = ui.escapeHtml;
     const dir = `exams/${setId}/${paper.id}`;
+    const scored = !!paper.full;
     const maxScore = paper.maxScore || paper.full;
     const main = ui.page(paper.title, '#/mock/' + setId, `${set.title} · ${subjectName(paper.subject)}`);
     let rec = getRecord(key);
@@ -236,9 +243,9 @@
     function intro() {
       main.innerHTML =
         `<div class="card mk-intro"><h2>${esc(paper.title)}</h2>` +
-        `<p>${esc(subjectName(paper.subject))} · ${paper.minutes} 分钟 · 满分 ${paper.full}</p>` +
+        `<p>${esc(subjectName(paper.subject))} · ${paper.minutes} 分钟${fullText(paper)}</p>` +
         (paper.note ? `<p>${esc(paper.note)}</p>` : '') +
-        `<ul><li>准备好草稿纸和笔，题目在纸上作答</li><li>开始后倒计时，中途关掉页面再打开会接着计时</li><li>交卷或时间到之后才能看解析，然后自己批改、填分数</li></ul>` +
+        `<ul><li>准备好草稿纸和笔，题目在纸上作答</li><li>开始后倒计时，中途关掉页面再打开会接着计时</li><li>交卷或时间到之后才能看解析，然后自己批改${scored ? '、填分数' : '、订正'}</li></ul>` +
         `<button type="button" class="mk-btn primary mk-start">开始考试</button></div>`;
       main.querySelector('.mk-start').onclick = () => {
         rec = { ...rec, startedAt: Date.now() };
@@ -291,12 +298,14 @@
         `<div class="card mk-result">` +
         (autoSubmitted ? '<p class="notice">时间到，已自动交卷。</p>' : '') +
         `<h2>${day(last.at)}交卷 · 用时 ${duration(last.usedSec)}</h2>` +
-        `<p>限时 ${paper.minutes} 分钟。对照下面的解析批改，再填上得分。</p>` +
-        `<div class="mk-score"><label>得分 <input type="number" inputmode="decimal" min="0" max="${maxScore}" step="0.5" value="${typeof last.score === 'number' ? last.score : ''}"></label>` +
-        `<span>/ ${paper.full}</span><button type="button" class="mk-btn primary mk-save">保存</button></div>` +
-        `<p class="mk-msg" role="status"></p>` +
+        (scored
+          ? `<p>限时 ${paper.minutes} 分钟。对照下面的解析批改，再填上得分。</p>` +
+            `<div class="mk-score"><label>得分 <input type="number" inputmode="decimal" min="0" max="${maxScore}" step="0.5" value="${typeof last.score === 'number' ? last.score : ''}"></label>` +
+            `<span>/ ${paper.full}</span><button type="button" class="mk-btn primary mk-save">保存</button></div>` +
+            `<p class="mk-msg" role="status"></p>`
+          : `<p>建议用时 ${paper.minutes} 分钟。对照下面的解析批改，把错题订正一遍。</p>`) +
         (older.length ? `<details class="mk-history"><summary>以前做过 ${older.length} 次</summary><ul>${older.map(h =>
-          `<li>${day(h.at)} · 用时 ${duration(h.usedSec)} · ${typeof h.score === 'number' ? h.score + ' 分' : '没填分数'}</li>`).join('')}</ul></details>` : '') +
+          `<li>${day(h.at)} · 用时 ${duration(h.usedSec)}${scored ? ` · ${typeof h.score === 'number' ? h.score + ' 分' : '没填分数'}` : ''}</li>`).join('')}</ul></details>` : '') +
         `</div>` +
         `<div class="pv-views mk-views" role="group" aria-label="显示内容"><button type="button" class="on" data-v="both">试卷和解析</button><button type="button" data-v="answer">只看解析</button></div>` +
         `<div class="pv-book mk-book"><h3 class="group mk-part-paper">试卷</h3><div class="mk-part-paper">${pagesHtml(dir + '/paper', paper.paper, paper.size, '试卷', esc)}</div>` +
@@ -306,7 +315,7 @@
 
       const input = main.querySelector('.mk-score input');
       const msg = main.querySelector('.mk-msg');
-      main.querySelector('.mk-save').onclick = () => {
+      if (scored) main.querySelector('.mk-save').onclick = () => {
         const score = parseScore(input.value, maxScore);
         if (score === null) {
           msg.textContent = `请填 0～${maxScore} 之间的分数（可以有半分）`;
@@ -324,7 +333,7 @@
         main.querySelectorAll('.mk-part-paper').forEach(el => { el.hidden = btn.dataset.v === 'answer'; });
       }));
       main.querySelector('.mk-again').onclick = () => {
-        if (!confirm('重新开始计时做一遍？以前的分数会留着。')) return;
+        if (!confirm(scored ? '重新开始计时做一遍？以前的分数会留着。' : '重新开始计时做一遍？')) return;
         autoSubmitted = false;
         rec = { ...rec, startedAt: Date.now() };
         putRecord(key, rec);

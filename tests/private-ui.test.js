@@ -132,6 +132,8 @@ test('模拟考试：页面接线（学科页入口、首页进行中提示、�
   const doing = mock.slice(mock.indexOf('function inProgress('), mock.indexOf('function openUnlock('));
   assert(doing.includes("if (s !== 'unlocked') return null;") && doing.includes('remainingSec(rec, paper.minutes, now)') && doing.includes('if (sec > 0)'),
     '首页“今天”只提示已解锁、开始了且还没到时间的卷子');
+  assert(mock.includes('const scored = !!paper.full;') && mock.includes('if (scored) main.querySelector(\'.mk-save\')'),
+    '没写满分的练习卷不显示分数输入框');
   assert(!/fetch\(/.test(mock), '私有文件用 <script>/<img> 加载，不用 fetch');
   const doc = read('docs/storage-and-routes.md');
   assert(doc.includes('#/mock') && doc.includes('`xq.mockExam.v1`'), '#/mock 路由和 xq.mockExam.v1 要登记到 docs/storage-and-routes.md');
